@@ -11,6 +11,16 @@
 # Build dependencies:
 # - bzip2-devel
 
+# Get commonly needed env vars
+CWD=$(cd `dirname $0` && pwd)
+source $CWD/../common-vars.sh
+
+if [ `uname` == Darwin ]; then
+    B2ARGS="toolset=clang"
+else
+    B2ARGS="toolset=gcc"
+fi
+
 mkdir -vp ${PREFIX}/bin;
 
 ./bootstrap.sh \
@@ -23,6 +33,8 @@ mkdir -vp ${PREFIX}/bin;
   --layout=tagged \
   -j ${CPU_COUNT} \
   -sNO_BZIP2=1 \
+  ${B2ARGS} \
+  cxxflags="${CXXFLAGS}" linkflags="${LDFLAGS}" \
   install
 
 # Second, without --layout=tagged, to create libraries without -mt names
@@ -30,6 +42,8 @@ mkdir -vp ${PREFIX}/bin;
 ./b2 \
   -j ${CPU_COUNT} \
   -sNO_BZIP2=1 \
+  ${B2ARGS} \
+  cxxflags="${CXXFLAGS}" linkflags="${LDFLAGS}" \
   install
 
 # Omitted these options from above commands:  
