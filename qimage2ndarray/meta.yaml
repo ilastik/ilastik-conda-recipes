@@ -1,0 +1,66 @@
+package:
+  name: qimage2ndarray
+  version: !!str 1.4
+
+source:
+  fn: qimage2ndarray-1.4.tar.gz
+  url: https://pypi.python.org/packages/source/q/qimage2ndarray/qimage2ndarray-1.4.tar.gz
+  md5: 77359e694d498c958c90bcd3e3851d5d
+#  patches:
+   # List any patch files here
+   # - fix.patch
+
+# build:
+  # preserve_egg_dir: True
+  # entry_points:
+    # Put any entry points (scripts to be generated automatically) here. The
+    # syntax is module:function.  For example
+    #
+    # - qimage2ndarray = qimage2ndarray:main
+    #
+    # Would create an entry point called qimage2ndarray that calls qimage2ndarray.main()
+
+
+  # If this is a new build for the same version, increment the build
+  # number. If you do not include this key, it defaults to 0.
+  # number: 1
+
+requirements:
+  build:
+    - python
+    - setuptools
+    - numpy
+    - sip
+    - pyqt
+
+  run:
+    - python
+    - numpy
+    - sip
+    - pyqt
+
+test:
+  # Python imports
+  imports:
+    - qimage2ndarray
+
+  # commands:
+    # You can put test commands to be run here.  Use this to test that the
+    # entry points work.
+
+
+  # You can also put a file called run_test.py in the recipe that will be run
+  # at test time.
+
+  # requires:
+    # Put any additional test requirements here.  For example
+    # - nose
+
+about:
+  home: https://github.com/hmeine/qimage2ndarray
+  license: BSD License
+  summary: 'Conversion between QImages and numpy.ndarrays.'
+
+# See
+# http://docs.continuum.io/conda/build.html for
+# more information about meta.yaml
