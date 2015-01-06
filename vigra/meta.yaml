@@ -146,6 +146,7 @@ requirements:
     - hdf5
     - boost
     - zlib
+    - nose
     
   # Packages required to run the package. These are the dependencies that
   # will be installed automatically whenever the package is installed.
@@ -159,7 +160,7 @@ requirements:
     - hdf5
     - boost
     - zlib
-  #  - argparse # [py26]
+    - nose
 
 test:
   ## files which are copied from the recipe into the (temporary) test
