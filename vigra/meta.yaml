@@ -20,7 +20,7 @@ source:
 
   # or from git:
   # git_url can also be a relative path to the recipe directory
-  git_url: git@github.com:stuarteberg/vigra.git
+  git_url: git://github.com/stuarteberg/vigra.git
   git_tag: HEAD
 
   ## or from hg:
