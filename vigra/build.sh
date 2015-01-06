@@ -33,8 +33,8 @@ cmake ..\
         -DWITH_VIGRANUMPY=TRUE \
         -DDEPENDENCY_SEARCH_PREFIX=${PREFIX} \
 \
-        -DFFTW3F_INCLUDE_DIR="" \
-        -DFFTW3F_LIBRARY="" \
+        -DFFTW3F_INCLUDE_DIR=${PREFIX}/include \
+        -DFFTW3F_LIBRARY=${PREFIX}/lib/libfftw3f.${DYLIB_EXT} \
         -DFFTW3_INCLUDE_DIR=${PREFIX}/include \
         -DFFTW3_LIBRARY=${PREFIX}/lib/libfftw3.${DYLIB_EXT} \
 \
@@ -79,3 +79,4 @@ eval ${LIBRARY_SEARCH_VAR}=$PREFIX/lib make -j${CPU_COUNT} check
 
 # "install" to the build prefix (conda will relocate these files afterwards)
 make install
+
