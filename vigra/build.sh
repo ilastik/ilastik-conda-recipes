@@ -11,7 +11,7 @@ fi
 # In release mode, we use -O2 because gcc is known to miscompile certain vigra functionality at the O3 level.
 # (This is probably due to inappropriate use of undefined behavior in vigra itself.)
 VIGRA_CXX_FLAGS_RELEASE="-O2 -DNDEBUG ${VIGRA_CXX_FLAGS}"
-VIGRA_LDFLAGS="${LDFLAGS} -Wl,-rpath,${PREFIX}/lib -L${PREFIX}/lib"
+VIGRA_LDFLAGS="${CXX_LDFLAGS} -Wl,-rpath,${PREFIX}/lib -L${PREFIX}/lib"
 
 # We like to make builds of vigra from arbitrary git commits (not always tagged).
 # Include the git commit in the build version so we remember which one was used for the build.

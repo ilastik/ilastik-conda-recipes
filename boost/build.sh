@@ -34,7 +34,7 @@ mkdir -vp ${PREFIX}/bin;
   -j ${CPU_COUNT} \
   -sNO_BZIP2=1 \
   ${B2ARGS} \
-  cxxflags="${CXXFLAGS}" linkflags="${LDFLAGS}" \
+  cxxflags="${CXXFLAGS}" linkflags="${CXX_LDFLAGS}" \
   install
 
 # Second, without --layout=tagged, to create libraries without -mt names
@@ -43,7 +43,7 @@ mkdir -vp ${PREFIX}/bin;
   -j ${CPU_COUNT} \
   -sNO_BZIP2=1 \
   ${B2ARGS} \
-  cxxflags="${CXXFLAGS}" linkflags="${LDFLAGS}" \
+  cxxflags="${CXXFLAGS}" linkflags="${CXX_LDFLAGS}" \
   install
 
 # Omitted these options from above commands:  
