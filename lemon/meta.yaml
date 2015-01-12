@@ -1,0 +1,17 @@
+package:
+  name: lemon
+  version: "1.2.4"
+
+source:
+  fn: lemon-1.2.4.tar.gz
+  url: http://lemon.cs.elte.hu/pub/sources/lemon-1.2.4.tar.gz
+  md5: fd89e8bf5035b02e2622a48ac7fe0641
+
+  patches:
+    - lemon.patch
+    - lemon-test.patch
+
+about:
+  home: http://lemon.cs.elte.hu/trac/lemon
+  license: Boost
+  summary: Library for Efficient Modeling and Optimization in Networks
