@@ -1,0 +1,13 @@
+about:
+  summary: "A meta-package for building all the dependencies needed for only pixel/object classification."
+
+package:
+  name: ilastik-deps-pc
+  version: "1.1"
+
+requirements:
+  run:
+    - ilastik-deps-pc-headless
+    - pyqt
+    - qimage2ndarray
+    - vtk

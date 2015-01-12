@@ -1,0 +1,22 @@
+about:
+  summary: "A meta-package for building all the dependencies needed for the minimal, headless version of pixel/object classification."
+
+package:
+  name: ilastik-deps-pc-headless
+  version: "1.1"
+
+requirements:
+  run:
+    - python
+    - numpy
+    - vigra
+    - h5py
+    - psutil
+    - blist
+    - greenlet
+    - cylemon
+    - yapsy
+    - scikit-learn
+    - faulthandler
+    - jsonschema
+    - nose
