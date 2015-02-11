@@ -1,5 +1,5 @@
 about:
-  summary: "A meta-package for building all the dependencies needed for only pixel/object classification."
+  summary: "A meta-package for building all the dependencies needed for only carving."
 
 package:
   name: ilastik-deps-carving
