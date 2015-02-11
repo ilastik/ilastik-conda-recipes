@@ -31,6 +31,7 @@ cmake ..\
         -DCMAKE_CXX_FLAGS_DEBUG="${VIGRA_CXX_FLAGS}" \
 \
         -DWITH_VIGRANUMPY=TRUE \
+        -DWITH_BOOST_THREAD=1 \
         -DDEPENDENCY_SEARCH_PREFIX=${PREFIX} \
 \
         -DFFTW3F_INCLUDE_DIR=${PREFIX}/include \
