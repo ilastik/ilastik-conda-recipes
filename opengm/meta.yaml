@@ -11,7 +11,14 @@ requirements:
       - boost
       - python
       - numpy
+    run:
+      - boost
+      - python
+      - numpy
 
+test:
+  imports:
+    - opengm
 # Note: tests are run when building the package, they are not accessible
 # in the installed package.
 
