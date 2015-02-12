@@ -1,0 +1,15 @@
+mkdir build
+cd build
+cmake ..\
+	-DCMAKE_OSX_DEPLOYMENT_TARGET=10.7\
+	-DCMAKE_INSTALL_PREFIX=${PREFIX}\
+	-DCMAKE_PREFIX_PATH=${PREFIX}\
+	-DBUILD_SHARED_LIBS=ON\
+    -DWITH_HDF5=ON\
+    -DWITH_PYTHON=ON\
+    -DWITH_CHECKED_STL=OFF\
+    -DWITH_TESTS=ON\
+    -DCPLEX_ROOT_DIR=/Users/chaubold/hci/code/cplex
+
+make -j${CPU_COUNT}
+make install
