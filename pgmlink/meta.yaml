@@ -28,6 +28,9 @@ requirements:
       - lemon
       - libxml2
 
+build:
+  number: 1 
+
 test:
   imports:
       - pgmlink
