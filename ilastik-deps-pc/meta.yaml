@@ -11,9 +11,14 @@ requirements:
     - pyqt
     - qimage2ndarray
     - vtk
+    - futures
+    - matplotlib
 
   run:
     - ilastik-deps-pc-headless
     - pyqt
     - qimage2ndarray
     - vtk
+    - futures
+    - matplotlib
+    
