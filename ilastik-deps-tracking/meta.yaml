@@ -1,0 +1,16 @@
+about:
+  summary: "A meta-package for building all the dependencies needed for pixel/object classification and tracking."
+
+package:
+  name: ilastik-deps-pc
+  version: "1.1"
+
+requirements:
+  build:
+    - ilastik-deps-pc
+    - pgmlink
+
+  run:
+    - ilastik-deps-pc
+    - pgmlink
+    
