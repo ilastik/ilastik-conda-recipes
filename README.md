@@ -42,6 +42,9 @@ Most dependencies will be pulled from the main anaconda package repo,
 
 ```
 $ conda install --channel stuarteberg ilastik-deps-pc
+
+# Or, to install the carving workflow, too:
+$ conda install --channel stuarteberg ilastik-deps-carving
 ```
 
 3. Run ilastik from your own local repository
