@@ -1,0 +1,21 @@
+package:
+    name: opengm
+    version: "2.3.4"
+
+source:
+    git_url: https://github.com/opengm/opengm.git
+    git_tag: HEAD
+
+requirements:
+    build:
+      - boost
+      - python
+      - numpy
+
+# Note: tests are run when building the package, they are not accessible
+# in the installed package.
+
+about:
+    home: https://github.com/opengm/opengm
+    license: GNU General Public License (GPL)
+    summary: 'A C++ Library for Discrete Graphical Models'
