@@ -63,7 +63,7 @@ These instructions assume you already cloned the [ilastik-meta] repo to your fil
 $ cd /path/to/ilastik-meta
 
 # Run ilastik
-PYTHONPATH="ilastik:lazyflow:volumina" python ilastik/ilastik.py
+$ PYTHONPATH="ilastik:lazyflow:volumina" python ilastik/ilastik.py
 ```
 
 ======================
