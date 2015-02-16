@@ -29,7 +29,7 @@ requirements:
       - libxml2
 
 build:
-  number: 1 
+  number: 2
 
 test:
   imports:
