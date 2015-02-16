@@ -51,13 +51,22 @@ $ conda install --channel stuarteberg ilastik-deps-carving
 ---------------------------------------------
 
 The dependency packages don't include the [`ilastik`][ilastik-repo]/[`lazyflow`][lazyflow-repo]/[`volumina`][volumina-repo] repos.
-These instructions assume you already cloned the [ilastik-meta] repo to your filesystem.
+If you haven't already done so, clone and prepare the [ilastik-meta] repo:
+
+```
+$ git clone http://github.com/ilastik/ilastik-meta
+$ cd ilastik-meta
+$ git submodule init
+$ git submodule update --recursive
+```
 
 [ilastik-repo]: http://github.com/ilastik/ilastik
 [lazyflow-repo]: http://github.com/ilastik/lazyflow
 [volumina-repo]: http://github.com/ilastik/volumina
 
 [ilastik-meta]: http://github.com/ilastik/ilastik-meta
+
+Now run ilastik from with your ilastik meta-repo:
 
 ```
 $ cd /path/to/ilastik-meta
