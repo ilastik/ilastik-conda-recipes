@@ -71,8 +71,11 @@ cmake ..\
         -DJPEG_LIBRARY=${PREFIX}/lib/libjpeg.${DYLIB_EXT} \
 
 
-# BUILD (in parallel)
-make -j${CPU_COUNT}
+# BUILD
+# Unfortunately, gcc can crash if it runs out of RAM, and that can 
+#  happen if we build vigra in parallel in a small VM. So we build single-threaded.
+#make -j${CPU_COUNT}
+make
 
 # TEST (before install)
 # (Since conda hasn't performed its link step yet, we must help the tests locate their dependencies via LD_LIBRARY_PATH)
