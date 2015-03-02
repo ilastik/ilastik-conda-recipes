@@ -154,7 +154,7 @@ make -j${CPU_COUNT}
 make install
 ```
 
-Write **build.sh**:
+Write **bld.bat**:
 
 ```
 $ cat > bld.bat
