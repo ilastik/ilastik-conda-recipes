@@ -45,6 +45,9 @@ $ conda install --channel stuarteberg ilastik-deps-pc
 
 # Or, to install the carving workflow, too:
 $ conda install --channel stuarteberg ilastik-deps-carving
+
+# Or, if you only need headless mode (no GUI dependencies), use this:
+$ conda install --channel stuarteberg ilastik-deps-pc-headless
 ```
 
 3. Run ilastik from your own local repository
