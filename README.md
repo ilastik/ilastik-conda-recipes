@@ -50,6 +50,36 @@ $ conda install --channel stuarteberg ilastik-deps-carving
 $ conda install --channel stuarteberg ilastik-deps-pc-headless
 ```
 
+2.b. (Optional) Build your own packages
+--------------------------------------
+
+(Most users can skip this step.  It's an alternative to step 2 above.)
+
+If your version of `GLIBC` is too old, you might not be able to use the binary ilastik packages 
+from the `stuarteberg` binstar channel.  Instead, you can try building those dependencies your self.
+The recipes for ilastik and its dependencies can be found in the [`ilastik-build-conda` repository][ilastik-build-conda].
+
+[ilastik-build-conda]: http://github.com/ilastik/ilastik-build-conda
+
+```
+# Prerequisite: Install conda-build
+$ source activate root
+$ conda install conda-build jinja2
+
+# Clone the ilastik build recipes
+$ git clone http://github.com/ilastik/ilastik-build-conda
+$ cd ilastik-build-conda
+
+# Start with a fresh environment.
+$ conda create -n ilastikdev python=2.7
+$ source activate ilastikdev
+$ conda build ilastik-deps-pc
+
+# Now install your newly built binaries, directly from your local build directory:
+$ conda install --channel /my/miniconda/conda-bld ilastik-deps-pc
+```
+
+
 3. Run ilastik from your own local repository
 ---------------------------------------------
 
