@@ -28,6 +28,9 @@ mkdir -vp ${PREFIX}/bin;
   --with-python=${PYTHON} \
   --prefix=${PREFIX}
 
+# In the commands below, we want to include linkflags=blabla and 
+# cxxflags=blabla, but only if there are actual values for 
+# linkflags and cxxflags.  Otherwisde, omit those settings entirely.
 LINK_ARG=""
 if [ "${CXX_LDFLAGS}" != "" ]; then
     LINK_ARG=linkflags=
@@ -35,13 +38,19 @@ fi
 
 echo "LINK_ARG=$LINK_ARG"
 
+CXX_ARG=""
+if [ "${CXXFLAGS}" != "" ]; then
+    CXX_ARG=cxxflags=
+fi
+
+
 # First, with --layout=tagged to create libraries named with -mt convention
 ./b2 \
   --layout=tagged \
   -j ${CPU_COUNT} \
   -sNO_BZIP2=1 \
   ${B2ARGS} \
-  cxxflags="${CXXFLAGS}" \
+  ${CXX_ARG}"${CXXFLAGS}" \
   ${LINK_ARG}"${CXX_LDFLAGS}" \
   install
 
@@ -51,7 +60,7 @@ echo "LINK_ARG=$LINK_ARG"
   -j ${CPU_COUNT} \
   -sNO_BZIP2=1 \
   ${B2ARGS} \
-  cxxflags="${CXXFLAGS}" \
+  ${CXX_ARG}"${CXXFLAGS}" \
   ${LINK_ARG}"${CXX_LDFLAGS}" \
   install
 
