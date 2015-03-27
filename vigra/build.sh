@@ -2,6 +2,12 @@
 CWD=$(cd `dirname $0` && pwd)
 source $CWD/../common-vars.sh
 
+if [[ -n ${!LIBRARY_SEARCH_VAR} ]]; then
+    echo "*** WARNING: You are using a non-empty value of ${LIBRARY_SEARCH_VAR}:"
+    echo "*** ${LIBARY_SEARCH_VAR}=${!LIBRARY_SEARCH_VAR}"
+    echo "*** This can make your build difficult to reproduce.  Make sure you know what you're doing."
+fi
+
 if [[ `uname` == 'Darwin' ]]; then
     VIGRA_CXX_FLAGS="${CXXFLAGS}"
 else
@@ -24,7 +30,7 @@ cmake ..\
         -DCMAKE_INSTALL_PREFIX=${PREFIX} \
         -DCMAKE_PREFIX_PATH=${PREFIX} \
 \
-        -DCMAKE_CXX_LINK_FLAGS="${VIGRA_LDFLAGS}" \
+        -DCMAKE_SHARED_LINKER_FLAGS="${VIGRA_LDFLAGS}" \
         -DCMAKE_EXE_LINKER_FLAGS="${VIGRA_LDFLAGS}" \
         -DCMAKE_CXX_FLAGS="${VIGRA_CXX_FLAGS}" \
         -DCMAKE_CXX_FLAGS_RELEASE="${VIGRA_CXX_FLAGS_RELEASE}" \
@@ -74,12 +80,16 @@ cmake ..\
 # BUILD
 # Unfortunately, gcc can crash if it runs out of RAM, and that can 
 #  happen if we build vigra in parallel in a small VM. So we build single-threaded.
-#make -j${CPU_COUNT}
 make
 
+
 # TEST (before install)
-# (Since conda hasn't performed its link step yet, we must help the tests locate their dependencies via LD_LIBRARY_PATH)
-eval ${LIBRARY_SEARCH_VAR}=$PREFIX/lib make -j${CPU_COUNT} check
+(
+    # (Since conda hasn't performed its link step yet, we must 
+    #  help the tests locate their dependencies via LD_LIBRARY_PATH)
+    export ${LIBRARY_SEARCH_VAR}=$PREFIX/lib:${!LIBRARY_SEARCH_VAR}
+    make check
+)
 
 # "install" to the build prefix (conda will relocate these files afterwards)
 make install

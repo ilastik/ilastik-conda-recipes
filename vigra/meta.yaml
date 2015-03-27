@@ -55,6 +55,10 @@ source:
   #########################################################################
 
 build:
+  script_env:
+   - LD_LIBRARY_PATH
+   - DYLD_LIBRARY_PATH
+
   # The build number should be incremented for new builds of the same version
   number: 1       # (defaults to 0)
   #string: abc     # (defaults to default conda build string plus the build
