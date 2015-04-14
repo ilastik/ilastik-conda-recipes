@@ -24,7 +24,7 @@ fi
 mkdir -vp ${PREFIX}/bin;
 
 ./bootstrap.sh \
-  --with-libraries=date_time,filesystem,python,regex,serialization,system,test,thread,program_options,chrono,atomic,random \
+  --with-libraries=container,date_time,filesystem,python,regex,serialization,system,test,thread,program_options,chrono,atomic,random \
   --with-python=${PYTHON} \
   --prefix=${PREFIX}
 
