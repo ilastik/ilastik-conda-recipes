@@ -72,11 +72,11 @@ $ cd ilastik-build-conda
 
 # Start with a fresh environment.
 $ conda create -n ilastikdev python=2.7
-$ source activate ilastikdev
 $ conda build ilastik-deps-pc
 
-# Now install your newly built binaries, directly from your local build directory:
-$ conda install --channel /my/miniconda/conda-bld ilastik-deps-pc
+# Now install your newly built binaries, directly from your local build directory nto the environment and activate it:
+$ conda install --use-local -n ilastikdev ilastik-deps-pc
+$ source activate ilastikdev
 ```
 
 
