@@ -1,0 +1,50 @@
+package:
+  name: libdvid-cpp
+  version: "0.1"
+  
+source:
+  git_url: git://github.com/janelia-flyem/libdvid-cpp.git
+  git_tag: HEAD
+
+build:
+  script_env:
+   - LD_LIBRARY_PATH
+   - DYLD_LIBRARY_PATH
+
+  # Binary files may contain the build prefix and need it replaced with the
+  # install prefix at installation time.  Conda can automatically identify
+  # and register such files:
+  detect_binary_files_with_prefix: true # (defaults to false)
+  
+requirements:
+  build:
+    - boost ==1.55
+    - jsoncpp
+    - lz4
+    - jpeg
+    - libpng
+    - curl
+    - python
+    - numpy >=1.7
+    
+  # Packages required to run the package. These are the dependencies that
+  # will be installed automatically whenever the package is installed.
+  run:
+    - boost ==1.55
+    - jsoncpp
+    - lz4
+    - jpeg
+    - libpng
+    - curl
+    - python
+    - numpy >=1.7
+
+test:
+  # Python imports
+  imports:
+    - libdvid
+
+about:
+  home: http://github.com/janelia-flyem/libdvid-cpp
+  license: BSD (3-clause)
+  summary: C++ library for accessing DVID's REST API 
