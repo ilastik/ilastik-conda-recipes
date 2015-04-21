@@ -2,12 +2,6 @@
 CWD=$(cd `dirname $0` && pwd)
 source $CWD/../common-vars.sh
 
-if [[ -n ${!LIBRARY_SEARCH_VAR} ]]; then
-    echo "*** WARNING: You are using a non-empty value of ${LIBRARY_SEARCH_VAR}:"
-    echo "*** ${LIBARY_SEARCH_VAR}=${!LIBRARY_SEARCH_VAR}"
-    echo "*** This can make your build difficult to reproduce.  Make sure you know what you're doing."
-fi
-
 if [[ `uname` == 'Darwin' ]]; then
     VIGRA_CXX_FLAGS="${CXXFLAGS}"
 else
