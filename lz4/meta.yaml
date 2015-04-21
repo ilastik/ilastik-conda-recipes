@@ -1,0 +1,18 @@
+package:
+  name: lz4
+  version: "128"
+
+source:
+  git_url: git://github.com/Cyan4973/lz4
+  git_tag: "r128"
+
+build:
+  # Binary files may contain the build prefix and need it replaced with the
+  # install prefix at installation time.  Conda can automatically identify
+  # and register such files:
+  detect_binary_files_with_prefix: true # (defaults to false)
+
+about:
+  home: http://cyan4973.github.io/lz4
+  license: Unknown
+  summary: Extremely Fast Compression algorithm
