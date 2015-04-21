@@ -1,0 +1,26 @@
+package:
+  name: jsoncpp
+  version: "1.6.2"
+
+source:
+  git_url: git://github.com/open-source-parsers/jsoncpp.git
+  git_tag: 1.6.2
+
+build:
+  # Binary files may contain the build prefix and need it replaced with the
+  # install prefix at installation time.  Conda can automatically identify
+  # and register such files:
+  detect_binary_files_with_prefix: true # (defaults to false)
+
+requirements:
+  build:
+    - python
+
+test:
+  requires:
+    - python
+
+about:
+  home: https://github.com/open-source-parsers/jsoncpp
+  license: MIT
+  summary: A C++ library for interacting with JSON.
