@@ -8,7 +8,6 @@ cd build
 cmake ..\
         -DCMAKE_INSTALL_PREFIX=${PREFIX} \
         -DCMAKE_PREFIX_PATH=${PREFIX} \
-        -DCMAKE_CXX_FLAGS=-fPIC \
         -DCMAKE_SHARED_LINKER_FLAGS=-L${PREFIX}/lib \
         -DCMAKE_EXE_LINKER_FLAGS=-L${PREFIX}/lib \
         -DPYTHON_EXECUTABLE=${PYTHON} \
