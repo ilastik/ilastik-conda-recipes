@@ -8,8 +8,10 @@ cd build
 cmake ..\
         -DCMAKE_INSTALL_PREFIX=${PREFIX} \
         -DCMAKE_PREFIX_PATH=${PREFIX} \
+        -DCMAKE_CXX_FLAGS=-I${PREFIX}/include \
         -DCMAKE_SHARED_LINKER_FLAGS=-L${PREFIX}/lib \
         -DCMAKE_EXE_LINKER_FLAGS=-L${PREFIX}/lib \
+        -DBoost_INCLUDE_DIR=${PREFIX}/include \
         -DPYTHON_EXECUTABLE=${PYTHON} \
         -DLIBDVID_WRAP_PYTHON=1 \
 
