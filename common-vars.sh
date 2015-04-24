@@ -39,10 +39,10 @@ fi
 export MACOSX_DEPLOYMENT_TARGET=10.7
 
 if [[ `uname` == 'Darwin' ]]; then
-    #CXXFLAGS="${CXXFLAGS} -stdlib=libc++"
-    #CXX_LDFLAGS="${LDFLAGS} -stdlib=libc++"
-    CXXFLAGS="${CXXFLAGS}"
-    CXX_LDFLAGS="${LDFLAGS}"
+    CXXFLAGS="${CXXFLAGS} -stdlib=libc++"
+    CXX_LDFLAGS="${LDFLAGS} -stdlib=libc++"
+    #CXXFLAGS="${CXXFLAGS}"
+    #CXX_LDFLAGS="${LDFLAGS}"
 else
     CXXFLAGS="${CXXFLAGS}"
     CXX_LDFLAGS="${LDFLAGS}"
