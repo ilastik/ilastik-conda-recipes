@@ -8,6 +8,7 @@ source:
 
 requirements:
   build:
+    - gcc
     - python
     - cython ==0.21
     - setuptools
@@ -15,6 +16,7 @@ requirements:
     - lemon
 
   run:
+    - libgcc
     - python
     - numpy
     - lemon

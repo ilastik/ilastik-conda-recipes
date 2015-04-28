@@ -27,6 +27,7 @@ source:
 
 requirements:
   build:
+    - gcc
     - python
     - setuptools
     - numpy
@@ -34,6 +35,7 @@ requirements:
     - pyqt
 
   run:
+    - libgcc
     - python
     - numpy
     - sip

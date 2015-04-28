@@ -11,6 +11,13 @@ source:
     - lemon.patch
     - lemon-test.patch
 
+requirements:
+  build:
+    - gcc
+
+  run:
+    - libgcc
+
 about:
   home: http://lemon.cs.elte.hu/trac/lemon
   license: Boost
