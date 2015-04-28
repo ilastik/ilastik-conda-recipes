@@ -9,14 +9,13 @@ source:
 requirements:
   build:
     - python
-    - cython
+    - cython ==0.21
     - setuptools
     - numpy
     - lemon
 
   run:
     - python
-    - cython
     - numpy
     - lemon
 
