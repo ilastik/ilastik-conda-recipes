@@ -10,9 +10,9 @@ source $CWD/../common-vars.sh
 
 if [[ `uname` == 'Darwin' ]]; then
     # OpenMP is not supported by default on Mac.
-    python setup.py --no-extra-includes build build_ext -I${PREFIX}/include -L${PREFIX}/lib --no-openmp
+    ${PYTHON} setup.py --no-extra-includes build build_ext -I${PREFIX}/include -L${PREFIX}/lib --no-openmp
 else
-    python setup.py --no-extra-includes build build_ext -I${PREFIX}/include -L${PREFIX}/lib
+    ${PYTHON} setup.py --no-extra-includes build build_ext -I${PREFIX}/include -L${PREFIX}/lib
 fi
 
-python setup.py install
+${PYTHON} setup.py install
