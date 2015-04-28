@@ -74,7 +74,7 @@ cmake ..\
 # BUILD
 # Unfortunately, gcc can crash if it runs out of RAM, and that can 
 #  happen if we build vigra in parallel in a small VM. So we build single-threaded.
-make
+make -j${CPU_COUNT}
 
 
 # TEST (before install)
@@ -82,7 +82,7 @@ make
     # (Since conda hasn't performed its link step yet, we must 
     #  help the tests locate their dependencies via LD_LIBRARY_PATH)
     export ${LIBRARY_SEARCH_VAR}=$PREFIX/lib:${!LIBRARY_SEARCH_VAR}
-    make check
+    make -j${CPU_COUNT} check
 )
 
 # "install" to the build prefix (conda will relocate these files afterwards)
