@@ -8,7 +8,7 @@ source:
 
 requirements:
   build:
-    - gcc
+    - gcc-no-fixincludes
     - python
     - cython ==0.21
     - setuptools

@@ -27,7 +27,7 @@ source:
 
 requirements:
   build:
-    - gcc
+    - gcc-no-fixincludes
     - python
     - setuptools
     - numpy

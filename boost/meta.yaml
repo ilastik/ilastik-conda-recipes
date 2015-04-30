@@ -16,7 +16,7 @@ build:
 
 requirements:
   build:
-    - gcc
+    - gcc-no-fixincludes
     - python
     - zlib
 
