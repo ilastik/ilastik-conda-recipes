@@ -227,48 +227,57 @@ binstar upload /my/miniconda/conda-bld/osx-64/somepackage-1.2.3-0.tar.bz2
 TODO/TBD
 ========
 
-- So far, this repo includes no package build scripts for Windows.
+- General
 
-- Mac: At the moment, we can't use `py2app` to package ilastik if we built it with conda.  
-  It has something to do with the fact that we have a top-level package named `ilastik` 
-  and a conflicting top-level script named `ilastik.py`.  If we rename or move the script, 
-  then we can use py2app.  (It isn't clear why this issue doesn't appear in our old setup.)
+ - [ ] Not all Tracking Workflow dependencies are supported yet, even on Mac/Linux.
 
-- Linux: We need to extract the final packaging steps `ilastik-build-Linux` and adapt them 
-  to work with the builds generated in this repo.
+ - [ ] How do we handle external libraries (like CPLEX)?
 
-- Ditto for Windows, once we have build scripts for the individual packages.
+ - [ ] Apparently, the VTK package provided by Continuum (Anaconda) was not built with PyQt support.  
+   We'll have to build our own VTK package, and pass 
+   `-DVTK_USE_QT:BOOL=ON -DSIP_EXECUTABLE:FILEPATH=$PREFIX/bin/sip -DSIP_INCLUDE_DIR:PATH=$PREFIX/include/python2.7 -DSIP_PYQT_DIR:PATH=$PREFIX/share/sip/PyQt4` 
+   to the `cmake` step.
 
-- Packages built *outside* of conda (i.e. CPLEX) must be "manually" linked via `install_name_tool`
-  or `chrpath`, etc. during the build or post-build step.  We are still exploring the "right" way to do this.
+ - [ ] In cases where we provide an alternative build of a package that Continuum already provides, we need to 
+   make sure our special channel takes priority over the `defaults` channel used by conda.  It isn't immediately 
+   obvious how this is supposed to be achieved in conda. (**Edit:** Which packages does this refer to?  VTK?) 
 
-- Not all Tracking Workflow dependencies are supported yet, even on Mac/Linux.
+ - [ ] So far, the `meta.yaml` files for `ilastik-deps-pc`, etc. do not list explicit version requirements for 
+   each dependency (e.g. `boost ==1.55`, or `vigra ==g14de6ac`).  We should fix that, and this repo should be 
+   tagged with the ilastik version number every time we make a release.  This repo will become the official record 
+   of which dependency versions were used in each release (via the `meta.yaml` files).
 
-- Apparently, the VTK package provided by Continuum (Anaconda) was not built with PyQt support.  
-  We'll have to build our own VTK package, and pass 
-  `-DVTK_USE_QT:BOOL=ON -DSIP_EXECUTABLE:FILEPATH=$PREFIX/bin/sip -DSIP_INCLUDE_DIR:PATH=$PREFIX/include/python2.7 -DSIP_PYQT_DIR:PATH=$PREFIX/share/sip/PyQt4` 
-  to the `cmake` step.
+ - [ ] The ilastik, lazyflow, and volumina repos themselves are not included as dependencies in this build repository.
+   How should we deal with them?
 
-- In cases where we provide an alternative build of a package that Continuum already provides, we need to 
-  make sure our special channel takes priority over the `defaults` channel used by conda.  It isn't immediately 
-  obvious how this is supposed to be achieved in conda. 
+ - [ ] Instead of uploading packages to our own [binstar] channels individually, we should create a shared account for 
+   ilastik on binstar, to be used by all ilastik maintainers.
 
-- It would be nice if we built "debug" versions of important packages (e.g. Python, vigra, Qt) 
-  and attached them to the `[debug]` conda-build "feature".
+ - [ ] It would be nice if we built "debug" versions of important packages (e.g. Python, vigra, Qt) 
+   and attached them to the `[debug]` conda-build "feature".
 
-- Mac: `conda` doesn't resolve the general issue of ABI incompatibility between `libc++` and `libstdc++`. (Continuum just uses `libstdc++` everywhere, apparently.) 
-  Should we attempt to create a new "feature" that tracks this linker setting?
+- Linux
 
-- Windows: Similar to the above issue on Mac, should we attempt to track different versions of 
-  the MSVC++ std library via a conda "feature" as well?
+ - [ ] We need to extract the final packaging steps `ilastik-build-Linux` and adapt them 
+   to work with the builds generated in this repo.
 
-- So far, the `meta.yaml` files for `ilastik-deps-pc`, etc. do not list explicit version requirements for 
-  each dependency (e.g. `boost ==1.55`, or `vigra ==g14de6ac`).  We should fix that, and this repo should be 
-  tagged with the ilastik version number every time we make a release.  This repo will become the official record 
-  of which dependency versions were used in each release (via the `meta.yaml` files).
+- Mac
 
-- The ilastik, lazyflow, and volumina repos themselves are not included as dependencies in this build repository.
-  How should we deal with them?
+ - [ ] At the moment, we can't use `py2app` to package ilastik if we built it with conda.  
+   It has something to do with the fact that we have a top-level package named `ilastik` 
+   and a conflicting top-level script named `ilastik.py`.  If we rename or move the script, 
+   then we can use py2app.  (It isn't clear why this issue doesn't appear in our old setup.)
 
-- Instead of uploading packages to our own [binstar] channels individually, we should create a shared account for 
-  ilastik on binstar, to be used by all ilastik maintainers.
+ - [ ] `conda` doesn't resolve the general issue of ABI incompatibility between `libc++` and `libstdc++`. 
+   (Continuum just uses `libstdc++` everywhere, apparently.) 
+   Should we attempt to create a new "feature" that tracks this linker setting?
+   (**Edit:** This shouldn't be an issue: we should use only `libstdc++`, and conda's gcc binary whereever possible.)
+
+- Windows
+
+ - [ ] So far, this repo includes no package build scripts for Windows.
+
+ - [ ] Generate a final binary package from the built dependencies
+
+ - [ ] Similar to the above issue on Mac, should we attempt to track different versions of 
+   the MSVC++ std library via a conda "feature" as well?
