@@ -10,6 +10,13 @@ source:
     patches:
         - patches/cmake.patch
 
+requirements:
+    build:
+      - gcc-no-fixincludes
+    run:
+      - libgcc
+
+
 # Note: tests are run when building the package, they are not accessible
 # in the installed package.
 
