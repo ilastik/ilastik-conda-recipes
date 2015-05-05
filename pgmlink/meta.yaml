@@ -27,16 +27,20 @@ requirements:
       - mlpack
       - lemon
       - libxml2
+      - patchelf # [linux]
 
 build:
-  number: 2
+  script_env:
+     - CPLEX_ROOT_DIR
+  number: 3
+
+  # Don't let conda configure the RPATH.
+  # We set the rpath ourselves in post-link.sh, so pgmlink can locate CPLEX.
+  binary_relocation: false
 
 test:
   imports:
       - pgmlink
-
-# Note: tests are run when building the package, they are not accessible
-# in the installed package.
 
 about:
     home: https://github.com/martinsch/pgmlink
