@@ -1,0 +1,17 @@
+about:
+  summary: |
+    A pseudo-package that converts an existing CPLEX static libraries (external to your conda prefix) into shared libraries suitable for linking by other programs.
+    This package does NOT install CPLEX.  You must install CPLEX externally, and set the CPLEX_ROOT_DIR environment variable before installing this package.
+    (This package does its work at install time, not build time.)
+
+package:
+  name: cplex-shared
+  version: "0.1"
+
+requirements:
+  run:
+    - gcc
+
+build:
+  script_env:
+    - CPLEX_ROOT_DIR
