@@ -3,7 +3,7 @@ CWD=$(cd `dirname $0` && pwd)
 source $CWD/../common-vars.sh
 
 if [[ `uname` == 'Darwin' ]]; then
-    VIGRA_CXX_FLAGS="${CXXFLAGS}"
+    VIGRA_CXX_FLAGS="${CXXFLAGS} -I${PREFIX}/include" # I have no clue why this -I option is necessary on Mac.
 else
     VIGRA_CXX_FLAGS="-pthread ${CXXFLAGS}"
 fi
