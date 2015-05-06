@@ -1,4 +1,5 @@
-if [ -z "$CPLEX_ROOT_DIR" ]; then
+if [ "$CPLEX_ROOT_DIR" == "<UNDEFINED>" ]; then
+    set +x
     echo "******************************************"
     echo "* You must define CPLEX_ROOT_DIR in your *"
     echo "* environment before building pgmlink.   *"
