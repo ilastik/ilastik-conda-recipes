@@ -11,10 +11,12 @@ requirements:
       - boost
       - python
       - numpy
+      - hdf5
     run:
       - boost
       - python
       - numpy
+      - hdf5
 
 test:
   imports:
