@@ -16,7 +16,8 @@ CWD=$(cd `dirname $0` && pwd)
 source $CWD/../common-vars.sh
 
 if [ `uname` == Darwin ]; then
-    B2ARGS="toolset=clang"
+    B2ARGS="toolset=darwin"
+    echo "using darwin : : ${PREFIX}/bin/g++" > user-config.jam
 else
     B2ARGS="toolset=gcc"
 fi

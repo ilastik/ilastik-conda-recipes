@@ -16,8 +16,12 @@ build:
 
 requirements:
   build:
+    - gcc
     - python
     - zlib
+
+  run:
+    - libgcc
 
 about:
   home: http://www.boost.org/
