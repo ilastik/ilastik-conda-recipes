@@ -9,6 +9,7 @@ source:
 requirements:
     build:
       - gcc
+      - cplex-shared
       - ann
       - boost
       - python
@@ -20,6 +21,7 @@ requirements:
       - libxml2
     run:
       - libgcc
+      - cplex-shared # Note: This pulls in gcc as a runtime dependency!
       - ann
       - boost
       - python

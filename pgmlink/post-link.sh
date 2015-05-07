@@ -1,3 +1,10 @@
+if [[ "$CPLEX_ROOT_DIR" == "<UNDEFINED>" || "$CPLEX_ROOT_DIR" == "" ]]; then
+    # Look for CPLEX_ROOT_DIR in the cplex-shared cache file.
+    CPLEX_LOCATION_CACHE_FILE="${PREFIX}/../../share/cplex-root-dir.path"
+    CPLEX_ROOT_DIR=`cat ${CPLEX_LOCATION_CACHE_FILE} 2> /dev/null` \
+    || CPLEX_ROOT_DIR="<UNDEFINED>"
+fi
+
 if [ "$CPLEX_ROOT_DIR" == "<UNDEFINED>" ]; then
     set +x
     echo "******************************************"
