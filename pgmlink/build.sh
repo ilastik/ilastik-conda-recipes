@@ -18,6 +18,11 @@ CFLAGS=""
 CXXFLAGS=""
 LDFLAGS=""
 
+LINKER_FLAGS="-L${PREFIX}/lib"
+if [ `uname` != "Darwin" ]; then
+    LINKER_FLAGS="-Wl,-rpath-link,${PREFIX}/lib ${LINKER_FLAGS}"
+fi
+
 mkdir build
 cd build
 cmake ..\
@@ -26,8 +31,8 @@ cmake ..\
     -DCMAKE_OSX_DEPLOYMENT_TARGET=10.7\
     -DCMAKE_INSTALL_PREFIX=${PREFIX}\
     -DCMAKE_PREFIX_PATH=${PREFIX}\
-    -DCMAKE_SHARED_LINKER_FLAGS="-Wl,-L${PREFIX}/lib" \
-    -DCMAKE_EXE_LINKER_FLAGS="-Wl,-L${PREFIX}/lib" \
+    -DCMAKE_SHARED_LINKER_FLAGS="${LINKER_FLAGS}" \
+    -DCMAKE_EXE_LINKER_FLAGS="${LINKER_FLAGS}" \
     -DBUILD_SHARED_LIBS=ON\
     -DWITH_PYTHON=ON\
     -DWITH_CHECKED_STL=OFF\
