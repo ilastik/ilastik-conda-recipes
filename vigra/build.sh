@@ -21,6 +21,8 @@ echo "$GIT_DESCRIBE_HASH" > __conda_version__.txt
 mkdir build
 cd build
 cmake ..\
+        -DCMAKE_C_COMPILER=${PREFIX}/bin/gcc \
+        -DCMAKE_CXX_COMPILER=${PREFIX}/bin/g++ \
         -DCMAKE_INSTALL_PREFIX=${PREFIX} \
         -DCMAKE_PREFIX_PATH=${PREFIX} \
 \
@@ -72,10 +74,7 @@ cmake ..\
 
 
 # BUILD
-# Unfortunately, gcc can crash if it runs out of RAM, and that can 
-#  happen if we build vigra in parallel in a small VM. So we build single-threaded.
 make -j${CPU_COUNT}
-
 
 # TEST (before install)
 (

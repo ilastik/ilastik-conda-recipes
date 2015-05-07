@@ -8,6 +8,9 @@ source $CWD/../common-vars.sh
 #        Try git describe --tags to see what I mean.
 # echo "$GIT_DESCRIBE_HASH" > __conda_version__.txt 
 
+export CC=${PREFIX}/bin/gcc
+export CXX=${PREFIX}/bin/g++
+
 if [[ `uname` == 'Darwin' ]]; then
     # OpenMP is not supported by default on Mac.
     ${PYTHON} setup.py --no-extra-includes build build_ext -I${PREFIX}/include -L${PREFIX}/lib --no-openmp

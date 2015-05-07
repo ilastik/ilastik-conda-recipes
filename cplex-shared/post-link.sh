@@ -58,17 +58,17 @@ if [ `uname` == "Darwin" ]; then
     EXISTING_SHARED_OBJECT=`ls ${CPLEX_LIB_DIR}/libilocplex.dylib` \
     || EXISTING_SHARED_OBJECT="NOT_PRESENT"
     if [ "$EXISTING_SHARED_OBJECT" == "NOT_PRESENT" ]; then
-        g++ -fpic -shared -Wl,-all_load ${CPLEX_LIB_DIR}/libcplex.a     -Wl,-noall_load -o ${CPLEX_LIB_DIR}/libcplex.dylib
-        g++ -fpic -shared -Wl,-all_load ${CONCERT_LIB_DIR}/libconcert.a -Wl,-noall_load -o ${CONCERT_LIB_DIR}/libconcert.dylib
-        g++ -fpic -shared -Wl,-all_load ${CPLEX_LIB_DIR}/libilocplex.a  -Wl,-noall_load \
+        ${PREFIX}/bin/g++ -fpic -shared -Wl,-all_load ${CPLEX_LIB_DIR}/libcplex.a     -Wl,-noall_load -o ${CPLEX_LIB_DIR}/libcplex.dylib
+        ${PREFIX}/bin/g++ -fpic -shared -Wl,-all_load ${CONCERT_LIB_DIR}/libconcert.a -Wl,-noall_load -o ${CONCERT_LIB_DIR}/libconcert.dylib
+        ${PREFIX}/bin/g++ -fpic -shared -Wl,-all_load ${CPLEX_LIB_DIR}/libilocplex.a  -Wl,-noall_load \
             -L${CPLEX_LIB_DIR} -L${CONCERT_LIB_DIR} -lcplex -lconcert -o ${CPLEX_LIB_DIR}/libilocplex.dylib
     fi
 else
     EXISTING_SHARED_OBJECT=`ls ${CPLEX_LIB_DIR}/libilocplex.so` \
     || EXISTING_SHARED_OBJECT="NOT_PRESENT"
     if [ "$EXISTING_SHARED_OBJECT" == "NOT_PRESENT" ]; then
-        g++ -fpic -shared -Wl,-whole-archive ${CPLEX_LIB_DIR}/libcplex.a     -Wl,-no-whole-archive -o ${CPLEX_LIB_DIR}/libcplex.so
-	g++ -fpic -shared -Wl,-whole-archive ${CONCERT_LIB_DIR}/libconcert.a -Wl,-no-whole-archive -o ${CONCERT_LIB_DIR}/libconcert.so
-	g++ -fpic -shared -Wl,-whole-archive ${CPLEX_LIB_DIR}/libilocplex.a  -Wl,-no-whole-archive -o ${CPLEX_LIB_DIR}/libilocplex.so
+    ${PREFIX}/bin/g++ -fpic -shared -Wl,-whole-archive ${CPLEX_LIB_DIR}/libcplex.a     -Wl,-no-whole-archive -o ${CPLEX_LIB_DIR}/libcplex.so
+    ${PREFIX}/bin/g++ -fpic -shared -Wl,-whole-archive ${CONCERT_LIB_DIR}/libconcert.a -Wl,-no-whole-archive -o ${CONCERT_LIB_DIR}/libconcert.so
+    ${PREFIX}/bin/g++ -fpic -shared -Wl,-whole-archive ${CPLEX_LIB_DIR}/libilocplex.a  -Wl,-no-whole-archive -o ${CPLEX_LIB_DIR}/libilocplex.so
     fi
 fi

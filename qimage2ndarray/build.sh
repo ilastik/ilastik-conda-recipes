@@ -1,5 +1,8 @@
 #!/bin/bash
 
+export CC=${PREFIX}/bin/gcc
+export CXX=${PREFIX}/bin/g++
+
 $PYTHON setup.py install
 
 # Add more build steps here, if they are necessary.
