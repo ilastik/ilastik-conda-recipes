@@ -11,7 +11,7 @@ requirements:
       - gcc
       - cplex-shared
       - ann
-      - boost
+      - boost ==1.55
       - python
       - numpy
       - vigra
@@ -23,7 +23,7 @@ requirements:
       - libgcc
       - cplex-shared # Note: This pulls in gcc as a runtime dependency!
       - ann
-      - boost
+      - boost ==1.55
       - python
       - numpy
       - vigra

@@ -8,12 +8,12 @@ source:
 
 requirements:
     build:
-      - boost
+      - boost ==1.55
       - python
       - numpy
       - hdf5
     run:
-      - boost
+      - boost ==1.55
       - python
       - numpy
       - hdf5
