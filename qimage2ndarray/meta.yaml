@@ -27,7 +27,8 @@ source:
 
 requirements:
   build:
-    - gcc-no-fixincludes
+    - gcc # [osx]
+    - gcc 4.8.2 linux_portable # [linux]
     - python
     - setuptools
     - numpy
