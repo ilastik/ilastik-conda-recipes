@@ -10,12 +10,12 @@ fi
 mkdir build
 cd build
 cmake ..\
-	-DCMAKE_OSX_DEPLOYMENT_TARGET=10.7\
-	-DCMAKE_INSTALL_PREFIX=${PREFIX}\
-	-DCMAKE_PREFIX_PATH=${PREFIX}\
-    -DCMAKE_SHARED_LINKER_FLAGS=${LDFLAGS}\ -Wl,-rpath,${PREFIX}/lib\ -L${PREFIX}/lib \
-    -DCMAKE_EXE_LINKER_FLAGS=${LDFLAGS}\ -Wl,-rpath,${PREFIX}/lib\ -L${PREFIX}/lib \
-	-DBUILD_SHARED_LIBS=ON\
+    -DCMAKE_OSX_DEPLOYMENT_TARGET=10.7\
+    -DCMAKE_INSTALL_PREFIX=${PREFIX}\
+    -DCMAKE_PREFIX_PATH=${PREFIX}\
+    -DCMAKE_SHARED_LINKER_FLAGS="-Wl,-L${PREFIX}/lib" \
+    -DCMAKE_EXE_LINKER_FLAGS="-Wl,-L${PREFIX}/lib" \
+    -DBUILD_SHARED_LIBS=ON\
     -DWITH_PYTHON=ON\
     -DWITH_CHECKED_STL=OFF\
     -DWITH_TESTS=ON\
@@ -23,3 +23,17 @@ cmake ..\
 
 make -j${CPU_COUNT}
 make install
+
+CPLEX_LIB_DIR=`echo $CPLEX_ROOT_DIR/cplex/lib/*/static_pic`
+CONCERT_LIB_DIR=`echo $CPLEX_ROOT_DIR/concert/lib/*/static_pic`
+
+if [ `uname` == "Darwin" ]; then
+    # Set install names according using @rpath, which will be configured via the post-link script.
+    install_name_tool -change ${CPLEX_LIB_DIR}/libcplex.dylib @rpath/libcplex.dylib ${PREFIX}/lib/libpgmlink.dylib
+    install_name_tool -change ${CPLEX_LIB_DIR}/libilocplex.dylib @rpath/libilocplex.dylib ${PREFIX}/lib/libpgmlink.dylib
+    install_name_tool -change ${CONCERT_LIB_DIR}/libconcert.dylib @rpath/libconcert.dylib ${PREFIX}/lib/libpgmlink.dylib
+
+    install_name_tool -change ${CPLEX_LIB_DIR}/libcplex.dylib @rpath/libcplex.dylib ${PREFIX}/lib/python2.7/site-packages/pgmlink.so
+    install_name_tool -change ${CPLEX_LIB_DIR}/libilocplex.dylib @rpath/libilocplex.dylib ${PREFIX}/lib/python2.7/site-packages/pgmlink.so
+    install_name_tool -change ${CONCERT_LIB_DIR}/libconcert.dylib @rpath/libconcert.dylib ${PREFIX}/lib/python2.7/site-packages/pgmlink.so
+fi

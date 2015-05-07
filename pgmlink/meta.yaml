@@ -34,10 +34,6 @@ build:
      - CPLEX_ROOT_DIR
   number: 3
 
-  # Don't let conda configure the RPATH.
-  # We set the rpath ourselves in post-link.sh, so pgmlink can locate CPLEX.
-  binary_relocation: false
-
 test:
   imports:
       - pgmlink
