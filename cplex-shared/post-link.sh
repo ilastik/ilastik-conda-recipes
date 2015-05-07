@@ -1,4 +1,4 @@
-CPLEX_LOCATION_CACHE_FILE="${PREFIX}/share/cplex-root-dir.path"
+CPLEX_LOCATION_CACHE_FILE="${PREFIX}/../../share/cplex-root-dir.path"
 
 if [ "$CPLEX_ROOT_DIR" == "" ]; then 
     CPLEX_ROOT_DIR="<UNDEFINED>"
