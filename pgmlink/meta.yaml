@@ -8,6 +8,7 @@ source:
 
 requirements:
     build:
+      - gcc
       - ann
       - boost
       - python
@@ -18,6 +19,7 @@ requirements:
       - lemon
       - libxml2
     run:
+      - libgcc
       - ann
       - boost
       - python
