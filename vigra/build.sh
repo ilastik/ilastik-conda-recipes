@@ -17,6 +17,11 @@ VIGRA_LDFLAGS="${CXX_LDFLAGS} -Wl,-rpath,${PREFIX}/lib -L${PREFIX}/lib"
 # Include the git commit in the build version so we remember which one was used for the build.
 echo "$GIT_DESCRIBE_HASH" > __conda_version__.txt 
 
+# These extra flags for .c files enable us to build on CentOS-5.11,
+# even with its default glibc headers, with gcc's special 'fixincludes' headers.
+# (No 'fixincludes' necessary.)
+VIGRA_IMPEX_EXTRA_C_FLAGS="-std=gnu90 -Wno-pedantic -Wno-long-long"
+
 # CONFIGURE
 mkdir build
 cd build
@@ -34,6 +39,7 @@ cmake ..\
 \
         -DWITH_VIGRANUMPY=TRUE \
         -DWITH_BOOST_THREAD=1 \
+        -DVIGRA_IMPEX_EXTRA_C_FLAGS="${VIGRA_IMPEX_EXTRA_C_FLAGS}" \
         -DDEPENDENCY_SEARCH_PREFIX=${PREFIX} \
 \
         -DFFTW3F_INCLUDE_DIR=${PREFIX}/include \
