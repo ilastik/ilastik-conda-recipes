@@ -1,6 +1,12 @@
+if [ $(echo $PREFIX | grep -q envs)$? -eq 0 ]; then
+    ROOT_ENV_PREFIX="${PREFIX}/../.."
+else
+    ROOT_ENV_PREFIX="${PREFIX}"
+fi
+CPLEX_LOCATION_CACHE_FILE="${ROOT_ENV_PREFIX}/share/cplex-root-dir.path"
+
 if [[ "$CPLEX_ROOT_DIR" == "<UNDEFINED>" || "$CPLEX_ROOT_DIR" == "" ]]; then
     # Look for CPLEX_ROOT_DIR in the cplex-shared cache file.
-    CPLEX_LOCATION_CACHE_FILE="${PREFIX}/../../share/cplex-root-dir.path"
     CPLEX_ROOT_DIR=`cat ${CPLEX_LOCATION_CACHE_FILE} 2> /dev/null` \
     || CPLEX_ROOT_DIR="<UNDEFINED>"
 fi
@@ -13,6 +19,40 @@ if [ "$CPLEX_ROOT_DIR" == "<UNDEFINED>" ]; then
     echo "******************************************"
     exit 1
 fi
+
+CPLEX_LIB_DIR=`echo $CPLEX_ROOT_DIR/cplex/lib/*/static_pic`
+CONCERT_LIB_DIR=`echo $CPLEX_ROOT_DIR/concert/lib/*/static_pic`
+
+
+set +e
+(
+    set -e
+    if [ `uname` == "Darwin" ]; then
+        ls ${CPLEX_LIB_DIR}/libcplex.dylib
+        ls ${CPLEX_LIB_DIR}/libilocplex.dylib
+        ls ${CONCERT_LIB_DIR}/libconcert.dylib
+    else
+        ls ${CPLEX_LIB_DIR}/libcplex.so
+        ls ${CPLEX_LIB_DIR}/libilocplex.so
+        ls ${CONCERT_LIB_DIR}/libconcert.so
+    fi
+)
+if [ $? -ne 0 ]; then
+    set +x
+    echo "************************************************"
+    echo "* Your CPLEX installation does not include     *" 
+    echo "* the necessary shared libraries.              *"
+    echo "*                                              *"
+    echo "* Please install the 'cplex-shared' package:   *"
+    echo "*                                              *"
+    echo "*     $ conda install cplex-shared             *"
+    echo "*                                              *"
+    echo "* (You only need to do this once per machine.) *"
+    echo "************************************************"
+    exit 1
+fi
+set -e
+
 
 CFLAGS=""
 CXXFLAGS=""
@@ -41,9 +81,6 @@ cmake ..\
 
 make -j${CPU_COUNT}
 make install
-
-CPLEX_LIB_DIR=`echo $CPLEX_ROOT_DIR/cplex/lib/*/static_pic`
-CONCERT_LIB_DIR=`echo $CPLEX_ROOT_DIR/concert/lib/*/static_pic`
 
 if [ `uname` == "Darwin" ]; then
     # Set install names according using @rpath, which will be configured via the post-link script.

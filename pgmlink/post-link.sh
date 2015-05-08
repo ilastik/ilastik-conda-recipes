@@ -1,6 +1,12 @@
+if [ $(echo $PREFIX | grep -q envs)$? -eq 0 ]; then
+    ROOT_ENV_PREFIX="${PREFIX}/../.."
+else
+    ROOT_ENV_PREFIX="${PREFIX}"
+fi
+CPLEX_LOCATION_CACHE_FILE="${ROOT_ENV_PREFIX}/share/cplex-root-dir.path"
+
 if [[ "$CPLEX_ROOT_DIR" == "<UNDEFINED>" || "$CPLEX_ROOT_DIR" == "" ]]; then
     # Look for CPLEX_ROOT_DIR in the cplex-shared cache file.
-    CPLEX_LOCATION_CACHE_FILE="${PREFIX}/../../share/cplex-root-dir.path"
     CPLEX_ROOT_DIR=`cat ${CPLEX_LOCATION_CACHE_FILE} 2> /dev/null` \
     || CPLEX_ROOT_DIR="<UNDEFINED>"
 fi

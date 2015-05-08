@@ -23,7 +23,6 @@ requirements:
 
     run:
       - libgcc
-      - cplex-shared # Note: This pulls in gcc as a runtime dependency!
       - ann
       - boost ==1.55
       - python
@@ -35,10 +34,15 @@ requirements:
       - libxml2
       - patchelf # [linux]
 
+      # We don't require cplex-shared here because it only needs to be installed once per machine,
+      # and requiring it here would include all of gcc in the install lib dir.
+      # Instead, we give the user a descriptive error message if cplex-shared hasn't been run on her machine.
+      # - cplex-shared 
+
 build:
   script_env:
      - CPLEX_ROOT_DIR
-  number: 3
+  number: 4
 
 test:
   imports:
