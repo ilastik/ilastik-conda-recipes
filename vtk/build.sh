@@ -20,6 +20,7 @@ cd build
 cmake \
     -DCMAKE_C_COMPILER=${CC} \
     -DCMAKE_CXX_COMPILER=${CXX} \
+    -DCMAKE_C_FLAGS="-std=gnu90 -gdwarf-2 -gstrict-dwarf" \
     -DCMAKE_INSTALL_PREFIX:PATH="$PREFIX" \
     -DCMAKE_INSTALL_RPATH:STRING="$PREFIX/lib" \
     -DVTK_HAS_FEENABLEEXCEPT:BOOL=OFF \
