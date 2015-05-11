@@ -23,6 +23,8 @@ cmake \
     -DCMAKE_C_FLAGS="-std=gnu90 -gdwarf-2 -gstrict-dwarf" \
     -DCMAKE_INSTALL_PREFIX:PATH="$PREFIX" \
     -DCMAKE_INSTALL_RPATH:STRING="$PREFIX/lib" \
+    -DCMAKE_SHARED_LINKER_FLAGS="-Wl,-rpath,/${PREFIX}/lib -L${PREFIX}/lib" \
+    -DCMAKE_EXE_LINKER_FLAGS="-Wl,-rpath,/${PREFIX}/lib -L${PREFIX}/lib" \
     -DVTK_HAS_FEENABLEEXCEPT:BOOL=OFF \
     -DBUILD_TESTING:BOOL=OFF \
     -DBUILD_EXAMPLES:BOOL=OFF \
