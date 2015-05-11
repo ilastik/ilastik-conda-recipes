@@ -14,6 +14,6 @@ import vtk.vtkVolumeRenderingPython
 import vtk.vtkWidgetsPython
 
 # Qt extension
-import vtk.QVTKWidget
-import vtk.QVTKWidget2
-import vtk.vtkQImageToImageSource
+from vtk import QVTKWidget
+from vtk import QVTKWidget2
+from vtk import vtkQImageToImageSource
