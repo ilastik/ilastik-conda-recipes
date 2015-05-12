@@ -9,7 +9,7 @@ requirements:
   build:
     - python
     - numpy
-    - vigra
+    - vigra 1.10 a590b5b # 2015-05-05
     - h5py
     - psutil
     - blist
@@ -23,7 +23,7 @@ requirements:
   run:
     - python
     - numpy
-    - vigra
+    - vigra 1.10 a590b5b # 2015-05-05
     - h5py
     - psutil
     - blist

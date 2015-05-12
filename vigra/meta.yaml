@@ -3,8 +3,8 @@ package:
   version: "1.10"
 
 source:
-  git_url: git://github.com/stuarteberg/vigra.git
-  git_tag: HEAD
+  git_url: git://github.com/ukoethe/vigra.git
+  git_tag: a590b5b5bd313afc5a2fb78adcd609cde28cc993 # 2015-05-05
 
 build:
   script_env:
@@ -12,6 +12,7 @@ build:
    - DYLD_LIBRARY_PATH
 
   number: 2
+  string: a590b5b
 
 requirements:
   build:

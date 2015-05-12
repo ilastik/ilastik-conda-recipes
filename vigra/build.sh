@@ -13,10 +13,6 @@ fi
 VIGRA_CXX_FLAGS_RELEASE="-O2 -DNDEBUG ${VIGRA_CXX_FLAGS}"
 VIGRA_LDFLAGS="${CXX_LDFLAGS} -Wl,-rpath,${PREFIX}/lib -L${PREFIX}/lib"
 
-# We like to make builds of vigra from arbitrary git commits (not always tagged).
-# Include the git commit in the build version so we remember which one was used for the build.
-echo "$GIT_DESCRIBE_HASH" > __conda_version__.txt 
-
 # CONFIGURE
 mkdir build
 cd build
@@ -86,4 +82,3 @@ make -j${CPU_COUNT}
 
 # "install" to the build prefix (conda will relocate these files afterwards)
 make install
-
