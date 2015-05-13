@@ -14,6 +14,10 @@ requirements:
     - futures 2.2.0 py27_0
     - matplotlib 1.4.3 np19py27_1
 
+    # Python was already included via the headless package,
+    # but we need to add it explicitly here due to a conda bug.
+    - python 2.7.9 3
+
   run:
     - ilastik-deps-pc-headless 1.1 np19py27_0
     - pyqt 4.11.3 py27_1
