@@ -137,39 +137,16 @@ requirements:
 #  # Packages required to build the package. python and numpy must be
 #  # listed explicitly if they are required.
  build:
-     - gcc # [osx]
-     - gcc 4.8.2 linux_portable # [linux]
-     - boost ==1.55
-     - armadillo
-     - libxml2
-#    - python
-#    - numpy
-#    - jpeg
-#    - libtiff
-#    - libpng
-#    - fftw
-#    - hdf5
-#    - boost
-#    - zlib
-#    - nose
-#    
-#  # Packages required to run the package. These are the dependencies that
-#  # will be installed automatically whenever the package is installed.
+     - gcc        4.8.2    5 # [osx]
+     - gcc        4.8.2    linux_portable # [linux]
+     - boost      1.55.0   1
+     - armadillo  4.000.2  1
+     - libxml2    2.9.0 0
  run:
-     - libgcc
-     - boost ==1.55
-     - armadillo
-     - libxml2
-#    - python
-#    - numpy
-#    - jpeg
-#    - libtiff
-#    - libpng
-#    - fftw
-#    - hdf5
-#    - boost
-#    - zlib
-#    - nose
+     - libgcc     4.8.4    1
+     - boost      1.55.0   1
+     - armadillo  4.000.2  1
+     - libxml2    2.9.0    0
 
 test:
   ## files which are copied from the recipe into the (temporary) test

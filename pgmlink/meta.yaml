@@ -8,36 +8,27 @@ source:
 
 requirements:
     build:
-      - gcc # [osx]
-      - gcc 4.8.2 linux_portable # [linux]
-      - cplex-shared
-      - ann
-      - boost ==1.55
-      - python
-      - numpy
-      - vigra
-      - opengm
-      - mlpack
-      - lemon
-      - libxml2
+      - gcc           4.8.2   5 # [osx]
+      - gcc           4.8.2   linux_portable # [linux]
+      - cplex-shared  0.1     0
 
     run:
-      - libgcc
-      - ann
-      - boost ==1.55
-      - python
-      - numpy
-      - vigra
-      - opengm
-      - mlpack
-      - lemon
-      - libxml2
-      - patchelf # [linux]
+      - libgcc        4.8.4   1
+      - patchelf      0.6     0 # [linux]
+      - ann           1.1.2   0
+      - boost         1.55.0  1
+      - python        2.7.9   3
+      - numpy         1.9.2   py27_0
+      - vigra         1.10    a590b5b
+      - opengm        2.3.4   np19py27_0
+      - mlpack        1.0.8   1
+      - lemon         1.2.4   0
+      - libxml2       2.9.0   0
 
       # We don't require cplex-shared here because it only needs to be installed once per machine,
       # and requiring it here would include all of gcc in the install lib dir.
       # Instead, we give the user a descriptive error message if cplex-shared hasn't been run on her machine.
-      # - cplex-shared 
+      # - cplex-shared
 
 build:
   script_env:

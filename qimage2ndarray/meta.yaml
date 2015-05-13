@@ -6,64 +6,30 @@ source:
   fn: qimage2ndarray-1.4.tar.gz
   url: https://pypi.python.org/packages/source/q/qimage2ndarray/qimage2ndarray-1.4.tar.gz
   md5: 77359e694d498c958c90bcd3e3851d5d
-#  patches:
-   # List any patch files here
-   # - fix.patch
-
-# build:
-  # preserve_egg_dir: True
-  # entry_points:
-    # Put any entry points (scripts to be generated automatically) here. The
-    # syntax is module:function.  For example
-    #
-    # - qimage2ndarray = qimage2ndarray:main
-    #
-    # Would create an entry point called qimage2ndarray that calls qimage2ndarray.main()
-
-
-  # If this is a new build for the same version, increment the build
-  # number. If you do not include this key, it defaults to 0.
-  # number: 1
 
 requirements:
   build:
-    - gcc # [osx]
-    - gcc 4.8.2 linux_portable # [linux]
-    - python
-    - setuptools
-    - numpy
-    - sip
-    - pyqt
+    - gcc         4.8.2   5 # [osx]
+    - gcc         4.8.2   linux_portable # [linux]
+    - python      2.7.9   3
+    - setuptools  15.2    py27_0
+    - numpy       1.9.2   py27_0
+    - sip         4.16.5  py27_0
+    - pyqt        4.11.3  py27_1
 
   run:
-    - libgcc
-    - python
-    - numpy
-    - sip
-    - pyqt
+    - libgcc      4.8.4   1
+    - python      2.7.9   3
+    - numpy       1.9.2   py27_0
+    - sip         4.16.5  py27_0
+    - pyqt        4.11.3  py27_1
 
 test:
   # Python imports
   imports:
     - qimage2ndarray
 
-  # commands:
-    # You can put test commands to be run here.  Use this to test that the
-    # entry points work.
-
-
-  # You can also put a file called run_test.py in the recipe that will be run
-  # at test time.
-
-  # requires:
-    # Put any additional test requirements here.  For example
-    # - nose
-
 about:
   home: https://github.com/hmeine/qimage2ndarray
   license: BSD License
   summary: 'Conversion between QImages and numpy.ndarrays.'
-
-# See
-# http://docs.continuum.io/conda/build.html for
-# more information about meta.yaml

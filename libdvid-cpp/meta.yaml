@@ -18,25 +18,25 @@ build:
   
 requirements:
   build:
-    - boost ==1.55
+    - boost 1.55.0 1
     - jsoncpp
     - lz4
     - jpeg
     - libpng
     - curl
-    - python
+    - python 2.7.9 3
     - numpy >=1.7
     
   # Packages required to run the package. These are the dependencies that
   # will be installed automatically whenever the package is installed.
   run:
-    - boost ==1.55
+    - boost 1.55.0 1
     - jsoncpp
     - lz4
     - jpeg
     - libpng
     - curl
-    - python
+    - python 2.7.9 3
     - numpy >=1.7
 
 test:

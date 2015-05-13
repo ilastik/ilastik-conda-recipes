@@ -7,7 +7,7 @@ package:
 
 requirements:
   build:
-    - ilastik-deps-pc-headless ==1.1
+    - ilastik-deps-pc-headless 1.1 np19py27_0
     - pyqt 4.11.3 py27_1
     - qimage2ndarray 1.4 np19py27_0
     - vtk 5.10.1 with_pyqt
@@ -15,7 +15,7 @@ requirements:
     - matplotlib 1.4.3 np19py27_1
 
   run:
-    - ilastik-deps-pc-headless ==1.1
+    - ilastik-deps-pc-headless 1.1 np19py27_0
     - pyqt 4.11.3 py27_1
     - qimage2ndarray 1.4 np19py27_0
     - vtk 5.10.1 with_pyqt

@@ -28,11 +28,11 @@ build:
 
 requirements:
   build:
-    - python
-    - setuptools
+    - python     2.7.9  3
+    - setuptools 15.2   py27_0
 
   run:
-    - python
+    - python     2.7.9  3
 
 test:
   # Python imports

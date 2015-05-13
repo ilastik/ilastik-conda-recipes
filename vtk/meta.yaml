@@ -18,16 +18,16 @@ build:
 
 requirements:
   build:
-    - gcc 4.8.2 linux_portable # [linux]
-    - python
-    - pyqt
+    - gcc     4.8.2   linux_portable # [linux]
+    - python  2.7.9   3
+    - pyqt    4.11.3  py27_1
   run:
-    - libgcc # [linux]
-    - python
+    - libgcc  4.8.4   1 # [linux]
+    - python  2.7.9   3
 
 test:
   requires:
-    - pyqt
+    - pyqt    4.11.3  py27_1
 
   commands:
     - vtkpython -h # [unix]
