@@ -11,6 +11,16 @@ requirements:
       - gcc 4.8.2.99 # [linux]
       - gcc 4.8.2 # [osx]
       - cplex-shared
+      - patchelf
+      - ann
+      - boost 1.55.0
+      - python
+      - numpy
+      - vigra
+      - opengm
+      - mlpack
+      - lemon
+      - libxml2
 
     run:
       - libgcc
