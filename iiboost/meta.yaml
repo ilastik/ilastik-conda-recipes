@@ -1,0 +1,39 @@
+package:
+  name: iiboost
+  version: 0.1
+
+source:
+  git_url: git://github.com/cbecker/iiboost.git
+  git_tag: HEAD
+
+build:
+  number: 0
+
+requirements:  
+  build:
+    - gcc 4.8.2.99 # [linux]
+    - gcc 4.8.2 # [osx]
+    - python
+    - numpy
+    - itk
+    - jpeg
+    - libtiff
+    - libpng
+
+  run:
+    - libgcc
+    - python
+    - numpy
+    - itk
+    - jpeg
+    - libtiff
+    - libpng
+
+test:
+  imports:
+    - iiboost
+
+about:
+  home: http://github.com/cbecker/iiboost
+  license: GPLv3
+  summary: Learning Context Cues for Synapse Segmentation
