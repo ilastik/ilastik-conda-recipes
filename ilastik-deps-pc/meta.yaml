@@ -10,7 +10,7 @@ requirements:
     - ilastik-deps-pc-headless
     - pyqt
     - qimage2ndarray
-    - vtk
+    - vtk 5.10.1.99
     - futures
     - matplotlib
 
@@ -22,6 +22,6 @@ requirements:
     - ilastik-deps-pc-headless
     - pyqt
     - qimage2ndarray
-    - vtk
+    - vtk 5.10.1.99
     - futures
     - matplotlib
