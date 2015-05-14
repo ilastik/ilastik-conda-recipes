@@ -1,0 +1,17 @@
+package:
+  name: ilastik-meta
+  version: {{ environ.get('GIT_DESCRIBE_TAG', '') }}
+
+source:
+  git_url: https://github.com/ilastik/ilastik-meta
+  git_tag: 1.1.5
+
+build:
+  number: {{ environ.get('GIT_DESCRIBE_NUMBER', 0) }}
+  string: {{ environ.get('GIT_BUILD_STR', '') }}
+
+requirements:
+  build:
+    - python
+  run:
+    - python
