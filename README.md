@@ -232,25 +232,28 @@ TODO/TBD
 
 - General
 
- - [ ] Not all Tracking Workflow dependencies are supported yet, even on Mac/Linux.
+ - [x] Not all Tracking Workflow dependencies are supported yet, even on Mac/Linux.
 
- - [ ] How do we handle external libraries (like CPLEX)?
+ - [x] How do we handle external libraries (like CPLEX)?
 
- - [ ] Apparently, the VTK package provided by Continuum (Anaconda) was not built with PyQt support.  
+ - [x] Apparently, the VTK package provided by Continuum (Anaconda) was not built with PyQt support.  
    We'll have to build our own VTK package, and pass 
    `-DVTK_USE_QT:BOOL=ON -DSIP_EXECUTABLE:FILEPATH=$PREFIX/bin/sip -DSIP_INCLUDE_DIR:PATH=$PREFIX/include/python2.7 -DSIP_PYQT_DIR:PATH=$PREFIX/share/sip/PyQt4` 
    to the `cmake` step.
 
- - [ ] In cases where we provide an alternative build of a package that Continuum already provides, we need to 
+ - [x] In cases where we provide an alternative build of a package that Continuum already provides, we need to 
    make sure our special channel takes priority over the `defaults` channel used by conda.  It isn't immediately 
-   obvious how this is supposed to be achieved in conda. (**Edit:** Which packages does this refer to?  VTK?) 
+   obvious how this is supposed to be achieved in conda.
+   (**Edit:** Ideally, we could just use a custom "build string", but due to conda/conda#918, that doesn't work.
+   Instead, we just use a deliberately strange version number in our custom packages, e.g. `version: 5.10.1.99`.)
 
  - [ ] So far, the `meta.yaml` files for `ilastik-deps-pc`, etc. do not list explicit version requirements for 
    each dependency (e.g. `boost ==1.55`, or `vigra ==g14de6ac`).  We should fix that, and this repo should be 
    tagged with the ilastik version number every time we make a release.  This repo will become the official record 
    of which dependency versions were used in each release (via the `meta.yaml` files).
+   (Edit: Again, ideally we'd use the "build string" feature here, but that feature doesn't yet work as it should.)
 
- - [ ] The ilastik, lazyflow, and volumina repos themselves are not included as dependencies in this build repository.
+ - [x] The ilastik, lazyflow, and volumina repos themselves are not included as dependencies in this build repository.
    How should we deal with them?
 
  - [ ] Instead of uploading packages to our own [binstar] channels individually, we should create a shared account for 
@@ -263,6 +266,8 @@ TODO/TBD
 
  - [ ] We need to extract the final packaging steps `ilastik-build-Linux` and adapt them 
    to work with the builds generated in this repo.
+   (**Update:** Conda binaries are relocatable by default, so simply copying the entire environment works just fine.
+   We can still go a step further to save disk space, e.g. `strip` the debug symbols from the `.so` files, remove include files, etc.)
 
 - Mac
 
