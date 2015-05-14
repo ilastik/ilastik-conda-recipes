@@ -9,20 +9,19 @@ source:
 
 requirements:
   build:
-    - gcc         4.8.2   5 # [osx]
-    - gcc         4.8.2   linux_portable # [linux]
-    - python      2.7.9   3
-    - setuptools  15.2    py27_0
-    - numpy       1.9.2   py27_0
-    - sip         4.16.5  py27_0
-    - pyqt        4.11.3  py27_1
+    - gcc
+    - python
+    - setuptools
+    - numpy
+    - sip
+    - pyqt
 
   run:
-    - libgcc      4.8.4   1
-    - python      2.7.9   3
-    - numpy       1.9.2   py27_0
-    - sip         4.16.5  py27_0
-    - pyqt        4.11.3  py27_1
+    - libgcc
+    - python
+    - numpy
+    - sip
+    - pyqt
 
 test:
   # Python imports

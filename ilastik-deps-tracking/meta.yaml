@@ -7,9 +7,9 @@ package:
 
 requirements:
   build:
-    - ilastik-deps-pc 1.1 0
-    - pgmlink 1.2 np19py27_3
+    - ilastik-deps-pc
+    - pgmlink
 
   run:
-    - ilastik-deps-pc 1.1 0
-    - pgmlink 1.2 np19py27_3
+    - ilastik-deps-pc
+    - pgmlink

@@ -12,10 +12,9 @@ source:
 
 requirements:
     build:
-      - gcc     4.8.2     5 # [osx]
-      - gcc     4.8.2     linux_portable # [linux]
+      - gcc
     run:
-      - libgcc  4.8.4     1
+      - libgcc
 
 
 # Note: tests are run when building the package, they are not accessible

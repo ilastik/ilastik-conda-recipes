@@ -7,9 +7,9 @@ package:
 
 requirements:
   build:
-    - ilastik-deps-pc 1.1 0
-    - cylemon 1 np19py27_0
+    - ilastik-deps-pc
+    - cylemon
 
   run:
-    - ilastik-deps-pc 1.1 0
-    - cylemon 1 np19py27_0
+    - ilastik-deps-pc
+    - cylemon

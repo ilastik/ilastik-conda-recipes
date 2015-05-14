@@ -14,11 +14,11 @@ build:
 
 requirements:
   build:
-    - python  2.7.9  3
+    - python
 
 test:
   requires:
-    - python  2.7.9  3
+    - python
 
 about:
   home: https://github.com/open-source-parsers/jsoncpp

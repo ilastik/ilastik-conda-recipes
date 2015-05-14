@@ -18,12 +18,12 @@ build:
 
 requirements:
   build:
-    - gcc     4.8.2   linux_portable # [linux]
-    - python  2.7.9   3
-    - pyqt    4.11.3  py27_1
+    - gcc
+    - python
+    - pyqt
   run:
-    - libgcc  4.8.4   1 # [linux]
-    - python  2.7.9   3
+    - libgcc
+    - python
 
 test:
   requires:

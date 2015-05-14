@@ -8,19 +8,18 @@ source:
 
 requirements:
   build:
-    - gcc         4.8.2    5 # [osx]
-    - gcc         4.8.2    linux_portable # [linux]
-    - python      2.7.9    3
-    - cython      0.21     py27_1
-    - setuptools  15.2     py27_0
-    - numpy       1.9.2    py27_0
-    - lemon       1.2.4    0
+    - gcc
+    - python
+    - cython
+    - setuptools
+    - numpy
+    - lemon
 
   run:
-    - libgcc      4.8.4    1
-    - python      2.7.9    3
-    - numpy       1.9.2    py27_0
-    - lemon       1.2.4    0
+    - libgcc
+    - python
+    - numpy
+    - lemon
 
 test:
   # Python imports

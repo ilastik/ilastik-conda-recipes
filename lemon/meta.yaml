@@ -13,11 +13,10 @@ source:
 
 requirements:
   build:
-    - gcc     4.8.2  5 # [osx]
-    - gcc     4.8.2  linux_portable # [linux]
+    - gcc
 
   run:
-    - libgcc  4.8.4  1
+    - libgcc
 
 about:
   home: http://lemon.cs.elte.hu/trac/lemon

@@ -9,11 +9,11 @@ source:
 
 requirements:
   build:
-    - python      2.7.9  3
-    - setuptools  15.2   py27_0
+    - python
+    - setuptools
 
   run:
-    - python      2.7.9  3
+    - python
 
 test:
   imports:

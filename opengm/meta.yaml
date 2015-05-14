@@ -8,18 +8,17 @@ source:
 
 requirements:
     build:
-      - gcc     4.8.2   5 # [osx]
-      - gcc     4.8.2   linux_portable # [linux]
-      - boost   1.55.0  1
-      - python  2.7.9   3
-      - numpy   1.9.2   py27_0
-      - hdf5    1.8.14  0
+      - gcc
+      - boost
+      - python
+      - numpy
+      - hdf5
     run:
-      - libgcc  4.8.4   1
-      - boost   1.55.0  1
-      - python  2.7.9   3
-      - numpy   1.9.2   py27_0
-      - hdf5    1.8.14  0
+      - libgcc
+      - boost
+      - python
+      - numpy
+      - hdf5
 
 test:
   imports:

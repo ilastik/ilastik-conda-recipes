@@ -8,22 +8,21 @@ source:
 
 requirements:
     build:
-      - gcc           4.8.2   5 # [osx]
-      - gcc           4.8.2   linux_portable # [linux]
-      - cplex-shared  0.1     0
+      - gcc
+      - cplex-shared
 
     run:
-      - libgcc        4.8.4   1
-      - patchelf      0.6     0 # [linux]
-      - ann           1.1.2   0
-      - boost         1.55.0  1
-      - python        2.7.9   3
-      - numpy         1.9.2   py27_0
-      - vigra         1.10    a590b5b
-      - opengm        2.3.4   np19py27_0
-      - mlpack        1.0.8   1
-      - lemon         1.2.4   0
-      - libxml2       2.9.0   0
+      - libgcc
+      - patchelf
+      - ann
+      - boost
+      - python
+      - numpy
+      - vigra
+      - opengm
+      - mlpack
+      - lemon
+      - libxml2
 
       # We don't require cplex-shared here because it only needs to be installed once per machine,
       # and requiring it here would include all of gcc in the install lib dir.
