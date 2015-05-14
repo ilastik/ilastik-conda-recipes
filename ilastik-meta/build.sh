@@ -1,5 +1,6 @@
 git clone https://github.com/ilastik/ilastik-meta ${PREFIX}/ilastik-meta
 cd ${PREFIX}/ilastik-meta
+git checkout ${GIT_DESCRIBE_HASH:1} # The git hash is prefixed with 'g' for some stupid reason.
 git submodule init
 git submodule update --recursive
 
