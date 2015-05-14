@@ -25,7 +25,7 @@ requirements:
     - libpng
     - fftw
     - hdf5
-    - boost
+    - boost 1.55.0
     - zlib
     - nose
 
@@ -38,7 +38,7 @@ requirements:
     - libpng
     - fftw
     - hdf5
-    - boost
+    - boost 1.55.0
     - zlib
     - nose
 

@@ -10,13 +10,13 @@ requirements:
     build:
       - gcc 4.8.2.99 # [linux]
       - gcc 4.8.2 # [osx]
-      - boost
+      - boost 1.55.0
       - python
       - numpy
       - hdf5
     run:
       - libgcc
-      - boost
+      - boost 1.55.0
       - python
       - numpy
       - hdf5

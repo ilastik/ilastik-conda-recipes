@@ -18,7 +18,7 @@ build:
   
 requirements:
   build:
-    - boost
+    - boost 1.55.0
     - jsoncpp
     - lz4
     - jpeg
@@ -30,7 +30,7 @@ requirements:
   # Packages required to run the package. These are the dependencies that
   # will be installed automatically whenever the package is installed.
   run:
-    - boost
+    - boost 1.55.0
     - jsoncpp
     - lz4
     - jpeg

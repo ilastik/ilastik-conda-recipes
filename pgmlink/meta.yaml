@@ -16,7 +16,7 @@ requirements:
       - libgcc
       - patchelf
       - ann
-      - boost
+      - boost 1.55.0
       - python
       - numpy
       - vigra
