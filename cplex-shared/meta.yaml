@@ -12,7 +12,8 @@ package:
 
 requirements:
   run:
-    - gcc
+    - gcc 4.8.2.99 # [linux]
+    - gcc 4.8.2 # [osx]
 
 build:
   script_env:

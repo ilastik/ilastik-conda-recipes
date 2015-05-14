@@ -13,7 +13,8 @@ source:
 
 requirements:
   build:
-    - gcc
+    - gcc 4.8.2.99 # [linux]
+    - gcc 4.8.2 # [osx]
 
   run:
     - libgcc

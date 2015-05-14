@@ -16,8 +16,8 @@ build:
 
 requirements:
   build:
-    - gcc
-    - gcc
+    - gcc 4.8.2.99 # [linux]
+    - gcc 4.8.2 # [osx]
     - python
     - numpy
     - jpeg
