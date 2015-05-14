@@ -11,7 +11,7 @@ requirements:
     - gcc 4.8.2.99 # [linux]
     - gcc 4.8.2 # [osx]
     - python
-    - cython
+    - cython 0.21
     - setuptools
     - numpy
     - lemon
