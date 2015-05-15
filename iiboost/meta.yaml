@@ -3,7 +3,9 @@ package:
   version: 0.1
 
 source:
-  git_url: git://github.com/cbecker/iiboost.git
+  # TODO: Change back to cbecker/iiboost after he accepts my pull request.
+  #git_url: git://github.com/cbecker/iiboost.git
+  git_url: git://github.com/stuarteberg/iiboost.git
   git_tag: HEAD
 
 build:
