@@ -6,7 +6,7 @@ CONDA_ROOT=`conda info --root`
 conda remove -q -y --all -n ilastik-release 2> /dev/null || true
 
 # Create new ilastik-release environment and install all ilastik dependencies to it.
-conda create -y -n ilastik-release ilastik-deps-pc ilastik-deps-carving ilastik-deps-tracking ilastik-meta
+conda create -y -n ilastik-release ilastik-everything
 
 ILASTIK_PKG_VERSION=`conda list -n ilastik-release | grep ilastik-meta | python -c "import sys; print sys.stdin.read().split()[1]"`
 RELEASE_NAME=ilastik-${ILASTIK_PKG_VERSION}-Linux
