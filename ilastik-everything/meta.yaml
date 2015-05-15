@@ -1,0 +1,30 @@
+about:
+  summary: "A meta-package for building all ilastik dependencies and downloading the ilastik-meta repo."
+
+package:
+  name: ilastik-everything
+  version: "1.1"
+
+requirements:
+  build:
+    - ilastik-deps-pc
+    - ilastik-deps-pc-iiboost
+    - ilastik-deps-carving
+    - ilastik-deps-tracking
+    - ilastik-meta
+
+  run:
+    - ilastik-deps-pc
+    - ilastik-deps-pc-iiboost
+    - ilastik-deps-carving
+    - ilastik-deps-tracking
+    - ilastik-meta
+
+test:
+  requires:
+    - nose
+    
+  imports:
+    - lazyflow
+    - volumina
+    - ilastik
