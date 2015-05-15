@@ -18,17 +18,41 @@ def ch_link_libvtk(path, link):
     if link.startswith('libpython'):
         return '@loader_path/../%s' % basename(link)
 
+    if (   link.startswith('libpng') 
+        or link.startswith('libtiff')
+        or link.startswith('libxml2')
+        or link.startswith('libjpeg')
+        or link.startswith('libz')):
+        return '@loader_path/../%s' % basename(link)
+
     if link.startswith('lib'):
         return '@loader_path/./%s' % basename(link)
 
 def ch_link_bin(path, link):
+    if not basename(path).startswith('vtk'):
+        return
+
     if link.startswith('libpython'):
+        return '@loader_path/../lib/%s' % basename(link)
+
+    if (   link.startswith('libpng') 
+        or link.startswith('libtiff')
+        or link.startswith('libxml2')
+        or link.startswith('libjpeg')
+        or link.startswith('libz')):
         return '@loader_path/../lib/%s' % basename(link)
 
     if link.startswith('lib'):
         return '@loader_path/../lib/vtk-5.10/%s' % basename(link)
 
 def ch_link_spvtk(path, link):
+    if (   link.startswith('libpng') 
+        or link.startswith('libtiff')
+        or link.startswith('libxml2')
+        or link.startswith('libjpeg')
+        or link.startswith('libz')):
+        return '@loader_path/../../../%s' % basename(link)
+
     if '/VTK5.10.1/' in link:
         return '@loader_path/../../../vtk-5.10/%s' % basename(link)
 
