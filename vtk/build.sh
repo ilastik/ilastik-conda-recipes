@@ -78,6 +78,9 @@ if [ `uname` == Linux ]; then
     sed -i 's|/lib/vtk-5.10/lib|/lib/lib|g' \
         $PREFIX/lib/vtk-5.10/VTKTargets-debug.cmake
 fi
+
 if [ `uname` == Darwin ]; then
-    $SYS_PYTHON $RECIPE_DIR/osx.py
+    # The osx.py script needs access to conda_build
+    CONDA_ROOT_PYTHON=`conda info --root`/bin/python
+    $CONDA_ROOT_PYTHON $RECIPE_DIR/osx.py
 fi
