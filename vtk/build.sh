@@ -3,7 +3,7 @@
 if [ `uname` == Linux ]; then
     CC=${PREFIX}/bin/gcc
     CXX=${PREFIX}/bin/g++
-    PY_LIB="libpython2.7.so"
+    DYLIB_EXT=so
 fi
 
 # Unfortunately, the VTK package can only be built with clang.
@@ -11,7 +11,7 @@ if [ `uname` == Darwin ]; then
     CC=/usr/bin/cc
     CXX=/usr/bin/c++
     CMAKE=$SYS_PREFIX/bin/cmake
-    PY_LIB="libpython2.7.dylib"
+    DYLIB_EXT=dylib
     export DYLD_LIBRARY_PATH=$PREFIX/lib
     CXXFLAGS="-stdlib=libstdc++ $CXXFLAGS"
 fi
@@ -31,18 +31,41 @@ cmake \
     -DBUILD_TESTING:BOOL=OFF \
     -DBUILD_EXAMPLES:BOOL=OFF \
     -DBUILD_SHARED_LIBS:BOOL=ON \
+    \
     -DPYTHON_EXECUTABLE:FILEPATH=${PYTHON} \
     -DPYTHON_INCLUDE_PATH:PATH=${PREFIX}/include/python2.7 \
-    -DPYTHON_LIBRARY:FILEPATH=${PREFIX}/lib/${PY_LIB} \
-    -DVTK_USE_X:BOOL=OFF \
+    -DPYTHON_LIBRARY:FILEPATH=${PREFIX}/lib/libpython2.7.${DYLIB_EXT} \
     -DVTK_WRAP_PYTHON:BOOL=ON \
+    \
+    -DVTK_USE_X:BOOL=OFF \
     -DVTK_USE_OFFSCREEN:BOOL=ON \
+    \
     -DVTK_WRAP_PYTHON_SIP:BOOL=ON \
     -DSIP_EXECUTABLE:FILEPATH=${PREFIX}/bin/sip \
     -DSIP_INCLUDE_DIR:PATH=${PREFIX}/include/python2.7 \
     -DSIP_PYQT_DIR:PATH=${PREFIX}/share/sip/PyQt4 \
     -DVTK_USE_QT:BOOL=ON \
     -DVTK_USE_QVTK_QTOPENGL:BOOL=ON \
+    \
+    -DVTK_USE_SYSTEM_LIBXML2=ON \
+    -DLIBXML2_INCLUDE_DIR:PATH=${PREFIX}/include/libxml2 \
+    -DLIBXML2_LIBRARIES:FILEPATH=${PREFIX}/lib/libxml2.${DYLIB_EXT} \
+    \
+    -DVTK_USE_SYSTEM_PNG=ON \
+    -DPNG_PNG_INCLUDE_DIR=${PREFIX}/include \
+    -DPNG_LIBRARY=${PREFIX}/lib/libpng.${DYLIB_EXT} \
+    \
+    -DVTK_USE_SYSTEM_JPEG=ON \
+    -DJPEG_INCLUDE_DIR=${PREFIX}/include \
+    -DJPEG_LIBRARY=${PREFIX}/lib/libjpeg.${DYLIB_EXT} \
+    \
+    -DVTK_USE_SYSTEM_TIFF=ON \
+    -DTIFF_INCLUDE_DIR=${PREFIX}/include \
+    -DTIFF_LIBRARY=${PREFIX}/lib/libtiff.${DYLIB_EXT} \
+    \
+    -DVTK_USE_SYSTEM_ZLIB=ON \
+    -DZLIB_INCLUDE_DIR=${PREFIX}/include \
+    -DZLIB_LIBRARY=${PREFIX}/lib/libz.${DYLIB_EXT} \
     ..
 
 make -j${CPU_COUNT}

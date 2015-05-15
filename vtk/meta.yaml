@@ -24,9 +24,20 @@ requirements:
     - gcc 4.8.2.99 # [linux]
     - python
     - pyqt
+    - jpeg
+    - libpng
+    - libtiff
+    - zlib
+    - libxml2
+
   run:
     - libgcc # [linux]
     - python
+    - jpeg
+    - libpng
+    - libtiff
+    - zlib
+    - libxml2
 
 test:
   requires:
