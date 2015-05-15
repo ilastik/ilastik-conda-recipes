@@ -7,6 +7,8 @@ IIBOOST_LDFLAGS="${CXX_LDFLAGS} -Wl,-rpath,${PREFIX}/lib -L${PREFIX}/lib"
 mkdir build
 cd build
 cmake .. \
+    -DCMAKE_C_COMPILER=${PREFIX}/bin/gcc \
+    -DCMAKE_CXX_COMPILER=${PREFIX}/bin/g++ \
     -DCMAKE_BUILD_TYPE=Release \
     -DCMAKE_INSTALL_PREFIX=${PREFIX} \
     -DCMAKE_PREFIX_PATH=${PREFIX} \
