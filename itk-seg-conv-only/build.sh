@@ -7,6 +7,8 @@ ITK_LDFLAGS="${CXX_LDFLAGS} -Wl,-rpath,${PREFIX}/lib -L${PREFIX}/lib"
 mkdir build
 cd build
 cmake .. \
+    -DCMAKE_C_COMPILER=${PREFIX}/bin/gcc \
+    -DCMAKE_CXX_COMPILER=${PREFIX}/bin/g++ \
     -DCMAKE_INSTALL_PREFIX=${PREFIX} \
     -DCMAKE_SHARED_LINKER_FLAGS="${ITK_LDFLAGS}" \
     -DCMAKE_EXE_LINKER_FLAGS="${ITK_LDFLAGS}" \
