@@ -15,7 +15,7 @@ requirements:
     - gcc 4.8.2 # [osx]
     - python
     - numpy
-    - itk
+    - itk-seg-conv-only
     - jpeg
     - libtiff
     - libpng
@@ -24,7 +24,7 @@ requirements:
     - libgcc
     - python
     - numpy
-    - itk
+    - itk-seg-conv-only
     - jpeg
     - libtiff
     - libpng
