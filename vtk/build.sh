@@ -8,8 +8,8 @@ fi
 
 # Unfortunately, the VTK package can only be built with clang.
 if [ `uname` == Darwin ]; then
-    CC=cc
-    CXX=c++
+    CC=/usr/bin/cc
+    CXX=/usr/bin/c++
     CMAKE=$SYS_PREFIX/bin/cmake
     PY_LIB="libpython2.7.dylib"
     export DYLD_LIBRARY_PATH=$PREFIX/lib
