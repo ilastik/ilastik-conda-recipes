@@ -16,7 +16,6 @@ requirements:
     - vtk 5.10.1.99
     - futures
     - matplotlib
-    - iiboost
 
     # Python was already included via the headless package,
     # but we need to add it explicitly here due to a conda bug.

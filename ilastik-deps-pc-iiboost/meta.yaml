@@ -1,0 +1,15 @@
+about:
+  summary: "A meta-package for building all the dependencies needed for pixel classification using IIBoost synapse detection."
+
+package:
+  name: ilastik-deps-pc-iiboost
+  version: "1.1"
+
+requirements:
+  build:
+    - ilastik-deps-pc
+    - iiboost
+
+  run:
+    - ilastik-deps-pc
+    - iiboost
