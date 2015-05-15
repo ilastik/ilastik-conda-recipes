@@ -12,8 +12,10 @@ if [ `uname` == Darwin ]; then
     CXX=/usr/bin/c++
     CMAKE=$SYS_PREFIX/bin/cmake
     DYLIB_EXT=dylib
-    export DYLD_LIBRARY_PATH=$PREFIX/lib
     CXXFLAGS="-stdlib=libstdc++ $CXXFLAGS"
+    
+    # This line was in conda-recipes, but causes a failure during cmake for me.
+    #export DYLD_LIBRARY_PATH=$PREFIX/lib
 fi
 
 mkdir build
