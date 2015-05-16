@@ -1,0 +1,33 @@
+package:
+  name: qt
+  version: 4.8.6.99
+
+source:
+  git_url: https://github.com/qtproject/qt
+  #git_tag: v4.8.6 # 682ed9df439481e1f8e8651c4aa06f1b455a2080
+  git_tag: 445d29dbb8135944ff3a9283b7622de75d68e747
+
+  patches:
+    # This patch fixes ilastik crashes on OSX due to an ill-shaped ellipse
+    - patches/qt4-osx-draw-ellipse.patch
+
+    # This patch fixes crashes with modal dialogs on OSX:
+    # https://bugreports.qt.io/secure/attachment/46537/QTBUG-40585-Rev3.patch
+    - patches/QTBUG-40585-Rev3.patch
+    
+requirements:
+  build:
+    - freetype
+    - libtiff
+    - jpeg
+    - libpng
+    - zlib
+
+  run:
+    - freetype
+    - libtiff
+    - jpeg
+    - libpng
+    - zlib
+
+  
