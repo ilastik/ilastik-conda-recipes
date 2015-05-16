@@ -7,6 +7,9 @@ source:
   url: https://pypi.python.org/packages/source/q/qimage2ndarray/qimage2ndarray-1.4.tar.gz
   md5: 77359e694d498c958c90bcd3e3851d5d
 
+build:
+  number: 1
+
 requirements:
   build:
     - gcc 4.8.2.99 # [linux]
@@ -15,14 +18,16 @@ requirements:
     - setuptools
     - numpy
     - sip
-    - pyqt
+    - pyqt 4.11.3.99            # [osx]
+    - pyqt 4.11.3               # [not osx]
 
   run:
     - libgcc
     - python
     - numpy
     - sip
-    - pyqt
+    - pyqt 4.11.3.99            # [osx]
+    - pyqt 4.11.3               # [not osx]
 
 test:
   # Python imports

@@ -6,12 +6,13 @@ package:
   version: "1.1"
 
 build:
-  number: 1
+  number: 2
 
 requirements:
   build:
     - ilastik-deps-pc-headless
-    - pyqt
+    - pyqt 4.11.3.99            # [osx]
+    - pyqt 4.11.3               # [not osx]
     - qimage2ndarray
     - vtk 5.10.1.99
     - futures
@@ -23,7 +24,8 @@ requirements:
 
   run:
     - ilastik-deps-pc-headless
-    - pyqt
+    - pyqt 4.11.3.99            # [osx]
+    - pyqt 4.11.3               # [not osx]
     - qimage2ndarray
     - vtk 5.10.1.99
     - futures
