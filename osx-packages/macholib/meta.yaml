@@ -6,9 +6,12 @@ source:
   fn: macholib-1.7.tar.gz
   url: https://pypi.python.org/packages/source/m/macholib/macholib-1.7.tar.gz
   md5: cf03a55323d5b7ca59be530ba0b01032
-#  patches:
-   # List any patch files here
-   # - fix.patch
+
+  patches:
+    # This patch fixes a simple bad variable name.
+    # See py2app#137: https://bitbucket.org/ronaldoussoren/py2app/issue/137/py2app-problems-using-enthought-python
+    # See also: https://bitbucket.org/ronaldoussoren/macholib/pull-request/10/machographlocate-when-calling-dyld_find/diff#comment-None
+    - MachOGraph.patch
 
 build:
   # preserve_egg_dir: True
