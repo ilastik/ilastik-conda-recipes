@@ -45,27 +45,25 @@ if [ "${CXXFLAGS}" != "" ]; then
 fi
 
 
-# First, with --layout=tagged to create libraries named with -mt convention
+# Create with --layout=tagged to create libraries named with -mt convention
 ./b2 \
   --layout=tagged \
   -j ${CPU_COUNT} \
   -sNO_BZIP2=1 \
   variant=release \
+  threading=multi \
   ${B2ARGS} \
   ${CXX_ARG}"${CXXFLAGS}" \
   ${LINK_ARG}"${CXX_LDFLAGS}" \
   install
-
-# Second, without --layout=tagged, to create libraries without -mt names
-# If all upstream libraries could be fixed to depend on the tagged name, we could eliminate this redundancy
-./b2 \
-  -j ${CPU_COUNT} \
-  -sNO_BZIP2=1 \
-  variant=release \
-  ${B2ARGS} \
-  ${CXX_ARG}"${CXXFLAGS}" \
-  ${LINK_ARG}"${CXX_LDFLAGS}" \
-  install
+  
+# Add symlinks in case some dependencies expect non-tagged names.
+cd ${PREFIX}/lib
+for f in libboost_*-mt*; do
+    echo $f
+    f_without_mt=${f/-mt/}
+    ln -s $f $f_without_mt
+done
 
 # Omitted these options from above commands:  
 #  -sZLIB_INCLUDE=${PREFIX}/include \
