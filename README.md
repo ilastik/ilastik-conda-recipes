@@ -53,6 +53,11 @@ $ conda install --channel stuarteberg ilastik-deps-pc-headless
 #### Notes on using the tracking package:
 Tracking requires CPLEX, and it looks for these libraries using the environment variable `CPLEX_ROOT_DIR`. Point it to the root of your CPLEX installation when using the tracking workflow in ilastik, or when building the `pgmlink` conda package yourself.
 
+Then, install conservation tracking and its dependencies as follows
+```
+env CPLEX_ROOT_DIR=/my/path/to/cplex/root conda install --channel stuarteberg ilastik-deps-pc
+```
+
 2.b. (Optional) Build your own packages
 --------------------------------------
 
