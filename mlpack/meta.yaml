@@ -25,7 +25,6 @@ requirements:
      - armadillo
      - libxml2
 
-test:
 about:
   home: http://www.mlpack.org/
   license: LGPL
