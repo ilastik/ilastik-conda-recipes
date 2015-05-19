@@ -43,7 +43,7 @@ requirements:
 build:
   script_env:
      - CPLEX_ROOT_DIR
-  number: 4
+  number: 5
 
 test:
   imports:

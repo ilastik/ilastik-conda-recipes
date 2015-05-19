@@ -6,6 +6,9 @@ source:
     git_url: https://github.com/opengm/opengm.git
     git_tag: HEAD
 
+build:
+  number: 1
+
 requirements:
     build:
       - gcc 4.8.2.99 # [linux]

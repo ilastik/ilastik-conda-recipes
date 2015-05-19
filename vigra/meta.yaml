@@ -11,7 +11,7 @@ build:
    - LD_LIBRARY_PATH
    - DYLD_LIBRARY_PATH
 
-  number: 2
+  number: 3
   string: a590b5b
 
 requirements:
