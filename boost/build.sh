@@ -50,6 +50,7 @@ fi
   --layout=tagged \
   -j ${CPU_COUNT} \
   -sNO_BZIP2=1 \
+  variant=release \
   ${B2ARGS} \
   ${CXX_ARG}"${CXXFLAGS}" \
   ${LINK_ARG}"${CXX_LDFLAGS}" \
@@ -60,6 +61,7 @@ fi
 ./b2 \
   -j ${CPU_COUNT} \
   -sNO_BZIP2=1 \
+  variant=release \
   ${B2ARGS} \
   ${CXX_ARG}"${CXXFLAGS}" \
   ${LINK_ARG}"${CXX_LDFLAGS}" \
