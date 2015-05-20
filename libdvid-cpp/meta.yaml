@@ -18,6 +18,8 @@ build:
   
 requirements:
   build:
+    - gcc 4.8.2.99 # [linux]
+    - gcc 4.8.2 # [osx]
     - boost 1.55.0
     - jsoncpp
     - lz4
@@ -30,6 +32,7 @@ requirements:
   # Packages required to run the package. These are the dependencies that
   # will be installed automatically whenever the package is installed.
   run:
+    - libgcc
     - boost 1.55.0
     - jsoncpp
     - lz4
