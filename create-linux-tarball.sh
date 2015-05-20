@@ -1,21 +1,30 @@
 #!/bin/bash
+
+##
+## Usage: create-linux-tarball.sh [--use-local] [-c binstar_channel]
+##
+
 set -e
 CONDA_ROOT=`conda info --root`
+source ${CONDA_ROOT}/bin/activate root
 
 # Remove old ilastik-release environment
-conda remove -q -y --all -n ilastik-release 2> /dev/null || true
+if [ -d ${CONDA_ROOT}/envs/ilastik-release ]; then
+    echo "Removing old ilastik-release environment..."
+    conda remove -y --all -n ilastik-release
+fi
 
 # Create new ilastik-release environment and install all ilastik dependencies to it.
-conda create -y -n ilastik-release ilastik-everything
+echo "Creating new ilastik-release environment..."
+conda create -q -y -n ilastik-release ilastik-everything $1
 
-# Delete the git repo history -- it's huge and users don't need it
-rm -rf ${CONDA_ROOT}/envs/ilastik-release/ilastik-meta/.git
-
+# Ask conda for the package version
 ILASTIK_PKG_VERSION=`conda list -n ilastik-release | grep ilastik-meta | python -c "import sys; print sys.stdin.read().split()[1]"`
 RELEASE_NAME=ilastik-${ILASTIK_PKG_VERSION}-Linux
 
 # Create the tarball, and move it to the current directory.
 # Note: the --transform option below only works on Linux.
+echo "Creating ${RELEASE_NAME}.tar.gz"
 tar czf ${RELEASE_NAME}.tar.gz \
     --transform "s|${CONDA_ROOT:1}/envs/ilastik-release|${RELEASE_NAME}|" \
     ${CONDA_ROOT}/envs/ilastik-release
