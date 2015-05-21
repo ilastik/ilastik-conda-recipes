@@ -1,0 +1,54 @@
+package:
+    name: pgmlink-gurobi
+    version: "1.2"
+
+source:
+    git_url: https://github.com/stuarteberg/pgmlink
+    git_tag: HEAD
+
+requirements:
+    build:
+      - gcc 4.8.2.99 # [linux]
+      - gcc 4.8.2 # [osx]
+      - patchelf # [linux]
+      - ann
+      - boost 1.55.0
+      - python
+      - numpy
+      - vigra
+      - opengm
+      - mlpack
+      - lemon
+      - libxml2
+
+    run:
+      - libgcc
+      - patchelf # [linux]
+      - ann
+      - boost 1.55.0
+      - python
+      - numpy
+      - vigra
+      - opengm
+      - mlpack
+      - lemon
+      - libxml2
+
+      # We don't require cplex-shared here because it only needs to be installed once per machine,
+      # and requiring it here would include all of gcc in the install lib dir.
+      # Instead, we give the user a descriptive error message if cplex-shared hasn't been run on her machine.
+      # - cplex-shared
+
+build:
+  script_env:
+     - GUROBI_ROOT_DIR
+  number: 1
+
+test:
+  imports:
+      - pgmlink
+
+about:
+    home: https://github.com/martinsch/pgmlink
+    license: GNU General Public License (GPL)
+    summary: 'pgmLink - A Tracking-by-Assignment Software'
