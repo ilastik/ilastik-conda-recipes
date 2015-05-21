@@ -16,7 +16,7 @@ fi
 
 # Create new ilastik-release environment and install all ilastik dependencies to it.
 echo "Creating new ilastik-release environment..."
-conda create -q -y -n ilastik-release ilastik-everything $1
+conda create -q -y -n ilastik-release ilastik-everything $1 $2 $3
 
 # Ask conda for the package version
 ILASTIK_PKG_VERSION=`conda list -n ilastik-release | grep ilastik-meta | python -c "import sys; print sys.stdin.read().split()[1]"`
