@@ -9,7 +9,8 @@ source:
   git_tag: HEAD
 
 build:
-  number: 0
+  number: 1
+  detect_binary_files_with_prefix: true
 
 requirements:  
   build:

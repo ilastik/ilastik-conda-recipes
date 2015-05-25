@@ -8,15 +8,16 @@ source:
   md5: b2891c7b59b96337c154c5d961fd40fb
 
 build:
-  number: 1
-  detect_binary_files_with_prefix: true # (defaults to false)
+  number: 2
+  detect_binary_files_with_prefix: true
 
 requirements:
-    build:
+  build:
     - gcc 4.8.2.99 # [linux]
     - gcc 4.8.2 # [osx]
-    run:
-      - libgcc
+  run:
+    - libgcc
+
 
 about:
   home: http://arma.sourceforge.net

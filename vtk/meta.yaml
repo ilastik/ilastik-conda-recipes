@@ -16,8 +16,9 @@ source:
     - osx_patches/no-gc.diff
 
 build:
-  number: 3
+  number: 4
   string: with_pyqt_3
+  detect_binary_files_with_prefix: true
 
 requirements:
   build:

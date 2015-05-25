@@ -11,8 +11,9 @@ build:
    - LD_LIBRARY_PATH
    - DYLD_LIBRARY_PATH
 
-  number: 3
+  number: 4
   string: a590b5b
+  detect_binary_files_with_prefix: true
 
 requirements:
   build:

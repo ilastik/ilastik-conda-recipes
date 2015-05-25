@@ -7,10 +7,8 @@ source:
   git_tag: "r128"
 
 build:
-  # Binary files may contain the build prefix and need it replaced with the
-  # install prefix at installation time.  Conda can automatically identify
-  # and register such files:
-  detect_binary_files_with_prefix: true # (defaults to false)
+  number: 1
+  detect_binary_files_with_prefix: true
 
 about:
   home: http://cyan4973.github.io/lz4

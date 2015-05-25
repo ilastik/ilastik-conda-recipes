@@ -12,7 +12,8 @@ source:
     - 1.55.0_patches/0005-Boost.S11n-include-missing-algorithm.patch  [osx]
 
 build:
-  number: 2
+  number: 4
+  detect_binary_files_with_prefix: true
 
 requirements:
   build:

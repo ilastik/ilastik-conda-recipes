@@ -11,6 +11,10 @@ source:
     - lemon.patch
     - lemon-test.patch
 
+build:
+  number: 1
+  detect_binary_files_with_prefix: true
+
 requirements:
   build:
     - gcc 4.8.2.99 # [linux]

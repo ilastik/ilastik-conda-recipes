@@ -16,7 +16,8 @@ source: # [unix]
     - configure.patch   # [unix]
 
 build:
-  number: 5
+  number: 6
+  detect_binary_files_with_prefix: true
 
 requirements:
   build:                 # [unix]

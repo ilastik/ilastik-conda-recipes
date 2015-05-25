@@ -10,13 +10,16 @@ source:
     patches:
         - patches/cmake.patch
 
-requirements:
-    build:
-      - gcc 4.8.2.99 # [linux]
-      - gcc 4.8.2 # [osx]
-    run:
-      - libgcc
+build:
+  number: 1
+  detect_binary_files_with_prefix: true
 
+requirements:
+  build:
+    - gcc 4.8.2.99 # [linux]
+    - gcc 4.8.2 # [osx]
+  run:
+    - libgcc
 
 # Note: tests are run when building the package, they are not accessible
 # in the installed package.

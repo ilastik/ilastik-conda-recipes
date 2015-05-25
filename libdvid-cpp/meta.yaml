@@ -11,9 +11,7 @@ build:
    - LD_LIBRARY_PATH
    - DYLD_LIBRARY_PATH
 
-  # Binary files may contain the build prefix and need it replaced with the
-  # install prefix at installation time.  Conda can automatically identify
-  # and register such files:
+  number: 1
   detect_binary_files_with_prefix: true # (defaults to false)
   
 requirements:
@@ -29,8 +27,6 @@ requirements:
     - python
     - numpy
     
-  # Packages required to run the package. These are the dependencies that
-  # will be installed automatically whenever the package is installed.
   run:
     - libgcc
     - boost 1.55.0
