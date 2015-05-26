@@ -23,8 +23,10 @@ ILASTIK_PKG_VERSION=`conda list -n ilastik-release | grep ilastik-meta | python 
 RELEASE_NAME=ilastik-${ILASTIK_PKG_VERSION}-Linux
 
 # Create the tarball, and move it to the current directory.
-# Note: the --transform option below only works on Linux.
 echo "Creating ${RELEASE_NAME}.tar.gz"
-tar czf ${RELEASE_NAME}.tar.gz \
-    --transform "s|${CONDA_ROOT:1}/envs/ilastik-release|${RELEASE_NAME}|" \
-    ${CONDA_ROOT}/envs/ilastik-release
+DEST_DIR=`pwd`
+cd ${CONDA_ROOT}/envs/
+mv ilastik-release ${RELEASE_NAME}
+tar czf $DEST_DIR/${RELEASE_NAME}.tar.gz ${RELEASE_NAME}
+mv ${RELEASE_NAME} ilastik-release
+cd -
