@@ -1,15 +1,30 @@
 #!/bin/bash
 
 ##
-## Usage: create-osx-zip.sh [--zip] [--use-local] [-c binstar_channel]
+## Usage: create-osx-zip.sh [--zip] [--git-head] [--use-local] [-c binstar_channel]
 ##
 
 set -e
 
 ZIP=0
-if [[ $1 == "--zip" ]]; then
-    shift
-    ZIP=1
+if [[ $@ == *"--zip"* ]]; then
+    if [[ $1 == "--zip" ]]; then
+	shift
+	ZIP=1
+    else
+	echo "Error: --zip may only be provided as the first arg." >&2
+    fi
+fi
+
+USE_GIT_HEAD=0
+if [[ $@ == *"--git-head"* ]]; then
+    if [[ $1 == "--git-head" ]]; then
+	USE_GIT_HEAD=1
+	shift
+    else
+	echo "Error: --git-head may only be provided as the first or second arg." >&2
+	exit 1
+    fi
 fi
 
 echo "Activating root conda env"
@@ -36,8 +51,21 @@ find $RELEASE_ENV/lib -name "*.dylib" -type f | xargs $REMOVE_RPATHS
 find $RELEASE_ENV/lib -name "*.so" -type f | xargs $REMOVE_RPATHS
 find $RELEASE_ENV/plugins -name "*.dylib" -type f | xargs $REMOVE_RPATHS
 
-# Ask conda for the package version
-ILASTIK_PKG_VERSION=`conda list -n ilastik-release | grep ilastik-meta | python -c "import sys; print sys.stdin.read().split()[1]"`
+if [[ $USE_GIT_HEAD == 1 ]]; then
+    # Instead of keeping the version from binstar, get the git repo
+    ILASTIK_META=${CONDA_ROOT}/envs/ilastik-release/ilastik-meta
+    rm -rf ${ILASTIK_META}
+    git clone https://github.com/ilastik/ilastik-meta ${ILASTIK_META}
+    cd ${ILASTIK_META}
+    git submodule init
+    git submodule update
+    git submodule foreach 'git checkout master'
+    cd -
+    ILASTIK_PKG_VERSION="master"
+else
+    # Ask conda for the package version
+    ILASTIK_PKG_VERSION=`conda list -n ilastik-release | grep ilastik-meta | python -c "import sys; print sys.stdin.read().split()[1]"`
+fi
 RELEASE_NAME=ilastik-${ILASTIK_PKG_VERSION}-OSX
 
 echo "Creating ilastik.app..."
