@@ -1,10 +1,16 @@
 #!/bin/bash
 
 ##
-## Usage: create-osx-zip.sh [--use-local] [-c binstar_channel]
+## Usage: create-osx-zip.sh [--zip] [--use-local] [-c binstar_channel]
 ##
 
 set -e
+
+ZIP=0
+if [[ $1 == "--zip" ]]; then
+    shift
+    ZIP=1
+fi
 
 echo "Activating root conda env"
 CONDA_ROOT=`conda info --root`
@@ -69,6 +75,7 @@ echo "Renaming ilastik.app -> ${RELEASE_NAME}.app"
 rm -rf ${RELEASE_NAME}.app
 mv ilastik.app ${RELEASE_NAME}.app
 
-
-echo "Zipping: ${RELEASE_NAME}.app -> ${RELEASE_NAME}.zip"
-zip -r ${RELEASE_NAME}.zip ${RELEASE_NAME}.app
+if [[ $ZIP == 1 ]]; then
+    echo "Zipping: ${RELEASE_NAME}.app -> ${RELEASE_NAME}.zip"
+    zip -r ${RELEASE_NAME}.zip ${RELEASE_NAME}.app
+fi
