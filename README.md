@@ -2,75 +2,110 @@
 ilastik-build-conda
 ===================
 
-This repo contains recipes for building ilastik's dependencies as [conda][1] packages.
+[ilastik] depends on **60+ packages**.  Most of those packages are already provided for us by the [Anaconda] Python distribution.
+For 20+ the packages that *aren't* provided by Anaconda, we use the recipes in this repo.
+
+These recipes are built using the [conda-build][2] tool.
+The resulting binaries are uploaded to the [ilastik binstar channel][3],
+and can be installed using the [conda][1] package manager.
 
 [1]: http://conda.pydata.org/
+[2]: http://conda.pydata.org/docs/build.html
+[3]: https://binstar.org/ilastik
+[Anaconda]: https://store.continuum.io/cshop/anaconda
+[ilastik]: http://ilastik.org
 
 ==================================
-How to install ilastik using conda
+Installing ilastik for development
 ==================================
 
-0. Prerequisite: Install conda (via Anaconda or Miniconda)
+Here's how to install everything you need to develop ilastik.
+
+0. Prerequisite: Install conda (via Anaconda or [Miniconda][Miniconda])
 ----------------------------------------------------------
+
+[Miniconda]: http://conda.pydata.org/miniconda.html
 
 ```
 # Install miniconda to the prefix of your choice, e.g. /my/miniconda
-$ wget http://repo.continuum.io/miniconda/Miniconda-3.8.3-MacOSX-x86_64.sh
-$ bash Miniconda-3.8.3-MacOSX-x86_64.sh
+
+# LINUX:
+$ wget https://repo.continuum.io/miniconda/Miniconda-latest-Linux-x86_64.sh
+$ bash Miniconda-latest-Linux-x86_64.sh
+
+# MAC:
+$ wget https://repo.continuum.io/miniconda/Miniconda-latest-MacOSX-x86_64.sh
+$ bash Miniconda-latest-MacOSX-x86_64.sh
+
+# Activate conda
+$ CONDA_ROOT=/my/miniconda
+$ source ${CONDA_ROOT}/bin/activate root
 ```
 
-1. Prepare an environment to install into
------------------------------------------
+1. Create a fresh environment, and install ilastik
+--------------------------------------------------
 
 ```
-# Activate the root conda env just to get us started (just to get 'conda' on our path)
-$ source /my/miniconda/bin/activate root
+CPLEX_ROOT_DIR=/path/to/cplex conda create -n ilastik-devel -c ilastik ilastik-everything
+``` 
 
-# Create a new conda "environment" to install ilastik into (e.g. named ilastikenv)
-$ conda create -n ilastikenv python=2.7
-
-# Activate our new env
-$ source activate ilastikenv
-```
-
-2. Install dependency packages
-------------------------------
-
-All pixel classification dependencies can be installed via the `ilastik-deps-pc` "metapackage".
-Most dependencies will be pulled from the main anaconda package repo,
- but a custom [binstar] channel is used here for the others.
+2. Run ilastik
+--------------
 
 ```
-$ conda install --channel stuarteberg ilastik-deps-pc
-
-# Or, to install the carving workflow, too:
-$ conda install --channel stuarteberg ilastik-deps-carving
-
-# Or, if you only need headless mode (no GUI dependencies), use this:
-$ conda install --channel stuarteberg ilastik-deps-pc-headless
+${CONDA_ROOT}/envs/ilastik-devel/run_ilastik.sh --debug
 ```
 
-#### Notes on using the tracking package:
-Tracking requires CPLEX, and it looks for these libraries using the environment variable `CPLEX_ROOT_DIR`. Point it to the root of your CPLEX installation when using the tracking workflow in ilastik, or when building the `pgmlink` conda package yourself. Before building or running the tracking workflow, execute the [CPLEX installation commands on the ilastik website](http://ilastik.org/documentation/basics/installation.html) to create shared CPLEX libraries.
+3. (Optional) Clone ilastik git repo into your environment
+----------------------------------------------------------
 
-Then, install conservation tracking and its dependencies as follows
-```
-env CPLEX_ROOT_DIR=/my/path/to/cplex/root conda install --channel stuarteberg ilastik-deps-pc
-```
-
-2.b. (Optional) Build your own packages
---------------------------------------
-
-(Most users can skip this step.  It's an alternative to step 2 above.)
-
-If your version of `GLIBC` is too old, you might not be able to use the binary ilastik packages 
-from the `stuarteberg` binstar channel.  Instead, you can try building those dependencies your self.
-The recipes for ilastik and its dependencies can be found in the [`ilastik-build-conda` repository][ilastik-build-conda].
-
-[ilastik-build-conda]: http://github.com/ilastik/ilastik-build-conda
+The installation downloaded the ilastik source, but not the git repo.
+If you need to edit the ilastik python repos, 
+replace the `ilastik-meta` directory with the full git repo.
 
 ```
-# Prerequisite: Install conda-build
+$ rm -rf ${CONDA_ROOT}/envs/ilastik-devel/ilastik-meta
+$ git clone http://github.com/ilastik/ilastik-meta ${CONDA_ROOT}/envs/ilastik-devel/ilastik-meta
+$ cd ilastik-meta
+$ git submodule init
+$ git submodule update --recursive
+$ git submodule foreach "git checkout master"
+```
+
+===========================
+Generating a release binary
+===========================
+
+1. Update the version number.
+
+  1. Edit `ilastik.__version__` (in ilastik/ilastik.py) and commit your change.
+  2. Commit to `ilastik-meta` and add a matching git tag, e.g. `git tag -a 1.1.9`
+  3. Update the `git_tag` in `ilastik/meta.yaml` and commit.
+
+2. Build `ilastik-meta` package and upload to the `ilastik` binstar channel.
+  
+```
+$ conda build ilastik-meta
+$ binstar upload -u ilastik ${CONDA_ROOT}/conda-bld/linux-64/ilastik-meta*.tar.gz
+```
+
+3. Create tarball/app
+
+   - Mac: `./create-osx-app.sh -c ilastik`
+   - Linux: `./create-linux-tarball.sh -c ilastik`
+
+====================================
+How to build these packages yourself
+====================================
+
+All of the recipes in this repo should already be uploaded to the [ilastik][3] binstar channel.
+The linux packages were built on CentOS 5.11, so they should be compatible with most modern distros.
+The Mac packages were built with `MACOSX_DEPLOYMENT_TARGET=10.7`, so they should theoretically support OSX 10.7+.
+
+But if, for some reason, you need to build your own binary packages from these recipes, it should be easy to do so:
+
+```
+# Prerequisite: Install conda-build and jinja2
 $ source activate root
 $ conda install conda-build jinja2
 
@@ -78,34 +113,12 @@ $ conda install conda-build jinja2
 $ git clone http://github.com/ilastik/ilastik-build-conda
 $ cd ilastik-build-conda
 
-# Start with a fresh environment.
-$ conda create -n ilastikdev python=2.7
-$ conda build ilastik-deps-pc
+# Build a recipe, e.g:
+$ conda build vigra
 
-# Now install your newly built binaries, directly from your local build directory into the environment and activate it:
-$ conda install --use-local -n ilastikdev ilastik-deps-pc
-$ source activate ilastikdev
+# Now install your newly built package, directly from your local build directory:
+$ conda install --use-local -n ilastik-devel vigra
 ```
-
-
-3. Run ilastik from your own local repository
----------------------------------------------
-
-The dependency packages don't include the [`ilastik`][ilastik-repo]/[`lazyflow`][lazyflow-repo]/[`volumina`][volumina-repo] repos.
-If you haven't already done so, clone and prepare the [ilastik-meta] repo:
-
-```
-$ git clone http://github.com/ilastik/ilastik-meta
-$ cd ilastik-meta
-$ git submodule init
-$ git submodule update --recursive
-```
-
-[ilastik-repo]: http://github.com/ilastik/ilastik
-[lazyflow-repo]: http://github.com/ilastik/lazyflow
-[volumina-repo]: http://github.com/ilastik/volumina
-
-[ilastik-meta]: http://github.com/ilastik/ilastik-meta
 
 Now run ilastik from with your ilastik meta-repo:
 
@@ -116,9 +129,9 @@ $ cd /path/to/ilastik-meta
 $ PYTHONPATH="ilastik:lazyflow:volumina" python ilastik/ilastik.py
 ```
 
-======================
-Building a new package
-======================
+==============================
+Appendix: Writing a new recipe
+==============================
 
 The [conda documentation][2] explains in detail how to create a new package, but here's a quick summary:
 
@@ -226,78 +239,16 @@ $ conda build somepackage
 ------------------------------------------------
 
 ```
+conda install binstar
 binstar upload /my/miniconda/conda-bld/osx-64/somepackage-1.2.3-0.tar.bz2
 ```
 
 [binstar]: http://binstar.org
 
-========
-TODO/TBD
-========
 
-- General
-
- - [x] Not all Tracking Workflow dependencies are supported yet, even on Mac/Linux.
-
- - [x] How do we handle external libraries (like CPLEX)?
-
- - [x] Apparently, the VTK package provided by Continuum (Anaconda) was not built with PyQt support.  
-   We'll have to build our own VTK package, and pass 
-   `-DVTK_USE_QT:BOOL=ON -DSIP_EXECUTABLE:FILEPATH=$PREFIX/bin/sip -DSIP_INCLUDE_DIR:PATH=$PREFIX/include/python2.7 -DSIP_PYQT_DIR:PATH=$PREFIX/share/sip/PyQt4` 
-   to the `cmake` step.
-
- - [x] In cases where we provide an alternative build of a package that Continuum already provides, we need to 
-   make sure our special channel takes priority over the `defaults` channel used by conda.  It isn't immediately 
-   obvious how this is supposed to be achieved in conda.
-   (**Edit:** Ideally, we could just use a custom "build string", but due to conda/conda#918, that doesn't work.
-   Instead, we just use a deliberately strange version number in our custom packages, e.g. `version: 5.10.1.99`.)
-
- - [ ] So far, the `meta.yaml` files for `ilastik-deps-pc`, etc. do not list explicit version requirements for 
-   each dependency (e.g. `boost ==1.55`, or `vigra ==g14de6ac`).  We should fix that, and this repo should be 
-   tagged with the ilastik version number every time we make a release.  This repo will become the official record 
-   of which dependency versions were used in each release (via the `meta.yaml` files).
-   (Edit: Again, ideally we'd use the "build string" feature here, but that feature doesn't yet work as it should.)
-
- - [x] The ilastik, lazyflow, and volumina repos themselves are not included as dependencies in this build repository.
-   How should we deal with them?
-
- - [ ] Instead of uploading packages to our own [binstar] channels individually, we should create a shared account for 
-   ilastik on binstar, to be used by all ilastik maintainers.
-
- - [ ] It would be nice if we built "debug" versions of important packages (e.g. Python, vigra, Qt) 
-   and attached them to the `[debug]` conda-build "feature".
-
-- Linux
-
- - [ ] We need to extract the final packaging steps `ilastik-build-Linux` and adapt them 
-   to work with the builds generated in this repo.
-   (**Update:** Conda binaries are relocatable by default, so simply copying the entire environment works just fine.
-   We can still go a step further to save disk space, e.g. `strip` the debug symbols from the `.so` files, remove include files, etc.)
-
-- Mac
-
- - [ ] At the moment, we can't use `py2app` to package ilastik if we built it with conda.  
-   It has something to do with the fact that we have a top-level package named `ilastik` 
-   and a conflicting top-level script named `ilastik.py`.  If we rename or move the script, 
-   then we can use py2app.  (It isn't clear why this issue doesn't appear in our old setup.)
-
- - [ ] `conda` doesn't resolve the general issue of ABI incompatibility between `libc++` and `libstdc++`. 
-   (Continuum just uses `libstdc++` everywhere, apparently.) 
-   Should we attempt to create a new "feature" that tracks this linker setting?
-   (**Edit:** This shouldn't be an issue: we should use only `libstdc++`, and conda's gcc binary whereever possible.)
-
-- Windows
-
- - [ ] So far, this repo includes no package build scripts for Windows.
-
- - [ ] Generate a final binary package from the built dependencies
-
- - [ ] Similar to the above issue on Mac, should we attempt to track different versions of 
-   the MSVC++ std library via a conda "feature" as well?
-
-==================
-Appendix: Build VM
-==================
+==========================
+Appendix: Linux VM Details
+==========================
 
 The Anaconda distribution is built on a CentOS 5.11 VM.  To build the ilastik stack on that OS, you'll need to install the following:
  
@@ -311,3 +262,39 @@ The Anaconda distribution is built on a CentOS 5.11 VM.  To build the ilastik st
   2. Install package `dkms`
   3. In VBox menu, select `Devices` > `Insert Guest Additions CD`
   4. From disk image, install Guest Additions from command line
+
+
+==================
+Appendix: TODO/TBD
+==================
+
+- General
+
+ - [x] In cases where we provide an alternative build of a package that Continuum already provides, we need to 
+   make sure our special channel takes priority over the `defaults` channel used by conda.
+   (**Edit:** Ideally, we could just use a custom "build string", but due to conda/conda#918, that doesn't work.
+   Instead, we just use a deliberately strange version number in our custom packages, e.g. `version: 5.10.1.99`.)
+
+ - [ ] It would be nice if we built "debug" versions of important packages (e.g. Python, vigra, Qt) 
+   and attached them to the `[debug]` conda-build "feature".
+
+ - [ ] The final binaries produced via `create-Linux-tarball.sh` and `create-osx-app.sh` are quite large.
+   They could be reduced by excluding unecessary dylibs and stripping the remaining dylibs.
+   Also, directories like `include`, etc. should be excluded.
+
+
+- Mac
+
+ - [ ] For unknown reasons, the `py2app` module does not work "out-of-the-box" for this conda build.
+   (The resulting app crashes frequently.) It probably has something to do with our new dependency on `gcc-4.8` and `libgcc`.
+   The current version of `create-osx-app.sh` uses a hacky workaround for this issue.
+   It would be nice if we could figure out what the real issue is.
+
+- Windows
+
+ - [ ] So far, this repo includes no package build scripts for Windows.
+
+ - [ ] Generate a final binary package from the built dependencies
+
+ - [ ] Should we attempt to track different versions of the MSVC++ std library via a conda "feature"?
+
