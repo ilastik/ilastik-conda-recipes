@@ -22,13 +22,6 @@ requirements:
     - h5py                      2.5.0     
     - hdf5                      1.8.14    
     - iiboost                   0.1       
-    - ilastik-deps-carving      1.1       
-    - ilastik-deps-pc           1.1       
-    - ilastik-deps-pc-headless  1.1       
-    - ilastik-deps-pc-iiboost   1.1       
-    - ilastik-deps-tracking     1.1       
-    - ilastik-everything        1.1       
-    - ilastik-meta              1.1.6a6   
     - isl                       0.12.2    
     - itk-seg-conv-only         4.6.1     
     - jpeg                      8d        
@@ -50,12 +43,14 @@ requirements:
     - pip                       6.1.1     
     - psutil                    2.2.1     
     - pyparsing                 2.0.3     
-    - pyqt                      4.11.3.99 
+    - pyqt                      4.11.3    # [not osx]
+    - pyqt                      4.11.3.99 # [osx]
     - python                    2.7.9     
     - python-dateutil           2.4.2     
     - pytz                      2015.4    
     - qimage2ndarray            1.4       
-    - qt                        4.8.6.99  
+    - qt                        4.8.6    # [not osx]
+    - qt                        4.8.6.99 # [osx]
     - readline                  6.2       
     - scikit-learn              0.16.1    
     - scipy                     0.15.1    
@@ -65,6 +60,6 @@ requirements:
     - sqlite                    3.8.4.1   
     - tk                        8.5.18    
     - vigra                     1.10      
-    - vtk                       5.10.1.99 
+    - vtk                       5.10.1.99
     - yapsy                     1.10.423  
     - zlib                      1.2.8     
