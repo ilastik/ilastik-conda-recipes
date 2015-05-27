@@ -76,18 +76,32 @@ $ git submodule foreach "git checkout master"
 Generating a release binary
 ===========================
 
-1. Update the version number.
+1. (Prerequisite) Update the version number.
 
-  1. Edit `ilastik.__version__` (in `ilastik/__init__.py`) and commit your change.
-  2. Commit to `ilastik-meta` and add a matching git tag, e.g. `git tag -a 1.1.9`
+  1. Edit `ilastik.__version_info__` (in `ilastik/__init__.py`) and commit your change.
+  2. Commit to `ilastik-meta` and add a matching git tag:
+
+          cd ${CONDA_ROOT}/envs/ilastik-devel/ilastik-meta
+          git commit -m "Alpha Release 1.2.3a4" ilastik lazyflow volumina
+          git push origin master
+          git tag -m "Alpha Release" -a 1.2.3a4
+          git push --tags origin
+
   3. Update the `git_tag` in `ilastik/meta.yaml` and commit.
 
-2. Build `ilastik-meta` package and upload to the `ilastik` binstar channel.
+2. Build `ilastik-meta` and `ilastik-everything` packages, and upload to the `ilastik` binstar channel.
 
-        $ conda build ilastik-meta
-        $ binstar upload -u ilastik ${CONDA_ROOT}/conda-bld/linux-64/ilastik-meta*.tar.gz
+        conda build ilastik-meta ilastik-everything
+        binstar upload -u ilastik ${CONDA_ROOT}/conda-bld/linux-64/ilastik-meta*.tar.gz
+        binstar upload -u ilastik ${CONDA_ROOT}/conda-bld/linux-64/ilastik-everything*.tar.gz
 
-3. Create tarball/app
+3. (Optional) Install to a local environment and test
+
+        conda create -n test-env -c ilastik ilastik-everything=1.2.3a4
+        cd ${CONDA_ROOT}/envs/test-env
+        ./run_ilastik.sh
+
+4. Create tarball/app
 
    - Mac: `./create-osx-app.sh -c ilastik`
    - Linux: `./create-linux-tarball.sh -c ilastik`
