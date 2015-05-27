@@ -2,8 +2,14 @@
 CWD=$(cd `dirname $0` && pwd)
 source $CWD/../common-vars.sh
 
+# Conda automatically sets these with the -arch x86_64 flag, 
+#  which is not recognized by cmake.
+export CFLAGS=""
+export CXXFLAGS=""
+export LDFLAGS=""
+
 if [[ `uname` == 'Darwin' ]]; then
-    VIGRA_CXX_FLAGS="${CXXFLAGS} -I${PREFIX}/include" # I have no clue why this -I option is necessary on Mac.
+    VIGRA_CXX_FLAGS="-I${PREFIX}/include" # I have no clue why this -I option is necessary on Mac.
 else
     VIGRA_CXX_FLAGS="-pthread ${CXXFLAGS}"
 fi
@@ -11,7 +17,7 @@ fi
 # In release mode, we use -O2 because gcc is known to miscompile certain vigra functionality at the O3 level.
 # (This is probably due to inappropriate use of undefined behavior in vigra itself.)
 VIGRA_CXX_FLAGS_RELEASE="-O2 -DNDEBUG ${VIGRA_CXX_FLAGS}"
-VIGRA_LDFLAGS="${CXX_LDFLAGS} -Wl,-rpath,${PREFIX}/lib -L${PREFIX}/lib"
+VIGRA_LDFLAGS="-Wl,-rpath,${PREFIX}/lib -L${PREFIX}/lib"
 
 # CONFIGURE
 mkdir build
