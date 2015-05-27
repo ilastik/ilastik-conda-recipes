@@ -9,7 +9,7 @@ requirements:
   build:
     - ilastik-deps-pc
     - ilastik-deps-pc-iiboost
-    - ilastik-deps-carving
+    - ilastik-deps-carving >=1.1.6a7
     - ilastik-deps-tracking
     - ilastik-meta
 
@@ -17,7 +17,7 @@ requirements:
     - ilastik-versions
     - ilastik-deps-pc
     - ilastik-deps-pc-iiboost
-    - ilastik-deps-carving
+    - ilastik-deps-carving >=1.1.6a7
     - ilastik-deps-tracking
     - ilastik-meta
 
