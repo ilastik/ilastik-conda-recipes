@@ -78,7 +78,7 @@ Generating a release binary
 
 1. Update the version number.
 
-  1. Edit `ilastik.__version__` (in ilastik/ilastik.py) and commit your change.
+  1. Edit `ilastik.__version__` (in `ilastik/__init__.py`) and commit your change.
   2. Commit to `ilastik-meta` and add a matching git tag, e.g. `git tag -a 1.1.9`
   3. Update the `git_tag` in `ilastik/meta.yaml` and commit.
 
