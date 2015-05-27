@@ -7,7 +7,7 @@ source:
   #git_tag: 92a2fa1f85cdcd5e15f599f69414e84445701b38 # 2015-05-12
 
   git_url: git://github.com/stuarteberg/vigra.git
-  git_tag: 124644022fcee6f8481f75c791bfcd0b8755de22
+  git_tag: 5dde8872323b1e592c7fbae45235362b07a9a59a
 
 build:
   script_env:
@@ -15,7 +15,7 @@ build:
    - DYLD_LIBRARY_PATH
 
   number: 5
-  string: 1246440
+  string: 5dde887
   detect_binary_files_with_prefix: true
 
 requirements:
