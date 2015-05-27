@@ -245,6 +245,56 @@ binstar upload /my/miniconda/conda-bld/osx-64/somepackage-1.2.3-0.tar.bz2
 
 [binstar]: http://binstar.org
 
+==========================
+Appendix: Compiler details
+==========================
+
+**When writing your own recipes, use gcc provided by conda.**
+
+Instead of using your system compiler, all of our C++ packages use the `gcc` package provided by conda
+itself (or our own variation of it).  On Mac, using gcc is critical because some packages require a
+modern (C++11) version of `libstdc++`.  On Linux, using conda's gcc-4.8 is an easy way to get C++11
+support on old OSes, such as our CentOS 5.11 build VM.
+
+To use the gcc package, add these requirements to your `meta.yaml` file:
+
+```
+requirements:
+  build:
+    - gcc 4.8.2.99 # [linux]
+    - gcc 4.8.2 # [osx]
+  run:
+    - libgcc
+```
+
+And in `build.sh`, make sure you use the right `gcc` executable.  For example:
+
+```
+export CC=${PREFIX}/bin/gcc
+export CXX=${PREFIX}/bin/g++
+
+# conda provides default values of these on Mac OS X,
+# but we don't want them when building with gcc
+export CFLAGS=""
+export CXXFLAGS=""
+export LDFLAGS=""
+
+./configure --prefix=${PREFIX} ...etc...
+make
+make install
+
+# Or, for cmake-based packages:
+mkdir build
+cd build
+cmake .. \
+    -DCMAKE_C_COMPILER=${PREFIX}/bin/gcc \
+    -DCMAKE_CXX_COMPILER=${PREFIX}/bin/g++ \
+    -DCMAKE_INSTALL_PREFIX=${PREFIX} \
+    ...etc...
+
+make
+make install
+```
 
 ==========================
 Appendix: Linux VM Details
