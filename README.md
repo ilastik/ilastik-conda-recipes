@@ -38,7 +38,7 @@ $ wget https://repo.continuum.io/miniconda/Miniconda-latest-MacOSX-x86_64.sh
 $ bash Miniconda-latest-MacOSX-x86_64.sh
 
 # Activate conda
-$ CONDA_ROOT=/my/miniconda
+$ CONDA_ROOT=`conda info --root`
 $ source ${CONDA_ROOT}/bin/activate root
 ```
 
@@ -59,13 +59,14 @@ ${CONDA_ROOT}/envs/ilastik-devel/run_ilastik.sh --debug
 3. (Optional) Clone ilastik git repo into your environment
 ----------------------------------------------------------
 
-The installation downloaded the ilastik source, but not the git repo.
-If you need to edit the ilastik python repos, 
+So far, our environment contains the ilastik source, but not the git repos.
+If you need to edit the ilastik python code,
 replace the `ilastik-meta` directory with the full git repo.
 
 ```
-$ rm -rf ${CONDA_ROOT}/envs/ilastik-devel/ilastik-meta
-$ git clone http://github.com/ilastik/ilastik-meta ${CONDA_ROOT}/envs/ilastik-devel/ilastik-meta
+$ DEV_PREFIX=${CONDA_ROOT}/envs/ilastik-devel
+$ rm -rf ${DEV_PREFIX}/ilastik-meta
+$ git clone http://github.com/ilastik/ilastik-meta ${DEV_PREFIX}/ilastik-meta
 $ cd ilastik-meta
 $ git submodule init
 $ git submodule update --recursive
@@ -81,7 +82,7 @@ Generating a release binary
   1. Edit `ilastik.__version_info__` (in `ilastik/__init__.py`) and commit your change.
   2. Commit to `ilastik-meta` and add a matching git tag:
 
-          cd ${CONDA_ROOT}/envs/ilastik-devel/ilastik-meta
+          cd ${DEV_PREFIX}/ilastik-meta
           git commit -m "Alpha Release 1.2.3a4" ilastik lazyflow volumina
           git push origin master
           git tag -m "Alpha Release" -a 1.2.3a4
