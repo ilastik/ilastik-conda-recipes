@@ -1,0 +1,36 @@
+package:
+  name: ilastiktools
+  version: "0.1"
+
+source:
+  git_url: git://github.com/ilastik/ilastiktools.git
+  git_tag: afd850125a40e027e78eae1a78e03c20a961ea6a
+  git_tag: 
+
+build:
+  number: 1
+  string: afd8501
+  detect_binary_files_with_prefix: true
+
+requirements:
+  build:
+    - gcc 4.8.2.99 # [linux]
+    - gcc 4.8.2 # [osx]
+    - python
+    - numpy
+    - vigra
+
+  run:
+    - libgcc
+    - python
+    - numpy
+    - vigra
+
+test:
+  imports:
+    - ilastiktools
+
+about:
+  home: http://ilastik.org
+  license: GPLv3
+  summary: Various compiled utilities for the ilastik project
