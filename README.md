@@ -83,11 +83,9 @@ Generating a release binary
   3. Update the `git_tag` in `ilastik/meta.yaml` and commit.
 
 2. Build `ilastik-meta` package and upload to the `ilastik` binstar channel.
-  
-```
-$ conda build ilastik-meta
-$ binstar upload -u ilastik ${CONDA_ROOT}/conda-bld/linux-64/ilastik-meta*.tar.gz
-```
+
+        $ conda build ilastik-meta
+        $ binstar upload -u ilastik ${CONDA_ROOT}/conda-bld/linux-64/ilastik-meta*.tar.gz
 
 3. Create tarball/app
 
