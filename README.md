@@ -30,16 +30,16 @@ Here's how to install everything you need to develop ilastik.
 # Install miniconda to the prefix of your choice, e.g. /my/miniconda
 
 # LINUX:
-$ wget https://repo.continuum.io/miniconda/Miniconda-latest-Linux-x86_64.sh
-$ bash Miniconda-latest-Linux-x86_64.sh
+wget https://repo.continuum.io/miniconda/Miniconda-latest-Linux-x86_64.sh
+bash Miniconda-latest-Linux-x86_64.sh
 
 # MAC:
-$ wget https://repo.continuum.io/miniconda/Miniconda-latest-MacOSX-x86_64.sh
-$ bash Miniconda-latest-MacOSX-x86_64.sh
+wget https://repo.continuum.io/miniconda/Miniconda-latest-MacOSX-x86_64.sh
+bash Miniconda-latest-MacOSX-x86_64.sh
 
 # Activate conda
-$ CONDA_ROOT=`conda info --root`
-$ source ${CONDA_ROOT}/bin/activate root
+CONDA_ROOT=`conda info --root`
+source ${CONDA_ROOT}/bin/activate root
 ```
 
 1. Create a fresh environment, and install ilastik
@@ -64,13 +64,14 @@ If you need to edit the ilastik python code,
 replace the `ilastik-meta` directory with the full git repo.
 
 ```
-$ DEV_PREFIX=${CONDA_ROOT}/envs/ilastik-devel
-$ rm -rf ${DEV_PREFIX}/ilastik-meta
-$ git clone http://github.com/ilastik/ilastik-meta ${DEV_PREFIX}/ilastik-meta
-$ cd ilastik-meta
-$ git submodule init
-$ git submodule update --recursive
-$ git submodule foreach "git checkout master"
+CONDA_ROOT=`conda info --root`
+DEV_PREFIX=${CONDA_ROOT}/envs/ilastik-devel
+rm -rf ${DEV_PREFIX}/ilastik-meta
+git clone http://github.com/ilastik/ilastik-meta ${DEV_PREFIX}/ilastik-meta
+cd ${DEV_PREFIX}/ilastik-meta
+git submodule init
+git submodule update --recursive
+git submodule foreach "git checkout master"
 ```
 
 ===========================
@@ -119,27 +120,27 @@ But if, for some reason, you need to build your own binary packages from these r
 
 ```
 # Prerequisite: Install conda-build and jinja2
-$ source activate root
-$ conda install conda-build jinja2
+source activate root
+conda install conda-build jinja2
 
 # Clone the ilastik build recipes
-$ git clone http://github.com/ilastik/ilastik-build-conda
-$ cd ilastik-build-conda
+git clone http://github.com/ilastik/ilastik-build-conda
+cd ilastik-build-conda
 
 # Build a recipe, e.g:
-$ conda build vigra
+conda build vigra
 
 # Now install your newly built package, directly from your local build directory:
-$ conda install --use-local -n ilastik-devel vigra
+conda install --use-local -n ilastik-devel vigra
 ```
 
 Now run ilastik from with your ilastik meta-repo:
 
 ```
-$ cd /path/to/ilastik-meta
+cd /path/to/ilastik-meta
 
 # Run ilastik
-$ PYTHONPATH="ilastik:lazyflow:volumina" python ilastik/ilastik.py
+PYTHONPATH="ilastik:lazyflow:volumina" python ilastik/ilastik.py
 ```
 
 ==============================
@@ -154,17 +155,17 @@ The [conda documentation][2] explains in detail how to create a new package, but
 --------------------------------------
 
 ```
-$ source activate root
-$ conda install conda-build jinja2
+source activate root
+conda install conda-build jinja2
 ```
 
 1. Add a directory to this repo, with the same name as your package.
 --------------------------------------------------------------------
 
 ```
-$ cd ilastik-build-conda
-$ mkdir somepackage
-$ cd somepackage
+cd ilastik-build-conda
+mkdir somepackage
+cd somepackage
 ```
 
 2. Create recipe files
