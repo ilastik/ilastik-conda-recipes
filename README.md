@@ -15,6 +15,20 @@ and can be installed using the [conda][1] package manager.
 [Anaconda]: https://store.continuum.io/cshop/anaconda
 [ilastik]: http://ilastik.org
 
+========
+Contents
+========
+
+- [Installing ilastik for development](#installing)
+- [Generating a release binary](#generating)
+- [How to build these packages yourself](#howtobuild)
+- [Appendix: Writing a new recipe](#writing)
+- [Appendix: Compiler details](#compiler)
+- [Appendix: Linux VM Details](#linuxvm)
+- [Appendix: TODO/TBD](#todo)
+
+
+<a name="installing"></a>
 ==================================
 Installing ilastik for development
 ==================================
@@ -74,6 +88,7 @@ git submodule update --recursive
 git submodule foreach "git checkout master"
 ```
 
+<a name="generating"></a>
 ===========================
 Generating a release binary
 ===========================
@@ -110,6 +125,7 @@ Generating a release binary
 
   (For creating testing/experimental packages from an untagged version, try the `--git-latest` and `--use-local` options.)
 
+<a name="howtobuild"></a>
 ====================================
 How to build these packages yourself
 ====================================
@@ -145,6 +161,7 @@ cd /path/to/ilastik-meta
 PYTHONPATH="ilastik:lazyflow:volumina" python ilastik/ilastik.py
 ```
 
+<a name="writing"></a>
 ==============================
 Appendix: Writing a new recipe
 ==============================
@@ -261,6 +278,7 @@ binstar upload /my/miniconda/conda-bld/osx-64/somepackage-1.2.3-0.tar.bz2
 
 [binstar]: http://binstar.org
 
+<a name="compiler"></a>
 ==========================
 Appendix: Compiler details
 ==========================
@@ -312,6 +330,7 @@ make
 make install
 ```
 
+<a name="linuxvm"></a>
 ==========================
 Appendix: Linux VM Details
 ==========================
@@ -330,6 +349,7 @@ The Anaconda distribution is built on a CentOS 5.11 VM.  To build the ilastik st
   4. From disk image, install Guest Additions from command line
 
 
+<a name="todo"></a>
 ==================
 Appendix: TODO/TBD
 ==================
