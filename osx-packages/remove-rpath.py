@@ -12,8 +12,6 @@ from read_rpaths import read_rpaths, read_dylib_id
 install_name_rgx = re.compile(r'\t(.*) \(.*\)')
 def remove_rpath( dylib_path, make_relative_to='loader_path', executable_path=sys.executable ):
     assert make_relative_to in ['loader_path', 'executable_path']
-    if not os.path.isdir(executable_path):
-        executable_path = os.path.split(executable_path)[0]
     try:
         otool_output = subprocess.check_output("otool -L " + dylib_path, shell=True)
     except subprocess.CalledProcessError as ex:
@@ -22,10 +20,16 @@ def remove_rpath( dylib_path, make_relative_to='loader_path', executable_path=sy
     else:
         dylib_id = read_dylib_id( dylib_path )
         raw_rpaths = read_rpaths( dylib_path )
+        if raw_rpaths:
+            print("*** Removing rpath from: {}".format(dylib_path))
+
         abs_rpaths = map( lambda rpath: rpath.replace( '@loader_path', os.path.split(dylib_path)[0] ),
                           raw_rpaths )
 
         if make_relative_to == 'executable_path':
+            if not os.path.isdir(executable_path):
+                executable_path = os.path.split(executable_path)[0]
+
             relative_rpaths = map( lambda rpath: os.path.relpath( rpath, executable_path ),
                                    abs_rpaths )
 
@@ -77,10 +81,14 @@ if __name__ == "__main__":
     parser.add_argument("-e","--with_executable_path", required=False)
     parser.add_argument("-l","--with_loader_path", action='store_true')
     parser.add_argument("dylib_paths", nargs="+")
-
     parsed_args = parser.parse_args()
-    if not parsed_args.with_executable_path:
-        parsed_args.executable_path = sys.executable
+
+    if parsed_args.with_executable_path and parsed_args.with_loader_path:
+        sys.stderr.write("Options -e and -l cannot be used together.  Choose one.\n")
+        sys.exit(1)
+
+    if not parsed_args.with_executable_path and not parsed_args.with_loader_path:
+        parsed_args.with_executable_path = sys.executable
         print("Assuming python for default --executable_path={}".format(parsed_args.executable_path))
 
     if parsed_args.with_loader_path:
@@ -89,5 +97,4 @@ if __name__ == "__main__":
         relative_to='executable_path'
 
     for dylib_path in parsed_args.dylib_paths:
-        print("*** Removing rpath from: {}".format(dylib_path))
-        remove_rpath( dylib_path, relative_to, parsed_args.executable_path )
+        remove_rpath( dylib_path, relative_to, parsed_args.with_executable_path )
