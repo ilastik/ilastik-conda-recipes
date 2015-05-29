@@ -1,10 +1,12 @@
 #!/bin/bash
 
 ##
-## Usage: create-osx-zip.sh [--zip] [--git-head] [--use-local] [-c binstar_channel]
+## Usage: create-osx-zip.sh [--zip] [--git-latest] [... extra install-args, e.g. --use-local or -c ilastik ...]
 ##
 
 set -e
+
+OSX_PACKAGES_DIR=$(cd `dirname $0` && pwd)
 
 ZIP=0
 if [[ $@ == *"--zip"* ]]; then
@@ -16,13 +18,13 @@ if [[ $@ == *"--zip"* ]]; then
     fi
 fi
 
-USE_GIT_HEAD=0
-if [[ $@ == *"--git-head"* ]]; then
-    if [[ $1 == "--git-head" ]]; then
-	USE_GIT_HEAD=1
+USE_GIT_LATEST=0
+if [[ $@ == *"--git-latest"* ]]; then
+    if [[ $1 == "--git-latest" ]]; then
+	USE_GIT_LATEST=1
 	shift
     else
-	echo "Error: --git-head may only be provided as the first or second arg." >&2
+	echo "Error: --git-latest may only be provided as the first or second arg." >&2
 	exit 1
     fi
 fi
@@ -41,17 +43,17 @@ fi
 
 # Create new ilastik-release environment and install all ilastik dependencies to it.
 echo "Creating new ilastik-release environment..."
-conda create -q -y -n ilastik-release ilastik-everything py2app $1 $2 $3
+conda create -q -y -n ilastik-release ilastik-everything py2app "$@"
 
 # Replace all @rpath references with @loader_path references,
 # and delete the RPATHs (some of which are absolute instead of relative).
 echo "Relinking all dylibs with relative links..."
-REMOVE_RPATHS="python ./remove-rpath.py --with_loader_path"
+REMOVE_RPATHS="python ${OSX_PACKAGES_DIR}/remove-rpath.py --with_loader_path"
 find $RELEASE_ENV/lib -name "*.dylib" -type f | xargs $REMOVE_RPATHS
 find $RELEASE_ENV/lib -name "*.so" -type f | xargs $REMOVE_RPATHS
 find $RELEASE_ENV/plugins -name "*.dylib" -type f | xargs $REMOVE_RPATHS
 
-if [[ $USE_GIT_HEAD == 1 ]]; then
+if [[ $USE_GIT_LATEST == 1 ]]; then
     # Instead of keeping the version from binstar, get the git repo
     ILASTIK_META=${CONDA_ROOT}/envs/ilastik-release/ilastik-meta
     rm -rf ${ILASTIK_META}
@@ -72,7 +74,7 @@ echo "Creating ilastik.app..."
 # For some reason, the app created by py2app has stability issues.
 # (It might be related to the load order of multiple libgcc_s dylibs and/or libSystem.B.dylib.)
 # As a workaround, we use py2app in "alias mode" and then manually copy the files we need into the app.
-${RELEASE_ENV}/bin/python setup-alias-app.py py2app --alias --dist-dir .
+${RELEASE_ENV}/bin/python ${OSX_PACKAGES_DIR}/setup-alias-app.py py2app --alias --dist-dir .
 
 echo "Writing qt.conf"
 cat <<EOF > ilastik.app/Contents/Resources/qt.conf
