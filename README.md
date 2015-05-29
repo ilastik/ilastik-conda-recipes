@@ -105,8 +105,10 @@ Generating a release binary
 
 4. Create tarball/app
 
-   - Mac: `./create-osx-app.sh -c ilastik`
-   - Linux: `./create-linux-tarball.sh -c ilastik`
+   - Mac: `./osx-packages/create-osx-app.sh --zip -c ilastik`
+   - Linux: `./create-tarball.sh -c ilastik` (also works on Mac)
+
+  (For creating testing/experimental packages from an untagged version, try the `--git-latest` and `--use-local` options.)
 
 ====================================
 How to build these packages yourself
