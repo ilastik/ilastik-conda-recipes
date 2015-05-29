@@ -1,18 +1,18 @@
 #!/bin/bash
 
 ##
-## Usage: create-linux-tarball.sh [--git-head] [--use-local] [-c binstar_channel]
+## Usage: create-linux-tarball.sh [--git-latest] [... extra install-args, e.g. --use-local or -c ilastik ...]
 ##
 
 set -e
 
-USE_GIT_HEAD=0
-if [[ $@ == *"--git-head"* ]]; then
-    if [[ $1 == "--git-head" ]]; then
-	USE_GIT_HEAD=1
+USE_GIT_LATEST=0
+if [[ $@ == *"--git-latest"* ]]; then
+    if [[ $1 == "--git-latest" ]]; then
+	USE_GIT_LATEST=1
 	shift
     else
-	echo "Error: --git-head may only be provided as the first arg." >&2
+	echo "Error: --git-latest may only be provided as the first arg." >&2
 	exit 1
     fi
 fi
@@ -28,9 +28,9 @@ fi
 
 # Create new ilastik-release environment and install all ilastik dependencies to it.
 echo "Creating new ilastik-release environment..."
-conda create -q -y -n ilastik-release ilastik-everything $1 $2 $3
+conda create -q -y -n ilastik-release ilastik-everything "$@"
 
-if [[ $USE_GIT_HEAD == 1 ]]; then
+if [[ $USE_GIT_LATEST == 1 ]]; then
     # Instead of keeping the version from binstar, get the git repo
     ILASTIK_META=${CONDA_ROOT}/envs/ilastik-release/ilastik-meta
     rm -rf ${ILASTIK_META}
