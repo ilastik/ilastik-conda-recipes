@@ -14,36 +14,36 @@ build:
    - LD_LIBRARY_PATH
    - DYLD_LIBRARY_PATH
 
-  number: 5
-  string: 5dde887
+  number: 6
+  string: 6_5dde887
   detect_binary_files_with_prefix: true
 
 requirements:
   build:
     - gcc 4.8.2.99 # [linux]
     - gcc 4.8.2 # [osx]
-    - python
-    - numpy
-    - jpeg
-    - libtiff
-    - libpng
-    - fftw
-    - hdf5
-    - boost 1.55.0
-    - zlib
+    - python   2.7*
+    - numpy    >=1.9
+    - jpeg     8d
+    - libtiff  4.0*
+    - libpng   1.5*
+    - fftw     3.3*
+    - hdf5     >=1.8.14
+    - boost    1.55.0
+    - zlib     1.2*
     - nose
 
   run:
-    - libgcc
-    - python
-    - numpy
-    - jpeg
-    - libtiff
-    - libpng
-    - fftw
-    - hdf5
-    - boost 1.55.0
-    - zlib
+    - libgcc   4.8*
+    - python   2.7*
+    - numpy    >=1.9
+    - jpeg     8d
+    - libtiff  4.0*
+    - libpng   1.5*
+    - fftw     3.3*
+    - hdf5     >=1.8.14
+    - boost    1.55.0
+    - zlib     1.2*
     - nose
 
 test:
