@@ -35,8 +35,8 @@ Installing ilastik for development
 
 Here's how to install everything you need to develop ilastik.
 
-0. Prerequisite: Install conda (via Anaconda or [Miniconda][Miniconda])
-----------------------------------------------------------
+0. Prerequisite: Install [Miniconda]
+------------------------------------
 
 [Miniconda]: http://conda.pydata.org/miniconda.html
 
@@ -70,8 +70,8 @@ CPLEX_ROOT_DIR=/path/to/cplex conda create -n ilastik-devel -c ilastik ilastik-e
 ${CONDA_ROOT}/envs/ilastik-devel/run_ilastik.sh --debug
 ```
 
-3. (Optional) Clone ilastik git repo into your environment
-----------------------------------------------------------
+3. (Optional) Clone ilastik git repo
+------------------------------------
 
 So far, our environment contains the ilastik source, but not the git repos.
 If you need to edit the ilastik python code,
@@ -178,17 +178,16 @@ source activate root
 conda install conda-build jinja2
 ```
 
-1. Add a directory to this repo, with the same name as your package.
---------------------------------------------------------------------
+1. Create recipe files
+----------------------
+
+Add a directory to this repo:
 
 ```
 cd ilastik-build-conda
 mkdir somepackage
 cd somepackage
 ```
-
-2. Create recipe files
-----------------------
 
 A complete recipe has at least 3 files:
 
@@ -257,7 +256,7 @@ devenv SomePackage.sln /Build "%RELEASE_TARGET%" /Project INSTALL
 if errorlevel 1 exit 1
 ```
 
-3. Build the package
+2. Build the package
 --------------------
 
 ```
@@ -268,12 +267,17 @@ $ cd ../
 $ conda build somepackage
 ```
 
-4. Upload the package to your [binstar] account.
+3. Upload the package to your [binstar].
 ------------------------------------------------
 
 ```
 conda install binstar
+
+# Upload to your personal channel:
 binstar upload /my/miniconda/conda-bld/osx-64/somepackage-1.2.3-0.tar.bz2
+
+# Or to ilastik's binstar channel:
+binstar upload -u ilastik /my/miniconda/conda-bld/osx-64/somepackage-1.2.3-0.tar.bz2
 ```
 
 [binstar]: http://binstar.org
