@@ -59,9 +59,28 @@ source ${CONDA_ROOT}/bin/activate root
 1. Create a fresh environment, and install ilastik
 --------------------------------------------------
 
+To install everything but tracking, this command is enough:
+
 ```
-CPLEX_ROOT_DIR=/path/to/cplex conda create -n ilastik-devel -c ilastik ilastik-everything
+conda create -n ilastik-devel -c ilastik ilastik-everything-but-tracking
 ``` 
+
+If you have CPLEX on your machine, you can install the full ilastik development 
+setup, including tracking.  First, install `cplex-shared` to any (temporary) environment:
+
+```
+CPLEX_ROOT_DIR=/path/to/cplex conda create -n throw-away -c ilastik cplex-shared
+conda remove --all -n throw-away
+```
+
+That command generated the necessary cplex `.so` files in-place (if necessary), 
+and also recorded the value of `CPLEX_ROOT_DIR` to your root directory.
+
+Now you can install everything, including tracking:
+
+```
+conda create -n ilastik-devel -c ilastik ilastik-everything
+```
 
 2. Run ilastik
 --------------

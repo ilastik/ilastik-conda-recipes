@@ -2,20 +2,22 @@ about:
   summary: "A meta-package for building all ilastik dependencies and downloading the ilastik-meta repo."
 
 package:
-  name: ilastik-everything
+  name: ilastik-everything-but-tracking
   version: "" # build.sh will generate a __conda_version__.txt file
-
-build:
-  number: 1
 
 requirements:
   build:
-    - ilastik-everything-but-tracking
-    - ilastik-deps-tracking
+    - ilastik-deps-pc
+    - ilastik-deps-pc-iiboost
+    - ilastik-deps-carving >=1.1.6a7
+    - ilastik-meta
 
   run:
-    - ilastik-everything-but-tracking
-    - ilastik-deps-tracking
+    - ilastik-versions
+    - ilastik-deps-pc
+    - ilastik-deps-pc-iiboost
+    - ilastik-deps-carving >=1.1.6a7
+    - ilastik-meta
 
 test:
   requires:
