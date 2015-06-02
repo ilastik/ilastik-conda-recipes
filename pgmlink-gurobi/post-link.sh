@@ -12,7 +12,7 @@ if [ `uname` == Darwin ]; then
     set +x
 else
     set -x
-    patchelf --set-rpath ${GUROBI_ROOT_DIR}/lib:'$ORIGIN/.' ${PREFIX}/lib/libpgmlink.so
-    patchelf --set-rpath ${GUROBI_ROOT_DIR}/lib:'$ORIGIN/../..' ${PREFIX}/lib/python2.7/site-packages/pgmlink.so
+    ${PREFIX}/bin/patchelf --set-rpath ${GUROBI_ROOT_DIR}/lib:'$ORIGIN/.' ${PREFIX}/lib/libpgmlink.so
+    ${PREFIX}/bin/patchelf --set-rpath ${GUROBI_ROOT_DIR}/lib:'$ORIGIN/../..' ${PREFIX}/lib/python2.7/site-packages/pgmlink.so
     set +x
 fi

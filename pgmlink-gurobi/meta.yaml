@@ -42,7 +42,7 @@ requirements:
 build:
   script_env:
      - GUROBI_ROOT_DIR
-  number: 1
+  number: 2
 
 test:
   imports:

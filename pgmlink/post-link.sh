@@ -35,7 +35,7 @@ if [ `uname` == Darwin ]; then
     set +x
 else
     set -x
-    patchelf --set-rpath $CONCERT_LIB_DIR:$CPLEX_LIB_DIR:'$ORIGIN/.' ${PREFIX}/lib/libpgmlink.so
-    patchelf --set-rpath $CONCERT_LIB_DIR:$CPLEX_LIB_DIR:'$ORIGIN/../..' ${PREFIX}/lib/python2.7/site-packages/pgmlink.so
+    ${PREFIX}/bin/patchelf --set-rpath $CONCERT_LIB_DIR:$CPLEX_LIB_DIR:'$ORIGIN/.' ${PREFIX}/lib/libpgmlink.so
+    ${PREFIX}/bin/patchelf --set-rpath $CONCERT_LIB_DIR:$CPLEX_LIB_DIR:'$ORIGIN/../..' ${PREFIX}/lib/python2.7/site-packages/pgmlink.so
     set +x
 fi
