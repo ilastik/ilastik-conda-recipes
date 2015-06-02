@@ -2,6 +2,9 @@ package:
   name: ilastik-versions
   version: 1.1
 
+build:
+  number: 1
+
 #
 # In general, we don't specify exact version requirements in each sub-package.
 # But this file tracks the versions of all packages used in the release.
@@ -28,7 +31,7 @@ requirements:
     - jsonschema                2.4.0     
     - lemon                     1.2.4     
     - libgcc                    4.8.4     
-    - libpng                    1.5.13    
+    - libpng                    1.6.17
     - libtiff                   4.0.2     
     - libxml2                   2.9.0     
     - matplotlib                1.4.3     

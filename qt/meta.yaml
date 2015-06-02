@@ -16,6 +16,7 @@ source:
     - patches/QTBUG-40585-Rev3.patch
     
 build:
+  number: 1
   detect_binary_files_with_prefix: true
 
 requirements:
@@ -23,14 +24,14 @@ requirements:
     - freetype
     - libtiff
     - jpeg
-    - libpng
+    - libpng  1.6.17
     - zlib
 
   run:
     - freetype
     - libtiff
     - jpeg
-    - libpng
+    - libpng  1.6.17
     - zlib
 
   

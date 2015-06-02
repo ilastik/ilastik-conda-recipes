@@ -14,8 +14,8 @@ build:
    - LD_LIBRARY_PATH
    - DYLD_LIBRARY_PATH
 
-  number: 6
-  string: 6_5dde887
+  number: 7
+  string: 7_5dde887
   detect_binary_files_with_prefix: true
 
 requirements:
@@ -26,7 +26,7 @@ requirements:
     - numpy    >=1.9
     - jpeg     8d
     - libtiff  4.0*
-    - libpng   1.5*
+    - libpng   1.6.17
     - fftw     3.3*
     - hdf5     >=1.8.14
     - boost    1.55.0
@@ -39,7 +39,7 @@ requirements:
     - numpy    >=1.9
     - jpeg     8d
     - libtiff  4.0*
-    - libpng   1.5*
+    - libpng   1.6.17
     - fftw     3.3*
     - hdf5     >=1.8.14
     - boost    1.55.0

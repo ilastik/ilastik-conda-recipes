@@ -9,7 +9,7 @@ source:
   git_tag: HEAD
 
 build:
-  number: 1
+  number: 2
   detect_binary_files_with_prefix: true
 
 requirements:  
@@ -21,7 +21,7 @@ requirements:
     - itk-seg-conv-only
     - jpeg
     - libtiff
-    - libpng
+    - libpng 1.6.17
 
   run:
     - libgcc
@@ -30,7 +30,7 @@ requirements:
     - itk-seg-conv-only
     - jpeg
     - libtiff
-    - libpng
+    - libpng 1.6.17
 
 test:
   imports:
