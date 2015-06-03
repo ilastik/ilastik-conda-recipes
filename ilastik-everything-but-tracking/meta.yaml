@@ -5,6 +5,9 @@ package:
   name: ilastik-everything-but-tracking
   version: "" # build.sh will generate a __conda_version__.txt file
 
+build:
+  number: 1
+
 requirements:
   build:
     - ilastik-deps-pc
@@ -13,7 +16,6 @@ requirements:
     - ilastik-meta
 
   run:
-    - ilastik-versions
     - ilastik-deps-pc
     - ilastik-deps-pc-iiboost
     - ilastik-deps-carving >=1.1.6a7
