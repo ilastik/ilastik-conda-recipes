@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ##
-## Usage: create-linux-tarball.sh [--git-latest] [... extra install-args, e.g. --use-local or -c ilastik ...]
+## Usage: create-tarball.sh [--git-latest] [--no-tracking] [... extra install-args, e.g. --use-local or -c ilastik ...]
 ##
 
 set -e
@@ -9,22 +9,22 @@ set -e
 USE_GIT_LATEST=0
 if [[ $@ == *"--git-latest"* ]]; then
     if [[ $1 == "--git-latest" ]]; then
-	USE_GIT_LATEST=1
-	shift
+        USE_GIT_LATEST=1
+       shift
     else
-	echo "Error: --git-latest may only be provided as the first arg." >&2
-	exit 1
+        echo "Error: --git-latest may only be provided as the first arg." >&2
+        exit 1
     fi
 fi
 
 OMIT_TRACKING=0
 if [[ $@ == *"--no-tracking"* ]]; then
     if [[ $1 == "--no-tracking" ]]; then
-	OMIT_TRACKING=1
-	shift
+        OMIT_TRACKING=1
+        shift
     else
-	echo "Error: --no-tracking may only be provided as the first arg after --git-latest." >&2
-	exit 1
+        echo "Error: --no-tracking may only be provided as the first arg after --git-latest." >&2
+        exit 1
     fi
 fi
 

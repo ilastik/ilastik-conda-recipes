@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ##
-## Usage: create-osx-zip.sh [--zip] [--git-latest] [... extra install-args, e.g. --use-local or -c ilastik ...]
+## Usage: create-osx-zip.sh [--zip] [--git-latest] [--no-tracking] [... extra install-args, e.g. --use-local or -c ilastik ...]
 ##
 
 set -e
@@ -11,21 +11,32 @@ OSX_PACKAGES_DIR=$(cd `dirname $0` && pwd)
 ZIP=0
 if [[ $@ == *"--zip"* ]]; then
     if [[ $1 == "--zip" ]]; then
-	shift
-	ZIP=1
+        shift
+        ZIP=1
     else
-	echo "Error: --zip may only be provided as the first arg." >&2
+        echo "Error: --zip may only be provided as the first arg." >&2
     fi
 fi
 
 USE_GIT_LATEST=0
 if [[ $@ == *"--git-latest"* ]]; then
     if [[ $1 == "--git-latest" ]]; then
-	USE_GIT_LATEST=1
-	shift
+        USE_GIT_LATEST=1
+        shift
     else
-	echo "Error: --git-latest may only be provided as the first or second arg." >&2
-	exit 1
+        echo "Error: --git-latest may only be provided as the first arg or after --zip." >&2
+        exit 1
+    fi
+fi
+
+OMIT_TRACKING=0
+if [[ $@ == *"--no-tracking"* ]]; then
+    if [[ $1 == "--no-tracking" ]]; then
+        OMIT_TRACKING=1
+        shift
+    else
+        echo "Error: --no-tracking may only be provided as the first arg or after --git-latest." >&2
+        exit 1
     fi
 fi
 
@@ -43,7 +54,11 @@ fi
 
 # Create new ilastik-release environment and install all ilastik dependencies to it.
 echo "Creating new ilastik-release environment..."
-conda create -q -y -n ilastik-release ilastik-everything py2app "$@"
+if [[ $OMIT_TRACKING == 1 ]]; then
+    conda create -q -y -n ilastik-release ilastik-everything-but-tracking py2app "$@"
+else    
+    conda create -q -y -n ilastik-release ilastik-everything py2app "$@"
+fi
 
 # Replace all @rpath references with @loader_path references,
 # and delete the RPATHs (some of which are absolute instead of relative).
