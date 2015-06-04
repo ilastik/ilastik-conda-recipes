@@ -17,6 +17,17 @@ if [[ $@ == *"--git-latest"* ]]; then
     fi
 fi
 
+OMIT_TRACKING=0
+if [[ $@ == *"--no-tracking"* ]]; then
+    if [[ $1 == "--no-tracking" ]]; then
+	OMIT_TRACKING=1
+	shift
+    else
+	echo "Error: --no-tracking may only be provided as the first arg after --git-latest." >&2
+	exit 1
+    fi
+fi
+
 CONDA_ROOT=`conda info --root`
 source ${CONDA_ROOT}/bin/activate root
 
@@ -28,7 +39,11 @@ fi
 
 # Create new ilastik-release environment and install all ilastik dependencies to it.
 echo "Creating new ilastik-release environment..."
-conda create -q -y -n ilastik-release ilastik-everything "$@"
+if [[ $OMIT_TRACKING == 1 ]]; then
+    conda create -q -y -n ilastik-release ilastik-everything-but-tracking "$@"
+else    
+    conda create -q -y -n ilastik-release ilastik-everything "$@"
+fi
 
 if [[ $USE_GIT_LATEST == 1 ]]; then
     # Instead of keeping the version from binstar, get the git repo
@@ -45,6 +60,7 @@ else
     # Ask conda for the package version
     ILASTIK_PKG_VERSION=`conda list -n ilastik-release | grep ilastik-meta | python -c "import sys; print sys.stdin.read().split()[1]"`
 fi
+
 RELEASE_NAME=ilastik-${ILASTIK_PKG_VERSION}-`uname`
 
 # Create the tarball, and move it to the current directory.
