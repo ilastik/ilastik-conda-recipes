@@ -1,0 +1,28 @@
+package:
+  name: tifffile
+  version: "0.4.1"
+
+source:
+  git_url: git://github.com/ilastik/tifffile.git
+  git_tag: 05b51f398b2c18eacf9dce674631707763f7e94e
+
+build:
+  number: 1
+
+requirements:
+  build:
+    - python 2.7*|>=3.4
+    - numpy >=1.8.2
+
+  run:
+    - python 2.7*|>=3.4
+    - numpy >=1.8.2
+
+test:
+  imports:
+    - tifffile
+
+about:
+  home: https://github.com/blink1073/tifffile
+  license: BSD License
+  summary: 'Read and write image data from and to TIFF files.'
