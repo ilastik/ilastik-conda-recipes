@@ -3,7 +3,7 @@ package:
   version: 1.1
 
 build:
-  number: 2
+  number: 3
 
 #
 # In general, we don't specify exact version requirements in each sub-package.
@@ -65,6 +65,7 @@ requirements:
     - sip                       4.16.5    
     - six                       1.9.0     
     - sqlite                    3.8.4.1   
+    - tifffile                  0.4.1
     - tk                        8.5.18    
     - vigra                     1.10      
     - vtk                       5.10.1.99
