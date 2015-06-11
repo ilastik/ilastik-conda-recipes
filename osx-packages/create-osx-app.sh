@@ -123,5 +123,5 @@ mv ilastik.app ${RELEASE_NAME}.app
 
 if [[ $ZIP == 1 ]]; then
     echo "Zipping: ${RELEASE_NAME}.app -> ${RELEASE_NAME}.zip"
-    zip -r ${RELEASE_NAME}.zip ${RELEASE_NAME}.app
+    zip -r --symlinks ${RELEASE_NAME}.zip ${RELEASE_NAME}.app
 fi
