@@ -116,6 +116,15 @@ rm ilastik.app/Contents/MacOS/python
 cd ilastik.app/Contents/MacOS && ln -s ../ilastik-release/bin/python
 cd -
 
+# Replace Resources/lib with a symlink
+rm -rf ilastik.app/Contents/Resources/lib
+cd ilastik.app/Contents/Resources && ln -s ../ilastik-release/lib
+cd -
+
+# Add a symlink to ilastik-meta so that lib/python2.7/site-packages/ilastik-meta.pth works correctly
+cd ilastik.app/Contents/Resources && ln -s ../ilastik-release/ilastik-meta
+cd -
+
 echo "Renaming ilastik.app -> ${RELEASE_NAME}.app"
 rm -rf ${RELEASE_NAME}.app
 rm -f ${RELEASE_NAME}.zip
