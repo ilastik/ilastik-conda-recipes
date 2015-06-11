@@ -118,6 +118,7 @@ cd -
 
 echo "Renaming ilastik.app -> ${RELEASE_NAME}.app"
 rm -rf ${RELEASE_NAME}.app
+rm -f ${RELEASE_NAME}.zip
 mv ilastik.app ${RELEASE_NAME}.app
 
 if [[ $ZIP == 1 ]]; then
