@@ -11,6 +11,22 @@ from read_rpaths import read_rpaths, read_dylib_id
 
 install_name_rgx = re.compile(r'\t(.*) \(.*\)')
 def remove_rpath( dylib_path, make_relative_to='loader_path', executable_path=sys.executable ):
+    """
+    For the given dylib, inspect the output of "otool -L" and use install_name_tool to replace 
+    all references to @rpath with a new relative path beginning with either @loader_path 
+    or @executable_path, as specified by the 'relative_to' parameter.
+
+    (The correct replacement strings are found by inspecting the LC_RPATH entries in "otool -l"
+    and searching those paths for the referenced libraries.)
+    
+    Lastly, the LC_RPATH entries are deleted.
+    
+    Motivation: What's wrong with keeping @rpath?
+                Nothing, in principle, except for the following minor points:
+                - It isn't supported in old versions of OSX
+                - It adds a level of indirection that can make it tricky to debug linking problems.
+                - I'm not 100% sure that py2app handles @rpath correctly when building a bundle.
+    """
     assert make_relative_to in ['loader_path', 'executable_path']
     try:
         otool_output = subprocess.check_output("otool -L " + dylib_path, shell=True)
