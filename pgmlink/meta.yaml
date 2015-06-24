@@ -7,9 +7,11 @@ source:
     git_tag: e46aaf4526ec23bde79d699252245eff3599aab3
 
 build:
-  number: 3
-  string: 3_ge46aaf4
+  number: 6
+  string: 6_ge46aaf4
   detect_binary_files_with_prefix: true
+  script_env:
+     - CPLEX_ROOT_DIR
 
 requirements:
     build:
@@ -44,11 +46,6 @@ requirements:
       # and requiring it here would include all of gcc in the install lib dir.
       # Instead, we give the user a descriptive error message if cplex-shared hasn't been run on her machine.
       # - cplex-shared
-
-build:
-  script_env:
-     - CPLEX_ROOT_DIR
-  number: 5
 
 test:
   imports:
