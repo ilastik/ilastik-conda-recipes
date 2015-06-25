@@ -102,8 +102,7 @@ DEV_PREFIX=${CONDA_ROOT}/envs/ilastik-devel
 rm -rf ${DEV_PREFIX}/ilastik-meta
 git clone http://github.com/ilastik/ilastik-meta ${DEV_PREFIX}/ilastik-meta
 cd ${DEV_PREFIX}/ilastik-meta
-git submodule init
-git submodule update --recursive
+git submodule update --init --recursive
 git submodule foreach "git checkout master"
 ```
 
