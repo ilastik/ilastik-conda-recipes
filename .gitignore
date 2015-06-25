@@ -1,2 +1,6 @@
 .project
 *~
+*.pyc
+*.tar.gz
+*.zip
+*.app
