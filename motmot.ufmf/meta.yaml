@@ -1,0 +1,52 @@
+package:
+  name: motmot.ufmf
+  version: "0.3.5"
+
+source:
+  fn: motmot.ufmf-0.3.5.tar.gz
+  url: https://pypi.python.org/packages/source/m/motmot.ufmf/motmot.ufmf-0.3.5.tar.gz
+  md5: a342bc6a8f8b5afc3fc2b98b9fa87d4c
+
+build:
+  number: 0
+  preserve_egg_dir: True
+  entry_points:
+    - ufmf2fmf = motmot.ufmf.ufmf2fmf:main
+    - ufmfcat = motmot.ufmf.ufmfcat:main
+    - playufmf = motmot.ufmf.playufmf:main
+    - fmf2ufmf = motmot.ufmf.fmf2ufmf:main
+    - ufmfstats = motmot.ufmf.ufmfstats:main
+    - ufmf_reindex = motmot.ufmf.reindex:main
+    - ufmf_1to3 = motmot.ufmf.ufmf_1to3:main
+    - ufmf_2to3 = motmot.ufmf.ufmf_2to3:main
+
+requirements:
+  build:
+    - python
+    - setuptools
+
+  run:
+    - python
+    - setuptools
+    - numpy
+    - motmot.flymovieformat
+
+test:
+  imports:
+    - motmot
+    - motmot.ufmf
+
+  commands:
+    #- ufmf2fmf --help
+    - ufmfcat --help
+    - playufmf --help
+    - fmf2ufmf --help
+    - ufmfstats --help
+    - ufmf_reindex --help
+    - ufmf_1to3 --help
+    - ufmf_2to3 --help
+
+about:
+  #home: The package home page
+  license: UNKNOWN
+  summary: 'micro-fmf (.ufmf) format library'
