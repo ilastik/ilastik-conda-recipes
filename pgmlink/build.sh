@@ -59,8 +59,10 @@ CXXFLAGS=""
 LDFLAGS=""
 
 LINKER_FLAGS="-L${PREFIX}/lib"
+DYLIB="dylib"
 if [ `uname` != "Darwin" ]; then
     LINKER_FLAGS="-Wl,-rpath-link,${PREFIX}/lib ${LINKER_FLAGS}"
+    DYLIB="so"
 fi
 
 mkdir build
@@ -75,6 +77,10 @@ cmake ..\
     -DCMAKE_EXE_LINKER_FLAGS="${LINKER_FLAGS}" \
     -DBUILD_SHARED_LIBS=ON\
     -DWITH_PYTHON=ON\
+    -DPYTHON_LIBRARY=${PREFIX}/lib/libpython2.7.${DYLIB} \
+    -DPYPGMLINK_INSTALL_DIR=${PREFIX}/lib/python2.7/site-packages \
+    -DVIGRA_IMPEX_LIBRARY=${PREFIX}/lib/libvigraimpex.${DYLIB} \
+    -DVIGRA_NUMPY_CORE_LIBRARY=${PREFIX}/lib/python2.7/site-packages/vigra/vigranumpycore.so \
     -DWITH_CHECKED_STL=OFF\
     -DWITH_TESTS=ON\
     -DCPLEX_ROOT_DIR="${CPLEX_ROOT_DIR}"
