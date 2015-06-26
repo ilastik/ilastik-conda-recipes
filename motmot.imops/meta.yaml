@@ -1,0 +1,31 @@
+package:
+  name: motmot.imops
+  version: "0.5.7"
+
+source:
+  fn: motmot.imops-0.5.7.tar.gz
+  url: https://pypi.python.org/packages/source/m/motmot.imops/motmot.imops-0.5.7.tar.gz
+  md5: 5085dd96827a68fd5a9bd0b10d2afe68
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - python 2.7*
+    - setuptools
+    - numpy
+
+  run:
+    - python 2.7*
+    - numpy
+
+test:
+  imports:
+    - motmot
+    - motmot.imops
+
+about:
+  home: http://code.astraw.com/projects/motmot/imops.html
+  license: BSD
+  summary: 'image format conversion (e.g. between MONO8, YUV422, and RGB)'
