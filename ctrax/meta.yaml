@@ -19,6 +19,8 @@ build:
 
 requirements:
   build:
+    - gcc      4.8.2.99 # [linux]
+    - gcc      4.8.2    # [osx]
     - python 2.7*
     - setuptools
     - numpy
@@ -26,6 +28,7 @@ requirements:
     - psutil
 
   run:
+    - libgcc   4.8*
     - python 2.7*
     - wxpython
     - numpy
