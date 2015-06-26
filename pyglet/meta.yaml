@@ -1,0 +1,55 @@
+package:
+  name: pyglet
+  version: "1.2.3"
+
+source:
+  fn: pyglet-1.2.3.tar.gz
+  url: https://pypi.python.org/packages/source/p/pyglet/pyglet-1.2.3.tar.gz
+  md5: 7b5e3c8ceae30cc6e6df1f7dc777034a
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - python
+    - setuptools
+
+  run:
+    - python
+
+test:
+  # Python imports
+  imports:
+    - pyglet
+    - pyglet.app
+    - pyglet.canvas
+    - pyglet.extlibs
+    - pyglet.font
+    - pyglet.gl
+    - pyglet.graphics
+    - pyglet.image
+    - pyglet.image.codecs
+    - pyglet.input
+    - pyglet.libs
+    - pyglet.libs.darwin		 # [osx]
+    - pyglet.libs.darwin.cocoapy # [osx]
+    - pyglet.libs.               # [win]
+    - pyglet.libs.x11
+    - pyglet.media
+    - pyglet.media.drivers
+    - pyglet.media.drivers.directsound # [win]
+    - pyglet.media.drivers.openal
+    - pyglet.media.drivers.pulse # [linux] # Is this a linux thing?
+    - pyglet.text
+    - pyglet.text.formats
+    - pyglet.window
+    #- pyglet.window.carbon # [osx] # I guess carbon support only works on old versions of OSX...
+    - pyglet.window.cocoa  # [osx]
+    - pyglet.window.win32  # [win]
+    - pyglet.window.xlib   # [linux]
+
+about:
+  home: http://pyglet.readthedocs.org/en/pyglet-1.2-maintenance/
+  license: BSD License
+  summary: 'Cross-platform windowing and multimedia library'
