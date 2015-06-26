@@ -1,0 +1,21 @@
+package:
+  name: libcamiface
+  version: "0.9.0"
+
+source:
+  git_url: git://github.com/motmot/libcamiface.git
+  git_tag: release/0.9.0
+
+build:
+  number: 1
+  detect_binary_files_with_prefix: true
+
+requirements:
+  build:
+    - python   2.7*
+    - gcc      4.8.2.99 # [linux]
+    - gcc      4.8.2    # [osx]
+  
+  run:
+    - python   2.7*
+    - libgcc   4.8*
