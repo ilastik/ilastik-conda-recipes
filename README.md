@@ -361,12 +361,14 @@ make install
 Appendix: Linux VM Details
 ==========================
 
-The Anaconda distribution is built on a CentOS 5.11 VM.  To build the ilastik stack on that OS, you'll need to install the following:
+The Anaconda distribution is built on a CentOS 5.11 VM.
+To build the ilastik stack on that OS, you'll need to install the following:
  
 - `cmake`, `git`, `conda`, `gcc`
 - VTK dependencies: 
   * OpenGL: `yum install mesa-libGL-devel`
   * X11: `yum groupinstall "X Software Development"`
+- CPLEX (optional)
 - Recommended: VirtualBox Guest additions
   1. Register external package repository "rpmforge"
     * http://wiki.centos.org/AdditionalResources/Repositories/RPMForge#head-5aabf02717d5b6b12d47edbc5811404998926a1b
