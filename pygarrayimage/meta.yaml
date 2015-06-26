@@ -1,0 +1,31 @@
+package:
+  name: pygarrayimage
+  version: "1.0"
+
+source:
+  fn: pygarrayimage-1.0.tar.gz
+  url: https://pypi.python.org/packages/source/p/pygarrayimage/pygarrayimage-1.0.tar.gz
+  md5: 15b18a4d3a5431b70bd92d52661491c7
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - python
+    - setuptools
+
+  run:
+    - python
+    - numpy
+    - pyglet
+
+test:
+  # Python imports
+  imports:
+    - pygarrayimage
+
+about:
+  home: http://code.astraw.com/projects/motmot/wiki/pygarrayimage
+  license: BSD
+  summary: 'Allow numpy arrays as source of texture data for pyglet.'
