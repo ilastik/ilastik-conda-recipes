@@ -1,0 +1,84 @@
+--- setup.py	2014-03-29 18:03:30.000000000 -0400
++++ setup.py	2015-06-26 15:40:12.000000000 -0400
+@@ -33,52 +33,6 @@
+                      [ f[6:] for f in glob.glob(os.path.join('Ctrax','icons','*.ico'))]+\
+                      [ f[6:] for f in glob.glob(os.path.join('Ctrax','xrc','*.bmp'))]
+ 
+-
+-# determine setup config for psutil (1.0.1)
+-# POSIX
+-if os.name == 'posix':
+-    posix_extension = Extension('_psutil_posix',
+-                                sources = ['psutil/_psutil_posix.c'])
+-# Windows
+-if sys.platform.startswith("win32"):
+-
+-    def get_winver():
+-        maj, min = sys.getwindowsversion()[0:2]
+-        return '0x0%s' % ((maj * 100) + min)
+-
+-    psutil_extensions = [Extension('_psutil_mswindows',
+-                                   sources=['psutil/_psutil_mswindows.c',
+-                                            'psutil/_psutil_common.c',
+-                                            'psutil/arch/mswindows/process_info.c',
+-                                            'psutil/arch/mswindows/process_handles.c',
+-                                            'psutil/arch/mswindows/security.c'],
+-                                   define_macros=[('_WIN32_WINNT', get_winver()),
+-                                                  ('_AVAIL_WINVER_', get_winver())],
+-                                   libraries=["psapi", "kernel32", "advapi32",
+-                                              "shell32", "netapi32", "iphlpapi",
+-                                              "wtsapi32"],
+-                                   #extra_compile_args=["/Z7"],
+-                                   #extra_link_args=["/DEBUG"]
+-                                   )]
+-# OS X
+-elif sys.platform.startswith("darwin"):
+-    psutil_extensions = [Extension('_psutil_osx',
+-                                   sources = ['psutil/_psutil_osx.c',
+-                                              'psutil/_psutil_common.c',
+-                                              'psutil/arch/osx/process_info.c'],
+-                                   extra_link_args=['-framework', 'CoreFoundation',
+-                                                    '-framework', 'IOKit']
+-                                   ),
+-                         posix_extension]
+-# Linux
+-elif sys.platform.startswith("linux"):
+-    psutil_extensions = [Extension('_psutil_linux',
+-                                   sources=['psutil/_psutil_linux.c'],
+-                                   ),
+-                         posix_extension]
+-
+-
+-
+ long_description = """
+ Ctrax: The Caltech Multiple Fly Tracker
+ 
+@@ -132,6 +86,7 @@
+           'PIL',
+           'scipy',
+           'wx',
++          'psutil'
+           ]
+ 
+ extensions = [Extension('hungarian',['hungarian/hungarian.cpp',
+@@ -147,8 +102,7 @@
+                         ['tracking_funcs/tracking_funcs.pyx'],
+                         include_dirs=[numpyincludedirs,])
+               ]
+-# If this line errors, you're not building on a known platform.
+-extensions.extend( psutil_extensions )
++
+ 
+ setup( name="Ctrax",
+        version=this_version,
+@@ -167,8 +121,8 @@
+        obsoletes=['mtrax'],
+        scripts=['Ctrax/Ctrax'],
+        cmdclass = {'build_ext': build_ext},
+-       packages=['Ctrax', 'psutil'],
+-       package_dir={'Ctrax': 'Ctrax', 'psutil': 'psutil'},
++       packages=['Ctrax'],
++       package_dir={'Ctrax': 'Ctrax'},
+        package_data = {'Ctrax':Ctrax_package_data},
+        ext_modules=extensions
+       )

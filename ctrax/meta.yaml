@@ -1,0 +1,45 @@
+package:
+  name: ctrax
+  version: "0.5.5"
+
+source:
+  fn: Ctrax-0.5.5.tar.gz
+  url: https://pypi.python.org/packages/source/C/Ctrax/Ctrax-0.5.5.tar.gz
+  md5: b0cd139df0cfa8079eb8dd5fa5ccf623
+
+  patches:
+    # For some reason, the psutil module is included in the source and 
+    #  compiled as part of setup.py instead of being simply listed as a dependency
+    # The version included in the source doesn't work on OSX, 
+    #  so it's easier to just list it as an external dependency.
+    - setup.patch
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - python 2.7*
+    - setuptools
+    - numpy
+    - cython 0.21
+    - psutil
+
+  run:
+    - python 2.7*
+    - wxpython
+    - numpy
+    - scipy
+    - pillow
+    - matplotlib
+    - motmot.wxvideo
+    - motmot.wxvalidatedtext
+    - motmot.imops
+    - motmot.ufmf
+    - opencv
+    - psutil
+
+about:
+  home: http://ctrax.sourceforge.net/
+  license: GPLv2
+  summary: 'Ctrax: The Caltech Multiple Walking Fly Tracker'
