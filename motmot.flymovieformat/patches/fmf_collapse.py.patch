@@ -1,0 +1,11 @@
+--- motmot/FlyMovieFormat/fmf_collapse.py	2015-06-26 14:39:40.000000000 -0400
++++ motmot/FlyMovieFormat/fmf_collapse.py.2	2015-06-26 14:39:31.000000000 -0400
+@@ -1,7 +1,7 @@
+ from __future__ import division
+ import os, sys
+ import FlyMovieFormat
+-import Image
++from PIL import Image
+ import numpy
+ 
+ def main():

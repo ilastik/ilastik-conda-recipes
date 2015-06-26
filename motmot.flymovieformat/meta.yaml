@@ -1,0 +1,63 @@
+package:
+  name: motmot.flymovieformat
+  version: "0.5.9.1"
+
+source:
+  fn: motmot.FlyMovieFormat-0.5.9.1.tar.gz
+  url: https://pypi.python.org/packages/source/m/motmot.FlyMovieFormat/motmot.FlyMovieFormat-0.5.9.1.tar.gz
+  md5: 79a6729aadad9eaf0ffbfd5a4414adca
+
+  patches:
+  	# These patches replace "import Image" with "from PIL import Image" 
+    - patches/fmf2bmps.py.patch
+    - patches/fmf_collapse.py.patch
+    - patches/images2fmf.py.patch
+
+build:
+  number: 0
+  preserve_egg_dir: True
+  entry_points:
+    - fmf2bmps = motmot.FlyMovieFormat.fmf2bmps:main
+    - fmf_collapse = motmot.FlyMovieFormat.fmf_collapse:main
+    - fmf_info = motmot.FlyMovieFormat.fmf_info:main
+    - fmfcat = motmot.FlyMovieFormat.fmfcat:main
+    - ffmpeg2fmf = motmot.FlyMovieFormat.ffmpeg2fmf:main
+    - playfmf = motmot.FlyMovieFormat.playfmf:main
+    - fmf_plottimestamps = motmot.FlyMovieFormat.fmf_plottimestamps:main
+    - fmf_tail = motmot.FlyMovieFormat.fmf_tail:main
+
+requirements:
+  build:
+    - python
+    - setuptools
+
+  run:
+    - python
+    - setuptools
+    - numpy
+    - pillow
+    - motmot.imops
+    - wxpython
+    - matplotlib
+    - pyglet
+    - pygarrayimage
+
+test:
+  imports:
+    - motmot
+    - motmot.FlyMovieFormat
+
+  commands:
+    - fmf2bmps --help
+    - fmf_collapse --help
+    - fmf_info
+    - fmfcat --help
+    #- ffmpeg2fmf
+    - playfmf --help
+    - fmf_plottimestamps --help
+    #- fmf_tail
+
+about:
+  home: http://code.astraw.com/projects/motmot/fly-movie-format.html
+  license: BSD
+  summary: 'support for .fmf (fly movie format) files'

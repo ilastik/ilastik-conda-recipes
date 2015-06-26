@@ -1,0 +1,10 @@
+--- motmot/FlyMovieFormat/fmf2bmps.py	2015-06-26 14:39:40.000000000 -0400
++++ motmot/FlyMovieFormat/fmf2bmps.py.2	2015-06-26 14:39:26.000000000 -0400
+@@ -1,6 +1,6 @@
+ import os, sys
+ import FlyMovieFormat
+-import Image
++from PIL import Image
+ from optparse import OptionParser
+ import motmot.imops.imops as imops
+ import warnings
