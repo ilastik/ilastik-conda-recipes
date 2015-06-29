@@ -23,19 +23,20 @@ fi
 CPLEX_LIB_DIR=`echo $CPLEX_ROOT_DIR/cplex/lib/*/static_pic`
 CONCERT_LIB_DIR=`echo $CPLEX_ROOT_DIR/concert/lib/*/static_pic`
 
+LINKER_FLAGS="-L${PREFIX}/lib"
+export DYLIB="dylib"
+if [ `uname` != "Darwin" ]; then
+    LINKER_FLAGS="-Wl,-rpath-link,${PREFIX}/lib ${LINKER_FLAGS}"
+    export DYLIB="so"
+fi
 
 set +e
 (
     set -e
-    if [ `uname` == "Darwin" ]; then
-        ls ${CPLEX_LIB_DIR}/libcplex.dylib
-        ls ${CPLEX_LIB_DIR}/libilocplex.dylib
-        ls ${CONCERT_LIB_DIR}/libconcert.dylib
-    else
-        ls ${CPLEX_LIB_DIR}/libcplex.so
-        ls ${CPLEX_LIB_DIR}/libilocplex.so
-        ls ${CONCERT_LIB_DIR}/libconcert.so
-    fi
+    # Verify the existence of the cplex dylibs.
+    ls ${CPLEX_LIB_DIR}/libcplex.${DYLIB}
+    ls ${CPLEX_LIB_DIR}/libilocplex.${DYLIB}
+    ls ${CONCERT_LIB_DIR}/libconcert.${DYLIB}
 )
 if [ $? -ne 0 ]; then
     set +x
@@ -57,13 +58,6 @@ set -e
 CFLAGS=""
 CXXFLAGS=""
 LDFLAGS=""
-
-LINKER_FLAGS="-L${PREFIX}/lib"
-DYLIB="dylib"
-if [ `uname` != "Darwin" ]; then
-    LINKER_FLAGS="-Wl,-rpath-link,${PREFIX}/lib ${LINKER_FLAGS}"
-    DYLIB="so"
-fi
 
 mkdir build
 cd build
