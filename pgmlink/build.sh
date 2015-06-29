@@ -71,7 +71,9 @@ cmake ..\
     -DCMAKE_EXE_LINKER_FLAGS="${LINKER_FLAGS}" \
     -DBUILD_SHARED_LIBS=ON\
     -DWITH_PYTHON=ON\
+    -DPYTHON_EXECUTABLE=${PYTHON} \
     -DPYTHON_LIBRARY=${PREFIX}/lib/libpython2.7.${DYLIB} \
+    -DPYTHON_INCLUDE_DIR=${PREFIX}/include/python2.7 \
     -DPYPGMLINK_INSTALL_DIR=${PREFIX}/lib/python2.7/site-packages \
     -DVIGRA_IMPEX_LIBRARY=${PREFIX}/lib/libvigraimpex.${DYLIB} \
     -DVIGRA_NUMPY_CORE_LIBRARY=${PREFIX}/lib/python2.7/site-packages/vigra/vigranumpycore.so \

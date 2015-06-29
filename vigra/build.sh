@@ -54,8 +54,8 @@ cmake ..\
         -DBoost_PYTHON_LIBRARY_DEBUG=${PREFIX}/lib/libboost_python-mt.${DYLIB_EXT} \
 \
         -DPYTHON_EXECUTABLE=${PYTHON} \
-        -DPYTHON_INCLUDE_PATH=${PREFIX}/include \
-        -DPYTHON_LIBRARIES=${PREFIX}/lib/libpython.2.7.${DYLIB_EXT} \
+        -DPYTHON_LIBRARY=${PREFIX}/lib/libpython2.7.${DYLIB_EXT} \
+        -DPYTHON_INCLUDE_DIR=${PREFIX}/include/python2.7 \
         -DPYTHON_NUMPY_INCLUDE_DIR=${PREFIX}/lib/python2.7/site-packages/numpy/core/include \
         -DPYTHON_SPHINX=${PREFIX}/bin/sphinx-build \
 \
