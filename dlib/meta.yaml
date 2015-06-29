@@ -1,0 +1,35 @@
+package:
+  name: dlib
+  version: "18.16"
+
+source:
+  fn: dlib-18.16.tar.bz2
+  url: http://downloads.sourceforge.net/project/dclib/dlib/v18.16/dlib-18.16.tar.bz2
+  md5: e9e5449bc25370afce2d254327afac99
+
+  patches:
+    - CMakeLists.txt.patch   # Add 'install' step
+    - CMakeLists.txt.patch_2 # Allow linking external jpeg, even on Mac OSX
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - gcc 4.8.2.99 # [linux]
+    - gcc 4.8.2 # [osx]
+    - libpng
+    - jpeg
+    - sqlite
+
+  run:
+    - libgcc
+    - libpng
+    - jpeg
+    - sqlite
+
+about:
+  home: http://dlib.net
+  license: Boost
+  summary: Dlib is a general purpose cross-platform C++ library designed using contract programming and modern C++ techniques.
+    
