@@ -150,14 +150,28 @@ Generating a release binary
 
 4. Create tarball/app
 
-   - Mac: `./osx-packages/create-osx-app.sh --zip -c ilastik`
-   - Linux: `./create-tarball.sh -c ilastik`
+   **Linux:**
 
-  Additional options:
-  
+           
+            $ grep Usage ./create-tarball.sh
+            ## Usage: create-tarball.sh [--git-latest] [--no-tracking] [... extra install-args, e.g. --use-local or -c ilastik ...]
+            
+            $ ./create-tarball.sh -c ilastik
+
+   **Mac:**
+       
+            $ grep Usage ./osx-packages/create-osx-app.sh
+            ## Usage: create-osx-app.sh [--zip] [--git-latest] [--no-tracking] [... extra install-args, e.g. --use-local or -c ilastik ...]
+            
+            $ ./osx-packages/create-osx-app.sh --zip -c ilastik
+
+  If any options are used, they must be passed in this order:
+
+    - `--zip`: (Mac only) After creating the `.app` bundle, compress it into a `.zip` file.  
     - `--git-latest`: Use the latest `master` branch of `ilastik`, `lazyflow`, and `volumina` instead of the most recent tag. (Don't use for official releases.)
     - `--no-tracking`: Omit tracking-specific dependencies
     - `--use-local`: Tells conda to use your custom builds of each package, if available.
+    - `-c ilastik`: Tells conda to use packages from the ilastik channel (in case it's missing from `~/.condarc`).
 
 <a name="howtobuild"></a>
 ====================================

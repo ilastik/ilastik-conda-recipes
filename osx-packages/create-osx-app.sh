@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ##
-## Usage: create-osx-zip.sh [--zip] [--git-latest] [--no-tracking] [... extra install-args, e.g. --use-local or -c ilastik ...]
+## Usage: create-osx-app.sh [--zip] [--git-latest] [--no-tracking] [... extra install-args, e.g. --use-local or -c ilastik ...]
 ##
 
 set -e
