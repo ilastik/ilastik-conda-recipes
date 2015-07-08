@@ -1,0 +1,39 @@
+package:
+  name: neuroproof 
+  version: "1.1"
+  
+source:
+  git_url: git://github.com/janelia-flyem/NeuroProof.git
+  git_tag: HEAD
+
+build:
+  script_env:
+   - LD_LIBRARY_PATH
+   - DYLD_LIBRARY_PATH
+
+  number: 1
+  detect_binary_files_with_prefix: true # (defaults to false)
+  
+requirements:
+  build:
+    - gcc 4.8.2.99 # [linux]
+    - jsoncpp
+    - libdvid-cpp
+    - hdf5     1.8.14
+    - python
+    - vigra
+    - opencv
+    
+  run:
+    - libgcc
+    - jsoncpp
+    - libdvid-cpp
+    - hdf5     1.8.14
+    - python
+    - vigra
+    - opencv
+
+about:
+  home: http://github.com/janelia-flyem/NeuroProof.git
+  license: BSD (3-clause)
+  summary: C++ library for image segmentation and analysis 
