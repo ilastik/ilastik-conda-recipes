@@ -7,6 +7,9 @@ source:
   url: https://pypi.python.org/packages/source/l/lz4/lz4-0.7.0.tar.gz
   md5: e32842a49d5254f6918567197a704492
 
+build:
+  number: 1
+
 requirements:
   build:
     - python
