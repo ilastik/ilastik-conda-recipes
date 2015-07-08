@@ -7,7 +7,9 @@ source:
   git_tag: HEAD
 
 build:
-  number: 1
+  entry_points:
+    #- launchworkflow = workflows.launchworkflow:main (TODO)
+  number: 4
   
 requirements:
   build:
