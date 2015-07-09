@@ -56,8 +56,10 @@ fi
 echo "Creating new ilastik-release environment..."
 if [[ $OMIT_TRACKING == 1 ]]; then
     conda create -q -y -n ilastik-release ilastik-everything-but-tracking py2app "$@"
+    TRACKING_SUFFIX="-no-tracking"
 else    
     conda create -q -y -n ilastik-release ilastik-everything py2app "$@"
+    TRACKING_SUFFIX=""
 fi
 
 # Replace all @rpath references with @loader_path references,
@@ -83,7 +85,7 @@ else
     # Ask conda for the package version
     ILASTIK_PKG_VERSION=`conda list -n ilastik-release | grep ilastik-meta | python -c "import sys; print sys.stdin.read().split()[1]"`
 fi
-RELEASE_NAME=ilastik-${ILASTIK_PKG_VERSION}-OSX
+RELEASE_NAME=ilastik-${ILASTIK_PKG_VERSION}${TRACKING_SUFFIX}-OSX
 
 echo "Creating ilastik.app..."
 # For some reason, the app created by py2app has stability issues.

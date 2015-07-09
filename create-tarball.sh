@@ -41,8 +41,10 @@ fi
 echo "Creating new ilastik-release environment..."
 if [[ $OMIT_TRACKING == 1 ]]; then
     conda create -q -y -n ilastik-release ilastik-everything-but-tracking "$@"
+    TRACKING_SUFFIX="-no-tracking"
 else    
     conda create -q -y -n ilastik-release ilastik-everything "$@"
+    TRACKING_SUFFIX=""
 fi
 
 if [[ $USE_GIT_LATEST == 1 ]]; then
@@ -61,7 +63,7 @@ else
     ILASTIK_PKG_VERSION=`conda list -n ilastik-release | grep ilastik-meta | python -c "import sys; print sys.stdin.read().split()[1]"`
 fi
 
-RELEASE_NAME=ilastik-${ILASTIK_PKG_VERSION}-`uname`
+RELEASE_NAME=ilastik-${ILASTIK_PKG_VERSION}${TRACKING_SUFFIX}-`uname`
 
 # Create the tarball, and move it to the current directory.
 echo "Creating ${RELEASE_NAME}.tar.gz"
