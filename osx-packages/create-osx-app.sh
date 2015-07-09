@@ -74,11 +74,16 @@ if [[ $USE_GIT_LATEST == 1 ]]; then
     # Instead of keeping the version from binstar, get the git repo
     ILASTIK_META=${CONDA_ROOT}/envs/ilastik-release/ilastik-meta
     rm -rf ${ILASTIK_META}
+
+    echo "Cloning ilastik from latest github sources"
     git clone https://github.com/ilastik/ilastik-meta ${ILASTIK_META}
     cd ${ILASTIK_META}
     git submodule init
     git submodule update
     git submodule foreach 'git checkout master'
+
+    echo "Compiling python sources"
+    python -m compileall lazyflow volumina ilastik
     cd -
     ILASTIK_PKG_VERSION="master"
 else
