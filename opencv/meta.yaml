@@ -4,7 +4,7 @@ package:
   
 source:
   fn: opencv-2.4.10.zip 
-  url: http://downloads.sourceforge.net/project/opencvlibrary/opencv-unix/3.0.0/opencv-2.4.10.zip 
+  url: http://downloads.sourceforge.net/project/opencvlibrary/opencv-unix/2.4.10/opencv-2.4.10.zip 
   md5: ec63952d3a3dff965d5fdde765926821  
 
 build:
