@@ -3,19 +3,16 @@ package:
   version: "1.10"
 
 source:
-  #git_url: git://github.com/ukoethe/vigra.git
-  #git_tag: 92a2fa1f85cdcd5e15f599f69414e84445701b38 # 2015-05-12
-
-  git_url: git://github.com/stuarteberg/vigra.git
-  git_tag: 5dde8872323b1e592c7fbae45235362b07a9a59a
+  git_url: git://github.com/ukoethe/vigra.git
+  git_tag: 35e5d4aed380087d75e206348d1648d9ad9cf1e6 # 2015-07-16
 
 build:
   script_env:
    - LD_LIBRARY_PATH
    - DYLD_LIBRARY_PATH
 
-  number: 8
-  string: 8_5dde887
+  number: 9
+  string: 9_35e5d4a
   detect_binary_files_with_prefix: true
 
 requirements:
