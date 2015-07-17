@@ -10,15 +10,15 @@ if [ `uname` == 'Darwin' ]; then
     CC=/usr/bin/cc
     CXX=/usr/bin/c++
 
-    CXXFLAGS="-stdlib=libstdc++"
-    EXTRA_QT4_CONFIG_FLAGS="-cocoa -L/usr/X11/lib -I/usr/X11/include -arch x86_64"
-
     # Leave Qt set its own flags and vars, else compilation errors
     # will occur
     for x in OSX_ARCH CFLAGS CXXFLAGS LDFLAGS
     do
 	unset $x
     done
+
+    CXXFLAGS="-stdlib=libstdc++"
+    EXTRA_QT4_CONFIG_FLAGS="-cocoa -L/usr/X11/lib -I/usr/X11/include -arch x86_64"
 else
     EXTRA_QT4_CONFIG_FLAGS=""
 fi
