@@ -1,0 +1,23 @@
+package:
+  name: neutu
+  version: "0.1"
+
+source:
+  git_url: git://github.com/janelia-flyem/NeuTu
+  git_tag: HEAD
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - qt      4.8.6.99   # [unix]
+    - sip     >=4.16.4   # [unix]
+
+  run:
+    - qt       4.8.6.99   # [unix]
+    - sip      >=4.16.4   # [unix]
+
+about:
+  home: http://github.com/janelia-flyem/NeuTu
+  license: GPL
