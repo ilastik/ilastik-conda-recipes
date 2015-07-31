@@ -7,8 +7,11 @@ source:
   url: http://downloads.sourceforge.net/project/arma/armadillo-4.000.2.tar.gz
   md5: b2891c7b59b96337c154c5d961fd40fb
 
+  patches:
+    - patches/use_atlas_lapack.diff
+
 build:
-  number: 2
+  number: 3
   detect_binary_files_with_prefix: true
 
 requirements:
