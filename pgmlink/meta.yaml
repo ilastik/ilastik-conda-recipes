@@ -7,8 +7,8 @@ source:
     git_tag: ce86cf509b60aaceb4e4bcf392698c2fc6e7e1fd
 
 build:
-  number: 8
-  string: 8_gce86cf5
+  number: 9
+  string: 9_gce86cf5
   detect_binary_files_with_prefix: true
   script_env:
      - CPLEX_ROOT_DIR
@@ -29,6 +29,7 @@ requirements:
       - lemon
       - libxml2
       - dlib
+      - armadillo 4.000.2-3
 
     run:
       - libgcc
