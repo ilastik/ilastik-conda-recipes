@@ -10,12 +10,12 @@ build:
 
 requirements:
   build:
-    - ilastik-everything-but-tracking
-    - ilastik-deps-tracking
+    - ilastik-everything-but-tracking # <-- Needed just to print ilastik.__version__ into __conda_version__.txt
 
   run:
     - ilastik-everything-but-tracking
     - ilastik-deps-tracking
+    - ilastik-versions
 
 test:
   requires:
