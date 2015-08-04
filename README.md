@@ -134,7 +134,7 @@ Generating a release binary
           git tag -m "Alpha Release" -a 1.2.3a4
           git push --tags origin
 
-  3. Update the `git_tag` in `ilastik/meta.yaml` and commit.
+  3. Update the `git_tag` in `ilastik-meta/meta.yaml` and commit.
 
 2. Build `ilastik-meta` and `ilastik-everything` packages, and upload to the `ilastik` binstar channel.
 
