@@ -16,7 +16,6 @@ requirements:
     - h5py
     - tifffile
     - psutil
-    - blist
     - greenlet
     - yapsy
     - scikit-learn
@@ -40,3 +39,5 @@ requirements:
     - faulthandler
     - jsonschema
     - nose
+    #- blist # only needed by deprecated operators
+    
