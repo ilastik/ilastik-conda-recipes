@@ -9,7 +9,7 @@ source:
 build:
   entry_points:
     #- launchworkflow = workflows.launchworkflow:main (TODO)
-  number: 7
+  number: 8
   
 requirements:
   build:
@@ -22,7 +22,7 @@ requirements:
     - requests
     - scikit-image
     - scipy
-    - pil
+    - pillow
     - python-lz4
   run:
     - python  
@@ -32,7 +32,7 @@ requirements:
     - libdvid-cpp
     - requests
     - scikit-image
-    - pil
+    - pillow
     - scipy
     - python-lz4
 
