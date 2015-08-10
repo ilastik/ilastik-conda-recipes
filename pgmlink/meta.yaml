@@ -29,7 +29,7 @@ requirements:
       - lemon
       - libxml2
       - dlib
-      - armadillo 4.000.2-3
+      - armadillo 4.000.2
 
     run:
       - libgcc
