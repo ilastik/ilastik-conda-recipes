@@ -123,6 +123,11 @@ rm ilastik.app/Contents/MacOS/python
 cd ilastik.app/Contents/MacOS && ln -s ../ilastik-release/bin/python
 cd -
 
+# Fix app icon link
+rm ilastik.app/Contents/Resources/appIcon.icns
+cd ilastik.app/Contents/Resources && ln -s ../ilastik-release/ilastik-meta/ilastik/appIcon.icns
+cd -
+
 # Replace Resources/lib with a symlink
 rm -rf ilastik.app/Contents/Resources/lib
 cd ilastik.app/Contents/Resources && ln -s ../ilastik-release/lib
