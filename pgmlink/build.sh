@@ -75,6 +75,7 @@ cmake ..\
     -DPYTHON_LIBRARY=${PREFIX}/lib/libpython2.7.${DYLIB} \
     -DPYTHON_INCLUDE_DIR=${PREFIX}/include/python2.7 \
     -DPYPGMLINK_INSTALL_DIR=${PREFIX}/lib/python2.7/site-packages \
+    -DVIGRA_INCLUDE_DIR=${PREFIX}/include \
     -DVIGRA_IMPEX_LIBRARY=${PREFIX}/lib/libvigraimpex.${DYLIB} \
     -DVIGRA_NUMPY_CORE_LIBRARY=${PREFIX}/lib/python2.7/site-packages/vigra/vigranumpycore.so \
     -DWITH_CHECKED_STL=OFF\

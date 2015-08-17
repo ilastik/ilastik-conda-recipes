@@ -4,11 +4,12 @@ package:
 
 source:
     git_url: https://github.com/opengm/opengm.git
-    git_tag: 376d06198aba59e6e37da520b9f34713f6d05674
+    #git_tag: 376d06198aba59e6e37da520b9f34713f6d05674
+    git_tag: 89d44d01920863f0b8df4a235b00e15adbd2b583 # intentionally downgraded relative to the previous build.
 
 build:
-  number: 4
-  string: 4_g376d061
+  number: 5
+  string: 5_g89d44d0 # Downgraded relative to build 4
   detect_binary_files_with_prefix: true
 
 requirements:
