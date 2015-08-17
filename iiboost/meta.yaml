@@ -3,13 +3,12 @@ package:
   version: 0.1
 
 source:
-  # TODO: Change back to cbecker/iiboost after he accepts my pull request.
-  #git_url: git://github.com/cbecker/iiboost.git
-  git_url: git://github.com/stuarteberg/iiboost.git
-  git_tag: HEAD
+  git_url: git://github.com/cbecker/iiboost.git
+  git_tag: 437491b5257cce74f86977ed203e1ccb2a02bd5c # 2015-08-17
 
 build:
-  number: 2
+  number: 3
+  string: 3_g437491b
   detect_binary_files_with_prefix: true
 
 requirements:  
