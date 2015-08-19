@@ -1,12 +1,16 @@
-cd PCbuild
-
+REM configure
 if %ARCH%==32 (
     set PYTHON_BITNESS=Win32
+    set PYTHON_BIN=.
     set PYTHON_EXE=.\python.exe
 ) else (
     set PYTHON_BITNESS=x64
+    set PYTHON_BIN=./amd64
     set PYTHON_EXE=.\amd64\python.exe
 )
+
+REM build directory is predetermined by Python distro
+cd PCbuild
 
 REM upgrade sln-file to current compiler version
 devenv PCbuild.sln /upgrade
@@ -34,3 +38,9 @@ if errorlevel 1 exit 1
 
 REM patch distutils for Visual Studio 2012
 "%PYTHON_EXE%" "%RECIPE_DIR%/patch_python.py" ../Lib/distutils/msvc9compiler.py ../Lib/distutils/cygwinccompiler.py
+if errorlevel 1 exit 1
+
+REM install 
+REM FIXME: what's the correct install path?
+cmake -DPYTHON_BIN="%PYTHON_BIN%" -DPYTHON_INSTALL_PREFIX="%PREFIX%" -P "%RECIPE_DIR%/python_install.cmake" 
+if errorlevel 1 exit 1
