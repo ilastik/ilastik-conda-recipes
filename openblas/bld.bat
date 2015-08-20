@@ -5,7 +5,16 @@ set PATH=%MAKE_PATH%;%PATH%
 rem disable AVX so that the binaries can run on older processors
 rem set NO_AFFINITY=1 to enable multithreaded execution
 make -j6 NO_AVX=1 FC="%MINGW_PATH%\gfortran.exe" BINARY=%ARCH% NO_AFFINITY=1
-make PREFIX="%LIBRARY_PREFIX%" install
+
+rem the install path must have forward slashes
+set INSTALL_PREFIX=%LIBRARY_PREFIX%
+setlocal enabledelayedexpansion
+FOR %%f IN (%INSTALL_PREFIX%) DO (
+  set "f=%%f"
+  set "INSTALL_PREFIX=!f:\=/!"
+)
+echo Installing into "%INSTALL_PREFIX%"
+make PREFIX="%INSTALL_PREFIX%" install
 
 rem install required shared libraries in their proper places
 move "%LIBRARY_PREFIX%\lib\libopenblas.dll" "%LIBRARY_PREFIX%\bin"
