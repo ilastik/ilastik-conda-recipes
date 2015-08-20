@@ -19,11 +19,12 @@ requirements:
   build:
     - gcc 4.8.2.99 # [linux]
     - gcc 4.8.2 # [osx]
-    - python
-    - zlib
+    - python  [not win]
+    - python 2.7.10 [win]
+    - zlib # [not win]
 
   run:
-    - libgcc
+    - libgcc # [not win]
 
 about:
   home: http://www.boost.org/

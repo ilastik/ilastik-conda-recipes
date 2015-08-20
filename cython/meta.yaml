@@ -19,4 +19,4 @@ requirements:
 about:
   home: http://cython.org/
   license: Apache Software License
-  summary: he Cython compiler for writing C extensions for the Python language
+  summary: The Cython compiler for writing C extensions for the Python language
