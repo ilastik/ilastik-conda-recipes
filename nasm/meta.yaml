@@ -7,9 +7,6 @@ source:
     md5: 1dafe433d8c83854188934617eec3032
     url: http://www.nasm.us/pub/nasm/releasebuilds/2.10.07/win32/nasm-2.10.07-win32.zip
 
-build:
-  script: copy nasm.exe %LIBRARY_BIN%
-  
 about:
   home: http://www.nasm.us
   license: BSD
