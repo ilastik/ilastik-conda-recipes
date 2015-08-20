@@ -9,14 +9,10 @@ source:
 
 requirements:
   build:
-    # compiler
+    - visual_studio 11.0  # [win]
 
   run:
-    # compiler runtime
-
-#test:
-#  imports:
-#    - vigra
+    - visual_studio 11.0  # [win]
 
 about:
   home: https://www.python.org/
