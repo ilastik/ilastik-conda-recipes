@@ -1,0 +1,22 @@
+package:
+  name: hdf5
+  version: "1.8.12"
+
+source:
+    fn:  hdf5-1.8.12.tar.gz
+    md5: d804802feb99b87fc668a90e6fa34411
+    url: http://www.hdfgroup.org/ftp/HDF5/releases/hdf5-1.8.12/src/hdf5-1.8.12.tar.gz
+
+requirements:
+  build:
+    - visual-studio 11.0 # [win]
+    - zlib
+
+  run:
+    - visual-studio 11.0 # [win]
+    - zlib
+
+about:
+  home: https://www.hdfgroup.org/HDF5/
+  license: HDF5 license (similar to BSD)
+  summary: HDF5 data format I/O

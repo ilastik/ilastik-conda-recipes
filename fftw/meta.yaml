@@ -15,6 +15,14 @@ build:
 # Note: tests are run when building the package, they are not accessible
 # in the installed package.
 
+requirements:
+  build:
+    - visual-studio 11.0 # [win]
+    - python             # [win]
+
+  run:
+    - visual-studio 11.0 # [win]
+
 about:
     home: http://fftw.org
     license: GNU General Public License (GPL)

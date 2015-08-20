@@ -1,0 +1,5 @@
+file(INSTALL ../api/fftw3.h DESTINATION ${FFTW_INSTALL_PREFIX}/include)
+file(GLOB fftw_DLL ${FFTW_BUILD_DIR}/Release/*.dll)
+file(INSTALL ${fftw_DLL} DESTINATION ${FFTW_INSTALL_PREFIX}/bin)
+file(GLOB fftw_LIB ${FFTW_BUILD_DIR}/Release/*.lib)
+file(INSTALL ${fftw_LIB} DESTINATION ${FFTW_INSTALL_PREFIX}/lib)
