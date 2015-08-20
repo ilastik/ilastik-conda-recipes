@@ -26,8 +26,9 @@ if NOT %ARCH%==%MINGW_ARCH% (
     exit 1
 )
 
-FOR /F "delims=" %%i IN ('where make.exe') DO set MAKE_PATH=%%i
-if "%MAKE_PATH%"=="" (
+REM FIXME: generalize
+set MAKE_PATH=c:\msys\bin
+if not exist "%MAKE_PATH%\make.exe" (
     echo 'make' must be in the PATH
     exit 1
 )

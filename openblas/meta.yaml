@@ -1,0 +1,19 @@
+package:
+  name: openblas
+  version: "0.2.5"
+
+source:
+  git_url: http://github.com/xianyi/OpenBLAS
+  git_rev: v0.2.5
+  
+requirements:
+  build:
+    - mingw 4.7.2 # [win]
+
+  run:
+    - mingw 4.7.2 # [win]
+
+about:
+  home: www.openblas.ne
+  license: BSD
+  summary: An optimized BLAS library
