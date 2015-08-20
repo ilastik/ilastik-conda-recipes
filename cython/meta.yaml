@@ -9,11 +9,11 @@ source:
 
 requirements:
   build:
-    - visual_studio 11.0  # [win]
+    - visual-studio 11.0  # [win]
     - python        2.7.10
 
   run:
-    - visual_studio 11.0  # [win]
+    - visual-studio 11.0  # [win]
     - python        2.7.10
 
 about:

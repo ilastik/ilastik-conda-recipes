@@ -9,10 +9,10 @@ source:
 
 requirements:
   build:
-    - visual_studio 11.0  # [win]
+    - visual-studio 11.0  # [win]
 
   run:
-    - visual_studio 11.0  # [win]
+    - visual-studio 11.0  # [win]
 
 about:
   home: https://www.python.org/
