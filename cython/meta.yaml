@@ -1,0 +1,22 @@
+package:
+  name: cython
+  version: "0.23"
+
+source:
+  fn:  Cython-0.23.tar.gz
+  url: https://pypi.python.org/packages/source/C/Cython/Cython-0.23.tar.gz
+  md5: 63d472d0a9b3b39b9651f7bf568bb4a5
+
+requirements:
+  build:
+    - visual_studio 11.0  # [win]
+    - python        2.7.10
+
+  run:
+    - visual_studio 11.0  # [win]
+    - python        2.7.10
+
+about:
+  home: http://cython.org/
+  license: Apache Software License
+  summary: he Cython compiler for writing C extensions for the Python language
