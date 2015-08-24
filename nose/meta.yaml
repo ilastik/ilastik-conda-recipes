@@ -1,0 +1,20 @@
+package:
+  name: nose
+  version: 1.2.1
+
+source:
+  fn:  nose-1.2.1.tar.gz
+  url: http://pypi.python.org/packages/source/n/nose/nose-1.2.1.tar.gz
+  md5: 735e3f1ce8b07e70ee1b742a8a53585a
+
+requirements:
+  build:
+    - python 2.7.10 [win]
+
+  run:
+    - python 2.7.10 [win]
+
+about:
+  home: https://nose.readthedocs.org/en/latest/
+  license: LGPL
+  summary: nicer testing for Python
