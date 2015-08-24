@@ -1,6 +1,6 @@
 package:
   name: numpy
-  version: "1.7.0"
+  version: "1.7.0.99"
 
 source:
     fn:  numpy-1.7.0.tar.gz
