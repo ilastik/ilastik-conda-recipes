@@ -1,0 +1,13 @@
+package:
+  name: sqlite
+  version: 3.8.11
+
+source:
+  fn:  sqlite-amalgamation-3081101.zip
+  url: http://www.sqlite.org/2015/sqlite-amalgamation-3081101.zip
+  md5: 94907e831502e2080b76e281cfa24dde
+
+about:
+  home: https://www.sqlite.org/
+  license: public domain
+  summary:  serverless SQL database engine
