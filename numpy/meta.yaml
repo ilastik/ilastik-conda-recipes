@@ -18,7 +18,11 @@ requirements:
     - python
     - openblas           # [win]
 
+#test:
+#  imports:
+#    - numpy   # FIXME: doesn't work on Windows: %LIBRARY_BIN% not in PATH
+
 about:
-  home: FIXME
+  home: http://www.numpy.org/
   license: BSD
   summary: Python linear algebra
