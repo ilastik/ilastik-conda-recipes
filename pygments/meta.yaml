@@ -1,0 +1,21 @@
+package:
+  name: pygments
+  version: 1.6
+
+source:
+  fn:  Pygments-1.6.tar.gz
+  url: http://pypi.python.org/packages/source/P/Pygments/Pygments-1.6.tar.gz
+  md5: a18feedf6ffd0b0cc8c8b0fbdb2027b1
+
+requirements:
+  build:
+    - python 2.7.10 [win]
+
+  run:
+    - python 2.7.10 [win]
+
+about:
+  home: http://pygments.org/
+  license: BSD
+  summary: Python syntax highlighter
+

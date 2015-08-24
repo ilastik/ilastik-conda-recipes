@@ -1,0 +1,21 @@
+package:
+  name: distribute
+  version: 0.6.12
+
+source:
+  fn:  distribute-0.6.12.tar.gz
+  url: http://pypi.python.org/packages/source/d/distribute/distribute-0.6.12.tar.gz
+  md5: d4713d07bccd48892e455fe30230f8bc
+
+requirements:
+  build:
+    - python 2.7.10 [win]
+
+  run:
+    - python 2.7.10 [win]
+
+about:
+  home: https://pypi.python.org/pypi/distribute
+  license: PSF
+  summary: deprecated setuptools version
+

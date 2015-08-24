@@ -1,0 +1,25 @@
+package:
+  name: jinja2
+  version: 2.7
+
+source:
+  fn:  Jinja2-2.7.tar.gz
+  url: https://pypi.python.org/packages/source/J/Jinja2/Jinja2-2.7.tar.gz
+  md5: c2fb12cbbb523c57d3d15bfe4dc0e8fe
+
+requirements:
+  build:
+    - python 2.7.10 [win]
+    - setuptools
+    - markupsafe
+
+  run:
+    - python 2.7.10 [win]
+    - setuptools
+    - markupsafe
+
+about:
+  home: http://jinja.pocoo.org/
+  license: BSD
+  summary: the Python template engine
+

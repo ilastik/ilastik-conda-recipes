@@ -1,0 +1,21 @@
+package:
+  name: docutils
+  version: 0.10
+
+source:
+  fn:  docutils-0.10.tar.gz
+  url: https://pypi.python.org/packages/source/d/docutils/docutils-0.10.tar.gz
+  md5: d8d4660c08302c791b2d71a155a2f4bc
+
+requirements:
+  build:
+    - python 2.7.10 [win]
+
+  run:
+    - python 2.7.10 [win]
+
+about:
+  home: https://pypi.python.org/pypi/docutils
+  license: public domain, BSD, PSF
+  summary: Python Documentation Utilities
+
