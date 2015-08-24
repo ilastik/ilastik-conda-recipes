@@ -1,0 +1,24 @@
+package:
+  name: numpy
+  version: "1.7.0"
+
+source:
+    fn:  numpy-1.7.0.tar.gz
+    md5: 4fa54e40b6a243416f0248123b6ec332
+    url: http://downloads.sourceforge.net/project/numpy/NumPy/1.7.0/numpy-1.7.0.tar.gz
+
+requirements:
+  build:
+    - visual-studio 11.0 # [win]
+    - python
+    - openblas           # [win]
+
+  run:
+    - visual-studio 11.0 # [win]
+    - python
+    - openblas           # [win]
+
+about:
+  home: FIXME
+  license: BSD
+  summary: Python linear algebra
