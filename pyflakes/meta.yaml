@@ -1,0 +1,21 @@
+package:
+  name: pyflakes
+  version: 0.7
+
+source:
+  fn:  pyflakes-0.7.tar.gz
+  url: http://pypi.python.org/packages/source/p/pyflakes/pyflakes-0.7.tar.gz
+  md5: 4cbe17be937684654eb29d9efab67b80
+
+requirements:
+  build:
+    - python 2.7.10 # [win]
+
+  run:
+    - python 2.7.10 # [win]
+
+about:
+  home: https://pypi.python.org/pypi/pyflakes
+  license: MIT
+  summary: passive checker of Python programs
+

@@ -1,0 +1,21 @@
+package:
+  name: pyopengl
+  version: 3.0.2
+
+source:
+  fn:  PyOpenGL-3.0.2.tar.gz
+  url: http://pypi.python.org/packages/source/P/PyOpenGL/PyOpenGL-3.0.2.tar.gz
+  md5: 77becc24ffc0a6b28030aa109ad7ff8b
+
+requirements:
+  build:
+    - python 2.7.10 # [win]
+
+  run:
+    - python 2.7.10 # [win]
+
+about:
+  home: https://pypi.python.org/pypi/PyOpenGL
+  license: BSD
+  summary: OpenGL bindings
+

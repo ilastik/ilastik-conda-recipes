@@ -1,0 +1,21 @@
+package:
+  name: greenlet
+  version: 0.4.7
+
+source:
+  fn:  greenlet-0.4.7.zip
+  url: https://pypi.python.org/packages/source/g/greenlet/greenlet-0.4.7.zip
+  md5: c2333a8ff30fa75c5d5ec0e67b461086 
+
+requirements:
+  build:
+    - python 2.7.10 # [win]
+
+  run:
+    - python 2.7.10 # [win]
+
+about:
+  home: https://pypi.python.org/pypi/greenlet
+  license: MIT
+  summary: Lightweight in-process concurrent programming
+

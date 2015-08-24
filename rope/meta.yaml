@@ -1,0 +1,21 @@
+package:
+  name: rope
+  version: 0.9.4
+
+source:
+  fn:  rope-0.9.4.tar.gz
+  url: http://pypi.python.org/packages/source/r/rope/rope-0.9.4.tar.gz
+  md5: 6c654c6892f78008e04e2d65f9f859bb
+
+requirements:
+  build:
+    - python 2.7.10 # [win]
+
+  run:
+    - python 2.7.10 # [win]
+
+about:
+  home: https://pypi.python.org/pypi/rope
+  license: GPL
+  summary: refactoring library
+

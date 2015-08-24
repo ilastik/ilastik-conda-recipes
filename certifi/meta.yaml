@@ -1,0 +1,22 @@
+package:
+  name: certifi
+  version: 2015.04.28
+
+source:
+
+  fn:  certifi-2015.04.28.tar.gz
+  url: https://pypi.python.org/packages/source/c/certifi/certifi-2015.04.28.tar.gz
+  md5: 12c7c3a063b2ff97a0f8291d8de41e8c
+
+requirements:
+  build:
+    - python 2.7.10 # [win]
+
+  run:
+    - python 2.7.10 # [win]
+
+about:
+  home: http://certifi.io/
+  license: Mozilla
+  summary: Python package for providing Mozilla's CA Bundle
+

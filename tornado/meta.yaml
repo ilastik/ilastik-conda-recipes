@@ -1,0 +1,21 @@
+package:
+  name: tornado
+  version: 2.4.1
+
+source:
+  fn:  tornado-2.4.1.tar.gz
+  url: http://pypi.python.org/packages/source/t/tornado/tornado-2.4.1.tar.gz
+  md5: 9b7146cbe7cce015e35856b592707b9b
+
+requirements:
+  build:
+    - python 2.7.10 # [win]
+
+  run:
+    - python 2.7.10 # [win]
+
+about:
+  home: https://pypi.python.org/pypi/tornado
+  license: Apache license
+  summary: Python web framework and asynchronous networking library
+

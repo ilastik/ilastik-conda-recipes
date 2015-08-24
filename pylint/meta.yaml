@@ -1,0 +1,21 @@
+package:
+  name: pylint
+  version: 0.27.0
+
+source:
+  fn:  pylint-0.27.0.tar.gz
+  url: http://pypi.python.org/packages/source/p/pylint/pylint-0.27.0.tar.gz
+  md5: 7819fec3ce3e720f30e508b8a88cf59b
+
+requirements:
+  build:
+    - python 2.7.10 # [win]
+
+  run:
+    - python 2.7.10 # [win]
+
+about:
+  home: https://pypi.python.org/pypi/pylint
+  license: GPL
+  summary: static code checker
+

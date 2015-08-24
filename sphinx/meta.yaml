@@ -1,0 +1,29 @@
+package:
+  name: sphinx
+  version: 1.3.1
+
+source:
+  fn:  Sphinx-1.3.1.tar.gz
+  url: https://pypi.python.org/packages/source/S/Sphinx/Sphinx-1.3.1.tar.gz
+  md5: 8786a194acf9673464c5455b11fd4332
+
+requirements:
+  build:
+    - python 2.7.10 # [win]
+    - docutils
+    - jinja2
+    - pygments
+    - colorama
+
+  run:
+    - python 2.7.10 # [win]
+    - docutils
+    - jinja2
+    - pygments
+    - colorama
+
+about:
+  home: http://sphinx-doc.org/
+  license: BSD
+  summary: Python documentation generator
+

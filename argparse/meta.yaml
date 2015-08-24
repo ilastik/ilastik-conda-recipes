@@ -1,0 +1,21 @@
+package:
+  name: argparse
+  version: 1.2.1
+
+source:
+  fn:  argparse-1.2.1.tar.gz
+  url: http://argparse.googlecode.com/files/argparse-1.2.1.tar.gz
+  md5: 2fbef8cb61e506c706957ab6e135840c
+
+requirements:
+  build:
+    - python 2.7.10 # [win]
+
+  run:
+    - python 2.7.10 # [win]
+
+about:
+  home: https://pypi.python.org/pypi/argparse
+  license: PSF
+  summary: command-line parsing library
+

@@ -1,0 +1,21 @@
+package:
+  name: traitlets
+  version: 4.0.0
+
+source:
+  fn:  traitlets-4.0.0.tar.gz
+  url: https://pypi.python.org/packages/source/t/traitlets/traitlets-4.0.0.tar.gz
+  md5: 27df56a921848686cf52766177a434f2
+
+requirements:
+  build:
+    - python 2.7.10 # [win]
+
+  run:
+    - python 2.7.10 # [win]
+
+about:
+  home: https://pypi.python.org/pypi/traitlets/
+  license: BSD
+  summary: A configuration system for Python applications.
+

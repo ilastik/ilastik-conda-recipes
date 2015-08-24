@@ -1,0 +1,23 @@
+package:
+  name: logilab_astng
+  version: 0.24.3
+
+source:
+  fn:  logilab-astng-0.24.3.tar.gz
+  url: http://pypi.python.org/packages/source/l/logilab-astng/logilab-astng-0.24.3.tar.gz
+  md5: f0dd5dee1d5053939da174e1bfe69388
+
+requirements:
+  build:
+    - python 2.7.10 # [win]
+    - logilab_common
+
+  run:
+    - python 2.7.10 # [win]
+    - logilab_common
+
+about:
+  home: https://pypi.python.org/pypi/logilab-astng
+  license: LGPL
+  summary: abstract syntax trees
+

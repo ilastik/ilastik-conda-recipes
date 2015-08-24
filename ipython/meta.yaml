@@ -1,0 +1,38 @@
+package:
+  name: ipython
+  version: 0.13.1
+  # v 4.0.0 didn't work (missing modules)
+
+source:
+  fn:  ipython-0.13.1.tar.gz
+  url: http://pypi.python.org/packages/source/i/ipython/ipython-0.13.1.tar.gz
+  md5: ca7e75f7c802afc6aaa0a1ea59846420
+
+requirements:
+  build:
+    - python 2.7.10 # [win]
+    - pip
+    - setuptools
+#    - certifi
+#    - traitlets
+#    - ssl_match_hostname
+    - pyreadline
+    - pyzmq
+    - tornado
+
+  run:
+    - python 2.7.10 # [win]
+    - pip
+    - setuptools
+#    - certifi
+#    - traitlets
+#    - ssl_match_hostname
+    - pyreadline
+    - pyzmq
+    - tornado
+
+about:
+  home: http://ipython.org/
+  license: BSD
+  summary: a rich architecture for interactive computing
+

@@ -1,0 +1,21 @@
+package:
+  name: pyreadline
+  version: 1.7.1
+
+source:
+  fn:  pyreadline-1.7.1.zip
+  url: http://pypi.python.org/packages/source/p/pyreadline/pyreadline-1.7.1.zip
+  md5: 293d4e8794f867c122d4290ccc84be8d
+
+requirements:
+  build:
+    - python 2.7.10 # [win]
+
+  run:
+    - python 2.7.10 # [win]
+
+about:
+  home: https://pypi.python.org/pypi/pyreadline
+  license: BSD
+  summary: python implmementation of GNU readline
+

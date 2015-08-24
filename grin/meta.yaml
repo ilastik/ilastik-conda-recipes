@@ -1,0 +1,21 @@
+package:
+  name: grin
+  version: 1.2.1
+
+source:
+  fn:  grin-1.2.1.tar.gz
+  url: https://pypi.python.org/packages/source/g/grin/grin-1.2.1.tar.gz
+  md5: d894426dfbf70bc105388c2a51348199
+
+requirements:
+  build:
+    - python 2.7.10 # [win]
+
+  run:
+    - python 2.7.10 # [win]
+
+about:
+  home: https://pypi.python.org/pypi/grin
+  license: BSD
+  summary: An extended grep program
+

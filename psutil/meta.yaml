@@ -1,0 +1,21 @@
+package:
+  name: psutil
+  version: 2.1.1
+  # FIXME: v 3.1.1 failed to compile on Windows
+
+source:
+  fn:  psutil-2.1.1.tar.gz
+  url: https://pypi.python.org/packages/source/p/psutil/psutil-2.1.1.tar.gz
+  md5: 72a6b15d589fab11f6ca245b775bc3c6
+
+requirements:
+  build:
+    - python 2.7.10 # [win]
+
+  run:
+    - python 2.7.10 # [win]
+
+about:
+  home: https://pypi.python.org/pypi/psutil
+  license: BSD
+  summary: cross-platform library for retrieving information on running processes and system utilization

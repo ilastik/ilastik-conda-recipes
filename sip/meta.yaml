@@ -1,0 +1,21 @@
+package:
+  name: sip
+  version: 4.16.9
+
+source:
+  fn:  sip-4.16.9.tar.gz
+  url: http://sourceforge.net/projects/pyqt/files/sip/sip-4.16.9/sip-4.16.9.tar.gz
+  md5: 7a1dfff4e6fade0e4adee2c4e3d3aa9a
+
+requirements:
+  build:
+    - python 2.7.10 # [win]
+
+  run:
+    - python 2.7.10 # [win]
+
+about:
+  home: http://www.riverbankcomputing.com/software/sip/
+  license: PSF
+  summary: Python extension module generator
+
