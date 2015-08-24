@@ -3,13 +3,17 @@ package:
   version: "2.7.10"
 
 source:
-  fn: Python-2.7.10.tgz
+  fn:  Python-2.7.10.tgz
   url: https://www.python.org/ftp/python/2.7.10/Python-2.7.10.tgz
   md5: d7547558fd673bd9d38e2108c6b42521
 
 requirements:
   build:
-    - visual-studio 11.0  # [win]
+    - visual-studio 11.0   # [win]
+    - bzip2         1.0.6  # [win]
+    - openssl       1.0.2a # [win]
+    - nasm                 # [win]
+    - sqlite        3.8.11 # [win]
 
   run:
     - visual-studio 11.0  # [win]

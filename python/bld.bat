@@ -9,6 +9,12 @@ if %ARCH%==32 (
     set PYTHON_EXE=.\amd64\python.exe
 )
 
+REM %LIBRARY_BIN% contains nasm (needed for openssl)
+set PATH=%PATH%;%LIBRARY_BIN%
+
+REM build expects external sources in the "externals" directory
+xcopy /S "%PREFIX%\externals" externals\
+
 REM build directory is predetermined by Python distro
 cd PCbuild
 
@@ -33,10 +39,17 @@ devenv PCbuild.sln /build "Release|%PYTHON_BITNESS%" /project select
 if errorlevel 1 exit 1
 devenv PCbuild.sln /build "Release|%PYTHON_BITNESS%" /project unicodedata
 if errorlevel 1 exit 1
-REM bz2 source is not included in the Python tar ball, skip it for now
-REM FIXME: provide a recipe for bz2
-REM devenv PCbuild.sln /build "Release|%PYTHON_BITNESS%" /project bz2
-REM if errorlevel 1 exit 1
+
+"%PYTHON_EXE%" "%RECIPE_DIR%/patch_python_externals.py"
+
+devenv PCbuild.sln /build "Release|%PYTHON_BITNESS%" /project bz2
+if errorlevel 1 exit 1
+
+devenv PCbuild.sln /build "Release|%PYTHON_BITNESS%" /project _ssl
+if errorlevel 1 exit 1
+
+devenv PCbuild.sln /build "Release|%PYTHON_BITNESS%" /project _sqlite3
+if errorlevel 1 exit 1
 
 REM patch distutils for Visual Studio 2012
 "%PYTHON_EXE%" "%RECIPE_DIR%/patch_python.py" ../Lib/distutils/msvc9compiler.py ../Lib/distutils/cygwinccompiler.py
