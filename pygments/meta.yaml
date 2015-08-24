@@ -9,10 +9,10 @@ source:
 
 requirements:
   build:
-    - python 2.7.10 [win]
+    - python 2.7.10 # [win]
 
   run:
-    - python 2.7.10 [win]
+    - python 2.7.10 # [win]
 
 about:
   home: http://pygments.org/

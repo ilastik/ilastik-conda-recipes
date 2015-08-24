@@ -9,12 +9,12 @@ source:
 
 requirements:
   build:
-    - python 2.7.10 [win]
+    - python 2.7.10 # [win]
     - setuptools
     - markupsafe
 
   run:
-    - python 2.7.10 [win]
+    - python 2.7.10 # [win]
     - setuptools
     - markupsafe
 
