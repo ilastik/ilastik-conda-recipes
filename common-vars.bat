@@ -15,6 +15,7 @@ if "%VISUAL_STUDIO_PATH%"=="" (
 )
 
 REM find compiler version
+REM FIXME: simply use %VisualStudioVersion% (set by vcvarsall.bat)?
 set VISUAL_STUDIO_VERSION=%VISUAL_STUDIO_PATH:*Visual Studio =%
 set _TMP_SUFFIX=%VISUAL_STUDIO_VERSION:*\=%
 call set VISUAL_STUDIO_VERSION=%%VISUAL_STUDIO_VERSION:\%_TMP_SUFFIX%=%%
@@ -45,3 +46,7 @@ echo VCVARSALL: VISUAL_STUDIO_VCVARSALL="%VISUAL_STUDIO_VCVARSALL%"
 echo VERSION:   VISUAL_STUDIO_VERSION=%VISUAL_STUDIO_VERSION%
 echo BITNESS:   VISUAL_STUDIO_ARCH=%VISUAL_STUDIO_ARCH%
 echo CMAKE:     CMAKE_GENERATOR=%CMAKE_GENERATOR%
+
+REM Call to the utility library. Usage:
+REM    %DOS_TOOLS%  :subroutine  arg1  arg2  ...
+set DOS_TOOLS=call "%~dp0dos-tools.bat"
