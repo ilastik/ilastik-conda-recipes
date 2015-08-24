@@ -10,9 +10,11 @@ source:
 requirements:
   build:
     - python 2.7.10 [win]
+    - setuptools
 
   run:
     - python 2.7.10 [win]
+    - setuptools
 
 about:
   home: https://pip.pypa.io/
