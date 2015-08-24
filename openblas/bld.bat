@@ -2,18 +2,16 @@ call "%RECIPE_DIR%\..\common-vars-mingw.bat"
 
 set PATH=%MAKE_PATH%;%PATH%
 
+rem set install path (must have forward slashes)
+%DOS_TOOLS% :to_linux_path %LIBRARY_PREFIX% INSTALL_PREFIX
+echo Installing into "%INSTALL_PREFIX%"
+
+rem build
 rem disable AVX so that the binaries can run on older processors
 rem set NO_AFFINITY=1 to enable multithreaded execution
 make -j6 NO_AVX=1 FC="%MINGW_PATH%\gfortran.exe" BINARY=%ARCH% NO_AFFINITY=1
 
-rem the install path must have forward slashes
-set INSTALL_PREFIX=%LIBRARY_PREFIX%
-setlocal enabledelayedexpansion
-FOR %%f IN (%INSTALL_PREFIX%) DO (
-  set "f=%%f"
-  set "INSTALL_PREFIX=!f:\=/!"
-)
-echo Installing into "%INSTALL_PREFIX%"
+rem install
 make PREFIX="%INSTALL_PREFIX%" install
 
 rem install required shared libraries in their proper places
