@@ -8,8 +8,8 @@ source:
 
 build:
   script_env:
-   - LD_LIBRARY_PATH
-   - DYLD_LIBRARY_PATH
+   - LD_LIBRARY_PATH      # [not win]
+   - DYLD_LIBRARY_PATH    # [not win]
 
   number: 9
   string: 9_35e5d4a
@@ -19,33 +19,45 @@ requirements:
   build:
     - gcc 4.8.2.99 # [linux]
     - gcc 4.8.2 # [osx]
+    - visual-studio 11.0 # [win]
     - python   2.7*
-    - numpy    >=1.9
-    - jpeg     8d
-    - libtiff  4.0*
-    - libpng   1.6.17
+    - numpy    >=1.9     # [not win]
+    - numpy    1.7.0.99  # [win]
+    - jpeg     8d        # [not win]
+    - jpeg     1.2.1.99  # [win]
+    - libtiff  4.0*      # [not win]
+    - libtiff  4.0.1.99  # [win]
+    - libpng   1.6.17    # [not win]
+    - libpng   1.5.13    # [win]
     - fftw     3.3*
-    - hdf5     1.8.14
+    - hdf5     1.8.14    # [not win]
+    - hdf5     1.8.12    # [win]
     - boost    1.55.0
-    - zlib     1.2*
     - nose
+#    - zlib     1.2*     # only indirectly used by vigra
 
   run:
-    - libgcc   4.8*
+    - libgcc   4.8*      # [not win]
+    - visual-studio 11.0 # [win]
     - python   2.7*
-    - numpy    >=1.9
-    - jpeg     8d
-    - libtiff  4.0*
-    - libpng   1.6.17
+    - numpy    >=1.9     # [not win]
+    - numpy    1.7.0.99  # [win]
+    - jpeg     8d        # [not win]
+    - jpeg     1.2.1.99  # [win]
+    - libtiff  4.0*      # [not win]
+    - libtiff  4.0.1.99  # [win]
+    - libpng   1.6.17    # [not win]
+    - libpng   1.5.13    # [win]
     - fftw     3.3*
-    - hdf5     1.8.14
+    - hdf5     1.8.14    # [not win]
+    - hdf5     1.8.12    # [win]
     - boost    1.55.0
-    - zlib     1.2*
     - nose
+#    - zlib     1.2*
 
-test:
-  imports:
-    - vigra
+#test:
+#  imports:
+#    - vigra   # FIXME: doesn't work on Windows: %LIBRARY_BIN% not in PATH
 
 about:
   home: http://ukoethe.github.io/vigra
