@@ -34,6 +34,7 @@ requirements:
     - hdf5     1.8.12    # [win]
     - boost    1.55.0
     - nose
+    - sphinx
 #    - zlib     1.2*     # only indirectly used by vigra
 
   run:
@@ -53,6 +54,7 @@ requirements:
     - hdf5     1.8.12    # [win]
     - boost    1.55.0
     - nose
+    - sphinx
 #    - zlib     1.2*
 
 #test:
