@@ -1,0 +1,21 @@
+package:
+  name: ssl_match_hostname
+  version: 3.4.0.2
+
+source:
+  fn:  backports.ssl_match_hostname-3.4.0.2.tar.gz
+  url: https://pypi.python.org/packages/source/b/backports.ssl_match_hostname/backports.ssl_match_hostname-3.4.0.2.tar.gz
+  md5: 788214f20214c64631f0859dc79f23c6
+
+requirements:
+  build:
+    - python 2.7.10 # [win]
+
+  run:
+    - python 2.7.10 # [win]
+
+about:
+  home: https://pypi.python.org/pypi/rope
+  license: GPL
+  summary: refactoring library
+

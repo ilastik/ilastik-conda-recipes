@@ -1,0 +1,25 @@
+package:
+  name: nbformat
+  version: 4.0.0
+
+source:
+  fn:  nbformat-4.0.0.tar.gz
+  url: https://pypi.python.org/packages/source/n/nbformat/nbformat-4.0.0.tar.gz
+  md5: ce31bb7f34c6a3554dc4a7625fc3033f
+
+requirements:
+  build:
+    - python 2.7.10 # [win]
+    - functools32
+    - jsonschema
+
+  run:
+    - python 2.7.10 # [win]
+    - functools32
+    - jsonschema
+
+about:
+  home: https://pypi.python.org/pypi/nbformat
+  license: BSD
+  summary: The Jupyter Notebook format
+

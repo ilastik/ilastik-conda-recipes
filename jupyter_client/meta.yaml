@@ -1,0 +1,23 @@
+package:
+  name: jupyter_client
+  version: 4.0.0
+
+source:
+  fn:  jupyter_client-4.0.0.tar.gz
+  url: https://pypi.python.org/packages/source/j/jupyter_client/jupyter_client-4.0.0.tar.gz
+  md5: 11ec05c5356c86ea3fe6b6008732874c
+
+requirements:
+  build:
+    - python 2.7.10 # [win]
+    - jupyter_core
+
+  run:
+    - python 2.7.10 # [win]
+    - jupyter_core
+
+about:
+  home: https://pypi.python.org/pypi/jupyter_client
+  license: BSD
+  summary: upyter protocol implementation and client libraries
+

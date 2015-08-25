@@ -1,0 +1,21 @@
+package:
+  name: decorator
+  version: 4.0.2
+
+source:
+  fn:  decorator-4.0.2.tar.gz
+  url: https://pypi.python.org/packages/source/d/decorator/decorator-4.0.2.tar.gz
+  md5: 033c9563af492c4ce2680ee6ca481fa7
+
+requirements:
+  build:
+    - python 2.7.10 # [win]
+
+  run:
+    - python 2.7.10 # [win]
+
+about:
+  home: https://pypi.python.org/pypi/rope
+  license: GPL
+  summary: refactoring library
+

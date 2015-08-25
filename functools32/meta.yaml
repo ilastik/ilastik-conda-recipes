@@ -1,0 +1,21 @@
+package:
+  name: functools32
+  version: 3.2.3
+
+source:
+  fn:  functools32-3.2.3-2.tar.gz
+  url: https://pypi.python.org/packages/source/f/functools32/functools32-3.2.3-2.tar.gz
+  md5: 09f24ffd9af9f6cd0f63cb9f4e23d4b2
+
+requirements:
+  build:
+    - python 2.7.10 # [win]
+
+  run:
+    - python 2.7.10 # [win]
+
+about:
+  home: https://pypi.python.org/pypi/functools32
+  license: PSF
+  summary: Backport of the functools module from Python 3.2.3 for use on 2.7
+

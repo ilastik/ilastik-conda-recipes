@@ -1,0 +1,29 @@
+package:
+  name: notebook
+  version: 4.0.4
+
+source:
+  fn:  notebook-4.0.4.tar.gz
+  url: https://pypi.python.org/packages/source/n/notebook/notebook-4.0.4.tar.gz
+  md5: 91d6d780832f1bec7545c66e367d34f3
+
+requirements:
+  build:
+    - python 2.7.10 # [win]
+    - jupyter_core
+    - jupyter_client
+    - jinja2
+    - nbformat
+
+  run:
+    - python 2.7.10 # [win]
+    - jupyter_core
+    - jupyter_client
+    - jinja2
+    - nbformat
+
+about:
+  home: https://pypi.python.org/pypi/notebook
+  license: BSD
+  summary: Jupyter HTML notebook is a web-based notebook environment for interactive computing
+
