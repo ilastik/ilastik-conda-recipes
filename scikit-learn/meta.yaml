@@ -1,0 +1,27 @@
+package:
+  name: scikit-learn
+  version: 0.16.1
+
+source:
+  fn:  scikit-learn-0.16.1.tar.gz
+  url: https://pypi.python.org/packages/source/s/scikit-learn/scikit-learn-0.16.1.tar.gz
+  md5: 363ddda501e3b6b61726aa40b8dbdb7e
+
+requirements:
+  build:
+    - python 2.7.10 # [win]
+    - numpy 1.7.0.99       # [win]
+    - scipy
+    - cython
+
+  run:
+    - python 2.7.10 # [win]
+    - numpy 1.7.0.99       # [win]
+    - scipy
+    - cython
+
+about:
+  home: http://scikit-learn.org
+  license: BSD
+  summary: Machine Learning in Python
+

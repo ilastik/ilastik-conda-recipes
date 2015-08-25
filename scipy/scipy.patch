@@ -1,0 +1,19 @@
+diff -rupN scipy/_build_utils/src/wrap_dummy_accelerate.f scipy/_build_utils/src/wrap_dummy_accelerate.f
+--- scipy/_build_utils/src/wrap_dummy_accelerate.f	Sun Dec  8 09:53:08 2013
++++ scipy/_build_utils/src/wrap_dummy_accelerate.f	Fri Jul 18 11:54:10 2014
+@@ -319,9 +319,9 @@ c Fortran code to Accelerate.
+       WSLAMCH = SLAMCH( CMACH )
+       END FUNCTION
+ 
+-      REAL FUNCTION WSLAMC3( A, B )
+-      REAL               A, B
+-      EXTERNAL           SLAMC3
+-      REAL               SLAMC3
+-      WSLAMC3 = SLAMC3( A, B )
+-      END FUNCTION
++C     REAL FUNCTION WSLAMC3( A, B )
++C     REAL               A, B
++C     EXTERNAL           SLAMC3
++C     REAL               SLAMC3
++C     WSLAMC3 = SLAMC3( A, B )
++C     END FUNCTION

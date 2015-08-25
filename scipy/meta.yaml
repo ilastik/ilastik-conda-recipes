@@ -1,0 +1,26 @@
+package:
+  name: scipy
+  version: "0.16.0"
+
+source:
+  fn:  scipy-0.16.0.tar.gz
+  md5: eb95dda0f36cc3096673993a350cde77
+  url: https://pypi.python.org/packages/source/s/scipy/scipy-0.16.0.tar.gz
+  
+requirements:
+  build:
+    - visual-studio 11.0   # [win]
+    - mingw 4.7.2          # [win]
+    - python 2.7.10        # [win]
+    - numpy 1.7.0.99       # [win]
+
+  run:
+    - visual-studio 11.0   # [win]
+    - mingw 4.7.2          # [win]
+    - python 2.7.10        # [win]
+    - numpy 1.7.0.99       # [win]
+
+about:
+  home: www.scipy.org
+  license: BSD
+  summary: Scientific Library for Python
