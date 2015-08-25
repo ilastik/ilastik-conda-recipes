@@ -1,35 +1,52 @@
 package:
   name: ipython
   version: 0.13.1
-  # v 4.0.0 didn't work (missing modules)
+# ipython 4 notebook fails to start the kernel
+#  version: 4.0.0
 
 source:
   fn:  ipython-0.13.1.tar.gz
   url: http://pypi.python.org/packages/source/i/ipython/ipython-0.13.1.tar.gz
   md5: ca7e75f7c802afc6aaa0a1ea59846420
+#  fn:  ipython-4.0.0.tar.gz
+#  url: https://pypi.python.org/packages/source/i/ipython/ipython-4.0.0.tar.gz
+#  md5: c2fecbcf1c0fbdc82625c77a50733dd6
 
 requirements:
   build:
     - python 2.7.10 # [win]
     - pip
     - setuptools
-#    - certifi
-#    - traitlets
-#    - ssl_match_hostname
     - pyreadline
-    - pyzmq
-    - tornado
+    - pygments
+    # FIXME: ipython 0.13.1 notebook works, but issues the warning:
+    #        RuntimeWarning: libzmq 4 detected.
+    #        It is unlikely that IPython's zmq code will work properly.
+    #        Please install libzmq stable, which is 2.1.x or 2.2.x
+    - pyzmq 14.3.1.99  # [win]
+    - tornado 4.2.1.99  # [win]
+    # needed for ipython 4.0:
+    # - certifi
+    # - traitlets
+    # - ssl_match_hostname
+    # - pickleshare
+    # - simplegeneric
+    # - notebook
 
   run:
     - python 2.7.10 # [win]
     - pip
     - setuptools
-#    - certifi
-#    - traitlets
-#    - ssl_match_hostname
     - pyreadline
-    - pyzmq
-    - tornado
+    - pygments
+    - pyzmq 14.3.1.99  # [win]
+    - tornado 4.2.1.99  # [win]
+    # - certifi
+    # - traitlets
+    # - ssl_match_hostname
+    # - pickleshare
+    # - simplegeneric
+    # - notebook
 
 about:
   home: http://ipython.org/
