@@ -1,3 +1,10 @@
 package:
   name: mingw
   version: "4.7.2"
+
+requirements:
+  build:
+    - emulate_c99   # [win]
+
+  run:
+    - emulate_c99   # [win]

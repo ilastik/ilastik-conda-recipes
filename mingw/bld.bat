@@ -16,12 +16,12 @@ if exist "%MINGW_PATH%\libwinpthread-1.dll" copy "%MINGW_PATH%\libwinpthread-1.d
 copy "%MINGW_PATH%\libstdc++-6.dll" "%LIBRARY_BIN%"
 copy "%MINGW_PATH%\libquadmath-0.dll" "%LIBRARY_BIN%"
 
+rem find libgcc.a and copy it to LIBRARY_LIB (needed to get __chkstk_ms() )
+for /f "delims=" %%a in ('dir /s /b "%MINGW_PATH%\..\lib\*libgcc.a" ^| find /v "\32\"') do @set LIBGCCA=%%a
+copy "%LIBGCCA%" "%LIBRARY_LIB%\libgcc.a.lib"
+
 if %ARCH%==64 (
-    rem The following two gendef/lib commands are not necessary for 32-bit builds
-    rem because suitable link libs libgcc.dll.a and libgfortran.dll.a 
-    rem are already in the mingw distribution and just need to be copied.
-    rem This will be done automatically by suitably patched numpy/distutils.
-    
+    rem The following two gendef/lib commands are needed for 64-bit builds
     gendef "%MINGW_PATH%\%LIBGCC%.dll"
     lib /NOLOGO /MACHINE:X64 /DEF:%LIBGCC%.def /OUT:"%LIBRARY_LIB%/%LIBGCC%.lib"
     gendef "%MINGW_PATH%\libgfortran-3.dll"

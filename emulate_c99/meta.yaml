@@ -1,0 +1,8 @@
+package:
+  name: emulate_c99
+  version: 1.0
+
+requirements:
+  build:
+    - visual-studio 11.0 # [win]
+
