@@ -9,7 +9,7 @@ if NOT "%VISUAL_STUDIO_VERSION%"=="%PKG_VERSION%" (
 )
 
 REM install Visual Studio runtime libraries (msvcr, msvcp)
-cmake "%RECIPE_DIR%" -G "%CMAKE_GENERATOR%" -DCMAKE_INSTALL_PREFIX=%LIBRARY_PREFIX%
+cmake "%RECIPE_DIR%" -G "%CMAKE_GENERATOR%" -DCMAKE_INSTALL_PREFIX="%LIBRARY_PREFIX%"
 if errorlevel 1 exit 1
 cmake --build . --target INSTALL --config Release
 move "%LIBRARY_PREFIX%\bin\msvc*.dll" "%PREFIX%"

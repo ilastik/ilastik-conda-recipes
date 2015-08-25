@@ -3,7 +3,7 @@ call "%RECIPE_DIR%\..\common-vars-mingw.bat"
 set PATH=%MAKE_PATH%;%PATH%
 
 rem set install path (must have forward slashes)
-%DOS_TOOLS% :to_linux_path %LIBRARY_PREFIX% INSTALL_PREFIX
+%DOS_TOOLS% :to_linux_path "%LIBRARY_PREFIX%" INSTALL_PREFIX
 echo Installing into "%INSTALL_PREFIX%"
 
 rem build

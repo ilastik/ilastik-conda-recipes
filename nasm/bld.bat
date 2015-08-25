@@ -1,2 +1,2 @@
-copy nasm.exe %LIBRARY_BIN%
+copy nasm.exe "%LIBRARY_BIN%"
 if errorlevel 1 exit 1
