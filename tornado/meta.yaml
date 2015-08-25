@@ -1,19 +1,23 @@
 package:
   name: tornado
-  version: 2.4.1
+  version: 4.2.1.99
 
 source:
-  fn:  tornado-2.4.1.tar.gz
-  url: http://pypi.python.org/packages/source/t/tornado/tornado-2.4.1.tar.gz
-  md5: 9b7146cbe7cce015e35856b592707b9b
+  fn:  tornado-4.2.1.tar.gz
+  url: https://pypi.python.org/packages/source/t/tornado/tornado-4.2.1.tar.gz
+  md5: d523204389cfb70121bb69709f551b20
 
 requirements:
   build:
     - python 2.7.10 # [win]
+    - certifi
+    - ssl_match_hostname
 
   run:
     - python 2.7.10 # [win]
-
+    - certifi
+    - ssl_match_hostname
+    
 about:
   home: https://pypi.python.org/pypi/tornado
   license: Apache license

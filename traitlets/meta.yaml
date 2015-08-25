@@ -10,9 +10,13 @@ source:
 requirements:
   build:
     - python 2.7.10 # [win]
+    - ipython_genutils
+    - decorator
 
   run:
     - python 2.7.10 # [win]
+    - ipython_genutils
+    - decorator
 
 about:
   home: https://pypi.python.org/pypi/traitlets/
