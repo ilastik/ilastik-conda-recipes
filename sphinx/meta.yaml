@@ -14,6 +14,10 @@ requirements:
     - jinja2
     - pygments
     - colorama
+    - babel
+    - alabaster
+    - six
+    - snowballstemmer
 
   run:
     - python 2.7.10 # [win]
@@ -21,6 +25,10 @@ requirements:
     - jinja2
     - pygments
     - colorama
+    - babel
+    - alabaster
+    - six
+    - snowballstemmer
 
 about:
   home: http://sphinx-doc.org/
