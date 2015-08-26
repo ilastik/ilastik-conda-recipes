@@ -2,15 +2,19 @@ package:
   name: pyqt
   version: 4.11.3.99
 
-source: # [unix]
+source:
 
-  fn: PyQt-mac-gpl-4.11.3.tar.gz                                                                 # [osx]
+  fn:  PyQt-mac-gpl-4.11.3.tar.gz                                                                # [osx]
   url: http://sourceforge.net/projects/pyqt/files/PyQt4/PyQt-4.11.3/PyQt-mac-gpl-4.11.3.tar.gz   # [osx]
   sha1: 8c53254b38686e5366d74eba81f02f9611f39166                                                 # [osx]
 
-  fn: PyQt-x11-gpl-4.11.3.tar.gz                                                                 # [linux]
+  fn:  PyQt-x11-gpl-4.11.3.tar.gz                                                                # [linux]
   url: http://sourceforge.net/projects/pyqt/files/PyQt4/PyQt-4.11.3/PyQt-x11-gpl-4.11.3.tar.gz   # [linux]
   sha1: 28259b175c0befed328087702e8b93b819c99895                                                 # [linux]
+
+  fn:  PyQt-win-gpl-4.11.3.zip                                                                   # [win]
+  url: http://sourceforge.net/projects/pyqt/files/PyQt4/PyQt-4.11.3/PyQt-win-gpl-4.11.3.zip      # [win]
+  md5: 53321bb872e665b3e89904df92a2e9ea                                                          # [win]
 
   patches:              # [unix]
     - configure.patch   # [unix]
@@ -20,19 +24,26 @@ build:
   detect_binary_files_with_prefix: true
 
 requirements:
-  build:                 # [unix]
+  build:
     - python             # [unix]
-    - qt      4.8.6.99   # [unix]
-    - sip     >=4.16.4   # [unix]
-
-  run:
-    - python
-    - qt      4.8.6.99   # [unix]
+    - visual-studio 11.0 # [win]
+    - python 2.7.10      # [win]
+    - qt      4.8.6.99
+    # note: sip >=4.16 is incompatible with PyQt 4.10.3
+    # note: sip <4.16  is incompatible with PyQt 4.11.3
     - sip     >=4.16.4
+    
+  run:
+    - visual-studio 11.0 # [win]
+    - python             # [not win]
+    - python 2.7.10      # [win]
+    - qt      4.8.6.99 
+    - sip     >=4.16.4 
 
-test:
-  imports:
-    - PyQt4
+test:         # [not win]
+  # import fails in Windows because conda doesn't add LIBRARY_BIN to the PATH
+  imports:    # [not win]
+    - PyQt4   # [not win]
 
 about:
   home: http://www.riverbankcomputing.co.uk/software/pyqt

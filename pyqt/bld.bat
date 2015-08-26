@@ -1,19 +1,22 @@
-:: assumes executable was installed to C:\staging, and that the documentation,
-:: examples, and start menu shortcuts were not selected for installation
+call "%RECIPE_DIR%\..\common-vars.bat"
 
-xcopy C:\staging\Lib %PREFIX%\Lib /e /i /q
-del %SP_DIR%\sip.pyd
-del %SP_DIR%\PyQt4\sip.exe
-del %SP_DIR%\PyQt4\qt.conf
-del %SP_DIR%\PyQt4\Uninstall.exe
-move %SP_DIR%\PyQt4\sip %PREFIX%\sip
+set QTDIR=%PREFIX%\Qt4
+set PATH=%LIBRARY_BIN%;%PATH%
+set QMAKESPEC=%QTDIR%\mkspecs\win32-msvc%VISUAL_STUDIO_YEAR%
 
-mkdir %PREFIX%\Scripts
+%DOS_TOOLS% :to_linux_path "%PREFIX%\sip-sources" SIP_SOURCES_PATH
 
-@echo off
-echo @echo off > %PREFIX%\Scripts\pyuic.bat
-echo "%%~dp0\..\python.exe" "%%~dp0\..\Lib\site-packages\PyQt4\uic\pyuic.py" %%* >> %PREFIX%\Scripts\pyuic.bat
+REM note: newer PyQt uses configure-ng.py instead of configure.py
+python configure-ng.py --confirm-license --sipdir="%SIP_SOURCES_PATH%"
+if errorlevel 1 exit 1
 
-echo @echo off > %PREFIX%\Scripts\pyrcc4.bat
-echo "%%~dp0\..\Lib\site-packages\PyQt4\pyrcc4" %%* >> %PREFIX%\Scripts\pyrcc4.bat
-@echo on
+REM sip hard-codes the location of moc.exe
+mkdir "%QTDIR%\bin"
+copy "%LIBRARY_BIN%\moc.exe" "%QTDIR%\bin\"
+if errorlevel 1 exit 1
+
+nmake
+if errorlevel 1 exit 1
+
+nmake install
+if errorlevel 1 exit 1
