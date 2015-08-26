@@ -1,0 +1,40 @@
+package:
+  name: pil
+  version: 1.1.7
+
+source:
+  fn:  Imaging-1.1.7.tar.gz
+  url: http://effbot.org/downloads/Imaging-1.1.7.tar.gz
+  md5: fc14a54e1ce02a0225be8854bfba478e
+
+requirements:
+  build:
+    - visual-studio 11.0   # [win]
+    - python 2.7.10        # [win]
+    - numpy 1.7.0.99       # [win]
+    - jpeg     8d          # [not win]
+    - jpeg     1.2.1.99    # [win]
+    # NOTE: PIL's support for TIFF is labeled experimental and commented out
+    - libtiff  4.0*        # [not win]
+    - libtiff  4.0.1.99    # [win]
+    - libpng   1.6.17      # [not win]
+    - libpng   1.5.13      # [win]
+    - freetype
+
+  run:
+    - visual-studio 11.0   # [win]
+    - python 2.7.10        # [win]
+    - numpy 1.7.0.99       # [win]
+    - jpeg     8d          # [not win]
+    - jpeg     1.2.1.99    # [win]
+    - libtiff  4.0*        # [not win]
+    - libtiff  4.0.1.99    # [win]
+    - libpng   1.6.17      # [not win]
+    - libpng   1.5.13      # [win]
+    - freetype
+
+about:
+  home: https://pypi.python.org/pypi/PIL
+  license: old Python license (MIT style)
+  summary: Python Imaging Library
+

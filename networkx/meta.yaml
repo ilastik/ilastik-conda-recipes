@@ -1,0 +1,23 @@
+package:
+  name: networkx
+  version: 1.10
+
+source:
+  fn:  networkx-1.10.tar.gz
+  url: https://pypi.python.org/packages/source/n/networkx/networkx-1.10.tar.gz
+  md5: eb7a065e37250a4cc009919dacfe7a9d
+
+requirements:
+  build:
+    - python 2.7.10 # [win]
+    - decorator
+
+  run:
+    - python 2.7.10 # [win]
+    - decorator
+
+about:
+  home: https://pypi.python.org/pypi/networkx
+  license: BSD
+  summary: creating and manipulating graphs and networks
+

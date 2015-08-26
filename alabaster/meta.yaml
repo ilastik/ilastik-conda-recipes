@@ -1,0 +1,21 @@
+package:
+  name: alabaster
+  version: 0.7.6
+
+source:
+  fn:  alabaster-0.7.6.tar.gz
+  url: https://pypi.python.org/packages/source/a/alabaster/alabaster-0.7.6.tar.gz
+  md5: 169cdce2a96b75bff8cb8a59d938673f
+
+requirements:
+  build:
+    - python 2.7.10 # [win]
+
+  run:
+    - python 2.7.10 # [win]
+
+about:
+  home: https://pypi.python.org/pypi/alabaster
+  license: BSD
+  summary: A configurable sidebar-enabled Sphinx theme
+

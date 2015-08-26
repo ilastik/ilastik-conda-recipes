@@ -1,0 +1,21 @@
+package:
+  name: six
+  version: 1.9.0
+
+source:
+  fn:  six-1.9.0.tar.gz
+  url: https://pypi.python.org/packages/source/s/six/six-1.9.0.tar.gz
+  md5: 476881ef4012262dfc8adc645ee786c4
+
+requirements:
+  build:
+    - python 2.7.10 # [win]
+
+  run:
+    - python 2.7.10 # [win]
+
+about:
+  home: https://pypi.python.org/pypi/six
+  license: MIT
+  summary: Python 2 and 3 compatibility utilities
+

@@ -1,0 +1,21 @@
+package:
+  name: snowballstemmer
+  version: 1.2.0
+
+source:
+  fn:  snowballstemmer-1.2.0.tar.gz
+  url: https://pypi.python.org/packages/source/s/snowballstemmer/snowballstemmer-1.2.0.tar.gz
+  md5: 51f2ef829db8129dd0f2354f0b209970
+
+requirements:
+  build:
+    - python 2.7.10 # [win]
+
+  run:
+    - python 2.7.10 # [win]
+
+about:
+  home: https://pypi.python.org/pypi/snowballstemmer
+  license: BSD
+  summary: reduce inflected words to their word stem
+

@@ -1,0 +1,22 @@
+package:
+  name: babel
+  version: 2.0
+
+source:
+  fn:  Babel-2.0.tar.gz
+  url: https://pypi.python.org/packages/source/B/Babel/Babel-2.0.tar.gz
+  md5: 62917719897a81e22dcaa3b17eeb11d8
+
+requirements:
+  build:
+    - python 2.7.10 # [win]
+    - pytz
+
+  run:
+    - python 2.7.10 # [win]
+    - pytz
+
+about:
+  home: https://pypi.python.org/pypi/Babel
+  license: BSD
+  summary: Internationalization utilities

@@ -1,0 +1,21 @@
+package:
+  name: pytz
+  version: 0.2.4
+
+source:
+  fn:  pytzpure-0.2.4.tar.gz
+  url: https://pypi.python.org/packages/source/p/pytzpure/pytzpure-0.2.4.tar.gz
+  md5: 837880c2c21cd3a0df52af358921d098
+
+requirements:
+  build:
+    - python 2.7.10 # [win]
+
+  run:
+    - python 2.7.10 # [win]
+
+about:
+  home: https://pypi.python.org/pypi/pytzpure
+  license: GPL2
+  summary: timezone support
+

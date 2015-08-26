@@ -1,0 +1,39 @@
+package:
+  name: pillow
+  version: 2.9.0
+
+source:
+  fn:  Pillow-2.9.0.tar.gz
+  url: https://pypi.python.org/packages/source/P/Pillow/Pillow-2.9.0.tar.gz
+  md5: 46f1729ece27981d54ec543ad5b37d14
+
+requirements:
+  build:
+    - visual-studio 11.0   # [win]
+    - python 2.7.10        # [win]
+    - numpy 1.7.0.99       # [win]
+    - jpeg     8d          # [not win]
+    - jpeg     1.2.1.99    # [win]
+    - libtiff  4.0*        # [not win]
+    - libtiff  4.0.1.99    # [win]
+    - libpng   1.6.17      # [not win]
+    - libpng   1.5.13      # [win]
+    - freetype
+
+  run:
+    - visual-studio 11.0   # [win]
+    - python 2.7.10        # [win]
+    - numpy 1.7.0.99       # [win]
+    - jpeg     8d          # [not win]
+    - jpeg     1.2.1.99    # [win]
+    - libtiff  4.0*        # [not win]
+    - libtiff  4.0.1.99    # [win]
+    - libpng   1.6.17      # [not win]
+    - libpng   1.5.13      # [win]
+    - freetype
+
+about:
+  home: https://pypi.python.org/pypi/Pillow
+  license: Standard PIL License (similar to BSD)
+  summary: Python Imaging Library (Fork)
+

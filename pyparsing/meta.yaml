@@ -1,0 +1,21 @@
+package:
+  name: pyparsing
+  version: 2.0.3
+
+source:
+  fn:  pyparsing-2.0.3.tar.gz
+  url: https://pypi.python.org/packages/source/p/pyparsing/pyparsing-2.0.3.tar.gz
+  md5: 0fe479be09fc2cf005f753d3acc35939
+
+requirements:
+  build:
+    - python 2.7.10 # [win]
+
+  run:
+    - python 2.7.10 # [win]
+
+about:
+  home: https://pypi.python.org/pypi/pyparsing
+  license: MIT
+  summary: Python parsing module
+
