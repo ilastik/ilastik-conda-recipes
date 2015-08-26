@@ -1,0 +1,30 @@
+package:
+  name: h5py
+  version: 2.5.0
+
+source:
+  fn:  h5py-2.5.0.tar.gz
+  url: https://pypi.python.org/packages/source/h/h5py/h5py-2.5.0.tar.gz
+  md5: 6e4301b5ad5da0d51b0a1e5ac19e3b74
+
+requirements:
+  build:
+    - python 2.7.10   # [win]
+    - hdf5
+    - numpy  1.7.0.99 # [win]
+    - cython >=0.23
+    - six
+    - nose
+
+  run:
+    - python 2.7.10 # [win]
+    - hdf5
+    - numpy  1.7.0.99 # [win]
+    - cython >=0.23
+    - six
+
+about:
+  home: http://www.h5py.org
+  license: BSD
+  summary: Read and write HDF5 files from Python
+
