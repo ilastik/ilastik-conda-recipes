@@ -39,17 +39,23 @@ rem
 rem Options "--prefix" and "-optimized-qmake" are not available on Windows!
 rem -no-webkit should be removed when Spyder is to be built
 rem
-echo yes | configure -opensource -platform win32-msvc2012 -I "%LIBRARY_INC%" -L "%LIBRARY_LIB%" -mp -nomake examples -nomake demos -nomake docs -nomake translations -no-multimedia -no-webkit -no-audio-backend -no-phonon -no-phonon-backend -no-sql-sqlite -no-sql-sqlite2 -no-sql-psql -no-sql-db2 -no-sql-ibase -no-sql-mysql -no-sql-oci -no-sql-odbc -no-sql-tds -no-dbus -no-cups -no-nis -no-qt3support -release -shared -no-accessibility -system-zlib -system-libpng -system-libjpeg -system-libtiff
+echo yes | configure -opensource -platform win32-msvc%VISUAL_STUDIO_YEAR% -I "%LIBRARY_INC%" -L "%LIBRARY_LIB%" -mp -nomake examples -nomake demos -nomake docs -nomake translations -no-multimedia -no-webkit -no-audio-backend -no-phonon -no-phonon-backend -no-sql-sqlite -no-sql-sqlite2 -no-sql-psql -no-sql-db2 -no-sql-ibase -no-sql-mysql -no-sql-oci -no-sql-odbc -no-sql-tds -no-dbus -no-cups -no-nis -no-qt3support -release -shared -no-accessibility -system-zlib -system-libpng -system-libjpeg -system-libtiff
 if errorlevel 1 exit 1
 
 rem build
 nmake
 if errorlevel 1 exit 1
 
-rem install
+rem install (src and tools directory are needed by PyQt)
 nmake clean
-FOR %%i IN (imports include lib mkspecs phrasebooks plugins) DO xcopy /S %%i "%QT_PREFIX%\%%i\"
+FOR %%i IN (imports include lib mkspecs phrasebooks plugins src qmake tools) DO xcopy /S %%i "%QT_PREFIX%\%%i\"
 if errorlevel 1 exit 1
 
 xcopy /S bin "%LIBRARY_BIN%\"
+if errorlevel 1 exit 1
+
+REM qt.conf contains the relative path between qmake and <qtroot>
+REM to make the Qt installation relocatable
+echo [Paths] > "%LIBRARY_BIN%\qt.conf"
+echo Prefix = ..\\..\\Qt4 >> "%LIBRARY_BIN%\\qt.conf"
 if errorlevel 1 exit 1
