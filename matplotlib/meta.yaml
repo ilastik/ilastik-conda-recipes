@@ -1,0 +1,38 @@
+package:
+  name: matplotlib
+  version: 1.4.3.99
+
+source:
+  fn:  matplotlib-1.4.3.tar.gz
+  url: https://pypi.python.org/packages/source/m/matplotlib/matplotlib-1.4.3.tar.gz
+  md5: 86af2e3e3c61849ac7576a6f5ca44267
+
+requirements:
+  build:
+    - python   2.7*
+    - numpy    1.7.0.99  # [win]
+    - libpng   1.5.13    # [win]
+    - freetype
+    - pyqt     4.11.3.99 # [win]
+    - mock
+    - nose
+    - pyparsing
+    - pytz
+    - python-dateutil
+    - six
+    - funcsigs
+    - pbr
+    
+
+  run:
+    - python 2.7.10 # [win]
+    - numpy    1.7.0.99  # [win]
+    - libpng   1.5.13    # [win]
+    - freetype
+    - pyqt     4.11.3.99 # [win]
+
+about:
+  home: https://pypi.python.org/pypi/matplotlib
+  license: BSD
+  summary: Python plotting package
+
