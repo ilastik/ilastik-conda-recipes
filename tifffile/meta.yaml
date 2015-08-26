@@ -11,16 +11,20 @@ build:
 
 requirements:
   build:
-    - python 2.7*|>=3.4
-    - numpy >=1.8.2
+    - python 2.7*|>=3.4   # [not win]
+    - numpy >=1.8.2       # [not win]
+    - python 2.7.10       # [win]
+    - numpy  1.7.0.99     # [win]
 
   run:
-    - python 2.7*|>=3.4
-    - numpy >=1.8.2
+    - python 2.7*|>=3.4   # [not win]
+    - numpy >=1.8.2       # [not win]
+    - python 2.7.10       # [win]
+    - numpy  1.7.0.99     # [win]
 
-test:
-  imports:
-    - tifffile
+#test:
+#  imports:
+#    - tifffile
 
 about:
   home: https://github.com/blink1073/tifffile
