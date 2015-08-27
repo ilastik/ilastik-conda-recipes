@@ -1,0 +1,23 @@
+package:
+  name: libxml2
+  version: 2.9.1
+
+source:
+  fn:  libxml2-2.9.1.tar.gz
+  url: ftp://xmlsoft.org/libxml2/libxml2-2.9.1.tar.gz
+  md5: 9c0cfef285d5c4a5c80d00904ddab380
+
+requirements:
+  build:
+    - visual-studio 11.0 # [win]
+    - iconv
+
+  run:
+    - visual-studio 11.0 # [win]
+    - iconv
+
+about:
+  home: http://www.xmlsoft.org/
+  license: MIT
+  summary: XML C parser and toolkit
+

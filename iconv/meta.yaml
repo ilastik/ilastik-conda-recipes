@@ -1,0 +1,21 @@
+package:
+  name: iconv
+  version: 1.14
+
+source:
+  fn:  libiconv-1.14.tar.gz
+  url: http://ftp.gnu.org/pub/gnu/libiconv/libiconv-1.14.tar.gz
+  md5: e34509b1623cec449dfeb73d7ce9c6c6
+
+requirements:
+  build:
+    - mingw   # [win]
+
+  run:
+    - mingw   # [win]
+
+about:
+  home: http://www.gnu.org/software/libiconv/
+  license: GPL v3
+  summary: character encoding conversion library
+
