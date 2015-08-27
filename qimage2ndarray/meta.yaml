@@ -13,27 +13,35 @@ build:
 
 requirements:
   build:
-    - gcc 4.8.2.99 # [linux]
-    - gcc 4.8.2 # [osx]
-    - python
+    - gcc 4.8.2.99       # [linux]
+    - gcc 4.8.2          # [osx]
+    - visual-studio 11.0 # [win]
+    - python             # [not win]
+    - python 2.7.10      # [win]
     - setuptools
-    - numpy
+    - numpy              # [not win]
+    - numpy    1.7.0.99  # [win]
     - sip
-    - pyqt 4.11.3.99            # [osx]
-    - pyqt 4.11.3               # [not osx]
+    - pyqt 4.11.3.99     # [osx or win]
+    - pyqt 4.11.3        # [linux]
 
   run:
-    - libgcc
-    - python
-    - numpy
+    - libgcc             # [not win]
+    - visual-studio 11.0 # [win]
+    - python             # [not win]
+    - python 2.7.10      # [win]
+    - numpy              # [not win]
+    - numpy    1.7.0.99  # [win]
     - sip
-    - pyqt 4.11.3.99            # [osx]
-    - pyqt 4.11.3               # [not osx]
+    - pyqt 4.11.3.99     # [osx or win]
+    - pyqt 4.11.3        # [linux]
 
-test:
-  # Python imports
-  imports:
-    - qimage2ndarray
+
+# test:
+  # # Python imports
+  # FIXME: this doesn't work on Windows because LIBRARY_BIN is not in the PATH
+  # imports:
+    # - qimage2ndarray
 
 about:
   home: https://github.com/hmeine/qimage2ndarray
