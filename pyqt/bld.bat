@@ -1,5 +1,8 @@
 call "%RECIPE_DIR%\..\common-vars.bat"
 
+REM FIXME: pyqt needs mt.exe (manifest tool) -- add an explicit dependency
+REM (on my machine, it resides in "c:\Program Files (x86)\Windows Kits\8.0\bin\x64")
+
 set QTDIR=%PREFIX%\Qt4
 set PATH=%LIBRARY_BIN%;%PATH%
 set QMAKESPEC=%QTDIR%\mkspecs\win32-msvc%VISUAL_STUDIO_YEAR%

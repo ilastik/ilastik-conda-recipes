@@ -25,8 +25,8 @@ build:
 
 requirements:
   build:
-    - python             # [unix]
     - visual-studio 11.0 # [win]
+    - python             # [not win]
     - python 2.7.10      # [win]
     - qt      4.8.6.99
     # note: sip >=4.16 is incompatible with PyQt 4.10.3
