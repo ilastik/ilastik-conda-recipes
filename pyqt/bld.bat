@@ -14,7 +14,7 @@ python configure-ng.py --confirm-license --sipdir="%SIP_SOURCES_PATH%"
 if errorlevel 1 exit 1
 
 REM sip hard-codes the location of moc.exe
-mkdir "%QTDIR%\bin"
+if not exist "%QTDIR%\bin" mkdir "%QTDIR%\bin"
 copy "%LIBRARY_BIN%\moc.exe" "%QTDIR%\bin\"
 if errorlevel 1 exit 1
 
