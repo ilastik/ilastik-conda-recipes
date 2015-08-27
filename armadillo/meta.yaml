@@ -1,14 +1,19 @@
 package:
   name: armadillo
-  version: "4.000.2"
+  version: "4.000.2" # [not win]
+  version: "4.320.0" # [win]
 
 source:
-  fn: armadillo-4.000.2.tar.gz
-  url: http://downloads.sourceforge.net/project/arma/armadillo-4.000.2.tar.gz
-  md5: b2891c7b59b96337c154c5d961fd40fb
+  fn:  armadillo-4.000.2.tar.gz                                                # [not win]
+  url: http://downloads.sourceforge.net/project/arma/armadillo-4.000.2.tar.gz  # [not win]
+  md5: b2891c7b59b96337c154c5d961fd40fb                                        # [not win]
 
-  patches:
-    - patches/use_atlas_lapack.diff
+  fn:  armadillo-4.320.0.tar.gz                                                # [win]
+  url: http://sourceforge.net/projects/arma/files/armadillo-4.320.0.tar.gz     # [win]
+  md5: d174ebcb5bffde6c8da8f47f06147386                                        # [win]
+
+  patches:  # [not win]
+    - patches/use_atlas_lapack.diff  # [not win]
 
 build:
   number: 3
@@ -16,11 +21,17 @@ build:
 
 requirements:
   build:
-    - gcc 4.8.2.99 # [linux]
-    - gcc 4.8.2 # [osx]
+    - gcc 4.8.2.99       # [linux]
+    - gcc 4.8.2          # [osx]
+    - visual-studio 11.0 # [win]
+    - openblas           # [win]
+    - hdf5               # [win]
+    
   run:
-    - libgcc
-
+    - libgcc             # [not win]
+    - visual-studio 11.0 # [win]
+    - openblas           # [win]
+    - hdf5               # [win]
 
 about:
   home: http://arma.sourceforge.net

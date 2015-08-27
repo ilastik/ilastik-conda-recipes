@@ -1,0 +1,36 @@
+diff -rupN CMakeLists.txt CMakeLists.txt
+--- CMakeLists.txt	Tue Jan  7 04:16:30 2014
++++ CMakeLists.txt	Tue Feb 25 16:29:22 2014
+@@ -206,7 +206,10 @@ endif (WIN32)
+ # For Boost testing framework (will have no effect on non-testing executables).
+ # This specifies to Boost that we are dynamically linking to the Boost test
+ # library.
+-add_definitions(-DBOOST_TEST_DYN_LINK)
++add_definitions(-DBOOST_ALL_DYN_LINK)
++if("${Boost_PROGRAM_OPTIONS_LIBRARY}" MATCHES "boost_program_options\\.lib")
++    ADD_DEFINITIONS(-DBOOST_AUTO_LINK_NOMANGLE)
++endif()
+ 
+ # Create a 'distclean' target in case the user is using an in-source build for
+ # some reason.
+diff -rupN src/mlpack/tests/tree_test.cpp src/mlpack/tests/tree_test.cpp
+--- src/mlpack/tests/tree_test.cpp	Tue Jan  7 04:34:08 2014
++++ src/mlpack/tests/tree_test.cpp	Tue Feb 25 10:31:25 2014
+@@ -2301,7 +2301,7 @@ bool CheckAccessibility(TreeType* childN
+ 
+     if (!found)
+     {
+-      Log::Debug << "Did not find descendant " << childNode->Point(i) << ".\n";
++      Log::Debug << "Did not find descendant " << (long)childNode->Point(i) << ".\n";
+       return false;
+     }
+   }
+@@ -2326,7 +2326,7 @@ void CheckDescendants(TreeType* node)
+   // Now check that each descendant is somewhere in the tree.
+   for (size_t i = 0; i < node->NumDescendants(); ++i)
+   {
+-    Log::Debug << "Check for descendant " << node->Descendant(i) << " (i " <<
++    Log::Debug << "Check for descendant " << (long)node->Descendant(i) << " (i " <<
+         i << ").\n";
+     BOOST_REQUIRE_EQUAL(FindIndex(node, node->Descendant(i)), true);
+   }

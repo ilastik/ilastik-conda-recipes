@@ -15,11 +15,13 @@ requirements:
  build:
      - gcc 4.8.2.99 # [linux]
      - gcc 4.8.2 # [osx]
+     - visual-studio 11.0 # [win]
      - boost 1.55.0
      - armadillo
      - libxml2
  run:
-     - libgcc
+     - libgcc         # [not win]
+     - visual-studio 11.0 # [win]
      - boost 1.55.0
      - armadillo
      - libxml2
