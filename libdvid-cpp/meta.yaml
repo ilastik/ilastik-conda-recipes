@@ -11,7 +11,7 @@ build:
    - LD_LIBRARY_PATH
    - DYLD_LIBRARY_PATH
 
-  number: 5
+  number: 6
   detect_binary_files_with_prefix: true # (defaults to false)
   
 requirements:
