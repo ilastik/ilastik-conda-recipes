@@ -23,22 +23,22 @@ requirements:
   build:
     - visual-studio 11.0 # [win]
     - freetype
-    - jpeg     8d          # [not win]
+    - jpeg     8d          # [unix]
     - jpeg     1.2.1.99    # [win]
-    - libtiff  4.0*        # [not win]
+    - libtiff  4.0*        # [unix]
     - libtiff  4.0.1.99    # [win]
-    - libpng   1.6.17      # [not win]
+    - libpng   1.6.17      # [unix]
     - libpng   1.5.13      # [win]
     - zlib
 
   run:
     - visual-studio 11.0 # [win]
     - freetype
-    - jpeg     8d          # [not win]
+    - jpeg     8d          # [unix]
     - jpeg     1.2.1.99    # [win]
-    - libtiff  4.0*        # [not win]
+    - libtiff  4.0*        # [unix]
     - libtiff  4.0.1.99    # [win]
-    - libpng   1.6.17      # [not win]
+    - libpng   1.6.17      # [unix]
     - libpng   1.5.13      # [win]
     - zlib
 

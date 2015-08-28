@@ -7,9 +7,9 @@ source:
   url: http://lemon.cs.elte.hu/pub/sources/lemon-1.2.4.tar.gz
   md5: fd89e8bf5035b02e2622a48ac7fe0641
 
-  patches:                # [not win]
-    - lemon.patch         # [not win]
-    - lemon-test.patch    # [not win]
+  patches:                # [unix]
+    - lemon.patch         # [unix]
+    - lemon-test.patch    # [unix]
 
 build:
   number: 1
@@ -23,7 +23,7 @@ requirements:
     - python  2.7.10     # [win]
 
   run:
-    - libgcc             # [not win]
+    - libgcc             # [unix]
     - visual-studio 11.0 # [win]
     - python  2.7.10     # [win]
 

@@ -19,25 +19,25 @@ requirements:
       - visual-studio 11.0 # [win]
       - boost 1.55.0
       - python  2.7.10     # [win]
-      - python             # [not win]
-      - numpy              # [not win]
+      - python             # [unix]
+      - numpy              # [unix]
       - numpy    1.7.0.99  # [win]
-      - hdf5     1.8.14    # [not win]
+      - hdf5     1.8.14    # [unix]
       - hdf5     1.8.12    # [win]
     run:
-      - libgcc             # [not win]
+      - libgcc             # [unix]
       - visual-studio 11.0 # [win]
       - boost 1.55.0
       - python  2.7.10     # [win]
-      - python             # [not win]
-      - numpy              # [not win]
+      - python             # [unix]
+      - numpy              # [unix]
       - numpy    1.7.0.99  # [win]
-      - hdf5     1.8.14    # [not win]
+      - hdf5     1.8.14    # [unix]
       - hdf5     1.8.12    # [win]
 
-test:          # [not win]
-  imports:     # [not win]
-    - opengm   # [not win]
+test:          # [unix]
+  imports:     # [unix]
+    - opengm   # [unix]
 # Note: tests are run when building the package, they are not accessible
 # in the installed package.
 

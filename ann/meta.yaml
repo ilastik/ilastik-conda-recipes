@@ -7,8 +7,8 @@ source:
     url: http://www.cs.umd.edu/~mount/ANN/Files/1.1.2/ann_1.1.2.tar.gz
     md5: 7ffaacc7ea79ca39d4958a6378071365
 
-    patches:                   # [not win]
-        - patches/cmake.patch  # [not win]
+    patches:                   # [unix]
+        - patches/cmake.patch  # [unix]
 
 build:
   number: 1
@@ -21,7 +21,7 @@ requirements:
     - visual-studio 11.0 # [win]
     
   run:
-    - libgcc  # [not win]
+    - libgcc  # [unix]
     - visual-studio 11.0 # [win]
 
 # Note: tests are run when building the package, they are not accessible

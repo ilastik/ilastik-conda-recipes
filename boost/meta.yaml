@@ -17,14 +17,16 @@ build:
 
 requirements:
   build:
-    - gcc 4.8.2.99  # [linux]
-    - gcc 4.8.2     # [osx]
-    - python        # [not win]
-    - python 2.7.10 # [win]
-    - zlib          # [not win]
+    - gcc 4.8.2.99       # [linux]
+    - gcc 4.8.2          # [osx]
+    - visual-studio 11.0 # [win]
+    - python             # [unix]
+    - python 2.7.10      # [win]
+    - zlib               # [unix]
 
   run:
-    - libgcc # [not win]
+    - libgcc             # [unix]
+    - visual-studio 11.0 # [win]
 
 about:
   home: http://www.boost.org/

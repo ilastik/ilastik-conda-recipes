@@ -20,7 +20,7 @@ requirements:
      - armadillo
      - libxml2
  run:
-     - libgcc         # [not win]
+     - libgcc         # [unix]
      - visual-studio 11.0 # [win]
      - boost 1.55.0
      - armadillo

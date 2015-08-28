@@ -26,7 +26,7 @@ build:
 requirements:
   build:
     - visual-studio 11.0 # [win]
-    - python             # [not win]
+    - python             # [unix]
     - python 2.7.10      # [win]
     - qt      4.8.6.99
     # note: sip >=4.16 is incompatible with PyQt 4.10.3
@@ -35,15 +35,15 @@ requirements:
     
   run:
     - visual-studio 11.0 # [win]
-    - python             # [not win]
+    - python             # [unix]
     - python 2.7.10      # [win]
     - qt      4.8.6.99 
     - sip     >=4.16.4 
 
-test:         # [not win]
+test:         # [unix]
   # import fails in Windows because conda doesn't add LIBRARY_BIN to the PATH
-  imports:    # [not win]
-    - PyQt4   # [not win]
+  imports:    # [unix]
+    - PyQt4   # [unix]
 
 about:
   home: http://www.riverbankcomputing.co.uk/software/pyqt

@@ -11,14 +11,14 @@ build:
 
 requirements:
   build:
-    - python 2.7*|>=3.4   # [not win]
-    - numpy >=1.8.2       # [not win]
+    - python 2.7*|>=3.4   # [unix]
+    - numpy >=1.8.2       # [unix]
     - python 2.7.10       # [win]
     - numpy  1.7.0.99     # [win]
 
   run:
-    - python 2.7*|>=3.4   # [not win]
-    - numpy >=1.8.2       # [not win]
+    - python 2.7*|>=3.4   # [unix]
+    - numpy >=1.8.2       # [unix]
     - python 2.7.10       # [win]
     - numpy  1.7.0.99     # [win]
 
