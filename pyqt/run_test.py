@@ -1,3 +1,6 @@
+import os
+os.environ['PATH'] = os.pathsep.join([os.environ['LIBRARY_BIN'], os.environ['PATH']])
+
 # From http://zetcode.com/gui/pyqt4/firstprograms/
 import sys
 from PyQt4 import QtGui

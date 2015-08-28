@@ -1,3 +1,6 @@
+import os
+os.environ['PATH'] = os.pathsep.join([os.environ['LIBRARY_BIN'], os.environ['PATH']])
+
 import vtk.vtkChartsPython
 import vtk.vtkCommonPython
 import vtk.vtkFilteringPython
