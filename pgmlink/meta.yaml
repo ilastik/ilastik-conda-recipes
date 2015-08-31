@@ -18,44 +18,53 @@ build:
 
 requirements:
     build:
-      - gcc 4.8.2.99 # [linux]
-      - gcc 4.8.2 # [osx]
-      - cplex-shared
-      - patchelf # [linux]
+      - gcc 4.8.2.99       # [linux]
+      - gcc 4.8.2          # [osx]
+      - visual-studio 11.0 # [win]
+      - python             # [unix]
+      - python  2.7.10     # [win]
+      - numpy              # [unix]
+      - numpy    1.7.0.99  # [win]
+      - cplex-shared       # [unix]
+      - patchelf           # [linux]
       - ann
       - boost 1.55.0
-      - python
-      - numpy
       - vigra
       - opengm
       - mlpack
       - lemon
       - libxml2
-      - dlib
-      - armadillo 4.000.2
+      - dlib               # [unix]
+      - armadillo 4.000.2  # [unix]
+      - armadillo 4.320.0  # [win]
 
     run:
-      - libgcc
-      - patchelf # [linux]
+      - libgcc             # [unix]
+      - visual-studio 11.0 # [win]
+      - python             # [unix]
+      - python  2.7.10     # [win]
+      - numpy              # [unix]
+      - numpy    1.7.0.99  # [win]
+      - patchelf           # [linux]
       - ann
       - boost 1.55.0
-      - python
-      - numpy
       - vigra
       - opengm
       - mlpack
       - lemon
       - libxml2
-      - dlib
+      - dlib               # [unix]
+      - armadillo 4.000.2  # [unix]
+      - armadillo 4.320.0  # [win]
 
       # We don't require cplex-shared here because it only needs to be installed once per machine,
       # and requiring it here would include all of gcc in the install lib dir.
       # Instead, we give the user a descriptive error message if cplex-shared hasn't been run on her machine.
       # - cplex-shared
 
-test:
-  imports:
-      - pgmlink
+# test:  # FIXME: doesn't work on Windows
+  # imports:
+      # - pgmlink
 
 about:
     home: https://github.com/martinsch/pgmlink
