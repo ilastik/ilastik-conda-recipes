@@ -25,13 +25,13 @@ requirements:
     - gcc 4.8.2          # [osx]
     - visual-studio 11.0 # [win]
     - openblas           # [win]
-    - hdf5               # [win]
+    - hdf5     1.8.12.99 # [win]
     
   run:
     - libgcc             # [unix]
     - visual-studio 11.0 # [win]
     - openblas           # [win]
-    - hdf5               # [win]
+    - hdf5     1.8.12.99 # [win]
 
 about:
   home: http://arma.sourceforge.net

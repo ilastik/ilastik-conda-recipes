@@ -19,12 +19,15 @@ requirements:
      - boost 1.55.0
      - armadillo
      - libxml2
+     - hdf5     1.8.12.99 # [win]
+     
  run:
-     - libgcc         # [unix]
+     - libgcc             # [unix]
      - visual-studio 11.0 # [win]
      - boost 1.55.0
      - armadillo
      - libxml2
+     - hdf5     1.8.12.99 # [win]
 
 about:
   home: http://www.mlpack.org/
