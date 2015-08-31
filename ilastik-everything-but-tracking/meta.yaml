@@ -21,11 +21,11 @@ requirements:
     - ilastik-deps-carving >=1.1.6a7
     - ilastik-meta
 
-test:
-  requires:
-    - nose
+# test:
+  # requires:
+    # - nose
     
-  imports:
-    - lazyflow
-    - volumina
-    - ilastik
+  # imports:
+    # - lazyflow
+    # - volumina
+    # - ilastik

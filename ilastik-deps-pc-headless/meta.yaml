@@ -10,8 +10,10 @@ build:
 
 requirements:
   build:
-    - python
-    - numpy
+    - python             # [unix]
+    - python  2.7.10     # [win]
+    - numpy    >=1.9     # [unix]
+    - numpy    1.7.0.99  # [win]
     - vigra
     - h5py
     - tifffile
@@ -25,8 +27,10 @@ requirements:
     - nose
 
   run:
-    - python
-    - numpy
+    - python             # [unix]
+    - python  2.7.10     # [win]
+    - numpy    >=1.9     # [unix]
+    - numpy    1.7.0.99  # [win]
     - vigra
     - tifffile
     - h5py

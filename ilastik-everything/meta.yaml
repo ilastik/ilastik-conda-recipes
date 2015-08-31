@@ -17,11 +17,11 @@ requirements:
     - ilastik-deps-tracking
     - ilastik-versions
 
-test:
-  requires:
-    - nose
+# test:
+  # requires:
+    # - nose
     
-  imports:
-    - lazyflow
-    - volumina
-    - ilastik
+  # imports:
+    # - lazyflow
+    # - volumina
+    # - ilastik
