@@ -31,7 +31,7 @@ requirements:
     - libpng   1.5.13    # [win]
     - fftw     3.3*
     - hdf5     1.8.14    # [unix]
-    - hdf5     1.8.12    # [win]
+    - hdf5     1.8.12.99 # [win]
     - boost    1.55.0
     - nose
     - sphinx
@@ -51,7 +51,7 @@ requirements:
     - libpng   1.5.13    # [win]
     - fftw     3.3*
     - hdf5     1.8.14    # [unix]
-    - hdf5     1.8.12    # [win]
+    - hdf5     1.8.12.99 # [win]
     - boost    1.55.0
     - nose
 #    - zlib     1.2*

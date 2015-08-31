@@ -31,7 +31,7 @@ requirements:
     - libpng   1.5.13    # [win]
     - zlib
     - libxml2
-    - hdf5     1.8.12    # [win]
+    - hdf5     1.8.12.99 # [win]
     - freetype           # [win]
 
   run:
@@ -49,7 +49,7 @@ requirements:
     - libpng   1.5.13    # [win]
     - zlib
     - libxml2
-    - hdf5     1.8.12    # [win]
+    - hdf5     1.8.12.99 # [win]
     - freetype           # [win]
 
 # test:

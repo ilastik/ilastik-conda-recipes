@@ -23,7 +23,7 @@ requirements:
       - numpy              # [unix]
       - numpy    1.7.0.99  # [win]
       - hdf5     1.8.14    # [unix]
-      - hdf5     1.8.12    # [win]
+      - hdf5     1.8.12.99 # [win]
     run:
       - libgcc             # [unix]
       - visual-studio 11.0 # [win]
@@ -33,7 +33,7 @@ requirements:
       - numpy              # [unix]
       - numpy    1.7.0.99  # [win]
       - hdf5     1.8.14    # [unix]
-      - hdf5     1.8.12    # [win]
+      - hdf5     1.8.12.99 # [win]
 
 test:          # [unix]
   imports:     # [unix]

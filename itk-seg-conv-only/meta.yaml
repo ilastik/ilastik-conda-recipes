@@ -23,7 +23,7 @@ requirements:
     - libpng   1.6.17    # [unix]
     - libpng   1.5.13    # [win]
     - hdf5     1.8.14    # [unix]
-    - hdf5     1.8.12    # [win]
+    - hdf5     1.8.12.99 # [win]
     - zlib
 
   run:
