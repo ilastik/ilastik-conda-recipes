@@ -12,6 +12,8 @@ build:
 
 requirements:
   build:
-    - python
+    - python             # [unix]
+    - python  2.7.10     # [win]
   run:
-    - python
+    - python             # [unix]
+    - python  2.7.10     # [win]
