@@ -39,11 +39,11 @@ cmake .. -G "%CMAKE_GENERATOR%" ^
 if errorlevel 1 exit 1
 
 REM work-around for a Visual Studio bug: 
-REM MSBuild.exe seems to fail on long relative paths to source files.
+REM MSBuild.exe seems to garble long relative paths to source files.
 REM Therefore, we replace long relative paths in vcxproj-files with 
 REM absolute paths. Under some conditions, cmake seems to do this
-REM automatically, but not here. 
-REM FIXME: improve fix for long relative paths in MSBuils
+REM automatically (if the absolute path is shorter?), but not here. 
+REM FIXME: improve fix for long relative paths in MSBuild
 set RE=..\..\..\..\..\..\..\..\\
 set RE=%RE:\=\\%
 set RE=%RE:.=\.%
