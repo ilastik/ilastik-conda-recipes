@@ -13,27 +13,39 @@ build:
 
 requirements:  
   build:
-    - gcc 4.8.2.99 # [linux]
-    - gcc 4.8.2 # [osx]
-    - python
-    - numpy
+    - gcc 4.8.2.99       # [linux]
+    - gcc 4.8.2          # [osx]
+    - visual-studio 11.0 # [win]
+    - python             # [unix]
+    - python  2.7.10     # [win]
+    - numpy              # [unix]
+    - numpy    1.7.0.99  # [win]
     - itk-seg-conv-only
-    - jpeg
-    - libtiff
-    - libpng 1.6.17
+    - jpeg               # [unix]
+    - jpeg     1.2.1.99  # [win]
+    - libtiff            # [unix]
+    - libtiff  4.0.1.99  # [win]
+    - libpng   1.6.17    # [unix]
+    - libpng   1.5.13    # [win]
 
   run:
-    - libgcc
-    - python
-    - numpy
+    - libgcc             # [unix]
+    - visual-studio 11.0 # [win]
+    - python             # [unix]
+    - python  2.7.10     # [win]
+    - numpy              # [unix]
+    - numpy    1.7.0.99  # [win]
     - itk-seg-conv-only
-    - jpeg
-    - libtiff
-    - libpng 1.6.17
+    - jpeg               # [unix]
+    - jpeg     1.2.1.99  # [win]
+    - libtiff            # [unix]
+    - libtiff  4.0.1.99  # [win]
+    - libpng   1.6.17    # [unix]
+    - libpng   1.5.13    # [win]
 
-test:
-  imports:
-    - iiboost
+test:           # [unix]
+  imports:      # [unix]
+    - iiboost   # [unix]
 
 about:
   home: http://github.com/cbecker/iiboost
