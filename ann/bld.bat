@@ -1,3 +1,5 @@
+rem copy %RECIPE_DIR%\ANN.h include\ANN\
+
 cd MS_Win32
 
 devenv Ann.sln /upgrade
@@ -19,7 +21,7 @@ if "%ARCH%"=="32" (
              -e "s@<TargetMachine>MachineX86</TargetMachine>@@g" ^
        > dll\dll.vcxproj.patched
     if errorlevel 1 exit 1
-    move dll\dll.vcxproj.patched dll\dll.vcxproj.sln
+    move dll\dll.vcxproj.patched dll\dll.vcxproj
 )
 
 devenv Ann.sln /build "Release|%PLATFORM%" /project dll
