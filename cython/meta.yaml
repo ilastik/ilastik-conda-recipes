@@ -1,6 +1,6 @@
 package:
   name: cython
-  version: "0.23"
+  version: "0.23.99"
 
 source:
   fn:  Cython-0.23.tar.gz

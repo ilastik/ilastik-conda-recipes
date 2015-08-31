@@ -9,18 +9,18 @@ source:
 
 requirements:
   build:
-    - python 2.7.10   # [win]
-    - hdf5
-    - numpy  1.7.0.99 # [win]
-    - cython >=0.23
+    - python 2.7.10        # [win]
+    - hdf5  1.8.12.99      # [win]
+    - numpy  1.7.0.99      # [win]
+    - cython  0.23.99      # [win]
     - six
     - nose
 
   run:
-    - python 2.7.10 # [win]
-    - hdf5
-    - numpy  1.7.0.99 # [win]
-    - cython >=0.23
+    - python 2.7.10        # [win]
+    - hdf5  1.8.12.99      # [win]
+    - numpy  1.7.0.99      # [win]
+    - cython  0.23.99      # [win]
     - six
 
 about:

@@ -12,13 +12,15 @@ requirements:
     - python 2.7.10 # [win]
     - numpy 1.7.0.99       # [win]
     - scipy
-    - cython
+    - cython               # [unix]
+    - cython  0.23.99      # [win]
 
   run:
     - python 2.7.10 # [win]
     - numpy 1.7.0.99       # [win]
     - scipy
-    - cython
+    - cython               # [unix]
+    - cython  0.23.99      # [win]
 
 about:
   home: http://scikit-learn.org
