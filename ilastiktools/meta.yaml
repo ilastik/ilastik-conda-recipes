@@ -17,24 +17,24 @@ requirements:
     - gcc 4.8.2.99       # [linux]
     - gcc 4.8.2          # [osx]
     - visual-studio 11.0 # [win]
-    - python             # [not win]
+    - python             # [unix]
     - python  2.7.10     # [win]
-    - numpy              # [not win]
+    - numpy              # [unix]
     - numpy    1.7.0.99  # [win]
     - vigra
 
   run:
     - libgcc             # [unix]
     - visual-studio 11.0 # [win]
-    - python             # [not win]
+    - python             # [unix]
     - python  2.7.10     # [win]
-    - numpy              # [not win]
+    - numpy              # [unix]
     - numpy    1.7.0.99  # [win]
     - vigra
 
-test:              # [not win]
-  imports:         # [not win]
-    - ilastiktools # [not win]
+test:              # [unix]
+  imports:         # [unix]
+    - ilastiktools # [unix]
 
 about:
   home: http://ilastik.org
