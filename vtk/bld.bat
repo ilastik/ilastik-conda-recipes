@@ -17,12 +17,6 @@ copy "%LIBRARY_BIN%\moc.exe" "%QTDIR%\bin\"
 copy "%LIBRARY_BIN%\uic.exe" "%QTDIR%\bin\"
 copy "%LIBRARY_BIN%\rcc.exe" "%QTDIR%\bin\"
 
-         REM -DHDF5_DIR:PATH="%LIBRARY_PREFIX_LINUX%/cmake/hdf5 ^
-         REM -DQT_QMAKE_EXECUTABLE:FILEPATH=${QMAKE_PATH}/qmake.exe ^
-         REM -DVTK_INSTALL_QT_DIR:STRING=${ILASTIK_DEPENDENCY_DIR}/Qt4                     # seems to be unused ^
-         REM -DPYTHON_EXECUTABLE:FILEPATH=${PYTHON_EXE} ^
-         REM -DSIP_EXECUTABLE:FILEPATH=${PYTHON_PREFIX}/sip.exe ^
-         
 REM Notes:
 REM  * HDF5 is needed for vtkNetCDF
 REM  * --prefix=%PYTHON_PREFIX_SLASH% needs double-backslashes to work
