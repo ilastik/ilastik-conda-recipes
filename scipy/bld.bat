@@ -22,7 +22,7 @@ cat setup.py | sed -e "s@import subprocess@import subprocess, no_error_box@" > s
 if errorlevel 1 exit 1
 
 REM patch
-"%MAKE_PATH%\patch.exe" -p0 -i "%RECIPE_DIR%\scipy.patch"
+"%MSYS_PATH%\patch.exe" -p0 -i "%RECIPE_DIR%\scipy.patch"
 if errorlevel 1 exit 1
 
 rem find libgcc*.dll

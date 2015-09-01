@@ -32,9 +32,9 @@ REM find proper MSYS make
 REM * condition: msysinfo in the same directory
 REM   FIXME: this condition might not be sufficiently portable
 REM * 'make' from conda's unxutils doesn't work
-set MAKE_PATH=
-FOR /F "delims=" %%i IN ('where make.exe') DO %DOS_TOOLS% :find_msys_make %%i MAKE_PATH
-if "%MAKE_PATH%"=="" (
+set MSYS_PATH=
+FOR /F "delims=" %%i IN ('where make.exe') DO %DOS_TOOLS% :find_msys_make %%i MSYS_PATH
+if "%MSYS_PATH%"=="" (
     echo MSYS 'make' must be in the PATH
     exit 1
 )
@@ -43,4 +43,4 @@ REM status output
 echo MINGW:   MINGW_PATH="%MINGW_PATH%"
 echo VERSION: MINGW_VERSION=%MINGW_VERSION%
 echo BITNESS: MINGW_ARCH=%MINGW_ARCH%
-echo MAKE:    MAKE_PATH="%MAKE_PATH%"
+echo MSYS:    MSYS_PATH="%MSYS_PATH%"

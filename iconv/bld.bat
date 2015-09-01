@@ -1,6 +1,6 @@
 call "%RECIPE_DIR%\..\common-vars-mingw.bat"
 
-set PATH=%MAKE_PATH%;%MINGW_PATH%;%PATH%
+set PATH=%MSYS_PATH%;%MINGW_PATH%;%PATH%
 
 if "%ARCH%"=="64" set PLATFORM=/MACHINE:X64
 
