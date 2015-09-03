@@ -1,0 +1,16 @@
+package:
+  name: vc11-env
+  version: "11.0"
+
+build:
+  track_features:
+    - vc11                           # [win]
+  features:
+    - vc11                           # [win]
+
+requirements:
+  run:
+    - visual-studio {{ vc_version }} # [win]
+    - python 2.7.10                  # [win]
+    - pip
+    - setuptools
