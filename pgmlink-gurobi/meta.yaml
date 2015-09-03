@@ -9,7 +9,7 @@ source:
 requirements:
     build:
       - gcc 4.8.5.99 # [linux]
-      - gcc 4.8.2 # [osx]
+      - gcc 4.8.5.99 # [osx]
       - patchelf # [linux]
       - ann
       - boost 1.55.0
