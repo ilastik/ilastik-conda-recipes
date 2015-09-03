@@ -1,6 +1,6 @@
 package:
-  name: sqlite
-  version: 3.8.11
+  name: sqlite-src-for-python
+  version: "3.8.11"
 
 source:
   fn:  sqlite-amalgamation-3081101.zip

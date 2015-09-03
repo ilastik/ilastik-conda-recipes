@@ -1,6 +1,6 @@
 package:
-  name: openssl
-  version: 1.0.2a
+  name: openssl-src-for-python
+  version: "1.0.2a"
 
 source:
   git_url: https://github.com/openssl/openssl

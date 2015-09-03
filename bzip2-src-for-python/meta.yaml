@@ -1,6 +1,6 @@
 package:
-  name: bzip2
-  version: 1.0.6
+  name: bzip2-src-for-python
+  version: "1.0.6"
 
 source:
   fn:  bzip2-1.0.6.tar.gz
