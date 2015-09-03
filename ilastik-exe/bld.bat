@@ -1,0 +1,16 @@
+call "%RECIPE_DIR%\..\common-vars.bat"
+
+REM build ilastik.exe
+mkdir build
+cd build
+
+cmake "%RECIPE_DIR%\ilastik_launch" ^
+        -G "%CMAKE_GENERATOR%" ^
+        -DCMAKE_INSTALL_PREFIX="%LIBRARY_BIN%"
+if errorlevel 1 exit 1
+
+cmake --build . --target ilastik --config Release
+if errorlevel 1 exit 1
+
+cmake --build . --target INSTALL --config Release
+if errorlevel 1 exit 1
