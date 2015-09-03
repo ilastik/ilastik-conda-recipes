@@ -1,6 +1,7 @@
 package:
+  # pure python
   name: futures
-  version: 2.1.3
+  version: "2.1.3"
 
 source:
   fn:  futures-2.1.3.tar.gz
@@ -9,13 +10,12 @@ source:
 
 requirements:
   build:
-    - python 2.7.10 # [win]
+    - python
 
   run:
-    - python 2.7.10 # [win]
+    - python
 
 about:
   home: https://pypi.python.org/pypi/futures
   license: BSD
   summary: high-level interface for asynchronously executing callables
-

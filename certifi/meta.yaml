@@ -1,6 +1,7 @@
 package:
+  # pure python
   name: certifi
-  version: 2015.04.28
+  version: "2015.04.28"
 
 source:
 
@@ -10,13 +11,13 @@ source:
 
 requirements:
   build:
-    - python 2.7.10 # [win]
+    - python
+    - setuptools
 
   run:
-    - python 2.7.10 # [win]
+    - python
 
 about:
   home: http://certifi.io/
   license: Mozilla
   summary: Python package for providing Mozilla's CA Bundle
-

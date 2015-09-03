@@ -1,6 +1,7 @@
 package:
+  # pure python
   name: funcsigs
-  version: 0.4
+  version: "0.4"
 
 source:
   fn:  funcsigs-0.4.tar.gz
@@ -9,13 +10,13 @@ source:
 
 requirements:
   build:
-    - python 2.7.10 # [win]
+    - python
+    - setuptools
 
   run:
-    - python 2.7.10 # [win]
+    - python
 
 about:
   home: https://pypi.python.org/pypi/funcsigs
   license: Apache Software License
   summary: Python function signatures from PEP362
-

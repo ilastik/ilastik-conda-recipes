@@ -1,21 +1,22 @@
 package:
+  # pure python
   name: pytz
-  version: 0.2.4
+  version: "2015.4"
 
 source:
-  fn:  pytzpure-0.2.4.tar.gz
-  url: https://pypi.python.org/packages/source/p/pytzpure/pytzpure-0.2.4.tar.gz
-  md5: 837880c2c21cd3a0df52af358921d098
+  fn:  pytz-2015.4.tar.bz2
+  url: https://pypi.python.org/packages/source/p/pytz/pytz-2015.4.tar.bz2
+  md5: 39f7375c4b1fa34cdcb4b4765d08f817
 
 requirements:
   build:
-    - python 2.7.10 # [win]
+    - python
+    - setuptools
 
   run:
-    - python 2.7.10 # [win]
+    - python
 
 about:
   home: https://pypi.python.org/pypi/pytzpure
   license: GPL2
-  summary: timezone support
-
+  summary: World timezone definitions

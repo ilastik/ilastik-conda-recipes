@@ -1,6 +1,7 @@
 package:
+  # pure pygthon
   name: ipython_genutils
-  version: 0.1.0
+  version: "0.1.0"
 
 source:
   fn:  ipython_genutils-0.1.0.tar.gz
@@ -9,10 +10,10 @@ source:
 
 requirements:
   build:
-    - python 2.7.10 # [win]
+    - python
 
   run:
-    - python 2.7.10 # [win]
+    - python
 
 about:
   home: https://pypi.python.org/pypi/ipython_genutils

@@ -1,21 +1,21 @@
 package:
+  # pure python
   name: pyreadline
-  version: 1.7.1
+  version: "2.0"
 
 source:
-  fn:  pyreadline-1.7.1.zip
-  url: http://pypi.python.org/packages/source/p/pyreadline/pyreadline-1.7.1.zip
-  md5: 293d4e8794f867c122d4290ccc84be8d
+  fn:  pyreadline-2.0.zip
+  url: https://pypi.python.org/packages/source/p/pyreadline/pyreadline-2.0.zip
+  md5: 87b15f18deff1db76e9d37149a2b027b
 
 requirements:
   build:
-    - python 2.7.10 # [win]
+    - python
 
   run:
-    - python 2.7.10 # [win]
+    - python
 
 about:
   home: https://pypi.python.org/pypi/pyreadline
   license: BSD
   summary: python implmementation of GNU readline
-

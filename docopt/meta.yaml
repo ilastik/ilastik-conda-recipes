@@ -1,6 +1,7 @@
 package:
+  # pure python
   name: docopt
-  version: 0.6.1
+  version: "0.6.1"
 
 source:
   fn:  docopt-0.6.1.tar.gz
@@ -9,10 +10,11 @@ source:
 
 requirements:
   build:
-    - python 2.7.10 # [win]
+    - python
+    - setuptools
 
   run:
-    - python 2.7.10 # [win]
+    - python
 
 about:
   home: http://docopt.org/

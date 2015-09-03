@@ -1,6 +1,7 @@
 package:
+  # pure python
   name: logilab_astng
-  version: 0.24.3
+  version: "0.24.3"
 
 source:
   fn:  logilab-astng-0.24.3.tar.gz
@@ -9,15 +10,14 @@ source:
 
 requirements:
   build:
-    - python 2.7.10 # [win]
+    - python
     - logilab_common
 
   run:
-    - python 2.7.10 # [win]
+    - python
     - logilab_common
 
 about:
   home: https://pypi.python.org/pypi/logilab-astng
   license: LGPL
   summary: abstract syntax trees
-

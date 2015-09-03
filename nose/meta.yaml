@@ -1,6 +1,7 @@
 package:
+  # pure python
   name: nose
-  version: 1.2.1
+  version: "1.2.1"
 
 source:
   fn:  nose-1.2.1.tar.gz
@@ -9,10 +10,10 @@ source:
 
 requirements:
   build:
-    - python 2.7.10 # [win]
+    - python
 
   run:
-    - python 2.7.10 # [win]
+    - python
 
 about:
   home: https://nose.readthedocs.org/en/latest/

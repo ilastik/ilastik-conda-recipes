@@ -1,6 +1,7 @@
 package:
+  # pure python
   name: nbformat
-  version: 4.0.0
+  version: "4.0.0"
 
 source:
   fn:  nbformat-4.0.0.tar.gz
@@ -9,12 +10,12 @@ source:
 
 requirements:
   build:
-    - python 2.7.10 # [win]
+    - python
     - functools32
     - jsonschema
 
   run:
-    - python 2.7.10 # [win]
+    - python
     - functools32
     - jsonschema
 
@@ -22,4 +23,3 @@ about:
   home: https://pypi.python.org/pypi/nbformat
   license: BSD
   summary: The Jupyter Notebook format
-

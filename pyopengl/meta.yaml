@@ -1,6 +1,6 @@
 package:
   name: pyopengl
-  version: 3.0.2
+  version: "3.0.2"
 
 source:
   fn:  PyOpenGL-3.0.2.tar.gz
@@ -9,10 +9,11 @@ source:
 
 requirements:
   build:
-    - python 2.7.10 # [win]
+    - python
 
   run:
-    - python 2.7.10 # [win]
+    # NOTE: the package seems to download precompiled binaries
+    - python
 
 about:
   home: https://pypi.python.org/pypi/PyOpenGL

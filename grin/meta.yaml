@@ -1,4 +1,5 @@
 package:
+  # pure python
   name: grin
   version: 1.2.1
 
@@ -9,13 +10,15 @@ source:
 
 requirements:
   build:
-    - python 2.7.10 # [win]
+    - python
+    - setuptools
+    - argparse
 
   run:
-    - python 2.7.10 # [win]
+    - python
+    - argparse
 
 about:
   home: https://pypi.python.org/pypi/grin
   license: BSD
   summary: An extended grep program
-

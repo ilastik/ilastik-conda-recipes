@@ -1,6 +1,7 @@
 package:
+  # pure python
   name: networkx
-  version: 1.10
+  version: "1.10"
 
 source:
   fn:  networkx-1.10.tar.gz
@@ -9,15 +10,15 @@ source:
 
 requirements:
   build:
-    - python 2.7.10 # [win]
+    - python
     - decorator
+    - setuptools
 
   run:
-    - python 2.7.10 # [win]
+    - python
     - decorator
 
 about:
   home: https://pypi.python.org/pypi/networkx
   license: BSD
   summary: creating and manipulating graphs and networks
-

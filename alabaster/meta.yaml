@@ -1,4 +1,5 @@
 package:
+  # pure python
   name: alabaster
   version: 0.7.6
 
@@ -9,10 +10,11 @@ source:
 
 requirements:
   build:
-    - python 2.7.10 # [win]
+    - python
+    - setuptools
 
   run:
-    - python 2.7.10 # [win]
+    - python
 
 about:
   home: https://pypi.python.org/pypi/alabaster

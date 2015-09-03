@@ -1,6 +1,7 @@
 package:
+  # pure python
   name: argparse
-  version: 1.2.1
+  version: "1.2.1"
 
 source:
   fn:  argparse-1.2.1.tar.gz
@@ -9,13 +10,13 @@ source:
 
 requirements:
   build:
-    - python 2.7.10 # [win]
+    - python
+    - setuptools
 
   run:
-    - python 2.7.10 # [win]
+    - python
 
 about:
   home: https://pypi.python.org/pypi/argparse
   license: PSF
   summary: command-line parsing library
-

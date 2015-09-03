@@ -1,6 +1,7 @@
 package:
+  # pure python
   name: pickleshare
-  version: 0.5
+  version: "0.5"
 
 source:
   fn:  pickleshare-0.5.tar.gz
@@ -9,13 +10,15 @@ source:
 
 requirements:
   build:
-    - python 2.7.10 # [win]
+    - python
+    - path.py
+    - setuptools
 
   run:
-    - python 2.7.10 # [win]
+    - python
+    - path.py
 
 about:
   home: https://pypi.python.org/pypi/pickleshare
   license: MIT
   summary: Tiny 'shelve'-like database with concurrency support
-

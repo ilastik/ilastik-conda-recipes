@@ -1,6 +1,7 @@
 package:
+  # pure python
   name: pyparsing
-  version: 2.0.3
+  version: "2.0.3"
 
 source:
   fn:  pyparsing-2.0.3.tar.gz
@@ -9,13 +10,12 @@ source:
 
 requirements:
   build:
-    - python 2.7.10 # [win]
+    - python
 
   run:
-    - python 2.7.10 # [win]
+    - python
 
 about:
   home: https://pypi.python.org/pypi/pyparsing
   license: MIT
   summary: Python parsing module
-

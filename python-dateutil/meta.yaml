@@ -1,6 +1,7 @@
 package:
+  # pure python
   name: python-dateutil
-  version: 2.4.2
+  version: "2.4.2"
 
 source:
   fn:  python-dateutil-2.4.2.tar.gz
@@ -9,15 +10,15 @@ source:
 
 requirements:
   build:
-    - python 2.7.10 # [win]
+    - python
     - six
+    - setuptools
 
   run:
-    - python 2.7.10 # [win]
+    - python
     - six
 
 about:
   home: https://pypi.python.org/pypi/python-dateutil
   license: BSD
   summary: Extensions to the standard Python datetime module
-

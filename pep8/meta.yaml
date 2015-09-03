@@ -1,6 +1,7 @@
 package:
+  # pure python
   name: pep8
-  version: 1.4.5
+  version: "1.4.5"
 
 source:
   fn:  pep8-1.4.5.tar.gz
@@ -9,13 +10,13 @@ source:
 
 requirements:
   build:
-    - python 2.7.10 # [win]
+    - python
+    - setuptools
 
   run:
-    - python 2.7.10 # [win]
+    - python
 
 about:
   home: https://pypi.python.org/pypi/pep8
   license: MIT
   summary: style guide checker
-

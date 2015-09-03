@@ -1,6 +1,7 @@
 package:
+  # pure python
   name: yapsy
-  version: !!str 1.10.423
+  version: "1.10.423"
 
 source:
   fn: Yapsy-1.10.423.tar.gz

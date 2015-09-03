@@ -1,0 +1,23 @@
+package:
+  # pure python
+  name: pkgconfig
+  version: "1.1.0"
+
+source:
+  fn:  pkgconfig-1.1.0.tar.gz
+  url: https://pypi.python.org/packages/source/p/pkgconfig/pkgconfig-1.1.0.tar.gz
+  md5: 15998b487c15c5954feb79443b5a937a
+
+requirements:
+  build:
+    - python
+    - setuptools
+
+  run:
+    - python
+    - setuptools
+
+about:
+  home: https://pypi.python.org/pypi/pkgconfig
+  license: MIT
+  summary: interface Python with pkg-config

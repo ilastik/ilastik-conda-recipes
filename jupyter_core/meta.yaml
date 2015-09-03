@@ -1,6 +1,7 @@
 package:
+  # pure python
   name: jupyter_core
-  version: 4.0.4
+  version: "4.0.4"
 
 source:
   fn:  jupyter_core-4.0.4.tar.gz
@@ -9,10 +10,10 @@ source:
 
 requirements:
   build:
-    - python 2.7.10 # [win]
+    - python
 
   run:
-    - python 2.7.10 # [win]
+    - python
 
 about:
   home: https://pypi.python.org/pypi/jupyter_core

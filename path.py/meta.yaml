@@ -1,0 +1,21 @@
+package:
+  # pure python
+  name: path.py
+  version: "8.1"
+
+source:
+  git_url: https://github.com/jaraco/path.py
+  git_tag: 3520e8f143a8ded9d5fa8e66038c1db3e75b112a
+  
+requirements:
+  build:
+    - python
+    - setuptools
+
+  run:
+    - python
+
+about:
+  home: https://pypi.python.org/pypi/path.py
+  license: MIT
+  summary: A module wrapper for os.path

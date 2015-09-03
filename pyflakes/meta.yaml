@@ -1,6 +1,7 @@
 package:
+  # pure python
   name: pyflakes
-  version: 0.7
+  version: "0.7"
 
 source:
   fn:  pyflakes-0.7.tar.gz
@@ -9,13 +10,13 @@ source:
 
 requirements:
   build:
-    - python 2.7.10 # [win]
+    # FIXME: build broken
+    - python
 
   run:
-    - python 2.7.10 # [win]
+    - python
 
 about:
   home: https://pypi.python.org/pypi/pyflakes
   license: MIT
   summary: passive checker of Python programs
-
