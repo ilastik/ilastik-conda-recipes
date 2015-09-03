@@ -3,7 +3,7 @@ CWD=$(cd `dirname $0` && pwd)
 source $CWD/../common-vars.sh
 
 # CONFIGURE
-mkdir build
+mkdir -p build # Using -p here is convenient for calling this script outside of conda.
 cd build
 cmake ..\
         -DCMAKE_C_COMPILER=${PREFIX}/bin/gcc \
