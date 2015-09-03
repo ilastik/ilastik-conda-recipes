@@ -1,4 +1,5 @@
 package:
+  # pure python
   name: ilastik-meta
   version: {{ environ.get('GIT_DESCRIBE_TAG', '') }}
 
@@ -12,8 +13,6 @@ build:
 
 requirements:
   build:
-    - python             # [unix]
-    - python  2.7.10     # [win]
+    - python
   run:
-    - python             # [unix]
-    - python  2.7.10     # [win]
+    - python

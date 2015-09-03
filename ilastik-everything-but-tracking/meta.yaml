@@ -5,8 +5,16 @@ package:
   name: ilastik-everything-but-tracking
   version: "" # build.sh will generate a __conda_version__.txt file
 
+{% set vc_version = environ.get('VISUALSTUDIOVERSION') %}  # [win]
+{% set vc = 'vc'+vc_version[:-2] %}                        # [win]
+
 build:
   number: 1
+  string: 1_{{ vc }}                 # [win]
+  track_features:
+    - {{ vc }}                       # [win]
+  features:
+    - {{ vc }}                       # [win]
 
 requirements:
   build:
@@ -21,11 +29,11 @@ requirements:
     - ilastik-deps-carving >=1.1.6a7
     - ilastik-meta
 
-# test:
-  # requires:
-    # - nose
+test:
+  requires:
+    - nose
     
-  # imports:
-    # - lazyflow
-    # - volumina
-    # - ilastik
+  imports:
+    - lazyflow
+    - volumina
+    - ilastik

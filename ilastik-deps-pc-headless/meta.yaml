@@ -5,15 +5,23 @@ package:
   name: ilastik-deps-pc-headless
   version: "1.1"
 
+{% set vc_version = environ.get('VISUALSTUDIOVERSION') %}  # [win]
+{% set vc = 'vc'+vc_version[:-2] %}                        # [win]
+
 build:
   number: 2
+  string: 2_{{ vc }}                 # [win]
+  track_features:
+    - {{ vc }}                       # [win]
+  features:
+    - {{ vc }}                       # [win]
 
 requirements:
   build:
     - python             # [unix]
     - python  2.7.10     # [win]
     - numpy    >=1.9     # [unix]
-    - numpy    1.7.0.99  # [win]
+    - numpy    1.7.0     # [win]
     - vigra
     - h5py
     - tifffile
@@ -30,7 +38,7 @@ requirements:
     - python             # [unix]
     - python  2.7.10     # [win]
     - numpy    >=1.9     # [unix]
-    - numpy    1.7.0.99  # [win]
+    - numpy    1.7.0     # [win]
     - vigra
     - tifffile
     - h5py
@@ -44,4 +52,3 @@ requirements:
     - jsonschema
     - nose
     #- blist # only needed by deprecated operators
-    

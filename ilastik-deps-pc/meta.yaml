@@ -5,17 +5,25 @@ package:
   name: ilastik-deps-pc
   version: "1.1"
 
+{% set vc_version = environ.get('VISUALSTUDIOVERSION') %}  # [win]
+{% set vc = 'vc'+vc_version[:-2] %}                        # [win]
+
 build:
   number: 2
+  string: 2_{{ vc }}                 # [win]
+  track_features:
+    - {{ vc }}                       # [win]
+  features:
+    - {{ vc }}                       # [win]
 
 requirements:
   build:
     - ilastik-deps-pc-headless
     - pyqt 4.11.3.99            # [osx]
-    - pyqt 4.11.3.99            # [win]
-    - pyqt 4.11.3               # [linux]
+    - pyqt 4.11.3               # [win or linux]
     - qimage2ndarray
-    - vtk 5.10.1.99
+    - vtk 5.10.1.99             # [unix]
+    - vtk 5.10.1                # [win]
     - futures
     - matplotlib
 
@@ -26,9 +34,9 @@ requirements:
   run:
     - ilastik-deps-pc-headless
     - pyqt 4.11.3.99            # [osx]
-    - pyqt 4.11.3.99            # [win]
-    - pyqt 4.11.3               # [linux]
+    - pyqt 4.11.3               # [win or linux]
     - qimage2ndarray
-    - vtk 5.10.1.99
+    - vtk 5.10.1.99             # [unix]
+    - vtk 5.10.1                # [win]
     - futures
     - matplotlib

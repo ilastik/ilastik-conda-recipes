@@ -16,3 +16,6 @@ if not "%ILASTIK_CODE_VERSION%"=="%ILASTIK_PKG_VERSION%" (
     echo ********************************************************************************
     exit 1
 )
+
+REM append compiler version to package version
+echo %ILASTIK_PKG_VERSION%.vc%VISUALSTUDIOVERSION:.0=% > __conda_version__.txt
