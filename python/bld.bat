@@ -65,3 +65,7 @@ if errorlevel 1 exit 1
 REM install directly into %PREFIX% (Conda convention on Windows)
 cmake -DPYTHON_BIN="%PYTHON_BIN%" -DPYTHON_INSTALL_PREFIX="%PREFIX%" -P "%RECIPE_DIR%/python_install.cmake" 
 if errorlevel 1 exit 1
+
+REM install sitecustomize.py (appends LIBRARY_BIN to the PATH upon Python startup)
+copy "%RECIPE_DIR%\sitecustomize.py.win" "%SP_DIR%\sitecustomize.py"
+if errorlevel 1 exit 1
