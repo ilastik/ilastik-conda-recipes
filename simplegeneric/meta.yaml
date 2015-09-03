@@ -1,6 +1,7 @@
 package:
+  # pure python
   name: simplegeneric
-  version: 0.8.1
+  version: "0.8.1"
 
 source:
   fn:  simplegeneric-0.8.1.zip
@@ -9,10 +10,10 @@ source:
 
 requirements:
   build:
-    - python 2.7.10 # [win]
+    - python
 
   run:
-    - python 2.7.10 # [win]
+    - python
 
 about:
   home: https://pypi.python.org/pypi/simplegeneric
