@@ -1,6 +1,21 @@
 package:
-  name: qt
+  name: qt-with-src
   version: "4.8.6"
+
+source:
+  git_url: https://github.com/qtproject/qt
+  #git_tag: v4.8.6 # 682ed9df439481e1f8e8651c4aa06f1b455a2080
+  git_tag: 445d29dbb8135944ff3a9283b7622de75d68e747
+
+  patches:
+    # This patch fixes ilastik crashes on OSX due to an ill-shaped ellipse
+    - patches/qt4-osx-draw-ellipse.patch  # [osx]
+
+    # This patch fixes crashes with modal dialogs on OSX:
+    # https://bugreports.qt.io/secure/attachment/46537/QTBUG-40585-Rev3.patch
+    - patches/QTBUG-40585-Rev3.patch  # [osx]
+    
+build:
 
 {% set vc_version = environ.get('VISUALSTUDIOVERSION') %}  # [win]
 {% set vc = 'vc'+vc_version[:-2] %}                        # [win]
@@ -14,24 +29,17 @@ build:
     - {{ vc }}                       # [win]
   detect_binary_files_with_prefix: true
 
-  always_include_files:              # [win]
-    - Library\bin\*                  # [win]
-    - Qt4\imports\*                  # [win]
-    - Qt4\include\*                  # [win]
-    - Qt4\mkspecs\*                  # [win]
-    - Qt4\plugins\*                  # [win]
-    - Qt4\lib\*.lib                  # [win]
-    - Qt4\lib\fonts\*                # [win]
-
 requirements:
   build:
     - visual-studio {{ vc_version }} # [win]
-    - qt-with-src  4.8.6             # [win]
     - jpeg     8d                    # [unix]
+    - jpeg     1.2.1                 # [win]
     - libtiff  4.0*                  # [unix]
+    - libtiff  4.0.1                 # [win]
     - libpng   1.6.17                # [unix]
-    - freetype                       # [unix]
-    - zlib                           # [unix]
+    - libpng   1.5.13                # [win]
+    - freetype
+    - zlib
 
   run:
     - visual-studio {{ vc_version }} # [win]

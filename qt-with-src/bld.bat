@@ -1,4 +1,8 @@
 call "%RECIPE_DIR%\..\common-vars.bat"
+call "%RECIPE_DIR%\..\common-vars-mingw.bat"
+
+REM MSYS\bin must not be in the PATH (conflicts with ActiveState perl.exe)
+%DOS_TOOLS% :remove_from_PATH "%MSYS_PATH%"
 
 cat src/gui/image/qjpeghandler.pri | sed -e "s@win32: *LIBS += libjpeg.lib@win32:          LIBS += jpeg.lib@g" > out.patch
 if errorlevel 1 exit 1
@@ -46,7 +50,7 @@ rem build
 nmake
 if errorlevel 1 exit 1
 
-rem install (src and tools directory are needed by PyQt)
+rem install (src, qmake, and tools directories are needed by PyQt)
 nmake clean
 FOR %%i IN (imports include lib mkspecs phrasebooks plugins src qmake tools) DO xcopy /S %%i "%QT_PREFIX%\%%i\"
 if errorlevel 1 exit 1

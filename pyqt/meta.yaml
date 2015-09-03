@@ -1,6 +1,6 @@
 package:
   name: pyqt
-  version: 4.11.3.99
+  version: "4.11.3"
 
 source:
 
@@ -20,31 +20,43 @@ source:
     - configure.patch   # [unix]
 
 build:
+
+{% set vc_version = environ.get('VISUALSTUDIOVERSION') %}  # [win]
+{% set vc = 'vc'+vc_version[:-2] %}                        # [win]
+
+build:
   number: 6
+  string: 6_{{ vc }}                 # [win]
+  track_features:
+    - {{ vc }}                       # [win]
+  features:
+    - {{ vc }}                       # [win]
   detect_binary_files_with_prefix: true
 
 requirements:
   build:
-    - visual-studio 11.0 # [win]
-    - python             # [unix]
-    - python 2.7.10      # [win]
-    - qt      4.8.6.99
+    - visual-studio {{ vc_version }} # [win]
+    - python                         # [unix]
+    - python 2.7.10                  # [win]
+    - qt     4.8.6.99                # [unix]
+    - qt-with-src     4.8.6          # [win]
     # note: sip >=4.16 is incompatible with PyQt 4.10.3
     # note: sip <4.16  is incompatible with PyQt 4.11.3
     - sip     >=4.16.4
     
   run:
-    - visual-studio 11.0 # [win]
-    - python             # [unix]
-    - python 2.7.10      # [win]
-    - qt      4.8.6.99 
+    - visual-studio {{ vc_version }} # [win]
+    - python                         # [unix]
+    - python 2.7.10                  # [win]
+    - qt     4.8.6.99                # [unix]
+    - qt     4.8.6                   # [win]
     - sip     >=4.16.4 
 
-test:         # [unix]
-  # import fails in Windows because conda doesn't add LIBRARY_BIN to the PATH
-  imports:    # [unix]
-    - PyQt4   # [unix]
+test: 
+  imports:
+    - PyQt4
 
 about:
   home: http://www.riverbankcomputing.co.uk/software/pyqt
   license: GPL
+

@@ -1,0 +1,24 @@
+--- src/3rdparty/webkit/Source/JavaScriptCore/wtf/HashSet.h	Tue Sep 11 01:36:45 2012
++++ src/3rdparty/webkit/Source/JavaScriptCore/wtf/HashSet.h	Sat Apr 20 16:41:10 2013
+@@ -177,7 +177,9 @@ namespace WTF {
+     template<typename T, typename U, typename V>
+     inline pair<typename HashSet<T, U, V>::iterator, bool> HashSet<T, U, V>::add(const ValueType& value)
+     {
+-        return m_impl.add(value);
++        typedef typename HashSet<T, U, V>::iterator iterator;
++        auto & r = m_impl.add(value);
++        return pair<iterator, bool>(iterator(r.first), r.second);
+     }
+ 
+     template<typename Value, typename HashFunctions, typename Traits>
+@@ -186,7 +188,9 @@ namespace WTF {
+     HashSet<Value, HashFunctions, Traits>::add(const T& value)
+     {
+         typedef HashSetTranslatorAdapter<ValueType, ValueTraits, T, HashTranslator> Adapter;
+-        return m_impl.template addPassingHashCode<T, T, Adapter>(value, value);
++        typedef typename HashSet<Value, HashFunctions, Traits>::iterator iterator;
++        auto & r = m_impl.template addPassingHashCode<T, T, Adapter>(value, value);
++        return pair<iterator, bool>(iterator(r.first), r.second);
+     }
+ 
+     template<typename T, typename U, typename V>
