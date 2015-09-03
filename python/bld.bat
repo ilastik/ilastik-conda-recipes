@@ -1,3 +1,8 @@
+call "%RECIPE_DIR%\..\common-vars-mingw.bat"
+
+REM MSYS\bin must not be in the PATH (conflicts with ActiveState perl.exe)
+%DOS_TOOLS% :remove_from_PATH "%MSYS_PATH%"
+
 REM configure
 if %ARCH%==32 (
     set PYTHON_BITNESS=Win32
@@ -14,6 +19,7 @@ set PATH=%PATH%;%LIBRARY_BIN%
 
 REM build expects external sources in the "externals" directory
 xcopy /S "%PREFIX%\externals" externals\
+if errorlevel 1 exit 1
 
 REM build directory is predetermined by Python distro
 cd PCbuild
@@ -41,6 +47,7 @@ devenv PCbuild.sln /build "Release|%PYTHON_BITNESS%" /project unicodedata
 if errorlevel 1 exit 1
 
 "%PYTHON_EXE%" "%RECIPE_DIR%/patch_python_externals.py"
+if errorlevel 1 exit 1
 
 devenv PCbuild.sln /build "Release|%PYTHON_BITNESS%" /project bz2
 if errorlevel 1 exit 1
