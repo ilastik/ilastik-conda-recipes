@@ -1,3 +1,12 @@
+{% set vc_version = environ.get('VISUALSTUDIOVERSION') %}  # [win]
+{% set vc = 'vc'+vc_version[:-2] %}                        # [win]
+
 package:
   name: visual-studio
-  version: "11.0"
+  version: {{ vc_version }} # [win]
+
+build:
+  track_features:
+    - {{ vc }}        # [win]
+  features:
+    - {{ vc }}        # [win]
