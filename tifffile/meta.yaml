@@ -6,27 +6,36 @@ source:
   git_url: git://github.com/ilastik/tifffile.git
   git_tag: 05b51f398b2c18eacf9dce674631707763f7e94e
 
+{% set vc_version = environ.get('VISUALSTUDIOVERSION') %}  # [win]
+{% set vc = 'vc'+vc_version[:-2] %}                        # [win]
+
 build:
   number: 1
+  string: 1_{{ vc }}                   # [win]
+  track_features:
+    - {{ vc }}                       # [win]
+  features:
+    - {{ vc }}                       # [win]
 
 requirements:
   build:
-    - python 2.7*|>=3.4   # [unix]
+    - python 2.7.*|>=3.4  # [unix]
+    - python 2.7.*        # [win]
     - numpy >=1.8.2       # [unix]
-    - python 2.7.10       # [win]
-    - numpy  1.7.0.99     # [win]
+    - numpy  1.7.0        # [win]
 
   run:
-    - python 2.7*|>=3.4   # [unix]
+    - python 2.7.*|>=3.4  # [unix]
+    - python 2.7.*        # [win]
     - numpy >=1.8.2       # [unix]
-    - python 2.7.10       # [win]
-    - numpy  1.7.0.99     # [win]
+    - numpy  1.7.0        # [win]
 
-#test:
-#  imports:
-#    - tifffile
+test:
+  imports:
+    - tifffile
 
 about:
   home: https://github.com/blink1073/tifffile
   license: BSD License
   summary: 'Read and write image data from and to TIFF files.'
+

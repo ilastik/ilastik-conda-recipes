@@ -7,18 +7,29 @@ source:
   md5: eb95dda0f36cc3096673993a350cde77
   url: https://pypi.python.org/packages/source/s/scipy/scipy-0.16.0.tar.gz
   
+{% set vc_version = environ.get('VISUALSTUDIOVERSION') %}  # [win]
+{% set vc = 'vc'+vc_version[:-2] %}                        # [win]
+
+build:
+  string: {{ vc }}                   # [win]
+  track_features:
+    - {{ vc }}                       # [win]
+  features:
+    - {{ vc }}                       # [win]
+
 requirements:
   build:
-    - visual-studio 11.0   # [win]
-    - mingw 4.7.2          # [win]
-    - python 2.7.10        # [win]
-    - numpy 1.7.0.99       # [win]
+    - visual-studio {{ vc_version }} # [win]
+    - mingw  4.7.2                   # [win]
+    - emulate_c99                    # [win]
+    - python 2.7.10                  # [win]
+    - numpy  1.7.0                   # [win]
 
   run:
-    - visual-studio 11.0   # [win]
-    - mingw 4.7.2          # [win]
-    - python 2.7.10        # [win]
-    - numpy 1.7.0.99       # [win]
+    - visual-studio {{ vc_version }} # [win]
+    - mingw  4.7.2                   # [win]
+    - python 2.7.10                  # [win]
+    - numpy  1.7.0                   # [win]
 
 about:
   home: www.scipy.org

@@ -1,8 +1,19 @@
 package:
   name: emulate_c99
-  version: 1.0
+  version: "1.0"
+  
+{% set vc_version = environ.get('VISUALSTUDIOVERSION') %}  # [win]
+{% set vc = 'vc'+vc_version[:-2] %}                        # [win]
+
+build:
+  string: {{ vc }}                   # [win]
+  track_features:
+    - {{ vc }}                       # [win]
+  features:
+    - {{ vc }}                       # [win]
 
 requirements:
   build:
-    - visual-studio 11.0 # [win]
+    - visual-studio {{ vc_version }} # [win]
 
+  # emulate_c99 is static library, has no runtime

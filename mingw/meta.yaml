@@ -2,9 +2,21 @@ package:
   name: mingw
   version: "4.7.2"
 
+{% set vc_version = environ.get('VISUALSTUDIOVERSION') %}  # [win]
+{% set vc = 'vc'+vc_version[:-2] %}                        # [win]
+
+build:
+  string: {{ vc }}                   # [win]
+  track_features:
+    - {{ vc }}                       # [win]
+  features:
+    - {{ vc }}                       # [win]
+
 requirements:
   build:
-    - emulate_c99   # [win]
+    - visual-studio {{ vc_version }} # [win]
+    - emulate_c99                    # [win]
 
   run:
-    - emulate_c99   # [win]
+    - visual-studio {{ vc_version }} # [win]
+

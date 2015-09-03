@@ -10,19 +10,27 @@ source:
     patches:                   # [unix]
         - patches/cmake.patch  # [unix]
 
+{% set vc_version = environ.get('VISUALSTUDIOVERSION') %}  # [win]
+{% set vc = 'vc'+vc_version[:-2] %}                        # [win]
+
 build:
   number: 1
   detect_binary_files_with_prefix: true
+  string: {{ vc }}                   # [win]
+  track_features:
+    - {{ vc }}                       # [win]
+  features:
+    - {{ vc }}                       # [win]
 
 requirements:
   build:
-    - gcc 4.8.2.99 # [linux]
-    - gcc 4.8.2 # [osx]
-    - visual-studio 11.0 # [win]
+    - visual-studio {{ vc_version }} # [win]
+    - gcc 4.8.2.99                   # [linux]
+    - gcc 4.8.2                      # [osx]
     
   run:
-    - libgcc  # [unix]
-    - visual-studio 11.0 # [win]
+    - libgcc                         # [unix]
+    - visual-studio {{ vc_version }} # [win]
 
 # Note: tests are run when building the package, they are not accessible
 # in the installed package.

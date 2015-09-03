@@ -1,34 +1,42 @@
 package:
   name: itk-seg-conv-only
-  version: 4.6.1
+  version: "4.6.1"
 
 source:
   url: http://iweb.dl.sourceforge.net/project/itk/itk/4.6/InsightToolkit-4.6.1.tar.gz
   fn: InsightToolkit-4.6.1.tar.gz
   md5: 2c84eae50ab2452cdad32aaadced3c37
 
+{% set vc_version = environ.get('VISUALSTUDIOVERSION') %}  # [win]
+{% set vc = 'vc'+vc_version[:-2] %}                        # [win]
+
 build:
   number: 3
   detect_binary_files_with_prefix: true
+  string: {{ vc }}                   # [win]
+  track_features:
+    - {{ vc }}                       # [win]
+  features:
+    - {{ vc }}                       # [win]
 
-requirements:  
+requirements:
   build:
-    - gcc 4.8.2.99       # [linux]
-    - gcc 4.8.2          # [osx]
-    - visual-studio 11.0 # [win]
-    - jpeg               # [unix]
-    - jpeg     1.2.1.99  # [win]
-    - libtiff            # [unix]
-    - libtiff  4.0.1.99  # [win]
-    - libpng   1.6.17    # [unix]
-    - libpng   1.5.13    # [win]
-    - hdf5     1.8.14    # [unix]
-    - hdf5     1.8.12.99 # [win]
+    - visual-studio {{ vc_version }} # [win]
+    - gcc 4.8.2.99                   # [linux]
+    - gcc 4.8.2                      # [osx]
+    - jpeg                           # [unix]
+    - jpeg     1.2.1                 # [win]
+    - libtiff                        # [unix]
+    - libtiff  4.0.1                 # [win]
+    - libpng   1.6.17                # [unix]
+    - libpng   1.5.13                # [win]
+    - hdf5     1.8.14                # [unix]
+    - hdf5     1.8.12                # [win]
     - zlib
 
   run:
-    - libgcc             # [unix]
-    - visual-studio 11.0 # [win]
+    - libgcc                         # [unix]
+    - visual-studio {{ vc_version }} # [win]
     - zlib
     # Let these be optional at install time
     # - jpeg

@@ -1,21 +1,32 @@
 package:
   name: pyzmq
-  version: 14.3.1.99
+  version: "14.3.1"
 
 source:
   fn:  pyzmq-14.3.1.tar.gz
   url: https://pypi.python.org/packages/source/p/pyzmq/pyzmq-14.3.1.tar.gz
   md5: 7196b4a6fbf98022f17ffa924be3d68d
 
+{% set vc_version = environ.get('VISUALSTUDIOVERSION') %}  # [win]
+{% set vc = 'vc'+vc_version[:-2] %}                        # [win]
+
+build:
+  string: {{ vc }}                   # [win]
+  track_features:
+    - {{ vc }}                       # [win]
+  features:
+    - {{ vc }}                       # [win]
+
 requirements:
   build:
-    - python 2.7.10 # [win]
+    - visual-studio {{ vc_version }} # [win]
+    - python 2.7.10                  # [win]
 
   run:
-    - python 2.7.10 # [win]
+    - visual-studio {{ vc_version }} # [win]
+    - python 2.7.10                  # [win]
 
 about:
   home: https://pypi.python.org/pypi/pyzmq
   license: BSD
   summary: Python bindings for the ZeroMQ Messaging Library
-

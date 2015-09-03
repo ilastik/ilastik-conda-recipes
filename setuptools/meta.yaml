@@ -1,21 +1,32 @@
 package:
   name: setuptools
-  version: 18.2
+  version: "18.2"
 
 source:
   fn:  setuptools-18.2.tar.gz
   url: https://pypi.python.org/packages/source/s/setuptools/setuptools-18.2.tar.gz
   md5: 52b4e48939ef311d7204f8fe940764f4
 
+{% set vc_version = environ.get('VISUALSTUDIOVERSION') %}  # [win]
+{% set vc = 'vc'+vc_version[:-2] %}                        # [win]
+
+build:
+  string: {{ vc }}                   # [win]
+  track_features:
+    - {{ vc }}                       # [win]
+  features:
+    - {{ vc }}                       # [win]
+
 requirements:
   build:
-    - python 2.7.10 # [win]
+    - python
+    - pip
 
   run:
-    - python 2.7.10 # [win]
+    - python
+    - pip
 
 about:
   home: https://pypi.python.org/pypi/setuptools
   license: PSF
   summary: Easily download, build, install, upgrade, and uninstall Python packages
-

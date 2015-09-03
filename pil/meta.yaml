@@ -7,34 +7,43 @@ source:
   url: http://effbot.org/downloads/Imaging-1.1.7.tar.gz
   md5: fc14a54e1ce02a0225be8854bfba478e
 
+{% set vc_version = environ.get('VISUALSTUDIOVERSION') %}  # [win]
+{% set vc = 'vc'+vc_version[:-2] %}                        # [win]
+
+build:
+  string: {{ vc }}                   # [win]
+  track_features:
+    - {{ vc }}                       # [win]
+  features:
+    - {{ vc }}                       # [win]
+
 requirements:
   build:
-    - visual-studio 11.0   # [win]
-    - python 2.7.10        # [win]
-    - numpy 1.7.0.99       # [win]
-    - jpeg     8d          # [unix]
-    - jpeg     1.2.1.99    # [win]
+    - visual-studio {{ vc_version }} # [win]
+    - python 2.7.10                  # [win]
+    - numpy 1.7.0                    # [win]
+    - jpeg     8d                    # [unix]
+    - jpeg     1.2.1                 # [win]
     # NOTE: PIL's support for TIFF is labeled experimental and commented out
-    - libtiff  4.0*        # [unix]
-    - libtiff  4.0.1.99    # [win]
-    - libpng   1.6.17      # [unix]
-    - libpng   1.5.13      # [win]
+    - libtiff  4.0*                  # [unix]
+    - libtiff  4.0.1                 # [win]
+    - libpng   1.6.17                # [unix]
+    - libpng   1.5.13                # [win]
     - freetype
 
   run:
-    - visual-studio 11.0   # [win]
-    - python 2.7.10        # [win]
-    - numpy 1.7.0.99       # [win]
-    - jpeg     8d          # [unix]
-    - jpeg     1.2.1.99    # [win]
-    - libtiff  4.0*        # [unix]
-    - libtiff  4.0.1.99    # [win]
-    - libpng   1.6.17      # [unix]
-    - libpng   1.5.13      # [win]
+    - visual-studio {{ vc_version }} # [win]
+    - python 2.7.10                  # [win]
+    - numpy 1.7.0                    # [win]
+    - jpeg     8d                    # [unix]
+    - jpeg     1.2.1                 # [win]
+    - libtiff  4.0*                  # [unix]
+    - libtiff  4.0.1                 # [win]
+    - libpng   1.6.17                # [unix]
+    - libpng   1.5.13                # [win]
     - freetype
 
 about:
   home: https://pypi.python.org/pypi/PIL
   license: old Python license (MIT style)
   summary: Python Imaging Library
-

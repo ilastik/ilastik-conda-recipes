@@ -1,26 +1,41 @@
 package:
   name: numpy
-  version: "1.7.0.99"
+  version: "1.7.0"
 
 source:
     fn:  numpy-1.7.0.tar.gz
     md5: 4fa54e40b6a243416f0248123b6ec332
     url: http://downloads.sourceforge.net/project/numpy/NumPy/1.7.0/numpy-1.7.0.tar.gz
 
+    # FIXME: numpy 1.9.2 needs updated patches
+    # fn:  numpy-1.9.2.tar.gz
+    # md5: a1ed53432dbcd256398898d35bc8e645
+    # url: https://pypi.python.org/packages/source/n/numpy/numpy-1.9.2.tar.gz
+    
+{% set vc_version = environ.get('VISUALSTUDIOVERSION') %}  # [win]
+{% set vc = 'vc'+vc_version[:-2] %}                        # [win]
+
+build:
+  string: {{ vc }}                   # [win]
+  track_features:
+    - {{ vc }}                       # [win]
+  features:
+    - {{ vc }}                       # [win]
+
 requirements:
   build:
-    - visual-studio 11.0 # [win]
+    - visual-studio {{ vc_version }} # [win]
     - python
-    - openblas           # [win]
+    - openblas                       # [win]
 
   run:
-    - visual-studio 11.0 # [win]
+    - visual-studio {{ vc_version }} # [win]
     - python
-    - openblas           # [win]
+    - openblas                       # [win]
 
-#test:
-#  imports:
-#    - numpy   # FIXME: doesn't work on Windows: %LIBRARY_BIN% not in PATH
+test:
+  imports:
+    - numpy
 
 about:
   home: http://www.numpy.org/

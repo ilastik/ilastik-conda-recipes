@@ -8,35 +8,44 @@ source:
   git_tag: 
 
 build:
+
+{% set vc_version = environ.get('VISUALSTUDIOVERSION') %}  # [win]
+{% set vc = 'vc'+vc_version[:-2] %}                        # [win]
+
+build:
   number: 1
-  string: afd8501
   detect_binary_files_with_prefix: true
+  string: afd8501                    # [unix]
+  string: afd8501_{{ vc }}           # [win]
+  track_features:
+    - {{ vc }}                       # [win]
+  features:
+    - {{ vc }}                       # [win]
 
 requirements:
   build:
-    - gcc 4.8.2.99       # [linux]
-    - gcc 4.8.2          # [osx]
-    - visual-studio 11.0 # [win]
-    - python             # [unix]
-    - python  2.7.10     # [win]
-    - numpy              # [unix]
-    - numpy    1.7.0.99  # [win]
+    - visual-studio {{ vc_version }} # [win]
+    - gcc 4.8.2.99                   # [linux]
+    - gcc 4.8.2                      # [osx]
+    - python   2.7.*
+    - numpy                          # [unix]
+    - numpy    1.7.0                 # [win]
     - vigra
 
   run:
+    - visual-studio {{ vc_version }} # [win]
     - libgcc             # [unix]
-    - visual-studio 11.0 # [win]
-    - python             # [unix]
-    - python  2.7.10     # [win]
-    - numpy              # [unix]
-    - numpy    1.7.0.99  # [win]
+    - python   2.7.*
+    - numpy                          # [unix]
+    - numpy    1.7.0                 # [win]
     - vigra
 
-test:              # [unix]
-  imports:         # [unix]
-    - ilastiktools # [unix]
+test:
+  imports:
+    - ilastiktools
 
 about:
   home: http://ilastik.org
   license: GPLv3
   summary: Various compiled utilities for the ilastik project
+

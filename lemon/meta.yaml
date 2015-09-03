@@ -11,23 +11,32 @@ source:
     - lemon.patch         # [unix]
     - lemon-test.patch    # [unix]
 
+{% set vc_version = environ.get('VISUALSTUDIOVERSION') %}  # [win]
+{% set vc = 'vc'+vc_version[:-2] %}                        # [win]
+
 build:
   number: 1
   detect_binary_files_with_prefix: true
+  string: {{ vc }}                   # [win]
+  track_features:
+    - {{ vc }}                       # [win]
+  features:
+    - {{ vc }}                       # [win]
 
 requirements:
   build:
-    - gcc 4.8.2.99       # [linux]
-    - gcc 4.8.2          # [osx]
-    - visual-studio 11.0 # [win]
-    - python  2.7.10     # [win]
+    - visual-studio {{ vc_version }} # [win]
+    - gcc 4.8.2.99                   # [linux]
+    - gcc 4.8.2                      # [osx]
+    - python  2.7.*
 
   run:
-    - libgcc             # [unix]
-    - visual-studio 11.0 # [win]
-    - python  2.7.10     # [win]
+    - libgcc                         # [unix]
+    - visual-studio {{ vc_version }} # [win]
+    - python  2.7.*
 
 about:
   home: http://lemon.cs.elte.hu/trac/lemon
   license: Boost
   summary: Library for Efficient Modeling and Optimization in Networks
+

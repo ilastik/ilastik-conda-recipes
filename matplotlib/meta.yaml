@@ -1,19 +1,30 @@
 package:
   name: matplotlib
-  version: 1.4.3.99
+  version: "1.4.3"
 
 source:
   fn:  matplotlib-1.4.3.tar.gz
   url: https://pypi.python.org/packages/source/m/matplotlib/matplotlib-1.4.3.tar.gz
   md5: 86af2e3e3c61849ac7576a6f5ca44267
 
+{% set vc_version = environ.get('VISUALSTUDIOVERSION') %}  # [win]
+{% set vc = 'vc'+vc_version[:-2] %}                        # [win]
+
+build:
+  string: {{ vc }}                   # [win]
+  track_features:
+    - {{ vc }}                       # [win]
+  features:
+    - {{ vc }}                       # [win]
+
 requirements:
   build:
-    - python   2.7*
-    - numpy    1.7.0.99  # [win]
-    - libpng   1.5.13    # [win]
-    - freetype
-    - pyqt     4.11.3.99 # [win]
+    - python   2.7.*
+    - numpy    1.7.0                 # [win]
+    - libpng   1.5.13                # [win]
+    - pyqt     4.11.3                # [win]
+    - tornado  4.2.1                 # [win]
+    - freetype 2.4.11                # [win]
     - mock
     - nose
     - pyparsing
@@ -22,17 +33,23 @@ requirements:
     - six
     - funcsigs
     - pbr
-    
 
   run:
-    - python 2.7.10 # [win]
-    - numpy    1.7.0.99  # [win]
-    - libpng   1.5.13    # [win]
-    - freetype
-    - pyqt     4.11.3.99 # [win]
+    - python   2.7.*
+    - numpy    1.7.0                 # [win]
+    - libpng   1.5.13                # [win]
+    - pyqt     4.11.3                # [win]
+    - tornado  4.2.1                 # [win]
+    - freetype 2.4.11                # [win]
+    - mock
+    - pyparsing
+    - pytz
+    - python-dateutil
+    - six
+    - funcsigs
+    - pbr
 
 about:
   home: https://pypi.python.org/pypi/matplotlib
   license: BSD
   summary: Python plotting package
-

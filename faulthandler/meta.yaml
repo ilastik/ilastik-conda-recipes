@@ -1,21 +1,32 @@
 package:
   name: faulthandler
-  version: 2.4
+  version: "2.4"
 
 source:
   fn:  faulthandler-2.4.tar.gz
   url: https://pypi.python.org/packages/source/f/faulthandler/faulthandler-2.4.tar.gz
   md5: 110960933b0902334e8804eb4ea20750
 
+{% set vc_version = environ.get('VISUALSTUDIOVERSION') %}  # [win]
+{% set vc = 'vc'+vc_version[:-2] %}                        # [win]
+
+build:
+  string: {{ vc }}                   # [win]
+  track_features:
+    - {{ vc }}                       # [win]
+  features:
+    - {{ vc }}                       # [win]
+
 requirements:
   build:
-    - python 2.7.10 # [win]
+    - visual-studio {{ vc_version }} # [win]
+    - python 2.7.*                   # [win]
 
   run:
-    - python 2.7.10 # [win]
+    - visual-studio {{ vc_version }} # [win]
+    - python 2.7.*                   # [win]
 
 about:
   home: https://pypi.python.org/pypi/faulthandler
   license: BSD
   summary: Display the Python traceback on a crash
-

@@ -7,15 +7,28 @@ source:
   url: https://pypi.python.org/packages/source/g/greenlet/greenlet-0.4.7.zip
   md5: c2333a8ff30fa75c5d5ec0e67b461086 
 
+{% set vc_version = environ.get('VISUALSTUDIOVERSION') %}  # [win]
+{% set vc = 'vc'+vc_version[:-2] %}                        # [win]
+
+build:
+  string: {{ vc }}                   # [win]
+  track_features:
+    - {{ vc }}                       # [win]
+  features:
+    - {{ vc }}                       # [win]
+
 requirements:
   build:
-    - python 2.7.10 # [win]
+    - visual-studio {{ vc_version }} # [win]
+    - python 2.7.10                  # [win]
 
   run:
-    - python 2.7.10 # [win]
+    - visual-studio {{ vc_version }} # [win]
+    - python 2.7.10                  # [win]
 
 about:
   home: https://pypi.python.org/pypi/greenlet
   license: MIT
   summary: Lightweight in-process concurrent programming
+
 

@@ -1,20 +1,30 @@
 package:
   name: cython
-  version: "0.23.99"
+  version: "0.23"
 
 source:
   fn:  Cython-0.23.tar.gz
   url: https://pypi.python.org/packages/source/C/Cython/Cython-0.23.tar.gz
   md5: 63d472d0a9b3b39b9651f7bf568bb4a5
 
+{% set vc_version = environ.get('VISUALSTUDIOVERSION') %}  # [win]
+{% set vc = 'vc'+vc_version[:-2] %}                        # [win]
+
+build:
+  string: {{ vc }}                   # [win]
+  track_features:
+    - {{ vc }}                       # [win]
+  features:
+    - {{ vc }}                       # [win]
+
 requirements:
   build:
-    - visual-studio 11.0  # [win]
-    - python        2.7.10
+    - visual-studio {{ vc_version }} # [win]
+    - python    2.7.*
 
   run:
-    - visual-studio 11.0  # [win]
-    - python        2.7.10
+    - visual-studio {{ vc_version }} # [win]
+    - python    2.7.*
 
 about:
   home: http://cython.org/

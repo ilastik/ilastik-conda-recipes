@@ -1,21 +1,34 @@
 package:
   name: sip
-  version: 4.16.9
+  version: "4.16.9"
 
 source:
   fn:  sip-4.16.9.tar.gz
   url: http://sourceforge.net/projects/pyqt/files/sip/sip-4.16.9/sip-4.16.9.tar.gz
   md5: 7a1dfff4e6fade0e4adee2c4e3d3aa9a
 
+{% set vc_version = environ.get('VISUALSTUDIOVERSION') %}  # [win]
+{% set vc = 'vc'+vc_version[:-2] %}                        # [win]
+
+build:
+  string: {{ vc }}                   # [win]
+  track_features:
+    - {{ vc }}                       # [win]
+  features:
+    - {{ vc }}                       # [win]
+
 requirements:
   build:
-    - python 2.7.10 # [win]
+    - visual-studio {{ vc_version }} # [win]
+    - python 2.7.10                  # [win]
 
   run:
-    - python 2.7.10 # [win]
+    - visual-studio {{ vc_version }} # [win]
+    - python 2.7.10                  # [win]
 
 about:
   home: http://www.riverbankcomputing.com/software/sip/
   license: PSF
   summary: Python extension module generator
+
 

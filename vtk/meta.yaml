@@ -1,6 +1,6 @@
 package:
   name: vtk
-  version: "5.10.1.99"
+  version: "5.10.1"
 
 source:
   url: http://www.vtk.org/files/release/5.10/vtk-5.10.1.tar.gz
@@ -10,59 +10,68 @@ source:
   patches:                     # [osx]
     - osx_patches/no-gc.diff   # [osx]
 
+{% set vc_version = environ.get('VISUALSTUDIOVERSION') %}  # [win]
+{% set vc = 'vc'+vc_version[:-2] %}                        # [win]
+
 build:
   number: 5
-  string: with_pyqt_5
+  string: 5_with_pyqt                # [unix]
+  string: 5_with_pyqt_{{ vc }}       # [win]
+  track_features:
+    - {{ vc }}                       # [win]
+  features:
+    - {{ vc }}                       # [win]
   detect_binary_files_with_prefix: true
 
 requirements:
   build:
-    - gcc 4.8.2.99       # [linux]
-    - visual-studio 11.0 # [win]
-    - python             # [unix]
-    - python  2.7.10     # [win]
-    - pyqt 4.11.3        # [linux]
-    - pyqt 4.11.3.99     # [osx or win]
-    - jpeg               # [unix]
-    - jpeg     1.2.1.99  # [win]
-    - libtiff            # [unix]
-    - libtiff  4.0.1.99  # [win]
-    - libpng   1.6.17    # [unix]
-    - libpng   1.5.13    # [win]
+    - visual-studio {{ vc_version }} # [win]
+    - gcc 4.8.2.99                   # [linux]
+    - python                         # [unix]
+    - python  2.7.10                 # [win]
+    - pyqt 4.11.3                    # [linux or win]
+    - pyqt 4.11.3.99                 # [osx]
+    - jpeg                           # [unix]
+    - jpeg     1.2.1                 # [win]
+    - libtiff                        # [unix]
+    - libtiff  4.0.1                 # [win]
+    - libpng   1.6.17                # [unix]
+    - libpng   1.5.13                # [win]
+    - hdf5     1.8.12                # [win]
+    - freetype                       # [win]
     - zlib
     - libxml2
-    - hdf5     1.8.12.99 # [win]
-    - freetype           # [win]
 
   run:
-    - libgcc             # [unix]
-    - visual-studio 11.0 # [win]
-    - python             # [unix]
-    - python  2.7.10     # [win]
-    - pyqt 4.11.3        # [linux]
-    - pyqt 4.11.3.99     # [osx or win]
-    - jpeg               # [unix]
-    - jpeg     1.2.1.99  # [win]
-    - libtiff            # [unix]
-    - libtiff  4.0.1.99  # [win]
-    - libpng   1.6.17    # [unix]
-    - libpng   1.5.13    # [win]
+    - libgcc                         # [unix]
+    - visual-studio {{ vc_version }} # [win]
+    - python                         # [unix]
+    - python  2.7.10                 # [win]
+    - pyqt 4.11.3                    # [linux or win]
+    - pyqt 4.11.3.99                 # [osx]
+    - jpeg                           # [unix]
+    - jpeg     1.2.1                 # [win]
+    - libtiff                        # [unix]
+    - libtiff  4.0.1                 # [win]
+    - libpng   1.6.17                # [unix]
+    - libpng   1.5.13                # [win]
+    - hdf5     1.8.12                # [win]
+    - freetype                       # [win]
     - zlib
     - libxml2
-    - hdf5     1.8.12.99 # [win]
-    - freetype           # [win]
 
-# test:
-  # requires:
-    # - pyqt 4.11.3.99     # [osx]
-    # - pyqt 4.11.3        # [linux]
+test:
+  requires:
+    - pyqt 4.11.3.99     # [osx]
+    - pyqt 4.11.3        # [linux or win]
 
-  # commands:
-    # - vtkpython -h       # [unix]
+  commands:
+    - vtkpython -h
 
-  # imports:
-    # - vtk                # [unix]
+  imports:
+    - vtk 
 
 about:
   home: http://www.vtk.org/
   license: BSD
+

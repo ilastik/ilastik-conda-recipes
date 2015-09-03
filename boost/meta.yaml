@@ -1,6 +1,6 @@
 package:
   name: boost
-  version: 1.55.0
+  version: "1.55.0"
 
 source:
   fn: boost_1_55_0.tar.bz2
@@ -11,24 +11,30 @@ source:
     - 1.55.0_patches/e4bde20f.diff # [osx]
     - 1.55.0_patches/0005-Boost.S11n-include-missing-algorithm.patch # [osx]
 
+{% set vc_version = environ.get('VISUALSTUDIOVERSION') %}  # [win]
+{% set vc = 'vc'+vc_version[:-2] %}                        # [win]
+
 build:
   number: 4
   detect_binary_files_with_prefix: true
+  string: {{ vc }}                   # [win]
+  track_features:
+    - {{ vc }}                       # [win]
+  features:
+    - {{ vc }}                       # [win]
 
 requirements:
   build:
-    - gcc 4.8.2.99       # [linux]
-    - gcc 4.8.2          # [osx]
-    - visual-studio 11.0 # [win]
-    - python             # [unix]
-    - python 2.7.10      # [win]
-    - zlib               # [unix]
+    - visual-studio {{ vc_version }} # [win]
+    - gcc 4.8.2.99                   # [linux]
+    - gcc 4.8.2                      # [osx]
+    - python    2.7.*
+    - zlib                           # [unix]
 
   run:
-    - libgcc             # [unix]
-    - visual-studio 11.0 # [win]
+    - visual-studio {{ vc_version }} # [win]
+    - libgcc                         # [unix]
 
 about:
   home: http://www.boost.org/
   license: Boost-1.0
-

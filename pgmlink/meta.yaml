@@ -9,64 +9,73 @@ source:
     git_url: https://github.com/martinsch/pgmlink
     git_tag: 7a0c8d4f54e9a4066991829fb52b411a02914666 # Version from ilastik 1.1.5, downgrade relative to above commit
 
+{% set vc_version = environ.get('VISUALSTUDIOVERSION') %}  # [win]
+{% set vc = 'vc'+vc_version[:-2] %}                        # [win]
+
 build:
   number: 11
-  string: 11_g7a0c8d4
-  detect_binary_files_with_prefix: true
+  string: 11_g7a0c8d4                # [unix]
+  string: 11_g7a0c8d4_{{ vc }}       # [win]
+  track_features:
+    - {{ vc }}                       # [win]
+  features:
+    - {{ vc }}                       # [win]
   script_env:
      - CPLEX_ROOT_DIR
+  detect_binary_files_with_prefix: true
 
 requirements:
-    build:
-      - gcc 4.8.2.99       # [linux]
-      - gcc 4.8.2          # [osx]
-      - visual-studio 11.0 # [win]
-      - python             # [unix]
-      - python  2.7.10     # [win]
-      - numpy              # [unix]
-      - numpy    1.7.0.99  # [win]
-      - cplex-shared       # [unix]
-      - patchelf           # [linux]
-      - ann
-      - boost 1.55.0
-      - vigra
-      - opengm
-      - mlpack
-      - lemon
-      - libxml2
-      - dlib               # [unix]
-      - armadillo 4.000.2  # [unix]
-      - armadillo 4.320.0  # [win]
+  build:
+    - visual-studio {{ vc_version }} # [win]
+    - gcc 4.8.2.99                   # [linux]
+    - gcc 4.8.2                      # [osx]
+    - python                         # [unix]
+    - python  2.7.10                 # [win]
+    - numpy                          # [unix]
+    - numpy    1.7.0                 # [win]
+    - cplex-shared                   # [unix]
+    - patchelf                       # [linux]
+    - ann
+    - boost 1.55.0
+    - vigra
+    - opengm
+    - mlpack
+    - lemon
+    - libxml2
+    - dlib                           # [unix]
+    - armadillo 4.000.2              # [unix]
+    - armadillo 4.320.0              # [win]
 
-    run:
-      - libgcc             # [unix]
-      - visual-studio 11.0 # [win]
-      - python             # [unix]
-      - python  2.7.10     # [win]
-      - numpy              # [unix]
-      - numpy    1.7.0.99  # [win]
-      - patchelf           # [linux]
-      - ann
-      - boost 1.55.0
-      - vigra
-      - opengm
-      - mlpack
-      - lemon
-      - libxml2
-      - dlib               # [unix]
-      - armadillo 4.000.2  # [unix]
-      - armadillo 4.320.0  # [win]
+  run:
+    - visual-studio {{ vc_version }} # [win]
+    - libgcc                         # [unix]
+    - python                         # [unix]
+    - python  2.7.10                 # [win]
+    - numpy                          # [unix]
+    - numpy    1.7.0                 # [win]
+    - patchelf                       # [linux]
+    - ann
+    - boost 1.55.0
+    - vigra
+    - opengm
+    - mlpack
+    - lemon
+    - libxml2
+    - dlib                           # [unix]
+    - armadillo 4.000.2              # [unix]
+    - armadillo 4.320.0              # [win]
 
-      # We don't require cplex-shared here because it only needs to be installed once per machine,
-      # and requiring it here would include all of gcc in the install lib dir.
-      # Instead, we give the user a descriptive error message if cplex-shared hasn't been run on her machine.
-      # - cplex-shared
+    # We don't require cplex-shared here because it only needs to be installed once per machine,
+    # and requiring it here would include all of gcc in the install lib dir.
+    # Instead, we give the user a descriptive error message if cplex-shared hasn't been run on her machine.
+    # - cplex-shared
 
-# test:  # FIXME: doesn't work on Windows
-  # imports:
-      # - pgmlink
+test:
+  imports:
+    - pgmlink
 
 about:
     home: https://github.com/martinsch/pgmlink
     license: GNU General Public License (GPL)
     summary: 'pgmLink - A Tracking-by-Assignment Software'
+

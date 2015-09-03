@@ -12,19 +12,30 @@ source:
 #  url: https://pypi.python.org/packages/source/i/ipython/ipython-4.0.0.tar.gz
 #  md5: c2fecbcf1c0fbdc82625c77a50733dd6
 
+{% set vc_version = environ.get('VISUALSTUDIOVERSION') %}  # [win]
+{% set vc = 'vc'+vc_version[:-2] %}                        # [win]
+
+build:
+  string: {{ vc }}                   # [win]
+  track_features:
+    - {{ vc }}                       # [win]
+  features:
+    - {{ vc }}                       # [win]
+
 requirements:
   build:
-    - python 2.7.10 # [win]
+    - visual-studio {{ vc_version }} # [win]
+    - python 2.7.10                  # [win]
     - pip
     - setuptools
-    - pyreadline
+    - pyreadline                     # [win]
     - pygments
     # FIXME: ipython 0.13.1 notebook works, but issues the warning:
     #        RuntimeWarning: libzmq 4 detected.
     #        It is unlikely that IPython's zmq code will work properly.
     #        Please install libzmq stable, which is 2.1.x or 2.2.x
-    - pyzmq 14.3.1.99  # [win]
-    - tornado 4.2.1.99  # [win]
+    - pyzmq  14.3.1                  # [win]
+    - tornado 4.2.1                  # [win]
     # needed for ipython 4.0:
     # - certifi
     # - traitlets
@@ -34,13 +45,13 @@ requirements:
     # - notebook
 
   run:
-    - python 2.7.10 # [win]
+    - visual-studio {{ vc_version }} # [win]
+    - python 2.7.10                  # [win]
     - pip
-    - setuptools
-    - pyreadline
+    - pyreadline                     # [win]
     - pygments
-    - pyzmq 14.3.1.99  # [win]
-    - tornado 4.2.1.99  # [win]
+    - pyzmq  14.3.1                  # [win]
+    - tornado 4.2.1                  # [win]
     # - certifi
     # - traitlets
     # - ssl_match_hostname
