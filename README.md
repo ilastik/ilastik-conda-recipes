@@ -347,7 +347,7 @@ To use the gcc package, add these requirements to your `meta.yaml` file:
 ```
 requirements:
   build:
-    - gcc 4.8.2.99 # [linux]
+    - gcc 4.8.5.99 # [linux]
     - gcc 4.8.2 # [osx]
   run:
     - libgcc

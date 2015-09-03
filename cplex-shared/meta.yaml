@@ -12,7 +12,7 @@ package:
 
 requirements:
   run:
-    - gcc 4.8.2.99 # [linux]
+    - gcc 4.8.5.99 # [linux]
     - gcc 4.8.2 # [osx]
 
 build:

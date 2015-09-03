@@ -12,7 +12,7 @@ build:
   
 requirements:
   build:
-    - gcc 4.8.2.99 # [linux]
+    - gcc 4.8.5.99 # [linux]
     - gcc 4.8.2 # [osx]
     - jsoncpp
     - libdvid-cpp
@@ -24,7 +24,7 @@ requirements:
     - opencv 2.4.10.1 
     
   run:
-    - gcc 4.8.2.99 # [linux]
+    - gcc 4.8.5.99 # [linux]
     - gcc 4.8.2 # [osx]
     - libgcc
     - jsoncpp
