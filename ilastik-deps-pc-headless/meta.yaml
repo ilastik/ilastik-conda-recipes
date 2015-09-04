@@ -22,6 +22,7 @@ requirements:
     - python  2.7.10     # [win]
     - numpy    >=1.9     # [unix]
     - numpy    1.7.0     # [win]
+    - ilastik-exe        # [win]
     - vigra
     - h5py
     - tifffile
@@ -39,6 +40,7 @@ requirements:
     - python  2.7.10     # [win]
     - numpy    >=1.9     # [unix]
     - numpy    1.7.0     # [win]
+    - ilastik-exe        # [win]
     - vigra
     - tifffile
     - h5py

@@ -22,12 +22,14 @@ requirements:
     - ilastik-deps-pc-iiboost
     - ilastik-deps-carving >=1.1.6a7
     - ilastik-meta
+    - ilastik-versions
 
   run:
     - ilastik-deps-pc
     - ilastik-deps-pc-iiboost
     - ilastik-deps-carving >=1.1.6a7
     - ilastik-meta
+    - ilastik-versions
 
 test:
   requires:
