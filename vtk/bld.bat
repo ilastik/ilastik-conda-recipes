@@ -53,5 +53,8 @@ cmake .. -G "%CMAKE_GENERATOR%" ^
          -DSIP_PYQT_DIR:PATH="%PREFIX_LINUX%/sip-sources"
 if errorlevel 1 exit 1
     
+cmake --build . --target ALL_BUILD --config Release
+if errorlevel 1 exit 1
+    
 cmake --build . --target INSTALL --config Release
 if errorlevel 1 exit 1
