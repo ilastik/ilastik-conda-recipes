@@ -1,0 +1,6 @@
+{% set name='visual-studio' %}
+{% set version='@PKG_VERSION@' %}
+{% set short='@PKG_SHORT@' %}
+{% set suffix='.@PKG_SHORT@' %}
+{% set build_requirement='visual-studio @PKG_VERSION@  # [win]' %}
+{% set run_requirement=  'visual-studio @PKG_VERSION@  # [win]' %}
