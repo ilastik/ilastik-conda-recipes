@@ -1,4 +1,6 @@
-call "%RECIPE_DIR%\..\common-vars-mingw.bat"
+REM load toolset info
+set TOOLSET_INFO_DIR=%PREFIX%\toolset-info
+call "%TOOLSET_INFO_DIR%\common-vars-mingw.bat"
 
 set PATH=%MSYS_PATH%;%PATH%
 

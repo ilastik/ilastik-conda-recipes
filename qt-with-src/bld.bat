@@ -1,8 +1,9 @@
-call "%RECIPE_DIR%\..\common-vars.bat"
-call "%RECIPE_DIR%\..\common-vars-mingw.bat"
+REM load toolset info
+set TOOLSET_INFO_DIR=%PREFIX%\toolset-info
+call "%TOOLSET_INFO_DIR%\common-vars.bat"
 
-REM MSYS\bin must not be in the PATH (conflicts with ActiveState perl.exe)
-%DOS_TOOLS% :remove_from_PATH "%MSYS_PATH%"
+REM ActiveState perl must be at the front in the path (avoid conflicts with other perls)
+set PATH=%PERL_PATH%;%PATH%
 
 cat src/gui/image/qjpeghandler.pri | sed -e "s@win32: *LIBS += libjpeg.lib@win32:          LIBS += jpeg.lib@g" > out.patch
 if errorlevel 1 exit 1

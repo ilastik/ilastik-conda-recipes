@@ -1,4 +1,6 @@
-call "%RECIPE_DIR%\..\common-vars.bat"
+REM load toolset info
+set TOOLSET_INFO_DIR=%PREFIX%\toolset-info
+call "%TOOLSET_INFO_DIR%\common-vars.bat"
 
 %DOS_TOOLS% :to_linux_path "%LIBRARY_PREFIX%\include" INCLUDE_PATH
 %DOS_TOOLS% :to_linux_path "%LIBRARY_PREFIX%\lib" LIB_PATH

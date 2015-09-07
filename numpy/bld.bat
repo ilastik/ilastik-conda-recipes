@@ -1,6 +1,8 @@
-call "%RECIPE_DIR%\..\common-vars.bat"
+REM load toolset info
+set TOOLSET_INFO_DIR=%PREFIX%\toolset-info
+call "%TOOLSET_INFO_DIR%\common-vars-mingw.bat"
 
-patch -p0 -i "%RECIPE_DIR%\patch_numpy.patch"
+"%MSYS_PATH%\patch" -p0 -i "%RECIPE_DIR%\patch_numpy.patch"
 if errorlevel 1 exit 1
 
 rem the dependency path must have forward slashes

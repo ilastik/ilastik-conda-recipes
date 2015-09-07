@@ -1,7 +1,8 @@
-call "%RECIPE_DIR%\..\common-vars.bat"
+REM load toolset info
+set TOOLSET_INFO_DIR=%PREFIX%\toolset-info
+call "%TOOLSET_INFO_DIR%\common-vars-mingw.bat"
 
-REM FIXME: don't hardcode path to MSYS\patch
-c:\msys\bin\patch -p0 -i "%RECIPE_DIR%\mlpack-win.patch"
+"%MSYS_PATH%\patch" -p0 -i "%RECIPE_DIR%\mlpack-win.patch"
 if errorlevel 1 exit 1
 
 mkdir build

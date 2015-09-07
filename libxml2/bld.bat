@@ -1,4 +1,6 @@
-call "%RECIPE_DIR%\..\common-vars-mingw.bat"
+REM load toolset info
+set TOOLSET_INFO_DIR=%PREFIX%\toolset-info
+call "%TOOLSET_INFO_DIR%\common-vars-mingw.bat"
 
 @REM msys\bin must not be in the PATH here (conflicts with MSVC link.exe)
 %DOS_TOOLS% :remove_from_PATH "%MSYS_PATH%"

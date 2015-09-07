@@ -1,6 +1,8 @@
 set SRC_DIR=%CD%
 
-call "%RECIPE_DIR%\..\common-vars.bat"
+REM load toolset info
+set TOOLSET_INFO_DIR=%PREFIX%\toolset-info
+call "%TOOLSET_INFO_DIR%\common-vars.bat"
 
 REM lift the ITK path length restriction to 200
 cat CMakeLists.txt ^

@@ -1,4 +1,6 @@
-call "%RECIPE_DIR%\..\common-vars.bat"
+REM load toolset info
+set TOOLSET_INFO_DIR=%PREFIX%\toolset-info
+call "%TOOLSET_INFO_DIR%\common-vars.bat"
 
 REM the source code for arc_look_up_test is missing
 cat test\CMakeLists.txt ^

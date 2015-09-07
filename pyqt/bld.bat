@@ -1,4 +1,6 @@
-call "%RECIPE_DIR%\..\common-vars.bat"
+REM load toolset info
+set TOOLSET_INFO_DIR=%PREFIX%\toolset-info
+call "%TOOLSET_INFO_DIR%\common-vars.bat"
 
 REM FIXME: pyqt needs mt.exe (manifest tool) -- add an explicit dependency
 REM (on my machine, it resides in "c:\Program Files (x86)\Windows Kits\8.0\bin\x64")

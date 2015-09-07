@@ -1,4 +1,6 @@
-call "%RECIPE_DIR%\..\common-vars.bat"
+REM load toolset info
+set TOOLSET_INFO_DIR=%PREFIX%\toolset-info
+call "%TOOLSET_INFO_DIR%\common-vars.bat"
 
 REM The git hash is prefixed with 'g' for some stupid reason.
 git checkout %GIT_DESCRIBE_HASH:~1% 

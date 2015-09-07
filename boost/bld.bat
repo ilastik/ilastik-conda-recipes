@@ -1,4 +1,6 @@
-call "%RECIPE_DIR%\..\common-vars.bat"
+REM load toolset info
+set TOOLSET_INFO_DIR=%PREFIX%\toolset-info
+call "%TOOLSET_INFO_DIR%\common-vars.bat"
 
 if %ARCH%==64 (
     REM bootstrap.bat wants a 32-bit compiler
@@ -6,6 +8,7 @@ if %ARCH%==64 (
 )
 
 call .\bootstrap.bat
+if errorlevel 1 exit 1
 
 if %ARCH%==64 (
     call "%VISUAL_STUDIO_VCVARSALL%" amd64
@@ -18,7 +21,10 @@ set BOOST_OPTIONS=--layout=system --with-python --with-serialization --with-syst
 
 REM compile
 .\b2 %BOOST_OPTIONS%
+if errorlevel 1 exit 1
 
 REM install
 .\b2 --prefix="%LIBRARY_PREFIX%" %BOOST_OPTIONS% install
+if errorlevel 1 exit 1
 move "%LIBRARY_PREFIX%\lib\boost*.dll" "%LIBRARY_PREFIX%\bin"
+if errorlevel 1 exit 1

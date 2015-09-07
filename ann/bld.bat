@@ -1,5 +1,3 @@
-rem copy %RECIPE_DIR%\ANN.h include\ANN\
-
 cd MS_Win32
 
 devenv Ann.sln /upgrade
