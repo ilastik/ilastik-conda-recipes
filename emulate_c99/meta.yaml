@@ -1,19 +1,11 @@
+{% import TOOLSET_CONFIG as toolset %}
+
 package:
   name: emulate_c99
-  version: "1.0"
+  version: "1.0{{toolset.suffix}}"
   
-{% set vc_version = environ.get('VISUALSTUDIOVERSION') %}  # [win]
-{% set vc = 'vc'+vc_version[:-2] %}                        # [win]
-
-build:
-  string: {{ vc }}                   # [win]
-  track_features:
-    - {{ vc }}                       # [win]
-  features:
-    - {{ vc }}                       # [win]
-
 requirements:
   build:
-    - visual-studio {{ vc_version }} # [win]
+    - {{toolset.build_requirement}}
 
-  # emulate_c99 is static library, has no runtime
+  # emulate_c99 is static library, has no runtime requirements

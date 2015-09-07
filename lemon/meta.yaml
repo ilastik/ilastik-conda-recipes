@@ -1,6 +1,8 @@
+{% import TOOLSET_CONFIG as toolset %}
+
 package:
   name: lemon
-  version: "1.2.4"
+  version: "1.2.4{{toolset.suffix}}"
 
 source:
   fn: lemon-1.2.4.tar.gz
@@ -11,29 +13,21 @@ source:
     - lemon.patch         # [unix]
     - lemon-test.patch    # [unix]
 
-{% set vc_version = environ.get('VISUALSTUDIOVERSION') %}  # [win]
-{% set vc = 'vc'+vc_version[:-2] %}                        # [win]
-
 build:
   number: 1
   detect_binary_files_with_prefix: true
-  string: {{ vc }}                   # [win]
-  track_features:
-    - {{ vc }}                       # [win]
-  features:
-    - {{ vc }}                       # [win]
 
 requirements:
   build:
-    - visual-studio {{ vc_version }} # [win]
-    - gcc 4.8.2.99                   # [linux]
-    - gcc 4.8.2                      # [osx]
-    - python  2.7.*
+    - {{toolset.build_requirement}}
+    # - gcc 4.8.2.99                   # [linux]
+    # - gcc 4.8.2                      # [osx]
+    - python  2.7.*{{toolset.suffix}}
 
   run:
-    - libgcc                         # [unix]
-    - visual-studio {{ vc_version }} # [win]
-    - python  2.7.*
+    # - libgcc                         # [unix]
+    - {{toolset.run_requirement}}
+    - python  2.7.*{{toolset.suffix}}
 
 about:
   home: http://lemon.cs.elte.hu/trac/lemon

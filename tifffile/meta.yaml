@@ -1,34 +1,29 @@
+{% import TOOLSET_CONFIG as toolset %}
+
 package:
   name: tifffile
-  version: "0.4.1"
+  version: "0.4.1{{toolset.suffix}}"
 
 source:
   git_url: git://github.com/ilastik/tifffile.git
   git_tag: 05b51f398b2c18eacf9dce674631707763f7e94e
 
-{% set vc_version = environ.get('VISUALSTUDIOVERSION') %}  # [win]
-{% set vc = 'vc'+vc_version[:-2] %}                        # [win]
-
 build:
   number: 1
-  string: 1_{{ vc }}                   # [win]
-  track_features:
-    - {{ vc }}                       # [win]
-  features:
-    - {{ vc }}                       # [win]
 
 requirements:
   build:
-    - python 2.7.*|>=3.4  # [unix]
-    - python 2.7.*        # [win]
-    - numpy >=1.8.2       # [unix]
-    - numpy  1.7.0        # [win]
+    - python 2.7.*|>=3.4              # [unix]
+    - python 2.7.*{{toolset.suffix}}  # [win]
+    # - numpy >=1.8.2,*{{toolset.suffix}}
+    - numpy >=1.8.2                   # [unix]
+    - numpy  1.7.*{{toolset.suffix}}  # [win]
 
   run:
-    - python 2.7.*|>=3.4  # [unix]
-    - python 2.7.*        # [win]
-    - numpy >=1.8.2       # [unix]
-    - numpy  1.7.0        # [win]
+    - python 2.7.*{{toolset.suffix}}  # [win]
+    # - numpy >=1.8.2,*{{toolset.suffix}}
+    - numpy >=1.8.2                   # [unix]
+    - numpy  1.7.*{{toolset.suffix}}  # [win]
 
 test:
   imports:

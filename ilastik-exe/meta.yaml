@@ -1,19 +1,14 @@
+{% import TOOLSET_CONFIG as toolset %}
+
 package:
   name: ilastik-exe
-  version: "1.0"
+  version: "1.0{{toolset.suffix}}"
 
 # source is in recipe dir
 
-{% set vc_version = environ.get('VISUALSTUDIOVERSION') %}  # [win]
-{% set vc = 'vc'+vc_version[:-2] %}                        # [win]
-
-build:
-  string: {{ vc }}                   # [win]
-  track_features:
-    - {{ vc }}                       # [win]
-  features:
-    - {{ vc }}                       # [win]
-
 requirements:
   build:
-    - visual-studio {{ vc_version }} # [win]
+    - {{toolset.build_requirement}}
+    
+  run:
+    - {{toolset.run_requirement}}

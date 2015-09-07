@@ -1,30 +1,22 @@
+{% import TOOLSET_CONFIG as toolset %}
+
 package:
   name: libpng
-  version: "1.5.13"
+  version: "1.5.13{{toolset.suffix}}"
 
 source:
     fn:  libpng-1.5.13.tar.gz
     md5: 9c5a584d4eb5fe40d0f1bc2090112c65
     url: http://sourceforge.net/projects/libpng/files/libpng15/older-releases/1.5.13/libpng-1.5.13.tar.gz
 
-{% set vc_version = environ.get('VISUALSTUDIOVERSION') %}  # [win]
-{% set vc = 'vc'+vc_version[:-2] %}                        # [win]
-
-build:
-  string: {{ vc }}                   # [win]
-  track_features:
-    - {{ vc }}                       # [win]
-  features:
-    - {{ vc }}                       # [win]
-
 requirements:
   build:
-    - visual-studio {{ vc_version }} # [win]
-    - zlib
+    - {{toolset.build_requirement}}
+    - zlib   *{{toolset.suffix}}
 
   run:
-    - visual-studio {{ vc_version }} # [win]
-    - zlib
+    - {{toolset.run_requirement}}
+    - zlib   *{{toolset.suffix}}
 
 about:
   home: http://www.libpng.org/pub/png/libpng.html

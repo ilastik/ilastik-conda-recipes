@@ -1,29 +1,21 @@
+{% import TOOLSET_CONFIG as toolset %}
+
 package:
   name: jpeg
-  version: "1.2.1"
+  version: "1.2.1{{toolset.suffix}}"
 
 source:
     fn:  libjpeg-turbo-1.2.1.tar.gz
     md5: f61e60ff01381ece4d2fe65eeb52669e
     url: http://sourceforge.net/projects/libjpeg-turbo/files/1.2.1/libjpeg-turbo-1.2.1.tar.gz
 
-{% set vc_version = environ.get('VISUALSTUDIOVERSION') %}  # [win]
-{% set vc = 'vc'+vc_version[:-2] %}                        # [win]
-
-build:
-  string: {{ vc }}                   # [win]
-  track_features:
-    - {{ vc }}                       # [win]
-  features:
-    - {{ vc }}                       # [win]
-
 requirements:
   build:
-    - visual-studio {{ vc_version }} # [win]
+    - {{toolset.build_requirement}}
     - nasm                           # [win]
 
   run:
-    - visual-studio {{ vc_version }} # [win]
+    - {{toolset.run_requirement}}
 
 about:
   home: http://libjpeg-turbo.virtualgl.org

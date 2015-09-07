@@ -1,32 +1,25 @@
+{% import TOOLSET_CONFIG as toolset %}
+
 package:
   name: python
-  version: "2.7.10"
+  version: "2.7.10{{toolset.suffix}}"
 
 source:
   fn:  Python-2.7.10.tgz
   url: https://www.python.org/ftp/python/2.7.10/Python-2.7.10.tgz
   md5: d7547558fd673bd9d38e2108c6b42521
 
-{% set vc_version = environ.get('VISUALSTUDIOVERSION') %}  # [win]
-{% set vc = 'vc'+vc_version[:-2] %}                        # [win]
-
-build:
-  string: {{ vc }}                   # [win]
-  track_features:
-    - {{ vc }}                       # [win]
-  features:
-    - {{ vc }}                       # [win]
-                                     
 requirements:
   build:
-    - visual-studio {{ vc_version }} # [win]
+    - {{toolset.build_requirement}}
+    - perl    active_state           # [win]
     - bzip2-src-for-python           # [win]
     - openssl-src-for-python         # [win]
     - nasm                           # [win]
     - sqlite-src-for-python          # [win]
 
   run:
-    - visual-studio {{ vc_version }} # [win]
+    - {{toolset.run_requirement}}
 
 about:
   home: https://www.python.org/

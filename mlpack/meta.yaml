@@ -1,41 +1,35 @@
+{% import TOOLSET_CONFIG as toolset %}
+
 package:
   name: mlpack
-  version: "1.0.8"
+  version: "1.0.8{{toolset.suffix}}"
 
 source:
   fn: mlpack-1.0.8.tar.gz
   url: http://www.mlpack.org/files/mlpack-1.0.8.tar.gz
   md5: 0331e12f2485b9d5d39c9d9dea618108
 
-{% set vc_version = environ.get('VISUALSTUDIOVERSION') %}  # [win]
-{% set vc = 'vc'+vc_version[:-2] %}                        # [win]
-
 build:
   number: 3
-  string: 3_{{ vc }}                 # [win]
-  track_features:
-    - {{ vc }}                       # [win]
-  features:
-    - {{ vc }}                       # [win]
   detect_binary_files_with_prefix: true
 
 requirements:
   build:
-    - visual-studio {{ vc_version }} # [win]
-    - gcc 4.8.2.99                   # [linux]
-    - gcc 4.8.2                      # [osx]
-    - boost 1.55.0
-    - armadillo
-    - libxml2
-    - hdf5     1.8.12                # [win]
+    - {{toolset.build_requirement}}
+    # - gcc 4.8.2.99                   # [linux]
+    # - gcc 4.8.2                      # [osx]
+    - boost  1.55.*{{toolset.suffix}}
+    - armadillo   *{{toolset.suffix}}
+    - libxml2     *{{toolset.suffix}}
+    - hdf5    1.8.*{{toolset.suffix}}  # [win]
      
   run:
-    - visual-studio {{ vc_version }} # [win]
-    - libgcc                         # [unix]
-    - boost 1.55.0
-    - armadillo
-    - libxml2
-    - hdf5     1.8.12                # [win]
+    - {{toolset.run_requirement}}
+    # - libgcc                         # [unix]
+    - boost  1.55.*{{toolset.suffix}}
+    - armadillo   *{{toolset.suffix}}
+    - libxml2     *{{toolset.suffix}}
+    - hdf5    1.8.*{{toolset.suffix}}  # [win]
 
 about:
   home: http://www.mlpack.org/

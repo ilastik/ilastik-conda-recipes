@@ -1,7 +1,11 @@
-call "%RECIPE_DIR%\..\common-vars-mingw.bat"
+REM load toolset info
+set TOOLSET_INFO_DIR=%PREFIX%\toolset-info
+call "%TOOLSET_INFO_DIR%\common-vars.bat"
+call "%TOOLSET_INFO_DIR%\perl-vars.bat"
 
-REM MSYS\bin must not be in the PATH (conflicts with ActiveState perl.exe)
-%DOS_TOOLS% :remove_from_PATH "%MSYS_PATH%"
+REM ActiveState Per should be at the front of the PATH to avoid
+REM conflicts with aother perl versions sitting around
+set PATH=%PERL_PATH%;%PATH%
 
 REM configure
 if %ARCH%==32 (

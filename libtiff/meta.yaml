@@ -1,32 +1,24 @@
+{% import TOOLSET_CONFIG as toolset %}
+
 package:
   name: libtiff
-  version: "4.0.1"
+  version: "4.0.1{{toolset.suffix}}"
 
 source:
     fn:  tiff-4.0.1.tar.gz
     md5: fae149cc9da35c598d8be897826dfc63
     url: http://download.osgeo.org/libtiff/tiff-4.0.1.tar.gz
 
-{% set vc_version = environ.get('VISUALSTUDIOVERSION') %}  # [win]
-{% set vc = 'vc'+vc_version[:-2] %}                        # [win]
-
-build:
-  string: {{ vc }}                   # [win]
-  track_features:
-    - {{ vc }}                       # [win]
-  features:
-    - {{ vc }}                       # [win]
-
 requirements:
   build:
-    - visual-studio {{ vc_version }} # [win]
-    - zlib
-    - jpeg  1.2.1                    # [win]
+    - {{toolset.build_requirement}}
+    - zlib  *{{toolset.suffix}}
+    - jpeg  *{{toolset.suffix}}
 
   run:
-    - visual-studio {{ vc_version }} # [win]
-    - zlib
-    - jpeg  1.2.1                    # [win]
+    - {{toolset.run_requirement}}
+    - zlib  *{{toolset.suffix}}
+    - jpeg  *{{toolset.suffix}}
 
 about:
   home: http://www.libtiff.org

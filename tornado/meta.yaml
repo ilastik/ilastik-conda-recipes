@@ -1,32 +1,24 @@
+{% import TOOLSET_CONFIG as toolset %}
+
 package:
   name: tornado
-  version: "4.2.1"
+  version: "4.2.1{{toolset.suffix}}"
 
 source:
   fn:  tornado-4.2.1.tar.gz
   url: https://pypi.python.org/packages/source/t/tornado/tornado-4.2.1.tar.gz
   md5: d523204389cfb70121bb69709f551b20
 
-{% set vc_version = environ.get('VISUALSTUDIOVERSION') %}  # [win]
-{% set vc = 'vc'+vc_version[:-2] %}                        # [win]
-
-build:
-  string: {{ vc }}                   # [win]
-  track_features:
-    - {{ vc }}                       # [win]
-  features:
-    - {{ vc }}                       # [win]
-
 requirements:
   build:
-    - visual-studio {{ vc_version }} # [win]
-    - python 2.7.10                  # [win]
+    - {{toolset.build_requirement}}
+    - python 2.7.*{{toolset.suffix}}
     - certifi
     - ssl_match_hostname
 
   run:
-    - visual-studio {{ vc_version }} # [win]
-    - python 2.7.10                  # [win]
+    - {{toolset.run_requirement}}
+    - python 2.7.*{{toolset.suffix}}
     - certifi
     - ssl_match_hostname
     

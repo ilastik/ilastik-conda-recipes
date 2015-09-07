@@ -1,6 +1,8 @@
+{% import TOOLSET_CONFIG as toolset %}
+
 package:
   name: psutil
-  version: "2.1.1"
+  version: "2.1.1{{toolset.suffix}}"
   # FIXME: v 3.1.1 failed to compile on Windows
 
 source:
@@ -8,24 +10,14 @@ source:
   url: https://pypi.python.org/packages/source/p/psutil/psutil-2.1.1.tar.gz
   md5: 72a6b15d589fab11f6ca245b775bc3c6
 
-{% set vc_version = environ.get('VISUALSTUDIOVERSION') %}  # [win]
-{% set vc = 'vc'+vc_version[:-2] %}                        # [win]
-
-build:
-  string: {{ vc }}                   # [win]
-  track_features:
-    - {{ vc }}                       # [win]
-  features:
-    - {{ vc }}                       # [win]
-
 requirements:
   build:
-    - visual-studio {{ vc_version }} # [win]
-    - python 2.7.10                  # [win]
+    - {{toolset.build_requirement}}
+    - python 2.7.*{{toolset.suffix}}
 
   run:
-    - visual-studio {{ vc_version }} # [win]
-    - python 2.7.10                  # [win]
+    - {{toolset.run_requirement}}
+    - python 2.7.*{{toolset.suffix}}
 
 about:
   home: https://pypi.python.org/pypi/psutil

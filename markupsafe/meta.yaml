@@ -1,31 +1,23 @@
+{% import TOOLSET_CONFIG as toolset %}
+
 package:
   name: markupsafe
-  version: "0.18"
+  version: "0.18{{toolset.suffix}}"
 
 source:
   fn:  MarkupSafe-0.18.tar.gz
   url: https://pypi.python.org/packages/source/M/MarkupSafe/MarkupSafe-0.18.tar.gz
   md5: f8d252fd05371e51dec2fe9a36890687
 
-{% set vc_version = environ.get('VISUALSTUDIOVERSION') %}  # [win]
-{% set vc = 'vc'+vc_version[:-2] %}                        # [win]
-
-build:
-  string: {{ vc }}                   # [win]
-  track_features:
-    - {{ vc }}                       # [win]
-  features:
-    - {{ vc }}                       # [win]
-
 requirements:
   build:
-    - visual-studio {{ vc_version }} # [win]
-    - python   2.7.10                # [win]
+    - {{toolset.build_requirement}}
+    - python   2.7.*{{toolset.suffix}}
     - setuptools
 
   run:
-    - visual-studio {{ vc_version }} # [win]
-    - python   2.7.10                # [win]
+    - {{toolset.run_requirement}}
+    - python   2.7.*{{toolset.suffix}}
 
 about:
   home: https://pypi.python.org/pypi/MarkupSafe

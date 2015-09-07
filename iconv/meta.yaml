@@ -1,21 +1,13 @@
+{% import TOOLSET_CONFIG as toolset %}
+
 package:
   name: iconv
-  version: "1.14"
+  version: "1.14{{toolset.suffix}}"
 
 source:
   fn:  libiconv-1.14.tar.gz
   url: http://ftp.gnu.org/pub/gnu/libiconv/libiconv-1.14.tar.gz
   md5: e34509b1623cec449dfeb73d7ce9c6c6
-
-{% set vc_version = environ.get('VISUALSTUDIOVERSION') %}  # [win]
-{% set vc = 'vc'+vc_version[:-2] %}                        # [win]
-
-build:
-  string: {{ vc }}                   # [win]
-  track_features:
-    - {{ vc }}                       # [win]
-  features:
-    - {{ vc }}                       # [win]
 
 requirements:
   build:

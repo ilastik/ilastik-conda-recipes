@@ -1,17 +1,11 @@
+{% import TOOLSET_CONFIG as toolset %}
+
 package:
   name: qt
-  version: "4.8.6"
-
-{% set vc_version = environ.get('VISUALSTUDIOVERSION') %}  # [win]
-{% set vc = 'vc'+vc_version[:-2] %}                        # [win]
+  version: "4.8.6{{toolset.suffix}}"
 
 build:
   number: 1
-  string: 1_{{ vc }}                 # [win]
-  track_features:
-    - {{ vc }}                       # [win]
-  features:
-    - {{ vc }}                       # [win]
   detect_binary_files_with_prefix: true
 
   always_include_files:              # [win]
@@ -25,8 +19,8 @@ build:
 
 requirements:
   build:
-    - visual-studio {{ vc_version }} # [win]
-    - qt-with-src  4.8.6             # [win]
+    - {{toolset.build_requirement}}
+    - qt-with-src  4.8.6*{{toolset.suffix}} # [win]
     - jpeg     8d                    # [unix]
     - libtiff  4.0*                  # [unix]
     - libpng   1.6.17                # [unix]
@@ -34,12 +28,11 @@ requirements:
     - zlib                           # [unix]
 
   run:
-    - visual-studio {{ vc_version }} # [win]
-    - jpeg     8d                    # [unix]
-    - jpeg     1.2.1                 # [win]
-    - libtiff  4.0*                  # [unix]
-    - libtiff  4.0.1                 # [win]
-    - libpng   1.6.17                # [unix]
-    - libpng   1.5.13                # [win]
-    - freetype
-    - zlib
+    - {{toolset.run_requirement}}
+    - jpeg     8d                      # [unix]
+    - jpeg     1.2.*{{toolset.suffix}} # [win]
+    - libtiff  4.0*{{toolset.suffix}}
+    - libpng   1.6.17                  # [unix]
+    - libpng   1.5.*{{toolset.suffix}} # [win]
+    - freetype *{{toolset.suffix}}
+    - zlib     *{{toolset.suffix}}

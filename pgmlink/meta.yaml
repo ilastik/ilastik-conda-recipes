@@ -1,6 +1,8 @@
+{% import TOOLSET_CONFIG as toolset %}
+
 package:
     name: pgmlink
-    version: "1.2"
+    version: "1.2{{toolset.suffix}}"
 
 source:
     #git_url: https://github.com/martinsch/pgmlink
@@ -9,61 +11,49 @@ source:
     git_url: https://github.com/martinsch/pgmlink
     git_tag: 7a0c8d4f54e9a4066991829fb52b411a02914666 # Version from ilastik 1.1.5, downgrade relative to above commit
 
-{% set vc_version = environ.get('VISUALSTUDIOVERSION') %}  # [win]
-{% set vc = 'vc'+vc_version[:-2] %}                        # [win]
-
 build:
   number: 11
-  string: 11_g7a0c8d4                # [unix]
-  string: 11_g7a0c8d4_{{ vc }}       # [win]
-  track_features:
-    - {{ vc }}                       # [win]
-  features:
-    - {{ vc }}                       # [win]
+  string: 11_g7a0c8d4
   script_env:
      - CPLEX_ROOT_DIR
   detect_binary_files_with_prefix: true
 
 requirements:
   build:
-    - visual-studio {{ vc_version }} # [win]
-    - gcc 4.8.2.99                   # [linux]
-    - gcc 4.8.2                      # [osx]
-    - python                         # [unix]
-    - python  2.7.10                 # [win]
-    - numpy                          # [unix]
-    - numpy    1.7.0                 # [win]
-    - cplex-shared                   # [unix]
-    - patchelf                       # [linux]
-    - ann
-    - boost 1.55.0
-    - vigra
-    - opengm
-    - mlpack
-    - lemon
-    - libxml2
-    - dlib                           # [unix]
-    - armadillo 4.000.2              # [unix]
-    - armadillo 4.320.0              # [win]
+    - {{toolset.build_requirement}}
+    # - gcc 4.8.2.99                   # [linux]
+    # - gcc 4.8.2                      # [osx]
+    - python  2.7.*{{toolset.suffix}}
+    - numpy   *{{toolset.suffix}}
+    - cplex-shared                        # [unix]
+    - patchelf                            # [linux]
+    - ann     *{{toolset.suffix}}
+    - boost 1.55.*{{toolset.suffix}}
+    - vigra   *{{toolset.suffix}}
+    - opengm  *{{toolset.suffix}}
+    - mlpack  *{{toolset.suffix}}
+    - lemon   *{{toolset.suffix}}
+    - libxml2 *{{toolset.suffix}}
+    - dlib                                # [unix]
+    - armadillo 4.000.2                   # [unix]
+    - armadillo 4.320.*{{toolset.suffix}} # [win]
 
   run:
-    - visual-studio {{ vc_version }} # [win]
-    - libgcc                         # [unix]
-    - python                         # [unix]
-    - python  2.7.10                 # [win]
-    - numpy                          # [unix]
-    - numpy    1.7.0                 # [win]
-    - patchelf                       # [linux]
-    - ann
-    - boost 1.55.0
-    - vigra
-    - opengm
-    - mlpack
-    - lemon
-    - libxml2
-    - dlib                           # [unix]
-    - armadillo 4.000.2              # [unix]
-    - armadillo 4.320.0              # [win]
+    - {{toolset.run_requirement}}
+    # - libgcc                            # [unix]
+    - python  2.7.*{{toolset.suffix}}
+    - numpy   *{{toolset.suffix}}
+    - patchelf                            # [linux]
+    - ann     *{{toolset.suffix}}
+    - boost 1.55.*{{toolset.suffix}}
+    - vigra   *{{toolset.suffix}}
+    - opengm  *{{toolset.suffix}}
+    - mlpack  *{{toolset.suffix}}
+    - lemon   *{{toolset.suffix}}
+    - libxml2 *{{toolset.suffix}}
+    - dlib                                # [unix]
+    - armadillo 4.000.2                   # [unix]
+    - armadillo 4.320.*{{toolset.suffix}} # [win]
 
     # We don't require cplex-shared here because it only needs to be installed once per machine,
     # and requiring it here would include all of gcc in the install lib dir.

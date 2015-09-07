@@ -1,6 +1,8 @@
+{% import TOOLSET_CONFIG as toolset %}
+
 package:
   name: hdf5
-  version: "1.8.12"
+  version: "1.8.12{{toolset.suffix}}"
 
 source:
     fn:  hdf5-1.8.12.tar.gz
@@ -12,24 +14,14 @@ source:
     # md5: 3c0d7a8c38d1abc7b40fc12c1d5f2bb8
     # url: http://www.hdfgroup.org/ftp/HDF5/current/src/hdf5-1.8.15-patch1.tar.bz2
 
-{% set vc_version = environ.get('VISUALSTUDIOVERSION') %}  # [win]
-{% set vc = 'vc'+vc_version[:-2] %}                        # [win]
-
-build:
-  string: {{ vc }}                   # [win]
-  track_features:
-    - {{ vc }}                       # [win]
-  features:
-    - {{ vc }}                       # [win]
-
 requirements:
   build:
-    - visual-studio {{ vc_version }} # [win]
-    - zlib
+    - {{toolset.build_requirement}}
+    - zlib    *{{toolset.suffix}}
 
   run:
-    - visual-studio {{ vc_version }} # [win]
-    - zlib
+    - {{toolset.run_requirement}}
+    - zlib    *{{toolset.suffix}}
 
 about:
   home: https://www.hdfgroup.org/HDF5/

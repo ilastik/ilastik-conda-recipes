@@ -1,15 +1,12 @@
+{% import TOOLSET_CONFIG as toolset %}
+
 package:
   name: vigra
-  version: "1.10"
+  version: "1.10{{toolset.suffix}}"
 
 source:
   git_url: git://github.com/ukoethe/vigra.git
   git_tag: 35e5d4aed380087d75e206348d1648d9ad9cf1e6 # 2015-07-16
-
-build:
-
-{% set vc_version = environ.get('VISUALSTUDIOVERSION') %}  # [win]
-{% set vc = 'vc'+vc_version[:-2] %}                        # [win]
 
 build:
   script_env:
@@ -18,51 +15,42 @@ build:
 
   number: 9
   detect_binary_files_with_prefix: true
-  string: 9_35e5d4a                  # [unix]
-  string: 9_35e5d4a_{{ vc }}         # [win]
-  track_features:
-    - {{ vc }}                       # [win]
-  features:
-    - {{ vc }}                       # [win]
+  string: 9_35e5d4a
 
 requirements:
   build:
-    - visual-studio {{ vc_version }} # [win]
-    - gcc 4.8.2.99                   # [linux]
-    - gcc 4.8.2                      # [osx]
-    - python   2.7.*
-    - numpy    >=1.9                 # [unix]
-    - numpy    1.7.0                 # [win]
-    - jpeg     8d                    # [unix]
-    - jpeg     1.2.1                 # [win]
-    - libtiff  4.0*                  # [unix]
-    - libtiff  4.0.1                 # [win]
-    - libpng   1.6.17                # [unix]
-    - libpng   1.5.13                # [win]
-    - fftw     3.3*
-    - hdf5     1.8.14                # [unix]
-    - hdf5     1.8.12                # [win]
-    - boost    1.55.0
+    - {{toolset.build_requirement}}
+    # - gcc 4.8.2.99                   # [linux]
+    # - gcc 4.8.2                      # [osx]
+    - python   2.7.*{{toolset.suffix}}
+    - numpy    >=1.9                   # [unix]
+    - numpy    1.7.*{{toolset.suffix}} # [win]
+    - jpeg     *{{toolset.suffix}}
+    - libtiff  *{{toolset.suffix}}
+    - libpng   1.6.17                  # [unix]
+    - libpng   1.5.*{{toolset.suffix}} # [win]
+    - fftw     3.3*{{toolset.suffix}}
+    - hdf5     1.8.14                  # [unix]
+    - hdf5     1.8.*{{toolset.suffix}} # [win]
+    - boost    1.55.*{{toolset.suffix}}
     - nose
     # - sphinx
 #    - zlib     1.2*     # only indirectly used by vigra
 
   run:
-    - visual-studio {{ vc_version }} # [win]
-    - libgcc   4.8*                  # [unix]
-    - python   2.7.*
-    - numpy    >=1.9                 # [unix]
-    - numpy    1.7.0                 # [win]
-    - jpeg     8d                    # [unix]
-    - jpeg     1.2.1                 # [win]
-    - libtiff  4.0*                  # [unix]
-    - libtiff  4.0.1                 # [win]
-    - libpng   1.6.17                # [unix]
-    - libpng   1.5.13                # [win]
-    - fftw     3.3*
-    - hdf5     1.8.14                # [unix]
-    - hdf5     1.8.12                # [win]
-    - boost    1.55.0
+    - {{toolset.run_requirement}}
+    # - libgcc   4.8*                  # [unix]
+    - python   2.7.*{{toolset.suffix}}
+    - numpy    >=1.9                   # [unix]
+    - numpy    1.7.*{{toolset.suffix}} # [win]
+    - jpeg     *{{toolset.suffix}}
+    - libtiff  *{{toolset.suffix}}
+    - libpng   1.6.17                  # [unix]
+    - libpng   1.5.*{{toolset.suffix}} # [win]
+    - fftw     3.3*{{toolset.suffix}}
+    - hdf5     1.8.14                  # [unix]
+    - hdf5     1.8.*{{toolset.suffix}} # [win]
+    - boost    1.55.*{{toolset.suffix}}
 #    - zlib     1.2*
 
 test:

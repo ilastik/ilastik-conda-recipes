@@ -1,38 +1,30 @@
+{% import TOOLSET_CONFIG as toolset %}
+
 package:
   name: scikit-learn
-  version: "0.16.1"
+  version: "0.16.1{{toolset.suffix}}"
 
 source:
   fn:  scikit-learn-0.16.1.tar.gz
   url: https://pypi.python.org/packages/source/s/scikit-learn/scikit-learn-0.16.1.tar.gz
   md5: 363ddda501e3b6b61726aa40b8dbdb7e
 
-{% set vc_version = environ.get('VISUALSTUDIOVERSION') %}  # [win]
-{% set vc = 'vc'+vc_version[:-2] %}                        # [win]
-
-build:
-  string: {{ vc }}                   # [win]
-  track_features:
-    - {{ vc }}                       # [win]
-  features:
-    - {{ vc }}                       # [win]
-
 requirements:
   build:
-    - visual-studio {{ vc_version }} # [win]
-    - python 2.7.10                  # [win]
-    - numpy 1.7.0                    # [win]
-    - scipy
-    - cython                         # [unix]
-    - cython  0.23                   # [win]
+    - {{toolset.build_requirement}}
+    - python 2.7.*{{toolset.suffix}}
+    - numpy  *{{toolset.suffix}}
+    - scipy  *{{toolset.suffix}}
+    - cython                          # [unix]
+    - cython  0.23*{{toolset.suffix}} # [win]
 
   run:
-    - visual-studio {{ vc_version }} # [win]
-    - python 2.7.10                  # [win]
-    - numpy 1.7.0                    # [win]
-    - scipy
-    - cython                         # [unix]
-    - cython  0.23                   # [win]
+    - {{toolset.run_requirement}}
+    - python 2.7.*{{toolset.suffix}}
+    - numpy  *{{toolset.suffix}}
+    - scipy  *{{toolset.suffix}}
+    - cython                          # [unix]
+    - cython  0.23*{{toolset.suffix}} # [win]
 
 about:
   home: http://scikit-learn.org

@@ -1,48 +1,38 @@
+{% import TOOLSET_CONFIG as toolset %}
+
 package:
   name: qimage2ndarray
-  version: "1.4"
+  version: "1.4{{toolset.suffix}}"
 
 source:
   fn: qimage2ndarray-1.4.tar.gz
   url: https://pypi.python.org/packages/source/q/qimage2ndarray/qimage2ndarray-1.4.tar.gz
   md5: 77359e694d498c958c90bcd3e3851d5d
 
-{% set vc_version = environ.get('VISUALSTUDIOVERSION') %}  # [win]
-{% set vc = 'vc'+vc_version[:-2] %}                        # [win]
-
 build:
   number: 3
-  string: 3_{{ vc }}                  # [win]
-  track_features:
-    - {{ vc }}                       # [win]
-  features:
-    - {{ vc }}                       # [win]
   detect_binary_files_with_prefix: true
 
 requirements:
   build:
-    - visual-studio {{ vc_version }} # [win]
-    - gcc 4.8.2.99                   # [linux]
-    - gcc 4.8.2                      # [osx]
-    - python                         # [unix]
-    - python 2.7.10                  # [win]
-    - numpy                          # [unix]
-    - numpy    1.7.0                 # [win]
-    - pyqt 4.11.3.99                 # [osx]
-    - pyqt 4.11.3                    # [linux or win]
+    - {{toolset.build_requirement}}
+    # - gcc 4.8.2.99                   # [linux]
+    # - gcc 4.8.2                      # [osx]
+    - python 2.7.*{{toolset.suffix}}
+    - numpy   *{{toolset.suffix}}
+    - pyqt 4.11.3.99                   # [osx]
+    - pyqt 4.11.3*{{toolset.suffix}}   # [linux or win]
     - setuptools
-    - sip
+    - sip     *{{toolset.suffix}}
 
   run:
-    - visual-studio {{ vc_version }} # [win]
-    - libgcc                         # [unix]
-    - python                         # [unix]
-    - python 2.7.10                  # [win]
-    - numpy                          # [unix]
-    - numpy    1.7.0                 # [win]
-    - pyqt 4.11.3.99                 # [osx]
-    - pyqt 4.11.3                    # [linux or win]
-    - sip
+    - {{toolset.run_requirement}}
+    # - libgcc                         # [unix]
+    - python 2.7.*{{toolset.suffix}}
+    - numpy   *{{toolset.suffix}}
+    - pyqt 4.11.3.99                   # [osx]
+    - pyqt 4.11.3*{{toolset.suffix}}   # [linux or win]
+    - sip     *{{toolset.suffix}}
 
 
 test:

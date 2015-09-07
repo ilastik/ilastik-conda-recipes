@@ -1,6 +1,8 @@
+{% import TOOLSET_CONFIG as toolset %}
+
 package:
     name: opengm
-    version: "2.3.4"
+    version: "2.3.4{{toolset.suffix}}"
 
 source:
     git_url: https://github.com/opengm/opengm.git
@@ -10,41 +12,29 @@ source:
 
 build:
 
-{% set vc_version = environ.get('VISUALSTUDIOVERSION') %}  # [win]
-{% set vc = 'vc'+vc_version[:-2] %}                        # [win]
-
 build:
   number: 5
-  string: 5_g89d44d0                 # [unix] Downgraded relative to build 4
-  string: 5_g89d44d0_{{ vc }}        # [win]
+  string: 5_g89d44d0                 # Downgraded relative to build 4
   detect_binary_files_with_prefix: true
-  track_features:
-    - {{ vc }}                       # [win]
-  features:
-    - {{ vc }}                       # [win]
 
 requirements:
   build:
-    - visual-studio {{ vc_version }} # [win]
-    - gcc 4.8.2.99                   # [linux]
-    - gcc 4.8.2                      # [osx]
-    - boost 1.55.0
-    - python  2.7.*                  # [win]
-    - python                         # [unix]
-    - numpy                          # [unix]
-    - numpy    1.7.0                 # [win]
-    - hdf5     1.8.14                # [unix]
-    - hdf5     1.8.12                # [win]
+    - {{toolset.build_requirement}}
+    # - gcc 4.8.2.99                   # [linux]
+    # - gcc 4.8.2                      # [osx]
+    - boost 1.55.*{{toolset.suffix}}
+    - python  2.7.*{{toolset.suffix}}
+    - numpy    *{{toolset.suffix}}
+    - hdf5     1.8.14                  # [unix]
+    - hdf5     1.8.*{{toolset.suffix}} # [win]
   run:
-    - visual-studio {{ vc_version }} # [win]
-    - libgcc                         # [unix]
-    - boost 1.55.0
-    - python  2.7.*                  # [win]
-    - python                         # [unix]
-    - numpy                          # [unix]
-    - numpy    1.7.0                 # [win]
-    - hdf5     1.8.14                # [unix]
-    - hdf5     1.8.12                # [win]
+    - {{toolset.run_requirement}}
+    # - libgcc                         # [unix]
+    - boost 1.55.*{{toolset.suffix}}
+    - python  2.7.*{{toolset.suffix}}
+    - numpy   *{{toolset.suffix}}
+    - hdf5     1.8.14                  # [unix]
+    - hdf5     1.8.*{{toolset.suffix}} # [win]
 
 # FIXME: upgrade opengm to make the Python bindings work on Windows 
 test:          # [unix]

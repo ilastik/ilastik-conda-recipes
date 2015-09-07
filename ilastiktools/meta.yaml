@@ -1,6 +1,8 @@
+{% import TOOLSET_CONFIG as toolset %}
+
 package:
   name: ilastiktools
-  version: "0.1"
+  version: "0.1{{toolset.suffix}}"
 
 source:
   git_url: git://github.com/ilastik/ilastiktools.git
@@ -8,37 +10,25 @@ source:
   git_tag: 
 
 build:
-
-{% set vc_version = environ.get('VISUALSTUDIOVERSION') %}  # [win]
-{% set vc = 'vc'+vc_version[:-2] %}                        # [win]
-
-build:
   number: 1
   detect_binary_files_with_prefix: true
-  string: afd8501                    # [unix]
-  string: afd8501_{{ vc }}           # [win]
-  track_features:
-    - {{ vc }}                       # [win]
-  features:
-    - {{ vc }}                       # [win]
+  string: afd8501
 
 requirements:
   build:
-    - visual-studio {{ vc_version }} # [win]
-    - gcc 4.8.2.99                   # [linux]
-    - gcc 4.8.2                      # [osx]
-    - python   2.7.*
-    - numpy                          # [unix]
-    - numpy    1.7.0                 # [win]
-    - vigra
+    - {{toolset.build_requirement}}
+    # - gcc 4.8.2.99                   # [linux]
+    # - gcc 4.8.2                      # [osx]
+    - python   2.7.*{{toolset.suffix}}
+    - numpy    *{{toolset.suffix}}
+    - vigra    *{{toolset.suffix}}
 
   run:
-    - visual-studio {{ vc_version }} # [win]
-    - libgcc             # [unix]
-    - python   2.7.*
-    - numpy                          # [unix]
-    - numpy    1.7.0                 # [win]
-    - vigra
+    - {{toolset.run_requirement}}
+    # - libgcc             # [unix]
+    - python   2.7.*{{toolset.suffix}}
+    - numpy    *{{toolset.suffix}}
+    - vigra    *{{toolset.suffix}}
 
 test:
   imports:

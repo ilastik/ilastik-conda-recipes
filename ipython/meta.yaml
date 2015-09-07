@@ -1,6 +1,8 @@
+{% import TOOLSET_CONFIG as toolset %}
+
 package:
   name: ipython
-  version: 0.13.1
+  version: "0.13.1{{toolset.suffix}}"
 # ipython 4 notebook fails to start the kernel
 #  version: 4.0.0
 
@@ -12,20 +14,10 @@ source:
 #  url: https://pypi.python.org/packages/source/i/ipython/ipython-4.0.0.tar.gz
 #  md5: c2fecbcf1c0fbdc82625c77a50733dd6
 
-{% set vc_version = environ.get('VISUALSTUDIOVERSION') %}  # [win]
-{% set vc = 'vc'+vc_version[:-2] %}                        # [win]
-
-build:
-  string: {{ vc }}                   # [win]
-  track_features:
-    - {{ vc }}                       # [win]
-  features:
-    - {{ vc }}                       # [win]
-
 requirements:
   build:
-    - visual-studio {{ vc_version }} # [win]
-    - python 2.7.10                  # [win]
+    - {{toolset.build_requirement}}
+    - python 2.7.*{{toolset.suffix}}
     - pip
     - setuptools
     - pyreadline                     # [win]
@@ -34,8 +26,8 @@ requirements:
     #        RuntimeWarning: libzmq 4 detected.
     #        It is unlikely that IPython's zmq code will work properly.
     #        Please install libzmq stable, which is 2.1.x or 2.2.x
-    - pyzmq  14.3.1                  # [win]
-    - tornado 4.2.1                  # [win]
+    - pyzmq     *{{toolset.suffix}}
+    - tornado   *{{toolset.suffix}}
     # needed for ipython 4.0:
     # - certifi
     # - traitlets
@@ -45,13 +37,13 @@ requirements:
     # - notebook
 
   run:
-    - visual-studio {{ vc_version }} # [win]
-    - python 2.7.10                  # [win]
+    - {{toolset.run_requirement}}
+    - python 2.7.*{{toolset.suffix}}
     - pip
     - pyreadline                     # [win]
     - pygments
-    - pyzmq  14.3.1                  # [win]
-    - tornado 4.2.1                  # [win]
+    - pyzmq     *{{toolset.suffix}}
+    - tornado   *{{toolset.suffix}}
     # - certifi
     # - traitlets
     # - ssl_match_hostname

@@ -1,27 +1,19 @@
+{% import TOOLSET_CONFIG as toolset %}
+
 package:
   name: openblas
-  version: "0.2.5"
+  version: "0.2.5{{toolset.suffix}}"
 
 source:
   git_url: http://github.com/xianyi/OpenBLAS
   git_rev: v0.2.5
   
-{% set vc_version = environ.get('VISUALSTUDIOVERSION') %}  # [win]
-{% set vc = 'vc'+vc_version[:-2] %}                        # [win]
-
-build:
-  string: {{ vc }}                   # [win]
-  track_features:
-    - {{ vc }}                       # [win]
-  features:
-    - {{ vc }}                       # [win]
-
 requirements:
   build:
-    - mingw 4.7.2                    # [win]
+    - mingw                          # [win]
 
   run:
-    - mingw 4.7.2                    # [win]
+    - mingw                          # [win]
 
 about:
   home: www.openblas.ne

@@ -1,6 +1,8 @@
+{% import TOOLSET_CONFIG as toolset %}
+
 package:
   name: iiboost
-  version: "0.1"
+  version: "0.1{{toolset.suffix}}"
 
 source:
   git_url: git://github.com/cbecker/iiboost.git
@@ -8,48 +10,36 @@ source:
 
 build:
 
-{% set vc_version = environ.get('VISUALSTUDIOVERSION') %}  # [win]
-{% set vc = 'vc'+vc_version[:-2] %}                        # [win]
-
 build:
   number: 3
   detect_binary_files_with_prefix: true
-  string: 3_g437491b                 # [unix]
-  string: 3_g437491b_{{ vc }}        # [win]
-  track_features:
-    - {{ vc }}                       # [win]
-  features:
-    - {{ vc }}                       # [win]
+  string: 3_g437491b
 
 requirements:
   build:
-    - visual-studio {{ vc_version }} # [win]
-    - gcc 4.8.2.99                   # [linux]
-    - gcc 4.8.2                      # [osx]
-    - python   2.7.*
-    - numpy                          # [unix]
-    - numpy    1.7.0                 # [win]
-    - itk-seg-conv-only
-    - jpeg                           # [unix]
-    - jpeg     1.2.1                 # [win]
-    - libtiff                        # [unix]
-    - libtiff  4.0.1                 # [win]
+    - {{toolset.build_requirement}}
+    # - gcc 4.8.2.99                   # [linux]
+    # - gcc 4.8.2                      # [osx]
+    - python   2.7.*{{toolset.suffix}}
+    - numpy    *{{toolset.suffix}}
+    - itk-seg-conv-only  *{{toolset.suffix}}
+    - jpeg     8d                      # [unix]
+    - jpeg     1.2.*{{toolset.suffix}} # [win]
+    - libtiff  *{{toolset.suffix}}
     - libpng   1.6.17                # [unix]
-    - libpng   1.5.13                # [win]
+    - libpng   1.5.*{{toolset.suffix}}  # [win]
 
   run:
     - libgcc                         # [unix]
-    - visual-studio {{ vc_version }} # [win]
-    - python   2.7.*
-    - numpy                          # [unix]
-    - numpy    1.7.0                 # [win]
-    - itk-seg-conv-only
-    - jpeg                           # [unix]
-    - jpeg     1.2.1                 # [win]
-    - libtiff                        # [unix]
-    - libtiff  4.0.1                 # [win]
+    - {{toolset.run_requirement}}
+    - python   2.7.*{{toolset.suffix}}
+    - numpy    *{{toolset.suffix}}
+    - itk-seg-conv-only  *{{toolset.suffix}}
+    - jpeg     8d                      # [unix]
+    - jpeg     1.2.*{{toolset.suffix}} # [win]
+    - libtiff  *{{toolset.suffix}}
     - libpng   1.6.17                # [unix]
-    - libpng   1.5.13                # [win]
+    - libpng   1.5.1*{{toolset.suffix}} # [win]
 
 test:
   imports:

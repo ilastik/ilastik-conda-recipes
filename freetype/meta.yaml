@@ -1,28 +1,20 @@
+{% import TOOLSET_CONFIG as toolset %}
+
 package:
   name: freetype
-  version: "2.4.11"
+  version: "2.4.11{{toolset.suffix}}"
 
 source:
   fn:  freetype-2.4.11.tar.gz
   url: http://download-mirror.savannah.gnu.org/releases/freetype/freetype-2.4.11.tar.gz
   md5: 5af8234cf36f64dc2b97f44f89325117
 
-{% set vc_version = environ.get('VISUALSTUDIOVERSION') %}  # [win]
-{% set vc = 'vc'+vc_version[:-2] %}                        # [win]
-
-build:
-  string: {{ vc }}                   # [win]
-  track_features:
-    - {{ vc }}                       # [win]
-  features:
-    - {{ vc }}                       # [win]
-
 requirements:
   build:
-    - visual-studio {{ vc_version }} # [win]
+    - {{toolset.build_requirement}}
 
   run:
-    - visual-studio {{ vc_version }} # [win]
+    - {{toolset.run_requirement}}
 
 about:
   home: http://www.freetype.org/

@@ -1,36 +1,28 @@
+{% import TOOLSET_CONFIG as toolset %}
+
 package:
   name: numpy
-  version: "1.7.0"
+  version: "1.7.0{{toolset.suffix}}"
 
 source:
     fn:  numpy-1.7.0.tar.gz
     md5: 4fa54e40b6a243416f0248123b6ec332
     url: http://downloads.sourceforge.net/project/numpy/NumPy/1.7.0/numpy-1.7.0.tar.gz
 
-    # FIXME: numpy 1.9.2 needs updated patches
+    # FIXME: numpy 1.9.2 needs updated patches on Windows
     # fn:  numpy-1.9.2.tar.gz
     # md5: a1ed53432dbcd256398898d35bc8e645
     # url: https://pypi.python.org/packages/source/n/numpy/numpy-1.9.2.tar.gz
     
-{% set vc_version = environ.get('VISUALSTUDIOVERSION') %}  # [win]
-{% set vc = 'vc'+vc_version[:-2] %}                        # [win]
-
-build:
-  string: {{ vc }}                   # [win]
-  track_features:
-    - {{ vc }}                       # [win]
-  features:
-    - {{ vc }}                       # [win]
-
 requirements:
   build:
-    - visual-studio {{ vc_version }} # [win]
-    - python
+    - {{toolset.build_requirement}}
+    - python     *{{toolset.suffix}}
     - openblas                       # [win]
 
   run:
-    - visual-studio {{ vc_version }} # [win]
-    - python
+    - {{toolset.run_requirement}}
+    - python     *{{toolset.suffix}}
     - openblas                       # [win]
 
 test:

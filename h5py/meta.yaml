@@ -1,37 +1,29 @@
+{% import TOOLSET_CONFIG as toolset %}
+
 package:
   name: h5py
-  version: "2.5.0"
+  version: "2.5.0{{toolset.suffix}}"
 
 source:
   fn:  h5py-2.5.0.tar.gz
   url: https://pypi.python.org/packages/source/h/h5py/h5py-2.5.0.tar.gz
   md5: 6e4301b5ad5da0d51b0a1e5ac19e3b74
 
-{% set vc_version = environ.get('VISUALSTUDIOVERSION') %}  # [win]
-{% set vc = 'vc'+vc_version[:-2] %}                        # [win]
-
-build:
-  string: {{ vc }}                   # [win]
-  track_features:
-    - {{ vc }}                       # [win]
-  features:
-    - {{ vc }}                       # [win]
-
 requirements:
   build:
-    - python
-    - hdf5
-    - numpy
-    - cython
+    - python    *{{toolset.suffix}}
+    - hdf5      *{{toolset.suffix}}
+    - numpy     *{{toolset.suffix}}
+    - cython    *{{toolset.suffix}}
     - six
     - pkgconfig
     - nose
 
   run:
-    - python
-    - hdf5
-    - numpy
-    - cython
+    - python    *{{toolset.suffix}}
+    - hdf5      *{{toolset.suffix}}
+    - numpy     *{{toolset.suffix}}
+    - cython    *{{toolset.suffix}}
     - six
 
 about:
