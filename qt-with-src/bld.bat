@@ -2,7 +2,8 @@ REM load toolset info
 set TOOLSET_INFO_DIR=%PREFIX%\toolset-info
 call "%TOOLSET_INFO_DIR%\common-vars.bat"
 
-REM ActiveState perl must be at the front in the path (avoid conflicts with other perls)
+REM ActiveState Perl should be at the front of the PATH to avoid
+REM conflicts with other perl versions sitting around
 set PATH=%PERL_PATH%;%PATH%
 
 cat src/gui/image/qjpeghandler.pri | sed -e "s@win32: *LIBS += libjpeg.lib@win32:          LIBS += jpeg.lib@g" > out.patch

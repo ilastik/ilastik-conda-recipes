@@ -3,8 +3,8 @@ set TOOLSET_INFO_DIR=%PREFIX%\toolset-info
 call "%TOOLSET_INFO_DIR%\common-vars.bat"
 call "%TOOLSET_INFO_DIR%\perl-vars.bat"
 
-REM ActiveState Per should be at the front of the PATH to avoid
-REM conflicts with aother perl versions sitting around
+REM ActiveState Perl should be at the front of the PATH to avoid
+REM conflicts with other perl versions sitting around
 set PATH=%PERL_PATH%;%PATH%
 
 REM configure
