@@ -1,10 +1,11 @@
-call "%RECIPE_DIR%\..\common-vars-mingw.bat"
+REM extend toolset info
+set TOOLSET_INFO_DIR=%PREFIX%\toolset-info
 
-REM check if we have the correct compiler version
-if NOT "%MINGW_VERSION%"=="%PKG_VERSION%" (
-    echo MinGW %PKG_VERSION% required.
-    exit 1
-)
+cat "%RECIPE_DIR%\common-vars-mingw.bat.in" ^
+   | sed -e "s/@PKG_VERSION@/%PKG_VERSION%/g" ^
+   > "%TOOLSET_INFO_DIR%\common-vars-mingw.bat"
+   
+call "%TOOLSET_INFO_DIR%\common-vars-mingw.bat"
 
 for /f "delims=" %%a in ('dir /b "%MINGW_PATH%\libgcc*.dll"') do @set LIBGCC=%%a
 set LIBGCC=%LIBGCC:.dll=%

@@ -1,0 +1,50 @@
+@echo off
+
+call "%~dp0common-vars.bat"
+
+REM find mingw in the PATH
+%DOS_TOOLS%  :capture_output  "where gfortran.exe"  MINGW_PATH
+if "%MINGW_PATH%"=="" (
+    echo MinGW\bin must be in the PATH
+    exit 1
+)
+set MINGW_PATH=%MINGW_PATH:\gfortran.exe=%
+
+REM find compiler version
+%DOS_TOOLS%  :capture_output  "gcc.exe -dumpversion"  MINGW_VERSION
+
+REM check if we have the correct compiler version
+if NOT "%MINGW_VERSION%"=="@PKG_VERSION@" (
+    echo Found MinGW %MINGW_VERSION% in the PATH, but version @PKG_VERSION@ is required.
+    exit 1
+)
+
+REM find compiler bitness
+%DOS_TOOLS%  :capture_output  "where x86_64-w64-mingw32-gcc.exe"  _TMP_MINGW_ARCH
+if "%_TMP_MINGW_ARCH%"=="" (
+    set MINGW_ARCH=32
+) else (
+    set MINGW_ARCH=64
+)
+
+if NOT "%ARCH%"=="%MINGW_ARCH%" (
+    echo Conda requested %ARCH%-bit build, but MinGW is %MINGW_ARCH%-bit.
+    exit 1
+)
+
+REM find proper MSYS make 
+REM * condition: msysinfo in the same directory
+REM   FIXME: this condition might not be sufficiently portable
+REM * 'make' from conda's unxutils doesn't work
+set MSYS_PATH=
+FOR /F "delims=" %%i IN ('where make.exe') DO %DOS_TOOLS% :find_msys_make %%i MSYS_PATH
+if "%MSYS_PATH%"=="" (
+    echo MSYS 'make' must be in the PATH
+    exit 1
+)
+
+REM status output
+echo MINGW:     MINGW_PATH=%MINGW_PATH%
+echo VERSION:   MINGW_VERSION=%MINGW_VERSION%
+echo BITNESS:   MINGW_ARCH=%MINGW_ARCH%
+echo MSYS:      MSYS_PATH=%MSYS_PATH%
