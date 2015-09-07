@@ -26,11 +26,11 @@ requirements:
     - jpeg     8d                      # [unix]
     - jpeg     1.2.*{{toolset.suffix}} # [win]
     - libtiff  *{{toolset.suffix}}
-    - libpng   1.6.17                # [unix]
-    - libpng   1.5.*{{toolset.suffix}}  # [win]
+    - libpng   1.6.17                  # [unix]
+    - libpng   1.5.*{{toolset.suffix}} # [win]
 
   run:
-    - libgcc                         # [unix]
+    # - libgcc                           # [unix]
     - {{toolset.run_requirement}}
     - python   2.7.*{{toolset.suffix}}
     - numpy    *{{toolset.suffix}}
@@ -38,8 +38,8 @@ requirements:
     - jpeg     8d                      # [unix]
     - jpeg     1.2.*{{toolset.suffix}} # [win]
     - libtiff  *{{toolset.suffix}}
-    - libpng   1.6.17                # [unix]
-    - libpng   1.5.1*{{toolset.suffix}} # [win]
+    - libpng   1.6.17                  # [unix]
+    - libpng   1.5.*{{toolset.suffix}} # [win]
 
 test:
   imports:

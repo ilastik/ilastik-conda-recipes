@@ -16,7 +16,7 @@ requirements:
     - numpy  *{{toolset.suffix}}
     - scipy  *{{toolset.suffix}}
     - cython                          # [unix]
-    - cython  0.23*{{toolset.suffix}} # [win]
+    - cython  0.23{{toolset.suffix}}  # [win]
     - pillow  *{{toolset.suffix}}
     - networkx
     - six
@@ -32,7 +32,7 @@ requirements:
     - numpy  *{{toolset.suffix}}
     - scipy  *{{toolset.suffix}}
     - cython                          # [unix]
-    - cython  0.23*{{toolset.suffix}} # [win]
+    - cython  0.23{{toolset.suffix}}  # [win]
     - pillow  *{{toolset.suffix}}
     - networkx
     - six

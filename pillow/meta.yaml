@@ -16,10 +16,10 @@ requirements:
     - numpy    *{{toolset.suffix}}
     - jpeg     8d                      # [unix]
     - jpeg     1.2.*{{toolset.suffix}} # [win]
-    - libtiff  4.0*{{toolset.suffix}}
+    - libtiff  4.0.*{{toolset.suffix}}
     - libpng   1.6.17                  # [unix]
     - libpng   1.5.*{{toolset.suffix}} # [win]
-    - freetype  *{{toolset.suffix}}
+    - freetype *{{toolset.suffix}}
     - setuptools
 
   run:
@@ -28,10 +28,10 @@ requirements:
     - numpy    *{{toolset.suffix}}
     - jpeg     8d                      # [unix]
     - jpeg     1.2.*{{toolset.suffix}} # [win]
-    - libtiff  4.0*{{toolset.suffix}}
+    - libtiff  4.0.*{{toolset.suffix}}
     - libpng   1.6.17                  # [unix]
     - libpng   1.5.*{{toolset.suffix}} # [win]
-    - freetype  *{{toolset.suffix}}
+    - freetype *{{toolset.suffix}}
 
 about:
   home: https://pypi.python.org/pypi/Pillow

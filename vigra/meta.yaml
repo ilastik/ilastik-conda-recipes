@@ -26,10 +26,10 @@ requirements:
     - numpy    >=1.9                   # [unix]
     - numpy    1.7.*{{toolset.suffix}} # [win]
     - jpeg     *{{toolset.suffix}}
-    - libtiff  *{{toolset.suffix}}
+    - libtiff  4.0.*{{toolset.suffix}}
     - libpng   1.6.17                  # [unix]
     - libpng   1.5.*{{toolset.suffix}} # [win]
-    - fftw     3.3*{{toolset.suffix}}
+    - fftw     3.3.*{{toolset.suffix}}
     - hdf5     1.8.14                  # [unix]
     - hdf5     1.8.*{{toolset.suffix}} # [win]
     - boost    1.55.*{{toolset.suffix}}
@@ -44,10 +44,10 @@ requirements:
     - numpy    >=1.9                   # [unix]
     - numpy    1.7.*{{toolset.suffix}} # [win]
     - jpeg     *{{toolset.suffix}}
-    - libtiff  *{{toolset.suffix}}
+    - libtiff  4.0.*{{toolset.suffix}}
     - libpng   1.6.17                  # [unix]
     - libpng   1.5.*{{toolset.suffix}} # [win]
-    - fftw     3.3*{{toolset.suffix}}
+    - fftw     3.3.*{{toolset.suffix}}
     - hdf5     1.8.14                  # [unix]
     - hdf5     1.8.*{{toolset.suffix}} # [win]
     - boost    1.55.*{{toolset.suffix}}

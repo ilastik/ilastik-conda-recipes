@@ -20,7 +20,7 @@ build:
 requirements:
   build:
     - {{toolset.build_requirement}}
-    - qt-with-src  4.8.6*{{toolset.suffix}} # [win]
+    - qt-with-src  4.8.6{{toolset.suffix}} # [win]
     - jpeg     8d                    # [unix]
     - libtiff  4.0*                  # [unix]
     - libpng   1.6.17                # [unix]
@@ -31,7 +31,7 @@ requirements:
     - {{toolset.run_requirement}}
     - jpeg     8d                      # [unix]
     - jpeg     1.2.*{{toolset.suffix}} # [win]
-    - libtiff  4.0*{{toolset.suffix}}
+    - libtiff  4.0.*{{toolset.suffix}}
     - libpng   1.6.17                  # [unix]
     - libpng   1.5.*{{toolset.suffix}} # [win]
     - freetype *{{toolset.suffix}}

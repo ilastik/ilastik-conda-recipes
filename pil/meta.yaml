@@ -12,25 +12,26 @@ source:
 requirements:
   build:
     - {{toolset.build_requirement}}
-    - python 2.7.*{{toolset.suffix}}
-    - numpy   *{{toolset.suffix}}
+    - python   2.7.*{{toolset.suffix}}
+    - numpy    *{{toolset.suffix}}
     - jpeg     8d                      # [unix]
     - jpeg     1.2.*{{toolset.suffix}} # [win]
     # NOTE: PIL's support for TIFF is labeled experimental and commented out
-    - libtiff  4.0*{{toolset.suffix}}
+    - libtiff  4.0.*{{toolset.suffix}}
     - libpng   1.6.17                  # [unix]
     - libpng   1.5.*{{toolset.suffix}} # [win]
-    - freetype   *{{toolset.suffix}}
+    - freetype *{{toolset.suffix}}
 
   run:
     - {{toolset.run_requirement}}
-    - python 2.7.*{{toolset.suffix}}
+    - python   2.7.*{{toolset.suffix}}
     - numpy    *{{toolset.suffix}}
-    - jpeg     *{{toolset.suffix}}
-    - libtiff  4.0*{{toolset.suffix}}
+    - jpeg     8d                      # [unix]
+    - jpeg     1.2.*{{toolset.suffix}} # [win]
+    - libtiff  4.0.*{{toolset.suffix}}
     - libpng   1.6.17                  # [unix]
     - libpng   1.5.*{{toolset.suffix}} # [win]
-    - freetype   *{{toolset.suffix}}
+    - freetype *{{toolset.suffix}}
 
 about:
   home: https://pypi.python.org/pypi/PIL

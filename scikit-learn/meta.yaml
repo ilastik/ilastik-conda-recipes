@@ -16,7 +16,7 @@ requirements:
     - numpy  *{{toolset.suffix}}
     - scipy  *{{toolset.suffix}}
     - cython                          # [unix]
-    - cython  0.23*{{toolset.suffix}} # [win]
+    - cython  0.23{{toolset.suffix}}  # [win]
 
   run:
     - {{toolset.run_requirement}}
@@ -24,7 +24,7 @@ requirements:
     - numpy  *{{toolset.suffix}}
     - scipy  *{{toolset.suffix}}
     - cython                          # [unix]
-    - cython  0.23*{{toolset.suffix}} # [win]
+    - cython  0.23{{toolset.suffix}}  # [win]
 
 about:
   home: http://scikit-learn.org
