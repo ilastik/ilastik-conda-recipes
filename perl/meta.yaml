@@ -1,0 +1,19 @@
+{% import TOOLSET_CONFIG as toolset %}
+
+package:
+  name: perl
+  version: "active_state"
+
+requirements:
+  build:
+    - {{toolset.build_requirement}}
+
+  run:
+    - {{toolset.run_requirement}}
+
+about:
+  home: http://www.activestate.com/activeperl
+  license: Perl Artistic License
+  summary: ActiveState Perl
+
+
