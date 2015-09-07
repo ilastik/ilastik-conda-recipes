@@ -1,56 +1,47 @@
+{% import TOOLSET_CONFIG as toolset %}
+
 about:
   summary: "A meta-package for building all the dependencies needed for the minimal, headless version of pixel/object classification."
 
 package:
   name: ilastik-deps-pc-headless
-  version: "1.1"
-
-{% set vc_version = environ.get('VISUALSTUDIOVERSION') %}  # [win]
-{% set vc = 'vc'+vc_version[:-2] %}                        # [win]
+  version: "1.1{{toolset.suffix}}"
 
 build:
   number: 2
-  string: 2_{{ vc }}                 # [win]
-  track_features:
-    - {{ vc }}                       # [win]
-  features:
-    - {{ vc }}                       # [win]
 
 requirements:
   build:
-    - python             # [unix]
-    - python  2.7.10     # [win]
-    - numpy    >=1.9     # [unix]
-    - numpy    1.7.0     # [win]
-    - ilastik-exe        # [win]
-    - vigra
-    - h5py
-    - tifffile
-    - psutil
-    - greenlet
+    - python  2.7.*{{toolset.suffix}}
+    - numpy    >=1.9                   # [unix]
+    - numpy    1.7.*{{toolset.suffix}} # [win]
+    - ilastik-exe  *{{toolset.suffix}} # [win]
+    - vigra        *{{toolset.suffix}}
+    - h5py         *{{toolset.suffix}}
+    - tifffile     *{{toolset.suffix}}
+    - psutil       *{{toolset.suffix}}
+    - greenlet     *{{toolset.suffix}}
     - yapsy
-    - scikit-learn
-    - scikit-image
-    - faulthandler
+    - scikit-learn *{{toolset.suffix}}
+    - scikit-image *{{toolset.suffix}}
+    - faulthandler *{{toolset.suffix}}
     - jsonschema
     - nose
 
   run:
-    - python             # [unix]
-    - python  2.7.10     # [win]
-    - numpy    >=1.9     # [unix]
-    - numpy    1.7.0     # [win]
-    - ilastik-exe        # [win]
-    - vigra
-    - tifffile
-    - h5py
-    - psutil
-    - blist
-    - greenlet
+    - python  2.7.*{{toolset.suffix}}
+    - numpy    >=1.9                   # [unix]
+    - numpy    1.7.*{{toolset.suffix}} # [win]
+    - ilastik-exe  *{{toolset.suffix}} # [win]
+    - vigra        *{{toolset.suffix}}
+    - h5py         *{{toolset.suffix}}
+    - tifffile     *{{toolset.suffix}}
+    - psutil       *{{toolset.suffix}}
+    - greenlet     *{{toolset.suffix}}
     - yapsy
-    - scikit-learn
-    - scikit-image
-    - faulthandler
+    - scikit-learn *{{toolset.suffix}}
+    - scikit-image *{{toolset.suffix}}
+    - faulthandler *{{toolset.suffix}}
     - jsonschema
     - nose
     #- blist # only needed by deprecated operators

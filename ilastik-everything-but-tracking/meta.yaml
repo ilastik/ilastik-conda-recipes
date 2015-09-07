@@ -1,3 +1,5 @@
+{% import TOOLSET_CONFIG as toolset %}
+
 about:
   summary: "A meta-package for building all ilastik dependencies and downloading the ilastik-meta repo."
 
@@ -5,30 +7,26 @@ package:
   name: ilastik-everything-but-tracking
   version: "" # build.sh will generate a __conda_version__.txt file
 
-{% set vc_version = environ.get('VISUALSTUDIOVERSION') %}  # [win]
-{% set vc = 'vc'+vc_version[:-2] %}                        # [win]
-
 build:
   number: 1
-  string: 1_{{ vc }}                 # [win]
-  track_features:
-    - {{ vc }}                       # [win]
-  features:
-    - {{ vc }}                       # [win]
 
 requirements:
   build:
-    - ilastik-deps-pc
-    - ilastik-deps-pc-iiboost
-    - ilastik-deps-carving >=1.1.6a7
-    - ilastik-meta
+    - ilastik-deps-pc                *{{toolset.suffix}}
+    - ilastik-deps-pc-iiboost        *{{toolset.suffix}}
+    # - ilastik-deps-carving >=1.1.6a7,*{{toolset.suffix}}
+    - ilastik-deps-carving >=1.1.6a7 # [unix]
+    - ilastik-deps-carving 1.1.6a7{{toolset.suffix}} # [win]
+    - ilastik-meta                   *{{toolset.suffix}}
     - ilastik-versions
 
   run:
-    - ilastik-deps-pc
-    - ilastik-deps-pc-iiboost
-    - ilastik-deps-carving >=1.1.6a7
-    - ilastik-meta
+    - ilastik-deps-pc                *{{toolset.suffix}}
+    - ilastik-deps-pc-iiboost        *{{toolset.suffix}}
+    # - ilastik-deps-carving >=1.1.6a7,*{{toolset.suffix}}
+    - ilastik-deps-carving >=1.1.6a7 # [unix]
+    - ilastik-deps-carving 1.1.6a7{{toolset.suffix}} # [win]
+    - ilastik-meta                   *{{toolset.suffix}}
     - ilastik-versions
 
 test:

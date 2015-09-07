@@ -1,31 +1,25 @@
+{% import TOOLSET_CONFIG as toolset %}
+
 about:
   summary: "A meta-package for building all the dependencies needed for only pixel/object classification."
 
 package:
   name: ilastik-deps-pc
-  version: "1.1"
-
-{% set vc_version = environ.get('VISUALSTUDIOVERSION') %}  # [win]
-{% set vc = 'vc'+vc_version[:-2] %}                        # [win]
+  version: "1.1{{toolset.suffix}}"
 
 build:
   number: 2
-  string: 2_{{ vc }}                 # [win]
-  track_features:
-    - {{ vc }}                       # [win]
-  features:
-    - {{ vc }}                       # [win]
 
 requirements:
   build:
-    - ilastik-deps-pc-headless
-    - pyqt 4.11.3.99            # [osx]
-    - pyqt 4.11.3               # [win or linux]
-    - qimage2ndarray
-    - vtk 5.10.1.99             # [unix]
-    - vtk 5.10.1                # [win]
+    - ilastik-deps-pc-headless   *{{toolset.suffix}}
+    - pyqt 4.11.3.99                     # [osx]
+    - pyqt 4.11.3*{{toolset.suffix}}     # [win or linux]
+    - qimage2ndarray*{{toolset.suffix}}
+    - vtk  5.10.1.99                     # [unix]
+    - vtk  5.10.1*{{toolset.suffix}}     # [win]
     - futures
-    - matplotlib
+    - matplotlib  *{{toolset.suffix}}
 
     # Python was already included via the headless package,
     # but we need to add it explicitly here due to a conda bug.
@@ -33,10 +27,10 @@ requirements:
 
   run:
     - ilastik-deps-pc-headless
-    - pyqt 4.11.3.99            # [osx]
-    - pyqt 4.11.3               # [win or linux]
-    - qimage2ndarray
-    - vtk 5.10.1.99             # [unix]
-    - vtk 5.10.1                # [win]
+    - pyqt 4.11.3.99                     # [osx]
+    - pyqt 4.11.3*{{toolset.suffix}}     # [win or linux]
+    - qimage2ndarray*{{toolset.suffix}}
+    - vtk  5.10.1.99                     # [unix]
+    - vtk  5.10.1*{{toolset.suffix}}     # [win]
     - futures
-    - matplotlib
+    - matplotlib  *{{toolset.suffix}}

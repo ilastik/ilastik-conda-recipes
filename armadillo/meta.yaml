@@ -26,14 +26,15 @@ requirements:
     - {{toolset.build_requirement}}
     # - gcc 4.8.2.99                   # [linux]
     # - gcc 4.8.2                      # [osx]
+    - mingw                            # [win] (needed for MSYS patch)
     - openblas                         # [win]
-    - hdf5  1.8.12*{{toolset.suffix}}  # [win]
+    - hdf5  1.8.12{{toolset.suffix}}   # [win]
     
   run:
     - {{toolset.run_requirement}}
     # - libgcc                         # [unix]
     - openblas                         # [win]
-    - hdf5  1.8.12*{{toolset.suffix}}  # [win]
+    - hdf5  1.8.12{{toolset.suffix}}   # [win]
 
 about:
   home: http://arma.sourceforge.net

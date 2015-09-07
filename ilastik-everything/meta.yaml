@@ -1,3 +1,5 @@
+{% import TOOLSET_CONFIG as toolset %}
+
 about:
   summary: "A meta-package for building all ilastik dependencies and downloading the ilastik-meta repo."
 
@@ -5,25 +7,17 @@ package:
   name: ilastik-everything
   version: "" # build.sh will generate a __conda_version__.txt file
 
-{% set vc_version = environ.get('VISUALSTUDIOVERSION') %}  # [win]
-{% set vc = 'vc'+vc_version[:-2] %}                        # [win]
-
 build:
   number: 1
-  string: 1_{{ vc }}                 # [win]
-  track_features:
-    - {{ vc }}                       # [win]
-  features:
-    - {{ vc }}                       # [win]
 
 requirements:
   build:
     - ilastik-everything-but-tracking # <-- Needed just to print ilastik.__version__ into __conda_version__.txt
 
   run:
-    - ilastik-everything-but-tracking
-    - ilastik-deps-tracking
-    - ilastik-versions
+    - ilastik-everything-but-tracking  *{{toolset.suffix}}
+    - ilastik-deps-tracking            *{{toolset.suffix}}
+    - ilastik-versions                 *{{toolset.suffix}}
 
 test:
   requires:

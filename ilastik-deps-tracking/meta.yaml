@@ -1,25 +1,17 @@
+{% import TOOLSET_CONFIG as toolset %}
+
 about:
   summary: "A meta-package for building all the dependencies needed for pixel/object classification and tracking."
 
 package:
   name: ilastik-deps-tracking
-  version: "1.1"
-
-{% set vc_version = environ.get('VISUALSTUDIOVERSION') %}  # [win]
-{% set vc = 'vc'+vc_version[:-2] %}                        # [win]
-
-build:
-  string: {{ vc }}                   # [win]
-  track_features:
-    - {{ vc }}                       # [win]
-  features:
-    - {{ vc }}                       # [win]
+  version: "1.1{{toolset.suffix}}"
 
 requirements:
   build:
-    - ilastik-deps-pc
-    - pgmlink
+    - ilastik-deps-pc  *{{toolset.suffix}}
+    - pgmlink          *{{toolset.suffix}}
 
   run:
-    - ilastik-deps-pc
-    - pgmlink
+    - ilastik-deps-pc  *{{toolset.suffix}}
+    - pgmlink          *{{toolset.suffix}}

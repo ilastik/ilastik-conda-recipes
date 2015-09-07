@@ -18,6 +18,7 @@ requirements:
     - {{toolset.build_requirement}}
     # - gcc 4.8.2.99                   # [linux]
     # - gcc 4.8.2                      # [osx]
+    - mingw                            # [win] (needed for MSYS patch.exe)
     - boost  1.55.*{{toolset.suffix}}
     - armadillo   *{{toolset.suffix}}
     - libxml2     *{{toolset.suffix}}
