@@ -1,4 +1,6 @@
-call "%RECIPE_DIR%\..\common-vars.bat"
+REM load toolset info
+set TOOLSET_INFO_DIR=%PREFIX%\toolset-info
+call "%TOOLSET_INFO_DIR%\common-vars.bat"
 
 REM Copy the ilastik version as our package version
 conda list -n _build | grep ilastik-meta | python -c "import sys; print sys.stdin.read().split()[1]" > __conda_version__.txt
