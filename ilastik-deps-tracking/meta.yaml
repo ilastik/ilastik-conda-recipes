@@ -1,4 +1,4 @@
-{% import TOOLSET_CONFIG as toolset %}
+{% import 'CONDA_ENVIRONMENT/toolset-info/config.yaml' as toolset %}
 
 about:
   summary: "A meta-package for building all the dependencies needed for pixel/object classification and tracking."

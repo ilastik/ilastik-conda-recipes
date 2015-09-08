@@ -1,4 +1,4 @@
-{% import TOOLSET_CONFIG as toolset %}
+{% import 'CONDA_ENVIRONMENT/toolset-info/config.yaml' as toolset %}
 
 package:
   name: boost
