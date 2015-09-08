@@ -37,7 +37,7 @@ REM * condition: msysinfo in the same directory
 REM   FIXME: this condition might not be sufficiently portable
 REM * 'make' from conda's unxutils doesn't work
 set MSYS_PATH=
-FOR /F "delims=" %%i IN ('where make.exe') DO %DOS_TOOLS% :find_msys_make %%i MSYS_PATH
+FOR /F "delims=" %%i IN ('where make.exe') DO %DOS_TOOLS% :find_msys_make "%%i" MSYS_PATH
 if "%MSYS_PATH%"=="" (
     echo MSYS 'make' must be in the PATH
     exit 1
