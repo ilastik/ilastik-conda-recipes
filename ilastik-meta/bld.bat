@@ -40,5 +40,3 @@ xcopy /S ilastik "%PREFIX%\ilastik-meta\ilastik\"
 if errorlevel 1 exit 1
 copy Readme* "%PREFIX%\ilastik-meta\"
 if errorlevel 1 exit 1
-copy "%RECIPE_DIR%\run-ilastik.bat" "%PREFIX%\"
-if errorlevel 1 exit 1

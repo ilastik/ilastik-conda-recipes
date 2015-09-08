@@ -16,3 +16,6 @@ if errorlevel 1 exit 1
 
 cmake --build . --target INSTALL --config Release
 if errorlevel 1 exit 1
+
+copy "%RECIPE_DIR%\run-ilastik.bat" "%PREFIX%\"
+if errorlevel 1 exit 1
