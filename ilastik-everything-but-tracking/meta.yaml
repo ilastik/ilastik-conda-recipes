@@ -15,18 +15,18 @@ requirements:
     - ilastik-deps-pc                *{{toolset.suffix}}
     - ilastik-deps-pc-iiboost        *{{toolset.suffix}}
     # - ilastik-deps-carving >=1.1.6a7,*{{toolset.suffix}}
-    - ilastik-deps-carving >=1.1.6a7 # [unix]
+    - ilastik-deps-carving >=1.1.6a7                 # [unix]
     - ilastik-deps-carving 1.1.6a7{{toolset.suffix}} # [win]
-    - ilastik-meta                   *{{toolset.suffix}}
+    - ilastik-meta
     - ilastik-versions
 
   run:
     - ilastik-deps-pc                *{{toolset.suffix}}
     - ilastik-deps-pc-iiboost        *{{toolset.suffix}}
     # - ilastik-deps-carving >=1.1.6a7,*{{toolset.suffix}}
-    - ilastik-deps-carving >=1.1.6a7 # [unix]
+    - ilastik-deps-carving >=1.1.6a7                 # [unix]
     - ilastik-deps-carving 1.1.6a7{{toolset.suffix}} # [win]
-    - ilastik-meta                   *{{toolset.suffix}}
+    - ilastik-meta
     - ilastik-versions
 
 test:

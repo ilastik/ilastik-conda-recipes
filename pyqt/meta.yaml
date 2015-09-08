@@ -31,6 +31,7 @@ requirements:
     - python 2.7.*{{toolset.suffix}}
     - qt          4.8.6.99                # [unix]
     - qt-with-src 4.8.*{{toolset.suffix}} # [win]
+    - qt          4.8.*{{toolset.suffix}} # [win]
     # note: sip >=4.16 is incompatible with PyQt 4.10.3
     # note: sip <4.16  is incompatible with PyQt 4.11.3
     # - sip     >=4.16.4,*{{toolset.suffix}}

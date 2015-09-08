@@ -13,6 +13,8 @@ build:
 requirements:
   build:
     - ilastik-everything-but-tracking # <-- Needed just to print ilastik.__version__ into __conda_version__.txt
+    - ilastik-deps-tracking            *{{toolset.suffix}}
+    - ilastik-versions                 *{{toolset.suffix}}
 
   run:
     - ilastik-everything-but-tracking  *{{toolset.suffix}}

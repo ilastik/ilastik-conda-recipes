@@ -1,3 +1,5 @@
+{% import TOOLSET_CONFIG as toolset %}
+
 package:
   # pure python
   name: ilastik-meta
@@ -13,6 +15,7 @@ build:
 
 requirements:
   build:
+    - {{toolset.build_requirement}}  # FIXME: needed for dos-tools.bat
     - python
   run:
     - python
