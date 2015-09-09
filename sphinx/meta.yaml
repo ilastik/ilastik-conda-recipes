@@ -19,6 +19,7 @@ requirements:
     - alabaster
     - six
     - snowballstemmer
+    - setuptools
 
   run:
     - python
