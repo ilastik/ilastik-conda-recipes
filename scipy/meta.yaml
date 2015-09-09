@@ -12,13 +12,13 @@ source:
 requirements:
   build:
     - {{toolset.build_requirement}}
-    - mingw  4.7.2                   # [win]
+    - mingw-for-msvc                 # [win]
     - python 2.7.*{{toolset.suffix}}
     - numpy  *{{toolset.suffix}}
 
   run:
     - {{toolset.run_requirement}}
-    - mingw  4.7.2                   # [win]
+    - mingw-for-msvc                 # [win]
     - python 2.7.*{{toolset.suffix}}
     - numpy  *{{toolset.suffix}}
 

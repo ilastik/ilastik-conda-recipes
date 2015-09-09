@@ -11,10 +11,10 @@ source:
 
 requirements:
   build:
-    - mingw                          # [win]
+    - mingw-for-msvc                 # [win]
 
   run:
-    - mingw                          # [win]
+    - mingw-for-msvc                 # [win]
 
 about:
   home: http://www.gnu.org/software/libiconv/

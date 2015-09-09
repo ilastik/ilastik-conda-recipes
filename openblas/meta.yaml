@@ -10,10 +10,10 @@ source:
   
 requirements:
   build:
-    - mingw                          # [win]
+    - mingw-for-msvc                 # [win]
 
   run:
-    - mingw                          # [win]
+    - mingw-for-msvc                 # [win]
 
 about:
   home: www.openblas.ne

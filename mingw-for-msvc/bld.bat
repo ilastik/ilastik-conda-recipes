@@ -18,7 +18,7 @@ copy "%MINGW_PATH%\libstdc++-6.dll" "%LIBRARY_BIN%"
 copy "%MINGW_PATH%\libquadmath-0.dll" "%LIBRARY_BIN%"
 
 rem find libgcc.a and copy it to LIBRARY_LIB (needed to get __chkstk_ms() )
-for /f "delims=" %%a in ('dir /s /b "%MINGW_PATH%\..\lib\*libgcc.a" ^| C:\Windows\System32\find /v "\32\"') do @set LIBGCCA=%%a
+for /f "delims=" %%a in ('dir /s /b "%MINGW_PATH%\..\lib\*libgcc.a" ^| grep -v "\\\\32\\\\"') do @set LIBGCCA=%%a
 copy "%LIBGCCA%" "%LIBRARY_LIB%\libgcc.a.lib"
 
 if %ARCH%==64 (
