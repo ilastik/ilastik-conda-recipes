@@ -41,6 +41,9 @@ if "%VISUAL_STUDIO_PATH%"=="%VISUAL_STUDIO_PATH:amd64=%" (
     set VISUAL_STUDIO_ARCH=64
 )
 
+REM if script is run outside 'conda build', ARCH may be undefined
+if "%ARCH%"=="" set ARCH=@ARCH@
+
 if NOT "%ARCH%"=="%VISUAL_STUDIO_ARCH%" (
     echo Conda requested %ARCH%-bit build, but Visual Studio is %VISUAL_STUDIO_ARCH%-bit.
     exit 1

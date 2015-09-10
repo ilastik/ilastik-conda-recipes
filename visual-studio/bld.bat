@@ -6,6 +6,7 @@ if not exist "%TOOLSET_INFO_DIR%" mkdir "%TOOLSET_INFO_DIR%"
 
 cat "%RECIPE_DIR%\common-vars.bat.in" ^
    | sed -e "s/@PKG_VERSION@/%PKG_VERSION%/g" ^
+         -e "s/@ARCH@/%ARCH%/g" ^
    > "%TOOLSET_INFO_DIR%\common-vars.bat"
    
 cat "%RECIPE_DIR%\config.yaml.in" ^
