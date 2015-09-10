@@ -1,4 +1,4 @@
-{% import 'CONDA_ENVIRONMENT/toolset-info/config.yaml' as toolset %}
+{% import '$CONDA_ENV_PATH/toolset-info/config.yaml' as toolset %}
 
 package:
   name: openblas
@@ -8,8 +8,13 @@ source:
   git_url: http://github.com/xianyi/OpenBLAS
   git_rev: v0.2.5
   
+build:
+  features:
+    - {{toolset.short}}
+
 requirements:
   build:
+    - {{toolset.build_requirement}}
     - mingw-for-msvc                 # [win]
 
   run:

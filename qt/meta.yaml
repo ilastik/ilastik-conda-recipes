@@ -1,10 +1,12 @@
-{% import 'CONDA_ENVIRONMENT/toolset-info/config.yaml' as toolset %}
+{% import '$CONDA_ENV_PATH/toolset-info/config.yaml' as toolset %}
 
 package:
   name: qt
   version: "4.8.6{{toolset.suffix}}"
 
 build:
+  features:
+    - {{toolset.short}}
   number: 1
   detect_binary_files_with_prefix: true
 

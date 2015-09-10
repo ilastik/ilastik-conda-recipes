@@ -1,4 +1,4 @@
-{% import 'CONDA_ENVIRONMENT/toolset-info/config.yaml' as toolset %}
+{% import '$CONDA_ENV_PATH/toolset-info/config.yaml' as toolset %}
 
 package:
   name: mlpack
@@ -10,6 +10,8 @@ source:
   md5: 0331e12f2485b9d5d39c9d9dea618108
 
 build:
+  features:
+    - {{toolset.short}}
   number: 3
   detect_binary_files_with_prefix: true
 

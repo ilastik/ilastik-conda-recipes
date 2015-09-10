@@ -1,4 +1,4 @@
-{% import 'CONDA_ENVIRONMENT/toolset-info/config.yaml' as toolset %}
+{% import '$CONDA_ENV_PATH/toolset-info/config.yaml' as toolset %}
 
 package:
     name: pgmlink
@@ -12,6 +12,8 @@ source:
     git_tag: 7a0c8d4f54e9a4066991829fb52b411a02914666 # Version from ilastik 1.1.5, downgrade relative to above commit
 
 build:
+  features:
+    - {{toolset.short}}
   number: 11
   string: 11_g7a0c8d4
   script_env:

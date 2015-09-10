@@ -1,4 +1,4 @@
-{% import 'CONDA_ENVIRONMENT/toolset-info/config.yaml' as toolset %}
+{% import '$CONDA_ENV_PATH/toolset-info/config.yaml' as toolset %}
 
 package:
   name: psutil
@@ -9,6 +9,10 @@ source:
   fn:  psutil-2.1.1.tar.gz
   url: https://pypi.python.org/packages/source/p/psutil/psutil-2.1.1.tar.gz
   md5: 72a6b15d589fab11f6ca245b775bc3c6
+
+build:
+  features:
+    - {{toolset.short}}
 
 requirements:
   build:

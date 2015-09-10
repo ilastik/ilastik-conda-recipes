@@ -1,4 +1,4 @@
-{% import 'CONDA_ENVIRONMENT/toolset-info/config.yaml' as toolset %}
+{% import '$CONDA_ENV_PATH/toolset-info/config.yaml' as toolset %}
 
 package:
   name: pillow
@@ -8,6 +8,10 @@ source:
   fn:  Pillow-2.9.0.tar.gz
   url: https://pypi.python.org/packages/source/P/Pillow/Pillow-2.9.0.tar.gz
   md5: 46f1729ece27981d54ec543ad5b37d14
+
+build:
+  features:
+    - {{toolset.short}}
 
 requirements:
   build:

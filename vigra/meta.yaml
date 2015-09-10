@@ -1,4 +1,4 @@
-{% import 'CONDA_ENVIRONMENT/toolset-info/config.yaml' as toolset %}
+{% import '$CONDA_ENV_PATH/toolset-info/config.yaml' as toolset %}
 
 package:
   name: vigra
@@ -9,6 +9,9 @@ source:
   git_tag: 35e5d4aed380087d75e206348d1648d9ad9cf1e6 # 2015-07-16
 
 build:
+  features:
+    - {{toolset.short}}
+
   script_env:
    - LD_LIBRARY_PATH      # [unix]
    - DYLD_LIBRARY_PATH    # [unix]

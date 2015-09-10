@@ -1,4 +1,4 @@
-{% import 'CONDA_ENVIRONMENT/toolset-info/config.yaml' as toolset %}
+{% import '$CONDA_ENV_PATH/toolset-info/config.yaml' as toolset %}
 
 package:
   name: pyqt
@@ -22,6 +22,8 @@ source:
     - configure.patch   # [unix]
 
 build:
+  features:
+    - {{toolset.short}}
   number: 6
   detect_binary_files_with_prefix: true
 
@@ -31,7 +33,7 @@ requirements:
     - python 2.7.*{{toolset.suffix}}
     - qt          4.8.6.99                # [unix]
     - qt-with-src 4.8.*{{toolset.suffix}} # [win]
-    - qt          4.8.*{{toolset.suffix}} # [win]
+    - qt          4.8.*{{toolset.suffix}} # [win] (needed here to initiate recursive creation)
     # note: sip >=4.16 is incompatible with PyQt 4.10.3
     # note: sip <4.16  is incompatible with PyQt 4.11.3
     # - sip     >=4.16.4,*{{toolset.suffix}}

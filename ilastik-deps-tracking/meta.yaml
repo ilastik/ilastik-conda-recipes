@@ -1,4 +1,4 @@
-{% import 'CONDA_ENVIRONMENT/toolset-info/config.yaml' as toolset %}
+{% import '$CONDA_ENV_PATH/toolset-info/config.yaml' as toolset %}
 
 about:
   summary: "A meta-package for building all the dependencies needed for pixel/object classification and tracking."
@@ -7,8 +7,13 @@ package:
   name: ilastik-deps-tracking
   version: "1.1{{toolset.suffix}}"
 
+build:
+  features:
+    - {{toolset.short}}
+
 requirements:
   build:
+    - {{toolset.build_requirement}}
     - ilastik-deps-pc  *{{toolset.suffix}}
     - pgmlink          *{{toolset.suffix}}
 

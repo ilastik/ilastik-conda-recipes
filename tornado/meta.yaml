@@ -1,4 +1,4 @@
-{% import 'CONDA_ENVIRONMENT/toolset-info/config.yaml' as toolset %}
+{% import '$CONDA_ENV_PATH/toolset-info/config.yaml' as toolset %}
 
 package:
   name: tornado
@@ -8,6 +8,10 @@ source:
   fn:  tornado-4.2.1.tar.gz
   url: https://pypi.python.org/packages/source/t/tornado/tornado-4.2.1.tar.gz
   md5: d523204389cfb70121bb69709f551b20
+
+build:
+  features:
+    - {{toolset.short}}
 
 requirements:
   build:

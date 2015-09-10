@@ -1,4 +1,4 @@
-{% import 'CONDA_ENVIRONMENT/toolset-info/config.yaml' as toolset %}
+{% import '$CONDA_ENV_PATH/toolset-info/config.yaml' as toolset %}
 
 package:
   name: ipython
@@ -13,6 +13,12 @@ source:
 #  fn:  ipython-4.0.0.tar.gz
 #  url: https://pypi.python.org/packages/source/i/ipython/ipython-4.0.0.tar.gz
 #  md5: c2fecbcf1c0fbdc82625c77a50733dd6
+
+build:
+  track_features:
+    - {{toolset.short}}
+  features:
+    - {{toolset.short}}
 
 requirements:
   build:

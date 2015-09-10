@@ -1,4 +1,4 @@
-{% import 'CONDA_ENVIRONMENT/toolset-info/config.yaml' as toolset %}
+{% import '$CONDA_ENV_PATH/toolset-info/config.yaml' as toolset %}
 
 package:
   name: lemon
@@ -14,6 +14,8 @@ source:
     - lemon-test.patch    # [unix]
 
 build:
+  features:
+    - {{toolset.short}}
   number: 1
   detect_binary_files_with_prefix: true
 

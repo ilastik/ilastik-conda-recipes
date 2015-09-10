@@ -1,4 +1,4 @@
-{% import 'CONDA_ENVIRONMENT/toolset-info/config.yaml' as toolset %}
+{% import '$CONDA_ENV_PATH/toolset-info/config.yaml' as toolset %}
 
 package:
   name: numpy
@@ -14,6 +14,10 @@ source:
     # md5: a1ed53432dbcd256398898d35bc8e645
     # url: https://pypi.python.org/packages/source/n/numpy/numpy-1.9.2.tar.gz
     
+build:
+  features:
+    - {{toolset.short}}
+
 requirements:
   build:
     - {{toolset.build_requirement}}

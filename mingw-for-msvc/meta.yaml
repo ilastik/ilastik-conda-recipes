@@ -1,4 +1,4 @@
-{% import 'CONDA_ENVIRONMENT/toolset-info/config.yaml' as toolset %}
+{% import '$CONDA_ENV_PATH/toolset-info/config.yaml' as toolset %}
 
 about:
   summary: "Configure MinGW as a subtool of Visual Studio (needed to compile packages that MSVC can't handle, e.g. Fortran sources)"
@@ -6,6 +6,10 @@ about:
 package:
   name: mingw-for-msvc
   version: "4.7.2"
+
+build:
+  features:
+    - {{toolset.short}}
 
 requirements:
   build:

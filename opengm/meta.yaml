@@ -1,4 +1,4 @@
-{% import 'CONDA_ENVIRONMENT/toolset-info/config.yaml' as toolset %}
+{% import '$CONDA_ENV_PATH/toolset-info/config.yaml' as toolset %}
 
 package:
     name: opengm
@@ -11,8 +11,8 @@ source:
     git_tag: 89d44d01920863f0b8df4a235b00e15adbd2b583 # intentionally downgraded relative to the previous build.
 
 build:
-
-build:
+  features:
+    - {{toolset.short}}
   number: 5
   string: 5_g89d44d0                 # Downgraded relative to build 4
   detect_binary_files_with_prefix: true

@@ -1,4 +1,4 @@
-{% import 'CONDA_ENVIRONMENT/toolset-info/config.yaml' as toolset %}
+{% import '$CONDA_ENV_PATH/toolset-info/config.yaml' as toolset %}
 
 about:
   summary: "A meta-package for building all ilastik dependencies and downloading the ilastik-meta repo."
@@ -8,10 +8,15 @@ package:
   version: "" # build.sh will generate a __conda_version__.txt file
 
 build:
+  track_features:
+    - {{toolset.short}}
+  features:
+    - {{toolset.short}}
   number: 1
 
 requirements:
   build:
+    - {{toolset.build_requirement}}
     - ilastik-deps-pc                *{{toolset.suffix}}
     - ilastik-deps-pc-iiboost        *{{toolset.suffix}}
     # - ilastik-deps-carving >=1.1.6a7,*{{toolset.suffix}}

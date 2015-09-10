@@ -1,4 +1,4 @@
-{% import 'CONDA_ENVIRONMENT/toolset-info/config.yaml' as toolset %}
+{% import '$CONDA_ENV_PATH/toolset-info/config.yaml' as toolset %}
 
 package:
   name: scikit-learn
@@ -8,6 +8,10 @@ source:
   fn:  scikit-learn-0.16.1.tar.gz
   url: https://pypi.python.org/packages/source/s/scikit-learn/scikit-learn-0.16.1.tar.gz
   md5: 363ddda501e3b6b61726aa40b8dbdb7e
+
+build:
+  features:
+    - {{toolset.short}}
 
 requirements:
   build:

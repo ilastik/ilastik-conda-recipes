@@ -1,4 +1,4 @@
-{% import 'CONDA_ENVIRONMENT/toolset-info/config.yaml' as toolset %}
+{% import '$CONDA_ENV_PATH/toolset-info/config.yaml' as toolset %}
 
 package:
   name: armadillo
@@ -18,6 +18,8 @@ source:
     - patches/use_atlas_lapack.diff  # [unix]
 
 build:
+  features:
+    - {{toolset.short}}
   number: 3
   detect_binary_files_with_prefix: true
 

@@ -1,4 +1,4 @@
-{% import 'CONDA_ENVIRONMENT/toolset-info/config.yaml' as toolset %}
+{% import '$CONDA_ENV_PATH/toolset-info/config.yaml' as toolset %}
 
 package:
   name: pil
@@ -8,6 +8,10 @@ source:
   fn:  Imaging-1.1.7.tar.gz
   url: http://effbot.org/downloads/Imaging-1.1.7.tar.gz
   md5: fc14a54e1ce02a0225be8854bfba478e
+
+build:
+  features:
+    - {{toolset.short}}
 
 requirements:
   build:

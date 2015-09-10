@@ -1,4 +1,4 @@
-{% import 'CONDA_ENVIRONMENT/toolset-info/config.yaml' as toolset %}
+{% import '$CONDA_ENV_PATH/toolset-info/config.yaml' as toolset %}
 
 package:
   name: tifffile
@@ -9,6 +9,8 @@ source:
   git_tag: 05b51f398b2c18eacf9dce674631707763f7e94e
 
 build:
+  features:
+    - {{toolset.short}}
   number: 1
 
 requirements:

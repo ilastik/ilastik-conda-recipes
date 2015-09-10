@@ -1,4 +1,4 @@
-{% import 'CONDA_ENVIRONMENT/toolset-info/config.yaml' as toolset %}
+{% import '$CONDA_ENV_PATH/toolset-info/config.yaml' as toolset %}
 
 package:
   name: faulthandler
@@ -8,6 +8,10 @@ source:
   fn:  faulthandler-2.4.tar.gz
   url: https://pypi.python.org/packages/source/f/faulthandler/faulthandler-2.4.tar.gz
   md5: 110960933b0902334e8804eb4ea20750
+
+build:
+  features:
+    - {{toolset.short}}
 
 requirements:
   build:

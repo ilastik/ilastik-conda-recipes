@@ -1,4 +1,4 @@
-{% import 'CONDA_ENVIRONMENT/toolset-info/config.yaml' as toolset %}
+{% import '$CONDA_ENV_PATH/toolset-info/config.yaml' as toolset %}
 
 package:
   name: cython
@@ -8,6 +8,10 @@ source:
   fn:  Cython-0.23.tar.gz
   url: https://pypi.python.org/packages/source/C/Cython/Cython-0.23.tar.gz
   md5: 63d472d0a9b3b39b9651f7bf568bb4a5
+
+build:
+  features:
+    - {{toolset.short}}
 
 requirements:
   build:

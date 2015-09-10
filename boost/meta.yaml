@@ -1,4 +1,4 @@
-{% import 'CONDA_ENVIRONMENT/toolset-info/config.yaml' as toolset %}
+{% import '$CONDA_ENV_PATH/toolset-info/config.yaml' as toolset %}
 
 package:
   name: boost
@@ -14,6 +14,8 @@ source:
     - 1.55.0_patches/0005-Boost.S11n-include-missing-algorithm.patch # [osx]
 
 build:
+  features:
+    - {{toolset.short}}
   number: 4
   detect_binary_files_with_prefix: true
 

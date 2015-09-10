@@ -1,4 +1,4 @@
-{% import 'CONDA_ENVIRONMENT/toolset-info/config.yaml' as toolset %}
+{% import '$CONDA_ENV_PATH/toolset-info/config.yaml' as toolset %}
 
 # Credits to jeanconn for the package https://binstar.org/jeanconn/fftw
 package:
@@ -12,6 +12,8 @@ source:
 
 
 build:
+  features:
+    - {{toolset.short}}
   number: 1
   detect_binary_files_with_prefix: true
 

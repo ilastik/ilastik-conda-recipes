@@ -1,4 +1,4 @@
-{% import 'CONDA_ENVIRONMENT/toolset-info/config.yaml' as toolset %}
+{% import '$CONDA_ENV_PATH/toolset-info/config.yaml' as toolset %}
 
 package:
   name: vtk
@@ -13,6 +13,8 @@ source:
     - osx_patches/no-gc.diff   # [osx]
 
 build:
+  features:
+    - {{toolset.short}}
   number: 5
   string: 5_with_pyqt
   detect_binary_files_with_prefix: true
@@ -20,34 +22,34 @@ build:
 requirements:
   build:
     - {{toolset.build_requirement}}
-    # - gcc 4.8.2.99                   # [linux]
+    # - gcc 4.8.2.99                        # [linux]
     - python  2.7.*{{toolset.suffix}}
-    - qt-with-src                    # [win]
-    - pyqt 4.11.3{{toolset.suffix}}    # [linux or win]
-    - pyqt 4.11.3.99                   # [osx]
-    - jpeg     8d                      # [unix]
-    - jpeg     1.2.*{{toolset.suffix}} # [win]
-    - libtiff  *{{toolset.suffix}}
-    - libpng   1.6.17                  # [unix]
-    - libpng   1.5.*{{toolset.suffix}} # [win]
-    - hdf5     1.8.*{{toolset.suffix}} # [win]
-    - freetype *{{toolset.suffix}}     # [win]
+    - qt-with-src 4.8.*{{toolset.suffix}} # [win]
+    - pyqt 4.11.3{{toolset.suffix}}       # [linux or win]
+    - pyqt 4.11.3.99                      # [osx]
+    - jpeg     8d                         # [unix]
+    - jpeg     1.2.*{{toolset.suffix}}    # [win]
+    - libtiff  *{{toolset.suffix}}        
+    - libpng   1.6.17                     # [unix]
+    - libpng   1.5.*{{toolset.suffix}}    # [win]
+    - hdf5     1.8.*{{toolset.suffix}}    # [win]
+    - freetype *{{toolset.suffix}}        # [win]
     - zlib     *{{toolset.suffix}}
     - libxml2  *{{toolset.suffix}}
 
   run:
-    # - libgcc                         # [unix]
+    # - libgcc                              # [unix]
     - {{toolset.run_requirement}}
     - python  2.7.*{{toolset.suffix}}
-    - pyqt 4.11.3{{toolset.suffix}}    # [linux or win]
-    - pyqt 4.11.3.99                   # [osx]
-    - jpeg     8d                      # [unix]
-    - jpeg     1.2.*{{toolset.suffix}} # [win]
-    - libtiff  *{{toolset.suffix}}
-    - libpng   1.6.17                  # [unix]
-    - libpng   1.5.*{{toolset.suffix}} # [win]
-    - hdf5     1.8.*{{toolset.suffix}} # [win]
-    - freetype *{{toolset.suffix}}     # [win]
+    - pyqt 4.11.3{{toolset.suffix}}       # [linux or win]
+    - pyqt 4.11.3.99                      # [osx]
+    - jpeg     8d                         # [unix]
+    - jpeg     1.2.*{{toolset.suffix}}    # [win]
+    - libtiff  *{{toolset.suffix}}        
+    - libpng   1.6.17                     # [unix]
+    - libpng   1.5.*{{toolset.suffix}}    # [win]
+    - hdf5     1.8.*{{toolset.suffix}}    # [win]
+    - freetype *{{toolset.suffix}}        # [win]
     - zlib     *{{toolset.suffix}}
     - libxml2  *{{toolset.suffix}}
 

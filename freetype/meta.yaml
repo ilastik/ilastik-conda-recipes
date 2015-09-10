@@ -1,4 +1,4 @@
-{% import 'CONDA_ENVIRONMENT/toolset-info/config.yaml' as toolset %}
+{% import '$CONDA_ENV_PATH/toolset-info/config.yaml' as toolset %}
 
 package:
   name: freetype
@@ -8,6 +8,10 @@ source:
   fn:  freetype-2.4.11.tar.gz
   url: http://download-mirror.savannah.gnu.org/releases/freetype/freetype-2.4.11.tar.gz
   md5: 5af8234cf36f64dc2b97f44f89325117
+
+build:
+  features:
+    - {{toolset.short}}
 
 requirements:
   build:

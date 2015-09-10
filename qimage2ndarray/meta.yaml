@@ -1,4 +1,4 @@
-{% import 'CONDA_ENVIRONMENT/toolset-info/config.yaml' as toolset %}
+{% import '$CONDA_ENV_PATH/toolset-info/config.yaml' as toolset %}
 
 package:
   name: qimage2ndarray
@@ -10,6 +10,8 @@ source:
   md5: 77359e694d498c958c90bcd3e3851d5d
 
 build:
+  features:
+    - {{toolset.short}}
   number: 3
   detect_binary_files_with_prefix: true
 

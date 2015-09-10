@@ -1,4 +1,4 @@
-{% import 'CONDA_ENVIRONMENT/toolset-info/config.yaml' as toolset %}
+{% import '$CONDA_ENV_PATH/toolset-info/config.yaml' as toolset %}
 
 package:
   name: iconv
@@ -9,8 +9,13 @@ source:
   url: http://ftp.gnu.org/pub/gnu/libiconv/libiconv-1.14.tar.gz
   md5: e34509b1623cec449dfeb73d7ce9c6c6
 
+build:
+  features:
+    - {{toolset.short}}
+
 requirements:
   build:
+    - {{toolset.build_requirement}}
     - mingw-for-msvc                 # [win]
 
   run:

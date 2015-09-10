@@ -1,4 +1,4 @@
-{% import 'CONDA_ENVIRONMENT/toolset-info/config.yaml' as toolset %}
+{% import '$CONDA_ENV_PATH/toolset-info/config.yaml' as toolset %}
 
 package:
   name: jpeg
@@ -8,6 +8,10 @@ source:
     fn:  libjpeg-turbo-1.2.1.tar.gz
     md5: f61e60ff01381ece4d2fe65eeb52669e
     url: http://sourceforge.net/projects/libjpeg-turbo/files/1.2.1/libjpeg-turbo-1.2.1.tar.gz
+
+build:
+  features:
+    - {{toolset.short}}
 
 requirements:
   build:

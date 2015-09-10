@@ -1,4 +1,4 @@
-{% import 'CONDA_ENVIRONMENT/toolset-info/config.yaml' as toolset %}
+{% import '$CONDA_ENV_PATH/toolset-info/config.yaml' as toolset %}
 
 package:
   name: zlib
@@ -8,6 +8,10 @@ source:
     fn:  zlib-1.2.8.tar.gz
     md5: 44d667c142d7cda120332623eab69f40
     url: http://zlib.net/zlib-1.2.8.tar.gz
+
+build:
+  features:
+    - {{toolset.short}}
 
 requirements:
   build:

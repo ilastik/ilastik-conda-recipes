@@ -1,4 +1,5 @@
 package:
+  # pure python
   name: setuptools
   version: "18.2"
 

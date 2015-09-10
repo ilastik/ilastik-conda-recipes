@@ -1,4 +1,4 @@
-{% import 'CONDA_ENVIRONMENT/toolset-info/config.yaml' as toolset %}
+{% import '$CONDA_ENV_PATH/toolset-info/config.yaml' as toolset %}
 
 package:
   name: ilastiktools
@@ -10,6 +10,8 @@ source:
   git_tag: 
 
 build:
+  features:
+    - {{toolset.short}}
   number: 1
   detect_binary_files_with_prefix: true
   string: afd8501

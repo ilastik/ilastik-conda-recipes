@@ -1,10 +1,14 @@
-{% import 'CONDA_ENVIRONMENT/toolset-info/config.yaml' as toolset %}
+{% import '$CONDA_ENV_PATH/toolset-info/config.yaml' as toolset %}
 
 package:
   name: ilastik-exe
   version: "1.0{{toolset.suffix}}"
 
 # source is in recipe dir
+
+build:
+  features:
+    - {{toolset.short}}
 
 requirements:
   build:

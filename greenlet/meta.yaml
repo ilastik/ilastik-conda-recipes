@@ -1,4 +1,4 @@
-{% import 'CONDA_ENVIRONMENT/toolset-info/config.yaml' as toolset %}
+{% import '$CONDA_ENV_PATH/toolset-info/config.yaml' as toolset %}
 
 package:
   name: greenlet
@@ -8,6 +8,10 @@ source:
   fn:  greenlet-0.4.7.zip
   url: https://pypi.python.org/packages/source/g/greenlet/greenlet-0.4.7.zip
   md5: c2333a8ff30fa75c5d5ec0e67b461086 
+
+build:
+  features:
+    - {{toolset.short}}
 
 requirements:
   build:

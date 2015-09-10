@@ -1,4 +1,4 @@
-{% import 'CONDA_ENVIRONMENT/toolset-info/config.yaml' as toolset %}
+{% import '$CONDA_ENV_PATH/toolset-info/config.yaml' as toolset %}
 
 package:
   name: matplotlib
@@ -8,6 +8,10 @@ source:
   fn:  matplotlib-1.4.3.tar.gz
   url: https://pypi.python.org/packages/source/m/matplotlib/matplotlib-1.4.3.tar.gz
   md5: 86af2e3e3c61849ac7576a6f5ca44267
+
+build:
+  features:
+    - {{toolset.short}}
 
 requirements:
   build:
