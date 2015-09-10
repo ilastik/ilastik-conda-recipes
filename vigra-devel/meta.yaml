@@ -1,0 +1,27 @@
+{% import '$CONDA_ENV_PATH/toolset-info/config.yaml' as toolset %}
+
+package:
+  name: vigra-devel
+  version: master
+
+build:
+  features:
+    - {{toolset.short}}
+
+requirements:
+  build:
+    - {{toolset.build_requirement}}
+    - vigra
+    - nose
+    - sphinx
+
+  run:
+    - {{toolset.run_requirement}}
+    - vigra
+    - nose
+    - sphinx
+
+about:
+  home: http://ukoethe.github.io/vigra
+  license: MIT
+  summary: Generic Programming for Computer Vision
