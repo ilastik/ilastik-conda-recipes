@@ -5,6 +5,16 @@ else
     DYLIB_EXT=so
 fi
 
+CONFIGURE_ONLY=0
+if [[ $1 != "" ]]; then
+    if [[ $1 == "--configure-only" ]]; then
+        CONFIGURE_ONLY=1
+    else
+        echo "Unknown argument: $1"
+        exit 1
+    fi
+fi
+
 # CONFIGURE
 mkdir -p build # Using -p here is convenient for calling this script outside of conda.
 cd build
@@ -22,8 +32,11 @@ cmake ..\
         -DPYTHON_LIBRARY="${PREFIX}/lib/libpython2.7.${DYLIB_EXT}" \
         -DPYTHON_INCLUDE_DIR="${PREFIX}/include/python2.7" \
 ##
-# BUILD
-make -j${CPU_COUNT}
 
-# "install" to the build prefix (conda will relocate these files afterwards)
-make install
+if [[ $CONFIGURE_ONLY == 0 ]]; then
+    # BUILD
+    make -j${CPU_COUNT}
+    
+    # "install" to the build prefix (conda will relocate these files afterwards)
+    make install
+fi
