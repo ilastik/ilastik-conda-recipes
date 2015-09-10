@@ -22,14 +22,5 @@ cmake ..\
 # BUILD
 make -j${CPU_COUNT}
 
-# TEST (before install)
-(
-    # (Since conda hasn't performed its link step yet, we must 
-    #  help the tests locate their dependencies via LD_LIBRARY_PATH)
-    export ${LIBRARY_SEARCH_VAR}=$PREFIX/lib:${!LIBRARY_SEARCH_VAR}
-    export PYTHONPATH=${SRC_DIR}/lib
-    make test
-)
-
 # "install" to the build prefix (conda will relocate these files afterwards)
 make install
