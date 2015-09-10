@@ -7,7 +7,7 @@ source:
   git_tag: HEAD
 
 build:
-  number: 9
+  number: 10
   detect_binary_files_with_prefix: true # (defaults to false)
   
 requirements:
@@ -24,8 +24,6 @@ requirements:
     - opencv 2.4.10.1 
     
   run:
-    - gcc 4.8.5.99 # [linux]
-    - gcc 4.8.5.99 # [osx]
     - libgcc
     - jsoncpp
     - vtk
