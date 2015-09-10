@@ -31,10 +31,3 @@ if [[ -n ${!LIBRARY_SEARCH_VAR} ]]; then
     echo "*** ${LIBARY_SEARCH_VAR}=${!LIBRARY_SEARCH_VAR}"
     echo "*** This can make your build difficult to reproduce.  Make sure you know what you're doing."
 fi
-
-#
-# We OVERRIDE conda's default value for MACOSX_DEPLOYMENT_TARGET, 
-#  because we want to link against libc++ (not stdlibc++) for C++ libraries (like vigra)
-#
-export MACOSX_DEPLOYMENT_TARGET=10.7
-
