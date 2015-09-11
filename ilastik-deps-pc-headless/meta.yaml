@@ -14,10 +14,10 @@ build:
 
 requirements:
   build:
+    - {{toolset.build_requirement}}
     - python  2.7.*{{toolset.suffix}}
     - numpy    >=1.9                   # [unix]
     - numpy    1.7.*{{toolset.suffix}} # [win]
-    - ilastik-exe  *{{toolset.suffix}} # [win]
     - vigra        *{{toolset.suffix}}
     - h5py         *{{toolset.suffix}}
     - tifffile     *{{toolset.suffix}}
@@ -31,10 +31,10 @@ requirements:
     - nose
 
   run:
+    - {{toolset.run_requirement}}
     - python  2.7.*{{toolset.suffix}}
     - numpy    >=1.9                   # [unix]
     - numpy    1.7.*{{toolset.suffix}} # [win]
-    - ilastik-exe  *{{toolset.suffix}} # [win]
     - vigra        *{{toolset.suffix}}
     - h5py         *{{toolset.suffix}}
     - tifffile     *{{toolset.suffix}}

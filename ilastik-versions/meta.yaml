@@ -28,7 +28,7 @@ requirements:
     - cython                    0.23{{toolset.suffix}}    # [win]
     - decorator                 3.4.0                     # [unix]
     - decorator                 4.0.2                     # [win]
-    - faulthandler              2.4       
+    - faulthandler              2.4{{toolset.suffix}}
     - fftw                      3.3.4{{toolset.suffix}}    
     - freetype                  2.5.2{{toolset.suffix}}   # [unix]    
     - freetype                  2.4.11{{toolset.suffix}}  # [win]    
