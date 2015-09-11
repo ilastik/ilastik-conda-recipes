@@ -14,7 +14,7 @@ cat "%RECIPE_DIR%\config.yaml.in" ^
          -e "s/@PKG_SHORT@/vc%PKG_VERSION:.0=%/g" ^
    > "%TOOLSET_INFO_DIR%\config.yaml"
    
-copy "%RECIPE_DIR%\dos-tools.bat" "%TOOLSET_INFO_DIR%\"
+copy "%RECIPE_DIR%\..\dos-tools.bat" "%TOOLSET_INFO_DIR%\"
    
 call "%TOOLSET_INFO_DIR%\common-vars.bat"
 
