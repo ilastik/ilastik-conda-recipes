@@ -58,7 +58,6 @@ echo "yes" | ./configure \
     -no-cups \
     -no-nis \
     -no-accessibility \
-    -release \
     -shared \
     -fontconfig \
     -system-zlib \
