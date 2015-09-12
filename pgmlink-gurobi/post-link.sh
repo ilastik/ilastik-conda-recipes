@@ -8,11 +8,11 @@ if [ `uname` == Darwin ]; then
     set -x
     install_name_tool -add_rpath ${GUROBI_ROOT_DIR}/lib "${PREFIX}/lib/libpgmlink.dylib"
     
-    install_name_tool -add_rpath ${GUROBI_ROOT_DIR}/lib  "${PREFIX}/lib/python2.7/site-packages/pgmlink.so"
+    install_name_tool -add_rpath ${GUROBI_ROOT_DIR}/lib  "${PREFIX}/lib/python3.5/site-packages/pgmlink.so"
     set +x
 else
     set -x
     ${PREFIX}/bin/patchelf --set-rpath ${GUROBI_ROOT_DIR}/lib:'$ORIGIN/.' ${PREFIX}/lib/libpgmlink.so
-    ${PREFIX}/bin/patchelf --set-rpath ${GUROBI_ROOT_DIR}/lib:'$ORIGIN/../..' ${PREFIX}/lib/python2.7/site-packages/pgmlink.so
+    ${PREFIX}/bin/patchelf --set-rpath ${GUROBI_ROOT_DIR}/lib:'$ORIGIN/../..' ${PREFIX}/lib/python3.5/site-packages/pgmlink.so
     set +x
 fi

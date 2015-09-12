@@ -133,7 +133,7 @@ rm -rf ilastik.app/Contents/Resources/lib
 cd ilastik.app/Contents/Resources && ln -s ../ilastik-release/lib
 cd -
 
-# Add a symlink to ilastik-meta so that lib/python2.7/site-packages/ilastik-meta.pth works correctly
+# Add a symlink to ilastik-meta so that lib/python3.5/site-packages/ilastik-meta.pth works correctly
 cd ilastik.app/Contents/Resources && ln -s ../ilastik-release/ilastik-meta
 cd -
 

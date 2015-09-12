@@ -14,11 +14,11 @@ cmake ..\
     -DCMAKE_INSTALL_PREFIX=${PREFIX} \
     -DCMAKE_PREFIX_PATH=${PREFIX} \
     -DPYTHON_EXECUTABLE=${PYTHON} \
-    -DPYTHON_LIBRARY=${PREFIX}/lib/libpython2.7.${DYLIB_EXT} \
-    -DPYTHON_INCLUDE_DIR=${PREFIX}/include/python2.7 \
+    -DPYTHON_LIBRARY=${PREFIX}/lib/libpython3.5m.${DYLIB_EXT} \
+    -DPYTHON_INCLUDE_DIR=${PREFIX}/include/python3.5m \
     -DVIGRA_INCLUDE_DIR=${PREFIX}/include \
     -DVIGRA_IMPEX_LIBRARY=${PREFIX}/lib/libvigraimpex.${DYLIB_EXT} \
-    -DVIGRA_NUMPY_CORE_LIBRARY=${PREFIX}/lib/python2.7/site-packages/vigra/vigranumpycore.so \
+    -DVIGRA_NUMPY_CORE_LIBRARY=${PREFIX}/lib/python3.5/site-packages/vigra/vigranumpycore.so \
     -DWITH_OPENMP=ON \
 ##
 

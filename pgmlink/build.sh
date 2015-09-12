@@ -72,12 +72,12 @@ cmake ..\
     -DBUILD_SHARED_LIBS=ON\
     -DWITH_PYTHON=ON\
     -DPYTHON_EXECUTABLE=${PYTHON} \
-    -DPYTHON_LIBRARY=${PREFIX}/lib/libpython2.7.${DYLIB} \
-    -DPYTHON_INCLUDE_DIR=${PREFIX}/include/python2.7 \
-    -DPYPGMLINK_INSTALL_DIR=${PREFIX}/lib/python2.7/site-packages \
+    -DPYTHON_LIBRARY=${PREFIX}/lib/libpython3.5m.${DYLIB} \
+    -DPYTHON_INCLUDE_DIR=${PREFIX}/include/python3.5m \
+    -DPYPGMLINK_INSTALL_DIR=${PREFIX}/lib/python3.5/site-packages \
     -DVIGRA_INCLUDE_DIR=${PREFIX}/include \
     -DVIGRA_IMPEX_LIBRARY=${PREFIX}/lib/libvigraimpex.${DYLIB} \
-    -DVIGRA_NUMPY_CORE_LIBRARY=${PREFIX}/lib/python2.7/site-packages/vigra/vigranumpycore.so \
+    -DVIGRA_NUMPY_CORE_LIBRARY=${PREFIX}/lib/python3.5/site-packages/vigra/vigranumpycore.so \
     -DWITH_CHECKED_STL=OFF\
     -DWITH_TESTS=ON\
     -DCPLEX_ROOT_DIR="${CPLEX_ROOT_DIR}"
@@ -91,7 +91,7 @@ if [ `uname` == "Darwin" ]; then
     install_name_tool -change ${CPLEX_LIB_DIR}/libilocplex.dylib @rpath/libilocplex.dylib ${PREFIX}/lib/libpgmlink.dylib
     install_name_tool -change ${CONCERT_LIB_DIR}/libconcert.dylib @rpath/libconcert.dylib ${PREFIX}/lib/libpgmlink.dylib
 
-    install_name_tool -change ${CPLEX_LIB_DIR}/libcplex.dylib @rpath/libcplex.dylib ${PREFIX}/lib/python2.7/site-packages/pgmlink.so
-    install_name_tool -change ${CPLEX_LIB_DIR}/libilocplex.dylib @rpath/libilocplex.dylib ${PREFIX}/lib/python2.7/site-packages/pgmlink.so
-    install_name_tool -change ${CONCERT_LIB_DIR}/libconcert.dylib @rpath/libconcert.dylib ${PREFIX}/lib/python2.7/site-packages/pgmlink.so
+    install_name_tool -change ${CPLEX_LIB_DIR}/libcplex.dylib @rpath/libcplex.dylib ${PREFIX}/lib/python3.5/site-packages/pgmlink.so
+    install_name_tool -change ${CPLEX_LIB_DIR}/libilocplex.dylib @rpath/libilocplex.dylib ${PREFIX}/lib/python3.5/site-packages/pgmlink.so
+    install_name_tool -change ${CONCERT_LIB_DIR}/libconcert.dylib @rpath/libconcert.dylib ${PREFIX}/lib/python3.5/site-packages/pgmlink.so
 fi

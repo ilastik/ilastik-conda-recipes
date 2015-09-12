@@ -54,13 +54,13 @@ cmake ..\
         -DBoost_PYTHON_LIBRARY_DEBUG=${PREFIX}/lib/libboost_python-mt.${DYLIB_EXT} \
 \
         -DPYTHON_EXECUTABLE=${PYTHON} \
-        -DPYTHON_LIBRARY=${PREFIX}/lib/libpython2.7.${DYLIB_EXT} \
-        -DPYTHON_INCLUDE_DIR=${PREFIX}/include/python2.7 \
-        -DPYTHON_NUMPY_INCLUDE_DIR=${PREFIX}/lib/python2.7/site-packages/numpy/core/include \
+        -DPYTHON_LIBRARY=${PREFIX}/lib/libpython3.5m.${DYLIB_EXT} \
+        -DPYTHON_INCLUDE_DIR=${PREFIX}/include/python3.5m \
+        -DPYTHON_NUMPY_INCLUDE_DIR=${PREFIX}/lib/python3.5/site-packages/numpy/core/include \
         -DPYTHON_SPHINX=${PREFIX}/bin/sphinx-build \
 \
-        -DVIGRANUMPY_LIBRARIES="${PREFIX}/lib/libpython2.7.${DYLIB_EXT};${PREFIX}/lib/libboost_python.${DYLIB_EXT};${PREFIX}/lib/libboost_thread.${DYLIB_EXT};${PREFIX}/lib/libboost_system.${DYLIB_EXT}" \
-        -DVIGRANUMPY_INSTALL_DIR=${PREFIX}/lib/python2.7/site-packages \
+        -DVIGRANUMPY_LIBRARIES="${PREFIX}/lib/libpython3.5m.${DYLIB_EXT};${PREFIX}/lib/libboost_python.${DYLIB_EXT};${PREFIX}/lib/libboost_thread.${DYLIB_EXT};${PREFIX}/lib/libboost_system.${DYLIB_EXT}" \
+        -DVIGRANUMPY_INSTALL_DIR=${PREFIX}/lib/python3.5/site-packages \
 \
         -DZLIB_INCLUDE_DIR=${PREFIX}/include \
         -DZLIB_LIBRARY=${PREFIX}/lib/libz.${DYLIB_EXT} \

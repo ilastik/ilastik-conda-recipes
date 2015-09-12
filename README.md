@@ -111,7 +111,7 @@ git submodule foreach "git checkout master"
 cd ${DEV_PREFIX} && ln -s /path/to/ilastik-meta
 
 # Finally, replace ilastik-meta.pth
-cat > ${DEV_PREFIX}/lib/python2.7/site-packages/ilastik-meta.pth << EOF
+cat > ${DEV_PREFIX}/lib/python3.5/site-packages/ilastik-meta.pth << EOF
 ../../../ilastik-meta/lazyflow
 ../../../ilastik-meta/volumina
 ../../../ilastik-meta/ilastik

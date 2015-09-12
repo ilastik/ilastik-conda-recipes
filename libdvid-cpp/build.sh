@@ -16,8 +16,8 @@ cmake ..\
         -DBoost_LIBRARY_DIR=${PREFIX}/lib \
         -DBoost_INCLUDE_DIR=${PREFIX}/include \
         -DPYTHON_EXECUTABLE=${PYTHON} \
-        -DPYTHON_LIBRARY=${PREFIX}/lib/libpython2.7.${DYLIB_EXT} \
-        -DPYTHON_INCLUDE_DIR=${PREFIX}/include/python2.7 \
+        -DPYTHON_LIBRARY=${PREFIX}/lib/libpython3.5m.${DYLIB_EXT} \
+        -DPYTHON_INCLUDE_DIR=${PREFIX}/include/python3.5m \
         -DLIBDVID_WRAP_PYTHON=1 \
 
 # BUILD

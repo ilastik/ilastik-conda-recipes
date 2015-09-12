@@ -35,8 +35,8 @@ cmake \
     -DBUILD_SHARED_LIBS:BOOL=ON \
     \
     -DPYTHON_EXECUTABLE=${PYTHON} \
-    -DPYTHON_LIBRARY=${PREFIX}/lib/libpython2.7.${DYLIB_EXT} \
-    -DPYTHON_INCLUDE_DIR=${PREFIX}/include/python2.7 \
+    -DPYTHON_LIBRARY=${PREFIX}/lib/libpython3.5m.${DYLIB_EXT} \
+    -DPYTHON_INCLUDE_DIR=${PREFIX}/include/python3.5m \
     -DVTK_WRAP_PYTHON:BOOL=ON \
     \
     -DVTK_USE_X:BOOL=OFF \
@@ -44,7 +44,7 @@ cmake \
     \
     -DVTK_WRAP_PYTHON_SIP:BOOL=ON \
     -DSIP_EXECUTABLE:FILEPATH=${PREFIX}/bin/sip \
-    -DSIP_INCLUDE_DIR:PATH=${PREFIX}/include/python2.7 \
+    -DSIP_INCLUDE_DIR:PATH=${PREFIX}/include/python3.5m \
     -DSIP_PYQT_DIR:PATH=${PREFIX}/share/sip/PyQt4 \
     -DVTK_USE_QT:BOOL=ON \
     -DVTK_USE_QVTK_QTOPENGL:BOOL=ON \

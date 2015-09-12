@@ -47,9 +47,9 @@ test:
     - macholib
 
   commands:
-    - python -mmacholib dump ${PREFIX}/lib/libpython2.7.dylib
-    - macho_find ${PREFIX}/lib/libpython2.7.dylib
-    - macho_dump ${PREFIX}/lib/libpython2.7.dylib
+    - python -mmacholib dump ${PREFIX}/lib/libpython3.5m.dylib
+    - macho_find ${PREFIX}/lib/libpython3.5m.dylib
+    - macho_dump ${PREFIX}/lib/libpython3.5m.dylib
 
   # You can also put a file called run_test.py in the recipe that will be run
   # at test time.

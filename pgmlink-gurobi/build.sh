@@ -41,6 +41,6 @@ if [ `uname` == "Darwin" ]; then
     # Set install names according using @rpath, which will be configured via the post-link script.
     install_name_tool -change ${LIBNAME} @rpath/${LIBNAME} ${PREFIX}/lib/libpgmlink.dylib
     
-    install_name_tool -change ${LIBNAME} @rpath/${LIBNAME} ${PREFIX}/lib/python2.7/site-packages/pgmlink.so
+    install_name_tool -change ${LIBNAME} @rpath/${LIBNAME} ${PREFIX}/lib/python3.5/site-packages/pgmlink.so
     
 fi

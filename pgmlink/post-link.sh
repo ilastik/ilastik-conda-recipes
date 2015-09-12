@@ -29,13 +29,13 @@ if [ `uname` == Darwin ]; then
     install_name_tool -add_rpath ${CONCERT_LIB_DIR} "${PREFIX}/lib/libpgmlink.dylib"
     install_name_tool -add_rpath @loader_path/./ "${PREFIX}/lib/libpgmlink.dylib"
 
-    install_name_tool -add_rpath ${CPLEX_LIB_DIR}  "${PREFIX}/lib/python2.7/site-packages/pgmlink.so"
-    install_name_tool -add_rpath ${CONCERT_LIB_DIR} "${PREFIX}/lib/python2.7/site-packages/pgmlink.so"
-    install_name_tool -add_rpath @loader_path/../.. "${PREFIX}/lib/python2.7/site-packages/pgmlink.so"
+    install_name_tool -add_rpath ${CPLEX_LIB_DIR}  "${PREFIX}/lib/python3.5/site-packages/pgmlink.so"
+    install_name_tool -add_rpath ${CONCERT_LIB_DIR} "${PREFIX}/lib/python3.5/site-packages/pgmlink.so"
+    install_name_tool -add_rpath @loader_path/../.. "${PREFIX}/lib/python3.5/site-packages/pgmlink.so"
     set +x
 else
     set -x
     ${PREFIX}/bin/patchelf --set-rpath $CONCERT_LIB_DIR:$CPLEX_LIB_DIR:'$ORIGIN/.' ${PREFIX}/lib/libpgmlink.so
-    ${PREFIX}/bin/patchelf --set-rpath $CONCERT_LIB_DIR:$CPLEX_LIB_DIR:'$ORIGIN/../..' ${PREFIX}/lib/python2.7/site-packages/pgmlink.so
+    ${PREFIX}/bin/patchelf --set-rpath $CONCERT_LIB_DIR:$CPLEX_LIB_DIR:'$ORIGIN/../..' ${PREFIX}/lib/python3.5/site-packages/pgmlink.so
     set +x
 fi

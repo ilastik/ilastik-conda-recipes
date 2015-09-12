@@ -12,10 +12,10 @@ def main():
     Example usage:
 
     # Print the dependencies of one shared object:
-    $ python find-dependencies.py --subtree=/miniconda/envs/ilastik-release /miniconda/envs/ilastik-release/lib/python2.7/site-packages/pgmlink.so
+    $ python find-dependencies.py --subtree=/miniconda/envs/ilastik-release /miniconda/envs/ilastik-release/lib/python3.5/site-packages/pgmlink.so
     
     # Print dependencies of all python extension modules:
-    $ find /miniconda/envs/ilastik-release/lib/python2.7 -name "*.so" \
+    $ find /miniconda/envs/ilastik-release/lib/python3.5 -name "*.so" \
         | xargs python find-dependencies.py --subtree=/miniconda/envs/ilastik-release \
         > all-python-module-dependencies
     """

@@ -15,8 +15,8 @@ cmake ..\
         -DCMAKE_SHARED_LINKER_FLAGS="-Wl,-rpath,${PREFIX}/lib -L${PREFIX}/lib" \
         -DCMAKE_EXE_LINKER_FLAGS="-Wl,-rpath,${PREFIX}/lib -L${PREFIX}/lib" \
         -DPYTHON_EXECUTABLE=${PYTHON} \
-        -DPYTHON_LIBRARY=${PREFIX}/lib/libpython2.7.${DYLIB_EXT} \
-        -DPYTHON_INCLUDE_DIR=${PREFIX}/include/python2.7 \
+        -DPYTHON_LIBRARY=${PREFIX}/lib/libpython3.5m.${DYLIB_EXT} \
+        -DPYTHON_INCLUDE_DIR=${PREFIX}/include/python3.5m \
 
 # BUILD
 make -j${CPU_COUNT}
