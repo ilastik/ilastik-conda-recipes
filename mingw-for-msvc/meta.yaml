@@ -8,6 +8,8 @@ package:
   version: "4.7.2"
 
 build:
+  track_features:
+    - {{toolset.short}}
   features:
     - {{toolset.short}}
 
