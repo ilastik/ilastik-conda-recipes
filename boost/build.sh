@@ -22,11 +22,23 @@ else
     B2ARGS="toolset=gcc"
 fi
 
+# For some reason, ${PY_VER} is incorrect, so we need to deduce the version on our own.
+PY_MAJOR_MINOR=$(python -c "import sys; sys.stdout.write('{}.{}'.format(sys.version_info.major, sys.version_info.minor))")
+echo "using python : ${PY_MAJOR_MINOR} : ${PYTHON} : ${PREFIX}/include/python${PY_MAJOR_MINOR} : ${PREFIX}/lib ;" >> user-config.jam
+
+# FIXME: These paths have 'm' character on the end, which boost seems not to expect.
+#        (Adding 'm' to the user-config line above seems to make no difference.)
+#        For now, we just add these symlinks to fix the issue.
+ln -s ${PREFIX}/include/python${PY_MAJOR_MINOR}m ${PREFIX}/include/python${PY_MAJOR_MINOR}
+ln -s ${PREFIX}/lib/libpython${PY_MAJOR_MINOR}m.dylib ${PREFIX}/lib/libpython${PY_MAJOR_MINOR}.dylib
+
 mkdir -vp ${PREFIX}/bin;
 
 ./bootstrap.sh \
   --with-libraries=date_time,filesystem,python,regex,serialization,system,test,thread,program_options,chrono,atomic,random \
   --with-python=${PYTHON} \
+  --with-python-version=${PY_MAJOR_MINOR} \
+  --with-python-root=${PREFIX} \
   --prefix=${PREFIX}
 
 # In the commands below, we want to include linkflags=blabla and 
