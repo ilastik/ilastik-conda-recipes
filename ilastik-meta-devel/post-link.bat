@@ -7,5 +7,5 @@ cd ilastik-meta
 
 git submodule update --init --recursive
 if errorlevel 1 exit 1
-git submodule foreach "git checkout master"
+git submodule foreach --recursive "git checkout master"
 if errorlevel 1 exit 1
