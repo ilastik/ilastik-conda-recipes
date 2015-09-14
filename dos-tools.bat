@@ -75,3 +75,8 @@ goto :eof
     set _NEW_PATH=%_NEW_PATH:~0,-1%
     echo set PATH=!_NEW_PATH!
     goto :eof
+
+@REM create an empty file
+@REM    :empty_file  "filename"
+:empty_file
+    copy /Y NUL "%~1" > NUL
