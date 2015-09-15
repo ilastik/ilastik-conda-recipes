@@ -13,4 +13,8 @@ fi
 bash build.sh ${PREFIX}/bin/qmake ${QMAKE_SPEC_PATH} -e flyem
 
 # Install to conda environment
-mv neurolabi/build/neuTube.app ${PREFIX}/bin/
+if [ `uname` == 'Darwin' ]; then
+    mv neurolabi/build/neuTube.app ${PREFIX}/bin/
+else
+    mv neurolabi/build/neuTube ${PREFIX}/bin/
+fi
