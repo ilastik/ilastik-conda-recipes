@@ -26,11 +26,12 @@ cmake ..\
         -DCMAKE_CXX_FLAGS=-I"${PREFIX}/include" \
         -DCMAKE_SHARED_LINKER_FLAGS="-Wl,-rpath,${PREFIX}/lib -L${PREFIX}/lib" \
         -DCMAKE_EXE_LINKER_FLAGS="-Wl,-rpath,${PREFIX}/lib -L${PREFIX}/lib" \
+        -DBoost_LIBRARY_DIR="${PREFIX}/lib" \
         -DBoost_INCLUDE_DIR="${PREFIX}/include" \
-        -DENABLE_GUI=1 \
         -DPYTHON_EXECUTABLE="${PYTHON}" \
         -DPYTHON_LIBRARY="${PREFIX}/lib/libpython2.7.${DYLIB_EXT}" \
         -DPYTHON_INCLUDE_DIR="${PREFIX}/include/python2.7" \
+        -DENABLE_GUI=1 \
 ##
 
 if [[ $CONFIGURE_ONLY == 0 ]]; then
