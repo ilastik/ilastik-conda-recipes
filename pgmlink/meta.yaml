@@ -3,15 +3,12 @@ package:
     version: "1.2"
 
 source:
-    #git_url: https://github.com/martinsch/pgmlink
-    #git_tag: ce86cf509b60aaceb4e4bcf392698c2fc6e7e1fd
-
     git_url: https://github.com/martinsch/pgmlink
-    git_tag: 7a0c8d4f54e9a4066991829fb52b411a02914666 # Version from ilastik 1.1.5, downgrade relative to above commit
+    git_tag: 9c4dadb14dd97a4dd1b6d8aca408809978616c45
 
 build:
-  number: 11
-  string: 11_g7a0c8d4
+  number: 12
+  string: 12_g9c4dadb1
   detect_binary_files_with_prefix: true
   script_env:
      - CPLEX_ROOT_DIR
