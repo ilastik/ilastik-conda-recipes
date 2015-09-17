@@ -21,6 +21,7 @@ cd build
 cmake ..\
         -DCMAKE_C_COMPILER="${PREFIX}/bin/gcc" \
         -DCMAKE_CXX_COMPILER="${PREFIX}/bin/g++" \
+        -DCMAKE_BUILD_TYPE=Release \
         -DCMAKE_INSTALL_PREFIX="${PREFIX}" \
         -DCMAKE_PREFIX_PATH="${PREFIX}" \
         -DCMAKE_CXX_FLAGS=-I"${PREFIX}/include" \
@@ -40,4 +41,7 @@ if [[ $CONFIGURE_ONLY == 0 ]]; then
 
     # "install" to the build prefix (conda will relocate these files afterwards)
     make install
+    
+    # For debug builds, this symlink can be useful...
+    #cd ${PREFIX}/lib && ln -s libdvidcpp-g.${DYLIB_EXT} libdvidcpp.${DYLIB_EXT} && cd -
 fi
