@@ -24,3 +24,7 @@ goto :eof
 :create
     cmd /C conda create -c "%CONDA_LOCAL_CHANNEL%" --override-channels %*
     goto :eof
+
+:index
+    cmd /C conda index "%CONDA_PATH%\conda-bld\win-64"
+    goto :eof
