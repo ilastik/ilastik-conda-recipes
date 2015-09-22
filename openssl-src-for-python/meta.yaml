@@ -1,5 +1,9 @@
 package:
   name: openssl-src-for-python
+  # IMPORTRANT: Contrary to conda conventions, openssl requires the order
+  #         1.0.2 < 1.0.2a
+  # (conda interprets 'a' as 'alpha', placing it before the final release).
+  # To enforce openssl ordering, always rename "1.0.2" => "1.0.2_".
   version: "1.0.2a"
 
 source:
