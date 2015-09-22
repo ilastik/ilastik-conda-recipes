@@ -4,11 +4,11 @@ package:
 
 source:
     git_url: https://github.com/martinsch/pgmlink
-    git_tag: 9c4dadb14dd97a4dd1b6d8aca408809978616c45
+    git_tag: c944c6764a85b88e94ff12c38baa1a8172d9be72 
 
 build:
-  number: 12
-  string: 12_g9c4dadb1
+  number: 13
+  string: 13_gc944c67
   detect_binary_files_with_prefix: true
   script_env:
      - CPLEX_ROOT_DIR
