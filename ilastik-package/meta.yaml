@@ -1,0 +1,25 @@
+{% import '$CONDA_ENV_PATH/toolset-info/config.yaml' as toolset %}
+
+about:
+  summary: "A meta-package for creating installer packages."
+
+package:
+  name: ilastik-package
+  version: "" # bld.bat will generate a __conda_version__.txt file
+
+build:
+  track_features:
+    - {{toolset.short}}
+  features:
+    - {{toolset.short}}
+
+requirements:
+  build:
+    - {{toolset.build_requirement}}
+    - python   *{{toolset.suffix}}
+    - ilastik-meta
+
+  run:
+    - {{toolset.run_requirement}}
+    - python   *{{toolset.suffix}}
+    - ilastik-meta
