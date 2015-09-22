@@ -74,6 +74,7 @@ cmake ..\
     -DPYTHON_EXECUTABLE=${PYTHON} \
     -DPYTHON_LIBRARY=${PREFIX}/lib/libpython2.7.${DYLIB} \
     -DPYTHON_INCLUDE_DIR=${PREFIX}/include/python2.7 \
+    -DPYTHON_INCLUDE_DIR2=${PREFIX}/include/python2.7 \
     -DPYPGMLINK_INSTALL_DIR=${PREFIX}/lib/python2.7/site-packages \
     -DVIGRA_INCLUDE_DIR=${PREFIX}/include \
     -DVIGRA_IMPEX_LIBRARY=${PREFIX}/lib/libvigraimpex.${DYLIB} \
