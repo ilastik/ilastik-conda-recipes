@@ -42,10 +42,8 @@ int main(int argc, char **argv)
     
     // full name of this executable
     std::string this_exe(buffer);
-    // we got something like 'path\Library\bin\ilastik.exe' and extract the 'path' part
-    std::string bin_path = this_exe.substr(0, this_exe.rfind("\\"));
-    std::string Library_path = bin_path.substr(0, bin_path.rfind("\\"));
-    std::string path = bin_path.substr(0, Library_path.rfind("\\"));
+    // we got something like 'ilastik_root\ilastik.exe' and extract the 'ilastik_root' part
+    std::string path = this_exe.substr(0, this_exe.rfind("\\"));
     // create the paths to python and ilastik
     std::string script_name = path + "\\ilastik-meta\\ilastik\\ilastik.py";
     std::string python_home = path;
