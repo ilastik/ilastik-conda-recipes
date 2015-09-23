@@ -11,10 +11,12 @@ WizardImageStretch=no
 ; use paint to create this file, size 55x58
 WizardSmallImageFile=package\ilastik-installer-small.bmp
 OutputBaseFilename=ilastik-@VERSION@-win64
+LicenseFile=LICENSE.txt
 SourceDir=..
 OutputDir=package
 
 [Files]
+Source: "LICENSE.txt"; DestDir: "{app}"
 Source: "ilastik.exe"; DestDir: "{app}"
 Source: "run-ilastik.bat"; DestDir: "{app}"
 Source: "python.exe"; DestDir: "{app}"
