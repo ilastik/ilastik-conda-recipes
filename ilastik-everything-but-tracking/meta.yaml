@@ -5,7 +5,8 @@ about:
 
 package:
   name: ilastik-everything-but-tracking
-  version: "" # build.sh will generate a __conda_version__.txt file
+  # build scripts will prepend actual version via a __conda_version__.txt file
+  version: "{{toolset.suffix}}"
 
 build:
   track_features:

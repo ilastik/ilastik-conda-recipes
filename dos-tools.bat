@@ -19,7 +19,8 @@ goto :eof
     if "%_TMP_PATH%"=="" set %~2=
     goto :EOF
     
-@REM capture the output of a command (like backticks in sh)
+@REM capture the output of a command (like backticks in sh), but
+@REM it understands only simple commands without pipes and quotes
 @REM   :capture_output "command" OUT_VAR
 :capture_output
     set %~2=

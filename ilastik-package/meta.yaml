@@ -9,4 +9,4 @@ package:
 
 requirements:
   run:
-    - python   *{{toolset.suffix}}     # needed to read the ilastik version
+    - ilastik-everything   *{{toolset.suffix}}
