@@ -18,8 +18,10 @@ source $CWD/../common-vars.sh
 if [ `uname` == Darwin ]; then
     B2ARGS="toolset=darwin"
     echo "using darwin : : ${PREFIX}/bin/g++" > user-config.jam
+    DY_EXT=dylib
 else
     B2ARGS="toolset=gcc"
+    DY_EXT=so
 fi
 
 # For some reason, ${PY_VER} is incorrect, so we need to deduce the version on our own.
@@ -29,8 +31,8 @@ echo "using python : ${PY_MAJOR_MINOR} : ${PYTHON} : ${PREFIX}/include/python${P
 # FIXME: These paths have 'm' character on the end, which boost seems not to expect.
 #        (Adding 'm' to the user-config line above seems to make no difference.)
 #        For now, we just add these symlinks to fix the issue.
-ln -s ${PREFIX}/include/python${PY_MAJOR_MINOR}m ${PREFIX}/include/python${PY_MAJOR_MINOR}
-ln -s ${PREFIX}/lib/libpython${PY_MAJOR_MINOR}m.dylib ${PREFIX}/lib/libpython${PY_MAJOR_MINOR}.dylib
+cd ${PREFIX}/include && ln -s python${PY_MAJOR_MINOR}m python${PY_MAJOR_MINOR} && cd -
+cd ${PREFIX}/lib && ln -s libpython${PY_MAJOR_MINOR}m.${DY_EXT} libpython${PY_MAJOR_MINOR}.${DY_EXT} && cd -
 
 mkdir -vp ${PREFIX}/bin;
 

@@ -11,8 +11,8 @@ build:
    - LD_LIBRARY_PATH
    - DYLD_LIBRARY_PATH
 
-  number: 9
-  string: 9_35e5d4a
+  number: 10
+  string: 10_35e5d4a_py35
   detect_binary_files_with_prefix: true
 
 requirements:
@@ -43,9 +43,9 @@ requirements:
     - zlib     1.2*
     - nose
 
-test:
-  imports:
-    - vigra
+#test:
+#  imports:
+#    - vigra
 
 about:
   home: http://ukoethe.github.io/vigra
