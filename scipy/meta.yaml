@@ -16,7 +16,7 @@ build:
 requirements:
   build:
     - {{toolset.build_requirement}}
-    - mingw-for-msvc                 # [win]
+    - mingw-for-msvc-build           # [win]
     - python 2.7.*{{toolset.suffix}}
     - numpy  *{{toolset.suffix}}
 

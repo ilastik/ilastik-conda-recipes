@@ -16,7 +16,7 @@ build:
 requirements:
   build:
     - {{toolset.build_requirement}}
-    - mingw-for-msvc                 # [win]
+    - mingw-for-msvc-build           # [win]
 
   run:
     - mingw-for-msvc                 # [win]

@@ -1,0 +1,15 @@
+package:
+  name: visual-studio-build
+  version: 11.0
+
+build:
+  track_features:
+    - vc11
+  features:
+    - vc11
+
+requirements:
+  build:
+    - visual-studio 11.0  # [win]
+  run:
+    - visual-studio 11.0  # [win]

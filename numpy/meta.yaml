@@ -22,7 +22,7 @@ requirements:
   build:
     - {{toolset.build_requirement}}
     - python     *{{toolset.suffix}}
-    - mingw-for-msvc                 # [win]
+    - mingw-for-msvc-build           # [win]
     - openblas                       # [win]
 
   run:
