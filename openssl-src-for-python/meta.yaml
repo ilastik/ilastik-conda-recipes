@@ -3,8 +3,8 @@ package:
   # IMPORTRANT: Contrary to conda conventions, openssl requires the order
   #         1.0.2 < 1.0.2a
   # (conda interprets 'a' as 'alpha', placing it before the final release).
-  # To enforce openssl ordering, always rename "1.0.2" => "1.0.2_".
-  version: "1.0.2a"
+  # To enforce openssl ordering, always insert 'post'.
+  version: "1.0.2post.a"
 
 source:
   git_url: https://github.com/openssl/openssl
