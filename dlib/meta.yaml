@@ -16,8 +16,8 @@ build:
 
 requirements:
   build:
-    - gcc 4.8.5.99 # [linux]
-    - gcc 4.8.5.99 # [osx]
+    - gcc 4.8.5 # [linux]
+    - gcc 4.8.5 # [osx]
     - libpng
     - jpeg
     - sqlite
