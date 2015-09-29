@@ -16,8 +16,13 @@ source:
     - osx_patches/no-gc.diff
 
 build:
-  number: 5
-  string: with_pyqt_5
+  number: 5             # [osx]
+  string: with_pyqt_5   # [osx]
+
+  # On linux, we bumped the gcc/libgcc version and rebuilt the package.
+  number: 6             # [linux]
+  string: with_pyqt_6   # [linux]
+
   detect_binary_files_with_prefix: true
 
 requirements:

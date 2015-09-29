@@ -7,12 +7,8 @@ source:
   git_tag: 35e5d4aed380087d75e206348d1648d9ad9cf1e6 # 2015-07-16
 
 build:
-  script_env:
-   - LD_LIBRARY_PATH
-   - DYLD_LIBRARY_PATH
-
-  number: 9
-  string: 9_35e5d4a
+  number: 10
+  string: 10_35e5d4a
   detect_binary_files_with_prefix: true
 
 requirements:

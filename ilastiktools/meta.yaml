@@ -8,8 +8,8 @@ source:
   git_tag: 
 
 build:
-  number: 1
-  string: afd8501
+  number: 2
+  string: 2_afd8501
   detect_binary_files_with_prefix: true
 
 requirements:

@@ -7,7 +7,8 @@ source:
   git_tag: 4872b315e5bb1467bb7473bd284c754bae212675 # 2015-09-17
 
 build:
-  number: 14
+  number: 15
+  string: 15_g4872b31
   detect_binary_files_with_prefix: true # (defaults to false)
   
 requirements:

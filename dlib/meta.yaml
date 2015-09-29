@@ -12,7 +12,7 @@ source:
     - CMakeLists.txt.patch_2 # Allow linking external jpeg, even on Mac OSX
 
 build:
-  number: 0
+  number: 1
 
 requirements:
   build:

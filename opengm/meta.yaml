@@ -7,8 +7,8 @@ source:
     git_tag: 0e55e0ba9db734c58349024e898121e2f9315c06
 
 build:
-  number: 6
-  string: 6_g0e55e0ba9
+  number: 7
+  string: 7_g0e55e0ba9
   detect_binary_files_with_prefix: true
 
 requirements:
