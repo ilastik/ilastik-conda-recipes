@@ -16,5 +16,6 @@ requirements:
     - gcc 4.8.5 # [osx]
 
 build:
+  number: 1
   script_env:
     - CPLEX_ROOT_DIR
