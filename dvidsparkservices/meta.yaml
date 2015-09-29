@@ -1,0 +1,42 @@
+package:
+  name: dvidsparkservices 
+  version: "0.1"
+  
+source:
+  git_url: git://github.com/janelia-flyem/DVIDSparkServices.git
+  git_tag: HEAD
+
+build:
+  entry_points:
+    #- launchworkflow = workflows.launchworkflow:main (TODO)
+  number: 8
+  
+requirements:
+  build:
+    - python
+    - setuptools
+    - jsonschema
+    - numpy
+    - neuroproof
+    - libdvid-cpp
+    - requests
+    - scikit-image
+    - scipy
+    - pillow
+    - python-lz4
+  run:
+    - python  
+    - jsonschema
+    - numpy
+    - neuroproof
+    - libdvid-cpp
+    - requests
+    - scikit-image
+    - pillow
+    - scipy
+    - python-lz4
+
+about:
+  home: http://github.com/janelia-flyem/DVIDSparkServices.git
+  license: BSD (3-clause)
+  summary: Python framework for EM Spark-based services 

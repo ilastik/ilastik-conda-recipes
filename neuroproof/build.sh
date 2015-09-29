@@ -21,7 +21,6 @@ cd build
 cmake ..\
         -DCMAKE_C_COMPILER="${PREFIX}/bin/gcc" \
         -DCMAKE_CXX_COMPILER="${PREFIX}/bin/g++" \
-        -DCMAKE_BUILD_TYPE=Release \
         -DCMAKE_INSTALL_PREFIX="${PREFIX}" \
         -DCMAKE_PREFIX_PATH="${PREFIX}" \
         -DCMAKE_CXX_FLAGS=-I"${PREFIX}/include" \
@@ -32,16 +31,13 @@ cmake ..\
         -DPYTHON_EXECUTABLE="${PYTHON}" \
         -DPYTHON_LIBRARY="${PREFIX}/lib/libpython2.7.${DYLIB_EXT}" \
         -DPYTHON_INCLUDE_DIR="${PREFIX}/include/python2.7" \
-        -DLIBDVID_WRAP_PYTHON=1 \
+        -DENABLE_GUI=1 \
 ##
 
 if [[ $CONFIGURE_ONLY == 0 ]]; then
     # BUILD
     make -j${CPU_COUNT}
-
+    
     # "install" to the build prefix (conda will relocate these files afterwards)
     make install
-    
-    # For debug builds, this symlink can be useful...
-    #cd ${PREFIX}/lib && ln -s libdvidcpp-g.${DYLIB_EXT} libdvidcpp.${DYLIB_EXT} && cd -
 fi

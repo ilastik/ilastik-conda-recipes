@@ -1,0 +1,35 @@
+package:
+  name: dvid-viewer 
+  version: "0.1"
+  
+source:
+  git_url: git://github.com/janelia-flyem/libdvid-utils.git
+  git_tag: HEAD
+
+build:
+  number: 1
+  detect_binary_files_with_prefix: true # (defaults to false)
+  
+requirements:
+  build:
+    - gcc 4.8.5.99 # [linux]
+    - gcc 4.8.5.99 # [osx]
+    - boost 1.55.0
+    - jsoncpp
+    - libdvid-cpp
+    - vtk
+    - qt
+
+    
+  run:
+    - libgcc
+    - boost 1.55.0
+    - jsoncpp
+    - vtk
+    - qt
+    - libdvid-cpp
+
+about:
+  home: http://github.com/janelia-flyem/libdvid-utils.git
+  license: BSD (3-clause)
+  summary: Simple C++ viewer for DVID datasets 
