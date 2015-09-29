@@ -1,7 +1,3 @@
-# Get commonly needed env vars
-CWD=$(cd `dirname $0` && pwd)
-source $CWD/../common-vars.sh
-
 # some hacks to get build working
 
 # no sense building troublesome gui module
@@ -16,7 +12,7 @@ cmake ..\
         -DCMAKE_C_COMPILER=${PREFIX}/bin/gcc \
         -DCMAKE_CXX_COMPILER=${PREFIX}/bin/g++ \
         -DCMAKE_INSTALL_PREFIX=${PREFIX} \
-	-DWITH_OPENMP=ON \
+        -DWITH_OPENMP=ON \
         -DCMAKE_PREFIX_PATH=${PREFIX} \
         -DCMAKE_CXX_FLAGS=-I${PREFIX}/include \
         -DCMAKE_SHARED_LINKER_FLAGS="-Wl,-rpath,${PREFIX}/lib -L${PREFIX}/lib" \

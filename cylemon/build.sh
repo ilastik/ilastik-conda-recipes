@@ -1,7 +1,3 @@
-# Get commonly needed env vars
-CWD=$(cd `dirname $0` && pwd)
-source $CWD/../common-vars.sh
-
 # We like to make builds of cylemon from arbitrary git commits (not always tagged).
 # Include the git commit in the build version so we remember which one was used for the build.
 # FIXME: This doesn't work right now because cylemon has no tags

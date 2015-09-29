@@ -1,7 +1,3 @@
-# Get commonly needed env vars
-CWD=$(cd `dirname $0` && pwd)
-source $CWD/../common-vars.sh
-
 # Conda automatically sets these with the -arch x86_64 flag, 
 #  which is not recognized by cmake.
 export CFLAGS=""
@@ -10,8 +6,10 @@ export LDFLAGS=""
 
 if [[ `uname` == 'Darwin' ]]; then
     VIGRA_CXX_FLAGS="-I${PREFIX}/include" # I have no clue why this -I option is necessary on Mac.
+    DYLIB_EXT=dylib
 else
     VIGRA_CXX_FLAGS="-pthread ${CXXFLAGS}"
+    DYLIB_EXT=so
 fi
 
 # In release mode, we use -O2 because gcc is known to miscompile certain vigra functionality at the O3 level.
@@ -82,7 +80,13 @@ make -j${CPU_COUNT}
 (
     # (Since conda hasn't performed its link step yet, we must 
     #  help the tests locate their dependencies via LD_LIBRARY_PATH)
-    export ${LIBRARY_SEARCH_VAR}=$PREFIX/lib:${!LIBRARY_SEARCH_VAR}
+    if [[ `uname` == 'Darwin' ]]; then
+        export DYLD_FALLBACK_LIBRARY_PATH="$PREFIX/lib":"${DYLD_FALLBACK_LIBRARY_PATH}"
+    else
+        export LD_LIBRARY_PATH="$PREFIX/lib":"${LD_LIBRARY_PATH}"
+    fi
+    
+    # Run the tests
     make -j${CPU_COUNT} check
 )
 

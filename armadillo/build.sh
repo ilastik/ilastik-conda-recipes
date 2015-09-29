@@ -1,6 +1,3 @@
-#CWD=$(cd `dirname $0` && pwd)
-#source $CWD/../common-vars.sh
-
 mkdir build
 cd build
 cmake .. \

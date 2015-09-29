@@ -11,10 +11,6 @@
 # Build dependencies:
 # - bzip2-devel
 
-# Get commonly needed env vars
-CWD=$(cd `dirname $0` && pwd)
-source $CWD/../common-vars.sh
-
 if [ `uname` == Darwin ]; then
     B2ARGS="toolset=darwin"
     echo "using darwin : : ${PREFIX}/bin/g++" > user-config.jam

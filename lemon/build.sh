@@ -1,7 +1,3 @@
-# Get commonly needed env vars
-CWD=$(cd `dirname $0` && pwd)
-source $CWD/../common-vars.sh
-
 mkdir build
 cd build
 
@@ -33,8 +29,18 @@ cmake .. \
 VERBOSE=1 make -j${CPU_COUNT}
 
 # TEST (before install)
-# (Since conda hasn't performed its link step yet, we must help the tests locate their dependencies via LD_LIBRARY_PATH)
-eval ${LIBRARY_SEARCH_VAR}=$PREFIX/lib make -j${CPU_COUNT} check
+(
+    # (Since conda hasn't performed its link step yet, we must 
+    #  help the tests locate their dependencies via LD_LIBRARY_PATH)
+    if [[ `uname` == 'Darwin' ]]; then
+        export DYLD_FALLBACK_LIBRARY_PATH="$PREFIX/lib":"${DYLD_FALLBACK_LIBRARY_PATH}"
+    else
+        export LD_LIBRARY_PATH="$PREFIX/lib":"${LD_LIBRARY_PATH}"
+    fi
+    
+    # Run the tests
+    make -j${CPU_COUNT} check
+)
 
 # "install" to the build prefix (conda will relocate these files afterwards)
 make install

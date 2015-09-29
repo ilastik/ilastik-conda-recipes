@@ -1,6 +1,9 @@
-# Get commonly needed env vars
-CWD=$(cd `dirname $0` && pwd)
-source $CWD/../common-vars.sh
+# Depending on our platform, shared libraries end with either .so or .dylib
+if [[ `uname` == 'Darwin' ]]; then
+    DYLIB_EXT=dylib
+else
+    DYLIB_EXT=so
+fi
 
 # CONFIGURE
 mkdir build
@@ -26,7 +29,13 @@ make -j${CPU_COUNT}
 (
     # (Since conda hasn't performed its link step yet, we must 
     #  help the tests locate their dependencies via LD_LIBRARY_PATH)
-    export ${LIBRARY_SEARCH_VAR}=$PREFIX/lib:${!LIBRARY_SEARCH_VAR}
+    if [[ `uname` == 'Darwin' ]]; then
+        export DYLD_FALLBACK_LIBRARY_PATH="$PREFIX/lib":"${DYLD_FALLBACK_LIBRARY_PATH}"
+    else
+        export LD_LIBRARY_PATH="$PREFIX/lib":"${LD_LIBRARY_PATH}"
+    fi
+    
+    # Run the tests
     make jsoncpp_check
 )
 

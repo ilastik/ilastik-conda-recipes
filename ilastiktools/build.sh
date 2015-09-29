@@ -1,10 +1,13 @@
-# Get commonly needed env vars
-CWD=$(cd `dirname $0` && pwd)
-source $CWD/../common-vars.sh
-
 export CXXFLAGS=""
 export CFLAGS=""
 export LDFLAGS=""
+
+# Depending on our platform, shared libraries end with either .so or .dylib
+if [[ `uname` == 'Darwin' ]]; then
+    DYLIB_EXT=dylib
+else
+    DYLIB_EXT=so
+fi
 
 mkdir build
 cd build

@@ -275,11 +275,7 @@ Write **build.sh**:
 
 ```
 $ cat > build.sh
-# For ilastik dependencies, we include commonly needed environment variables via this shared script
-CWD=$(cd `dirname $0` && pwd)
-source $CWD/../common-vars.sh
-
-# Now configure, make, and install
+# configure, make, and install
 configure --prefix=$PREFIX --with-zlib=$PREFIX
 make -j${CPU_COUNT}
 make install
