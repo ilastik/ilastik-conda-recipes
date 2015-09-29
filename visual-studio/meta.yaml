@@ -7,4 +7,5 @@ build:
     - vc11
   features:
     - vc11
+  number: 1
 
