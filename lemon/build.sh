@@ -1,6 +1,3 @@
-mkdir build
-cd build
-
 # Notes:
 # 
 # 1) Lemon can be optionally built with glpk to enable the LP solver.
@@ -9,8 +6,25 @@ cd build
 #    We kill these cache variables to make sure we don't use it
 #    (avoid potential linker errors if cmake finds a version of glpk on our system)
 #
-# 2) Be sure to pass c++ and link flags on from the environment via CMAKE_CXX_...
- 
+# 2) As of XCode 7, the clang-based assembler seems to have trouble with some source 
+#    files in the lemon/tools directory.  We don't need the tools, so we simply don't build them.
+#    
+#    The errors look like this:
+#        /var/tmp//ccuWS4ad.s:29837:2: error: ambiguous instructions require an explicit suffix (could be 'filds', or 'fildl')
+#            fild    -10(%rsp)
+#            ^
+#
+#    For more information, see https://gcc.gnu.org/bugzilla/show_bug.cgi?format=multiple&id=66509
+
+
+if [[ `uname` == 'Darwin' ]]; then
+    # Pursuant to Item 2 above, replace the tools/CMakeLists.txt with an empty file.
+    echo "" > tools/CMakeLists.txt
+fi
+
+mkdir build
+cd build
+
 echo CXX_LDFLAGS=$CXX_LDFLAGS
 
 cmake .. \
