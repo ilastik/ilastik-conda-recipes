@@ -1,6 +1,6 @@
 if "%CONDA_DEFAULT_ENV%"=="" (
     echo 'ilastik-package' cannot be installed into the root environment.
-    echo Use 'activate <environment-name>' to switch to another environment.
+    echo Use 'activate environment-name' to switch to another environment.
     exit 1
 )
 
