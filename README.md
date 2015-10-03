@@ -101,6 +101,13 @@ CONDA_ROOT=`conda info --root`
 DEV_PREFIX=${CONDA_ROOT}/envs/ilastik-devel
 conda remove -n ilastik-devel ilastik-meta
 
+# Re-install ilastik-meta.pth
+cat > ${DEV_PREFIX}/lib/python2.7/site-packages/ilastik-meta.pth << EOF
+../../../ilastik-meta/lazyflow
+../../../ilastik-meta/volumina
+../../../ilastik-meta/ilastik
+EOF
+
 # Option 1: clone a fresh copy of ilastik-meta
 git clone http://github.com/ilastik/ilastik-meta ${DEV_PREFIX}/ilastik-meta
 cd ${DEV_PREFIX}/ilastik-meta
@@ -109,13 +116,6 @@ git submodule foreach "git checkout master"
 
 # Option 2: Symlink to a pre-existing working copy, if you have one.
 cd ${DEV_PREFIX} && ln -s /path/to/ilastik-meta
-
-# Finally, replace ilastik-meta.pth
-cat > ${DEV_PREFIX}/lib/python2.7/site-packages/ilastik-meta.pth << EOF
-../../../ilastik-meta/lazyflow
-../../../ilastik-meta/volumina
-../../../ilastik-meta/ilastik
-EOF
 ```
 
 <a name="generating"></a>
