@@ -6,12 +6,12 @@ ilastik-build-conda
 For 20+ the packages that *aren't* provided by Anaconda, we use the recipes in this repo.
 
 These recipes are built using the [conda-build][2] tool.
-The resulting binaries are uploaded to the [ilastik binstar channel][3],
+The resulting binaries are uploaded to the [ilastik anaconda channel][3],
 and can be installed using the [conda][1] package manager.
 
 [1]: http://conda.pydata.org/
 [2]: http://conda.pydata.org/docs/build.html
-[3]: https://binstar.org/ilastik
+[3]: https://anaconda.org/ilastik
 [Anaconda]: https://store.continuum.io/cshop/anaconda
 [ilastik]: http://ilastik.org
 
@@ -136,11 +136,11 @@ Generating a release binary
 
   3. Update the `git_tag` in `ilastik-meta/meta.yaml` and commit.
 
-2. Build `ilastik-meta` and `ilastik-everything` packages, and upload to the `ilastik` binstar channel.
+2. Build `ilastik-meta` and `ilastik-everything` packages, and upload to the `ilastik` anaconda channel.
 
         conda build ilastik-meta ilastik-everything
-        binstar upload -u ilastik ${CONDA_ROOT}/conda-bld/linux-64/ilastik-meta*.tar.gz
-        binstar upload -u ilastik ${CONDA_ROOT}/conda-bld/linux-64/ilastik-everything*.tar.gz
+        anaconda upload -u ilastik ${CONDA_ROOT}/conda-bld/linux-64/ilastik-meta*.tar.gz
+        anaconda upload -u ilastik ${CONDA_ROOT}/conda-bld/linux-64/ilastik-everything*.tar.gz
 
 3. (Optional) Install to a local environment and test
 
@@ -178,7 +178,7 @@ Generating a release binary
 How to build these packages yourself
 ====================================
 
-All of the recipes in this repo should already be uploaded to the [ilastik][3] binstar channel.
+All of the recipes in this repo should already be uploaded to the [ilastik][3] anaconda channel.
 The linux packages were built on CentOS 5.11, so they should be compatible with most modern distros.
 The Mac packages were built with `MACOSX_DEPLOYMENT_TARGET=10.7`, so they should theoretically support OSX 10.7+.
 
@@ -311,20 +311,20 @@ $ cd ../
 $ conda build somepackage
 ```
 
-3. Upload the package to your [binstar].
+3. Upload the package to your [anaconda] channel.
 ------------------------------------------------
 
 ```
-conda install binstar
+conda install anaconda-client
 
 # Upload to your personal channel:
-binstar upload /my/miniconda/conda-bld/osx-64/somepackage-1.2.3-0.tar.bz2
+anaconda upload /my/miniconda/conda-bld/osx-64/somepackage-1.2.3-0.tar.bz2
 
-# Or to ilastik's binstar channel:
-binstar upload -u ilastik /my/miniconda/conda-bld/osx-64/somepackage-1.2.3-0.tar.bz2
+# Or to ilastik's anaconda channel:
+anaconda upload -u ilastik /my/miniconda/conda-bld/osx-64/somepackage-1.2.3-0.tar.bz2
 ```
 
-[binstar]: http://binstar.org
+[anaconda]: http://anaconda.org
 
 <a name="compiler"></a>
 ==========================
