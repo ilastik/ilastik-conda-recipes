@@ -6,7 +6,7 @@ package:
   version: "" # build.sh will generate a __conda_version__.txt file
 
 build:
-  number: 1
+  number: 0
 
 requirements:
   build:
@@ -20,6 +20,7 @@ requirements:
     - ilastik-deps-pc-iiboost
     - ilastik-deps-carving >=1.1.6a7
     - ilastik-meta
+    - ilastik-launch
 
 test:
   requires:
