@@ -1,0 +1,49 @@
+package:
+  name: vigra-thorsten
+  version: "1.10"
+
+source:
+  git_url: git://github.com/DerThorsten/vigra.git
+  git_tag: master
+
+build:
+  number: 0
+  detect_binary_files_with_prefix: true
+
+requirements:
+  build:
+    - gcc 4.8.5 # [linux]
+    - gcc 4.8.5 # [osx]
+    - python   2.7*
+    - numpy    >=1.9
+    - jpeg     8d
+    - libtiff  4.0*
+    - libpng   1.6.17
+    - fftw     3.3*
+    - hdf5     1.8.14
+    - boost    1.55.0
+    - zlib     1.2*
+    - nose
+
+  run:
+    - libgcc   4.8*
+    - python   2.7*
+    - numpy    >=1.9
+    - jpeg     8d
+    - libtiff  4.0*
+    - libpng   1.6.17
+    - fftw     3.3*
+    - hdf5     1.8.14
+    - boost    1.55.0
+    - zlib     1.2*
+    - nose
+
+test:
+  imports:
+    - vigra
+
+about:
+  home: http://ukoethe.github.io/vigra
+  license: MIT
+  summary: Generic Programming for Computer Vision
+
