@@ -4,7 +4,7 @@ package:
 
 source:
   git_url: https://github.com/ilastik/ilastik-meta
-  git_tag: 1.1.7rc3
+  git_tag: 1.1.7
 
 build:
   number: 1
