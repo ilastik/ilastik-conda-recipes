@@ -139,8 +139,8 @@ Generating a release binary
 2. Build `ilastik-meta` and `ilastik-everything` packages, and upload to the `ilastik` anaconda channel.
 
         conda build ilastik-meta ilastik-everything
-        anaconda upload -u ilastik ${CONDA_ROOT}/conda-bld/linux-64/ilastik-meta*.tar.gz
-        anaconda upload -u ilastik ${CONDA_ROOT}/conda-bld/linux-64/ilastik-everything*.tar.gz
+        anaconda upload -u ilastik ${CONDA_ROOT}/conda-bld/linux-64/ilastik-meta*.tar.bz2
+        anaconda upload -u ilastik ${CONDA_ROOT}/conda-bld/linux-64/ilastik-everything*.tar.bz2
 
 3. (Optional) Install to a local environment and test
 
