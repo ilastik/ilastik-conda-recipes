@@ -9,8 +9,8 @@ source:
 build:
   number: 14            # [linux]
   string: 14_gc944c67   # [linux]
-  number: 15            # [osx]
-  string: 15_gc944c67   # [osx]
+  number: 17            # [osx]
+  string: 17_gc944c67   # [osx]
 
   detect_binary_files_with_prefix: true
   script_env:

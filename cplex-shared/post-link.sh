@@ -37,8 +37,8 @@ if [ "$CPLEX_ROOT_DIR" == "<UNDEFINED>" ]; then
     exit 1
 fi
 
-CPLEX_LIB_DIR=`echo $CPLEX_ROOT_DIR/cplex/lib/*/static_pic`
-CONCERT_LIB_DIR=`echo $CPLEX_ROOT_DIR/concert/lib/*/static_pic`
+CPLEX_LIB_DIR=`echo $CPLEX_ROOT_DIR/cplex/lib/x86-64*/static_pic`
+CONCERT_LIB_DIR=`echo $CPLEX_ROOT_DIR/concert/lib/x86-64*/static_pic`
 
 # Check for write permissions in the CPLEX dir (we need to write to it).
 (
