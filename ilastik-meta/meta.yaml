@@ -7,8 +7,8 @@ source:
   git_tag: 1.1.7
 
 build:
-  number: 1
-  string: 1_{{ environ.get('GIT_BUILD_STR', '') }}
+  number: 2
+  string: 2_{{ environ.get('GIT_BUILD_STR', '') }}
 
 requirements:
   build:
