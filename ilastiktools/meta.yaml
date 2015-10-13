@@ -4,12 +4,11 @@ package:
 
 source:
   git_url: git://github.com/ilastik/ilastiktools.git
-  git_tag: afd850125a40e027e78eae1a78e03c20a961ea6a
-  git_tag: 
+  git_tag: 6cdd7d2663b2f3ab0a2428c5b1d7c0bf94801027
 
 build:
-  number: 2
-  string: 2_afd8501
+  number: 3
+  string: 3_6cdd7d2
   detect_binary_files_with_prefix: true
 
 requirements:
