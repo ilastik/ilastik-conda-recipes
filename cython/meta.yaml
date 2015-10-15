@@ -12,15 +12,19 @@ source:
 build:
   features:
     - {{toolset.short}}
+  number: 1
+  preserve_egg_dir: True
 
 requirements:
   build:
     - {{toolset.build_requirement}}
     - python    *{{toolset.suffix}}
+    - setuptools
 
   run:
     - {{toolset.run_requirement}}
     - python    *{{toolset.suffix}}
+    - setuptools
 
 about:
   home: http://cython.org/
