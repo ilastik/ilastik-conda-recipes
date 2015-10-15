@@ -1,0 +1,29 @@
+package:
+  # pure python
+  name: seaborn
+  version: "0.6.0"
+
+source:
+  git_url: https://github.com/mwaskom/seaborn.git
+  git_tag: v0.6.0
+
+requirements:
+  build:
+    - python
+
+  run:
+    - python
+    - numpy
+    - scipy
+    - matplotlib
+    - pandas
+    - statsmodels
+
+test:
+  imports:
+      - seaborn
+
+about:
+  home: http://stanford.edu/~mwaskom/software/seaborn/
+  license: BSD
+  summary: statistical data visualization
