@@ -46,6 +46,7 @@ requirements:
     - {{toolset.run_requirement}}
     - python 2.7.*{{toolset.suffix}}
     - pip
+    - setuptools
     - pyreadline                     # [win]
     - pygments
     - pyzmq     *{{toolset.suffix}}
