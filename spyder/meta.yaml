@@ -1,0 +1,31 @@
+package:
+  # pure python
+  name: spyder
+  version: "2.3.7"
+
+source:
+  fn:  spyder-2.3.7.zip
+  url: https://pypi.python.org/packages/source/s/spyder/spyder-2.3.7.zip
+  md5: 33c25c946f863754aa8df8319970b09f
+
+requirements:
+  build:
+    - python
+
+  run:
+    - python
+    - numpy
+    - setuptools
+    - nose
+    - sphinx
+    - pyflakes
+    - rope
+    - pygments
+    - pylint
+    - pep8
+    - pyqt
+
+about:
+  home: https://pythonhosted.org/spyder/
+  license: MIT
+  summary: Scientific PYthon Development EnviRonment
