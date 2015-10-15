@@ -1,0 +1,68 @@
+TARGET = VigraQt.pyd
+OFILES = sipVigraQtcmodule.obj sipVigraQtColorMapEditor.obj sipVigraQtColorMapGradient.obj sipVigraQtColorMap.obj sipVigraQtImageCursor.obj sipVigraQtOverlay.obj sipVigraQtOverlayViewer.obj sipVigraQtQImageViewer.obj sipVigraQtQImageViewerBase.obj
+HFILES = sipAPIVigraQt.h
+PREFIX = @PREFIX@
+SITE_PACKAGES = @SITE_PACKAGES@
+
+CC = cl
+CXX = cl
+LINK = link
+CPPFLAGS = -DNDEBUG -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DQT_DLL -DQT_NO_DEBUG -DQT_CORE_LIB -DQT_GUI_LIB -DQT_OPENGL_LIB -I. -I..\vigraqt -I$(PREFIX)\include -I$(PREFIX)\Library\include -I$(PREFIX)\Qt4\mkspecs\default -I$(PREFIX)\Qt4\include\QtCore -I$(PREFIX)\Qt4\include\QtGui -I$(PREFIX)\Qt4\include\QtOpenGL -I$(PREFIX)\Qt4\include
+CFLAGS = -nologo -Zm200 -Zc:wchar_t- -O2 -MD -W3
+CXXFLAGS = -EHsc -nologo -Zm200 -Zc:wchar_t- -O2 -MD -W3 -w34100 -w34189
+LFLAGS = /NOLOGO /DYNAMICBASE /NXCOMPAT /DLL /MANIFEST /MANIFESTFILE:$(TARGET).manifest /SUBSYSTEM:WINDOWS /INCREMENTAL:NO
+LIBS = /LIBPATH:..\vigraqt /LIBPATH:$(PREFIX)\libs /LIBPATH:$(PREFIX)\Qt4\lib $(PREFIX)\Library\lib\VigraQt0.lib python27.lib QtCore4.lib kernel32.lib user32.lib shell32.lib uuid.lib ole32.lib advapi32.lib ws2_32.lib QtGui4.lib gdi32.lib comdlg32.lib oleaut32.lib imm32.lib winmm.lib winspool.lib ws2_32.lib ole32.lib user32.lib advapi32.lib QtOpenGL4.lib glu32.lib opengl32.lib gdi32.lib user32.lib glu32.lib opengl32.lib gdi32.lib user32.lib
+MOC = moc.exe
+.SUFFIXES: .c .cpp .cc .cxx .C
+
+
+{.}.cpp{}.obj::
+	$(CXX) -c $(CXXFLAGS) $(CPPFLAGS) -Fo @<<
+	$<
+<<
+
+{.}.cc{}.obj::
+	$(CXX) -c $(CXXFLAGS) $(CPPFLAGS) -Fo @<<
+	$<
+<<
+
+{.}.cxx{}.obj::
+	$(CXX) -c $(CXXFLAGS) $(CPPFLAGS) -Fo @<<
+	$<
+<<
+
+{.}.C{}.obj::
+	$(CXX) -c $(CXXFLAGS) $(CPPFLAGS) -Fo @<<
+	$<
+<<
+
+{.}.c{}.obj::
+	$(CC) -c $(CFLAGS) $(CPPFLAGS) -Fo @<<
+	$<
+<<
+
+all: $(TARGET)
+
+$(OFILES): $(HFILES)
+
+$(TARGET): $(OFILES)
+	$(LINK) $(LFLAGS) /OUT:$(TARGET) @<<
+	  $(OFILES) $(LIBS)
+<<
+	mt -nologo -manifest $(TARGET).manifest -outputresource:$(TARGET);2
+
+install: $(TARGET)
+	copy /y $(TARGET) $(SITE_PACKAGES)\$(TARGET)
+
+clean:
+	-del $(TARGET)
+	-del sipVigraQtcmodule.obj
+	-del sipVigraQtColorMapEditor.obj
+	-del sipVigraQtColorMapGradient.obj
+	-del sipVigraQtColorMap.obj
+	-del sipVigraQtImageCursor.obj
+	-del sipVigraQtOverlay.obj
+	-del sipVigraQtOverlayViewer.obj
+	-del sipVigraQtQImageViewer.obj
+	-del sipVigraQtQImageViewerBase.obj
+	-del $(TARGET).manifest

@@ -1,0 +1,36 @@
+{% import '$CONDA_ENV_PATH/toolset-info/config.yaml' as toolset %}
+
+package:
+  name: vigraqt
+  version: 0.6{{toolset.suffix}}
+
+source:
+  git_url: https://github.com/hmeine/vigraqt.git
+  git_tag: release_0_6
+
+build:
+  number: {{ environ.get('GIT_DESCRIBE_NUMBER', 0) }}
+  string: {{ environ.get('GIT_BUILD_STR', '') }}
+  features:
+    - {{toolset.short}}
+
+requirements:
+  build:
+    - {{toolset.build_requirement}}
+    - python         *{{toolset.suffix}}
+    - qt-with-src    *{{toolset.suffix}}
+    - pyqt           *{{toolset.suffix}}
+    - vigra          *{{toolset.suffix}}
+    - sip            *{{toolset.suffix}}
+
+  run:
+    - {{toolset.run_requirement}}
+    - python         *{{toolset.suffix}}
+    - pyqt           *{{toolset.suffix}}
+    - vigra          *{{toolset.suffix}}
+    - qimage2ndarray *{{toolset.suffix}}
+
+about:
+  home: https://github.com/hmeine/vigraqt
+  license: MIT
+  summary: simple Qt widgets for VIGRA
