@@ -10,8 +10,8 @@ source:
 
 requirements:
   build:
-    # FIXME: build broken
     - python
+    - setuptools
 
   run:
     - python
