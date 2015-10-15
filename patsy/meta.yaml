@@ -1,0 +1,29 @@
+package:
+  # pure python
+  name: patsy
+  version: "0.4.0"
+
+source:
+  git_url: https://github.com/pydata/patsy.git
+  git_tag: v0.4.0
+
+requirements:
+  build:
+    - python
+    - numpy
+    - six
+    - setuptools
+
+  run:
+    - python
+    - numpy
+    - six
+
+test:
+  imports:
+      - patsy
+
+about:
+  home: https://patsy.readthedocs.org/
+  license: BSD
+  summary: Describing statistical models using symbolic formulas
