@@ -30,6 +30,7 @@ requirements:
     - scipy      *{{toolset.suffix}}
     - matplotlib *{{toolset.suffix}}
     - pandas     *{{toolset.suffix}}
+    - patsy
 
 test:
   imports:
