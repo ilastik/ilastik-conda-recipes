@@ -1,11 +1,11 @@
 package:
   # pure python
   name: patsy
-  version: "0.4.0"
+  version: "0.4.1dev"
 
 source:
   git_url: https://github.com/pydata/patsy.git
-  git_tag: v0.4.0
+  git_tag: 0c06192ce857f5638475092fedad11d67f323795
 
 requirements:
   build:
