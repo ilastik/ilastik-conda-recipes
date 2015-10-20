@@ -1,0 +1,27 @@
+package:
+  name: znn
+  version: "0.1.1"
+
+source:
+  git_url: https://github.com/seung-lab/znn-release
+  git_tag: master
+
+build:
+  number: 0
+  detect_binary_files_with_prefix: true
+
+requirements:
+  build:
+    - gcc 4.8.5
+    - fftw     3.3*
+    - boost    1.55.0
+
+  run:
+    - libgcc   4.8*
+    - fftw     3.3*
+    - boost    1.55.0
+
+about:
+  home: https://github.com/seung-lab/znn-release
+  license: ???
+  summary: Multi-core CPU implementation of deep learning for 2D and 3D convolutional networks (ConvNets).
