@@ -5,6 +5,8 @@ else
     DYLIB_EXT=so
 fi
 
+BUILD_DIR=${BUILD_DIR-build}
+
 CONFIGURE_ONLY=0
 if [[ $1 != "" ]]; then
     if [[ $1 == "--configure-only" ]]; then
@@ -16,8 +18,8 @@ if [[ $1 != "" ]]; then
 fi
 
 # CONFIGURE
-mkdir -p build # Using -p here is convenient for calling this script outside of conda.
-cd build
+mkdir -p "${BUILD_DIR}" # Using -p here is convenient for calling this script outside of conda.
+cd "${BUILD_DIR}"
 cmake ..\
         -DCMAKE_C_COMPILER="${PREFIX}/bin/gcc" \
         -DCMAKE_CXX_COMPILER="${PREFIX}/bin/g++" \
