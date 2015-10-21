@@ -4,11 +4,11 @@ package:
   
 source:
   git_url: git://github.com/janelia-flyem/libdvid-cpp.git
-  git_tag: 198e9e0e8ddceaf4b44a28426afbfe781acc0037 # 2015-10-09
+  git_tag: 90264da2b3f7137639a843b3f00963684c97871c # 2015-10-21
 
 build:
-  number: 16
-  string: 16_198e9e0
+  number: 17
+  string: 17_90264da
   detect_binary_files_with_prefix: true # (defaults to false)
   
 requirements:
