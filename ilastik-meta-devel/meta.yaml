@@ -1,9 +1,12 @@
-{% import '$CONDA_ENV_PATH/toolset-info/config.yaml' as toolset %}
+{% import '$CONDA_DEFAULT_ENV/toolset-info/config.yaml' as toolset %}
 
 package:
   # pure python
   name: ilastik-meta-devel
   version: master
+
+build:
+  number: 1
 
 requirements:
   build:
