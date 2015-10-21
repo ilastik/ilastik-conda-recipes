@@ -1,4 +1,4 @@
-{% import '$CONDA_ENV_PATH/toolset-info/config.yaml' as toolset %}
+{% import '$CONDA_DEFAULT_ENV/toolset-info/config.yaml' as toolset %}
 
 about:
   summary: "A meta-package for building all the dependencies needed for only carving."
