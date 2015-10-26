@@ -1,0 +1,15 @@
+package:
+  # header-ony library
+  name: eigen
+  version: "3.2.6"
+
+source:
+    fn:  eigen-3.2.6.tar.gz
+    md5: 9f93bfc14ba0816220c9674e99b8c418
+    url: http://bitbucket.org/eigen/eigen/get/3.2.6.tar.gz
+
+
+about:
+  home: http://eigen.tuxfamily.org
+  license: Mozilla
+  summary: C++ template library for linear algebra

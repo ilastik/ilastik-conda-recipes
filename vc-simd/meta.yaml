@@ -1,0 +1,26 @@
+{% import '$CONDA_DEFAULT_ENV/toolset-info/config.yaml' as toolset %}
+
+package:
+  name: vc-simd
+  version: "0.7.5{{toolset.suffix}}"
+
+source:
+  git_url: https://github.com/VcDevel/Vc.git
+  git_tag: 0.7.5
+
+build:
+  features:
+    - {{toolset.short}}
+
+
+requirements:
+  build:
+    - {{toolset.build_requirement}}
+
+  run:
+    - {{toolset.run_requirement}}
+
+about:
+  home: https://github.com/VcDevel/Vc.git
+  license: BSD
+  summary: SIMD Vector Classes for C++
