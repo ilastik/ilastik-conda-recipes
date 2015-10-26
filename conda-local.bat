@@ -32,3 +32,7 @@ goto :eof
 :index
     cmd /C conda index "%CONDA_PATH%\conda-bld\win-64"
     goto :eof
+
+:remove
+    cmd /C conda remove %*
+    goto :eof
