@@ -1,17 +1,17 @@
---- numpy/distutils/command/build_ext.py	Sat Feb  9 21:04:56 2013
-+++ numpy/distutils/command/build_ext.py	Fri Dec  6 10:33:41 2013
-@@ -448,7 +448,9 @@ class build_ext (old_build_ext):
-             # make g77-compiled static libs available to MSVC
+--- numpy/distutils/command/build_ext.py	Tue Aug 11 17:03:43 2015
++++ numpy/distutils/command/build_ext.py	Wed Oct 28 18:56:20 2015
+@@ -456,7 +456,9 @@ class build_ext (old_build_ext):
+             if libname.startswith('msvc'): continue
              fileexists = False
-             for libdir in c_library_dirs:
--                libfile = os.path.join(libdir,'lib%s.a' % (libname))
+             for libdir in c_library_dirs or []:
+-                libfile = os.path.join(libdir, '%s.lib' % (libname))
 +                libfile = os.path.join(libdir,'lib%s.dll.a' % (libname))
 +                if not os.path.isfile(libfile):
 +                    libfile = os.path.join(libdir,'lib%s.a' % (libname))
                  if os.path.isfile(libfile):
-                     # copy libname.a file to name.lib so that MSVC linker
-                     # can find it
-@@ -478,7 +480,9 @@ class build_ext (old_build_ext):
+                     fileexists = True
+                     break
+@@ -494,7 +496,9 @@ class build_ext (old_build_ext):
          for lib in fcompiler.libraries:
              if not lib.startswith('msvc'):
                  c_libraries.append(lib)
@@ -22,52 +22,37 @@
                  if p:
                      dst_name = os.path.join(self.build_temp, lib + '.lib')
                      if not os.path.isfile(dst_name):
---- numpy/distutils/fcompiler/gnu.py	Sat Feb  9 21:04:56 2013
-+++ numpy/distutils/fcompiler/gnu.py	Fri Dec  6 11:01:38 2013
-@@ -39,7 +39,7 @@ class GnuFCompiler(FCompiler):
-         m = re.match(r'GNU Fortran\s+95.*?([0-9-.]+)', version_string)
-         if m:
-             return ('gfortran', m.group(1))
--        m = re.match(r'GNU Fortran.*?([0-9-.]+)', version_string)
-+        m = re.match(r'GNU Fortran.*?([0-9]+[-.][0-9]+[-.][0-9]+)', version_string)
-         if m:
-             v = m.group(1)
-             if v.startswith('0') or v.startswith('2') or v.startswith('3'):
-@@ -325,10 +325,7 @@ class Gnu95FCompiler(GnuFCompiler):
+--- numpy/distutils/fcompiler/gnu.py	Sun Sep 13 16:21:27 2015
++++ numpy/distutils/fcompiler/gnu.py	Wed Oct 28 19:00:16 2015
+@@ -62,7 +62,7 @@ class GnuFCompiler(FCompiler):
+             m = re.search(r'GNU Fortran\s+95.*?([0-9-.]+)', version_string)
+             if m:
+                 return ('gfortran', m.group(1))
+-            m = re.search(r'GNU Fortran.*?\-?([0-9-.]+)', version_string)
++            m = re.search(r'GNU Fortran.*?([0-9]+[-.][0-9]+[-.][0-9]+)', version_string)
+             if m:
+                 v = m.group(1)
+                 if v.startswith('0') or v.startswith('2') or v.startswith('3'):
+@@ -344,10 +344,7 @@ class Gnu95FCompiler(GnuFCompiler):
              # XXX: fix this mess, does not work for mingw
              if is_win64():
                  c_compiler = self.c_compiler
 -                if c_compiler and c_compiler.compiler_type == "msvc":
 -                    return []
 -                else:
--                    raise NotImplementedError("Only MS compiler supported with gfortran on win64")
+-                    pass
 +                return []
          return opt
- 
+
      def get_target(self):
-@@ -343,7 +340,7 @@ class Gnu95FCompiler(GnuFCompiler):
- 
-     def get_flags_opt(self):
-         if is_win64():
--            return ['-O0']
-+            return ['-O2']
-         else:
-             return GnuFCompiler.get_flags_opt(self)
- 
---- numpy/distutils/mingw32ccompiler.py	Sat Feb  9 21:04:55 2013
-+++ numpy/distutils/mingw32ccompiler.py	Fri Dec  6 10:33:41 2013
-@@ -124,10 +124,10 @@ class Mingw32CCompiler(distutils.cygwinc
-             else:
-                 # gcc-4 series releases do not support -mno-cygwin option
-                 self.set_executables(
--                    compiler='gcc -g -DDEBUG -DMS_WIN64 -O0 -Wall',
--                    compiler_so='gcc -g -DDEBUG -DMS_WIN64 -O0 -Wall -Wstrict-prototypes',
--                    linker_exe='gcc -g',
--                    linker_so='gcc -g -shared')
-+                    compiler='gcc -O2 -DMS_WIN64 -Wall',
-+                    compiler_so='gcc -O2 -DMS_WIN64 -Wall -Wstrict-prototypes',
-+                    linker_exe='gcc -O2',
-+                    linker_so='gcc -O2 -shared')
-         else:
-             if self.gcc_version <= "3.0.0":
-                 self.set_executables(compiler='gcc -mno-cygwin -O2 -w',
+--- numpy/distutils/misc_util.py	Tue Aug 11 17:03:43 2015
++++ numpy/distutils/misc_util.py	Wed Oct 28 19:17:49 2015
+@@ -397,6 +397,7 @@ def msvc_runtime_library():
+                '1400': 'msvcr80',    # MSVC 8
+                '1500': 'msvcr90',    # MSVC 9 (VS 2008)
+                '1600': 'msvcr100',   # MSVC 10 (aka 2010)
++               '1700': 'msvcr110',   # MSVC 11 (aka 2012)
+               }.get(msc_ver, None)
+     else:
+         lib = None
+
