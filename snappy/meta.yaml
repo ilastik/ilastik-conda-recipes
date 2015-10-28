@@ -1,0 +1,26 @@
+{% import '$CONDA_DEFAULT_ENV/toolset-info/config.yaml' as toolset %}
+
+package:
+  name: snappy
+  version: "1.1.1.7{{toolset.suffix}}"
+
+source:
+  hg_url: https://bitbucket.org/robertvazan/snappy-visual-cpp
+  hg_tag: 1.1.1.7
+
+build:
+  features:
+    - {{toolset.short}}
+
+
+requirements:
+  build:
+    - {{toolset.build_requirement}}
+
+  run:
+    - {{toolset.run_requirement}}
+
+about:
+  home: http://google.github.io/snappy/
+  license: BSD
+  summary: fast compression/decompression library

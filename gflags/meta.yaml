@@ -1,0 +1,25 @@
+{% import '$CONDA_DEFAULT_ENV/toolset-info/config.yaml' as toolset %}
+
+package:
+  name: gflags
+  version: "2.1.2{{toolset.suffix}}"
+
+source:
+  git_url: https://github.com/gflags/gflags.git
+#  git_tag: v2.1.2
+
+build:
+  features:
+    - {{toolset.short}}
+
+requirements:
+  build:
+    - {{toolset.build_requirement}}
+
+  run:
+    - {{toolset.run_requirement}}
+
+about:
+  home: https://github.com/gflags/gflags
+  license: BSD
+  summary: Google commandline flags processing
