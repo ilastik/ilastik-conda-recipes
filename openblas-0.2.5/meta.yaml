@@ -2,12 +2,12 @@
 
 package:
   name: openblas
-  version: "0.2.15{{toolset.suffix}}"
+  version: "0.2.5{{toolset.suffix}}"
 
 source:
   git_url: http://github.com/xianyi/OpenBLAS
-  git_rev: v0.2.15
-
+  git_rev: v0.2.5
+  
 build:
   features:
     - {{toolset.short}}

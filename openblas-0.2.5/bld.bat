@@ -17,10 +17,11 @@ rem install
 make PREFIX="%INSTALL_PREFIX%" install
 
 rem install required shared libraries in their proper places
-REM move "%LIBRARY_PREFIX%\lib\libopenblas.dll" "%LIBRARY_PREFIX%\bin"
+move "%LIBRARY_PREFIX%\lib\libopenblas.dll" "%LIBRARY_PREFIX%\bin"
 
 rem copy the DLL export library under various names
-rem (this also overwrites the static library libopenblas.lib)
-REM copy "%LIBRARY_LIB%\libopenblas.dll.a" "%LIBRARY_LIB%\blas.lib"
-REM copy "%LIBRARY_LIB%\libopenblas.dll.a" "%LIBRARY_LIB%\lapack.lib"
-move "%LIBRARY_LIB%\libopenblas.dll.a" "%LIBRARY_LIB%\libopenblas.lib"
+rem (this also overwrites the static library libopenblas.lib which
+rem  doesn't work anyway due to unresolved symbols)
+copy exports\libopenblas.lib "%LIBRARY_PREFIX%\lib\blas.lib"
+copy exports\libopenblas.lib "%LIBRARY_PREFIX%\lib\lapack.lib"
+copy exports\libopenblas.lib "%LIBRARY_PREFIX%\lib\libopenblas.lib"
