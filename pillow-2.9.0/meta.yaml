@@ -2,12 +2,12 @@
 
 package:
   name: pillow
-  version: "3.0.0{{toolset.suffix}}"
+  version: "2.9.0{{toolset.suffix}}"
 
 source:
-  fn:  Pillow-3.0.0.tar.gz
-  url: https://pypi.python.org/packages/source/P/Pillow/Pillow-3.0.0.tar.gz
-  md5: fc8ac44e93da09678eac7e30c9b7377d
+  fn:  Pillow-2.9.0.tar.gz
+  url: https://pypi.python.org/packages/source/P/Pillow/Pillow-2.9.0.tar.gz
+  md5: 46f1729ece27981d54ec543ad5b37d14
 
 build:
   features:
