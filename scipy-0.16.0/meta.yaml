@@ -2,12 +2,13 @@
 
 package:
   name: scipy
-  version: "0.16.1{{toolset.suffix}}"
+  version: "0.16.0{{toolset.suffix}}"
 
 source:
-  git_url: https://github.com/scipy/scipy.git
-  git_tag: v0.16.1
-
+  fn:  scipy-0.16.0.tar.gz
+  md5: eb95dda0f36cc3096673993a350cde77
+  url: https://pypi.python.org/packages/source/s/scipy/scipy-0.16.0.tar.gz
+  
 build:
   features:
     - {{toolset.short}}
@@ -17,14 +18,13 @@ requirements:
     - {{toolset.build_requirement}}
     - mingw-for-msvc-build           # [win]
     - python 2.7.*{{toolset.suffix}}
-    - numpy  >=1.10,*{{toolset.suffix}}
-    - cython *{{toolset.suffix}}
+    - numpy  *{{toolset.suffix}}
 
   run:
     - {{toolset.run_requirement}}
     - mingw-for-msvc                 # [win]
     - python 2.7.*{{toolset.suffix}}
-    - numpy  >=1.10,*{{toolset.suffix}}
+    - numpy  *{{toolset.suffix}}
 
 about:
   home: www.scipy.org
