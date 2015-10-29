@@ -2,7 +2,7 @@
 
 package:
   name: qimage2ndarray
-  version: "1.4{{toolset.suffix}}"
+  version: "1.4post1{{toolset.suffix}}"
 
 source:
   fn: qimage2ndarray-1.4.tar.gz
@@ -21,7 +21,7 @@ requirements:
     # - gcc 4.8.2.99                   # [linux]
     # - gcc 4.8.2                      # [osx]
     - python 2.7.*{{toolset.suffix}}
-    - numpy   *{{toolset.suffix}}
+    - numpy   >=1.10,*{{toolset.suffix}}
     - pyqt 4.11.3.99                   # [osx]
     - pyqt 4.11.3{{toolset.suffix}}    # [linux or win]
     - setuptools
@@ -31,7 +31,7 @@ requirements:
     - {{toolset.run_requirement}}
     # - libgcc                         # [unix]
     - python 2.7.*{{toolset.suffix}}
-    - numpy   *{{toolset.suffix}}
+    - numpy   >=1.10,*{{toolset.suffix}}
     - pyqt 4.11.3.99                   # [osx]
     - pyqt 4.11.3{{toolset.suffix}}    # [linux or win]
     - sip     *{{toolset.suffix}}

@@ -2,12 +2,11 @@
 
 package:
   name: scikit-learn
-  version: "0.16.1{{toolset.suffix}}"
+  version: "0.16.1post1{{toolset.suffix}}"
 
 source:
-  fn:  scikit-learn-0.16.1.tar.gz
-  url: https://pypi.python.org/packages/source/s/scikit-learn/scikit-learn-0.16.1.tar.gz
-  md5: 363ddda501e3b6b61726aa40b8dbdb7e
+  git_url: https://github.com/scikit-learn/scikit-learn.git
+  git_tag: 0.16.1
 
 build:
   features:

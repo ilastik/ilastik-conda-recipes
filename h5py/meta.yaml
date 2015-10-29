@@ -2,12 +2,11 @@
 
 package:
   name: h5py
-  version: "2.5.0{{toolset.suffix}}"
+  version: "2.5.0post1{{toolset.suffix}}"  # post1 since numpy was upgraded
 
 source:
-  fn:  h5py-2.5.0.tar.gz
-  url: https://pypi.python.org/packages/source/h/h5py/h5py-2.5.0.tar.gz
-  md5: 6e4301b5ad5da0d51b0a1e5ac19e3b74
+  git_url: https://github.com/h5py/h5py.git
+  git_tag: 2.5.0
 
 build:
   features:
@@ -17,7 +16,7 @@ requirements:
   build:
     - python    *{{toolset.suffix}}
     - hdf5      *{{toolset.suffix}}
-    - numpy     *{{toolset.suffix}}
+    - numpy     >=1.10,*{{toolset.suffix}}
     - cython    *{{toolset.suffix}}
     - six
     - pkgconfig
@@ -26,7 +25,7 @@ requirements:
   run:
     - python    *{{toolset.suffix}}
     - hdf5      *{{toolset.suffix}}
-    - numpy     *{{toolset.suffix}}
+    - numpy     >=1.10,*{{toolset.suffix}}
     - cython    *{{toolset.suffix}}
     - six
 
