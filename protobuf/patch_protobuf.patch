@@ -1,0 +1,18 @@
+--- src/google/protobuf/stubs/port.h	Thu Oct 29 05:30:02 2015
++++ src/google/protobuf/stubs/port.h	Thu Oct 29 05:29:39 2015
+@@ -77,9 +77,15 @@
+   #else
+     #define LIBPROTOC_EXPORT   __declspec(dllimport)
+   #endif
++  #ifdef PROTOBUF_CLIENT_EXPORTS
++    #define PROTOBUF_DECLSPEC __declspec(dllexport)
++  #else
++    #define PROTOBUF_DECLSPEC __declspec(dllimport)
++  #endif
+ #else
+   #define LIBPROTOBUF_EXPORT
+   #define LIBPROTOC_EXPORT
++  #define PROTOBUF_DECLSPEC
+ #endif
+
+ // These #includes are for the byte swap functions declared later on.
