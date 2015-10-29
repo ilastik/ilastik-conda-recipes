@@ -2,7 +2,7 @@
 
 package:
   name: pandas
-  version: 0.17.0{{toolset.suffix}}
+  version: 0.17.0post1{{toolset.suffix}}
 
 source:
   git_url: https://github.com/pydata/pandas.git
@@ -18,14 +18,14 @@ requirements:
   build:
     - python     *{{toolset.suffix}}
     - cython     *{{toolset.suffix}}
-    - numpy      *{{toolset.suffix}}
+    - numpy      >=1.10,*{{toolset.suffix}}
     - setuptools
     - pytz
     - python-dateutil
 
   run:
     - python     *{{toolset.suffix}}
-    - numpy      *{{toolset.suffix}}
+    - numpy      >=1.10,*{{toolset.suffix}}
     - python-dateutil
     - pytz
 

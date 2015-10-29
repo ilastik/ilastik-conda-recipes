@@ -2,7 +2,7 @@
 
 package:
   name: statsmodels
-  version: "0.6.1{{toolset.suffix}}"
+  version: "0.6.1post1{{toolset.suffix}}"
 
 source:
   git_url: https://github.com/statsmodels/statsmodels.git
@@ -18,7 +18,7 @@ requirements:
   build:
     - python     *{{toolset.suffix}}
     - cython     *{{toolset.suffix}}
-    - numpy      *{{toolset.suffix}}
+    - numpy      >=1.10,*{{toolset.suffix}}
     - scipy      *{{toolset.suffix}}
     - matplotlib *{{toolset.suffix}}
     - pandas     *{{toolset.suffix}}
@@ -26,7 +26,7 @@ requirements:
 
   run:
     - python     *{{toolset.suffix}}
-    - numpy      *{{toolset.suffix}}
+    - numpy      >=1.10,*{{toolset.suffix}}
     - scipy      *{{toolset.suffix}}
     - matplotlib *{{toolset.suffix}}
     - pandas     *{{toolset.suffix}}

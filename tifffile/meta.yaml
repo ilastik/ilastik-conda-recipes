@@ -2,7 +2,7 @@
 
 package:
   name: tifffile
-  version: "0.4.1{{toolset.suffix}}"
+  version: "0.4.1post1{{toolset.suffix}}"
 
 source:
   git_url: git://github.com/ilastik/tifffile.git
@@ -15,17 +15,17 @@ build:
 
 requirements:
   build:
-    - python 2.7.*|>=3.4              # [unix]
-    - python 2.7.*{{toolset.suffix}}  # [win]
+    - python 2.7.*|>=3.4                # [unix]
+    - python 2.7.*{{toolset.suffix}}    # [win]
     # - numpy >=1.8.2,*{{toolset.suffix}}
-    - numpy >=1.8.2                   # [unix]
-    - numpy  1.7.*{{toolset.suffix}}  # [win]
+    - numpy >=1.8.2                     # [unix]
+    - numpy >=1.10,*{{toolset.suffix}}  # [win]
 
   run:
-    - python 2.7.*{{toolset.suffix}}  # [win]
+    - python 2.7.*{{toolset.suffix}}    # [win]
     # - numpy >=1.8.2,*{{toolset.suffix}}
-    - numpy >=1.8.2                   # [unix]
-    - numpy  1.7.*{{toolset.suffix}}  # [win]
+    - numpy >=1.8.2                     # [unix]
+    - numpy >=1.10,*{{toolset.suffix}}  # [win]
 
 test:
   imports:

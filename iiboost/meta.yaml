@@ -2,7 +2,7 @@
 
 package:
   name: iiboost
-  version: "0.1{{toolset.suffix}}"
+  version: "0.1post1{{toolset.suffix}}"  # post1 since numpy was upgraded
 
 source:
   git_url: git://github.com/cbecker/iiboost.git
