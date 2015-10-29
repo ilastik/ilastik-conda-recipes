@@ -5,9 +5,8 @@ package:
   version: "1.10.1{{toolset.suffix}}"
 
 source:
-    fn:  numpy-1.10.1.tar.gz
-    md5: 3fed2b50906bc19018cec5fa26168aa5
-    url: http://downloads.sourceforge.net/project/numpy/NumPy/1.10.1/numpy-1.10.1.tar.gz
+  git_url: https://github.com/numpy/numpy.git
+  git_tag: v1.10.1
 
 build:
   features:
@@ -17,6 +16,7 @@ requirements:
   build:
     - {{toolset.build_requirement}}
     - python     *{{toolset.suffix}}
+    - cython     *{{toolset.suffix}}
     - setuptools
     - mingw-for-msvc-build                  # [win]
     - openblas   >=0.2.15{{toolset.suffix}} # [win]

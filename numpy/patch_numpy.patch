@@ -1,5 +1,6 @@
---- numpy/distutils/command/build_ext.py	Tue Aug 11 17:03:43 2015
-+++ numpy/distutils/command/build_ext.py	Wed Oct 28 18:56:20 2015
+diff --git numpy/distutils/command/build_ext.py numpy/distutils/command/build_ext.py
+--- numpy/distutils/command/build_ext.py
++++ numpy/distutils/command/build_ext.py
 @@ -456,7 +456,9 @@ class build_ext (old_build_ext):
              if libname.startswith('msvc'): continue
              fileexists = False
@@ -22,8 +23,9 @@
                  if p:
                      dst_name = os.path.join(self.build_temp, lib + '.lib')
                      if not os.path.isfile(dst_name):
---- numpy/distutils/fcompiler/gnu.py	Sun Sep 13 16:21:27 2015
-+++ numpy/distutils/fcompiler/gnu.py	Wed Oct 28 19:00:16 2015
+diff --git numpy/distutils/fcompiler/gnu.py numpy/distutils/fcompiler/gnu.py
+--- numpy/distutils/fcompiler/gnu.py
++++ numpy/distutils/fcompiler/gnu.py
 @@ -62,7 +62,7 @@ class GnuFCompiler(FCompiler):
              m = re.search(r'GNU Fortran\s+95.*?([0-9-.]+)', version_string)
              if m:
@@ -45,8 +47,9 @@
          return opt
 
      def get_target(self):
---- numpy/distutils/misc_util.py	Tue Aug 11 17:03:43 2015
-+++ numpy/distutils/misc_util.py	Wed Oct 28 19:17:49 2015
+diff --git numpy/distutils/misc_util.py numpy/distutils/misc_util.py
+--- numpy/distutils/misc_util.py
++++ numpy/distutils/misc_util.py
 @@ -397,6 +397,7 @@ def msvc_runtime_library():
                 '1400': 'msvcr80',    # MSVC 8
                 '1500': 'msvcr90',    # MSVC 9 (VS 2008)
@@ -55,4 +58,14 @@
                }.get(msc_ver, None)
      else:
          lib = None
+diff --git numpy/distutils/msvccompiler.py numpy/distutils/msvccompiler.py
+--- numpy/distutils/msvccompiler.py
++++ numpy/distutils/msvccompiler.py
+@@ -8,6 +8,7 @@ from .system_info import platform_bits
+ class MSVCCompiler(distutils.msvccompiler.MSVCCompiler):
+     def __init__(self, verbose=0, dry_run=0, force=0):
+         distutils.msvccompiler.MSVCCompiler.__init__(self, verbose, dry_run, force)
++        self.compiler_cxx = ['cl.exe']
 
+     def initialize(self, plat_name=None):
+         environ_lib = os.getenv('lib')
