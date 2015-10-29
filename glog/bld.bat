@@ -5,7 +5,9 @@ call "%TOOLSET_INFO_DIR%\common-vars.bat"
 mkdir build
 cd build
 
-cmake .. -G "%CMAKE_GENERATOR%" -DCMAKE_INSTALL_PREFIX="%LIBRARY_PREFIX%"
+cmake .. -G "%CMAKE_GENERATOR%" ^
+         -DCMAKE_INSTALL_PREFIX="%LIBRARY_PREFIX%" ^
+         -DBUILD_SHARED_LIBS=ON
 if errorlevel 1 exit 1
 
 cmake --build . --target ALL_BUILD --config Release
