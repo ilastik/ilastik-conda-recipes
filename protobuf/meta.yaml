@@ -2,7 +2,7 @@
 
 package:
   name: protobuf
-  version: "3.0.0{{toolset.suffix}}"
+  version: "3.0.0a4{{toolset.suffix}}"
 
 source:
   git_url: https://github.com/google/protobuf.git
@@ -15,10 +15,18 @@ build:
 requirements:
   build:
     - {{toolset.build_requirement}}
+    - mingw-for-msvc-build           # [win]
+    - zlib      *{{toolset.suffix}}
+    - python    *{{toolset.suffix}}
+    - setuptools
+    - six
     # - gmock   # for testing
 
   run:
     - {{toolset.run_requirement}}
+    - zlib      *{{toolset.suffix}}
+    - python    *{{toolset.suffix}}
+    - six
 
 about:
   home: https://developers.google.com/protocol-buffers/
