@@ -1322,3 +1322,29 @@ diff --git tools/extract_features.cpp tools/extract_features.cpp
            ->blob_by_name(blob_names[i]);
        int batch_size = feature_blob->num();
        int dim_features = feature_blob->count() / batch_size;
+diff --git a/src/caffe/util/db_lmdb.cpp b/src/caffe/util/db_lmdb.cpp
+--- src/caffe/util/db_lmdb.cpp
++++ src/caffe/util/db_lmdb.cpp
+@@ -5,6 +5,10 @@
+
+ #include <string>
+
++#ifdef _MSC_VER
++#include <direct.h>
++#endif
++
+ namespace caffe { namespace db {
+
+ const size_t LMDB_MAP_SIZE = 1099511627776;  // 1 TB
+@@ -13,7 +17,11 @@ void LMDB::Open(const string& source, Mode mode) {
+   MDB_CHECK(mdb_env_create(&mdb_env_));
+   MDB_CHECK(mdb_env_set_mapsize(mdb_env_, LMDB_MAP_SIZE));
+   if (mode == NEW) {
++#ifdef _MSC_VER
++    CHECK_EQ(_mkdir(source.c_str()), 0) << "mkdir " << source << "failed";
++#else
+     CHECK_EQ(mkdir(source.c_str(), 0744), 0) << "mkdir " << source << "failed";
++#endif
+   }
+   int flags = 0;
+   if (mode == READ) {

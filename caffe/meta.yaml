@@ -18,6 +18,8 @@ requirements:
     - {{toolset.build_requirement}}
     - python    *{{toolset.suffix}}
     - numpy     *{{toolset.suffix}}
+    # - lmdb      *{{toolset.suffix}}   # FIXME: difficult recipe - no Windows build system
+    # - leveldb   *{{toolset.suffix}}   # FIXME: difficult recipe - no Windows build system
     - gflags    *{{toolset.suffix}}
     - glog      *{{toolset.suffix}}
     - protobuf  *{{toolset.suffix}}

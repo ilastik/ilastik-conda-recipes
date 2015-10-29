@@ -13,8 +13,8 @@ cmake .. -G "%CMAKE_GENERATOR%" ^
          -DCMAKE_INSTALL_PREFIX="%LIBRARY_PREFIX%" ^
          -DCMAKE_PREFIX_PATH="%LIBRARY_PREFIX%" ^
          -DUSE_OPENCV=0 ^
-         -DUSE_LEVELDB=0 ^
          -DUSE_LMDB=0 ^
+         -DUSE_LEVELDB=0 ^
          -DGFLAGS_LIBRARY_RELEASE="%LIBRARY_LIB%\gflags.lib" ^
          -DGFLAGS_LIBRARY_DEBUG="%LIBRARY_LIB%\gflags.lib" ^
          -DGLOG_LIBRARY_RELEASE="%LIBRARY_LIB%\glog.lib" ^
@@ -42,10 +42,12 @@ cmake --build . --target pycaffe --config Release
 if errorlevel 1 exit 1
 
 REM INSTALL
+xcopy /S lib\Release\*.lib "%LIBRARY_LIB%\"
 xcopy /S bin\Release\*.dll "%LIBRARY_BIN%\"
 xcopy /S bin\Release\*.exe "%LIBRARY_BIN%\"
-xcopy /S lib\Release\*.lib "%LIBRARY_LIB%\"
 xcopy /S bin\Release\*.pyd "%SP_DIR%\caffe\"
+xcopy include\caffe\proto\caffe_pb2.py "%SP_DIR%\caffe\proto\"
+xcopy __init__.py "%SP_DIR%\caffe\proto\"
 
 cd ..
 xcopy /S include\caffe "%LIBRARY_INC%\caffe\"
