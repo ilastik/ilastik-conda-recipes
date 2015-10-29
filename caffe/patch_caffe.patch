@@ -1,0 +1,1324 @@
+diff --git cmake/Dependencies.cmake cmake/Dependencies.cmake
+--- cmake/Dependencies.cmake
++++ cmake/Dependencies.cmake
+@@ -2,10 +2,14 @@
+ set(Caffe_LINKER_LIBS "")
+
+ # ---[ Boost
+-find_package(Boost 1.46 REQUIRED COMPONENTS system thread)
++find_package(Boost 1.46 REQUIRED COMPONENTS system thread chrono date_time)
+ include_directories(SYSTEM ${Boost_INCLUDE_DIR})
+ list(APPEND Caffe_LINKER_LIBS ${Boost_LIBRARIES})
+
++if("${Boost_SYSTEM_LIBRARY}" MATCHES "boost_system\\.lib")
++    ADD_DEFINITIONS(-DBOOST_AUTO_LINK_NOMANGLE)
++endif()
++
+ # ---[ Threads
+ find_package(Threads REQUIRED)
+ list(APPEND Caffe_LINKER_LIBS ${CMAKE_THREAD_LIBS_INIT})
+@@ -18,10 +22,11 @@ list(APPEND Caffe_LINKER_LIBS ${GLOG_LIBRARIES})
+ # ---[ Google-gflags
+ include("cmake/External/gflags.cmake")
+ include_directories(SYSTEM ${GFLAGS_INCLUDE_DIRS})
+-list(APPEND Caffe_LINKER_LIBS ${GFLAGS_LIBRARIES})
++list(APPEND Caffe_LINKER_LIBS ${GFLAGS_LIBRARIES} Shlwapi.lib)
+
+ # ---[ Google-protobuf
+ include(cmake/ProtoBuf.cmake)
++ADD_DEFINITIONS(-DPROTOBUF_USE_DLLS)
+
+ # ---[ HDF5
+ find_package(HDF5 COMPONENTS HL REQUIRED)
+diff --git cmake/ProtoBuf.cmake cmake/ProtoBuf.cmake
+--- cmake/ProtoBuf.cmake
++++ cmake/ProtoBuf.cmake
+@@ -77,7 +77,7 @@ function(caffe_protobuf_generate_cpp_py output_dir srcs_var hdrs_var python_var)
+              "${output_dir}/${fil_we}.pb.h"
+              "${output_dir}/${fil_we}_pb2.py"
+       COMMAND ${CMAKE_COMMAND} -E make_directory "${output_dir}"
+-      COMMAND ${PROTOBUF_PROTOC_EXECUTABLE} --cpp_out    ${output_dir} ${_protoc_include} ${abs_fil}
++      COMMAND ${PROTOBUF_PROTOC_EXECUTABLE} --cpp_out=dllexport_decl=PROTOBUF_DECLSPEC:${output_dir} ${_protoc_include} ${abs_fil}
+       COMMAND ${PROTOBUF_PROTOC_EXECUTABLE} --python_out ${output_dir} ${_protoc_include} ${abs_fil}
+       DEPENDS ${abs_fil}
+       COMMENT "Running C++/Python protocol buffer compiler on ${fil}" VERBATIM )
+diff --git include/caffe/blob.hpp include/caffe/blob.hpp
+--- include/caffe/blob.hpp
++++ include/caffe/blob.hpp
+@@ -11,6 +11,14 @@
+
+ const int kMaxBlobAxes = 32;
+
++#ifdef _MSC_VER
++#  ifdef caffe_EXPORTS
++#    define CAFFE_DECLSPEC __declspec(dllexport)
++#  elif !defined(CAFFE_DECLSPEC)
++#    define CAFFE_DECLSPEC __declspec(dllimport)
++#  endif
++#endif
++
+ namespace caffe {
+
+ /**
+@@ -27,9 +35,9 @@ class Blob {
+        : data_(), diff_(), count_(0), capacity_(0) {}
+
+   /// @brief Deprecated; use <code>Blob(const vector<int>& shape)</code>.
+-  explicit Blob(const int num, const int channels, const int height,
++  CAFFE_DECLSPEC explicit Blob(const int num, const int channels, const int height,
+       const int width);
+-  explicit Blob(const vector<int>& shape);
++  CAFFE_DECLSPEC explicit Blob(const vector<int>& shape);
+
+   /// @brief Deprecated; use <code>Reshape(const vector<int>& shape)</code>.
+   void Reshape(const int num, const int channels, const int height,
+@@ -48,9 +56,9 @@ class Blob {
+    * an error; either Net::Forward or Net::Reshape need to be called to
+    * propagate the new input shape to higher layers.
+    */
+-  void Reshape(const vector<int>& shape);
+-  void Reshape(const BlobShape& shape);
+-  void ReshapeLike(const Blob& other);
++  CAFFE_DECLSPEC void Reshape(const vector<int>& shape);
++  CAFFE_DECLSPEC void Reshape(const BlobShape& shape);
++  CAFFE_DECLSPEC void ReshapeLike(const Blob& other);
+   inline string shape_string() const {
+     ostringstream stream;
+     for (int i = 0; i < shape_.size(); ++i) {
+@@ -222,13 +230,13 @@ class Blob {
+   const Dtype* gpu_data() const;
+   const Dtype* cpu_diff() const;
+   const Dtype* gpu_diff() const;
+-  Dtype* mutable_cpu_data();
+-  Dtype* mutable_gpu_data();
+-  Dtype* mutable_cpu_diff();
+-  Dtype* mutable_gpu_diff();
+-  void Update();
+-  void FromProto(const BlobProto& proto, bool reshape = true);
+-  void ToProto(BlobProto* proto, bool write_diff = false) const;
++  CAFFE_DECLSPEC Dtype* mutable_cpu_data();
++  CAFFE_DECLSPEC Dtype* mutable_gpu_data();
++  CAFFE_DECLSPEC Dtype* mutable_cpu_diff();
++  CAFFE_DECLSPEC Dtype* mutable_gpu_diff();
++  CAFFE_DECLSPEC void Update();
++  CAFFE_DECLSPEC void FromProto(const BlobProto& proto, bool reshape = true);
++  CAFFE_DECLSPEC void ToProto(BlobProto* proto, bool write_diff = false) const;
+
+   /// @brief Compute the sum of absolute values (L1 norm) of the data.
+   Dtype asum_data() const;
+diff --git include/caffe/common.hpp include/caffe/common.hpp
+--- include/caffe/common.hpp
++++ include/caffe/common.hpp
+@@ -18,6 +18,15 @@
+
+ #include "caffe/util/device_alternate.hpp"
+
++#ifdef _MSC_VER
++#  ifdef caffe_EXPORTS
++#    define CAFFE_DECLSPEC __declspec(dllexport)
++#  elif !defined(CAFFE_DECLSPEC)
++#    define CAFFE_DECLSPEC __declspec(dllimport)
++#  endif
++#endif
++
++
+ // gflags 2.1 issue: namespace google was changed to gflags without warning.
+ // Luckily we will be able to use GFLAGS_GFLAGS_H_ to detect if it is version
+ // 2.1. If yes, we will add a temporary solution to redirect the namespace.
+@@ -77,8 +86,23 @@ using boost::shared_ptr;
+ // Common functions and classes from std that caffe often uses.
+ using std::fstream;
+ using std::ios;
++
++#ifdef _MSC_VER
++template <class REAL>
++inline bool isinf(REAL v)
++{
++    return _finite(v) == 0;
++}
++
++template <class REAL>
++inline bool isnan(REAL v)
++{
++    return _isnan(v) != 0;
++}
++#else
+ using std::isnan;
+ using std::isinf;
++#endif
+ using std::iterator;
+ using std::make_pair;
+ using std::map;
+@@ -102,7 +126,7 @@ class Caffe {
+   // Thread local context for Caffe. Moved to common.cpp instead of
+   // including boost/thread.hpp to avoid a boost/NVCC issues (#1009, #1010)
+   // on OSX. Also fails on Linux with CUDA 7.0.18.
+-  static Caffe& Get();
++  CAFFE_DECLSPEC static Caffe& Get();
+
+   enum Brew { CPU, GPU };
+
+@@ -146,7 +170,7 @@ class Caffe {
+   static void set_random_seed(const unsigned int seed);
+   // Sets the device. Since we have cublas and curand stuff, set device also
+   // requires us to reset those values.
+-  static void SetDevice(const int device_id);
++  CAFFE_DECLSPEC static void SetDevice(const int device_id);
+   // Prints the current GPU status.
+   static void DeviceQuery();
+   // Parallel training info
+diff --git include/caffe/data_layers.hpp include/caffe/data_layers.hpp
+--- include/caffe/data_layers.hpp
++++ include/caffe/data_layers.hpp
+@@ -20,6 +20,14 @@
+ #define HDF5_DATA_DATASET_NAME "data"
+ #define HDF5_DATA_LABEL_NAME "label"
+
++#ifdef _MSC_VER
++#  ifdef caffe_EXPORTS
++#    define CAFFE_DECLSPEC __declspec(dllexport)
++#  elif !defined(CAFFE_DECLSPEC)
++#    define CAFFE_DECLSPEC __declspec(dllimport)
++#  endif
++#endif
++
+ namespace caffe {
+
+ /**
+@@ -284,7 +292,7 @@ class MemoryDataLayer : public BaseDataLayer<Dtype> {
+
+   // Reset should accept const pointers, but can't, because the memory
+   //  will be given to Blob, which is mutable
+-  void Reset(Dtype* data, Dtype* label, int n);
++  CAFFE_DECLSPEC void Reset(Dtype* data, Dtype* label, int n);
+   void set_batch_size(int new_size);
+
+   int batch_size() { return batch_size_; }
+diff --git include/caffe/net.hpp include/caffe/net.hpp
+--- include/caffe/net.hpp
++++ include/caffe/net.hpp
+@@ -12,6 +12,14 @@
+ #include "caffe/layer.hpp"
+ #include "caffe/proto/caffe.pb.h"
+
++#ifdef _MSC_VER
++#  ifdef caffe_EXPORTS
++#    define CAFFE_DECLSPEC __declspec(dllexport)
++#  elif !defined(CAFFE_DECLSPEC)
++#    define CAFFE_DECLSPEC __declspec(dllimport)
++#  endif
++#endif
++
+ namespace caffe {
+
+ /**
+@@ -24,7 +32,7 @@ template <typename Dtype>
+ class Net {
+  public:
+   explicit Net(const NetParameter& param, const Net* root_net = NULL);
+-  explicit Net(const string& param_file, Phase phase,
++  explicit CAFFE_DECLSPEC Net(const string& param_file, Phase phase,
+       const Net* root_net = NULL);
+   virtual ~Net() {}
+
+@@ -46,9 +54,9 @@ class Net {
+    * the middle may be incorrect if all of the layers of a fan-in are not
+    * included.
+    */
+-  Dtype ForwardFromTo(int start, int end);
+-  Dtype ForwardFrom(int start);
+-  Dtype ForwardTo(int end);
++  CAFFE_DECLSPEC Dtype ForwardFromTo(int start, int end);
++  CAFFE_DECLSPEC Dtype ForwardFrom(int start);
++  CAFFE_DECLSPEC Dtype ForwardTo(int end);
+   /// @brief Run forward using a set of bottom blobs, and return the result.
+   const vector<Blob<Dtype>*>& Forward(const vector<Blob<Dtype>* > & bottom,
+       Dtype* loss = NULL);
+@@ -69,10 +77,10 @@ class Net {
+    * computes the gradient w.r.t the parameters, and the data has already been
+    * provided during the forward pass.
+    */
+-  void Backward();
+-  void BackwardFromTo(int start, int end);
+-  void BackwardFrom(int start);
+-  void BackwardTo(int end);
++  CAFFE_DECLSPEC void Backward();
++  CAFFE_DECLSPEC void BackwardFromTo(int start, int end);
++  CAFFE_DECLSPEC void BackwardFrom(int start);
++  CAFFE_DECLSPEC void BackwardTo(int end);
+
+   /**
+    * @brief Reshape all layers from bottom to top.
+@@ -80,7 +88,7 @@ class Net {
+    * This is useful to propagate changes to layer sizes without running
+    * a forward pass, e.g. to compute output feature size.
+    */
+-  void Reshape();
++  CAFFE_DECLSPEC void Reshape();
+
+   Dtype ForwardBackward(const vector<Blob<Dtype>* > & bottom) {
+     Dtype loss;
+@@ -103,19 +111,19 @@ class Net {
+    * @brief For an already initialized net, implicitly copies (i.e., using no
+    *        additional memory) the pre-trained layers from another Net.
+    */
+-  void ShareTrainedLayersWith(const Net* other);
++  CAFFE_DECLSPEC void ShareTrainedLayersWith(const Net* other);
+   // For an already initialized net, CopyTrainedLayersFrom() copies the already
+   // trained layers from another net parameter instance.
+   /**
+    * @brief For an already initialized net, copies the pre-trained layers from
+    *        another Net.
+    */
+-  void CopyTrainedLayersFrom(const NetParameter& param);
+-  void CopyTrainedLayersFrom(const string trained_filename);
+-  void CopyTrainedLayersFromBinaryProto(const string trained_filename);
+-  void CopyTrainedLayersFromHDF5(const string trained_filename);
++  CAFFE_DECLSPEC void CopyTrainedLayersFrom(const NetParameter& param);
++  CAFFE_DECLSPEC void CopyTrainedLayersFrom(const string trained_filename);
++  CAFFE_DECLSPEC void CopyTrainedLayersFromBinaryProto(const string trained_filename);
++  CAFFE_DECLSPEC void CopyTrainedLayersFromHDF5(const string trained_filename);
+   /// @brief Writes the net to a proto.
+-  void ToProto(NetParameter* param, bool write_diff = false) const;
++  CAFFE_DECLSPEC void ToProto(NetParameter* param, bool write_diff = false) const;
+   /// @brief Writes the net to an HDF5 file.
+   void ToHDF5(const string& filename, bool write_diff = false) const;
+
+diff --git include/caffe/sgd_solvers.hpp include/caffe/sgd_solvers.hpp
+--- include/caffe/sgd_solvers.hpp
++++ include/caffe/sgd_solvers.hpp
+@@ -17,25 +17,25 @@ class SGDSolver : public Solver<Dtype> {
+  public:
+   explicit SGDSolver(const SolverParameter& param)
+       : Solver<Dtype>(param) { PreSolve(); }
+-  explicit SGDSolver(const string& param_file)
++  CAFFE_DECLSPEC explicit SGDSolver(const string& param_file)
+       : Solver<Dtype>(param_file) { PreSolve(); }
+   virtual inline const char* type() const { return "SGD"; }
+
+   const vector<shared_ptr<Blob<Dtype> > >& history() { return history_; }
+
+  protected:
+-  void PreSolve();
+-  Dtype GetLearningRate();
+-  virtual void ApplyUpdate();
+-  virtual void Normalize(int param_id);
+-  virtual void Regularize(int param_id);
+-  virtual void ComputeUpdateValue(int param_id, Dtype rate);
+-  virtual void ClipGradients();
+-  virtual void SnapshotSolverState(const string& model_filename);
+-  virtual void SnapshotSolverStateToBinaryProto(const string& model_filename);
+-  virtual void SnapshotSolverStateToHDF5(const string& model_filename);
+-  virtual void RestoreSolverStateFromHDF5(const string& state_file);
+-  virtual void RestoreSolverStateFromBinaryProto(const string& state_file);
++  CAFFE_DECLSPEC void PreSolve();
++  CAFFE_DECLSPEC Dtype GetLearningRate();
++  CAFFE_DECLSPEC virtual void ApplyUpdate();
++  CAFFE_DECLSPEC virtual void Normalize(int param_id);
++  CAFFE_DECLSPEC virtual void Regularize(int param_id);
++  CAFFE_DECLSPEC virtual void ComputeUpdateValue(int param_id, Dtype rate);
++  CAFFE_DECLSPEC virtual void ClipGradients();
++  CAFFE_DECLSPEC virtual void SnapshotSolverState(const string& model_filename);
++  CAFFE_DECLSPEC virtual void SnapshotSolverStateToBinaryProto(const string& model_filename);
++  CAFFE_DECLSPEC virtual void SnapshotSolverStateToHDF5(const string& model_filename);
++  CAFFE_DECLSPEC virtual void RestoreSolverStateFromHDF5(const string& state_file);
++  CAFFE_DECLSPEC virtual void RestoreSolverStateFromBinaryProto(const string& state_file);
+   // history maintains the historical momentum data.
+   // update maintains update related data and is not needed in snapshots.
+   // temp maintains other information that might be needed in computation
+@@ -55,7 +55,7 @@ class NesterovSolver : public SGDSolver<Dtype> {
+   virtual inline const char* type() const { return "Nesterov"; }
+
+  protected:
+-  virtual void ComputeUpdateValue(int param_id, Dtype rate);
++  CAFFE_DECLSPEC virtual void ComputeUpdateValue(int param_id, Dtype rate);
+
+   DISABLE_COPY_AND_ASSIGN(NesterovSolver);
+ };
+@@ -70,7 +70,7 @@ class AdaGradSolver : public SGDSolver<Dtype> {
+   virtual inline const char* type() const { return "AdaGrad"; }
+
+  protected:
+-  virtual void ComputeUpdateValue(int param_id, Dtype rate);
++  CAFFE_DECLSPEC virtual void ComputeUpdateValue(int param_id, Dtype rate);
+   void constructor_sanity_check() {
+     CHECK_EQ(0, this->param_.momentum())
+         << "Momentum cannot be used with AdaGrad.";
+@@ -90,7 +90,7 @@ class RMSPropSolver : public SGDSolver<Dtype> {
+   virtual inline const char* type() const { return "RMSProp"; }
+
+  protected:
+-  virtual void ComputeUpdateValue(int param_id, Dtype rate);
++  CAFFE_DECLSPEC virtual void ComputeUpdateValue(int param_id, Dtype rate);
+   void constructor_sanity_check() {
+     CHECK_EQ(0, this->param_.momentum())
+         << "Momentum cannot be used with RMSProp.";
+@@ -113,8 +113,8 @@ class AdaDeltaSolver : public SGDSolver<Dtype> {
+   virtual inline const char* type() const { return "AdaDelta"; }
+
+  protected:
+-  void AdaDeltaPreSolve();
+-  virtual void ComputeUpdateValue(int param_id, Dtype rate);
++  CAFFE_DECLSPEC void AdaDeltaPreSolve();
++  CAFFE_DECLSPEC virtual void ComputeUpdateValue(int param_id, Dtype rate);
+
+   DISABLE_COPY_AND_ASSIGN(AdaDeltaSolver);
+ };
+@@ -137,8 +137,8 @@ class AdamSolver : public SGDSolver<Dtype> {
+   virtual inline const char* type() const { return "Adam"; }
+
+  protected:
+-  void AdamPreSolve();
+-  virtual void ComputeUpdateValue(int param_id, Dtype rate);
++  CAFFE_DECLSPEC void AdamPreSolve();
++  CAFFE_DECLSPEC virtual void ComputeUpdateValue(int param_id, Dtype rate);
+
+   DISABLE_COPY_AND_ASSIGN(AdamSolver);
+ };
+diff --git include/caffe/solver.hpp include/caffe/solver.hpp
+--- include/caffe/solver.hpp
++++ include/caffe/solver.hpp
+@@ -42,7 +42,7 @@ class Solver {
+  public:
+   explicit Solver(const SolverParameter& param,
+       const Solver* root_solver = NULL);
+-  explicit Solver(const string& param_file, const Solver* root_solver = NULL);
++  CAFFE_DECLSPEC explicit Solver(const string& param_file, const Solver* root_solver = NULL);
+   void Init(const SolverParameter& param);
+   void InitTrainNet();
+   void InitTestNets();
+@@ -54,13 +54,13 @@ class Solver {
+   SolverAction::Enum GetRequestedAction();
+   // The main entry of the solver function. In default, iter will be zero. Pass
+   // in a non-zero iter number to resume training for a pre-trained net.
+-  virtual void Solve(const char* resume_file = NULL);
+-  inline void Solve(const string resume_file) { Solve(resume_file.c_str()); }
+-  void Step(int iters);
++  CAFFE_DECLSPEC virtual void Solve(const char* resume_file = NULL);
++  CAFFE_DECLSPEC inline void Solve(const string resume_file) { Solve(resume_file.c_str()); }
++  CAFFE_DECLSPEC void Step(int iters);
+   // The Restore method simply dispatches to one of the
+   // RestoreSolverStateFrom___ protected methods. You should implement these
+   // methods to restore the state from the appropriate snapshot type.
+-  void Restore(const char* resume_file);
++  CAFFE_DECLSPEC void Restore(const char* resume_file);
+   virtual ~Solver() {}
+   inline const SolverParameter& param() const { return param_; }
+   inline shared_ptr<Net<Dtype> > net() { return net_; }
+diff --git include/caffe/util/io.hpp include/caffe/util/io.hpp
+--- include/caffe/util/io.hpp
++++ include/caffe/util/io.hpp
+@@ -1,7 +1,11 @@
+ #ifndef CAFFE_UTIL_IO_H_
+ #define CAFFE_UTIL_IO_H_
+
+-#include <unistd.h>
++#if defined(_MSC_VER)
++#  include <io.h>
++#else
++#  include <unistd.h>
++#endif
+ #include <string>
+
+ #include "google/protobuf/message.h"
+@@ -9,6 +13,18 @@
+ #include "caffe/common.hpp"
+ #include "caffe/proto/caffe.pb.h"
+
++#ifdef _MSC_VER
++int mkstemp(char *tmpl);
++#endif
++
++#ifdef _MSC_VER
++#  ifdef caffe_EXPORTS
++#    define CAFFE_DECLSPEC __declspec(dllexport)
++#  elif !defined(CAFFE_DECLSPEC)
++#    define CAFFE_DECLSPEC __declspec(dllimport)
++#  endif
++#endif
++
+ namespace caffe {
+
+ using ::google::protobuf::Message;
+@@ -21,7 +37,11 @@ inline void MakeTempFilename(string* temp_filename) {
+   strcpy(temp_filename_cstr, temp_filename->c_str());
+   int fd = mkstemp(temp_filename_cstr);
+   CHECK_GE(fd, 0) << "Failed to open a temporary file at: " << *temp_filename;
++#ifndef _MSC_VER
+   close(fd);
++#else
++  _close(fd);
++#endif
+   *temp_filename = temp_filename_cstr;
+   delete[] temp_filename_cstr;
+ }
+@@ -32,7 +52,11 @@ inline void MakeTempDir(string* temp_dirname) {
+   char* temp_dirname_cstr = new char[temp_dirname->size() + 1];
+   // NOLINT_NEXT_LINE(runtime/printf)
+   strcpy(temp_dirname_cstr, temp_dirname->c_str());
++#ifndef _MSC_VER
+   char* mkdtemp_result = mkdtemp(temp_dirname_cstr);
++#else
++  errno_t mkdtemp_result = _mktemp_s(temp_dirname_cstr, sizeof(temp_dirname_cstr));
++#endif
+   CHECK(mkdtemp_result != NULL)
+       << "Failed to create a temporary directory at: " << *temp_dirname;
+   *temp_dirname = temp_dirname_cstr;
+@@ -74,7 +98,7 @@ inline void ReadProtoFromBinaryFileOrDie(const string& filename,
+ }
+
+
+-void WriteProtoToBinaryFile(const Message& proto, const char* filename);
++CAFFE_DECLSPEC void WriteProtoToBinaryFile(const Message& proto, const char* filename);
+ inline void WriteProtoToBinaryFile(
+     const Message& proto, const string& filename) {
+   WriteProtoToBinaryFile(proto, filename.c_str());
+diff --git include/caffe/util/math_functions.hpp include/caffe/util/math_functions.hpp
+--- include/caffe/util/math_functions.hpp
++++ include/caffe/util/math_functions.hpp
+@@ -10,6 +10,9 @@
+ #include "caffe/util/device_alternate.hpp"
+ #include "caffe/util/mkl_alternate.hpp"
+
++#define __builtin_popcount __popcnt
++#define __builtin_popcountl __popcnt
++
+ namespace caffe {
+
+ // Caffe gemm provides a simpler interface to the gemm functions, with the
+@@ -137,8 +140,13 @@ DEFINE_CAFFE_CPU_UNARY_FUNC(sign, y[i] = caffe_sign<Dtype>(x[i]));
+ // The name sngbit is meant to avoid conflicts with std::signbit in the macro.
+ // The extra parens are needed because CUDA < 6.5 defines signbit as a macro,
+ // and we don't want that to expand here when CUDA headers are also included.
++#ifdef _MSC_VER
++DEFINE_CAFFE_CPU_UNARY_FUNC(sgnbit, \
++    y[i] = static_cast<bool>((::signbit)(x[i])));
++#else
+ DEFINE_CAFFE_CPU_UNARY_FUNC(sgnbit, \
+     y[i] = static_cast<bool>((std::signbit)(x[i])));
++#endif
+
+ DEFINE_CAFFE_CPU_UNARY_FUNC(fabs, y[i] = std::fabs(x[i]));
+
+diff --git include/caffe/util/upgrade_proto.hpp include/caffe/util/upgrade_proto.hpp
+--- include/caffe/util/upgrade_proto.hpp
++++ include/caffe/util/upgrade_proto.hpp
+@@ -5,6 +5,14 @@
+
+ #include "caffe/proto/caffe.pb.h"
+
++#ifdef _MSC_VER
++#  ifdef caffe_EXPORTS
++#    define CAFFE_DECLSPEC __declspec(dllexport)
++#  elif !defined(CAFFE_DECLSPEC)
++#    define CAFFE_DECLSPEC __declspec(dllimport)
++#  endif
++#endif
++
+ namespace caffe {
+
+ // Return true iff the net is not the current version.
+@@ -14,9 +22,9 @@ bool NetNeedsUpgrade(const NetParameter& net_param);
+ bool UpgradeNetAsNeeded(const string& param_file, NetParameter* param);
+
+ // Read parameters from a file into a NetParameter proto message.
+-void ReadNetParamsFromTextFileOrDie(const string& param_file,
++CAFFE_DECLSPEC void ReadNetParamsFromTextFileOrDie(const string& param_file,
+                                     NetParameter* param);
+-void ReadNetParamsFromBinaryFileOrDie(const string& param_file,
++CAFFE_DECLSPEC void ReadNetParamsFromBinaryFileOrDie(const string& param_file,
+                                       NetParameter* param);
+
+ // Return true iff any layer contains parameters specified using
+@@ -68,7 +76,7 @@ bool UpgradeSolverType(SolverParameter* solver_param);
+ bool UpgradeSolverAsNeeded(const string& param_file, SolverParameter* param);
+
+ // Read parameters from a file into a SolverParameter proto message.
+-void ReadSolverParamsFromTextFileOrDie(const string& param_file,
++CAFFE_DECLSPEC void ReadSolverParamsFromTextFileOrDie(const string& param_file,
+                                        SolverParameter* param);
+
+ }  // namespace caffe
+diff --git python/CMakeLists.txt python/CMakeLists.txt
+--- python/CMakeLists.txt
++++ python/CMakeLists.txt
+@@ -19,6 +19,8 @@ if(UNIX OR APPLE)
+                        COMMAND touch ${PROJECT_SOURCE_DIR}/python/caffe/proto/__init__.py
+                        COMMAND cp ${proto_gen_folder}/*.py ${PROJECT_SOURCE_DIR}/python/caffe/proto/
+                        COMMENT "Creating symlink ${__linkname} -> ${PROJECT_BINARY_DIR}/lib/_caffe${Caffe_POSTFIX}.so")
++elseif(MSVC)
++    SET_TARGET_PROPERTIES(pycaffe PROPERTIES OUTPUT_NAME "_caffe" PREFIX "" SUFFIX  ".pyd")
+ endif()
+
+ # ---[ Install
+diff --git src/caffe/CMakeLists.txt src/caffe/CMakeLists.txt
+--- src/caffe/CMakeLists.txt
++++ src/caffe/CMakeLists.txt
+@@ -3,9 +3,11 @@ file(GLOB proto_files proto/*.proto)
+ caffe_protobuf_generate_cpp_py(${proto_gen_folder} proto_srcs proto_hdrs proto_python ${proto_files})
+
+ # include python files either to force generation
+-add_library(proto STATIC ${proto_hdrs} ${proto_srcs} ${proto_python})
++add_library(proto SHARED ${proto_hdrs} ${proto_srcs} ${proto_python})
+ set(Caffe_LINKER_LIBS proto ${Caffe_LINKER_LIBS}) # note, crucial to prepend!
+ caffe_default_properties(proto)
++SET_TARGET_PROPERTIES(proto PROPERTIES COMPILE_FLAGS -DPROTOBUF_CLIENT_EXPORTS)
++target_link_libraries(proto ${PROTOBUF_LIBRARIES})
+
+ # --[ Caffe library
+
+diff --git src/caffe/common.cpp src/caffe/common.cpp
+--- src/caffe/common.cpp
++++ src/caffe/common.cpp
+@@ -7,6 +7,11 @@
+ #include "caffe/common.hpp"
+ #include "caffe/util/rng.hpp"
+
++#ifdef _MSC_VER
++#  include <process.h>
++#define getpid _getpid
++#endif
++
+ namespace caffe {
+
+ // Make sure each thread can have different values.
+@@ -46,7 +51,7 @@ void GlobalInit(int* pargc, char*** pargv) {
+   // Google logging.
+   ::google::InitGoogleLogging(*(pargv)[0]);
+   // Provide a backtrace on segfault.
+-  ::google::InstallFailureSignalHandler();
++  // ::google::InstallFailureSignalHandler();
+ }
+
+ #ifdef CPU_ONLY  // CPU-only Caffe.
+diff --git src/caffe/layers/bnll_layer.cu src/caffe/layers/bnll_layer.cu
+--- src/caffe/layers/bnll_layer.cu
++++ src/caffe/layers/bnll_layer.cu
+@@ -5,7 +5,7 @@
+
+ namespace caffe {
+
+-const float kBNLL_THRESHOLD = 50.;
++#define kBNLL_THRESHOLD 50.0
+
+ template <typename Dtype>
+ __global__ void BNLLForward(const int n, const Dtype* in, Dtype* out) {
+diff --git src/caffe/layers/contrastive_loss_layer.cpp src/caffe/layers/contrastive_loss_layer.cpp
+--- src/caffe/layers/contrastive_loss_layer.cpp
++++ src/caffe/layers/contrastive_loss_layer.cpp
+@@ -51,7 +51,7 @@ void ContrastiveLossLayer<Dtype>::Forward_cpu(
+       if (legacy_version) {
+         loss += std::max(margin - dist_sq_.cpu_data()[i], Dtype(0.0));
+       } else {
+-        Dtype dist = std::max(margin - sqrt(dist_sq_.cpu_data()[i]), 0.0);
++        Dtype dist = std::max<Dtype>(margin - sqrt(dist_sq_.cpu_data()[i]), 0.0);
+         loss += dist*dist;
+       }
+     }
+diff --git src/caffe/parallel.cpp src/caffe/parallel.cpp
+--- src/caffe/parallel.cpp
++++ src/caffe/parallel.cpp
+@@ -3,8 +3,10 @@
+ #endif
+ #include <glog/logging.h>
+ #include <stdio.h>
++#ifndef _MSC_VER
+ #include <sys/ioctl.h>
+ #include <sys/mman.h>
++#endif
+ #include <sys/stat.h>
+
+ #include <sstream>
+@@ -122,7 +124,7 @@ void DevicePair::compute(const vector<int> devices, vector<DevicePair>* pairs) {
+   vector<int> remaining(devices);
+
+   // Depth for reduction tree
+-  int remaining_depth = static_cast<int>(ceil(log2(remaining.size())));
++  int remaining_depth = static_cast<int>(ceil(log(remaining.size())/log(2.0)));
+
+   // Group GPUs by board
+   for (int d = 0; d < remaining_depth; ++d) {
+@@ -149,7 +151,7 @@ void DevicePair::compute(const vector<int> devices, vector<DevicePair>* pairs) {
+   DLOG(INFO) << "GPUs paired by boards, remaining: " << s.str();
+
+   // Group by P2P accessibility
+-  remaining_depth = ceil(log2(remaining.size()));
++  remaining_depth = ceil(log(remaining.size())/log(2.0));
+   for (int d = 0; d < remaining_depth; ++d) {
+     for (int i = 0; i < remaining.size(); ++i) {
+       for (int j = i + 1; j < remaining.size(); ++j) {
+@@ -172,7 +174,7 @@ void DevicePair::compute(const vector<int> devices, vector<DevicePair>* pairs) {
+   DLOG(INFO) << "GPUs paired by P2P access, remaining: " << s.str();
+
+   // Group remaining
+-  remaining_depth = ceil(log2(remaining.size()));
++  remaining_depth = ceil(log(remaining.size())/log(2.0));
+   for (int d = 0; d < remaining_depth; ++d) {
+     for (int i = 0; i < remaining.size(); ++i) {
+       pairs->push_back(DevicePair(remaining[i], remaining[i + 1]));
+diff --git src/caffe/solver.cpp src/caffe/solver.cpp
+--- src/caffe/solver.cpp
++++ src/caffe/solver.cpp
+@@ -446,6 +446,10 @@ void Solver<Dtype>::CheckSnapshotWritePermissions() {
+   }
+ }
+
++#ifdef _MSC_VER
++#define snprintf sprintf_s
++#endif
++
+ template <typename Dtype>
+ string Solver<Dtype>::SnapshotFilename(const string extension) {
+   string filename(param_.snapshot_prefix());
+diff --git src/caffe/util/hdf5.cpp src/caffe/util/hdf5.cpp
+--- src/caffe/util/hdf5.cpp
++++ src/caffe/util/hdf5.cpp
+@@ -29,11 +29,15 @@ void hdf5_load_nd_dataset_helper(
+   CHECK_GE(status, 0) << "Failed to get dataset info for " << dataset_name_;
+   switch (class_) {
+   case H5T_FLOAT:
++  {
+     LOG_FIRST_N(INFO, 1) << "Datatype class: H5T_FLOAT";
+     break;
++  }
+   case H5T_INTEGER:
++  {
+     LOG_FIRST_N(INFO, 1) << "Datatype class: H5T_INTEGER";
+     break;
++  }
+   case H5T_TIME:
+     LOG(FATAL) << "Unsupported datatype class: H5T_TIME";
+   case H5T_STRING:
+diff --git src/caffe/util/io.cpp src/caffe/util/io.cpp
+--- src/caffe/util/io.cpp
++++ src/caffe/util/io.cpp
+@@ -2,8 +2,8 @@
+ #include <google/protobuf/io/coded_stream.h>
+ #include <google/protobuf/io/zero_copy_stream_impl.h>
+ #include <google/protobuf/text_format.h>
+-#include <opencv2/core/core.hpp>
+ #ifdef USE_OPENCV
++#include <opencv2/core/core.hpp>
+ #include <opencv2/highgui/highgui.hpp>
+ #include <opencv2/highgui/highgui_c.h>
+ #include <opencv2/imgproc/imgproc.hpp>
+@@ -19,6 +19,112 @@
+ #include "caffe/proto/caffe.pb.h"
+ #include "caffe/util/io.hpp"
+
++#ifdef _MSC_VER
++#define open _open
++
++static const char letters[] =
++"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
++
++#include <io.h>
++
++#include "boost/date_time/filetime_functions.hpp"
++using boost::date_time::winapi::SYSTEMTIME;
++using boost::date_time::winapi::FILETIME;
++
++#include "boost/thread/win32/thread_primitives.hpp"
++
++#include <fcntl.h>
++#include <sys/stat.h>
++
++/* Generate a temporary file name based on TMPL. */
++int
++mkstemp(char *tmpl)
++{
++    int len;
++    char *XXXXXX;
++    static unsigned long long value;
++    unsigned long long random_time_bits;
++    unsigned int count;
++    int fd = -1;
++    int save_errno = errno;
++
++    /* A lower bound on the number of temporary files to attempt to
++    generate.  The maximum total number of temporary file names that
++    can exist for a given template is 62**6.  It should never be
++    necessary to try all these combinations.  Instead if a reasonable
++    number of names is tried (we define reasonable as 62**3) fail to
++    give the system administrator the chance to remove the problems.  */
++#define ATTEMPTS_MIN (62 * 62 * 62)
++
++    /* The number of times to attempt to generate a temporary file.  To
++    conform to POSIX, this must be no smaller than TMP_MAX.  */
++#if ATTEMPTS_MIN < TMP_MAX
++    unsigned int attempts = TMP_MAX;
++#else
++    unsigned int attempts = ATTEMPTS_MIN;
++#endif
++
++    len = strlen(tmpl);
++    if (len < 6 || strcmp(&tmpl[len - 6], "XXXXXX"))
++    {
++        errno = EINVAL;
++        return -1;
++    }
++
++    /* This is where the Xs start.  */
++    XXXXXX = &tmpl[len - 6];
++
++    /* Get some more or less random data.  */
++    {
++        SYSTEMTIME      stNow;
++        FILETIME ftNow;
++
++        // get system time
++        GetSystemTime(&stNow);
++        stNow.wMilliseconds = 500;
++        if (!SystemTimeToFileTime(&stNow, &ftNow))
++        {
++            errno = -1;
++            return -1;
++        }
++
++        random_time_bits = (((unsigned long long)ftNow.dwHighDateTime << 32)
++            | (unsigned long long)ftNow.dwLowDateTime);
++    }
++    value += random_time_bits ^ (unsigned long long) boost::detail::win32::GetCurrentThreadId();
++
++    for (count = 0; count < attempts; value += 7777, ++count)
++    {
++        unsigned long long v = value;
++
++        /* Fill in the random bits.  */
++        XXXXXX[0] = letters[v % 62];
++        v /= 62;
++        XXXXXX[1] = letters[v % 62];
++        v /= 62;
++        XXXXXX[2] = letters[v % 62];
++        v /= 62;
++        XXXXXX[3] = letters[v % 62];
++        v /= 62;
++        XXXXXX[4] = letters[v % 62];
++        v /= 62;
++        XXXXXX[5] = letters[v % 62];
++
++        fd = _open(tmpl, O_RDWR | O_CREAT | O_EXCL, _S_IREAD | _S_IWRITE);
++        if (fd >= 0)
++        {
++            errno = save_errno;
++            return fd;
++        } else if (errno != EEXIST)
++            return -1;
++    }
++
++    /* We got out of the loop because we ran out of combinations to try.  */
++    errno = EEXIST;
++    return -1;
++}
++#endif
++
+ const int kProtoReadBytesLimit = INT_MAX;  // Max size of 2 GB minus 1 byte.
+
+ namespace caffe {
+@@ -37,7 +143,7 @@ bool ReadProtoFromTextFile(const char* filename, Message* proto) {
+   FileInputStream* input = new FileInputStream(fd);
+   bool success = google::protobuf::TextFormat::Parse(input, proto);
+   delete input;
+-  close(fd);
++  _close(fd);
+   return success;
+ }
+
+@@ -46,11 +152,11 @@ void WriteProtoToTextFile(const Message& proto, const char* filename) {
+   FileOutputStream* output = new FileOutputStream(fd);
+   CHECK(google::protobuf::TextFormat::Print(proto, output));
+   delete output;
+-  close(fd);
++  _close(fd);
+ }
+
+ bool ReadProtoFromBinaryFile(const char* filename, Message* proto) {
+-  int fd = open(filename, O_RDONLY);
++  int fd = open(filename, O_RDONLY | O_BINARY);
+   CHECK_NE(fd, -1) << "File not found: " << filename;
+   ZeroCopyInputStream* raw_input = new FileInputStream(fd);
+   CodedInputStream* coded_input = new CodedInputStream(raw_input);
+@@ -60,7 +166,7 @@ bool ReadProtoFromBinaryFile(const char* filename, Message* proto) {
+
+   delete coded_input;
+   delete raw_input;
+-  close(fd);
++  _close(fd);
+   return success;
+ }
+
+diff --git src/caffe/util/signal_handler.cpp src/caffe/util/signal_handler.cpp
+--- src/caffe/util/signal_handler.cpp
++++ src/caffe/util/signal_handler.cpp
+@@ -6,6 +6,7 @@
+
+ #include "caffe/util/signal_handler.h"
+
++#ifndef _MSC_VER
+ namespace {
+   static volatile sig_atomic_t got_sigint = false;
+   static volatile sig_atomic_t got_sighup = false;
+@@ -113,3 +114,28 @@ ActionCallback SignalHandler::GetActionFunction() {
+ }
+
+ }  // namespace caffe
++
++#else
++
++namespace caffe {
++
++SignalHandler::SignalHandler(SolverAction::Enum SIGINT_action,
++                             SolverAction::Enum SIGHUP_action)
++{}
++
++SignalHandler::~SignalHandler()
++{}
++
++SolverAction::Enum SignalHandler::CheckForSignals() const {
++  return SolverAction::NONE;
++}
++
++// Return the function that the solver can use to find out if a snapshot or
++// early exit is being requested.
++ActionCallback SignalHandler::GetActionFunction() {
++  return boost::bind(&SignalHandler::CheckForSignals, this);
++}
++
++}  // namespace caffe
++
++#endif //_MSC_VER
+diff --git src/gtest/gtest.h src/gtest/gtest.h
+--- src/gtest/gtest.h
++++ src/gtest/gtest.h
+@@ -54,6 +54,8 @@
+ #include <limits>
+ #include <vector>
+
++#include "boost/tuple/tuple.hpp"
++
+ // Copyright 2005, Google Inc.
+ // All rights reserved.
+ //
+@@ -660,6 +662,7 @@
+ // In theory, defining stuff in the ::std namespace is undefined
+ // behavior.  We can do this as we are playing the role of a standard
+ // library vendor.
++#if 0
+ namespace std {
+ namespace tr1 {
+
+@@ -1496,6 +1499,7 @@ inline bool operator!=(const GTEST_10_TUPLE_(T)& t,
+
+ }  // namespace tr1
+ }  // namespace std
++#endif
+
+ #undef GTEST_0_TUPLE_
+ #undef GTEST_1_TUPLE_
+@@ -9666,7 +9670,7 @@ inline void PrintTo(const ::std::wstring& s, ::std::ostream* os) {
+ #endif  // GTEST_HAS_STD_WSTRING
+
+ #if GTEST_HAS_TR1_TUPLE
+-// Overload for ::std::tr1::tuple.  Needed for printing function arguments,
++// Overload for boost::tuple.  Needed for printing function arguments,
+ // which are packed as tuples.
+
+ // Helper function for printing a tuple.  T must be instantiated with
+@@ -9679,60 +9683,60 @@ void PrintTupleTo(const T& t, ::std::ostream* os);
+ // regardless of whether tr1::tuple is implemented using the
+ // non-standard variadic template feature or not.
+
+-inline void PrintTo(const ::std::tr1::tuple<>& t, ::std::ostream* os) {
++inline void PrintTo(const boost::tuple<>& t, ::std::ostream* os) {
+   PrintTupleTo(t, os);
+ }
+
+ template <typename T1>
+-void PrintTo(const ::std::tr1::tuple<T1>& t, ::std::ostream* os) {
++void PrintTo(const boost::tuple<T1>& t, ::std::ostream* os) {
+   PrintTupleTo(t, os);
+ }
+
+ template <typename T1, typename T2>
+-void PrintTo(const ::std::tr1::tuple<T1, T2>& t, ::std::ostream* os) {
++void PrintTo(const boost::tuple<T1, T2>& t, ::std::ostream* os) {
+   PrintTupleTo(t, os);
+ }
+
+ template <typename T1, typename T2, typename T3>
+-void PrintTo(const ::std::tr1::tuple<T1, T2, T3>& t, ::std::ostream* os) {
++void PrintTo(const boost::tuple<T1, T2, T3>& t, ::std::ostream* os) {
+   PrintTupleTo(t, os);
+ }
+
+ template <typename T1, typename T2, typename T3, typename T4>
+-void PrintTo(const ::std::tr1::tuple<T1, T2, T3, T4>& t, ::std::ostream* os) {
++void PrintTo(const boost::tuple<T1, T2, T3, T4>& t, ::std::ostream* os) {
+   PrintTupleTo(t, os);
+ }
+
+ template <typename T1, typename T2, typename T3, typename T4, typename T5>
+-void PrintTo(const ::std::tr1::tuple<T1, T2, T3, T4, T5>& t,
++void PrintTo(const boost::tuple<T1, T2, T3, T4, T5>& t,
+              ::std::ostream* os) {
+   PrintTupleTo(t, os);
+ }
+
+ template <typename T1, typename T2, typename T3, typename T4, typename T5,
+           typename T6>
+-void PrintTo(const ::std::tr1::tuple<T1, T2, T3, T4, T5, T6>& t,
++void PrintTo(const boost::tuple<T1, T2, T3, T4, T5, T6>& t,
+              ::std::ostream* os) {
+   PrintTupleTo(t, os);
+ }
+
+ template <typename T1, typename T2, typename T3, typename T4, typename T5,
+           typename T6, typename T7>
+-void PrintTo(const ::std::tr1::tuple<T1, T2, T3, T4, T5, T6, T7>& t,
++void PrintTo(const boost::tuple<T1, T2, T3, T4, T5, T6, T7>& t,
+              ::std::ostream* os) {
+   PrintTupleTo(t, os);
+ }
+
+ template <typename T1, typename T2, typename T3, typename T4, typename T5,
+           typename T6, typename T7, typename T8>
+-void PrintTo(const ::std::tr1::tuple<T1, T2, T3, T4, T5, T6, T7, T8>& t,
++void PrintTo(const boost::tuple<T1, T2, T3, T4, T5, T6, T7, T8>& t,
+              ::std::ostream* os) {
+   PrintTupleTo(t, os);
+ }
+
+ template <typename T1, typename T2, typename T3, typename T4, typename T5,
+           typename T6, typename T7, typename T8, typename T9>
+-void PrintTo(const ::std::tr1::tuple<T1, T2, T3, T4, T5, T6, T7, T8, T9>& t,
++void PrintTo(const boost::tuple<T1, T2, T3, T4, T5, T6, T7, T8, T9>& t,
+              ::std::ostream* os) {
+   PrintTupleTo(t, os);
+ }
+@@ -9740,7 +9744,7 @@ void PrintTo(const ::std::tr1::tuple<T1, T2, T3, T4, T5, T6, T7, T8, T9>& t,
+ template <typename T1, typename T2, typename T3, typename T4, typename T5,
+           typename T6, typename T7, typename T8, typename T9, typename T10>
+ void PrintTo(
+-    const ::std::tr1::tuple<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>& t,
++    const boost::tuple<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>& t,
+     ::std::ostream* os) {
+   PrintTupleTo(t, os);
+ }
+@@ -9900,7 +9904,7 @@ struct TuplePrefixPrinter {
+   static void PrintPrefixTo(const Tuple& t, ::std::ostream* os) {
+     TuplePrefixPrinter<N - 1>::PrintPrefixTo(t, os);
+     *os << ", ";
+-    UniversalPrinter<typename ::std::tr1::tuple_element<N - 1, Tuple>::type>
++    UniversalPrinter<typename boost::tuple_element<N - 1, Tuple>::type>
+         ::Print(::std::tr1::get<N - 1>(t), os);
+   }
+
+@@ -9933,7 +9937,7 @@ template <>
+ struct TuplePrefixPrinter<1> {
+   template <typename Tuple>
+   static void PrintPrefixTo(const Tuple& t, ::std::ostream* os) {
+-    UniversalPrinter<typename ::std::tr1::tuple_element<0, Tuple>::type>::
++    UniversalPrinter<typename boost::tuple_element<0, Tuple>::type>::
+         Print(::std::tr1::get<0>(t), os);
+   }
+
+@@ -9945,12 +9949,14 @@ struct TuplePrefixPrinter<1> {
+   }
+ };
+
++
++
+ // Helper function for printing a tuple.  T must be instantiated with
+ // a tuple type.
+ template <typename T>
+ void PrintTupleTo(const T& t, ::std::ostream* os) {
+   *os << "(";
+-  TuplePrefixPrinter< ::std::tr1::tuple_size<T>::value>::
++  TuplePrefixPrinter< boost::tuples::length<T>::value>::
+       PrintPrefixTo(t, os);
+   *os << ")";
+ }
+@@ -9961,7 +9967,7 @@ void PrintTupleTo(const T& t, ::std::ostream* os) {
+ template <typename Tuple>
+ Strings UniversalTersePrintTupleFieldsToStrings(const Tuple& value) {
+   Strings result;
+-  TuplePrefixPrinter< ::std::tr1::tuple_size<Tuple>::value>::
++  TuplePrefixPrinter< boost::tuples::length<Tuple>::value>::
+       TersePrintPrefixToStrings(value, &result);
+   return result;
+ }
+@@ -13387,9 +13393,9 @@ class ValueArray50 {
+ //
+ template <typename T1, typename T2>
+ class CartesianProductGenerator2
+-    : public ParamGeneratorInterface< ::std::tr1::tuple<T1, T2> > {
++    : public ParamGeneratorInterface< boost::tuple<T1, T2> > {
+  public:
+-  typedef ::std::tr1::tuple<T1, T2> ParamType;
++  typedef boost::tuple<T1, T2> ParamType;
+
+   CartesianProductGenerator2(const ParamGenerator<T1>& g1,
+       const ParamGenerator<T2>& g2)
+@@ -13502,9 +13508,9 @@ class CartesianProductGenerator2
+
+ template <typename T1, typename T2, typename T3>
+ class CartesianProductGenerator3
+-    : public ParamGeneratorInterface< ::std::tr1::tuple<T1, T2, T3> > {
++    : public ParamGeneratorInterface< boost::tuple<T1, T2, T3> > {
+  public:
+-  typedef ::std::tr1::tuple<T1, T2, T3> ParamType;
++  typedef boost::tuple<T1, T2, T3> ParamType;
+
+   CartesianProductGenerator3(const ParamGenerator<T1>& g1,
+       const ParamGenerator<T2>& g2, const ParamGenerator<T3>& g3)
+@@ -13634,9 +13640,9 @@ class CartesianProductGenerator3
+
+ template <typename T1, typename T2, typename T3, typename T4>
+ class CartesianProductGenerator4
+-    : public ParamGeneratorInterface< ::std::tr1::tuple<T1, T2, T3, T4> > {
++    : public ParamGeneratorInterface< boost::tuple<T1, T2, T3, T4> > {
+  public:
+-  typedef ::std::tr1::tuple<T1, T2, T3, T4> ParamType;
++  typedef boost::tuple<T1, T2, T3, T4> ParamType;
+
+   CartesianProductGenerator4(const ParamGenerator<T1>& g1,
+       const ParamGenerator<T2>& g2, const ParamGenerator<T3>& g3,
+@@ -13785,9 +13791,9 @@ class CartesianProductGenerator4
+
+ template <typename T1, typename T2, typename T3, typename T4, typename T5>
+ class CartesianProductGenerator5
+-    : public ParamGeneratorInterface< ::std::tr1::tuple<T1, T2, T3, T4, T5> > {
++    : public ParamGeneratorInterface< boost::tuple<T1, T2, T3, T4, T5> > {
+  public:
+-  typedef ::std::tr1::tuple<T1, T2, T3, T4, T5> ParamType;
++  typedef boost::tuple<T1, T2, T3, T4, T5> ParamType;
+
+   CartesianProductGenerator5(const ParamGenerator<T1>& g1,
+       const ParamGenerator<T2>& g2, const ParamGenerator<T3>& g3,
+@@ -13953,10 +13959,10 @@ class CartesianProductGenerator5
+ template <typename T1, typename T2, typename T3, typename T4, typename T5,
+     typename T6>
+ class CartesianProductGenerator6
+-    : public ParamGeneratorInterface< ::std::tr1::tuple<T1, T2, T3, T4, T5,
++    : public ParamGeneratorInterface< boost::tuple<T1, T2, T3, T4, T5,
+         T6> > {
+  public:
+-  typedef ::std::tr1::tuple<T1, T2, T3, T4, T5, T6> ParamType;
++  typedef boost::tuple<T1, T2, T3, T4, T5, T6> ParamType;
+
+   CartesianProductGenerator6(const ParamGenerator<T1>& g1,
+       const ParamGenerator<T2>& g2, const ParamGenerator<T3>& g3,
+@@ -14139,10 +14145,10 @@ class CartesianProductGenerator6
+ template <typename T1, typename T2, typename T3, typename T4, typename T5,
+     typename T6, typename T7>
+ class CartesianProductGenerator7
+-    : public ParamGeneratorInterface< ::std::tr1::tuple<T1, T2, T3, T4, T5, T6,
++    : public ParamGeneratorInterface< boost::tuple<T1, T2, T3, T4, T5, T6,
+         T7> > {
+  public:
+-  typedef ::std::tr1::tuple<T1, T2, T3, T4, T5, T6, T7> ParamType;
++  typedef boost::tuple<T1, T2, T3, T4, T5, T6, T7> ParamType;
+
+   CartesianProductGenerator7(const ParamGenerator<T1>& g1,
+       const ParamGenerator<T2>& g2, const ParamGenerator<T3>& g3,
+@@ -14342,10 +14348,10 @@ class CartesianProductGenerator7
+ template <typename T1, typename T2, typename T3, typename T4, typename T5,
+     typename T6, typename T7, typename T8>
+ class CartesianProductGenerator8
+-    : public ParamGeneratorInterface< ::std::tr1::tuple<T1, T2, T3, T4, T5, T6,
++    : public ParamGeneratorInterface< boost::tuple<T1, T2, T3, T4, T5, T6,
+         T7, T8> > {
+  public:
+-  typedef ::std::tr1::tuple<T1, T2, T3, T4, T5, T6, T7, T8> ParamType;
++  typedef boost::tuple<T1, T2, T3, T4, T5, T6, T7, T8> ParamType;
+
+   CartesianProductGenerator8(const ParamGenerator<T1>& g1,
+       const ParamGenerator<T2>& g2, const ParamGenerator<T3>& g3,
+@@ -14564,10 +14570,10 @@ class CartesianProductGenerator8
+ template <typename T1, typename T2, typename T3, typename T4, typename T5,
+     typename T6, typename T7, typename T8, typename T9>
+ class CartesianProductGenerator9
+-    : public ParamGeneratorInterface< ::std::tr1::tuple<T1, T2, T3, T4, T5, T6,
++    : public ParamGeneratorInterface< boost::tuple<T1, T2, T3, T4, T5, T6,
+         T7, T8, T9> > {
+  public:
+-  typedef ::std::tr1::tuple<T1, T2, T3, T4, T5, T6, T7, T8, T9> ParamType;
++  typedef boost::tuple<T1, T2, T3, T4, T5, T6, T7, T8, T9> ParamType;
+
+   CartesianProductGenerator9(const ParamGenerator<T1>& g1,
+       const ParamGenerator<T2>& g2, const ParamGenerator<T3>& g3,
+@@ -14803,10 +14809,10 @@ class CartesianProductGenerator9
+ template <typename T1, typename T2, typename T3, typename T4, typename T5,
+     typename T6, typename T7, typename T8, typename T9, typename T10>
+ class CartesianProductGenerator10
+-    : public ParamGeneratorInterface< ::std::tr1::tuple<T1, T2, T3, T4, T5, T6,
++    : public ParamGeneratorInterface< boost::tuple<T1, T2, T3, T4, T5, T6,
+         T7, T8, T9, T10> > {
+  public:
+-  typedef ::std::tr1::tuple<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> ParamType;
++  typedef boost::tuple<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> ParamType;
+
+   CartesianProductGenerator10(const ParamGenerator<T1>& g1,
+       const ParamGenerator<T2>& g2, const ParamGenerator<T3>& g3,
+@@ -15068,8 +15074,8 @@ class CartesianProductHolder2 {
+ CartesianProductHolder2(const Generator1& g1, const Generator2& g2)
+       : g1_(g1), g2_(g2) {}
+   template <typename T1, typename T2>
+-  operator ParamGenerator< ::std::tr1::tuple<T1, T2> >() const {
+-    return ParamGenerator< ::std::tr1::tuple<T1, T2> >(
++  operator ParamGenerator< boost::tuple<T1, T2> >() const {
++    return ParamGenerator< boost::tuple<T1, T2> >(
+         new CartesianProductGenerator2<T1, T2>(
+         static_cast<ParamGenerator<T1> >(g1_),
+         static_cast<ParamGenerator<T2> >(g2_)));
+@@ -15090,8 +15096,8 @@ CartesianProductHolder3(const Generator1& g1, const Generator2& g2,
+     const Generator3& g3)
+       : g1_(g1), g2_(g2), g3_(g3) {}
+   template <typename T1, typename T2, typename T3>
+-  operator ParamGenerator< ::std::tr1::tuple<T1, T2, T3> >() const {
+-    return ParamGenerator< ::std::tr1::tuple<T1, T2, T3> >(
++  operator ParamGenerator< boost::tuple<T1, T2, T3> >() const {
++    return ParamGenerator< boost::tuple<T1, T2, T3> >(
+         new CartesianProductGenerator3<T1, T2, T3>(
+         static_cast<ParamGenerator<T1> >(g1_),
+         static_cast<ParamGenerator<T2> >(g2_),
+@@ -15115,8 +15121,8 @@ CartesianProductHolder4(const Generator1& g1, const Generator2& g2,
+     const Generator3& g3, const Generator4& g4)
+       : g1_(g1), g2_(g2), g3_(g3), g4_(g4) {}
+   template <typename T1, typename T2, typename T3, typename T4>
+-  operator ParamGenerator< ::std::tr1::tuple<T1, T2, T3, T4> >() const {
+-    return ParamGenerator< ::std::tr1::tuple<T1, T2, T3, T4> >(
++  operator ParamGenerator< boost::tuple<T1, T2, T3, T4> >() const {
++    return ParamGenerator< boost::tuple<T1, T2, T3, T4> >(
+         new CartesianProductGenerator4<T1, T2, T3, T4>(
+         static_cast<ParamGenerator<T1> >(g1_),
+         static_cast<ParamGenerator<T2> >(g2_),
+@@ -15142,8 +15148,8 @@ CartesianProductHolder5(const Generator1& g1, const Generator2& g2,
+     const Generator3& g3, const Generator4& g4, const Generator5& g5)
+       : g1_(g1), g2_(g2), g3_(g3), g4_(g4), g5_(g5) {}
+   template <typename T1, typename T2, typename T3, typename T4, typename T5>
+-  operator ParamGenerator< ::std::tr1::tuple<T1, T2, T3, T4, T5> >() const {
+-    return ParamGenerator< ::std::tr1::tuple<T1, T2, T3, T4, T5> >(
++  operator ParamGenerator< boost::tuple<T1, T2, T3, T4, T5> >() const {
++    return ParamGenerator< boost::tuple<T1, T2, T3, T4, T5> >(
+         new CartesianProductGenerator5<T1, T2, T3, T4, T5>(
+         static_cast<ParamGenerator<T1> >(g1_),
+         static_cast<ParamGenerator<T2> >(g2_),
+@@ -15173,8 +15179,8 @@ CartesianProductHolder6(const Generator1& g1, const Generator2& g2,
+       : g1_(g1), g2_(g2), g3_(g3), g4_(g4), g5_(g5), g6_(g6) {}
+   template <typename T1, typename T2, typename T3, typename T4, typename T5,
+       typename T6>
+-  operator ParamGenerator< ::std::tr1::tuple<T1, T2, T3, T4, T5, T6> >() const {
+-    return ParamGenerator< ::std::tr1::tuple<T1, T2, T3, T4, T5, T6> >(
++  operator ParamGenerator< boost::tuple<T1, T2, T3, T4, T5, T6> >() const {
++    return ParamGenerator< boost::tuple<T1, T2, T3, T4, T5, T6> >(
+         new CartesianProductGenerator6<T1, T2, T3, T4, T5, T6>(
+         static_cast<ParamGenerator<T1> >(g1_),
+         static_cast<ParamGenerator<T2> >(g2_),
+@@ -15206,9 +15212,9 @@ CartesianProductHolder7(const Generator1& g1, const Generator2& g2,
+       : g1_(g1), g2_(g2), g3_(g3), g4_(g4), g5_(g5), g6_(g6), g7_(g7) {}
+   template <typename T1, typename T2, typename T3, typename T4, typename T5,
+       typename T6, typename T7>
+-  operator ParamGenerator< ::std::tr1::tuple<T1, T2, T3, T4, T5, T6,
++  operator ParamGenerator< boost::tuple<T1, T2, T3, T4, T5, T6,
+       T7> >() const {
+-    return ParamGenerator< ::std::tr1::tuple<T1, T2, T3, T4, T5, T6, T7> >(
++    return ParamGenerator< boost::tuple<T1, T2, T3, T4, T5, T6, T7> >(
+         new CartesianProductGenerator7<T1, T2, T3, T4, T5, T6, T7>(
+         static_cast<ParamGenerator<T1> >(g1_),
+         static_cast<ParamGenerator<T2> >(g2_),
+@@ -15244,9 +15250,9 @@ CartesianProductHolder8(const Generator1& g1, const Generator2& g2,
+           g8_(g8) {}
+   template <typename T1, typename T2, typename T3, typename T4, typename T5,
+       typename T6, typename T7, typename T8>
+-  operator ParamGenerator< ::std::tr1::tuple<T1, T2, T3, T4, T5, T6, T7,
++  operator ParamGenerator< boost::tuple<T1, T2, T3, T4, T5, T6, T7,
+       T8> >() const {
+-    return ParamGenerator< ::std::tr1::tuple<T1, T2, T3, T4, T5, T6, T7, T8> >(
++    return ParamGenerator< boost::tuple<T1, T2, T3, T4, T5, T6, T7, T8> >(
+         new CartesianProductGenerator8<T1, T2, T3, T4, T5, T6, T7, T8>(
+         static_cast<ParamGenerator<T1> >(g1_),
+         static_cast<ParamGenerator<T2> >(g2_),
+@@ -15285,9 +15291,9 @@ CartesianProductHolder9(const Generator1& g1, const Generator2& g2,
+           g9_(g9) {}
+   template <typename T1, typename T2, typename T3, typename T4, typename T5,
+       typename T6, typename T7, typename T8, typename T9>
+-  operator ParamGenerator< ::std::tr1::tuple<T1, T2, T3, T4, T5, T6, T7, T8,
++  operator ParamGenerator< boost::tuple<T1, T2, T3, T4, T5, T6, T7, T8,
+       T9> >() const {
+-    return ParamGenerator< ::std::tr1::tuple<T1, T2, T3, T4, T5, T6, T7, T8,
++    return ParamGenerator< boost::tuple<T1, T2, T3, T4, T5, T6, T7, T8,
+         T9> >(
+         new CartesianProductGenerator9<T1, T2, T3, T4, T5, T6, T7, T8, T9>(
+         static_cast<ParamGenerator<T1> >(g1_),
+@@ -15329,9 +15335,9 @@ CartesianProductHolder10(const Generator1& g1, const Generator2& g2,
+           g9_(g9), g10_(g10) {}
+   template <typename T1, typename T2, typename T3, typename T4, typename T5,
+       typename T6, typename T7, typename T8, typename T9, typename T10>
+-  operator ParamGenerator< ::std::tr1::tuple<T1, T2, T3, T4, T5, T6, T7, T8,
++  operator ParamGenerator< boost::tuple<T1, T2, T3, T4, T5, T6, T7, T8,
+       T9, T10> >() const {
+-    return ParamGenerator< ::std::tr1::tuple<T1, T2, T3, T4, T5, T6, T7, T8,
++    return ParamGenerator< boost::tuple<T1, T2, T3, T4, T5, T6, T7, T8,
+         T9, T10> >(
+         new CartesianProductGenerator10<T1, T2, T3, T4, T5, T6, T7, T8, T9,
+             T10>(
+diff --git tools/extract_features.cpp tools/extract_features.cpp
+--- tools/extract_features.cpp
++++ tools/extract_features.cpp
+@@ -17,7 +17,7 @@ using caffe::Blob;
+ using caffe::Caffe;
+ using caffe::Datum;
+ using caffe::Net;
+-using boost::shared_ptr;
++using boost::boost::shared_ptr;
+ using std::string;
+ namespace db = caffe::db;
+
+@@ -52,7 +52,7 @@ int feature_extraction_pipeline(int argc, char** argv) {
+   arg_pos = num_required_args;
+   if (argc > arg_pos && strcmp(argv[arg_pos], "GPU") == 0) {
+     LOG(ERROR)<< "Using GPU";
+-    uint device_id = 0;
++    unsigned int device_id = 0;
+     if (argc > arg_pos + 1) {
+       device_id = atoi(argv[arg_pos + 1]);
+       CHECK_GE(device_id, 0);
+@@ -96,7 +96,7 @@ int feature_extraction_pipeline(int argc, char** argv) {
+    }
+    */
+   std::string feature_extraction_proto(argv[++arg_pos]);
+-  shared_ptr<Net<Dtype> > feature_extraction_net(
++  boost::shared_ptr<Net<Dtype> > feature_extraction_net(
+       new Net<Dtype>(feature_extraction_proto, caffe::TEST));
+   feature_extraction_net->CopyTrainedLayersFrom(pretrained_binary_proto);
+
+@@ -120,15 +120,15 @@ int feature_extraction_pipeline(int argc, char** argv) {
+
+   int num_mini_batches = atoi(argv[++arg_pos]);
+
+-  std::vector<shared_ptr<db::DB> > feature_dbs;
+-  std::vector<shared_ptr<db::Transaction> > txns;
++  std::vector<boost::shared_ptr<db::DB> > feature_dbs;
++  std::vector<boost::shared_ptr<db::Transaction> > txns;
+   const char* db_type = argv[++arg_pos];
+   for (size_t i = 0; i < num_features; ++i) {
+     LOG(INFO)<< "Opening dataset " << dataset_names[i];
+-    shared_ptr<db::DB> db(db::GetDB(db_type));
++    boost::shared_ptr<db::DB> db(db::GetDB(db_type));
+     db->Open(dataset_names.at(i), db::NEW);
+     feature_dbs.push_back(db);
+-    shared_ptr<db::Transaction> txn(db->NewTransaction());
++    boost::shared_ptr<db::Transaction> txn(db->NewTransaction());
+     txns.push_back(txn);
+   }
+
+@@ -142,7 +142,7 @@ int feature_extraction_pipeline(int argc, char** argv) {
+   for (int batch_index = 0; batch_index < num_mini_batches; ++batch_index) {
+     feature_extraction_net->Forward(input_vec);
+     for (int i = 0; i < num_features; ++i) {
+-      const shared_ptr<Blob<Dtype> > feature_blob = feature_extraction_net
++      const boost::shared_ptr<Blob<Dtype> > feature_blob = feature_extraction_net
+           ->blob_by_name(blob_names[i]);
+       int batch_size = feature_blob->num();
+       int dim_features = feature_blob->count() / batch_size;

@@ -1,0 +1,57 @@
+{% import '$CONDA_DEFAULT_ENV/toolset-info/config.yaml' as toolset %}
+
+package:
+  name: caffe
+  version: "0.9{{toolset.suffix}}"
+
+source:
+  git_url: https://github.com/BVLC/caffe.git
+  git_tag: ca4e3428bd40ba5b4ba941a7781d0d16d0726005
+  # git_tag: win64
+
+build:
+  features:
+    - {{toolset.short}}
+
+requirements:
+  build:
+    - {{toolset.build_requirement}}
+    - python    *{{toolset.suffix}}
+    - numpy     *{{toolset.suffix}}
+    - gflags    *{{toolset.suffix}}
+    - glog      *{{toolset.suffix}}
+    - protobuf  *{{toolset.suffix}}
+    - openblas  *{{toolset.suffix}}
+    - boost     *{{toolset.suffix}}
+    - hdf5      *{{toolset.suffix}}
+
+  run:
+    - {{toolset.run_requirement}}
+    - python    *{{toolset.suffix}}
+    - numpy     >=1.10,*{{toolset.suffix}}
+    - glog      *{{toolset.suffix}}
+    - protobuf  *{{toolset.suffix}}
+    - openblas  *{{toolset.suffix}}
+    - boost     *{{toolset.suffix}}
+    - hdf5      *{{toolset.suffix}}
+    - cython    *{{toolset.suffix}}
+    - scipy     *{{toolset.suffix}}
+    - scikit-image    *{{toolset.suffix}}
+    - matplotlib    *{{toolset.suffix}}
+    - ipython    *{{toolset.suffix}}
+    - h5py    *{{toolset.suffix}}
+    # - leveldb>=0.191
+    - networkx
+    - nose
+    - pandas
+    - python-dateutil
+    - protobuf    *{{toolset.suffix}}
+    # - python-gflags>=2.0
+    # - pyyaml>=3.10
+    - pillow    *{{toolset.suffix}}
+    - six
+
+about:
+  home: http://caffe.berkeleyvision.org/
+  license: BSD
+  summary: deep learning framework
