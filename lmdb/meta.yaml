@@ -1,0 +1,27 @@
+{% import '$CONDA_DEFAULT_ENV/toolset-info/config.yaml' as toolset %}
+
+package:
+  name: lmdb
+  version: "0.9.16{{toolset.suffix}}"
+
+source:
+  git_url: https://github.com/LMDB/lmdb.git
+  git_tag: LMDB_0.9.16
+
+build:
+  features:
+    - {{toolset.short}}
+
+requirements:
+  build:
+    - {{toolset.build_requirement}}
+    - mingw-for-msvc-build           # [win]
+
+  run:
+    - {{toolset.run_requirement}}
+    - mingw-for-msvc                 # [win]
+
+about:
+  home: http://symas.com/mdb/
+  license: OpenLDAP Public License (similar to BSD)
+  summary: Syma's Lightning Memory-Mapped Database
