@@ -2,17 +2,18 @@
 
 package:
     name: opengm
-    version: "2.3.5{{toolset.suffix}}"
+    version: "2.3.4{{toolset.suffix}}"
 
 source:
     git_url: https://github.com/opengm/opengm.git
-    git_tag: v2.3.5
+    #git_tag: 376d06198aba59e6e37da520b9f34713f6d05674
+    git_tag: 0e55e0ba9db734c58349024e898121e2f9315c06 # for ilastik 1.1.7
 
 build:
   features:
     - {{toolset.short}}
-  number: 8
-  string: 8
+  number: 7
+  string: 7_g0e55e0b
   detect_binary_files_with_prefix: true
 
 requirements:
@@ -22,7 +23,7 @@ requirements:
     # - gcc 4.8.2                      # [osx]
     - boost 1.55.*{{toolset.suffix}}
     - python  2.7.*{{toolset.suffix}}
-    - numpy    >=1.10,*{{toolset.suffix}}
+    - numpy    *{{toolset.suffix}}
     - hdf5     1.8.14                  # [unix]
     - hdf5     1.8.*{{toolset.suffix}} # [win]
   run:
@@ -30,11 +31,11 @@ requirements:
     # - libgcc                         # [unix]
     - boost 1.55.*{{toolset.suffix}}
     - python  2.7.*{{toolset.suffix}}
-    - numpy   >=1.10,*{{toolset.suffix}}
+    - numpy   *{{toolset.suffix}}
     - hdf5     1.8.14                  # [unix]
     - hdf5     1.8.*{{toolset.suffix}} # [win]
 
-# FIXME: upgrade opengm to make the Python bindings work on Windows
+# FIXME: upgrade opengm to make the Python bindings work on Windows 
 test:          # [unix]
   imports:     # [unix]
     - opengm   # [unix]
