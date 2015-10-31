@@ -1,0 +1,30 @@
+package:
+  name: viridis
+  version: "0.3"
+
+source:
+  fn: viridis-0.3.0.tar.gz
+  url: https://pypi.python.org/packages/source/v/viridis/viridis-0.3.0.tar.gz
+  md5: 1a24af568fd9f28cbfd15e0210c38557
+
+requirements:
+  build:
+    - python >=2.7,<3|>=3.4
+    - numpy >=1.7
+    - networkx >=1.6
+    - six
+
+  run:
+    - python >=2.7,<3|>=3.4
+    - numpy >=1.7
+    - networkx >=1.6
+    - six
+
+test:
+  imports:
+    - viridis
+
+about:
+  home: https://github.com/jni/viridis
+  license: BSD
+  summary: 'A tree library for Python'
