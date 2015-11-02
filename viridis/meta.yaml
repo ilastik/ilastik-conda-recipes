@@ -8,20 +8,20 @@ source:
   md5: 1a24af568fd9f28cbfd15e0210c38557
 
 build:
-  number: 1
+  {% set build_num = 2 %}
+  number: {{ build_num }}
+  string: "py{{ environ.get('PY_VER').replace('.', '') }}_{{ build_num }}"
 
 requirements:
   build:
-    - python >=2.7,<3 # [py2k]
-    - python >=3.4    # [py3k]
-    - numpy >=1.7
+    - python >=2.7,<3|>=3.4,{{ environ.get('PY_VER') }}*
+    - numpy
     - networkx >=1.6
     - six
 
   run:
-    - python >=2.7,<3 # [py2k]
-    - python >=3.4    # [py3k]
-    - numpy >=1.7
+    - python {{ environ.get('PY_VER') }}*
+    - numpy
     - networkx >=1.6
     - six
 
