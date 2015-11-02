@@ -7,15 +7,20 @@ source:
   url: https://pypi.python.org/packages/source/v/viridis/viridis-0.3.0.tar.gz
   md5: 1a24af568fd9f28cbfd15e0210c38557
 
+build:
+  number: 1
+
 requirements:
   build:
-    - python >=2.7,<3|>=3.4
+    - python >=2.7,<3 # [py2k]
+    - python >=3.4    # [py3k]
     - numpy >=1.7
     - networkx >=1.6
     - six
 
   run:
-    - python >=2.7,<3|>=3.4
+    - python >=2.7,<3 # [py2k]
+    - python >=3.4    # [py3k]
     - numpy >=1.7
     - networkx >=1.6
     - six
