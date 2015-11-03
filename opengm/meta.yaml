@@ -7,28 +7,38 @@ source:
     git_tag: 0e55e0ba9db734c58349024e898121e2f9315c06
 
 build:
-  number: 7
-  string: 7_g0e55e0ba9
+  {% set build_num = 8 %}
+  number: {{ build_num }}
+
+  #
+  # We use NPY_VER here: You must build this recipe using 'conda build --numpy=X.Y'
+  #
+  string: "np{{ environ.get('NPY_VER', '-NPY_VER-UNDEFINED-').replace('.', '') }}\
+           py{{ environ.get('PY_VER').replace('.', '') }}\
+           _{{ build_num }}\
+           _g{{ environ.get('GIT_FULL_HASH', '')[:7] }}"
+
   detect_binary_files_with_prefix: true
 
 requirements:
-    build:
-      - gcc 4.8.5 # [linux]
-      - gcc 4.8.5 # [osx]
-      - boost 1.55.0
-      - python
-      - numpy
-      - hdf5 1.8.14
-    run:
-      - libgcc
-      - boost 1.55.0
-      - python
-      - numpy
-      - hdf5 1.8.14
+  build:
+    - gcc 4.8.5 # [linux]
+    - gcc 4.8.5 # [osx]
+    - boost 1.55.0
+    - python 2.7*
+    - numpy >=1.9,{{ environ.get('NPY_VER', '-NPY_VER-UNDEFINED-') }}*
+    - hdf5 1.8.14
+  run:
+    - libgcc
+    - boost 1.55.0
+    - python {{ environ.get('PY_VER') }}*
+    - numpy {{ environ.get('NPY_VER') }}*
+    - hdf5 1.8.14
 
 test:
   imports:
     - opengm
+
 # Note: tests are run when building the package, they are not accessible
 # in the installed package.
 

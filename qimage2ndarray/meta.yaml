@@ -8,7 +8,16 @@ source:
   md5: 77359e694d498c958c90bcd3e3851d5d
 
 build:
-  number: 4
+  {% set build_num = 5 %}
+  number: {{ build_num }}
+
+  #
+  # We use NPY_VER here: You must build this recipe using 'conda build --numpy=X.Y'
+  #
+  string: "np{{ environ.get('NPY_VER', '-NPY_VER-UNDEFINED-').replace('.', '') }}\
+           py{{ environ.get('PY_VER').replace('.', '') }}\
+           _{{ build_num }}"
+
   detect_binary_files_with_prefix: true
 
 requirements:
@@ -16,16 +25,16 @@ requirements:
     - gcc 4.8.5 # [linux]
     - gcc 4.8.5 # [osx]
     - python
-    - setuptools
-    - numpy
+    - python 2.7*
+    - numpy >=1.9,{{ environ.get('NPY_VER', '-NPY_VER-UNDEFINED-') }}*
     - sip
     - pyqt 4.11.3.99            # [osx]
     - pyqt 4.11.3               # [not osx]
 
   run:
     - libgcc
-    - python
-    - numpy
+    - python {{ environ.get('PY_VER') }}*
+    - numpy  {{ environ.get('NPY_VER') }}*
     - sip
     - pyqt 4.11.3.99            # [osx]
     - pyqt 4.11.3               # [not osx]

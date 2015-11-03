@@ -7,34 +7,45 @@ source:
   git_tag: 35e5d4aed380087d75e206348d1648d9ad9cf1e6 # 2015-07-16
 
 build:
-  number: 10
-  string: 10_35e5d4a
+  {% set build_num = 11 %}
+  number: {{ build_num }}
+
+  #
+  # We use NPY_VER here: You must build this recipe using 'conda build --numpy=X.Y'
+  #
+  string: "np{{ environ.get('NPY_VER', '-NPY_VER-UNDEFINED-').replace('.', '') }}\
+           py{{ environ.get('PY_VER').replace('.', '') }}\
+           _{{ build_num }}\
+           _g{{ environ.get('GIT_FULL_HASH', '')[:7] }}"
+
   detect_binary_files_with_prefix: true
 
 requirements:
   build:
     - gcc 4.8.5 # [linux]
     - gcc 4.8.5 # [osx]
-    - python   2.7*
-    - numpy    >=1.9
+    - python 2.7*
+    - numpy >=1.9,{{ environ.get('NPY_VER', '-NPY_VER-UNDEFINED-') }}*
     - jpeg     8d
     - libtiff  4.0*
     - libpng   1.6.17
     - fftw     3.3*
     - hdf5     1.8.14
+    - h5py
     - boost    1.55.0
     - zlib     1.2*
     - nose
 
   run:
     - libgcc   4.8*
-    - python   2.7*
-    - numpy    >=1.9
+    - python {{ environ.get('PY_VER') }}*
+    - numpy  {{ environ.get('NPY_VER') }}*
     - jpeg     8d
     - libtiff  4.0*
     - libpng   1.6.17
     - fftw     3.3*
     - hdf5     1.8.14
+    - h5py
     - boost    1.55.0
     - zlib     1.2*
     - nose
