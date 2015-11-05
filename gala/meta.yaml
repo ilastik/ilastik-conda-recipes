@@ -7,16 +7,14 @@ source:
   git_tag: "v0.3.0"
 
 build:
-  {% set build_num = 2 %}
-  number: {{ build_num }}
-  string: "np{{ environ.get('NPY_VER', 'NPY_VER-UNDEFINED').replace('.', '') }}\
-           py{{ environ.get('PY_VER').replace('.', '') }}\
-           _{{ build_num }}"
+  {% set build_num = 3 %}
+  number: {{build_num}}
+  string: np{{CONDA_NPY}}py{{CONDA_PY}}_{{build_num}}
 
 requirements:
   build:
-    - python >=2.7,<3|>=3.4,{{ environ.get('PY_VER') }}*
-    - numpy >=1.7,{{ environ.get('NPY_VER', 'NPY_VER-UNDEFINED') }}*
+    - python >=2.7,<3|>=3.4,{{PY_VER}}*
+    - numpy >=1.7,{{NPY_VER}}*
     - scipy >=0.1
     - pillow >=2.5
     - networkx >=1.6
@@ -28,8 +26,8 @@ requirements:
     - viridis >=0.3
 
   run:
-    - python {{ environ.get('PY_VER') }}*
-    - numpy {{ environ.get('NPY_VER') }}*
+    - python {{PY_VER}}*
+    - numpy {{NPY_VER}}*
     - scipy >=0.1
     - pillow >=2.5
     - networkx >=1.6

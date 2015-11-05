@@ -10,17 +10,17 @@ source:
 build:
   {% set build_num = 2 %}
   number: {{ build_num }}
-  string: "py{{ environ.get('PY_VER').replace('.', '') }}_{{ build_num }}"
+  string: py{{CONDA_PY}}_{{build_num}}
 
 requirements:
   build:
-    - python >=2.7,<3|>=3.4,{{ environ.get('PY_VER') }}*
+    - python >=2.7,<3|>=3.4,{{PY_VER}}*
     - numpy
     - networkx >=1.6
     - six
 
   run:
-    - python {{ environ.get('PY_VER') }}*
+    - python {{PY_VER}}*
     - numpy
     - networkx >=1.6
     - six

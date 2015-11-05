@@ -11,12 +11,9 @@ build:
   number: {{ build_num }}
 
   #
-  # We use NPY_VER here: You must build this recipe using 'conda build --numpy=X.Y'
+  # You must build this recipe using 'conda build --numpy=X.Y'
   #
-  string: "np{{ environ.get('NPY_VER', '-NPY_VER-UNDEFINED-').replace('.', '') }}\
-           py{{ environ.get('PY_VER').replace('.', '') }}\
-           _{{ build_num }}\
-           _g{{ environ.get('GIT_FULL_HASH', '')[:7] }}"
+  string: np{{CONDA_NPY[:]}}py{{CONDA_PY}}_{{build_num}}_g{{GIT_FULL_HASH[:7]}}
 
   detect_binary_files_with_prefix: true
   script_env:
@@ -31,7 +28,7 @@ requirements:
     - ann
     - boost 1.55.0
     - python 2.7*
-    - numpy >=1.9,{{ environ.get('NPY_VER', '-NPY_VER-UNDEFINED-') }}*
+    - numpy >=1.9,{{NPY_VER}}*
     - vigra
     - opengm
     - mlpack
@@ -45,8 +42,8 @@ requirements:
     - patchelf # [linux]
     - ann
     - boost 1.55.0
-    - python {{ environ.get('PY_VER') }}*
-    - numpy  {{ environ.get('NPY_VER') }}*
+    - python {{PY_VER}}*
+    - numpy  {{NPY_VER}}*
     - vigra
     - opengm
     - mlpack
