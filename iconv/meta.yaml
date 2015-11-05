@@ -1,4 +1,4 @@
-{% import '$CONDA_DEFAULT_ENV/toolset-info/config.yaml' as toolset %}
+{% import '$CONDA_ACTIVE_ENV/toolset-info/config.yaml' as toolset %}
 
 package:
   name: iconv
