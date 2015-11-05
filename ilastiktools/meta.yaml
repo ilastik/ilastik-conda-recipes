@@ -1,20 +1,19 @@
-{% import '$CONDA_DEFAULT_ENV/toolset-info/config.yaml' as toolset %}
+{% import '$CONDA_ACTIVE_ENV/toolset-info/config.yaml' as toolset %}
 
 package:
   name: ilastiktools
-  version: "0.1{{toolset.suffix}}"
+  version: "0.1post1{{toolset.suffix}}"
 
 source:
   git_url: git://github.com/ilastik/ilastiktools.git
-  git_tag: afd850125a40e027e78eae1a78e03c20a961ea6a
-  git_tag: 
+  git_tag: aec44a7b6b3f9504fe50858b2ea054dc52dc7678
 
 build:
   features:
     - {{toolset.short}}
   number: 1
   detect_binary_files_with_prefix: true
-  string: afd8501
+  string: 1_aec44a7
 
 requirements:
   build:
@@ -22,14 +21,14 @@ requirements:
     # - gcc 4.8.2.99                   # [linux]
     # - gcc 4.8.2                      # [osx]
     - python   2.7.*{{toolset.suffix}}
-    - numpy    *{{toolset.suffix}}
+    - numpy    >=1.10,*{{toolset.suffix}}
     - vigra    *{{toolset.suffix}}
 
   run:
     - {{toolset.run_requirement}}
     # - libgcc             # [unix]
     - python   2.7.*{{toolset.suffix}}
-    - numpy    *{{toolset.suffix}}
+    - numpy    >=1.10,*{{toolset.suffix}}
     - vigra    *{{toolset.suffix}}
 
 test:

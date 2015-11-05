@@ -1,12 +1,12 @@
-{% import '$CONDA_DEFAULT_ENV/toolset-info/config.yaml' as toolset %}
+{% import '$CONDA_ACTIVE_ENV/toolset-info/config.yaml' as toolset %}
 
 package:
   name: vigra
-  version: "1.10{{toolset.suffix}}"
+  version: "1.10post1{{toolset.suffix}}"
 
 source:
   git_url: git://github.com/ukoethe/vigra.git
-  git_tag: 35e5d4aed380087d75e206348d1648d9ad9cf1e6 # 2015-07-16
+  git_tag: ca2246798fed70e8a7bd0994f22ee9f857e9aba0 # 2015-10-30
 
 build:
   features:
@@ -16,9 +16,9 @@ build:
    - LD_LIBRARY_PATH      # [unix]
    - DYLD_LIBRARY_PATH    # [unix]
 
-  number: 9
+  number: 10
   detect_binary_files_with_prefix: true
-  string: 9_35e5d4a
+  string: 10_ca22467
 
 requirements:
   build:
@@ -27,7 +27,7 @@ requirements:
     # - gcc 4.8.2                      # [osx]
     - python   2.7.*{{toolset.suffix}}
     - numpy    >=1.9                   # [unix]
-    - numpy    1.7.*{{toolset.suffix}} # [win]
+    - numpy    >=1.10,*{{toolset.suffix}} # [win]
     - jpeg     *{{toolset.suffix}}
     - libtiff  4.0.*{{toolset.suffix}}
     - libpng   1.6.17                  # [unix]
@@ -45,7 +45,7 @@ requirements:
     # - libgcc   4.8*                  # [unix]
     - python   2.7.*{{toolset.suffix}}
     - numpy    >=1.9                   # [unix]
-    - numpy    1.7.*{{toolset.suffix}} # [win]
+    - numpy    >=1.10,*{{toolset.suffix}} # [win]
     - jpeg     *{{toolset.suffix}}
     - libtiff  4.0.*{{toolset.suffix}}
     - libpng   1.6.17                  # [unix]
