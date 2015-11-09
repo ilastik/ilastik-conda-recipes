@@ -7,33 +7,33 @@ source:
   git_tag: 8210cd378365fc1824d8ef2b3426238ee50c6820 # 2015-09-15
 
 build:
-  number: 11
-  string: 11_g8210cd3
+  number: 12
+  string: 12_g8210cd3
   detect_binary_files_with_prefix: true # (defaults to false)
   
 requirements:
   build:
     - gcc 4.8.5 # [linux]
     - gcc 4.8.5 # [osx]
-    - jsoncpp
-    - libdvid-cpp
-    - hdf5     1.8.14
     - python
-    - vtk
-    - qt
+    - jsoncpp
     - vigra
-    - opencv 2.4.10.1 
+    - libdvid-cpp
+    - vtk         5.10.1.99
+    - hdf5        1.8.14
+    - qt          4.8.6.99
+    - opencv      2.4.10.1
     
   run:
     - libgcc
-    - jsoncpp
-    - vtk
-    - qt
-    - libdvid-cpp
-    - hdf5     1.8.14
     - python
+    - jsoncpp
     - vigra
-    - opencv 2.4.10.1 
+    - libdvid-cpp
+    - vtk         5.10.1.99
+    - hdf5        1.8.14
+    - qt          4.8.6.99
+    - opencv      2.4.10.1
 
 about:
   home: http://github.com/janelia-flyem/NeuroProof.git
