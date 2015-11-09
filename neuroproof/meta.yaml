@@ -13,15 +13,15 @@ build:
   
 requirements:
   build:
-    - gcc 4.8.5 # [linux]
-    - gcc 4.8.5 # [osx]
+    - gcc 4.8.5
     - python
     - jsoncpp
     - vigra
     - libdvid-cpp
     - vtk         5.10.1.99
     - hdf5        1.8.14
-    - qt          4.8.6.99
+    - qt          4.8.6.99 # [osx]
+    - qt          4.8*     # [linux]
     - opencv      2.4.10.1
     
   run:
@@ -32,7 +32,8 @@ requirements:
     - libdvid-cpp
     - vtk         5.10.1.99
     - hdf5        1.8.14
-    - qt          4.8.6.99
+    - qt          4.8.6.99 # [osx]
+    - qt          4.8*     # [linux]
     - opencv      2.4.10.1
 
 about:
