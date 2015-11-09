@@ -31,6 +31,8 @@ cmake ..\
         -DPYTHON_EXECUTABLE="${PYTHON}" \
         -DPYTHON_LIBRARY="${PREFIX}/lib/libpython2.7.${DYLIB_EXT}" \
         -DPYTHON_INCLUDE_DIR="${PREFIX}/include/python2.7" \
+        -DLIBDVIDCPP_INCLUDE_DIR="${PREFIX}/include" \
+        -DLIBDVIDCPP_LIBRARY="${PREFIX}/lib/libdvidcpp.${DYLIB_EXT}" \
         -DENABLE_GUI=1 \
 ##
 
