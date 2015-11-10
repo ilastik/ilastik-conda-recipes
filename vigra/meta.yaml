@@ -7,7 +7,7 @@ source:
   git_tag: 35e5d4aed380087d75e206348d1648d9ad9cf1e6 # 2015-07-16
 
 build:
-  {% set build_num = 11 %}
+  {% set build_num = 12 %}
   number: {{ build_num }}
 
   #
@@ -24,7 +24,7 @@ requirements:
     - python 2.7*
     - numpy >=1.9,{{NPY_VER}}*
     - jpeg     8d
-    - libtiff  4.0*
+    - libtiff  4.0.6
     - libpng   1.6.17
     - fftw     3.3*
     - hdf5     1.8.14
@@ -38,7 +38,7 @@ requirements:
     - python {{PY_VER}}*
     - numpy  {{NPY_VER}}*
     - jpeg     8d
-    - libtiff  4.0*
+    - libtiff  4.0.6   # libtiff version must exactly match from the build (on osx, at least)
     - libpng   1.6.17
     - fftw     3.3*
     - hdf5     1.8.14
