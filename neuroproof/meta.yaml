@@ -4,11 +4,11 @@ package:
   
 source:
   git_url: git://github.com/janelia-flyem/NeuroProof.git
-  git_tag: 8210cd378365fc1824d8ef2b3426238ee50c6820 # 2015-09-15
+  git_tag: f8808af80f02ced1c5ada2131b04497a6bb53789 # 2015-11-10
 
 build:
-  number: 12
-  string: 12_g8210cd3
+  number: 13
+  string: 13_gf8808af
   detect_binary_files_with_prefix: true # (defaults to false)
   
 requirements:
