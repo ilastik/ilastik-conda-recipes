@@ -3,7 +3,7 @@ package:
   version: 1.1
 
 build:
-  number: 4
+  number: 5
 
 #
 # In general, we don't specify exact version requirements in each sub-package.
@@ -45,7 +45,7 @@ requirements:
     - opengm                    2.3.4     
     - openssl                   1.0.1k    
     - pgmlink                   1.2       
-    - pillow                    2.7.0
+    - pillow                    3.0.0
     - pip                       6.1.1     
     - psutil                    2.2.1     
     - pyparsing                 2.0.3     
