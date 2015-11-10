@@ -3,7 +3,7 @@ package:
   version: 1.1
 
 build:
-  number: 3
+  number: 4
 
 #
 # In general, we don't specify exact version requirements in each sub-package.
@@ -33,7 +33,7 @@ requirements:
     - lemon                     1.2.4     
     - libgcc                    4.8.5     
     - libpng                    1.6.17
-    - libtiff                   4.0.2     
+    - libtiff                   4.0.6
     - libxml2                   2.9.0     
     - matplotlib                1.4.3     
     - mlpack                    1.0.8     
