@@ -4,28 +4,21 @@ package:
   
 source:
   git_url: git://github.com/janelia-flyem/DVIDSparkServices.git
-  git_tag: HEAD
+  git_tag: 4b036d4e6e2b63a28203c5a6193f8b1b3650fa46
 
 build:
+  number: 9
+  string: py27_9_g4b036d4
+  
   entry_points:
     #- launchworkflow = workflows.launchworkflow:main (TODO)
-  number: 8
-  
+
 requirements:
   build:
-    - python
+    - python 2.7*
     - setuptools
-    - jsonschema
-    - numpy
-    - neuroproof
-    - libdvid-cpp
-    - requests
-    - scikit-image
-    - scipy
-    - pillow
-    - python-lz4
   run:
-    - python  
+    - python 2.7*  
     - jsonschema
     - numpy
     - neuroproof
@@ -35,6 +28,15 @@ requirements:
     - pillow
     - scipy
     - python-lz4
+    - gala
+    - ilastik-deps-pc-headless
+    - ilastik-meta
+    - wsdt
+
+test:
+  imports:
+    - DVIDSparkServices
+    - ilastik
 
 about:
   home: http://github.com/janelia-flyem/DVIDSparkServices.git
