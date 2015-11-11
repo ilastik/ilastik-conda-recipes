@@ -4,10 +4,10 @@ package:
   
 source:
   git_url: git://github.com/janelia-flyem/libdvid-cpp.git
-  git_tag: 90264da2b3f7137639a843b3f00963684c97871c # 2015-10-21
+  git_tag: 5cbd35fce1fcf57778bd977cf7e74a22dc165b78 # 2015-11-03
 
 build:
-  {% set build_num = 18 %}
+  {% set build_num = 19 %}
   number: {{ build_num }}
 
   #
@@ -17,8 +17,7 @@ build:
   
 requirements:
   build:
-    - gcc 4.8.5 # [linux]
-    - gcc 4.8.5 # [osx]
+    - gcc 4.8.5
     - boost 1.55.0
     - jsoncpp
     - lz4
