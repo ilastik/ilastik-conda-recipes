@@ -60,6 +60,11 @@ export QT_PLUGIN_PATH=\${PREFIX}/plugins
 # Disable the checks.
 export MALLOC_CHECK_=0
 
+# fontconf determines the default paths for configuration files during compile time
+# make sure to update these to match the local system
+export FONTCONFIG_PATH=\${PREFIX}/etc/fonts/
+export FONTCONFIG_FILE=\${PREFIX}/etc/fonts/fonts.conf
+
 # Launch the ilastik entry script, and pass along any commmand line args.
 \${PREFIX}/bin/python \${PREFIX}/ilastik-meta/ilastik/ilastik.py "\$@"
 EOF
