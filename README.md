@@ -136,19 +136,27 @@ Generating a release binary
 
   3. Update the `git_tag` in `ilastik-meta/meta.yaml` and commit.
 
-2. Build `ilastik-meta` and `ilastik-everything` packages, and upload to the `ilastik` anaconda channel.
+2. Double-check your conda configuration (`.condarc`).  You should allow access to the `ilastik`
+   channel and `defaults`, but nothing else:
+
+        $ cat ~/.condarc
+        channels:
+        - ilastik
+        - defaults
+
+3. Build `ilastik-meta` and `ilastik-everything` packages, and upload to the `ilastik` anaconda channel.
 
         conda build ilastik-meta ilastik-everything
         anaconda upload -u ilastik ${CONDA_ROOT}/conda-bld/linux-64/ilastik-meta*.tar.bz2
         anaconda upload -u ilastik ${CONDA_ROOT}/conda-bld/linux-64/ilastik-everything*.tar.bz2
 
-3. (Optional) Install to a local environment and test
+4. (Optional) Install to a local environment and test
 
         conda create -n test-env -c ilastik ilastik-everything=1.2.3a4
         cd ${CONDA_ROOT}/envs/test-env
         ./run_ilastik.sh
 
-4. Create tarball/app
+5. Create tarball/app
 
    **Linux:**
 
