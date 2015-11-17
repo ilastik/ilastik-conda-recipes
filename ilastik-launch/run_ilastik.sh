@@ -12,6 +12,9 @@ export LD_LIBRARY_PATH=""
 # Similarly, clear PYTHONPATH
 export PYTHONPATH=""
 
+# Similarly, disable user-site configuration
+export PYTHONNOUSERSITE=1
+
 # Do not use the user's own QT_PLUGIN_PATH, which can cause conflicts with our QT build.
 # This is especially important on KDE, which is uses its own version of QT and may conflict.
 export QT_PLUGIN_PATH=${PREFIX}/plugins
