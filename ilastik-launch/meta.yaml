@@ -1,3 +1,6 @@
 package:
   name: ilastik-launch
   version: 0.1
+
+build:
+  number: 1
