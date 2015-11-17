@@ -33,5 +33,3 @@ cat > ${PREFIX}/lib/python2.7/site-packages/ilastik-meta.pth << EOF
 ../../../ilastik-meta/volumina
 ../../../ilastik-meta/ilastik
 EOF
-
-chmod a+x ${PREFIX}/run_ilastik.sh
