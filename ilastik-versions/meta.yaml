@@ -52,7 +52,7 @@ requirements:
     - libpng                    1.6.17{{toolset.suffix}}  # [unix]
     - libpng                    1.5.13{{toolset.suffix}}  # [win]
     - libtiff                   4.0.2{{toolset.suffix}}   # [unix]
-    - libtiff                   4.0.1{{toolset.suffix}}   # [win]
+    - libtiff                   4.0.6{{toolset.suffix}}   # [win]
     - libxml2                   2.9.0{{toolset.suffix}}   # [unix]
     - libxml2                   2.9.1{{toolset.suffix}}   # [win]
     - matplotlib                1.4.3{{toolset.suffix}}   # [unix]

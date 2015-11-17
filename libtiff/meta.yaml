@@ -2,12 +2,12 @@
 
 package:
   name: libtiff
-  version: "4.0.1{{toolset.suffix}}"
+  version: "4.0.6{{toolset.suffix}}"
 
 source:
-    fn:  tiff-4.0.1.tar.gz
-    md5: fae149cc9da35c598d8be897826dfc63
-    url: http://download.osgeo.org/libtiff/tiff-4.0.1.tar.gz
+    fn:  tiff-4.0.6.tar.gz
+    md5: d1d2e940dea0b5ad435f21f03d96dd72
+    url: http://download.osgeo.org/libtiff/tiff-4.0.6.tar.gz
 
 build:
   features:
