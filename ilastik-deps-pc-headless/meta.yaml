@@ -10,31 +10,31 @@ package:
 build:
   features:
     - {{toolset.short}}
-  number: 2
+  number: 3
 
 requirements:
   build:
     - {{toolset.build_requirement}}
     - python  2.7.*{{toolset.suffix}}
-    - numpy    >=1.9                   # [unix]
-    - numpy    1.7.*{{toolset.suffix}} # [win]
-    - vigra        *{{toolset.suffix}}
-    - h5py         *{{toolset.suffix}}
-    - tifffile     *{{toolset.suffix}}
-    - psutil       *{{toolset.suffix}}
-    - greenlet     *{{toolset.suffix}}
+    - numpy    >=1.9                      # [unix]
+    - numpy    >=1.10,*{{toolset.suffix}} # [win]
+    - vigra           *{{toolset.suffix}}
+    - h5py            *{{toolset.suffix}}
+    - tifffile        *{{toolset.suffix}}
+    - psutil          *{{toolset.suffix}}
+    - greenlet        *{{toolset.suffix}}
     - yapsy
-    - scikit-learn *{{toolset.suffix}}
-    - scikit-image *{{toolset.suffix}}
-    - faulthandler *{{toolset.suffix}}
+    - scikit-learn    *{{toolset.suffix}}
+    - scikit-image    *{{toolset.suffix}}
+    - faulthandler    *{{toolset.suffix}}
     - jsonschema
-    - nose
+    # - nose
 
   run:
     - {{toolset.run_requirement}}
     - python  2.7.*{{toolset.suffix}}
     - numpy    >=1.9                   # [unix]
-    - numpy    1.7.*{{toolset.suffix}} # [win]
+    - numpy    >=1.10,*{{toolset.suffix}} # [win]
     - vigra        *{{toolset.suffix}}
     - h5py         *{{toolset.suffix}}
     - tifffile     *{{toolset.suffix}}

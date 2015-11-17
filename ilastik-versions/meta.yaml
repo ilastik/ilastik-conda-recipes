@@ -9,7 +9,7 @@ build:
     - {{toolset.short}}
   features:
     - {{toolset.short}}
-  number: 3
+  number: 4
 
 #
 # In general, we don't specify exact version requirements in each sub-package.
@@ -22,7 +22,7 @@ requirements:
     - armadillo                 4.320.0{{toolset.suffix}} # [win]
     #- blist                     1.3.6 # Only needed by deprecated operators
     - boost                     1.55.0{{toolset.suffix}}
-    - bzip2-src-for-python      1.0.6                     # [win]
+    # - bzip2-src-for-python      1.0.6 # [win] hard-wired in Python
     - cloog                     0.18.0{{toolset.suffix}}  # [unix]
     # - cylemon                   1
     - cython                    0.23{{toolset.suffix}}    # [win]
@@ -37,7 +37,8 @@ requirements:
     - gmp                       5.1.2                     # [unix]
     - greenlet                  0.4.6{{toolset.suffix}}   # [unix]
     - greenlet                  0.4.7{{toolset.suffix}}   # [win]
-    - h5py                      2.5.0{{toolset.suffix}}
+    - h5py                      2.5.0{{toolset.suffix}}   # [unix]
+    - h5py                      2.5.0post1{{toolset.suffix}}   # [win]
     - hdf5                      1.8.14{{toolset.suffix}}  # [unix]
     - hdf5                      1.8.12{{toolset.suffix}}  # [win]
     - iiboost                   0.1{{toolset.suffix}}
@@ -54,7 +55,8 @@ requirements:
     - libtiff                   4.0.1{{toolset.suffix}}   # [win]
     - libxml2                   2.9.0{{toolset.suffix}}   # [unix]
     - libxml2                   2.9.1{{toolset.suffix}}   # [win]
-    - matplotlib                1.4.3{{toolset.suffix}}
+    - matplotlib                1.4.3{{toolset.suffix}}   # [unix]
+    - matplotlib                1.4.3post1{{toolset.suffix}} # [win]
     - mingw-for-msvc            4.7.2                     # [win]
     - mlpack                    1.0.8{{toolset.suffix}}
     - mpc                       1.0.1                     # [unix]
@@ -62,16 +64,17 @@ requirements:
     - networkx                  1.9.1                     # [unix]
     - networkx                  1.10                      # [win]
     - nose                      1.3.6                     # [unix]
-    - nose                      1.2.1                     # [win]
+    - nose                      1.3.7                     # [win]
     - numpy                     1.9.2{{toolset.suffix}}   # [unix]
-    - numpy                     1.7.0{{toolset.suffix}}   # [win]
-    - openblas                  0.2.5{{toolset.suffix}}   # [win]
-    - opengm                    2.3.4{{toolset.suffix}}
+    - numpy                     1.10.1{{toolset.suffix}}  # [win]
+    - openblas                  0.2.15{{toolset.suffix}}  # [win]
+    - opengm                    2.3.4{{toolset.suffix}}   # [unix]
+    - opengm                    2.3.5{{toolset.suffix}}   # [win]
     - openssl                   1.0.1k                    # [unix]
-    - openssl-src-for-python    1.0.2post.a               # [win]
+    # - openssl-src-for-python    1.0.2post.a  # [win]  hard-wired in Python
     - pgmlink                   1.2{{toolset.suffix}}
     - pillow                    2.7.0{{toolset.suffix}}   # [unix]
-    - pillow                    2.9.0{{toolset.suffix}}   # [win]
+    - pillow                    3.0.0{{toolset.suffix}}   # [win]
     - pip                       6.1.1                     # [unix]
     - pip                       7.1.0                     # [win]
     - psutil                    2.2.1{{toolset.suffix}}   # [unix]
@@ -84,24 +87,29 @@ requirements:
     - python                    2.7.10{{toolset.suffix}}  # [win]
     - python-dateutil           2.4.2
     - pytz                      2015.4
-    - qimage2ndarray            1.4{{toolset.suffix}}
+    - qimage2ndarray            1.4{{toolset.suffix}}     # [unix]
+    - qimage2ndarray            1.4post1{{toolset.suffix}}     # [win]
     - qt                        4.8.6{{toolset.suffix}}   # [linux or win]
     - qt                        4.8.6.99                  # [osx]
     - readline                  6.2                       # [unix]
-    - scikit-image              0.11.3{{toolset.suffix}}
-    - scikit-learn              0.16.1{{toolset.suffix}}
+    - scikit-image              0.11.3{{toolset.suffix}}  # [unix]
+    - scikit-image              0.11.3post1{{toolset.suffix}}  # [win]
+    - scikit-learn              0.16.1{{toolset.suffix}}  # [unix]
+    - scikit-learn              0.16.1post1{{toolset.suffix}}  # [win]
     - scipy                     0.15.1{{toolset.suffix}}  # [unix]
-    - scipy                     0.16.0{{toolset.suffix}}  # [win]
+    - scipy                     0.16.1{{toolset.suffix}}  # [win]
     - setuptools                16.0                      # [unix]
     - setuptools                18.2                      # [win]
     - sip                       4.16.5{{toolset.suffix}}  # [unix]
     - sip                       4.16.9{{toolset.suffix}}  # [win]
     - six                       1.9.0
     - sqlite                    3.8.4.1                   # [unix]
-    - sqlite-src-for-python     3.8.11                    # [win]
-    - tifffile                  0.4.1{{toolset.suffix}}
+    # - sqlite-src-for-python     3.8.11  # [win] hard-wired in Python
+    - tifffile                  0.4.1{{toolset.suffix}}   # [unix]
+    - tifffile                  0.4.1post1{{toolset.suffix}}   # [win]
     - tk                        8.5.18                    # [unix]
-    - vigra                     1.10{{toolset.suffix}}
+    - vigra                     1.10{{toolset.suffix}}    # [unix]
+    - vigra                     1.10post1{{toolset.suffix}} # [win]
     - vtk                       5.10.1.99                 # [unix]
     - vtk                       5.10.1{{toolset.suffix}}  # [win]
     - yapsy                     1.10.423
