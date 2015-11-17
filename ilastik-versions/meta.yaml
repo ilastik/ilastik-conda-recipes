@@ -3,7 +3,7 @@ package:
   version: 1.1
 
 build:
-  number: 5
+  number: 6
 
 #
 # In general, we don't specify exact version requirements in each sub-package.
@@ -16,6 +16,7 @@ requirements:
     - boost                     1.55.0    
     - cloog                     0.18.0    
     - cylemon                   1         
+    - dlib                      18.16
     - decorator                 3.4.0
     - faulthandler              2.4       
     - fftw                      3.3.4     
@@ -28,6 +29,7 @@ requirements:
     - iiboost                   0.1       
     - isl                       0.12.2    
     - itk-seg-conv-only         4.6.1     
+    - jbig                      2.1
     - jpeg                      8d        
     - jsonschema                2.4.0     
     - lemon                     1.2.4     
@@ -71,3 +73,4 @@ requirements:
     - vtk                       5.10.1.99
     - yapsy                     1.10.423  
     - zlib                      1.2.8     
+    - xz                        5.0.5
