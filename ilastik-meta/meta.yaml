@@ -4,11 +4,11 @@ package:
 
 source:
   git_url: https://github.com/ilastik/ilastik-meta
-  git_tag: 1.1.7
+  git_tag: 1.1.8
 
 build:
-  number: 2
-  string: 2_{{ environ.get('GIT_BUILD_STR', '') }}
+  number: 0
+  string: 0_{{ environ.get('GIT_BUILD_STR', '') }}
 
 requirements:
   build:
