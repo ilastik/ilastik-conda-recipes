@@ -12,13 +12,6 @@ if errorlevel 1 exit 1
 move setup_build.py.patched setup_build.py
 if errorlevel 1 exit 1
 
-cat h5py.egg-info/SOURCES.txt ^
-   | sed -e "s@/Users/andrew/Documents/Projects/h5py/@@g" ^
-   > SOURCES.txt.patched
-if errorlevel 1 exit 1
-move SOURCES.txt.patched h5py.egg-info/SOURCES.txt
-if errorlevel 1 exit 1
-
 python setup.py build_ext -c msvc -L "%LIBRARY_LIB%" -I "%LIBRARY_INC%"
 if errorlevel 1 exit 1
 
