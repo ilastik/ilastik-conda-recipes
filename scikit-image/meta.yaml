@@ -11,6 +11,7 @@ source:
 build:
   features:
     - {{toolset.short}}
+  number: 1
 
 requirements:
   build:
@@ -28,6 +29,7 @@ requirements:
     - pyparsing
     - pytz
     - python-dateutil
+    - nose
 
   run:
     - {{toolset.run_requirement}}
@@ -44,6 +46,7 @@ requirements:
     - pyparsing
     - pytz
     - python-dateutil
+    - nose
 
 about:
   home: http://scikit-image.org/
