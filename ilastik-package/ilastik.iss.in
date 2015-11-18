@@ -8,8 +8,10 @@ ChangesAssociations=yes
 ; use paint to create this file, size 164x314
 WizardImageFile=package\ilastik-installer.bmp
 WizardImageStretch=no
+WizardImageBackColor=$ffffff
 ; use paint to create this file, size 55x58
 WizardSmallImageFile=package\ilastik-installer-small.bmp
+WizardSmallImageBackColor=$ffffff
 OutputBaseFilename=ilastik-@VERSION@-win64
 LicenseFile=LICENSE.txt
 SourceDir=..
@@ -38,11 +40,11 @@ Name: "{group}\uninstall ilastik"; Filename: "{uninstallexe}"
 
 
 [Registry]
-; ".ilp" is the extension we're associating. "ilastik-@VERSION@" is the internal name for the file type as stored in the registry. Make sure you use a unique name for this so you don't inadvertently overwrite another application's registry key. 
+; ".ilp" is the extension we're associating. "ilastik-@VERSION@" is the internal name for the file type as stored in the registry. Make sure you use a unique name for this so you don't inadvertently overwrite another application's registry key.
 Root: HKCR64; Subkey: ".ilp"; ValueType: string; ValueName: ""; ValueData: "ilastik-@VERSION@"; Flags: uninsdeletekey deletevalue
-; "ilastik project" is the name for the file type as shown in Explorer. 
+; "ilastik project" is the name for the file type as shown in Explorer.
 Root: HKCR64; Subkey: "ilastik-@VERSION@"; ValueType: string; ValueName: ""; ValueData: "ilastik project"; Flags: uninsdeletekey
 ; "DefaultIcon" is the registry key that specifies the filename containing the icon to associate with the file type.
 Root: HKCR64; Subkey: "ilastik-@VERSION@\DefaultIcon"; ValueType: string; ValueName: ""; ValueData: "{app}\ilastik-icon.ico"
-; "shell\open\command" is the registry key that specifies the program to execute when a file of the type is double-clicked in Explorer. The surrounding quotes are in the command line so it handles long filenames correctly. 
+; "shell\open\command" is the registry key that specifies the program to execute when a file of the type is double-clicked in Explorer. The surrounding quotes are in the command line so it handles long filenames correctly.
 Root: HKCR64; Subkey: "ilastik-@VERSION@\shell\open\command"; ValueType: string; ValueName: ""; ValueData: """{app}\ilastik.exe"" ""%1"""
