@@ -43,11 +43,12 @@ int main(int argc, char **argv)
     // full name of this executable
     std::string this_exe(buffer);
     // we got something like 'ilastik_root\ilastik.exe' and extract the 'ilastik_root' part
-    std::string path = this_exe.substr(0, this_exe.rfind("\\"));
+    std::string prefix = this_exe.substr(0, this_exe.rfind("\\"));
     // create the paths to python and ilastik
-    std::string script_name = path + "\\ilastik-meta\\ilastik\\ilastik.py";
-    std::string python_home = path;
-    std::string python_exe  = path + "\\python.exe";
+    std::string script_name    = prefix + "\\ilastik-meta\\ilastik\\ilastik.py";
+    std::string python_home    = prefix;
+    std::string python_exe     = prefix + "\\python.exe";
+    std::string qt_plugin_path = prefix + "\\Qt4\\plugins";
 
     std::vector<std::string> args;
     args.push_back("\"" + python_exe + "\"");
@@ -64,6 +65,7 @@ int main(int argc, char **argv)
     SetEnvironmentVariable("PYTHONHOME", python_home.c_str());
     SetEnvironmentVariable("PYTHONPATH", "");
     SetEnvironmentVariable("PYTHONNOUSERSITE", "1");
+    SetEnvironmentVariable("QT_PLUGIN_PATH", qt_plugin_path.c_str());
 
     if(_spawnv(P_WAIT, python_exe.c_str(), &cargs[0]))
         printWinError("ilastik error: \n");

@@ -27,6 +27,7 @@ IF ["%ILASTIK_DIR%"] EQU [""] set ILASTIK_DIR=%INSTALL_DIR%ilastik-meta
 set PYTHONPATH=%ILASTIK_DIR%\lazyflow;%ILASTIK_DIR%\volumina;%ILASTIK_DIR%\ilastik
 set PYTHONHOME=%INSTALL_DIR%
 set PYTHONNOUSERSITE=1
+set QT_PLUGIN_PATH=%QTDIR%\plugins
 
 rem check if this script was called as 'lastik test' or 'ilastik python ...'
 if /I "%1" EQU "test" goto :testing
