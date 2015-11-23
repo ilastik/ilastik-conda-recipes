@@ -27,7 +27,7 @@ if [[ $PYTHONPATH != "" ]] || [[ $PYTHONHOME != "" ]]; then
     1>&2 echo "Warning: Ignoring your non-empty PYTHONPATH/PYTHONHOME"
 fi    
 export PYTHONPATH=""
-export PYTHONHOME=""
+export PYTHONHOME="${PREFIX}"
 
 # Similarly, disable user-site configuration
 export PYTHONNOUSERSITE=1
