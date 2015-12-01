@@ -4,17 +4,19 @@ package:
   
 source:
   git_url: git://github.com/janelia-flyem/NeuroProof.git
-  git_tag: f8808af80f02ced1c5ada2131b04497a6bb53789 # 2015-11-10
+  git_tag: HEAD
 
 build:
-  number: 13
-  string: 13_gf8808af
+  {% set build_num = 0 %}
+  number: {{ build_num }}
+  string: np{{CONDA_NPY}}py{{CONDA_PY}}_{{build_num}}_g{{GIT_FULL_HASH[:7]}}
   detect_binary_files_with_prefix: true # (defaults to false)
-  
+
 requirements:
   build:
     - gcc 4.8.5
-    - python
+    - python 2.7*
+    - numpy {{NPY_VER}}*
     - jsoncpp
     - vigra
     - libdvid-cpp
@@ -26,7 +28,8 @@ requirements:
     
   run:
     - libgcc
-    - python
+    - python 2.7*
+    - numpy {{NPY_VER}}*
     - jsoncpp
     - vigra
     - libdvid-cpp

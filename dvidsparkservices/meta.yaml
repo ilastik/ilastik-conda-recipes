@@ -4,11 +4,12 @@ package:
   
 source:
   git_url: git://github.com/janelia-flyem/DVIDSparkServices.git
-  git_tag: 4b036d4e6e2b63a28203c5a6193f8b1b3650fa46
+  git_tag: HEAD
 
 build:
-  number: 9
-  string: py27_9_g4b036d4
+  {% set build_num = 10 %}
+  number: {{ build_num }}
+  string: py{{CONDA_PY}}_{{build_num}}_g{{GIT_FULL_HASH[:7]}}
   
   entry_points:
     #- launchworkflow = workflows.launchworkflow:main (TODO)
