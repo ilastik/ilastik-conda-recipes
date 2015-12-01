@@ -22,6 +22,7 @@ import subprocess
 import json
 from collections import namedtuple
 
+from conda.config import rc as condarc
 from conda.resolve import VersionOrder
 from conda_build.metadata import MetaData
 
@@ -31,6 +32,13 @@ def main():
                         help='If provided, the "latest" cloud version is taken from this channel, if present.')
     parser.add_argument('meta_yaml_paths', nargs='+')
     args = parser.parse_args()
+
+    if args.channel:
+        # Verify that the channel is available
+        channels = condarc.get('channels')
+        if args.channel not in channels:
+            sys.exit("Your preferred channel '{}' is not active in your .condarc configuration.\n"
+                     "Only these channels are available: {}".format(args.channel, channels)) 
 
     print_unequal(args.meta_yaml_paths, preferred_channel=args.channel)
 
