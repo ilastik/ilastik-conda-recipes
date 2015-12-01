@@ -9,7 +9,7 @@ source:
 build:
   entry_points:
     #- launchworkflow = workflows.launchworkflow:main (TODO)
-  number: 8
+  number: 9
   
 requirements:
   build:
