@@ -4,7 +4,7 @@ package:
 
 source:
   git_url: git://github.com/janelia-flyem/NeuTu
-  git_tag: flyem_release
+  git_tag: flyem_release_stage
 
 build:
   number: 5
