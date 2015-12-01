@@ -42,8 +42,20 @@ def print_unequal(meta_yaml_paths, preferred_channel=None):
     If the recipe version of a package doesn't match the latest cloud version, print the mismatch.
     """
     for meta_yaml_path in meta_yaml_paths:
-        package_name, recipe_version, recipe_build_number = read_recipe_name_version_build(meta_yaml_path)
-        latest_channel, latest_version, latest_build_number = get_latest_build(package_name, preferred_channel)
+        try:
+            package_name, recipe_version, recipe_build_number = read_recipe_name_version_build(meta_yaml_path)
+        except Exception as ex:
+            print("ERROR PARSING RECIPE: {}".format(meta_yaml_path))
+            print(ex)
+            continue
+        
+        try:
+            latest_channel, latest_version, latest_build_number = get_latest_build(package_name, preferred_channel)
+        except Exception as ex:
+            print("ERROR FETCHING REMOTE PACKAGE for: {}".format(meta_yaml_path))
+            print(ex)
+            continue
+
         if latest_channel is None:
             print( "{}: Recipe is at {}={}, but latest is NOT FOUND."
                   .format(package_name, recipe_version, recipe_build_number) )
@@ -71,8 +83,11 @@ def read_recipe_name_version_build(meta_yaml_path):
     else:
         recipe_dir = os.path.split(meta_yaml_path)[0]
 
-    metadata = MetaData(recipe_dir)
-    return (metadata.name(), metadata.version(), metadata.build_number())
+    try:
+        metadata = MetaData(recipe_dir)
+        return (metadata.name(), metadata.version(), metadata.build_number())
+    except SystemExit as ex:
+        raise Exception(*ex.args)
 
 BuildInfo = namedtuple('BuildInfo', 'channel version build_number')
 def get_latest_build(package_name, preferred_channel=None):
@@ -132,7 +147,7 @@ def conda_search(package_name):
     
 if __name__ == "__main__":
     # DEBUG
-    # os.chdir('/Users/bergs/Documents/workspace/ilastik-build-conda')
-    # sys.argv += "--channel=ilastik boost/meta.yaml".split()    
+    #os.chdir('/Users/bergs/Documents/workspace/ilastik-build-conda')
+    #sys.argv += "--channel=flyem ilastik-meta/meta.yaml".split()    
 
     main()
