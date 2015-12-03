@@ -7,7 +7,7 @@ source:
   git_tag: HEAD
 
 build:
-  {% set build_num = 10 %}
+  {% set build_num = 11 %}
   number: {{ build_num }}
   string: py{{CONDA_PY}}_{{build_num}}_g{{GIT_FULL_HASH[:7]}}
   
@@ -29,7 +29,6 @@ requirements:
     - pillow
     - scipy
     - python-lz4
-    - gala
     - ilastik-deps-pc-headless
     - ilastik-meta
     - wsdt
