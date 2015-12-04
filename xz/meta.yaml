@@ -1,0 +1,27 @@
+{% import '$CONDA_ACTIVE_ENV/toolset-info/config.yaml' as toolset %}
+
+package:
+  name: xz
+  version: "5.0.8"
+
+source:
+  fn:  xz-5.0.8.tar.bz2
+  url: http://tukaani.org/xz/xz-5.0.8.tar.bz2
+  md5: 98c1a916a37a0e5f1e6ad060b3376e90
+
+build:
+  features:
+    - {{toolset.short}}
+
+requirements:
+  build:
+    - {{toolset.build_requirement}}
+    - mingw-for-msvc-build           # [win]
+
+  run:
+    - mingw-for-msvc                 # [win]
+
+about:
+  home: http://tukaani.org/xz/
+  summary: "XZ Utils is free general-purpose data compression software with high compression ratio."
+  license: Public domain/GPL

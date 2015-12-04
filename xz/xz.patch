@@ -1,0 +1,22 @@
+diff -rupN src/liblzma/check/crc32_x86.S src/liblzma/check/crc32_x86.S
+--- src/liblzma/check/crc32_x86.S	Fri Dec  4 18:07:53 2015
++++ src/liblzma/check/crc32_x86.S	Fri Dec  4 18:08:29 2015
+@@ -73,6 +73,7 @@ init_table(void)
+ #	define ALIGN(pow2, abs) .align abs
+ #endif
+
++	.code32
+ 	.text
+ 	.globl	LZMA_CRC32
+
+diff -rupN src/liblzma/check/crc64_x86.S src/liblzma/check/crc64_x86.S
+--- src/liblzma/check/crc64_x86.S	Fri Dec  4 18:07:53 2015
++++ src/liblzma/check/crc64_x86.S	Fri Dec  4 18:08:42 2015
+@@ -63,6 +63,7 @@ init_table(void)
+ #	define ALIGN(pow2, abs) .align abs
+ #endif
+
++	.code32
+ 	.text
+ 	.globl	LZMA_CRC64
+
