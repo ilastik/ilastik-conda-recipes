@@ -21,6 +21,6 @@ make install
 if errorlevel 1 exit 1
 
 gendef "%LIBRARY_BIN%\liblzma-5.dll"
-lib /NOLOGO /MACHINE:X64 /DEF:liblzma-5.def /OUT:"%LIBRARY_LIB%\liblzma-5.lib"
+lib /NOLOGO /MACHINE:X64 /DEF:liblzma-5.def /OUT:"%LIBRARY_LIB%\liblzma.lib"
 
-del "%LIBRARY_LIB%\liblzma.a" "%LIBRARY_LIB%\liblzma.dll.a" "%LIBRARY_LIB%\liblzma.la" "%LIBRARY_LIB%\liblzma-5.exp"
+del "%LIBRARY_LIB%\liblzma.a" "%LIBRARY_LIB%\liblzma.dll.a" "%LIBRARY_LIB%\liblzma.la" "%LIBRARY_LIB%\liblzma.exp"
