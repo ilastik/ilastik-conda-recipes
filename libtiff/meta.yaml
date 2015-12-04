@@ -12,17 +12,20 @@ source:
 build:
   features:
     - {{toolset.short}}
+  number: 1
 
 requirements:
   build:
     - {{toolset.build_requirement}}
     - zlib  *{{toolset.suffix}}
     - jpeg  *{{toolset.suffix}}
+    - xz
 
   run:
     - {{toolset.run_requirement}}
     - zlib  *{{toolset.suffix}}
     - jpeg  *{{toolset.suffix}}
+    - xz
 
 about:
   home: http://www.libtiff.org
