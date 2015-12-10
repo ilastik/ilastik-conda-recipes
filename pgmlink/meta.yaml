@@ -4,14 +4,16 @@ package:
 
 source:
     git_url: https://github.com/martinsch/pgmlink
-    git_tag: c944c6764a85b88e94ff12c38baa1a8172d9be72 
+    git_tag: HEAD 
 
 build:
-  {% set build_num = 18 %}
+  {% set build_num = 19 %}
   number: {{ build_num }}
 
   #
   # You must build this recipe using 'conda build --numpy=X.Y'
+  # Edit: Until conda 1.18.3 is released, you must use the following command:
+  #       CONDA_NPY=19 CONDA_PY=27 GIT_FULL_HASH='' conda build pgmlink
   #
   string: np{{CONDA_NPY[:]}}py{{CONDA_PY}}_{{build_num}}_g{{GIT_FULL_HASH[:7]}}
 
