@@ -63,29 +63,27 @@ to select the appropriate compiler runtime according to the Python version. Howe
 
 However, the actual difficulty is more fundamental: `meta.yaml` are static text files by nature, whereas the information about features is only available at build time (because it depends on the build environment), and may differ between different builds of the same recipe. Conda currently solves this by means of conditionals (the `[win and py27]` above), but this technique is severely limited by the restricted set of supported conditions.
 
-But once again, conda already offers a solution: the possibility to customize `meta.yaml` files at build time by means of jinja2 preprocessing. A simple `meta.yaml` that configures the compiler feature at build time might look like this:
+But once again, conda already offers a solution: the possibility to customize `meta.yaml` files at build time by means of jinja2 preprocessing. A simple `meta.yaml` that configures the compiler feature at build time looks like this:
 
 ```
 # import the feature spec of the active compiler
 {% import '$CONDA_ACTIVE_ENV/conda-meta/features/compiler.yaml' as compiler %}
 
 package:
-  name: cython
-  version: "0.23"
+  name: zlib
+  version: "1.2.8"
 
 build:
   features:
     - {{compiler.feature}}  # add feature for the current build
-                            # expands into 'vc10', 'vc14' etc. as apropriate
+                            # expands into 'vc10', 'vc14' etc. as appropriate
 
 requirements:
   build:
     - {{compiler.build_requirement}}  # list the correct compiler as a requirement
-    - ... # more requirements
 
   run:
-    - {{compiler.run_requirement}}
-    - ... # more requirements
+    - {{compiler.run_requirement}}    # list the compiler runtime as a requirement
 
 source:
   ... # as usual
@@ -93,15 +91,23 @@ about:
   ... # as usual
 ```
 
-For this to work, 'conda install visual-studio' must install an additional file `conda-meta/features/compiler.yaml` which defines jinja2 variables to be imported by the `meta.yaml` file of all C/C++ packages. Specifically, after 'conda install visual-studio=14.0' (installing the Visual Studio 2015 runtime), the variables resolve into
+Specifically, for a vc14 (Visual Studio 2015) build, the variables resolve into
 
 ```
-{{compiler.feature}}            => 14.0
+{{compiler.feature}}            => vc14
 {{compiler.build_requirement}}  => visual-studio-build  14.0
 {{compiler.build_requirement}}  => visual-studio        14.0
 ```
 
-The package `visual-studio-build` installs the file `conda-meta/features/compiler.yaml` in the current `_build` environment and possibly a few utilities that simplify builds. Ideally, it would also install the compiler, but since this is not permitted by Microsoft's license and would be too time consuming anyway, it just checks that the correct compiler is in the PATH, and terminates the build otherwise (e.g. if it finds Visual Studio 10.0 instead). The package `visual-studio` installs the compiler runtime DLLs.
+The file `conda-meta/features/compiler.yaml` is installed by the command `conda install visual-studio-build=14.0` which prepares the current environment for conda builds with this compiler. Ideally, this command would also install the compiler into the current environment, but since this is not permitted by Microsoft's license and would be too time consuming anyway, it just checks that the correct compiler is in the PATH, and terminates otherwise (e.g. if it finds Visual Studio 10.0 instead). The package `visual-studio` just installs the compiler runtime DLLs. Moreover, both packages contain a `track-features:` specification with the appropriate feature tag.
+
+Thus, to build a package aginst a specific collection of dependencies, you
+* create an environment that contains the desired dependencies
+* activate that environment
+* run 'conda build' (which reads `meta.yaml` after jinja2 preprocessing, re-creates the present setup in the `_build` environment and then compiles the new package)
+
+The `meta.yaml` file of a more complex recipe like scipy might look like this:
+
 
 
 How to ensure binary compatibility between the packages in a conda environment
