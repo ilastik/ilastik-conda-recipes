@@ -1,0 +1,134 @@
+How to ensure that binary incompatible builds of a package can coexist in conda
+===============================================================================
+
+One and the same version of a package can exist in several incompatible versions. For example, we may compile boost with different compilers (say, vc10 and vc14) and link the boost::python library against different Python versions (say, 2.7 and 3.5) to end up with four incompatible builds of the same boost version. Similarly, we may build numpy with its embedded lapack-lite or link against an external lapack library such as Intel MKL or OpenBLAS. Subsequent compilation of scipy against each of these numpy variants will result in three incompatible builds of the same scipy version.
+
+Conda uses clever conventions to avoid coexistence of incompatible variants whenever possible:
+* There is a one-to-one correspondence between Python versions and compiler versions.
+* Packages are updated in lock-step so that the set of newest versions (at any given time) is compatible.
+
+When this is not possible, conda encodes compatibility information into the build string. For example, '_np110py27' means that a package requires Python 2.7 and numpy 1.10. This approach works reasonably, but is not always reliable because conda's version resolution algorithm treats build strings as secondary entities: (i) build strings are only looked at when version and build numbers are identical; (ii) build string comparison only supports exact matching, no relational comparisons or wild cards as in version numbers.
+
+Moreover, the above conventions may be too restrictive in certain situations: Some users may be forced by external circumstances to use a different compiler than conda's default, or may be restricted to a particular version of a package so that packages cannot be updated in lockstep. Therefore, conda needs a more powerful mechanism to specify requirements for compatible variants.
+
+Fortunately, such a mechanism already exists: conda's 'features' capability. For example, to ensure that a package is only used in combination with packages that were built by the same compiler, a recipe would specify:
+
+```
+build:
+  features:
+    - vc10
+```
+
+if the package requires Visual Studio 2010. As a consequence, this particular package would only be considered in conda environments that based on this compiler. In practice, an environment acquires this feature-enforcing behavior by installing a package which tracks the feature, i.e. whose recipe contains:
+
+```
+build:
+  track_features:
+    - vc10
+```
+
+To make full use of 'features', three questions need to be answered:
+1) Which packages need to enforce (i.e. track) features in order to ensure that only compatible dependents are installed, and what conventions/standards shall be observed to specify those features?
+2) How can we insert the appropriate 'features' and 'track_features' specifications into the recipes automatically, especially when requirements  are transitive?
+3) How can we guarantee that 'conda install' always respects the feature specifications?
+
+1) What features?
+-----------------
+
+Conda already uses the features 'vc10', 'vc14' etc. to distinguish compilers on windows. Since each Python version in conda is tied to a particular compiler version, the corresponding 'track_features' spec is found in the Python recipe. This leads to the slight oddity that pure C++ packages must still list Python as a build requirement in order to activate the appropriate compiler (Insteadt, it might be better to create a dedicated 'visual-studio' package which installs the appropriate runtime libaries and activates the appropriate 'track_features'.) More importantly, it prevents users from compiling Python with a different compiler. For example, it is impossible to build extension modules that require C++11 for Python 2.7 on Windows because Visual Studio 2010 (conda's default for Python 2.7) only supports C++98. Conversely, one cannot use Python 3.5 when one is forced (by whatever reason) to an older compiler than conda's default.
+
+At present, this problem is most pronounced on Windows, because Visual Studio versions produce mutually incompatible code. In contrast, the gcc 4.x compiler series on Linux generally generate compatible binaries. However, incompatibilities may arise with the more widespread use of gcc 5.x and clang, and by incompatible versions of the C++ standard library (libstdc++ vs. libc++ on Mac is a case in point). Moreover, compilers are not the only source of incompatibility, as the above example of numpy with MKL vs. numpy with OpenBLAS demonstrates. In conclusion:
+
+1. Packages where the same version number exists in multiple, binary incompatible variants must define (i.e. 'track_features') a feature.
+2. Dependents of such packages must be built in the same variants, and those variants are distinguished by the appropriate 'features' specification.
+3. Feature names should follow the established conventions of 'vc10' and 'vc14' or 'np100' and 'np110' and must be documented on the conda website.
+
+Specifically,
+??? define some features
+
+2) How to add feature specs to recipes automatically?
+-----------------------------------------------------
+
+At present, conda features are specified manually in a package recipe's `meta.yaml` file, e.g.
+
+```
+build:
+  features:
+    - vc9   # [win and py27]
+    - vc10  # [win and py34]
+    - vc14  # [win and py35]
+```
+
+to select the appropriate compiler runtime according to the Python version. However, this approach does not scale to more widespread application of the 'features' mechanism, and is not flexible enough to allow Python to be compiled with a non-standard compiler.
+
+However, the actual difficulty is more fundamental: `meta.yaml` are static text files by nature, whereas the information about features is only available at build time (because it depends on the build environment), and may differ between different builds of the same recipe. Conda currently solves this by means of conditionals (the `[win and py27]` above), but this technique is severely limited by the restricted set of supported conditions.
+
+But once again, conda already offers a solution: the possibility to customize `meta.yaml` files at build time by means of jinja2 preprocessing. A simple `meta.yaml` that configures the compiler feature at build time might look like this:
+
+```
+# import the feature spec of the active compiler
+{% import '$CONDA_ACTIVE_ENV/conda-meta/features/compiler.yaml' as compiler %}
+
+package:
+  name: cython
+  version: "0.23"
+
+build:
+  features:
+    - {{compiler.feature}}  # add feature for the current build
+                            # expands into 'vc10', 'vc14' etc. as apropriate
+
+requirements:
+  build:
+    - {{compiler.build_requirement}}  # list the correct compiler as a requirement
+    - ... # more requirements
+
+  run:
+    - {{compiler.run_requirement}}
+    - ... # more requirements
+
+source:
+  ... # as usual
+about:
+  ... # as usual
+```
+
+For this to work, 'conda install visual-studio' must install an additional file `conda-meta/features/compiler.yaml` which defines jinja2 variables to be imported by the `meta.yaml` file of all C/C++ packages. Specifically, after 'conda install visual-studio=14.0' (installing the Visual Studio 2015 runtime), the variables resolve into
+
+```
+{{compiler.feature}}            => 14.0
+{{compiler.build_requirement}}  => visual-studio-build  14.0
+{{compiler.build_requirement}}  => visual-studio        14.0
+```
+
+The package `visual-studio-build` installs the file `conda-meta/features/compiler.yaml` in the current `_build` environment and possibly a few utilities that simplify builds. Ideally, it would also install the compiler, but since this is not permitted by Microsoft's license and would be too time consuming anyway, it just checks that the correct compiler is in the PATH, and terminates the build otherwise (e.g. if it finds Visual Studio 10.0 instead). The package `visual-studio` installs the compiler runtime DLLs.
+
+
+How to ensure binary compatibility between the packages in a conda environment
+------------------------------------------------------------------------------
+
+If the packages in a given conda environment are not fully compatible on a binary level, users will sooner or later experience myterious crashes. Binary incompatibilities can be subtle (e.g. a function argument changed its type from int32 to int64) and occur even for source-compatible packages (e.g. by switching to a new compiler).
+
+So far, conda has avoided binary incompatibility problems by two simple strategies:
+* There is a one-to-one correspondence between Python versions and compiler versions.
+* Packages are updated in lock-step so that the newest versions (at any given time) can be considered compatible.
+
+Since all packages are tied to a particular Python version, the first rule excludes compiler mismatches. The second rule takes effect because `conda install` always attempts to update packages to their newest versions.
+
+Due to conda's success, these two rules are no longer sufficient to serve the needs of conda's growing user base. Conda-based projects may be tied to particular package versions or require non-default compilers to ensure downstream compatibility with their own code. Therefore, conda should establish more flexible mechanisms to enforce binary compatibility.
+
+The fundamental problem is this: To keep conda recipes general, the requirements section in `meta.yaml` should only express source compatibility constraints. However, when the package is actually built with a particular compiler and against specific versions of the dependencies, the resulting binary has a much narrower compatibility scope. This fact must be made explicit in the package metadata.
+
+To make binary compatibility constraints explicit, two problems must be solved:
+1. The constraints must be expressed in a way that `conda install` can handle.
+2. `conda build` must determine the constraints and add them to the package metadata.
+
+Lets first consider problem 1. `conda install` considers at least six kinds of metadata: platform, Python version, package version string, build number and build string, and features defined in the package. We can take the first two for granted because they are hardwired in the channel information. Package build numbers don't contain enough information to be relied upon for the present purpose. Build strings could be very useful in principle, but their contents are weakly standardized, and conda's present build string comparison is too simple to be relied upon either. While this could be improved in the future, it is hard to do so in a backwards compatible manner that also works for existing packages.
+
+This leaves version strings and features. Features are probably the most suitable mechanism, but due to an unfortunate bug in conda's default version resolution algorithm, features are ignored under certain circumstances. A correct version resolution algorithm has already been implemented but is too slow for routine use. IMHO, work on speeding up that algorithm (by at least a factor of 4) should have high priority, so that the old algorithm can be phased out and features can be used to their full potential.
+
+For the time being, we must work around this bug by augmenting features with additional information in the version string, e.g. in form of feature suffixes like '1.1.1.vc11' for packages built with Visual Studio 11.0 (2012).
+
+To add compatibility information to the package metadata (problem 2), the build process must be able to specialize dependencies according to the present build setup. Since this information cannot be hardwired in `meta.yaml`, I propose to represent it in terms of jinja2 variables which are retrieved and expanded at build time. In this design, a typical `meta.yaml` would look like this:
+```yaml
+```
