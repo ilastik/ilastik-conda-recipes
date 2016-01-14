@@ -7,7 +7,7 @@ source:
     git_tag: HEAD 
 
 build:
-  {% set build_num = 19 %}
+  {% set build_num = 20 %}
   number: {{ build_num }}
 
   #
@@ -38,6 +38,7 @@ requirements:
     - libxml2
     - dlib
     - armadillo 4.000.2
+    - openblas # [linux]
 
   run:
     - libgcc
@@ -52,6 +53,8 @@ requirements:
     - lemon
     - libxml2
     - dlib
+    - armadillo
+    - openblas # [linux]
 
     # We don't require cplex-shared here because it only needs to be installed once per machine,
     # and requiring it here would include all of gcc in the install lib dir.
