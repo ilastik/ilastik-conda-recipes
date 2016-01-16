@@ -3,7 +3,7 @@ package:
   version: "0.1"
 
 source:
-  git_url: git://github.com/ilastik/ilastiktools.git
+  git_url: https://github.com/ilastik/ilastiktools
   git_tag: 6cdd7d2663b2f3ab0a2428c5b1d7c0bf94801027
 
 build:

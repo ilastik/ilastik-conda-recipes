@@ -39,6 +39,6 @@ test:
     - ilastik
 
 about:
-  home: http://github.com/janelia-flyem/DVIDSparkServices.git
+  home: http://github.com/janelia-flyem/DVIDSparkServices
   license: BSD (3-clause)
   summary: Python framework for EM Spark-based services 

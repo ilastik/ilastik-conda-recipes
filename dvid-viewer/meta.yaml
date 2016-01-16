@@ -3,7 +3,7 @@ package:
   version: "0.1"
   
 source:
-  git_url: git://github.com/janelia-flyem/libdvid-utils.git
+  git_url: https://github.com/janelia-flyem/libdvid-utils
   git_tag: HEAD
 
 build:
@@ -32,6 +32,6 @@ requirements:
     - libdvid-cpp
 
 about:
-  home: http://github.com/janelia-flyem/libdvid-utils.git
+  home: http://github.com/janelia-flyem/libdvid-utils
   license: BSD (3-clause)
   summary: Simple C++ viewer for DVID datasets 
