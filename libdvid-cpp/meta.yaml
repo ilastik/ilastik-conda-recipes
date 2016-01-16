@@ -3,11 +3,11 @@ package:
   version: "0.1"
   
 source:
-  git_url: git://github.com/janelia-flyem/libdvid-cpp.git
+  git_url: https://github.com/janelia-flyem/libdvid-cpp
   git_tag: HEAD
 
 build:
-  {% set build_num = 22 %}
+  {% set build_num = 23 %}
   number: {{ build_num }}
 
   #
