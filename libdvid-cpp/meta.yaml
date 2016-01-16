@@ -7,7 +7,7 @@ source:
   git_tag: HEAD
 
 build:
-  {% set build_num = 20 %}
+  {% set build_num = 22 %}
   number: {{ build_num }}
 
   #
