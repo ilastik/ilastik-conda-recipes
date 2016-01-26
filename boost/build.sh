@@ -25,6 +25,35 @@ mkdir -vp ${PREFIX}/bin;
   --with-python=${PYTHON} \
   --prefix=${PREFIX}
 
+# python3 is built with --pymalloc by default which adds a "m" suffix to the include directory and library name
+# (see https://www.python.org/dev/peps/pep-3149/)
+# The boost build system does not detect this and also happens to think it's smarter than the user (hint: it's not)
+# and disallows any overrides to the automatically detected (incorrect!) values.
+# Let's just patch it into submission:
+PYTHON_HEADERS=`${PYTHON} -c "import distutils.sysconfig; print(distutils.sysconfig.get_config_var('INCLUDEPY'))"`
+PYTHON_LDNAME=`${PYTHON} -c "import distutils.sysconfig; print(distutils.sysconfig.get_config_var('LDLIBRARY'))"`
+
+patch -Np1 << EOF
+--- a/tools/build/v2/tools/python.jam
++++ b/tools/build/v2/tools/python.jam
+@@ -539,7 +539,7 @@
+     }
+     else
+     {
+-        includes ?= \$(prefix)/include/python\$(version) ;
++        includes ?= "${PYTHON_HEADERS}" ;
+
+         local lib = \$(exec-prefix)/lib ;
+         libraries ?= \$(lib)/python\$(version)/config \$(lib) ;
+@@ -677,7 +677,7 @@
+     }
+
+     # Declare it.
+-    lib python.lib : : <name>python\$(lib-version) \$(requirements) ;
++    lib python.lib : : <name>${PYTHON_LDNAME} \$(requirements) ;
+ }
+EOF
+
 # In the commands below, we want to include linkflags=blabla and 
 # cxxflags=blabla, but only if there are actual values for 
 # linkflags and cxxflags.  Otherwisde, omit those settings entirely.

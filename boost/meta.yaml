@@ -14,6 +14,7 @@ source:
 build:
   number: 5
   detect_binary_files_with_prefix: true
+  string: py{{CONDA_PY}}
 
 requirements:
   build:
