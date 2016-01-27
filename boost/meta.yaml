@@ -12,9 +12,10 @@ source:
     - 1.55.0_patches/0005-Boost.S11n-include-missing-algorithm.patch  [osx]
 
 build:
-  number: 5
+  {% set build_num = 5 %}
+  number: {{build_num}}
   detect_binary_files_with_prefix: true
-  string: py{{CONDA_PY}}
+  string: py{{CONDA_PY}}_{{build_num}}
 
 requirements:
   build:
