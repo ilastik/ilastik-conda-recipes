@@ -21,11 +21,13 @@ requirements:
   build:
     - gcc 4.8.5 # [linux]
     - gcc 4.8.5 # [osx]
-    - python
+    - python 2.7*|3.5*
+    - python {{PY_VER}}*
     - zlib
 
   run:
     - libgcc
+    - python {{PY_VER}}*
 
 about:
   home: http://www.boost.org/
