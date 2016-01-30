@@ -23,7 +23,6 @@ build:
 requirements:
   build:
     - {{toolset.build_requirement}}
-    - python                         # [win]  (needed to download the Visual Studio project)
 
   run:
     - {{toolset.run_requirement}}
