@@ -17,7 +17,8 @@ if %ARCH%==64 (
 set BOOST_TOOLSET=msvc-%VISUAL_STUDIO_VERSION%
 echo BOOST TOOLSET: %BOOST_TOOLSET%
 
-set BOOST_OPTIONS=--layout=system --with-python --with-serialization --with-system --with-filesystem --with-test --with-timer --with-thread --with-random --with-date_time --with-chrono --with-program_options  variant=release threading=multi link=shared toolset=%BOOST_TOOLSET% address-model=%ARCH%
+REM set BOOST_OPTIONS=--layout=system --with-python --with-serialization --with-system --with-filesystem --with-test --with-timer --with-thread --with-random --with-date_time --with-chrono --with-program_options  variant=release threading=multi link=shared toolset=%BOOST_TOOLSET% address-model=%ARCH%
+set BOOST_OPTIONS=--with-python --with-serialization --with-system --with-filesystem --with-test --with-timer --with-thread --with-random --with-date_time --with-chrono --with-program_options  variant=release threading=multi link=shared toolset=%BOOST_TOOLSET% address-model=%ARCH%
 
 REM compile
 .\b2 %BOOST_OPTIONS%
@@ -27,4 +28,6 @@ REM install
 .\b2 --prefix="%LIBRARY_PREFIX%" %BOOST_OPTIONS% install
 if errorlevel 1 exit 1
 move "%LIBRARY_PREFIX%\lib\boost*.dll" "%LIBRARY_PREFIX%\bin"
+move "%LIBRARY_PREFIX%\include\boost-1_60\boost" ""%LIBRARY_PREFIX%\include\boost"
+rmdir "%LIBRARY_PREFIX%\include\boost-1_60"
 if errorlevel 1 exit 1
