@@ -2,19 +2,21 @@
 
 package:
   name: boost
-  version: "1.60.0{{toolset.suffix}}"
+  version: "1.55.0{{toolset.suffix}}"
 
 source:
-  fn: boost_1_60_0.tar.bz2
-  url: http://sourceforge.net/projects/boost/files/boost/1.60.0/boost_1_60_0.tar.bz2
+  fn: boost_1_55_0.tar.bz2
+  url: http://sourceforge.net/projects/boost/files/boost/1.55.0/boost_1_55_0.tar.bz2
 
   patches:
-    - 1.60.0.patch
+    - 1.55.0_patches/6bb71fdd.diff # [osx]
+    - 1.55.0_patches/e4bde20f.diff # [osx]
+    - 1.55.0_patches/0005-Boost.S11n-include-missing-algorithm.patch # [osx]
 
 build:
   features:
     - {{toolset.short}}
-  number: 1
+  number: 4
   detect_binary_files_with_prefix: true
 
 requirements:
@@ -22,7 +24,7 @@ requirements:
     - {{toolset.build_requirement}}
     # - gcc 4.8.2.99                   # [linux]
     # - gcc 4.8.2                      # [osx]
-    - python    3.5
+    - python    2.7.*{{toolset.suffix}}
     - zlib                           # [unix]
 
   run:

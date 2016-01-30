@@ -1,0 +1,117 @@
+diff boost/python/detail/config.hpp boost/python/detail/config.hpp
+--- boost/python/detail/config.hpp	Wed Sep  2 12:07:49 2015
++++ boost/python/detail/config.hpp	Fri Jan 29 23:29:39 2016
+@@ -118,7 +118,11 @@
+ // Set the name of our library, this will get undef'ed by auto_link.hpp
+ // once it's done with it:
+ //
+-#define BOOST_LIB_NAME boost_python
++#if PY_MAJOR_VERSION < 3
++# define BOOST_LIB_NAME boost_python
++#else
++# define BOOST_LIB_NAME boost_python3
++#endif
+ //
+ // If we're importing code from a dll, then tell auto_link.hpp about it:
+ //
+diff boost/type_traits/detail/bool_trait_def.hpp boost/type_traits/detail/bool_trait_def.hpp
+--- boost/type_traits/detail/bool_trait_def.hpp	Sun Dec 13 12:49:42 2015
++++ boost/type_traits/detail/bool_trait_def.hpp	Fri Jan 29 23:31:34 2016
+@@ -11,13 +11,6 @@
+ // $Date$
+ // $Revision$
+
+-//
+-// This header is deprecated and no longer used by type_traits:
+-//
+-#if defined(__GNUC__) || defined(_MSC_VER)
+-# pragma message("NOTE: Use of this header (bool_trait_def.hpp) is deprecated")
+-#endif
+-
+ #include <boost/type_traits/detail/template_arity_spec.hpp>
+ #include <boost/type_traits/integral_constant.hpp>
+ #include <boost/config.hpp>
+diff boost/type_traits/detail/ice_and.hpp boost/type_traits/detail/ice_and.hpp
+--- boost/type_traits/detail/ice_and.hpp	Sun Dec 13 12:49:42 2015
++++ boost/type_traits/detail/ice_and.hpp	Fri Jan 29 23:30:53 2016
+@@ -11,13 +11,6 @@
+
+ #include <boost/config.hpp>
+
+-//
+-// This header is deprecated and no longer used by type_traits:
+-//
+-#if defined(__GNUC__) || defined(_MSC_VER)
+-# pragma message("NOTE: Use of this header (ice_and.hpp) is deprecated")
+-#endif
+-
+ namespace boost {
+ namespace type_traits {
+
+diff boost/type_traits/detail/ice_eq.hpp boost/type_traits/detail/ice_eq.hpp
+--- boost/type_traits/detail/ice_eq.hpp	Sun Dec 13 12:49:42 2015
++++ boost/type_traits/detail/ice_eq.hpp	Fri Jan 29 23:30:47 2016
+@@ -10,13 +10,6 @@
+
+ #include <boost/config.hpp>
+
+-//
+-// This header is deprecated and no longer used by type_traits:
+-//
+-#if defined(__GNUC__) || defined(_MSC_VER)
+-# pragma message("NOTE: Use of this header (ice_eq.hpp) is deprecated")
+-#endif
+-
+ namespace boost {
+ namespace type_traits {
+
+diff boost/type_traits/detail/ice_not.hpp boost/type_traits/detail/ice_not.hpp
+--- boost/type_traits/detail/ice_not.hpp	Sun Dec 13 12:49:42 2015
++++ boost/type_traits/detail/ice_not.hpp	Fri Jan 29 23:30:42 2016
+@@ -10,13 +10,6 @@
+
+ #include <boost/config.hpp>
+
+-//
+-// This header is deprecated and no longer used by type_traits:
+-//
+-#if defined(__GNUC__) || defined(_MSC_VER)
+-# pragma message("NOTE: Use of this header (ice_not.hpp) is deprecated")
+-#endif
+-
+ namespace boost {
+ namespace type_traits {
+
+diff boost/type_traits/detail/ice_or.hpp boost/type_traits/detail/ice_or.hpp
+--- boost/type_traits/detail/ice_or.hpp	Sun Dec 13 12:49:42 2015
++++ boost/type_traits/detail/ice_or.hpp	Fri Jan 29 23:30:38 2016
+@@ -10,13 +10,6 @@
+
+ #include <boost/config.hpp>
+
+-//
+-// This header is deprecated and no longer used by type_traits:
+-//
+-#if defined(__GNUC__) || defined(_MSC_VER)
+-# pragma message("NOTE: Use of this header (ice_or.hpp) is deprecated")
+-#endif
+-
+ namespace boost {
+ namespace type_traits {
+
+diff boost/type_traits/detail/template_arity_spec.hpp boost/type_traits/detail/template_arity_spec.hpp
+--- boost/type_traits/detail/template_arity_spec.hpp	Sun Dec 13 12:49:42 2015
++++ boost/type_traits/detail/template_arity_spec.hpp	Fri Jan 29 23:30:20 2016
+@@ -5,12 +5,5 @@
+ // Distributed under the Boost Software License, Version 1.0.
+ // (See accompanying file LICENSE_1_0.txt or copy at
+ // http://www.boost.org/LICENSE_1_0.txt)
+-
+-//
+-// This header is deprecated and no longer used by type_traits:
+-//
+-#if defined(__GNUC__) || defined(_MSC_VER)
+-# pragma message("NOTE: Use of this header (template_arity_spec.hpp) is deprecated")
+-#endif
+
+ #   define BOOST_TT_AUX_TEMPLATE_ARITY_SPEC(i, name) /**/
