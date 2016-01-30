@@ -1,11 +1,11 @@
 package:
   name: visual-studio
-  version: 14.0
+  version: 11.0
 
 build:
   track_features:
-    - vc14
+    - vc11
   features:
-    - vc14
-  number: 0
+    - vc11
+  number: 1
 

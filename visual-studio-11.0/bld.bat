@@ -8,14 +8,14 @@ cat "%RECIPE_DIR%\common-vars.bat.in" ^
    | sed -e "s/@PKG_VERSION@/%PKG_VERSION%/g" ^
          -e "s/@ARCH@/%ARCH%/g" ^
    > "%TOOLSET_INFO_DIR%\common-vars.bat"
-
+   
 cat "%RECIPE_DIR%\config.yaml.in" ^
    | sed -e "s/@PKG_VERSION@/%PKG_VERSION%/g" ^
          -e "s/@PKG_SHORT@/vc%PKG_VERSION:.0=%/g" ^
    > "%TOOLSET_INFO_DIR%\config.yaml"
-
+   
 copy "%RECIPE_DIR%\..\dos-tools.bat" "%TOOLSET_INFO_DIR%\"
-
+   
 call "%TOOLSET_INFO_DIR%\common-vars.bat"
 
 REM install Visual Studio runtime libraries (msvcr, msvcp)
@@ -23,7 +23,5 @@ cmake "%RECIPE_DIR%" -G "%CMAKE_GENERATOR%" -DCMAKE_INSTALL_PREFIX="%LIBRARY_PRE
 if errorlevel 1 exit 1
 cmake --build . --target INSTALL --config Release
 if errorlevel 1 exit 1
-
-REM needed when we want to build Python ourselves
-REM copy "%LIBRARY_PREFIX%\bin\msvc*.dll" "%PREFIX%"
-REM if errorlevel 1 exit 1
+copy "%LIBRARY_PREFIX%\bin\msvc*.dll" "%PREFIX%"
+if errorlevel 1 exit 1
