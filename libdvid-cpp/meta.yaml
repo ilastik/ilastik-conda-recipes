@@ -3,17 +3,16 @@ package:
   version: "0.1"
   
 source:
-  git_url: git://github.com/janelia-flyem/libdvid-cpp.git
-  git_tag: HEAD
+  git_url: https://github.com/janelia-flyem/libdvid-cpp
+  git_tag: master
 
 build:
-  {% set build_num = 20 %}
-  number: {{ build_num }}
+  number: 24
 
   #
   # You must build this recipe using 'conda build --numpy=X.Y'
   #
-  string: np{{CONDA_NPY[:]}}py{{CONDA_PY}}_{{build_num}}_g{{GIT_FULL_HASH[:7]}}
+  string: np{{CONDA_NPY}}py{{CONDA_PY}}_{{PKG_BUILDNUM}}_g{{GIT_FULL_HASH[:7]}}
   
 requirements:
   build:

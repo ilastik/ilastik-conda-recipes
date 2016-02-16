@@ -3,7 +3,7 @@ package:
   version: 0.1
 
 source:
-  git_url: git://github.com/cbecker/iiboost.git
+  git_url: https://github.com/cbecker/iiboost
   git_tag: 437491b5257cce74f86977ed203e1ccb2a02bd5c # 2015-08-17
 
 build:

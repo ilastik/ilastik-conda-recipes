@@ -3,11 +3,11 @@ package:
   version: "0.1"
   
 source:
-  git_url: git://github.com/janelia-flyem/DVIDSparkServices.git
+  git_url: https://github.com/janelia-flyem/DVIDSparkServices
   git_tag: HEAD
 
 build:
-  {% set build_num = 11 %}
+  {% set build_num = 12 %}
   number: {{ build_num }}
   string: py{{CONDA_PY}}_{{build_num}}_g{{GIT_FULL_HASH[:7]}}
   
@@ -39,6 +39,6 @@ test:
     - ilastik
 
 about:
-  home: http://github.com/janelia-flyem/DVIDSparkServices.git
+  home: http://github.com/janelia-flyem/DVIDSparkServices
   license: BSD (3-clause)
   summary: Python framework for EM Spark-based services 
