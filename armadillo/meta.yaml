@@ -1,14 +1,17 @@
 package:
   name: armadillo
-  version: "4.000.2"
+  version: "6.500.5"
 
 source:
-  fn: armadillo-4.000.2.tar.gz
-  url: http://downloads.sourceforge.net/project/arma/armadillo-4.000.2.tar.gz
-  md5: b2891c7b59b96337c154c5d961fd40fb
+  # fn: armadillo-4.000.2.tar.gz
+  # url: http://downloads.sourceforge.net/project/arma/armadillo-4.000.2.tar.gz
+  # md5: b2891c7b59b96337c154c5d961fd40fb
+  fn: armadillo-6.500.5.tar.gz
+  url: http://sourceforge.net/projects/arma/files/armadillo-6.500.5.tar.gz
+  md5: 099f37bc4a3ed55e8fa174695e4ba9f6
 
-  patches:
-    - patches/use_atlas_lapack.diff
+  # patches:
+  #   - patches/use_atlas_lapack.diff
 
 build:
   number: 5

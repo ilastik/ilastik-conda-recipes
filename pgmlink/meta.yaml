@@ -3,11 +3,11 @@ package:
     version: "1.2"
 
 source:
-    git_url: https://github.com/martinsch/pgmlink
+    git_url: https://github.com/ilastik/pgmlink
     git_tag: HEAD 
 
 build:
-  number: 21
+  number: 22
 
   #
   # You must build this recipe using 'conda build --numpy=X.Y'
@@ -22,13 +22,14 @@ build:
 
 requirements:
   build:
+    - libgcc
     - gcc 4.8.5 # [linux]
     - gcc 4.8.5 # [osx]
     - cplex-shared
     - patchelf # [linux]
     - ann
     - boost 1.55.0
-    - python 2.7*
+    - python {{PY_VER}}*
     - numpy >=1.9,{{NPY_VER}}*
     - vigra
     - opengm
@@ -36,7 +37,8 @@ requirements:
     - lemon
     - libxml2
     - dlib
-    - armadillo 4.000.2
+    - libpng 1.5.*
+    - armadillo 6.500.5
     - openblas # [linux]
 
   run:
@@ -47,12 +49,12 @@ requirements:
     - python {{PY_VER}}*
     - numpy  {{NPY_VER}}*
     - vigra
-    - opengm
     - mlpack
     - lemon
+    - libpng 1.5.*
     - libxml2
     - dlib
-    - armadillo
+    - armadillo 6.500.5
     - openblas # [linux]
 
     # We don't require cplex-shared here because it only needs to be installed once per machine,

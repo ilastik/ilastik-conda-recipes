@@ -81,6 +81,7 @@ cmake ..\
     -DVIGRA_NUMPY_CORE_LIBRARY=${PREFIX}/lib/python2.7/site-packages/vigra/vigranumpycore.so \
     -DWITH_CHECKED_STL=OFF\
     -DWITH_TESTS=ON\
+    -DXml2_INCLUDE_DIR=${PREFIX}/include/libxml2 \
     -DCPLEX_ROOT_DIR="${CPLEX_ROOT_DIR}"
 
 make -j${CPU_COUNT}
