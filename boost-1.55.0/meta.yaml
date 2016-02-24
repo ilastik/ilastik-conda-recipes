@@ -16,8 +16,9 @@ source:
 build:
   features:
     - {{toolset.short}}
-  number: 4
+  number: 5
   detect_binary_files_with_prefix: true
+  msvc_compiler: {{toolset.version}}  # [win]
 
 requirements:
   build:

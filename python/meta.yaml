@@ -14,6 +14,7 @@ build:
     - {{toolset.short}}
   features:
     - {{toolset.short}}
+  msvc_compiler: {{toolset.version}}  # [win]
 
 requirements:
   build:

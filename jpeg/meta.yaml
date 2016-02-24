@@ -12,6 +12,7 @@ source:
 build:
   features:
     - {{toolset.short}}
+  msvc_compiler: {{toolset.version}}  # [win]
 
 requirements:
   build:
