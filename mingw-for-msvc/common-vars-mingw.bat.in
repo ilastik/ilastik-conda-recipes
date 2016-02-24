@@ -3,7 +3,7 @@
 call "%~dp0common-vars.bat"
 
 REM find mingw in the PATH
-%DOS_TOOLS%  :capture_output  "where gfortran.exe"  MINGW_PATH
+%DOS_TOOLS%  :full_path  "gfortran.exe"  MINGW_PATH
 if "%MINGW_PATH%"=="" (
     echo MinGW\bin must be in the PATH
     exit 1
@@ -20,7 +20,7 @@ if NOT "%MINGW_VERSION%"=="@PKG_VERSION@" (
 )
 
 REM find compiler bitness
-%DOS_TOOLS%  :capture_output  "where x86_64-w64-mingw32-gcc.exe"  _TMP_MINGW_ARCH
+%DOS_TOOLS%  :full_path  "x86_64-w64-mingw32-gcc.exe"  _TMP_MINGW_ARCH
 if "%_TMP_MINGW_ARCH%"=="" (
     set MINGW_ARCH=32
 ) else (
@@ -32,7 +32,7 @@ if NOT "%ARCH%"=="%MINGW_ARCH%" (
     exit 1
 )
 
-REM find proper MSYS make 
+REM find proper MSYS make
 REM * condition: msysinfo in the same directory
 REM   FIXME: this condition might not be sufficiently portable
 REM * 'make' from conda's unxutils doesn't work

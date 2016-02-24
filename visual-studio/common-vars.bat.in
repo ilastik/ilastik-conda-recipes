@@ -10,7 +10,7 @@ REM    %DOS_TOOLS%  :subroutine  arg1  arg2  ...
 set DOS_TOOLS=call "%~dp0dos-tools.bat"
 
 REM find Visual Studio in the PATH
-%DOS_TOOLS%  :capture_output  "where cl.exe"  VISUAL_STUDIO_PATH
+%DOS_TOOLS%  :full_path  "cl.exe"  VISUAL_STUDIO_PATH
 if "%VISUAL_STUDIO_PATH%"=="" (
     echo Visual Studio must be in the PATH
     exit 1
@@ -59,7 +59,7 @@ REM find vcvarsall.bat
 call set _TMP_SUFFIX=%%VISUAL_STUDIO_PATH:*%VISUAL_STUDIO_VERSION%\VC=%%
 call set VISUAL_STUDIO_VCVARSALL=%%VISUAL_STUDIO_PATH:%_TMP_SUFFIX%=\VCVARSALL.BAT%%
 
-REM find MSYS (so that we can remove it from the PATH when necessary) 
+REM find MSYS (so that we can remove it from the PATH when necessary)
 REM * condition: msysinfo in the same directory
 REM   FIXME: this condition might not be sufficiently portable
 FOR /F "delims=" %%i IN ('where make.exe') DO %DOS_TOOLS% :find_msys_make %%i MSYS_PATH
