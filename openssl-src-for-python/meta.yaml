@@ -10,6 +10,9 @@ source:
   git_url: https://github.com/openssl/openssl
   git_tag: OpenSSL_1_0_2a
 
+build:
+  number: 2
+
 about:
   home: https://www.openssl.org/
   license: OpenSSL License (BSD style)
