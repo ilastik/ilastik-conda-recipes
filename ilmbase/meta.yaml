@@ -1,0 +1,27 @@
+{% import '$CONDA_ACTIVE_ENV/toolset-info/config.yaml' as toolset %}
+
+package:
+  name: ilmbase
+  version: "2.2.0{{toolset.suffix}}"
+
+source:
+    fn:  ilmbase-2.2.0.tar.gz
+    md5: b540db502c5fa42078249f43d18a4652
+    url: http://download.savannah.nongnu.org/releases/openexr/ilmbase-2.2.0.tar.gz
+
+build:
+  features:
+    - {{toolset.short}}
+  msvc_compiler: {{toolset.version}}  # [win]
+
+requirements:
+  build:
+    - {{toolset.build_requirement}}
+
+  run:
+    - {{toolset.run_requirement}}
+
+about:
+  home: http://www.openexr.com/
+  license: BSD
+  summary: high dynamic-range (HDR) image file format

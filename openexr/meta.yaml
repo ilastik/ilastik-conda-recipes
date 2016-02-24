@@ -1,0 +1,31 @@
+{% import '$CONDA_ACTIVE_ENV/toolset-info/config.yaml' as toolset %}
+
+package:
+  name: openexr
+  version: "2.2.0{{toolset.suffix}}"
+
+source:
+    fn:  openexr-2.2.0.tar.gz
+    md5: b64e931c82aa3790329c21418373db4e
+    url: http://download.savannah.nongnu.org/releases/openexr/openexr-2.2.0.tar.gz
+
+build:
+  features:
+    - {{toolset.short}}
+  msvc_compiler: {{toolset.version}}  # [win]
+
+requirements:
+  build:
+    - {{toolset.build_requirement}}
+    - zlib  *{{toolset.suffix}}
+    - ilmbase  *{{toolset.suffix}}
+
+  run:
+    - {{toolset.run_requirement}}
+    - zlib  *{{toolset.suffix}}
+    - ilmbase  *{{toolset.suffix}}
+
+about:
+  home: http://www.openexr.com/
+  license: BSD
+  summary: high dynamic-range (HDR) image file format
