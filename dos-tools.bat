@@ -10,7 +10,7 @@ goto :eof
     call set "%~2=%_TMP_PATH:\=/%"
     if "%_TMP_PATH%"=="" set %~2=
     goto :EOF
-    
+
 @REM convert forward slashes to backward slashes
 @REM   :to_dos_path "path" OUT_VAR
 :to_dos_path
@@ -18,9 +18,20 @@ goto :eof
     call set "%~2=%_TMP_PATH:/=\%"
     if "%_TMP_PATH%"=="" set %~2=
     goto :EOF
-    
+
+@REM find the full path of a command
+@REM   :full_path "command" OUT_VAR
+:full_path
+    set %~2=
+    FOR /F "delims=" %%i IN ('where %~1') DO (
+        set %~2=%%i
+        goto :EOF
+    )
+    goto :EOF
+
 @REM capture the output of a command (like backticks in sh), but
 @REM it understands only simple commands without pipes and quotes
+@REM when the output had multiple line, only the LAST line is returned
 @REM   :capture_output "command" OUT_VAR
 :capture_output
     set %~2=
@@ -51,12 +62,12 @@ goto :eof
     del "%temp%\_tmp_path.bat"
     goto :eof
 
-@REM helper function for remove_from_PATH 
+@REM helper function for remove_from_PATH
 @REM (creates a command that sets the desired PATH)
 :remove_from_PATH_impl
     @echo off
-    SETLOCAL ENABLEDELAYEDEXPANSION 
-    
+    SETLOCAL ENABLEDELAYEDEXPANSION
+
     @REM  ~f = remove quotes, full path
     set _TMP_PATH=%~f1
 
@@ -71,7 +82,7 @@ goto :eof
             set _NEW_PATH=!_NEW_PATH!%%~i;
         )
     )
-    @REM remove trailing ; (adding ; in each iteration is necessary to keep 
+    @REM remove trailing ; (adding ; in each iteration is necessary to keep
     @REM the empty path in the PATH)
     set _NEW_PATH=%_NEW_PATH:~0,-1%
     echo set PATH=!_NEW_PATH!
