@@ -1,5 +1,5 @@
 package:
-  # header-ony library
+  # header-only library
   name: eigen
   version: "3.2.6"
 

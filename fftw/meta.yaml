@@ -1,4 +1,4 @@
-{% import '$CONDA_ACTIVE_ENV/toolset-info/config.yaml' as toolset %}
+{% import '$CONDA_DEFAULT_ENV/toolset-info/config.yaml' as toolset %}
 
 # Credits to jeanconn for the package https://binstar.org/jeanconn/fftw
 package:
@@ -16,6 +16,7 @@ build:
     - {{toolset.short}}
   number: 1
   detect_binary_files_with_prefix: true
+  msvc_compiler: {{toolset.version}}  # [win]
 
 # Note: tests are run when building the package, they are not accessible
 # in the installed package.

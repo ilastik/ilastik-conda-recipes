@@ -1,4 +1,4 @@
-{% import '$CONDA_ACTIVE_ENV/toolset-info/config.yaml' as toolset %}
+{% import '$CONDA_DEFAULT_ENV/toolset-info/config.yaml' as toolset %}
 
 package:
   name: pyqt
@@ -26,6 +26,7 @@ build:
     - {{toolset.short}}
   number: 6
   detect_binary_files_with_prefix: true
+  msvc_compiler: {{toolset.version}}  # [win]
 
 requirements:
   build:
@@ -39,7 +40,7 @@ requirements:
     # - sip     >=4.16.4,*{{toolset.suffix}}
     - sip     >=4.16.4                    # [unix]
     - sip     4.16.9{{toolset.suffix}}    # [win]
-    
+
   run:
     - {{toolset.run_requirement}}
     - python 2.7.*{{toolset.suffix}}
@@ -49,7 +50,7 @@ requirements:
     - sip     >=4.16.4                   # [unix]
     - sip     4.16.9{{toolset.suffix}}   # [win]
 
-test: 
+test:
   imports:
     - PyQt4
 

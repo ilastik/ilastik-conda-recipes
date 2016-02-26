@@ -1,4 +1,4 @@
-{% import '$CONDA_ACTIVE_ENV/toolset-info/config.yaml' as toolset %}
+{% import '$CONDA_DEFAULT_ENV/toolset-info/config.yaml' as toolset %}
 
 package:
   name: pandas
@@ -13,6 +13,7 @@ build:
   string: {{ environ.get('GIT_BUILD_STR', '') }}
   features:
     - {{toolset.short}}
+  msvc_compiler: {{toolset.version}}  # [win]
 
 requirements:
   build:

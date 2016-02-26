@@ -1,4 +1,4 @@
-{% import '$CONDA_ACTIVE_ENV/toolset-info/config.yaml' as toolset %}
+{% import '$CONDA_DEFAULT_ENV/toolset-info/config.yaml' as toolset %}
 
 package:
     name: ann
@@ -17,13 +17,14 @@ build:
     - {{toolset.short}}
   number: 1
   detect_binary_files_with_prefix: true
+  msvc_compiler: {{toolset.version}}  # [win]
 
 requirements:
   build:
     - {{toolset.build_requirement}}
     # - gcc 4.8.2.99                   # [linux]
     # - gcc 4.8.2                      # [osx]
-    
+
   run:
     # - libgcc                         # [unix]
     - {{toolset.run_requirement}}

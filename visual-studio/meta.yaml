@@ -8,4 +8,5 @@ build:
   features:
     - vc14
   number: 0
+  msvc_compiler: 14.0  # [win]
 

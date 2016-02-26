@@ -1,4 +1,4 @@
-{% import '$CONDA_ACTIVE_ENV/toolset-info/config.yaml' as toolset %}
+{% import '$CONDA_DEFAULT_ENV/toolset-info/config.yaml' as toolset %}
 
 package:
     name: opengm
@@ -15,6 +15,7 @@ build:
   number: 7
   string: 7_g0e55e0b
   detect_binary_files_with_prefix: true
+  msvc_compiler: {{toolset.version}}  # [win]
 
 requirements:
   build:
@@ -35,7 +36,7 @@ requirements:
     - hdf5     1.8.14                  # [unix]
     - hdf5     1.8.*{{toolset.suffix}} # [win]
 
-# FIXME: upgrade opengm to make the Python bindings work on Windows 
+# FIXME: upgrade opengm to make the Python bindings work on Windows
 test:          # [unix]
   imports:     # [unix]
     - opengm   # [unix]

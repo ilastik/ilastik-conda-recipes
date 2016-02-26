@@ -1,4 +1,4 @@
-{% import '$CONDA_ACTIVE_ENV/toolset-info/config.yaml' as toolset %}
+{% import '$CONDA_DEFAULT_ENV/toolset-info/config.yaml' as toolset %}
 
 package:
   name: ilastiktools
@@ -14,6 +14,7 @@ build:
   number: 1
   detect_binary_files_with_prefix: true
   string: 1_aec44a7
+  msvc_compiler: {{toolset.version}}  # [win]
 
 requirements:
   build:

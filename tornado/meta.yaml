@@ -1,4 +1,4 @@
-{% import '$CONDA_ACTIVE_ENV/toolset-info/config.yaml' as toolset %}
+{% import '$CONDA_DEFAULT_ENV/toolset-info/config.yaml' as toolset %}
 
 package:
   name: tornado
@@ -12,6 +12,7 @@ source:
 build:
   features:
     - {{toolset.short}}
+  msvc_compiler: {{toolset.version}}  # [win]
 
 requirements:
   build:
@@ -25,7 +26,7 @@ requirements:
     - python 2.7.*{{toolset.suffix}}
     - certifi
     - ssl_match_hostname
-    
+
 about:
   home: https://pypi.python.org/pypi/tornado
   license: Apache license

@@ -1,4 +1,4 @@
-{% import '$CONDA_ACTIVE_ENV/toolset-info/config.yaml' as toolset %}
+{% import '$CONDA_DEFAULT_ENV/toolset-info/config.yaml' as toolset %}
 
 about:
   summary: "A meta-package for building all ilastik dependencies and downloading the ilastik-meta repo."
@@ -18,7 +18,7 @@ build:
 requirements:
   build:
     - {{toolset.build_requirement}}
-    - ilastik-everything-but-tracking 
+    - ilastik-everything-but-tracking
     - ilastik-deps-tracking            *{{toolset.suffix}}
     - ilastik-versions                 *{{toolset.suffix}}
 
@@ -30,7 +30,7 @@ requirements:
 test:
   requires:
     - nose
-    
+
   imports:
     - lazyflow
     - volumina
