@@ -1,8 +1,8 @@
-{% import '$CONDA_ACTIVE_ENV/toolset-info/config.yaml' as toolset %}
+{% import '$CONDA_DEFAULT_ENV/toolset-info/config.yaml' as toolset %}
 
 package:
   name: ilastik-versions
-  version: "1.1{{toolset.suffix}}"
+  version: "1.1.9{{toolset.suffix}}"
 
 build:
   track_features:
@@ -112,5 +112,7 @@ requirements:
     - vigra                     1.10post1{{toolset.suffix}} # [win]
     - vtk                       5.10.1.99                 # [unix]
     - vtk                       5.10.1{{toolset.suffix}}  # [win]
+    - xz                        5.10.5                    # [unix]
+    - xz                        5.10.8                    # [win]
     - yapsy                     1.10.423
     - zlib                      1.2.8{{toolset.suffix}}
