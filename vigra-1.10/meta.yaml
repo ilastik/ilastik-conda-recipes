@@ -2,11 +2,11 @@
 
 package:
   name: vigra
-  version: "1.11.0rc0{{toolset.suffix}}"
+  version: "1.10post1{{toolset.suffix}}"
 
 source:
   git_url: git://github.com/ukoethe/vigra.git
-  git_tag: version-1-11-rc
+  git_tag: ca2246798fed70e8a7bd0994f22ee9f857e9aba0 # 2015-10-30
 
 build:
   features:
@@ -16,9 +16,9 @@ build:
    - LD_LIBRARY_PATH      # [unix]
    - DYLD_LIBRARY_PATH    # [unix]
 
-  number: 0
+  number: 10
   detect_binary_files_with_prefix: true
-#  string: 10_ca22467
+  string: 10_ca22467
   msvc_compiler: {{toolset.version}}  # [win]
 
 requirements:
@@ -57,9 +57,9 @@ requirements:
     - boost    1.55.*{{toolset.suffix}}
 #    - zlib     1.2*
 
-# test:
-  # imports:
-    # - vigra
+test:
+  imports:
+    - vigra
 
 about:
   home: http://ukoethe.github.io/vigra
