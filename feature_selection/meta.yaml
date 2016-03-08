@@ -1,0 +1,35 @@
+{% import '$CONDA_DEFAULT_ENV/toolset-info/config.yaml' as toolset %}
+
+package:
+    name: feature_selection
+    version: "1.0{{toolset.suffix}}"
+
+source:
+    git_url: https://bitbucket.org/FabianIsensee/feature_selection_clean
+    git_tag: cfbd4852574e9a9fa3f155774dd5071752e987d6
+
+build:
+  features:
+    - {{toolset.short}}
+  number: 0
+  msvc_compiler: {{toolset.version}}  # [win]
+
+requirements:
+  build:
+    - {{toolset.build_requirement}}
+    - python  2.7.*{{toolset.suffix}}
+    - numpy   *{{toolset.suffix}}
+    - cython  *{{toolset.suffix}}
+    - scikit-learn *{{toolset.suffix}}
+
+  run:
+    - {{toolset.run_requirement}}
+    - python  2.7.*{{toolset.suffix}}
+    - numpy   *{{toolset.suffix}}
+    - scikit-learn *{{toolset.suffix}}
+
+about:
+    home: https://bitbucket.org/FabianIsensee/feature_selection_clean
+    license: MIT
+    summary: feature selection library
+
