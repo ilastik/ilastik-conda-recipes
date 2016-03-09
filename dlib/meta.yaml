@@ -18,13 +18,13 @@ requirements:
   build:
     - gcc 4.8.5 # [linux]
     - gcc 4.8.5 # [osx]
-    - libpng
+    - libpng 1.6.17
     - jpeg
     - sqlite
 
   run:
-    - libgcc
-    - libpng
+    - libgcc 4.8.5
+    - libpng 1.6.17
     - jpeg
     - sqlite
 
