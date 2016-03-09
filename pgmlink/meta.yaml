@@ -29,7 +29,7 @@ requirements:
     - boost 1.55.0
     - python {{PY_VER}}*
     - numpy >=1.9,{{NPY_VER}}*
-    - vigra
+    - vigra 1.10*
     - opengm
     - mlpack
     - lemon
@@ -46,7 +46,7 @@ requirements:
     - boost 1.55.0
     - python {{PY_VER}}*
     - numpy  {{NPY_VER}}*
-    - vigra
+    - vigra 1.10*
     - mlpack
     - lemon
     - libpng 1.6.17
