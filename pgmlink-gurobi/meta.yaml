@@ -6,6 +6,17 @@ source:
     git_url: https://github.com/stuarteberg/pgmlink
     git_tag: HEAD
 
+build:
+  number: 3
+
+  #
+  # You must build this recipe using 'conda build --numpy=X.Y'
+  #
+  string: gurobi_np{{np}}py{{py}}_{{PKG_BUILDNUM}}_g{{GIT_FULL_HASH[:7]}}
+
+  script_env:
+     - GUROBI_ROOT_DIR
+
 requirements:
     build:
       - gcc 4.8.5 # [linux]
@@ -15,7 +26,7 @@ requirements:
       - boost 1.55.0
       - python
       - numpy
-      - vigra
+      - vigra 1.10*
       - opengm
       - mlpack
       - lemon
@@ -28,7 +39,7 @@ requirements:
       - boost 1.55.0
       - python
       - numpy
-      - vigra
+      - vigra 1.10*
       - opengm
       - mlpack
       - lemon
@@ -38,11 +49,6 @@ requirements:
       # and requiring it here would include all of gcc in the install lib dir.
       # Instead, we give the user a descriptive error message if cplex-shared hasn't been run on her machine.
       # - cplex-shared
-
-build:
-  script_env:
-     - GUROBI_ROOT_DIR
-  number: 2
 
 test:
   imports:
