@@ -12,7 +12,7 @@ source:
     - CMakeLists.txt.patch_2 # Allow linking external jpeg, even on Mac OSX
 
 build:
-  number: 2
+  number: 3
 
 requirements:
   build:
@@ -21,12 +21,14 @@ requirements:
     - libpng 1.6.17
     - jpeg
     - sqlite
+    - openblas # [linux]
 
   run:
     - libgcc 4.8.5
     - libpng 1.6.17
     - jpeg
     - sqlite
+    - openblas # [linux]
 
 about:
   home: http://dlib.net
