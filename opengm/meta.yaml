@@ -1,21 +1,32 @@
 package:
     name: opengm
-    version: "2.3.4"
+    version: "2.3.6.post1"
 
 source:
-    git_url: https://github.com/opengm/opengm.git
-    git_tag: 0e55e0ba9db734c58349024e898121e2f9315c06
+    #git_url: https://github.com/opengm/opengm
+    #git_tag: 3f68450da8b3c7ef11e2614c4a0acf5866851115 # 2015-12-10
+    git_url: https://github.com/stuarteberg/opengm
+    git_tag: fix-apple
 
 build:
-  {% set build_num = 8 %}
+  {% set build_num = 9 %}
   number: {{ build_num }}
+
+  {% if WITH_CPLEX %}
+      {% set cplex_string = '_with_cplex' %}
+  {% else %}
+      {% set cplex_string = '' %}
+  {% endif %}
 
   #
   # You must build this recipe using 'conda build --numpy=X.Y'
   #
-  string: np{{CONDA_NPY[:]}}py{{CONDA_PY}}_{{build_num}}_g{{GIT_FULL_HASH[:7]}}
+  string: np{{CONDA_NPY[:]}}py{{CONDA_PY}}_{{build_num}}_g{{GIT_FULL_HASH[:7]}}{{cplex_string}}
 
   detect_binary_files_with_prefix: true
+  script_env:
+     - WITH_CPLEX
+     - CPLEX_ROOT_DIR
 
 requirements:
   build:
