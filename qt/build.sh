@@ -15,8 +15,10 @@ if [ `uname` == 'Darwin' ]; then
 
     CXXFLAGS="-stdlib=libstdc++"
     EXTRA_QT4_CONFIG_FLAGS="-cocoa -L/usr/X11/lib -I/usr/X11/include -arch x86_64"
+    OPT_FLAG='-openssl -no-framework'
 else
     EXTRA_QT4_CONFIG_FLAGS=""
+    OPT_FLAG=''
 fi
 
 # pipe "yes" to stdin to accept the license.
@@ -27,9 +29,8 @@ echo "yes" | ./configure \
     -fast \
     -opensource \
     -verbose \
-    -openssl \
     -optimized-qmake \
-    -no-framework \
+    $OPT_FLAG \
     -nomake examples \
     -nomake demos \
     -nomake docs \
