@@ -7,14 +7,12 @@ source:
     git_tag: HEAD 
 
 build:
-  number: 22
+  number: 23
 
   #
   # You must build this recipe using 'conda build --numpy=X.Y'
-  # Edit: Until conda 1.18.3 is released, you must use the following command:
-  #       CONDA_NPY=19 CONDA_PY=27 GIT_FULL_HASH='' conda build pgmlink
   #
-  string: np{{CONDA_NPY[:]}}py{{CONDA_PY}}_{{PKG_BUILDNUM}}_g{{GIT_FULL_HASH[:7]}}
+  string: np{{np}}py{{py}}_{{PKG_BUILDNUM}}_g{{GIT_FULL_HASH[:7]}}
 
   detect_binary_files_with_prefix: true
   script_env:
@@ -37,7 +35,7 @@ requirements:
     - lemon
     - libxml2
     - dlib
-    - libpng 1.5.*
+    - libpng 1.6.17
     - armadillo 6.500.5
     - openblas # [linux]
 
@@ -51,7 +49,7 @@ requirements:
     - vigra
     - mlpack
     - lemon
-    - libpng 1.5.*
+    - libpng 1.6.17
     - libxml2
     - dlib
     - armadillo 6.500.5
