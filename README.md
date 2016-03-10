@@ -40,7 +40,7 @@ Here's how to install everything you need to develop ilastik.
 
 [Miniconda]: http://conda.pydata.org/miniconda.html
 
-```
+```bash
 # Install miniconda to the prefix of your choice, e.g. /my/miniconda
 
 # LINUX:
@@ -61,7 +61,7 @@ source ${CONDA_ROOT}/bin/activate root
 
 To install everything but tracking, this command is enough:
 
-```
+```bash
 conda create -n ilastik-devel -c ilastik ilastik-everything-but-tracking
 ``` 
 
@@ -78,14 +78,14 @@ and also recorded the value of `CPLEX_ROOT_DIR` to your root directory.
 
 Now you can install everything, including tracking:
 
-```
+```bash
 conda create -n ilastik-devel -c ilastik ilastik-everything
 ```
 
 2. Run ilastik
 --------------
 
-```
+```bash
 ${CONDA_ROOT}/envs/ilastik-devel/run_ilastik.sh --debug
 ```
 
@@ -96,7 +96,7 @@ So far, our environment contains the ilastik source, but not the git repos.
 If you need to edit the ilastik python code,
 replace the `ilastik-meta` directory with the full git repo.
 
-```
+```bash
 CONDA_ROOT=`conda info --root`
 DEV_PREFIX=${CONDA_ROOT}/envs/ilastik-devel
 conda remove -n ilastik-devel ilastik-meta
@@ -192,7 +192,7 @@ The Mac packages were built with `MACOSX_DEPLOYMENT_TARGET=10.7`, so they should
 
 But if, for some reason, you need to build your own binary packages from these recipes, it should be easy to do so:
 
-```
+```bash
 # Prerequisite: Install conda-build and jinja2
 source activate root
 conda install conda-build jinja2
@@ -210,7 +210,7 @@ conda install --use-local -n ilastik-devel vigra
 
 Now run ilastik from with your ilastik meta-repo:
 
-```
+```bash
 cd /path/to/ilastik-meta
 
 # Run ilastik
@@ -229,7 +229,7 @@ The [conda documentation][2] explains in detail how to create a new package, but
 0. Prerequisite: Install `conda-build`
 --------------------------------------
 
-```
+```bash
 source activate root
 conda install conda-build jinja2
 ```
@@ -239,7 +239,7 @@ conda install conda-build jinja2
 
 Add a directory to this repo:
 
-```
+```bash
 cd ilastik-build-conda
 mkdir somepackage
 cd somepackage
@@ -255,7 +255,7 @@ A complete recipe has at least 3 files:
 
 Write **meta.yaml**:
 
-```
+```yaml
 $ cat > meta.yaml
 package:
   name: somepackage
@@ -291,7 +291,7 @@ make install
 
 Write **bld.bat**:
 
-```
+```bat
 $ cat > bld.bat
 mkdir build
 cd build
@@ -311,7 +311,7 @@ if errorlevel 1 exit 1
 2. Build the package
 --------------------
 
-```
+```bash
 # Switch back to the `ilastik-build-conda` directory
 $ cd ../
 
@@ -322,7 +322,7 @@ $ conda build somepackage
 3. Upload the package to your [anaconda] channel.
 ------------------------------------------------
 
-```
+```bash
 conda install anaconda-client
 
 # Upload to your personal channel:
@@ -348,7 +348,7 @@ support on old OSes, such as our CentOS 5.11 build VM.
 
 To use the gcc package, add these requirements to your `meta.yaml` file:
 
-```
+```yaml
 requirements:
   build:
     - gcc 4.8.5 # [linux]
@@ -359,7 +359,7 @@ requirements:
 
 And in `build.sh`, make sure you use the right `gcc` executable.  For example:
 
-```
+```bash
 export CC=${PREFIX}/bin/gcc
 export CXX=${PREFIX}/bin/g++
 
