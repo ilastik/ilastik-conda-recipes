@@ -11,7 +11,7 @@ build:
 requirements:
   run:
     - ann                       1.1.2     
-    - armadillo                 4.000.2   
+    - armadillo                 6.500.5   
     #- blist                     1.3.6 # Only needed by deprecated operators     
     - boost                     1.55.0    
     - cloog                     0.18.0    
