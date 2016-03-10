@@ -7,7 +7,7 @@ source:
   git_tag: "v1.1.3"
 
 build:
-  number: 0
+  number: 1
 
 requirements:
   build:
@@ -19,4 +19,5 @@ requirements:
 about:
   home: http://www.cs.man.ac.uk/~gbrown/fstoolbox/
   license: BSD
+  license_file: LICENSE
   summary: 'A FEAture Selection Toolbox for C/C++ & Matlab/Octave.'

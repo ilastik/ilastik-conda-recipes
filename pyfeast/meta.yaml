@@ -10,7 +10,7 @@ source:
     - fix-toolbox-location.patch
 
 build:
-  number: 0
+  number: 1
 
 requirements:
   build:
@@ -30,4 +30,5 @@ test:
 about:
   home: https://github.com/mutantturkey/PyFeast
   license: GPLv3
+  license_file: LICENSE.txt
   summary: 'A Python interface to the Feature Selection Toolkit, contains JMI, BetaGamma, CMIM, CondMI, DISR, ICAP, and mRMR'
