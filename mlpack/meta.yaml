@@ -12,7 +12,7 @@ source:
 build:
   features:
     - {{toolset.short}}
-  number: 3
+  number: 4
   detect_binary_files_with_prefix: true
   msvc_compiler: {{toolset.version}}  # [win]
 
@@ -23,7 +23,7 @@ requirements:
     # - gcc 4.8.2                      # [osx]
     - mingw-for-msvc-build             # [win] (needed for MSYS patch.exe)
     - boost  1.55.*{{toolset.suffix}}
-    - armadillo   *{{toolset.suffix}}
+    - armadillo   6.500.5{{toolset.suffix}}
     - libxml2     *{{toolset.suffix}}
     - hdf5    1.8.*{{toolset.suffix}}  # [win]
 
@@ -31,7 +31,7 @@ requirements:
     - {{toolset.run_requirement}}
     # - libgcc                         # [unix]
     - boost  1.55.*{{toolset.suffix}}
-    - armadillo   *{{toolset.suffix}}
+    - armadillo   6.500.5{{toolset.suffix}}
     - libxml2     *{{toolset.suffix}}
     - hdf5    1.8.*{{toolset.suffix}}  # [win]
 

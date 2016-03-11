@@ -1,6 +1,24 @@
 diff -rupN CMakeLists.txt CMakeLists.txt
 --- CMakeLists.txt	Tue Jan  7 04:16:30 2014
 +++ CMakeLists.txt	Tue Feb 25 16:29:22 2014
+@@ -94,7 +94,7 @@ endif(CMAKE_SIZEOF_VOID_P EQUAL 8)
+ # script Armadillo uses to find these.
+ if (WIN32)
+   find_library(LAPACK_LIBRARY
+-      NAMES lapack liblapack lapack_win32_MT lapack_win32
++      NAMES libopenblas lapack liblapack lapack_win32_MT lapack_win32
+       PATHS "C:/Program Files/Armadillo"
+       PATH_SUFFIXES "examples/lib_win32/")
+ 
+@@ -103,7 +103,7 @@ if (WIN32)
+   endif (NOT LAPACK_LIBRARY)
+ 
+   find_library(BLAS_LIBRARY
+-      NAMES blas libblas blas_win32_MT blas_win32
++      NAMES libopenblas blas libblas blas_win32_MT blas_win32
+       PATHS "C:/Program Files/Armadillo"
+       PATH_SUFFIXES "examples/lib_win32/")
+ 
 @@ -206,7 +206,10 @@ endif (WIN32)
  # For Boost testing framework (will have no effect on non-testing executables).
  # This specifies to Boost that we are dynamically linking to the Boost test
