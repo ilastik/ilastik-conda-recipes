@@ -5,17 +5,14 @@ package:
     version: "1.2{{toolset.suffix}}"
 
 source:
-    #git_url: https://github.com/martinsch/pgmlink
-    #git_tag: ce86cf509b60aaceb4e4bcf392698c2fc6e7e1fd
-
-    git_url: https://github.com/martinsch/pgmlink
-    git_tag: c944c6764a85b88e94ff12c38baa1a8172d9be72 # Version for ilastik 1.1.7
+    git_url: https://github.com/ilastik/pgmlink
+    git_tag: HEAD
 
 build:
   features:
     - {{toolset.short}}
-  number: 12
-  string: 12_gc944c67
+  number: 13
+  string: {{PKG_BUILDNUM}}_g{{GIT_FULL_HASH[:7]}}
   script_env:
      - CPLEX_ROOT_DIR
   detect_binary_files_with_prefix: true
@@ -32,14 +29,14 @@ requirements:
     - patchelf                            # [linux]
     - ann     *{{toolset.suffix}}
     - boost 1.55.*{{toolset.suffix}}
-    - vigra   *{{toolset.suffix}}
+    - vigra   1.10*{{toolset.suffix}}
     - opengm  *{{toolset.suffix}}
     - mlpack  *{{toolset.suffix}}
     - lemon   *{{toolset.suffix}}
     - libxml2 *{{toolset.suffix}}
     - dlib                                # [unix]
     - armadillo 4.000.2                   # [unix]
-    - armadillo 4.320.*{{toolset.suffix}} # [win]
+    - armadillo 6.500.*{{toolset.suffix}} # [win]
 
   run:
     - {{toolset.run_requirement}}
@@ -49,14 +46,14 @@ requirements:
     - patchelf                            # [linux]
     - ann     *{{toolset.suffix}}
     - boost 1.55.*{{toolset.suffix}}
-    - vigra   *{{toolset.suffix}}
+    - vigra   1.10*{{toolset.suffix}}
     - opengm  *{{toolset.suffix}}
     - mlpack  *{{toolset.suffix}}
     - lemon   *{{toolset.suffix}}
     - libxml2 *{{toolset.suffix}}
     - dlib                                # [unix]
     - armadillo 4.000.2                   # [unix]
-    - armadillo 4.320.*{{toolset.suffix}} # [win]
+    - armadillo 6.500.*{{toolset.suffix}} # [win]
 
     # We don't require cplex-shared here because it only needs to be installed once per machine,
     # and requiring it here would include all of gcc in the install lib dir.
