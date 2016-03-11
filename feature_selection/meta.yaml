@@ -5,13 +5,14 @@ package:
     version: "1.0{{toolset.suffix}}"
 
 source:
-    git_url: https://bitbucket.org/FabianIsensee/feature_selection_clean
-    git_tag: cfbd4852574e9a9fa3f155774dd5071752e987d6
+    git_url: https://github.com/ilastik/ilastik-feature-selection
+    git_tag: HEAD
 
 build:
   features:
     - {{toolset.short}}
-  number: 0
+  number: 1
+  string: {{PKG_BUILDNUM}}_g{{GIT_FULL_HASH[:7]}}
   msvc_compiler: {{toolset.version}}  # [win]
 
 requirements:
