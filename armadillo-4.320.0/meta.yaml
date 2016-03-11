@@ -2,17 +2,25 @@
 
 package:
   name: armadillo
-  version: "6.500.5{{toolset.suffix}}"
+  version: "4.000.2{{toolset.suffix}}" # [unix]
+  version: "4.320.0{{toolset.suffix}}" # [win]
 
 source:
-  fn: armadillo-6.500.5.tar.gz
-  url: http://sourceforge.net/projects/arma/files/armadillo-6.500.5.tar.gz
-  md5: 099f37bc4a3ed55e8fa174695e4ba9f6
+  fn:  armadillo-4.000.2.tar.gz                                                # [unix]
+  url: http://downloads.sourceforge.net/project/arma/armadillo-4.000.2.tar.gz  # [unix]
+  md5: b2891c7b59b96337c154c5d961fd40fb                                        # [unix]
+
+  fn:  armadillo-4.320.0.tar.gz                                                # [win]
+  url: http://sourceforge.net/projects/arma/files/armadillo-4.320.0.tar.gz     # [win]
+  md5: d174ebcb5bffde6c8da8f47f06147386                                        # [win]
+
+  patches:  # [unix]
+    - patches/use_atlas_lapack.diff  # [unix]
 
 build:
   features:
     - {{toolset.short}}
-  number: 0
+  number: 3
   detect_binary_files_with_prefix: true
   msvc_compiler: {{toolset.version}}  # [win]
 
