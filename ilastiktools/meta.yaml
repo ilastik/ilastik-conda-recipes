@@ -2,18 +2,18 @@
 
 package:
   name: ilastiktools
-  version: "0.1post1{{toolset.suffix}}"
+  version: "0.1post2{{toolset.suffix}}"
 
 source:
   git_url: git://github.com/ilastik/ilastiktools.git
-  git_tag: aec44a7b6b3f9504fe50858b2ea054dc52dc7678
+  git_tag: 6cdd7d2663b2f3ab0a2428c5b1d7c0bf94801027
 
 build:
   features:
     - {{toolset.short}}
   number: 1
   detect_binary_files_with_prefix: true
-  string: 1_aec44a7
+  string: 1_6cdd7d2
   msvc_compiler: {{toolset.version}}  # [win]
 
 requirements:
@@ -23,14 +23,14 @@ requirements:
     # - gcc 4.8.2                      # [osx]
     - python   2.7.*{{toolset.suffix}}
     - numpy    >=1.10,*{{toolset.suffix}}
-    - vigra    *{{toolset.suffix}}
+    - vigra    1.10*{{toolset.suffix}}
 
   run:
     - {{toolset.run_requirement}}
     # - libgcc             # [unix]
     - python   2.7.*{{toolset.suffix}}
     - numpy    >=1.10,*{{toolset.suffix}}
-    - vigra    *{{toolset.suffix}}
+    - vigra    1.10*{{toolset.suffix}}
 
 test:
   imports:
