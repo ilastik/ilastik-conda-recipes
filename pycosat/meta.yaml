@@ -1,0 +1,30 @@
+{% import '$CONDA_DEFAULT_ENV/toolset-info/config.yaml' as toolset %}
+
+package:
+  name: pycosat
+  version: "0.6.1{{toolset.suffix}}"
+
+source:
+  fn:  pycosat-0.6.1.tar.gz
+  url: https://pypi.python.org/packages/source/p/pycosat/pycosat-0.6.1.tar.gz
+  md5: c1fc35b17865f5f992595ae0362f9f9f
+
+build:
+  features:
+    - {{toolset.short}}
+  msvc_compiler: {{toolset.version}}  # [win]
+
+requirements:
+  build:
+    - {{toolset.build_requirement}}
+    - python   2.7.*{{toolset.suffix}}
+    - setuptools
+
+  run:
+    - {{toolset.run_requirement}}
+    - python
+
+about:
+  home: https://github.com/ContinuumIO/pycosat
+  license: MIT
+  summary: bindings to picosat (a SAT solver)

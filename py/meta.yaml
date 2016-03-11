@@ -1,0 +1,22 @@
+package:
+  # pure python
+  name: py
+  version: "1.4.31"
+
+source:
+  fn:  py-1.4.31.tar.gz
+  url: https://pypi.python.org/packages/source/p/py/py-1.4.31.tar.gz
+  md5: 5d2c63c56dc3f2115ec35c066ecd582b
+
+requirements:
+  build:
+    - python
+    - setuptools
+
+  run:
+    - python
+
+about:
+  home: http://pylib.readthedocs.org/
+  license: MIT
+  summary: Python development support library
