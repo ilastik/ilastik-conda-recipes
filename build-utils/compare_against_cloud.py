@@ -23,8 +23,12 @@ import json
 from collections import namedtuple
 
 from conda.config import rc as condarc
-from conda.resolve import VersionOrder
 from conda_build.metadata import MetaData
+
+try:
+    from conda.version import VersionOrder
+except ImportError:
+    from conda.resolve import VersionOrder
 
 def main():
     parser = argparse.ArgumentParser()
