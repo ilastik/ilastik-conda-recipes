@@ -15,14 +15,11 @@ build:
 # In general, we don't specify exact version requirements in each sub-package.
 # But this file tracks the versions of all packages used in the release.
 requirements:
-  build:
-    - {{toolset.build_requirement}}
-
   run:
     - {{toolset.run_requirement}}
     - ann                       1.1.2{{toolset.suffix}}
     - armadillo                 4.000.2{{toolset.suffix}} # [unix]
-    - armadillo                 6.500.5{{toolset.suffix}} # [win]
+    - armadillo                 4.320.0{{toolset.suffix}} # [win]
     #- blist                     1.3.6 # Only needed by deprecated operators
     - boost                     1.55.0{{toolset.suffix}}
     # - bzip2-src-for-python      1.0.6 # [win] hard-wired in Python
@@ -115,7 +112,5 @@ requirements:
     - vigra                     1.10post1{{toolset.suffix}} # [win]
     - vtk                       5.10.1.99                 # [unix]
     - vtk                       5.10.1{{toolset.suffix}}  # [win]
-    - xz                        5.10.5                    # [unix]
-    - xz                        5.0.8                     # [win]
     - yapsy                     1.10.423
     - zlib                      1.2.8{{toolset.suffix}}
