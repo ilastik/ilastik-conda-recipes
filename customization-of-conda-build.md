@@ -6,17 +6,17 @@ A major design decision has already been made: conda-build supports jinja2 templ
 
 Before discussing concrete customizations, I'd like to review the general question of how customization information can be passed to conda-build. Various possibilities have been tried:
 
-**environement variables** and **command line options**: For example, the command line
+**Environment variables** and **command line options**: For example, the command line
 ```
 CONDA_PY=33 conda build --numpy=1.9 foo
 ```
-defines the Python and numpy versions to be used in the build. These variables are easily imported into `meta.yaml` by copying them to the global jinja namespace with a command like
+defines the Python and numpy versions to be used in the build. These variables are easily imported into `meta.yaml` by copying them to the global jinja namespace with a Python command like
 ```
 jinja_env.globals.update({'PY_VER': os.environ['CONDA_PY'], 'NPY_VER': args.numpy[0] })
 ```
 They can now be accessed in `meta.yaml` as `{{ PY_VER }}` and `{{ NPY_VER }}` respectively.
 
-**special syntax**: It has been proposed to write
+**Special syntax**: It has been proposed to write
 ```
 requirements:
   build:
@@ -24,7 +24,7 @@ requirements:
   run:
     - python x.x
 ```
-in `meta.yaml` in order to specialize the run requirements to the Python version that was actually present during the build. However, this approach needlessly complicates parsing of `meta.yaml`. When metadata from `<ENV>/conda-meta/*.json` are imported as described below, the same can be achieved with existing jinja syntax:
+in `meta.yaml` in order to specialize the run requirements to the Python version that was actually present during the build. However, this approach needlessly complicates parsing of `meta.yaml`. When metadata from `<ENV>/conda-meta/*.json` are imported as described below, the same can be written with existing jinja syntax:
 ```
 requirements:
   build:
@@ -33,15 +33,15 @@ requirements:
     - python {{ packages['python']['version'] }}
 ```
 
-**jinja configuration files**: While parsing `meta.yaml`, jinja can read variables from external files via the `import` command
+**Jinja configuration files**: While parsing `meta.yaml`, jinja can read variables from external files via the `import` command
 ```
 {% import <PATH_TO_JINJA_FILE> as config %}
 ```
-where `<PATH_TO_JINJA_FILE>` may be a string literal, variable, or query like `environ['CONDA_BUILD_CONFIG']` for an environment variable holding the file name. (For simplicity, I skip certain jinja initializations that may be necessary to make this work.) Variables defined in the jinja file are now available as attributes of the `config` variable.
+where `<PATH_TO_JINJA_FILE>` may be a string literal, variable, or environment variable access (like `environ['CONDA_BUILD_CONFIG']`) holding the file name. (For simplicity, I skip certain jinja initializations that may be necessary to make this work.) Variables defined in the jinja file are now available as attributes of the `config` variable.
 
 Additional possibilities I have not yet seen in practice include:
 
-**json or yaml configuration files**: They are similar to the jinja config files described above, but are passed to conda-build via the command line
+**Json or yaml configuration files**: They are similar to the jinja config files described above, but are passed to conda-build via the command line
 ```
 conda build --config=/path/to/config.json  foo
 ```
@@ -58,9 +58,9 @@ for filename in glob.glob(os.path.join(conda_meta, '*.json')):
     packages[data['name']] = data
 jinja_env.globals.update({'packages': packages })
 ```
-For example, the jinja expression `{{ packages['python']['version'] }}` now returns the Python version in the current environment. (Since versions are probably the most frequently accessed field, one could additionally support the syntax `{{ version['python'] }}`.)
+For example, the jinja expression `{{ packages['python']['version'] }}` now returns the Python version in the current environment. (Since versions are probably the most frequently accessed field, one could additionally support the abbreviated syntax `{{ version['python'] }}`.)
 
-**bootstrap environments**: Here, the user creates a conda environment holding precisely the desired dependency versions/variants and tells conda-build to replicate this setup in the `_build` environment with commands like
+**Bootstrap environments**: Here, the user creates a conda environment holding precisely the desired dependency versions/variants and tells conda-build to replicate this setup in the `_build` environment with commands like
 ```
 conda create -n bootstrap python=3.3 numpy=1.10
 conda build --bootstrap=bootstrap  foo
@@ -73,7 +73,7 @@ conda build --bootstrap  foo   # bootstrap from the active environment
 ```
 This gives users full control over the `_build` environment without requiring a complicated new configuration mechanism. (Dependencies not present in the bootstrap environment are added to the `_build` environment by the usual rules.)
 
-**public database at anaconda.org**: This idea is a bit of science fiction. Whenever a continuous integration server successfully completes a test with a particular combination of package variants, it announces this fact to a central database. Over time, the database will collect a large body of precise compatibility information that can be accessed by conda's version resolution algorithm and conda-build.
+**Public database at anaconda.org**: This idea is a bit of science fiction. Whenever a continuous integration server successfully completes a test with a particular combination of package variants, it announces this fact to a central database. Over time, the database will collect a large body of precise compatibility information that can be accessed by conda's version resolution algorithm and conda-build.
 
 Now let's turn to actual configuration options.
 
@@ -106,9 +106,9 @@ where we assume that the environment variable `CONDA_COMPILER_CONFIG` holds the 
 
 ## Customization of Dependency Versions and Features
 
-It is often necessary to build a package against a specific set of dependency versions, possibly tracking a specific selection of features. The easiest way to achieve this is a bootstrap environment containing the desired dependencies, as described above. Alternatively, one could control build requirements via jinja variables that are imported from a configuration file. In principle, environment variables and command line switches would work as well, but they should probably be restricted to basic cases like Python and numpy (if used at all) because they don't scale to situations where many dependencies must be configured.
+It is often necessary to build a package against a specific set of dependency versions, possibly tracking a specific selection of features. The easiest way to achieve this is a bootstrap environment containing the desired dependencies, as described above. Alternatively, one could control build requirements via jinja variables that are imported from a configuration file. In principle, environment variables and command line switches could be used as well, but they should probably be restricted to basic cases like Python and numpy (if used at all) because they don't scale to situations where many dependencies must be configured.
 
-When features are tracked in the `_build` environment, it is also necessary to insert corresponding `features:` declarations into the present package's `meta.yaml`. An easy solution is to have conda-build create a jinja variable `track_features` that holds a list of all features that were found in the `track_features` fields of `<ENV>/conda-meta/*.json`. The list can be transfered to `meta.yaml` by means of a jinja for-loop:
+When features are tracked in the `_build` environment, it is also necessary to insert corresponding `features:` declarations into the present package's `meta.yaml`. An easy solution is to have conda-build create a jinja variable `track_features` that holds a list of all features that were found in the `track_features` fields of `<ENV>/conda-meta/*.json`. The list can be inserted into `meta.yaml` by means of a jinja for-loop:
 ```
 build:
   features:
@@ -134,11 +134,11 @@ build:
 ```
 If desired, conda can probably be extended to understand both syntax variants simultaneously, so that existing recipes won't break.
 
-SIMD acceleration (such as SSE and AVX) can significantly speed up low-level libraries like openblas and fftw. Configuring for SIMD is a special case, because one can only determine at installation time if the present CPU supports it. Ideally, libraries would include code with and without acceleration in the same binary and branch to the appropriate implementation automatically at execution time. Since not all libraries are implemented this way, it would be useful to provide metapackages like `avx` that fail to install if their *pre-link* script signals that the desired SIMD implementation is unavailable. Otherwise, they define `track_features: - avx`, so that conda will prefer package variants with AVX support, and conda-build will enable compilation with acceleration. However, another difficulty arises because SIMD implementations are backwards compatible: a CPU supporting AVX2 also supports AVX. Thus, when `track_features: - avx2` is active, but a package only provides `features: - avx`, this variant should still be preferred over a variant without any acceleration. Unfortunately, this capability requires a significant enhancement of conda's feature mechanism.
+SIMD acceleration (such as SSE and AVX) can significantly speed up low-level libraries like openblas and fftw. Configuring for SIMD is a special case, because one can only determine at installation time if the present CPU supports it. Ideally, libraries would include code with and without acceleration in the same binary and branch to the appropriate implementation automatically at execution time. Since not all libraries are implemented this way, it would be useful to provide metapackages like `avx` that fail to install if their *pre-link* script signals the desired SIMD implementation to be unavailable. Otherwise, they define `track_features: - avx`, so that conda will prefer package variants with AVX support, and conda-build will enable compilation with acceleration. However, another difficulty arises because SIMD implementations are backwards compatible: a CPU supporting AVX2 also supports AVX. Thus, when `track_features: - avx2` is active, but a package only provides `features: - avx`, this variant should still be preferred over a variant without any acceleration. Unfortunately, this capability requires a significant enhancement of conda's feature mechanism.
 
 ## Specialization of the Run Requirements at Build Time
 
-Suppose package foo depends on package bar and is compatible with all versions above 1.1. Then, `foo/meta.yaml` would read
+Suppose package 'foo' depends on package 'bar' and is compatible with all versions above 1.1. Then, `foo/meta.yaml` would read
 ```
 requirements:
   build:
@@ -164,4 +164,4 @@ requirements:
   run:
     - bar  {{ packages['bar']['version']|compatible }}
 ```
-More sophisticated filters that take parameters, consider optional hints in bar's `index.json` or consult the compatibility database at anaconda.org can be implemented in the same way.
+More sophisticated filters which take parameters, consider optional hints in bar's `index.json` or consult the compatibility database at anaconda.org can be implemented in the same way.
