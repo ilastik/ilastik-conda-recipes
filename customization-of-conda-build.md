@@ -142,7 +142,7 @@ build:
     - {{ feature }}
 {% endfor %}
 ```
-However, this ignores the features' meaning and thus doesn't allow dropping feature declarations that are irrelevant for the present package. It might therefore be preferrable to group features into categories that cover a particular installation property. At present, there seem to be four reasonable categories: compiler, Python version, BLAS variant, and SIMD acceleration (see below for the latter). Assuming that conda-build knows about the existing categories, it could analyse the `track_features` fields in `<BUILD_ENV>/conda-meta/*.json` to define a jinja variable `features` that maps categories to active feature declarations (or to the empty string if the category is not tracked in the current `_build` environment). Then, `meta.yaml` might read like this:
+However, this ignores the features' meaning and thus doesn't allow dropping feature declarations that are irrelevant for the present package. It might therefore be preferrable to group features into categories that cover a particular installation property. At present, there seem to be four reasonable categories: compiler, Python version, and BLAS variant. Assuming that conda-build knows about the existing categories, it could analyse the `track_features` fields in `<BUILD_ENV>/conda-meta/*.json` to define a jinja variable `features` that maps categories to active feature declarations (or to the empty string if the category is not tracked in the current `_build` environment). Then, `meta.yaml` might read like this:
 ```
 build:
   features:
@@ -159,8 +159,6 @@ build:
     blas:     {{ features['blas'] }}
 ```
 If desired, conda can probably be extended to understand both syntax variants simultaneously, so that existing recipes won't break.
-
-SIMD acceleration (such as SSE and AVX) can significantly speed up low-level libraries like openblas and fftw. Configuring for SIMD is a special case, because one can only determine at installation time if the present CPU supports it. Ideally, libraries would include code with and without acceleration in the same binary and branch to the appropriate implementation automatically at execution time. Since not all libraries are implemented this way, it would be useful to provide metapackages like `avx` that fail to install if their *pre-link* script signals the desired SIMD implementation to be unavailable. Otherwise, they define `track_features: - avx`, so that conda will prefer package variants with AVX support, and conda-build will enable compilation with acceleration. However, another difficulty arises because SIMD implementations are backwards compatible: a CPU supporting AVX2 also supports AVX. Thus, when `track_features: - avx2` is active, but a package only provides `features: - avx`, this variant should still be preferred over a variant without any acceleration. Unfortunately, this capability requires a significant enhancement of conda's feature mechanism.
 
 ## Specialization of the Run Requirements at Build Time
 
