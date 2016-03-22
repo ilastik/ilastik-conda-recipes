@@ -1,10 +1,10 @@
 package:
   name: vigra
-  version: "1.11rc"
+  version: "1.11post1"
 
 source:
   git_url: https://github.com/ukoethe/vigra
-  git_tag: version-1-11-rc
+  git_tag: HEAD
 
 build:
   number: 0
