@@ -1,6 +1,16 @@
 package:
   name: vigra
-  version: "1.11post1"
+  
+  # Transform tag:
+  # Version-1-11-0 --> 1.11.0
+  {% set tagged_version = GIT_DESCRIBE_TAG|replace("Version-","")|replace("-", ".") %}
+
+  # If we're using a non-tagged revision, append '.postN' to the version
+  {% if GIT_DESCRIBE_NUMBER %}
+    {% set tagged_version = tagged_version + '.post' + GIT_DESCRIBE_NUMBER %}
+  {% endif %}
+
+  version: {{tagged_version}}
 
 source:
   git_url: https://github.com/ukoethe/vigra
