@@ -6,6 +6,9 @@ source:
     git_url: https://github.com/opengm/opengm.git
     git_tag: learning-experimental
 
+    patches:
+      - patches/install_header_files.diff
+
 build:
   {% set build_num = 1 %}
   number: {{ build_num }}
