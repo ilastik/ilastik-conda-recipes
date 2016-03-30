@@ -1,0 +1,70 @@
+package:
+    name: pgmlink-structured-learning
+    version: "1.2"
+
+source:
+    git_url: https://github.com/ilastik/pgmlink
+    git_tag: learning
+
+build:
+  {% set build_num = 2 %}
+  number: {{ build_num }}
+
+  #
+  # You must build this recipe using 'conda build --numpy=X.Y'
+  # Edit: Until conda 1.18.3 is released, you must use the following command:
+  #       CONDA_NPY=19 CONDA_PY=27 GIT_FULL_HASH='' conda build pgmlink
+  #
+  string: np{{CONDA_NPY[:]}}py{{CONDA_PY}}_{{build_num}}_g{{GIT_FULL_HASH[:7]}}
+
+  detect_binary_files_with_prefix: true
+  script_env:
+     - CPLEX_ROOT_DIR
+
+requirements:
+  build:
+    - gcc 4.8.5 # [linux]
+    - gcc 4.8.5 # [osx]
+    - cplex-shared
+    - patchelf # [linux]
+    - ann
+    - boost 1.55.0
+    - python 2.7*
+    - numpy >=1.9,{{NPY_VER}}*
+    - vigra
+    - opengm-structured-learning
+    - mlpack
+    - lemon
+    - libxml2
+    - dlib
+    - armadillo 6.500.5
+    - openblas # [linux]
+
+  run:
+    - libgcc
+    - patchelf # [linux]
+    - ann
+    - boost 1.55.0
+    - python {{PY_VER}}*
+    - numpy  {{NPY_VER}}*
+    - vigra
+    - mlpack
+    - lemon
+    - libxml2
+    - dlib
+    - armadillo 6.500.5
+    - openblas # [linux]
+
+    # We don't require cplex-shared here because it only needs to be installed once per machine,
+    # and requiring it here would include all of gcc in the install lib dir.
+    # Instead, we give the user a descriptive error message if cplex-shared hasn't been run on her machine.
+    # - cplex-shared
+
+test:
+  imports:
+    - pgmlink
+
+about:
+    home: https://github.com/martinsch/pgmlink
+    license: GNU General Public License (GPL)
+    summary: 'pgmLink - A Tracking-by-Assignment Software'
