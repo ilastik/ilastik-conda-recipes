@@ -11,7 +11,7 @@ source:
 build:
   features:
     - {{toolset.short}}
-  number: 13
+  number: 14
   string: {{PKG_BUILDNUM}}_g{{GIT_FULL_HASH[:7]}}
   script_env:
      - CPLEX_ROOT_DIR
@@ -30,11 +30,11 @@ requirements:
     - ann     *{{toolset.suffix}}
     - boost 1.55.*{{toolset.suffix}}
     - vigra   1.10*{{toolset.suffix}}
-    - opengm  *{{toolset.suffix}}
+    - opengm-learning  *{{toolset.suffix}}
     - mlpack  *{{toolset.suffix}}
     - lemon   *{{toolset.suffix}}
     - libxml2 *{{toolset.suffix}}
-    - dlib                                # [unix]
+    - dlib    *{{toolset.suffix}}
     - armadillo 4.000.2                   # [unix]
     - armadillo 6.500.*{{toolset.suffix}} # [win]
 
@@ -47,11 +47,11 @@ requirements:
     - ann     *{{toolset.suffix}}
     - boost 1.55.*{{toolset.suffix}}
     - vigra   1.10*{{toolset.suffix}}
-    - opengm  *{{toolset.suffix}}
+    - opengm-learning  *{{toolset.suffix}}
     - mlpack  *{{toolset.suffix}}
     - lemon   *{{toolset.suffix}}
     - libxml2 *{{toolset.suffix}}
-    - dlib                                # [unix]
+    - dlib    *{{toolset.suffix}}
     - armadillo 4.000.2                   # [unix]
     - armadillo 6.500.*{{toolset.suffix}} # [win]
 
