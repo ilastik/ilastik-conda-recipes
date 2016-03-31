@@ -1,0 +1,28 @@
+{% import '$CONDA_DEFAULT_ENV/toolset-info/config.yaml' as toolset %}
+
+package:
+  name: sqlite
+  version: "3.8.11{{toolset.suffix}}"
+
+source:
+  fn:  sqlite-amalgamation-3081101.zip
+  url: http://www.sqlite.org/2015/sqlite-amalgamation-3081101.zip
+  md5: 94907e831502e2080b76e281cfa24dde
+
+build:
+  features:
+    - {{toolset.short}}
+  msvc_compiler: {{toolset.version}}  # [win]
+
+requirements:
+  build:
+    - {{toolset.build_requirement}}
+
+  run:
+    - {{toolset.run_requirement}}
+
+
+about:
+  home: https://www.sqlite.org/
+  license: public domain
+  summary:  serverless SQL database engine
