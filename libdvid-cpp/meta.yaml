@@ -7,7 +7,7 @@ source:
   git_tag: master
 
 build:
-  number: 25
+  number: 26
 
   #
   # You must build this recipe using 'conda build --numpy=X.Y'
