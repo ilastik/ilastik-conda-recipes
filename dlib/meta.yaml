@@ -1,6 +1,8 @@
+{% import '$CONDA_DEFAULT_ENV/toolset-info/config.yaml' as toolset %}
+
 package:
   name: dlib
-  version: "18.16"
+  version: "18.16{{toolset.suffix}}"
 
 source:
   fn: dlib-18.16.tar.bz2
@@ -13,23 +15,23 @@ source:
 
 build:
   number: 0
+  features:
+    - {{toolset.short}}
+  msvc_compiler: {{toolset.version}}  # [win]
 
 requirements:
   build:
-    - gcc 4.8.2.99 # [linux]
-    - gcc 4.8.2 # [osx]
-    - libpng
-    - jpeg
-    - sqlite
+    - {{toolset.build_requirement}}
+    - libpng   *{{toolset.suffix}}
+    - jpeg     *{{toolset.suffix}}
+    - sqlite   *{{toolset.suffix}}
 
   run:
-    - libgcc
-    - libpng
-    - jpeg
-    - sqlite
+    - {{toolset.run_requirement}}
+    - libpng   *{{toolset.suffix}}
+    - jpeg     *{{toolset.suffix}}
 
 about:
   home: http://dlib.net
   license: Boost
   summary: Dlib is a general purpose cross-platform C++ library designed using contract programming and modern C++ techniques.
-    
