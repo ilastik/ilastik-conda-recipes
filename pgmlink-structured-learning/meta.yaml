@@ -31,7 +31,7 @@ requirements:
     - boost 1.55.0
     - python 2.7*
     - numpy >=1.9,{{NPY_VER}}*
-    - vigra
+    - vigra 1.10
     - opengm-structured-learning
     - mlpack
     - lemon
@@ -47,7 +47,7 @@ requirements:
     - boost 1.55.0
     - python {{PY_VER}}*
     - numpy  {{NPY_VER}}*
-    - vigra
+    - vigra 1.10
     - mlpack
     - lemon
     - libxml2
