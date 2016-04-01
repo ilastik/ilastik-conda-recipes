@@ -4,10 +4,10 @@ package:
 
 source:
     git_url: https://github.com/ilastik/pgmlink
-    git_tag: learning
+    git_tag: master
 
 build:
-  {% set build_num = 2 %}
+  {% set build_num = 3 %}
   number: {{ build_num }}
 
   #
