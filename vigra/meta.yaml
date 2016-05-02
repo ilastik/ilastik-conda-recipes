@@ -3,7 +3,7 @@ package:
   version: "1.10"
 
 source:
-  git_url: git://github.com/ukoethe/vigra.git
+  git_url: https://github.com/ukoethe/vigra
   git_tag: 35e5d4aed380087d75e206348d1648d9ad9cf1e6 # 2015-07-16
 
 build:

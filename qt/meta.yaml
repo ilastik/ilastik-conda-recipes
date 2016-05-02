@@ -16,7 +16,8 @@ source:
     - patches/QTBUG-40585-Rev3.patch
     
 build:
-  number: 2
+  number: 1 # [not osx]
+  number: 2 # [osx]
   detect_binary_files_with_prefix: true
 
 requirements:

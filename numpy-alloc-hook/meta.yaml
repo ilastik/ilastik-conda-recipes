@@ -1,0 +1,27 @@
+package:
+  name: numpy-alloc-hook
+  version: 1.9
+
+source:
+  git_url: https://github.com/numpy/numpy
+  git_tag: v1.9.3 # If you change this, change the build string below, and the numpy version requirement
+
+build:
+  number: 0
+  string: py{{py}}np19_{{PKG_BUILDNUM}}
+
+requirements:
+  build:
+    - numpy 1.9.3
+    - cython
+  run:
+    - numpy
+
+test:
+  imports:
+    - alloc_hook
+
+about:
+  home: http://www.numpy.org
+  license: BSD
+  summary: Allocation tracking utility from the numpy source repo (which isn't installed by default)

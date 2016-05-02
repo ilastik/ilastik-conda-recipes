@@ -3,7 +3,7 @@ package:
   version: "128"
 
 source:
-  git_url: git://github.com/Cyan4973/lz4
+  git_url: https://github.com/Cyan4973/lz4
   git_tag: "r128"
 
 build:

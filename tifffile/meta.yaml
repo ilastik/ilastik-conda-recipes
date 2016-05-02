@@ -3,7 +3,7 @@ package:
   version: "0.4.1"
 
 source:
-  git_url: git://github.com/ilastik/tifffile.git
+  git_url: https://github.com/ilastik/tifffile
   git_tag: 05b51f398b2c18eacf9dce674631707763f7e94e
 
 build:

@@ -1,0 +1,19 @@
+package:
+  name: mitoolbox
+  version: "2.1.2"
+
+source:
+  git_url: https://github.com/Craigacp/MIToolbox
+  git_tag: "v2.1.2"
+
+build:
+  number: 1
+
+# No requirements! :-)
+# No tests! :-(
+
+about:
+  home: https://github.com/Craigacp/MIToolbox
+  license: BSD
+  license_file: LICENSE
+  summary: 'Mutual Information functions for C and MATLAB'
