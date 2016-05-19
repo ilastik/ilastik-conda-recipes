@@ -1,16 +1,14 @@
 package:
     name: opengm
-    version: "2.3.6.post1"
+    version: "2.3.7.post26"
 
 source:
-    #git_url: https://github.com/opengm/opengm
-    #git_tag: 3f68450da8b3c7ef11e2614c4a0acf5866851115 # 2015-12-10
-    git_url: https://github.com/stuarteberg/opengm
-    git_tag: fix-apple
+  #git_url: https://github.com/opengm/opengm
+  git_url: https://github.com/DerThorsten/opengm
+  git_rev: 059e15995a4f2b219b350c58290cec74696d9b7e
 
 build:
-  {% set build_num = 9 %}
-  number: {{ build_num }}
+  number: 0
 
   {% if WITH_CPLEX %}
       {% set cplex_string = '_with_cplex' %}
@@ -21,7 +19,7 @@ build:
   #
   # You must build this recipe using 'conda build --numpy=X.Y'
   #
-  string: np{{CONDA_NPY[:]}}py{{CONDA_PY}}_{{build_num}}_g{{GIT_FULL_HASH[:7]}}{{cplex_string}}
+  string: np{{CONDA_NPY[:]}}py{{CONDA_PY}}_{{PKG_BUILDNUM}}_g{{GIT_FULL_HASH[:7]}}{{cplex_string}}
 
   detect_binary_files_with_prefix: true
   script_env:
@@ -36,12 +34,17 @@ requirements:
     - python 2.7*
     - numpy >=1.9,{{NPY_VER}}*
     - hdf5 1.8.14
+    - vigra >=1.11
   run:
     - libgcc
     - boost 1.55.0
     - python {{PY_VER}}*
     - numpy  {{NPY_VER}}*
     - hdf5 1.8.14
+    
+    # At build time, vigra is needed on the C++ side for header-only stuff,
+    # but isn't needed at runtime (e.g. for python stuff) 
+    # - vigra >=1.11
 
 test:
   imports:

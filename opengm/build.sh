@@ -20,7 +20,7 @@ else
 	    set +x
 	    echo "******************************************"
 	    echo "* You must define CPLEX_ROOT_DIR in your *"
-	    echo "* environment before building pgmlink.   *"
+	    echo "* environment before building opengm.   *"
 	    echo "******************************************"
 	    exit 1
 	fi
@@ -82,22 +82,33 @@ fi
 
 mkdir build
 cd build
-cmake ..\
-    -DCMAKE_C_COMPILER=${PREFIX}/bin/gcc \
-    -DCMAKE_CXX_COMPILER=${PREFIX}/bin/g++ \
-    -DCMAKE_OSX_DEPLOYMENT_TARGET=10.7 \
-    -DCMAKE_INSTALL_PREFIX=${PREFIX} \
-    -DCMAKE_PREFIX_PATH=${PREFIX} \
-    -DWITH_BOOST=ON \
-    -DWITH_HDF5=ON \
-    -DBUILD_PYTHON_WRAPPER=ON \
-    -DBUILD_TESTING=OFF \
-    -DBUILD_EXAMPLES=OFF \
-    -DBUILD_COMMANDLINE=OFF \
-    ${CPLEX_ARGS} \
+CXXFLAGS="${CXXFLAGS} -I${PREFIX}/include"
+LDFLAGS="${LDFLAGS} -Wl,-rpath,${PREFIX}/lib -L${PREFIX}/lib"
+
+cmake .. \
+        -DCMAKE_C_COMPILER=${PREFIX}/bin/gcc \
+        -DCMAKE_CXX_COMPILER=${PREFIX}/bin/g++ \
+        -DCMAKE_OSX_DEPLOYMENT_TARGET=10.7\
+        -DCMAKE_INSTALL_PREFIX=${PREFIX} \
+        -DCMAKE_PREFIX_PATH=${PREFIX} \
+\
+        -DCMAKE_SHARED_LINKER_FLAGS="${LDFLAGS}" \
+        -DCMAKE_EXE_LINKER_FLAGS="${LDFLAGS}" \
+        -DCMAKE_CXX_FLAGS="${CXXFLAGS}" \
+        -DCMAKE_CXX_FLAGS_RELEASE="${CXXFLAGS}" \
+        -DCMAKE_CXX_FLAGS_DEBUG="${CXXFLAGS}" \
+\
+        -DBUILD_PYTHON_WRAPPER=ON \
+        -DBUILD_TESTING=OFF \
+        -DBUILD_EXAMPLES=OFF \
+        -DBUILD_COMMANDLINE=OFF \
+\
+        -DWITH_VIGRA=ON \
+        -DWITH_BOOST=ON \
+        -DWITH_HDF5=ON \
+\
+        ${CPLEX_ARGS} \
 ##
-#    -DCMAKE_SHARED_LINKER_FLAGS="${LINKER_FLAGS}" \
-#    -DCMAKE_EXE_LINKER_FLAGS="${LINKER_FLAGS}" \
 
 make -j${CPU_COUNT}
 make install
