@@ -1,4 +1,7 @@
-
+if [[ "$WITH_CPLEX" == "0" ]]; then
+    WITH_CPLEX=""
+fi
+    
 if [[ "$WITH_CPLEX" == "" ]]; then
     CPLEX_ARGS=""
     LINKER_FLAGS=""
@@ -112,3 +115,19 @@ cmake .. \
 
 make -j${CPU_COUNT}
 make install
+
+if [[ "$WITH_CPLEX" != "" ]]; then
+    (
+        # Rename the opengm package to 'opengm_with_cplex'
+        cd "${PREFIX}/lib/python2.7/site-packages/"
+        mv opengm opengm_with_cplex
+        cd opengm_with_cplex
+        
+        # This sed command works on Mac and Linux
+        for f in $(find . -name "*.py"); do
+	        sed -i.bak 's|import opengm[:space]*$|import opengm_with_cplex|g' "$f"
+	        sed -i.bak 's|from opengm import|from opengm_with_cplex import|g' "$f"
+	        rm "$f.bak"
+        done
+    )
+fi
