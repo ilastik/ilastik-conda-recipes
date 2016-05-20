@@ -1,7 +1,11 @@
 if [[ "$WITH_CPLEX" == "0" ]]; then
     WITH_CPLEX=""
 fi
-    
+
+if [[ "$WITH_EXTERNAL_LIBS" == "0" ]]; then
+    WITH_EXTERNAL_LIBS=""
+fi
+            
 if [[ "$WITH_CPLEX" == "" ]]; then
     CPLEX_ARGS=""
     LINKER_FLAGS=""
@@ -85,8 +89,30 @@ fi
 
 mkdir build
 cd build
+
 CXXFLAGS="${CXXFLAGS} -I${PREFIX}/include"
 LDFLAGS="${LDFLAGS} -Wl,-rpath,${PREFIX}/lib -L${PREFIX}/lib"
+
+
+EXTERNAL_LIB_FLAGS=""
+if [[ "$WITH_EXTERNAL_LIBS" != "" ]]; then
+    # We must run cmake preliminarily to enable 'make externalLibs'
+	cmake .. \
+	        -DCMAKE_C_COMPILER=${PREFIX}/bin/gcc \
+	        -DCMAKE_CXX_COMPILER=${PREFIX}/bin/g++ \
+	        -DCMAKE_OSX_DEPLOYMENT_TARGET=10.7\
+	        -DCMAKE_INSTALL_PREFIX=${PREFIX} \
+	        -DCMAKE_PREFIX_PATH=${PREFIX} \
+	        -DCMAKE_SHARED_LINKER_FLAGS="${LDFLAGS}" \
+	        -DCMAKE_EXE_LINKER_FLAGS="${LDFLAGS}" \
+	        -DCMAKE_CXX_FLAGS="${CXXFLAGS}" \
+	        -DCMAKE_CXX_FLAGS_RELEASE="${CXXFLAGS}" \
+	        -DCMAKE_CXX_FLAGS_DEBUG="${CXXFLAGS}" \
+
+    make externalLibs
+    
+    EXTERNAL_LIB_FLAGS="-DWITH_QBPO=ON -DWITH_PLANARITY=ON -DWITH_BLOSSOM5=ON"
+fi
 
 cmake .. \
         -DCMAKE_C_COMPILER=${PREFIX}/bin/gcc \
@@ -110,6 +136,7 @@ cmake .. \
         -DWITH_BOOST=ON \
         -DWITH_HDF5=ON \
 \
+        ${EXTERNAL_LIB_FLAGS} \
         ${CPLEX_ARGS} \
 ##
 

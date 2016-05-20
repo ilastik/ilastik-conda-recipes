@@ -27,6 +27,7 @@ build:
   detect_binary_files_with_prefix: true
   script_env:
      - WITH_CPLEX
+     - WITH_EXTERNAL_LIBS
      - CPLEX_ROOT_DIR
 
 requirements:
