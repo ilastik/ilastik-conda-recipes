@@ -143,7 +143,11 @@ cmake .. \
 make -j${CPU_COUNT}
 make install
 
-if [[ "$WITH_CPLEX" != "" ]]; then
+
+if [[ "$WITH_CPLEX" == "" ]]; then
+    # Activate post-link script (give it the proper name)
+    rm -f "${RECIPE_DIR}/post-link.sh"
+else
     (
         # Rename the opengm package to 'opengm_with_cplex'
         cd "${PREFIX}/lib/python2.7/site-packages/"
@@ -157,4 +161,15 @@ if [[ "$WITH_CPLEX" != "" ]]; then
 	        rm "$f.bak"
         done
     )
+
+    if [ `uname` == "Darwin" ]; then
+        # Set install names according using @rpath, which will be configured via the post-link script.
+        INFERENCE_MODULE_SO=${PREFIX}/lib/python2.7/site-packages/opengm_with_cplex/inference/_inference.so
+        install_name_tool -change ${CPLEX_LIB_DIR}/libcplex.dylib @rpath/libcplex.dylib ${INFERENCE_MODULE_SO}
+        install_name_tool -change ${CPLEX_LIB_DIR}/libilocplex.dylib @rpath/libilocplex.dylib ${INFERENCE_MODULE_SO}
+        install_name_tool -change ${CONCERT_LIB_DIR}/libconcert.dylib @rpath/libconcert.dylib ${INFERENCE_MODULE_SO}
+    fi
+
+    # Activate post-link script (give it the proper name)
+    cp "${RECIPE_DIR}/post-link-with-cplex.sh" "${RECIPE_DIR}/post-link.sh"
 fi
