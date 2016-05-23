@@ -1,3 +1,17 @@
+##
+## This build script is parameterized by the following external environment variables:
+## - WITH_CPLEX
+##    - Build OpenGM with CPLEX enabled, and create a post-link script 
+##      that links against the user's CPLEX library during install.
+##
+## - WITH_EXTERNAL_LIBS
+##    - Activate OpenGM's "externalLibs" support.  That is, download the external libs,
+##      build them, install them, and tweak the opengm python module so it refers to
+##      the external libraries in their final install location.
+##
+## - PREFIX, PYTHON, CPU_COUNT, etc. (as defined by conda-build)
+
+# Convert '0' to empty (all code below treats non-empty as True)
 if [[ "$WITH_CPLEX" == "0" ]]; then
     WITH_CPLEX=""
 fi
@@ -5,7 +19,15 @@ fi
 if [[ "$WITH_EXTERNAL_LIBS" == "0" ]]; then
     WITH_EXTERNAL_LIBS=""
 fi
-            
+
+# Platform-specific dylib extension
+if [ $(uname) == "Darwin" ]; then
+    export DYLIB="dylib"
+else
+    export DYLIB="so"
+fi
+
+# Pre-define special flags, paths, etc. if we're building with CPLEX support.
 if [[ "$WITH_CPLEX" == "" ]]; then
     CPLEX_ARGS=""
     LINKER_FLAGS=""
@@ -35,13 +57,7 @@ else
     CPLEX_BIN_DIR=`echo $CPLEX_ROOT_DIR/cplex/bin/x86-64*`
     CPLEX_LIB_DIR=`echo $CPLEX_ROOT_DIR/cplex/lib/x86-64*/static_pic`
     CONCERT_LIB_DIR=`echo $CPLEX_ROOT_DIR/concert/lib/x86-64*/static_pic`
-        
-    if [ `uname` == "Darwin" ]; then
-        export DYLIB="dylib"
-    else
-        export DYLIB="so"
-    fi
-	
+        	
     #LINKER_FLAGS="-L${PREFIX}/lib -L${CPLEX_LIB_DIR} -L${CONCERT_LIB_DIR}"
     #if [ `uname` != "Darwin" ]; then
     #    LINKER_FLAGS="-Wl,-rpath-link,${PREFIX}/lib ${LINKER_FLAGS}"
@@ -87,13 +103,20 @@ else
     CPLEX_ARGS="${CPLEX_ARGS} -DCPLEX_BIN_DIR=${CPLEX_CONCERT_LIBRARY}"
 fi
 
+
+##
+## START THE BUILD
+##
+
 mkdir build
 cd build
 
 CXXFLAGS="${CXXFLAGS} -I${PREFIX}/include"
 LDFLAGS="${LDFLAGS} -Wl,-rpath,${PREFIX}/lib -L${PREFIX}/lib"
 
-
+##
+## Download and build external libs
+##
 EXTERNAL_LIB_FLAGS=""
 if [[ "$WITH_EXTERNAL_LIBS" != "" ]]; then
     # We must run cmake preliminarily to enable 'make externalLibs'
@@ -110,10 +133,13 @@ if [[ "$WITH_EXTERNAL_LIBS" != "" ]]; then
 	        -DCMAKE_CXX_FLAGS_DEBUG="${CXXFLAGS}" \
 
     make externalLibs
-    
+
     EXTERNAL_LIB_FLAGS="-DWITH_QBPO=ON -DWITH_PLANARITY=ON -DWITH_BLOSSOM5=ON"
 fi
 
+##
+## Configure
+##
 cmake .. \
         -DCMAKE_C_COMPILER=${PREFIX}/bin/gcc \
         -DCMAKE_CXX_COMPILER=${PREFIX}/bin/g++ \
@@ -140,14 +166,57 @@ cmake .. \
         ${CPLEX_ARGS} \
 ##
 
+##
+## Compile
+##
 make -j${CPU_COUNT}
+
+##
+## Install to prefix
+##
 make install
 
+INFERENCE_MODULE_SO=${PREFIX}/lib/python2.7/site-packages/opengm/inference/_inference.so
 
+
+##
+## If we built with external libs, then copy the resulting dylibs to the prefix.
+## On Mac, fix the install names.
+##
+if [[ "$WITH_EXTERNAL_LIBS" != "" ]]; then
+   # Install the external dylibs
+    mv src/external/libopengm-external-planarity-shared.${DYLIB} "${PREFIX}/lib/"
+    mv src/external/libopengm-external-blossom5-shared.${DYLIB} "${PREFIX}/lib/"
+
+    if [ $(uname) == "Darwin" ]; then
+        install_name_tool \
+            -change \
+            $(pwd)/src/external/libopengm-external-planarity-shared.dylib \
+            @rpath/libopengm-external-planarity-shared.dylib \
+            ${INFERENCE_MODULE_SO}
+
+        install_name_tool \
+            -change \
+            $(pwd)/src/external/libopengm-external-blossom5-shared.dylib \
+            @rpath/libopengm-external-blossom5-shared.dylib \
+            ${INFERENCE_MODULE_SO}
+    fi
+fi
+
+##
+## Rename the python module entirely, and change cplex lib install names.
+##
 if [[ "$WITH_CPLEX" == "" ]]; then
     # Activate post-link script (give it the proper name)
     rm -f "${RECIPE_DIR}/post-link.sh"
 else
+    if [ `uname` == "Darwin" ]; then
+        # Set install names according using @rpath, which will be configured via the post-link script.
+        install_name_tool -change ${CPLEX_LIB_DIR}/libcplex.dylib @rpath/libcplex.dylib ${INFERENCE_MODULE_SO}
+        install_name_tool -change ${CPLEX_LIB_DIR}/libilocplex.dylib @rpath/libilocplex.dylib ${INFERENCE_MODULE_SO}
+        install_name_tool -change ${CONCERT_LIB_DIR}/libconcert.dylib @rpath/libconcert.dylib ${INFERENCE_MODULE_SO}
+    fi
+
     (
         # Rename the opengm package to 'opengm_with_cplex'
         cd "${PREFIX}/lib/python2.7/site-packages/"
@@ -161,14 +230,6 @@ else
 	        rm "$f.bak"
         done
     )
-
-    if [ `uname` == "Darwin" ]; then
-        # Set install names according using @rpath, which will be configured via the post-link script.
-        INFERENCE_MODULE_SO=${PREFIX}/lib/python2.7/site-packages/opengm_with_cplex/inference/_inference.so
-        install_name_tool -change ${CPLEX_LIB_DIR}/libcplex.dylib @rpath/libcplex.dylib ${INFERENCE_MODULE_SO}
-        install_name_tool -change ${CPLEX_LIB_DIR}/libilocplex.dylib @rpath/libilocplex.dylib ${INFERENCE_MODULE_SO}
-        install_name_tool -change ${CONCERT_LIB_DIR}/libconcert.dylib @rpath/libconcert.dylib ${INFERENCE_MODULE_SO}
-    fi
 
     # Activate post-link script (give it the proper name)
     cp "${RECIPE_DIR}/post-link-with-cplex.sh" "${RECIPE_DIR}/post-link.sh"
