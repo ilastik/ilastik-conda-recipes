@@ -1,0 +1,11 @@
+--- src/external/patches/ConicBundle/patchConicBundle-v0.3.11.sh
++++ src/external/patches/ConicBundle/patchConicBundle-v0.3.11.sh
+@@ -25,7 +25,7 @@
+ then
+     echo "$ConicBundle_FILENAME already exists, skipping download."
+ else
+-    wget -q $ConicBundle_URL$ConicBundle_FILENAME -P $ZIP_FOLDER
++    wget --no-check-certificate $ConicBundle_URL$ConicBundle_FILENAME -P $ZIP_FOLDER
+ fi
+ 
+ # check if download was successful

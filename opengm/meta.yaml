@@ -16,6 +16,9 @@ source:
   git_url: https://github.com/DerThorsten/opengm
   git_rev: 059e15995a4f2b219b350c58290cec74696d9b7e
 
+  patches:
+    - patches/patchConicBundle.patch # Yes, we're patching the patch script (ignore ssl certificate problems)
+
 build:
   number: 0
 
