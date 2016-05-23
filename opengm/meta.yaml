@@ -16,6 +16,11 @@ source:
   git_url: https://github.com/DerThorsten/opengm
   git_rev: 059e15995a4f2b219b350c58290cec74696d9b7e
 
+  patches:
+    - patches/patchConicBundle.patch # Yes, we're patching the patch script (ignore ssl certificate problems)
+    - patches/patchDAOOPT.sh.patch # Apparently old versions of wget don't choose the same default filename for github zip files.
+    - patches/patchPlanarity.sh.patch # Apparently the mirror at http://jgaa.info is not reliable, but the parent website is.
+
 build:
   number: 0
 
@@ -46,7 +51,7 @@ requirements:
     - hdf5 1.8.14
 
     {% if WITH_CPLEX %}
-    - patchelf # [linux]
+    - patchelf-bigfile # [linux]
     {% endif %}
     
     # At build time, vigra is needed on the C++ side for header-only stuff,
