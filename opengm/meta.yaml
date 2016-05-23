@@ -44,6 +44,10 @@ requirements:
     - python {{PY_VER}}*
     - numpy  {{NPY_VER}}*
     - hdf5 1.8.14
+
+    {% if WITH_CPLEX %}
+    - patchelf # [linux]
+    {% endif %}
     
     # At build time, vigra is needed on the C++ side for header-only stuff,
     # but isn't needed at runtime (e.g. for python stuff) 
