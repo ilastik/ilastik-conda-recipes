@@ -50,7 +50,7 @@ requirements:
     - hdf5 1.8.14
 
     {% if WITH_CPLEX %}
-    - patchelf # [linux]
+    - patchelf-bigfile # [linux]
     {% endif %}
     
     # At build time, vigra is needed on the C++ side for header-only stuff,
