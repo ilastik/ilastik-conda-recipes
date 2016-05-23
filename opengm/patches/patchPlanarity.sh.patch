@@ -1,0 +1,11 @@
+--- src/external/patches/Planarity/patchPlanarity.sh
++++ src/external/patches/Planarity/patchPlanarity.sh
+@@ -5,7 +5,7 @@
+ ZIP_FOLDER=../zip_files/
+ PATCH_FOLDER=./
+ PLANARITY_FILENAME=planarity.zip
+-PLANARITY_URL=http://jgaa.info/accepted/2004/BoyerMyrvold2004.8.3/
++PLANARITY_URL=http://www.emis.ams.org/journals/JGAA/accepted/2004/BoyerMyrvold2004.8.3/
+
+ PLANARITY_SOURCE_FOLDER=../../planarity.src-patched/
+ PLANARITY_PATCH_NAME=planarity.patch

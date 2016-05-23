@@ -19,6 +19,7 @@ source:
   patches:
     - patches/patchConicBundle.patch # Yes, we're patching the patch script (ignore ssl certificate problems)
     - patches/patchDAOOPT.sh.patch # Apparently old versions of wget don't choose the same default filename for github zip files.
+    - patches/patchPlanarity.sh.patch # Apparently the mirror at http://jgaa.info is not reliable, but the parent website is.
 
 build:
   number: 0
