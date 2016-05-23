@@ -31,6 +31,6 @@ CONCERT_LIB_DIR=`echo $CPLEX_ROOT_DIR/concert/lib/x86-64*/static_pic`
         install_name_tool -add_rpath "${CONCERT_LIB_DIR}" "${INFERENCE_MODULE_SO}"
         install_name_tool -add_rpath @loader_path/./      "${INFERENCE_MODULE_SO}"
     else
-        ${PREFIX}/bin/patchelf --set-rpath "$CONCERT_LIB_DIR:$CPLEX_LIB_DIR:"'$ORIGIN/.' "${INFERENCE_MODULE_SO}"
+        ${PREFIX}/bin/patchelf --set-rpath "$CONCERT_LIB_DIR:$CPLEX_LIB_DIR:"'$ORIGIN/../../../..' "${INFERENCE_MODULE_SO}"
     fi
 )
