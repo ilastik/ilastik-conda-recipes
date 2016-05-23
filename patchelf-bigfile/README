@@ -1,0 +1,2 @@
+This recipe builds the standard patchelf utility, but patches the source to avoid "maximum file size exceeded" errors.
+(Such errors were encountered when attempting to post-link the OpenGM binary package.)
