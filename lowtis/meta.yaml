@@ -1,6 +1,6 @@
 package:
-  name: neuroproof 
-  version: "0.0.1"
+  name: lowtis 
+  version: "0.1.0"
   
 source:
   git_url: https://github.com/janelia-flyem/lowtis
