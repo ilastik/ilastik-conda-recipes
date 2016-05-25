@@ -60,6 +60,7 @@ if [ $? -ne 0 ]; then
     exit 1
 fi
 
+set -x
 # Create a shared library from each static library.
 if [ `uname` == "Darwin" ]; then
     EXISTING_SHARED_OBJECT=`ls ${CPLEX_LIB_DIR}/libilocplex.dylib` \
@@ -79,3 +80,19 @@ else
     ${PREFIX}/bin/g++ -fpic -shared -Wl,-whole-archive ${CPLEX_LIB_DIR}/libilocplex.a  -Wl,-no-whole-archive -o ${CPLEX_LIB_DIR}/libilocplex.so
     fi
 fi
+
+# Now symlink the cplex libraries into the lib directory
+(
+    mkdir -p ${PREFIX}/lib
+    if [ $(uname) == "Darwin" ]; then
+            cd ${PREFIX}/lib
+	        ln -f -s ${CPLEX_LIB_DIR}/libcplex.dylib
+            ln -f -s ${CONCERT_LIB_DIR}/libconcert.dylib
+            ln -f -s ${CPLEX_LIB_DIR}/libilocplex.dylib
+	else
+	        cd ${PREFIX}/lib
+	        ln -f -s ${CPLEX_LIB_DIR}/libcplex.so
+	        ln -f -s ${CONCERT_LIB_DIR}/libconcert.so
+	        ln -f -s ${CPLEX_LIB_DIR}/libilocplex.so
+	fi
+)
