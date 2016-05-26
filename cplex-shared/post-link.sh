@@ -1,3 +1,4 @@
+set -e
 # Always write to the root prefix, even if a different env is active.
 if [ $(echo $PREFIX | grep -q envs)$? -eq 0 ]; then
     ROOT_ENV_PREFIX="${PREFIX}/../.."
@@ -61,23 +62,48 @@ if [ $? -ne 0 ]; then
 fi
 
 set -x
-# Create a shared library from each static library.
-if [ `uname` == "Darwin" ]; then
+
+# Apparently conda sets these varibles to 'None', which can cause 
+# problems if we run a second instance of conda here.
+unset CONDA_NPY
+unset CONDA_PY
+
+# If necessary, create a shared library from each static library.
+# Note: To avoid installing gcc into the user's environment every time this is created,
+#       we don't include gcc as a run dependency.
+#       Instead, we create a temporary environment right here and install gcc into it.
+if [ $(uname) == "Darwin" ]; then
     EXISTING_SHARED_OBJECT=`ls ${CPLEX_LIB_DIR}/libilocplex.dylib` \
     || EXISTING_SHARED_OBJECT="NOT_PRESENT"
     if [ "$EXISTING_SHARED_OBJECT" == "NOT_PRESENT" ]; then
-        ${PREFIX}/bin/g++ -fpic -shared -Wl,-all_load ${CPLEX_LIB_DIR}/libcplex.a     -Wl,-noall_load -o ${CPLEX_LIB_DIR}/libcplex.dylib
-        ${PREFIX}/bin/g++ -fpic -shared -Wl,-all_load ${CONCERT_LIB_DIR}/libconcert.a -Wl,-noall_load -o ${CONCERT_LIB_DIR}/libconcert.dylib
-        ${PREFIX}/bin/g++ -fpic -shared -Wl,-all_load ${CPLEX_LIB_DIR}/libilocplex.a  -Wl,-noall_load \
+        
+        # Install gcc to a temporary environment
+        conda remove -y --all -n _cplex_shared_gcc_throwaway 2> /dev/null || true
+        conda create -y -n _cplex_shared_gcc_throwaway gcc=4.8.5
+        GCC_ENV_PREFIX=$(conda info --root)/envs/_cplex_shared_gcc_throwaway
+
+        ${GCC_ENV_PREFIX}/bin/g++ -fpic -shared -Wl,-all_load ${CPLEX_LIB_DIR}/libcplex.a     -Wl,-noall_load -o ${CPLEX_LIB_DIR}/libcplex.dylib
+        ${GCC_ENV_PREFIX}/bin/g++ -fpic -shared -Wl,-all_load ${CONCERT_LIB_DIR}/libconcert.a -Wl,-noall_load -o ${CONCERT_LIB_DIR}/libconcert.dylib
+        ${GCC_ENV_PREFIX}/bin/g++ -fpic -shared -Wl,-all_load ${CPLEX_LIB_DIR}/libilocplex.a  -Wl,-noall_load \
             -L${CPLEX_LIB_DIR} -L${CONCERT_LIB_DIR} -lcplex -lconcert -o ${CPLEX_LIB_DIR}/libilocplex.dylib
+        
+        conda remove -y --all -n _cplex_shared_gcc_throwaway
     fi
 else
     EXISTING_SHARED_OBJECT=`ls ${CPLEX_LIB_DIR}/libilocplex.so` \
     || EXISTING_SHARED_OBJECT="NOT_PRESENT"
     if [ "$EXISTING_SHARED_OBJECT" == "NOT_PRESENT" ]; then
-    ${PREFIX}/bin/g++ -fpic -shared -Wl,-whole-archive ${CPLEX_LIB_DIR}/libcplex.a     -Wl,-no-whole-archive -o ${CPLEX_LIB_DIR}/libcplex.so
-    ${PREFIX}/bin/g++ -fpic -shared -Wl,-whole-archive ${CONCERT_LIB_DIR}/libconcert.a -Wl,-no-whole-archive -o ${CONCERT_LIB_DIR}/libconcert.so
-    ${PREFIX}/bin/g++ -fpic -shared -Wl,-whole-archive ${CPLEX_LIB_DIR}/libilocplex.a  -Wl,-no-whole-archive -o ${CPLEX_LIB_DIR}/libilocplex.so
+
+        # Install gcc to a temporary environment
+        conda remove -y --all -n _cplex_shared_gcc_throwaway 2> /dev/null || true
+        conda create -y -n _cplex_shared_gcc_throwaway gcc=4.8.5
+        GCC_ENV_PREFIX=$(conda info --root)/_cplex_shared_gcc_throwaway
+
+        ${GCC_ENV_PREFIX}/bin/g++ -fpic -shared -Wl,-whole-archive ${CPLEX_LIB_DIR}/libcplex.a     -Wl,-no-whole-archive -o ${CPLEX_LIB_DIR}/libcplex.so
+        ${GCC_ENV_PREFIX}/bin/g++ -fpic -shared -Wl,-whole-archive ${CONCERT_LIB_DIR}/libconcert.a -Wl,-no-whole-archive -o ${CONCERT_LIB_DIR}/libconcert.so
+        ${GCC_ENV_PREFIX}/bin/g++ -fpic -shared -Wl,-whole-archive ${CPLEX_LIB_DIR}/libilocplex.a  -Wl,-no-whole-archive -o ${CPLEX_LIB_DIR}/libilocplex.so
+    
+        conda remove -y --all -n _cplex_shared_gcc_throwaway
     fi
 fi
 

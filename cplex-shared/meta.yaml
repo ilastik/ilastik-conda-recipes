@@ -10,12 +10,16 @@ package:
   name: cplex-shared
   version: "0.1"
 
-requirements:
-  run:
-    - gcc 4.8.5 # [linux]
-    - gcc 4.8.5 # [osx]
+#
+# No requirements!
+# The first time this pacakge is installed,
+# post-link.sh will create a temporary environment for gcc.
+# But after that, there's no need for gcc again on subsequent installs.
+#
+# requirements:
+#   - ###
 
 build:
-  number: 3
+  number: 4
   script_env:
     - CPLEX_ROOT_DIR
