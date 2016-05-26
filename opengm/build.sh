@@ -1,8 +1,7 @@
 ##
 ## This build script is parameterized by the following external environment variables:
 ## - WITH_CPLEX
-##    - Build OpenGM with CPLEX enabled, and create a post-link script 
-##      that links against the user's CPLEX library during install.
+##    - Build OpenGM with CPLEX enabled
 ##
 ## - WITH_EXTERNAL_LIBS
 ##    - Activate OpenGM's "externalLibs" support.  That is, download the external libs,
@@ -206,18 +205,15 @@ fi
 ##
 ## Rename the python module entirely, and change cplex lib install names.
 ##
-if [[ "$WITH_CPLEX" == "" ]]; then
-    # Activate post-link script (give it the proper name)
-    rm -f "${RECIPE_DIR}/post-link.sh"
-else
-    if [ `uname` == "Darwin" ]; then
-        # Set install names according using @rpath, which will be configured via the post-link script.
-        install_name_tool -change ${CPLEX_LIB_DIR}/libcplex.dylib @rpath/libcplex.dylib ${INFERENCE_MODULE_SO}
-        install_name_tool -change ${CPLEX_LIB_DIR}/libilocplex.dylib @rpath/libilocplex.dylib ${INFERENCE_MODULE_SO}
-        install_name_tool -change ${CONCERT_LIB_DIR}/libconcert.dylib @rpath/libconcert.dylib ${INFERENCE_MODULE_SO}
-    fi
-
+if [[ "$WITH_CPLEX" != "" ]]; then
     (
+        if [ `uname` == "Darwin" ]; then
+            # Set install names according using @rpath
+            install_name_tool -change ${CPLEX_LIB_DIR}/libcplex.dylib     @rpath/libcplex.dylib    ${INFERENCE_MODULE_SO}
+            install_name_tool -change ${CPLEX_LIB_DIR}/libilocplex.dylib  @rpath/libilocplex.dylib ${INFERENCE_MODULE_SO}
+            install_name_tool -change ${CONCERT_LIB_DIR}/libconcert.dylib @rpath/libconcert.dylib  ${INFERENCE_MODULE_SO}
+        fi
+
         # Rename the opengm package to 'opengm_with_cplex'
         cd "${PREFIX}/lib/python2.7/site-packages/"
         mv opengm opengm_with_cplex
@@ -230,7 +226,4 @@ else
 	        rm "$f.bak"
         done
     )
-
-    # Activate post-link script (give it the proper name)
-    cp "${RECIPE_DIR}/post-link-with-cplex.sh" "${RECIPE_DIR}/post-link.sh"
 fi
