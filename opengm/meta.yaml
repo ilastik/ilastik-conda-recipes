@@ -9,12 +9,12 @@ package:
     name: opengm
   {% endif %}
 
-    version: "2.3.7.post26"
+    version: "2.3.7.post27"
 
 source:
   #git_url: https://github.com/opengm/opengm
-  git_url: https://github.com/DerThorsten/opengm
-  git_rev: 059e15995a4f2b219b350c58290cec74696d9b7e
+  git_url: https://github.com/stuarteberg/opengm
+  git_rev: 1631cf41e7cc6968954be52b2e979475e63e76c8 # branch 'thorsten-master'
 
   patches:
     - patches/patchConicBundle.patch # Yes, we're patching the patch script (ignore ssl certificate problems)
