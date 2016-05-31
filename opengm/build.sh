@@ -184,10 +184,17 @@ INFERENCE_MODULE_SO=${PREFIX}/lib/python2.7/site-packages/opengm/inference/_infe
 ##
 if [[ "$WITH_EXTERNAL_LIBS" != "" ]]; then
    # Install the external dylibs
+    mv src/external/libexternal-library-qpbo-shared.${DYLIB} "${PREFIX}/lib/"
     mv src/external/libopengm-external-planarity-shared.${DYLIB} "${PREFIX}/lib/"
     mv src/external/libopengm-external-blossom5-shared.${DYLIB} "${PREFIX}/lib/"
 
     if [ $(uname) == "Darwin" ]; then
+        install_name_tool \
+            -change \
+            $(pwd)/src/external/libexternal-library-qpbo-shared.dylib \
+            @rpath/libexternal-library-qpbo-shared.dylib \
+            ${INFERENCE_MODULE_SO}
+
         install_name_tool \
             -change \
             $(pwd)/src/external/libopengm-external-planarity-shared.dylib \
