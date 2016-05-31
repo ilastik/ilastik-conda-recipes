@@ -9,14 +9,14 @@ By default, OpenGM is built without any external library support:
 
 `WITH_EXTERNAL_LIBS`
 --------------------
-Some OpenGM functionality requires external libraries: qbpo, blossom5, and planarity.
+Some OpenGM functionality requires external libraries: qpbo, blossom5, and planarity.
 OpenGM comes with scripts to download those libraries (and patch them as needed).
 To enable those dependencies in your build, use the `WITH_EXTERNAL_LIBS` environment variable:
 
     $ WITH_EXTERNAL_LIBS=1 conda build --numpy=1.9 opengm
 
 When that option is used, the external libs are downloaded (via `make externalLibs`)
-and `-DWITH_QBPO=ON -DWITH_PLANARITY=ON -DWITH_BLOSSOM5=ON` is added to the opengm cmake configuration. 
+and `-DWITH_QPBO=ON -DWITH_PLANARITY=ON -DWITH_BLOSSOM5=ON` is added to the opengm cmake configuration. 
 
 **NOTE:** At the time of this writing, the package name/version/build-string are
           *not* changed in any way to indicate that the external libraries were used!
