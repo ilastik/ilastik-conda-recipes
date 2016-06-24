@@ -1,0 +1,21 @@
+about:
+  summary: |
+    A pseudo-package that symlinks your system Gurobi libraries into the conda environment.
+    This package does NOT install Gurobi.  You must install Gurobi externally, 
+    and set the GUROBI_ROOT_DIR environment variable before installing this package.
+    (This package does its work at install time, not build time.)
+    **DON'T FORGET TO ACTIVATE YOUR GUROBI LICENSE!**
+
+package:
+  name: gurobi-symlink
+  version: "0.1"
+
+# No requirements!
+#
+# requirements:
+#   - ###
+
+build:
+  number: 0
+  script_env:
+    - GUROBI_ROOT_DIR
