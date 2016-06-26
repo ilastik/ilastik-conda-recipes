@@ -1,13 +1,19 @@
 package:
-  name: neuroproof 
-  version: "1.2.1"
+    name: neuroproof
+
+  {% if GIT_DESCRIBE_NUMBER|int == 0 %}
+    version: {{GIT_DESCRIBE_TAG}}
+  {% else %}
+    # If we're using a non-tagged revision, append '.postN' to the version
+    version: {{GIT_DESCRIBE_TAG}}.post{{GIT_DESCRIBE_NUMBER}}
+  {% endif %}
   
 source:
   git_url: https://github.com/janelia-flyem/NeuroProof
   git_tag: HEAD
 
 build:
-  number: 2
+  number: 3
 
   #
   # You must build this recipe using 'conda build --numpy=X.Y'
@@ -22,7 +28,7 @@ requirements:
     - python 2.7*
     - numpy {{NPY_VER}}*
     - jsoncpp 1.6.2
-    - vigra 1.10*
+    - vigra 1.11*
     - libdvid-cpp
     - vtk         5.10.1.99
     - hdf5        1.8.14
@@ -35,7 +41,7 @@ requirements:
     - python 2.7*
     - numpy {{NPY_VER}}*
     - jsoncpp 1.6.2
-    - vigra 1.10*
+    - vigra 1.11*
     - libdvid-cpp
     - vtk         5.10.1.99
     - hdf5        1.8.14
