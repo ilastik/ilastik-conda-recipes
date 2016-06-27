@@ -1,19 +1,28 @@
 package:
   name: vigra
-  version: "1.10"
+  
+  # Transform tag:
+  # Version-1-11-0 --> 1.11.0
+  {% set tagged_version = GIT_DESCRIBE_TAG|replace("Version-","")|replace("-", ".") %}
+
+  # If we're using a non-tagged revision, append '.postN' to the version
+  {% if GIT_DESCRIBE_NUMBER|int != 0 %}
+    {% set tagged_version = tagged_version + '.post' + GIT_DESCRIBE_NUMBER %}
+  {% endif %}
+
+  version: {{tagged_version}}
 
 source:
   git_url: https://github.com/ukoethe/vigra
-  git_tag: 35e5d4aed380087d75e206348d1648d9ad9cf1e6 # 2015-07-16
+  git_tag: HEAD
 
 build:
-  {% set build_num = 12 %}
-  number: {{ build_num }}
+  number: 0
 
   #
   # You must build this recipe using 'conda build --numpy=X.Y'
   #
-  string: np{{CONDA_NPY[:]}}py{{CONDA_PY}}_{{build_num}}_g{{GIT_FULL_HASH[:7]}}
+  string: np{{np}}py{{py}}_{{PKG_BUILDNUM}}_g{{GIT_FULL_HASH[:7]}}
 
   detect_binary_files_with_prefix: true
 
