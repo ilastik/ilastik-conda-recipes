@@ -26,7 +26,7 @@ requirements:
     - greenlet                  0.4.6     
     - h5py                      2.5.0     
     - hdf5                      1.8.14    
-    - iiboost                   0.1       
+    - iiboost                   0.2       
     - isl                       0.12.2    
     - itk-seg-conv-only         4.6.1     
     - jbig                      2.1

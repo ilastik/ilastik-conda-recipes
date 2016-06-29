@@ -1,20 +1,25 @@
 package:
-  name: iiboost
-  version: 0.1
+    name: iiboost
+
+  {% if GIT_DESCRIBE_NUMBER|int == 0 %}
+    version: {{GIT_DESCRIBE_TAG}}
+  {% else %}
+    # If we're using a non-tagged revision, append '.postN' to the version
+    version: {{GIT_DESCRIBE_TAG}}.post{{GIT_DESCRIBE_NUMBER}}
+  {% endif %}
 
 source:
   git_url: https://github.com/cbecker/iiboost
-  git_tag: 437491b5257cce74f86977ed203e1ccb2a02bd5c # 2015-08-17
+  git_tag: HEAD
 
 build:
-  number: 4
-  string: 4_g437491b
+  number: 0
+  string: {{CONDA_PY}}_{{PKG_BUILDNUM}}_{{GIT_FULL_HASH}}
   detect_binary_files_with_prefix: true
 
 requirements:  
   build:
-    - gcc 4.8.5 # [linux]
-    - gcc 4.8.5 # [osx]
+    - gcc 4.8.5 # [unix]
     - python
     - numpy
     - itk-seg-conv-only
