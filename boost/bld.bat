@@ -18,7 +18,10 @@ set BOOST_TOOLSET=msvc-%VISUAL_STUDIO_VERSION%
 echo BOOST TOOLSET: %BOOST_TOOLSET%
 
 REM set BOOST_OPTIONS=--layout=system --with-python --with-serialization --with-system --with-filesystem --with-test --with-timer --with-thread --with-random --with-date_time --with-chrono --with-program_options  variant=release threading=multi link=shared toolset=%BOOST_TOOLSET% address-model=%ARCH%
-set BOOST_OPTIONS=--with-python --with-serialization --with-system --with-filesystem --with-test --with-timer --with-thread --with-random --with-date_time --with-chrono --with-program_options  variant=release threading=multi link=shared toolset=%BOOST_TOOLSET% address-model=%ARCH%
+REM set BOOST_OPTIONS=--with-python --with-serialization --with-system --with-filesystem --with-test --with-timer --with-thread --with-random --with-date_time --with-chrono --with-program_options  variant=release threading=multi link=shared toolset=%BOOST_TOOLSET% address-model=%ARCH%
+
+REM if no library is explicitly requested, boost builds them all
+set BOOST_OPTIONS=variant=release threading=multi link=shared toolset=%BOOST_TOOLSET% address-model=%ARCH%
 
 REM compile
 .\b2 %BOOST_OPTIONS%

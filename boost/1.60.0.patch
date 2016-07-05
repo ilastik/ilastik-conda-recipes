@@ -1,3 +1,15 @@
+diff boost/get_pointer.hpp boost/get_pointer.hpp
+--- boost/get_pointer.hpp	Fri Aug 28 19:31:26 2015
++++ boost/get_pointer.hpp	Tue Jul  5 16:22:04 2016
+@@ -17,7 +17,7 @@ namespace boost {
+
+ // get_pointer(p) extracts a ->* capable pointer from p
+
+-template<class T> T * get_pointer(T * p)
++template<class T> inline T * get_pointer(T * p)
+ {
+     return p;
+ }
 diff boost/python/detail/config.hpp boost/python/detail/config.hpp
 --- boost/python/detail/config.hpp	Wed Sep  2 12:07:49 2015
 +++ boost/python/detail/config.hpp	Fri Jan 29 23:29:39 2016

@@ -14,7 +14,7 @@ source:
 build:
   features:
     - {{toolset.short}}
-  number: 2
+  number: 3
   detect_binary_files_with_prefix: true
   msvc_compiler: {{toolset.version}}  # [win]
 
@@ -23,7 +23,7 @@ requirements:
     - {{toolset.build_requirement}}
     # - gcc 4.8.2.99                   # [linux]
     # - gcc 4.8.2                      # [osx]
-    - python    3.5
+    - python    3.5*
     - zlib                           # [unix]
 
   run:
