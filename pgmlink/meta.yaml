@@ -1,13 +1,13 @@
 package:
     name: pgmlink
-    version: "1.2"
+    version: "1.3"
 
 source:
     git_url: https://github.com/ilastik/pgmlink
     git_tag: HEAD 
 
 build:
-  number: 23
+  number: 1
 
   #
   # You must build this recipe using 'conda build --numpy=X.Y'
@@ -29,13 +29,13 @@ requirements:
     - boost 1.55.0
     - python {{PY_VER}}*
     - numpy >=1.9,{{NPY_VER}}*
-    - vigra 1.10*
-    - opengm
+    - vigra 1.11*
+    - opengm-structured-learning-headers
     - mlpack
     - lemon
     - libxml2
     - dlib
-    - libpng 1.6.17
+    - libpng
     - armadillo 6.500.5
     - openblas # [linux]
 
@@ -46,10 +46,10 @@ requirements:
     - boost 1.55.0
     - python {{PY_VER}}*
     - numpy  {{NPY_VER}}*
-    - vigra 1.10*
+    - vigra 1.11*
     - mlpack
     - lemon
-    - libpng 1.6.17
+    - libpng
     - libxml2
     - dlib
     - armadillo 6.500.5
