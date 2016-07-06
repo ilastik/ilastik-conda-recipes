@@ -13,8 +13,8 @@ package:
 
 source:
   #git_url: https://github.com/opengm/opengm
-  git_url: https://github.com/stuarteberg/opengm
-  git_rev: f9b2bff1fbd207b1ff4831c23d97a60d6f9d6362 # branch 'thorsten-master'
+  git_url: https://github.com/DerThorsten/opengm
+  git_rev: a00f9958e8dc79d51f22b9c00e3093bd8bd32ae0
 
   patches:
     - patches/patchConicBundle.patch # Yes, we're patching the patch script (ignore ssl certificate problems)
@@ -22,7 +22,7 @@ source:
     - patches/patchPlanarity.sh.patch # Apparently the mirror at http://jgaa.info is not reliable, but the parent website is.
 
 build:
-  number: 1
+  number: 0
 
   #
   # You must build this recipe using 'conda build --numpy=X.Y'
