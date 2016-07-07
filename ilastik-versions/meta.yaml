@@ -3,7 +3,7 @@ package:
   version: 1.2
 
 build:
-  number: 1
+  number: 2
 
 #
 # In general, we don't specify exact version requirements in each sub-package.
@@ -38,7 +38,7 @@ requirements:
     - libtiff                   4.0.6
     - libxml2                   2.9.0     
     - matplotlib                1.4.3     
-    - mlpack                    1.0.8     
+    - mlpack                    1.0.8.99     
     - mpc                       1.0.1     
     - mpfr                      3.1.2     
     - networkx                  1.9.1
