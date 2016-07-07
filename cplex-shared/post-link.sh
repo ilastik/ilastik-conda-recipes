@@ -76,7 +76,11 @@ if [ $(uname) == "Darwin" ]; then
     EXISTING_SHARED_OBJECT=`ls ${CPLEX_LIB_DIR}/libilocplex.dylib` \
     || EXISTING_SHARED_OBJECT="NOT_PRESENT"
     if [ "$EXISTING_SHARED_OBJECT" == "NOT_PRESENT" ]; then
-        
+
+        # This is slightly dangerous, but apparently conda doesn't want
+        # to recursively call itself if we don't remove the locks.
+        conda clean --lock
+
         # Install gcc to a temporary environment
         conda remove -y --all -n _cplex_shared_gcc_throwaway 2> /dev/null || true
         conda create -y -n _cplex_shared_gcc_throwaway gcc=4.8.5
@@ -94,10 +98,14 @@ else
     || EXISTING_SHARED_OBJECT="NOT_PRESENT"
     if [ "$EXISTING_SHARED_OBJECT" == "NOT_PRESENT" ]; then
 
+        # This is slightly dangerous, but apparently conda doesn't want
+        # to recursively call itself if we don't remove the locks.
+        conda clean --lock
+        
         # Install gcc to a temporary environment
         conda remove -y --all -n _cplex_shared_gcc_throwaway 2> /dev/null || true
         conda create -y -n _cplex_shared_gcc_throwaway gcc=4.8.5
-        GCC_ENV_PREFIX=$(conda info --root)/_cplex_shared_gcc_throwaway
+        GCC_ENV_PREFIX=$(conda info --root)/envs/_cplex_shared_gcc_throwaway
 
         ${GCC_ENV_PREFIX}/bin/g++ -fpic -shared -Wl,-whole-archive ${CPLEX_LIB_DIR}/libcplex.a     -Wl,-no-whole-archive -o ${CPLEX_LIB_DIR}/libcplex.so
         ${GCC_ENV_PREFIX}/bin/g++ -fpic -shared -Wl,-whole-archive ${CONCERT_LIB_DIR}/libconcert.a -Wl,-no-whole-archive -o ${CONCERT_LIB_DIR}/libconcert.so
