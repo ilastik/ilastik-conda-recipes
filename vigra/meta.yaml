@@ -2,11 +2,11 @@
 
 package:
   name: vigra
-  version: "1.11.0rc0{{toolset.suffix}}"
+  version: "1.11.0post1{{toolset.suffix}}"
 
 source:
   git_url: git://github.com/ukoethe/vigra.git
-  git_tag: version-1-11-rc
+  git_tag: c9aa1f0253880f2d09918dcf962ff8e4844ba44f
 
 build:
   features:
@@ -24,37 +24,28 @@ build:
 requirements:
   build:
     - {{toolset.build_requirement}}
-    # - gcc 4.8.2.99                   # [linux]
-    # - gcc 4.8.2                      # [osx]
-    - python   2.7.*{{toolset.suffix}}
-    - numpy    >=1.9                   # [unix]
-    - numpy    >=1.10,*{{toolset.suffix}} # [win]
-    - jpeg     *{{toolset.suffix}}
-    - libtiff  4.0.*{{toolset.suffix}}
-    - libpng   1.6.17                  # [unix]
-    - libpng   1.5.*{{toolset.suffix}} # [win]
-    - fftw     3.3.*{{toolset.suffix}}
-    - hdf5     1.8.14                  # [unix]
-    - hdf5     1.8.*{{toolset.suffix}} # [win]
-    - boost    1.55.*{{toolset.suffix}}
+    - python   2.7.10*{{toolset.suffix}}
+    - numpy    1.10.1*{{toolset.suffix}}
+    - jpeg     1.2.1*{{toolset.suffix}}
+    - libtiff  4.0.6*{{toolset.suffix}}
+    - libpng   1.5.13*{{toolset.suffix}}
+    - fftw     3.3.4*{{toolset.suffix}}
+    - hdf5     1.8.12*{{toolset.suffix}}
+    - boost    1.55.0*{{toolset.suffix}}
     - nose
     # - sphinx
 #    - zlib     1.2*     # only indirectly used by vigra
 
   run:
     - {{toolset.run_requirement}}
-    # - libgcc   4.8*                  # [unix]
-    - python   2.7.*{{toolset.suffix}}
-    - numpy    >=1.9                   # [unix]
-    - numpy    >=1.10,*{{toolset.suffix}} # [win]
-    - jpeg     *{{toolset.suffix}}
-    - libtiff  4.0.*{{toolset.suffix}}
-    - libpng   1.6.17                  # [unix]
-    - libpng   1.5.*{{toolset.suffix}} # [win]
-    - fftw     3.3.*{{toolset.suffix}}
-    - hdf5     1.8.14                  # [unix]
-    - hdf5     1.8.*{{toolset.suffix}} # [win]
-    - boost    1.55.*{{toolset.suffix}}
+    - python   2.7.10*{{toolset.suffix}}
+    - numpy    1.10.1*{{toolset.suffix}} # [win]
+    - jpeg     1.2.1*{{toolset.suffix}}
+    - libtiff  4.0.6*{{toolset.suffix}}
+    - libpng   1.5.13*{{toolset.suffix}} # [win]
+    - fftw     3.3.4*{{toolset.suffix}}
+    - hdf5     1.8.12*{{toolset.suffix}} # [win]
+    - boost    1.55.0*{{toolset.suffix}}
 #    - zlib     1.2*
 
 # test:
