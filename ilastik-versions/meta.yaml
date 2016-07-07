@@ -1,6 +1,6 @@
 package:
   name: ilastik-versions
-  version: 1.1.9
+  version: 1.2
 
 build:
   number: 0
@@ -25,7 +25,7 @@ requirements:
     - gmp                       5.1.2     
     - greenlet                  0.4.6     
     - h5py                      2.5.0     
-    - hdf5                      1.8.14    
+    - hdf5                      1.8.16    
     - iiboost                   0.2       
     - isl                       0.12.2    
     - itk-seg-conv-only         4.6.1     
@@ -69,7 +69,7 @@ requirements:
     - sqlite                    3.8.4.1   
     - tifffile                  0.4.1
     - tk                        8.5.18    
-    - vigra                     1.10      
+    - vigra                     1.11.0.post28      
     - vtk                       5.10.1.99
     - yapsy                     1.10.423  
     - zlib                      1.2.8     

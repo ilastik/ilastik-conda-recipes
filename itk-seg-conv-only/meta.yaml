@@ -3,12 +3,12 @@ package:
   version: 4.6.1
 
 source:
-  url: http://iweb.dl.sourceforge.net/project/itk/itk/4.6/InsightToolkit-4.6.1.tar.gz
+  url: http://superb-sea2.dl.sourceforge.net/project/itk/itk/4.6/InsightToolkit-4.6.1.tar.gz
   fn: InsightToolkit-4.6.1.tar.gz
   md5: 2c84eae50ab2452cdad32aaadced3c37
 
 build:
-  number: 4
+  number: 5
   detect_binary_files_with_prefix: true
 
 requirements:  
@@ -18,7 +18,7 @@ requirements:
     - jpeg
     - libtiff
     - libpng 1.6.17
-    - hdf5 1.8.14
+    - hdf5 1.8.16
     - zlib
 
   run:
@@ -28,7 +28,7 @@ requirements:
     # - jpeg
     # - libtiff
     # - libpng
-    # - hdf5 1.8.14
+    # - hdf5 1.8.16
 
 about:
   home: http://itk.org
