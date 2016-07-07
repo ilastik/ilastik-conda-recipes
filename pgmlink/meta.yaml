@@ -1,17 +1,17 @@
 {% import '$CONDA_DEFAULT_ENV/toolset-info/config.yaml' as toolset %}
 
 package:
-    name: pgmlink
-    version: "1.2{{toolset.suffix}}"
+    name: pgmlink-with-cplex
+    version: "1.2.1{{toolset.suffix}}"
 
 source:
     git_url: https://github.com/ilastik/pgmlink
-    git_tag: HEAD
+    git_tag: 24f872e248351e4c0b5fc9fc3d4c46219d179aeb # master 2016/07/06
 
 build:
   features:
     - {{toolset.short}}
-  number: 14
+  number: 0
   string: {{PKG_BUILDNUM}}_g{{GIT_FULL_HASH[:7]}}
   script_env:
      - CPLEX_ROOT_DIR
@@ -29,8 +29,8 @@ requirements:
     - patchelf                            # [linux]
     - ann     *{{toolset.suffix}}
     - boost 1.55.*{{toolset.suffix}}
-    - vigra   1.10*{{toolset.suffix}}
-    - opengm-learning  *{{toolset.suffix}}
+    - vigra   1.11.0post1{{toolset.suffix}}
+    - opengm-learning-headers  *{{toolset.suffix}}
     - mlpack  *{{toolset.suffix}}
     - lemon   *{{toolset.suffix}}
     - libxml2 *{{toolset.suffix}}
@@ -46,8 +46,7 @@ requirements:
     - patchelf                            # [linux]
     - ann     *{{toolset.suffix}}
     - boost 1.55.*{{toolset.suffix}}
-    - vigra   1.10*{{toolset.suffix}}
-    - opengm-learning  *{{toolset.suffix}}
+    - vigra   1.11.0post1{{toolset.suffix}}
     - mlpack  *{{toolset.suffix}}
     - lemon   *{{toolset.suffix}}
     - libxml2 *{{toolset.suffix}}

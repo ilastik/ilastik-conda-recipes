@@ -15,9 +15,10 @@ cmake .. -G "%CMAKE_GENERATOR%" ^
          -DWITH_PYTHON=ON ^
          -DWITH_TESTS=OFF ^
          -DPYTHON_INCLUDE_DIRS="%PREFIX%\include" ^
-         -DPYTHON_LIBRARIES="%PREFIX%\libs\python27.lib"
+         -DPYTHON_LIBRARIES="%PREFIX%\libs\python27.lib" ^
+         -DPYTHON_LIBRARY="%PREFIX%\libs\python27.lib"
 if errorlevel 1 exit 1
-    
+
 set CONFIGURATION=Release
 cmake --build . --target pgmlink --config %CONFIGURATION%
 if errorlevel 1 exit 1
@@ -26,3 +27,7 @@ if errorlevel 1 exit 1
 
 cmake --build . --target INSTALL --config %CONFIGURATION%
 if errorlevel 1 exit 1
+
+rem FIXME: this should be corrected in the cmake configuration
+move "%PREFIX%\Lib\site-packages\pgmlink\pgmlink.pyd" "%PREFIX%\Lib\site-packages\pgmlink.pyd"
+rmdir "%PREFIX%\Lib\site-packages\pgmlink"
