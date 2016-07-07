@@ -2,18 +2,18 @@
 
 package:
   name: ilastiktools
-  version: "0.1post2{{toolset.suffix}}"
+  version: "0.1post3{{toolset.suffix}}"
 
 source:
   git_url: git://github.com/ilastik/ilastiktools.git
-  git_tag: 6cdd7d2663b2f3ab0a2428c5b1d7c0bf94801027
+  git_tag: f68665df6406856d00ef9ae5af64278d685df564 # master 2016/07/07
 
 build:
   features:
     - {{toolset.short}}
-  number: 1
+  number: 0
   detect_binary_files_with_prefix: true
-  string: 1_6cdd7d2
+  string: 0_gf68665d
   msvc_compiler: {{toolset.version}}  # [win]
 
 requirements:
@@ -31,10 +31,6 @@ requirements:
     - python   2.7.*{{toolset.suffix}}
     - numpy    >=1.10,*{{toolset.suffix}}
     - vigra    1.10*{{toolset.suffix}}
-
-test:
-  imports:
-    - ilastiktools
 
 about:
   home: http://ilastik.org
