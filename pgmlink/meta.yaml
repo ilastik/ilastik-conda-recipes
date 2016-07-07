@@ -31,7 +31,7 @@ requirements:
     - numpy >=1.9,{{NPY_VER}}*
     - vigra 1.11*
     - opengm-structured-learning-headers
-    - mlpack
+    - mlpack 1.0.8.99
     - lemon
     - libxml2
     - dlib
@@ -47,7 +47,7 @@ requirements:
     - python {{PY_VER}}*
     - numpy  {{NPY_VER}}*
     - vigra 1.11*
-    - mlpack
+    - mlpack 1.0.8.99
     - lemon
     - libpng
     - libxml2
