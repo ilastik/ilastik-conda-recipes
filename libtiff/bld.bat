@@ -23,3 +23,6 @@ if errorlevel 1 exit 1
 
 cmake --build . --target INSTALL --config Release
 if errorlevel 1 exit 1
+
+copy "%PREFIX%\Library\lib\tiff.lib" "%PREFIX%\Library\lib\libtiff_i.lib"
+if errorlevel 1 exit 1
