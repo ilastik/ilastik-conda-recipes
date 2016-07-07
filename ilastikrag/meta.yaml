@@ -1,0 +1,38 @@
+{% import '$CONDA_DEFAULT_ENV/toolset-info/config.yaml' as toolset %}
+
+package:
+    name: ilastikrag
+
+  {% if GIT_DESCRIBE_NUMBER|int == 0 %}
+    version: {{GIT_DESCRIBE_TAG}}
+  {% else %}
+    # If we're using a non-tagged revision, append '.postN' to the version
+    version: {{GIT_DESCRIBE_TAG}}.post{{GIT_DESCRIBE_NUMBER}}
+  {% endif %}
+
+source:
+    git_url: https://github.com/stuarteberg/ilastikrag
+    git_tag: 34ca57aec4df481a39feda7414e11c307045d84e # master 2016/07/07
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - python 2.7*{{toolset.suffix}}
+    - setuptools
+
+  run:
+    - python 2.7*{{toolset.suffix}}
+    - numpy  >=1.9*{{toolset.suffix}}
+    - hdf5   1.8.12*{{toolset.suffix}}
+    - h5py   >=2.5*{{toolset.suffix}}
+    - pandas >=0.16*{{toolset.suffix}}
+    - vigra  >=1.11*{{toolset.suffix}}
+    - networkx >=1.11*
+
+about:
+  home: https://github.com/stuarteberg/ilastikrag
+  license: Simplified BSD
+  license_file: LICENSE-BSD
+  summary: ND Region Adjacency Graph with edge feature algorithms

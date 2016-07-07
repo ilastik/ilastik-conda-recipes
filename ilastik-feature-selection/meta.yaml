@@ -1,0 +1,29 @@
+{% import '$CONDA_DEFAULT_ENV/toolset-info/config.yaml' as toolset %}
+
+package:
+  name: ilastik-feature-selection
+  version: "0.123"
+
+source:
+  git_url: https://github.com/ilastik/ilastik-feature-selection
+  git_tag: 88d0454b44f006e9f8963ec3188d42e8b9243ecd
+
+build:
+  number: 0
+  msvc_compiler: {{toolset.version}}  # [win]
+
+requirements:
+  build:
+    - python 2.7*
+    - setuptools
+
+  run:
+    - python 2.7*
+    - numpy
+    - scikit-learn
+
+about:
+  home: https://bitbucket.org/FabianIsensee/feature_selection_clean
+  license: BSD
+  license_file: LICENSE
+  summary: 'A Python library for selecting features during image classification.'
