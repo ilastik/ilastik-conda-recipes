@@ -1,0 +1,38 @@
+package:
+    name: opengm-structured-learning-headers
+    version: "2.3.4"
+
+source:
+    git_url: https://github.com/opengm/opengm.git
+    git_tag: learning-experimental
+
+build:
+  {% set build_num = 2 %}
+  number: {{ build_num }}
+
+  #
+  # You must build this recipe using 'conda build --numpy=X.Y'
+  #
+  string: np{{CONDA_NPY[:]}}py{{CONDA_PY}}_{{build_num}}_g{{GIT_FULL_HASH[:7]}}
+
+  detect_binary_files_with_prefix: true
+
+requirements:
+  build:
+    - gcc 4.8.5 # [linux]
+    - gcc 4.8.5 # [osx]
+    - boost 1.55.0
+    - python 2.7*
+    - numpy >=1.9,{{NPY_VER}}*
+    - hdf5
+  run:
+    - libgcc
+    - boost 1.55.0
+    - python {{PY_VER}}*
+    - numpy  {{NPY_VER}}*
+    - hdf5
+
+about:
+    home: https://github.com/opengm/opengm
+    license: GNU General Public License (GPL)
+    summary: 'A C++ Library for Discrete Graphical Models'

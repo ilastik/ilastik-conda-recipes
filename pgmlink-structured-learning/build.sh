@@ -67,7 +67,6 @@ cmake ..\
     -DCMAKE_OSX_DEPLOYMENT_TARGET=10.7\
     -DCMAKE_INSTALL_PREFIX=${PREFIX}\
     -DCMAKE_PREFIX_PATH=${PREFIX}\
-    -DCMAKE_CXX_FLAGS="-std=c++11" \
     -DCMAKE_SHARED_LINKER_FLAGS="${LINKER_FLAGS}" \
     -DCMAKE_EXE_LINKER_FLAGS="${LINKER_FLAGS}" \
     -DBUILD_SHARED_LIBS=ON\
@@ -81,10 +80,9 @@ cmake ..\
     -DVIGRA_IMPEX_LIBRARY=${PREFIX}/lib/libvigraimpex.${DYLIB} \
     -DVIGRA_NUMPY_CORE_LIBRARY=${PREFIX}/lib/python2.7/site-packages/vigra/vigranumpycore.so \
     -DWITH_CHECKED_STL=OFF\
-    -DWITH_TESTS=ON\
+    -DWITH_TESTS=OFF\
     -DWITH_FUNKEY=OFF\
-    -DWITH_DPCT=OFF\
-    -DXml2_INCLUDE_DIR=${PREFIX}/include/libxml2 \
+    -DWITH_DPCT=ON\
     -DCPLEX_ROOT_DIR="${CPLEX_ROOT_DIR}"
 
 make -j${CPU_COUNT}
