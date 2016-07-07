@@ -15,7 +15,7 @@ requirements:
     #- blist                     1.3.6 # Only needed by deprecated operators     
     - boost                     1.55.0    
     - cloog                     0.18.0    
-    - cylemon                   1         
+    #- cylemon                   1         
     - dlib                      18.16
     - decorator                 3.4.0
     - faulthandler              2.4       
