@@ -13,7 +13,7 @@ source:
   git_tag: HEAD
 
 build:
-  number: 3
+  number: 4
 
   #
   # You must build this recipe using 'conda build --numpy=X.Y'
@@ -31,7 +31,7 @@ requirements:
     - vigra 1.11*
     - libdvid-cpp
     - vtk         5.10.1.99
-    - hdf5        1.8.14
+    - hdf5        1.8.16
     - qt          4.8.6.99 # [osx]
     - qt          4.8.6    # [linux]
     - opencv      2.4.10.1
@@ -44,7 +44,7 @@ requirements:
     - vigra 1.11*
     - libdvid-cpp
     - vtk         5.10.1.99
-    - hdf5        1.8.14
+    - hdf5        1.8.16
     - qt          4.8.6.99 # [osx]
     - qt          4.8.6     # [linux]
     - opencv      2.4.10.1

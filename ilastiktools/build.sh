@@ -9,11 +9,14 @@ else
     DYLIB_EXT=so
 fi
 
+ILASTIKTOOLS_CXXFLAGS="${CFLAGS} -std=c++11"
+
 mkdir build
 cd build
 cmake ..\
     -DCMAKE_C_COMPILER=${PREFIX}/bin/gcc \
     -DCMAKE_CXX_COMPILER=${PREFIX}/bin/g++ \
+    -DCMAKE_CXX_FLAGS="${ILASTIKTOOLS_CXXFLAGS}" \
     -DCMAKE_INSTALL_PREFIX=${PREFIX} \
     -DCMAKE_PREFIX_PATH=${PREFIX} \
     -DPYTHON_EXECUTABLE=${PYTHON} \

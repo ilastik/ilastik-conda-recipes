@@ -17,7 +17,7 @@ source:
   git_tag: HEAD
 
 build:
-  number: 0
+  number: 1
 
   #
   # You must build this recipe using 'conda build --numpy=X.Y'
@@ -36,7 +36,7 @@ requirements:
     - libtiff  4.0.6
     - libpng   1.6.17
     - fftw     3.3*
-    - hdf5     1.8.14
+    - hdf5     1.8.16
     - h5py
     - boost    1.55.0
     - zlib     1.2*
@@ -50,7 +50,7 @@ requirements:
     - libtiff  4.0.6   # libtiff version must exactly match from the build (on osx, at least)
     - libpng   1.6.17
     - fftw     3.3*
-    - hdf5     1.8.14
+    - hdf5     1.8.16
     - h5py
     - boost    1.55.0
     - zlib     1.2*

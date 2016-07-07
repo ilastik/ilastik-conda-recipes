@@ -14,7 +14,7 @@ build:
   #
   # You must build this recipe using 'conda build --numpy=X.Y'
   #
-  string: np{{CONDA_NPY[:]}}py{{CONDA_PY}}_{{build_num}}_g{{GIT_FULL_HASH[:7]}}
+  string: np{{CONDA_NPY[:]}}py{{CONDA_PY}}_{{build_num}}
 
   detect_binary_files_with_prefix: true
 

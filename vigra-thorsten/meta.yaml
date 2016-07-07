@@ -7,7 +7,7 @@ source:
   git_tag: master
 
 build:
-  {% set build_num = 1 %}
+  {% set build_num = 2 %}
   number: {{ build_num }}
 
   #
@@ -27,7 +27,7 @@ requirements:
     - libtiff  4.0*
     - libpng   1.6.17
     - fftw     3.3*
-    - hdf5     1.8.14
+    - hdf5     1.8.16
     - boost    1.55.0
     - zlib     1.2*
     - nose
@@ -40,7 +40,7 @@ requirements:
     - libtiff  4.0*
     - libpng   1.6.17
     - fftw     3.3*
-    - hdf5     1.8.14
+    - hdf5     1.8.16
     - boost    1.55.0
     - zlib     1.2*
     - nose
