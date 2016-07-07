@@ -1,21 +1,21 @@
 package:
   # pure python
   name: networkx
-  version: "1.11"
+  version: "1.10"
 
 source:
-  fn:  networkx-1.11.tar.gz
-  url: https://pypi.python.org/packages/c2/93/dbb41b03cf7c878a7409c8e92226531f840a423c9309ea534873a83c9192/networkx-1.11.tar.gz
-  md5: 6ef584a879e9163013e9a762e1cf7cd1
+  fn:  networkx-1.10.tar.gz
+  url: https://pypi.python.org/packages/source/n/networkx/networkx-1.10.tar.gz
+  md5: eb7a065e37250a4cc009919dacfe7a9d
 
 requirements:
   build:
-    - python   2.7*
+    - python
     - decorator
     - setuptools
 
   run:
-    - python   2.7*
+    - python
     - decorator
 
 about:
