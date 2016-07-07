@@ -14,6 +14,6 @@ cmake .. -G "%CMAKE_GENERATOR%" ^
          -DBUILD_PYTHON_WRAPPER=1 ^
          -DITK_DIR="%ITK_CONFIG_DIR%"
 if errorlevel 1 exit 1
-            
+
 cmake --build . --target INSTALL --config Release
 if errorlevel 1 exit 1

@@ -1,0 +1,63 @@
+diff --git ContextFeatures/ContextFeatures.h ContextFeatures/ContextFeatures.h
+index b442d64..156dd2e 100644
+--- ContextFeatures/ContextFeatures.h
++++ ContextFeatures/ContextFeatures.h
+@@ -260,9 +260,9 @@ struct HistogramMeanThresholdData
+             newPt.z = round(pt.z + invZAnisotropyFactor * orient.coeff(2));
+
+             //FIXME: shouldn't have to check for NaN
+-           if (std::isnan(newPt.x)) newPt.x = 1;
+-           if (std::isnan(newPt.y)) newPt.y = 1;
+-           if (std::isnan(newPt.z)) newPt.z = 1;
++           if (_isnan(newPt.x)) newPt.x = 1;
++           if (_isnan(newPt.y)) newPt.y = 1;
++           if (_isnan(newPt.z)) newPt.z = 1;
+
+             if (newPt.x < 1)    newPt.x = 1;
+             if (newPt.y < 1)    newPt.y = 1;
+diff --git HistogramMeanThreshold.h HistogramMeanThreshold.h
+index a29a7eb..65caefe 100644
+--- HistogramMeanThreshold.h
++++ HistogramMeanThreshold.h
+@@ -276,9 +276,9 @@ struct HistogramMeanThresholdData
+             newPt.z = round(pt.z + invZAnisotropyFactor * orient.coeff(2));
+
+             //FIXME //TODO quick bug patch
+-           if (std::isnan(newPt.x)) newPt.x = 1;
+-           if (std::isnan(newPt.y)) newPt.y = 1;
+-           if (std::isnan(newPt.z)) newPt.z = 1;
++           if (_isnan(newPt.x)) newPt.x = 1;
++           if (_isnan(newPt.y)) newPt.y = 1;
++           if (_isnan(newPt.z)) newPt.z = 1;
+
+             if (newPt.x < 1)    newPt.x = 1;
+             if (newPt.y < 1)    newPt.y = 1;
+diff --git IntegralImage.h IntegralImage.h
+index 7f716ab..0c24d32 100644
+--- IntegralImage.h
++++ IntegralImage.h
+@@ -73,7 +73,7 @@ public:
+     template<typename S>
+     static inline S removeNaN( S val )
+     {
+-    if ( std::isnan(val) || std::isinf(val) )
++    if ( _isnan(val) || !_finite(val) )
+         return (S)0;
+     else
+         return val;
+diff --git ROIData.h ROIData.h
+index 2f99b1f..6a0a970 100644
+--- ROIData.h
++++ ROIData.h
+@@ -145,7 +145,7 @@ public:
+         for (long int i=0; i < numElem; i++)
+         {
+             auto total = _rotMatrices[i].sum();
+-            if ( std::isnan(total) || std::isinf(total) )
++            if ( _isnan(total) || !_finite(total) )
+                 _rotMatrices[i].setIdentity();
+         }
+     }
+--
+1.8.1.msysgit.1
+

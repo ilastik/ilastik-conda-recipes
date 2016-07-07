@@ -2,18 +2,20 @@
 
 package:
   name: iiboost
-  version: "0.1post1{{toolset.suffix}}"  # post1 since numpy was upgraded
+  version: "0.1post2{{toolset.suffix}}"  # post1 since numpy was upgraded
 
 source:
-  git_url: git://github.com/cbecker/iiboost.git
-  git_tag: 437491b5257cce74f86977ed203e1ccb2a02bd5c # 2015-08-17
+  git_url: https://github.com/cbecker/iiboost
+  git_tag: 76140cd985ab301749395bb47cbc8f8d88cdd257 # master 2016/07/07
+  patches:
+    - isnan.patch  # [win]
 
 build:
   features:
     - {{toolset.short}}
-  number: 3
+  number: 0
   detect_binary_files_with_prefix: true
-  string: 3_g437491b
+  string: 0_g76140cd
   msvc_compiler: {{toolset.version}}  # [win]
 
 requirements:
@@ -41,10 +43,6 @@ requirements:
     - libtiff  *{{toolset.suffix}}
     - libpng   1.6.17                  # [unix]
     - libpng   1.5.*{{toolset.suffix}} # [win]
-
-test:
-  imports:
-    - iiboost
 
 about:
   home: http://github.com/cbecker/iiboost
