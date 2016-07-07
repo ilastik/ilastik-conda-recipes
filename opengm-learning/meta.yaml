@@ -1,51 +1,72 @@
 {% import '$CONDA_DEFAULT_ENV/toolset-info/config.yaml' as toolset %}
 
+# in the shell, use
+#    set WITH_CPLEX=0
+# or
+#    set WITH_CPLEX=1
+# because only these values are recognized in bld.bat.
+# jinja transforms "0" into false below, "1" is automatically considered true.
+# (likewise for HEADER_ONLY)
+
+{% if (HEADER_ONLY is undefined) or (HEADER_ONLY is equalto "0") %}
+  {% set HEADER_ONLY = false %}
+{% endif %}
+{% if (WITH_CPLEX is undefined) or (WITH_CPLEX is equalto "0") %}
+  {% set WITH_CPLEX = false %}
+{% endif %}
+
 package:
-    name: opengm-learning
-    version: "2.3.5post1{{toolset.suffix}}"
+ {% if HEADER_ONLY %}
+    name: opengm-learning-headers
+ {% elif WITH_CPLEX %}
+    name: opengm-with-cplex
+ {% else %}
+    name: opengm
+ {% endif %}
+
+    version: "2.3.7post2{{toolset.suffix}}"
 
 source:
-    git_url: https://github.com/ilastikdev/opengm-1
-    git_tag: learning-experimental
+    git_url: https://github.com/ilastik/opengm
+    git_tag: 0c05fbcaab95ea6a91357c3c3965618f942fcb37 # learning-experimental 2016/07/07
 
 build:
-  features:
-    - {{toolset.short}}
-  number: 0
-  detect_binary_files_with_prefix: true
-  msvc_compiler: {{toolset.version}}  # [win]
+    number: 0
+    msvc_compiler: {{toolset.version}}  # [win]
+ {% if not HEADER_ONLY %}
+    features:
+      - {{toolset.short}}
+ {% endif %}
+    detect_binary_files_with_prefix: true
+
+    script_env:
+      - HEADER_ONLY
+      - WITH_CPLEX
 
 requirements:
   build:
     - {{toolset.build_requirement}}
     - mingw-for-msvc-build    # [win]
-    # - gcc 4.8.2.99                   # [linux]
-    # - gcc 4.8.2                      # [osx]
+{% if not HEADER_ONLY %}
     - boost 1.55.*{{toolset.suffix}}
     - python  2.7.*{{toolset.suffix}}
     - numpy    >=1.10,*{{toolset.suffix}}
-    - hdf5     1.8.14                  # [unix]
     - hdf5     1.8.*{{toolset.suffix}} # [win]
     - vigra    1.11.*{{toolset.suffix}} # [win]
   run:
     - {{toolset.run_requirement}}
-    # - libgcc                         # [unix]
     - boost 1.55.*{{toolset.suffix}}
     - python  2.7.*{{toolset.suffix}}
     - numpy   >=1.10,*{{toolset.suffix}}
-    - hdf5     1.8.14                  # [unix]
     - hdf5     1.8.*{{toolset.suffix}} # [win]
     - vigra    1.11.*{{toolset.suffix}} # [win]
-
-# FIXME: upgrade opengm to make the Python bindings work on Windows
-test:          # [unix]
-  imports:     # [unix]
-    - opengm   # [unix]
-
-# Note: tests are run when building the package, they are not accessible
-# in the installed package.
+{% endif %}
 
 about:
     home: https://github.com/opengm/opengm
     license: GNU General Public License (GPL)
+ {% if WITH_CPLEX %}
+    summary: 'A C++ Library for Discrete Graphical Models. This package was linked against the CPLEX commercial ILP solver, which you will need to install separately.'
+ {% else %}
     summary: 'A C++ Library for Discrete Graphical Models'
+ {% endif %}
