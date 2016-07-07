@@ -8,7 +8,7 @@ source:
     git_tag: HEAD
 
 build:
-  number: 2
+  number: 3
 
   #
   # You must build this recipe using 'conda build --numpy=X.Y'
@@ -54,11 +54,7 @@ requirements:
     - dlib
     - armadillo 6.500.5
     - openblas # [linux]
-
-    # We don't require cplex-shared here because it only needs to be installed once per machine,
-    # and requiring it here would include all of gcc in the install lib dir.
-    # Instead, we give the user a descriptive error message if cplex-shared hasn't been run on her machine.
-    # - cplex-shared
+    - cplex-shared
 
 test:
   imports:
