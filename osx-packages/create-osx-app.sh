@@ -55,20 +55,20 @@ fi
 # Create new ilastik-release environment and install all ilastik dependencies to it.
 echo "Creating new ilastik-release environment..."
 if [[ $OMIT_TRACKING == 1 ]]; then
-    conda create -q -y -n ilastik-release ilastik-everything-but-tracking py2app "$@"
+    conda create -q -y --copy -n ilastik-release ilastik-everything-but-tracking py2app "$@"
     TRACKING_SUFFIX="-no-tracking"
 else    
-    conda create -q -y -n ilastik-release ilastik-everything py2app "$@"
+    conda create -q --copy -y -n ilastik-release ilastik-everything py2app "$@"
     TRACKING_SUFFIX=""
 fi
 
-# Replace all @rpath references with @loader_path references,
-# and delete the RPATHs (some of which are absolute instead of relative).
-echo "Relinking all dylibs with relative links..."
-REMOVE_RPATHS="python ${OSX_PACKAGES_DIR}/remove-rpath.py --with_loader_path"
-find $RELEASE_ENV/lib -name "*.dylib" -type f | xargs $REMOVE_RPATHS
-find $RELEASE_ENV/lib -name "*.so" -type f | xargs $REMOVE_RPATHS
-find $RELEASE_ENV/plugins -name "*.dylib" -type f | xargs $REMOVE_RPATHS
+## Replace all @rpath references with @loader_path references,
+## and delete the RPATHs (some of which are absolute instead of relative).
+#echo "Relinking all dylibs with relative links..."
+#REMOVE_RPATHS="python ${OSX_PACKAGES_DIR}/remove-rpath.py --with_loader_path"
+#find $RELEASE_ENV/lib -name "*.dylib" -type f | xargs $REMOVE_RPATHS
+#find $RELEASE_ENV/lib -name "*.so" -type f | xargs $REMOVE_RPATHS
+#find $RELEASE_ENV/plugins -name "*.dylib" -type f | xargs $REMOVE_RPATHS
 
 if [[ $USE_GIT_LATEST == 1 ]]; then
     # Instead of keeping the version from binstar, get the git repo
