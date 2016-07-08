@@ -6,6 +6,6 @@ fi
 
 # Remove the symlinks we made
 cd ${PREFIX}/lib
-rm -f ${CPLEX_LIB_DIR}/libcplex.dylib
-rm -f ${CONCERT_LIB_DIR}/libconcert.dylib
-rm -f ${CPLEX_LIB_DIR}/libilocplex.dylib
+rm -f ${PREFIX}/libcplex.dylib
+rm -f ${PREFIX}/libconcert.dylib
+rm -f ${PREFIX}/libilocplex.dylib

@@ -20,6 +20,6 @@ package:
 #   - ###
 
 build:
-  number: 5
+  number: 6
   script_env:
     - CPLEX_ROOT_DIR
