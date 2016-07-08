@@ -5,7 +5,6 @@ else
 fi
 
 # Remove the symlinks we made
-cd ${PREFIX}/lib
-rm -f ${PREFIX}/libcplex.dylib
-rm -f ${PREFIX}/libconcert.dylib
-rm -f ${PREFIX}/libilocplex.dylib
+rm -f ${PREFIX}/lib/libcplex.dylib
+rm -f ${PREFIX}/lib/libconcert.dylib
+rm -f ${PREFIX}/lib/libilocplex.dylib
