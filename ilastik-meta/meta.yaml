@@ -2,7 +2,7 @@ package:
   name: ilastik-meta
 
   # If we're using a non-tagged revision, append '.postN' to the version
-  {% if GIT_DESCRIBE_NUMBER %}
+  {% if GIT_DESCRIBE_NUMBER|int %}
   version: {{ GIT_DESCRIBE_TAG }}.post{{ GIT_DESCRIBE_NUMBER }}
   {% else %}
   version: {{ GIT_DESCRIBE_TAG }}
