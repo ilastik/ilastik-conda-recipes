@@ -105,6 +105,11 @@ cat <<EOF > ilastik.app/Contents/Resources/qt.conf
 Plugins = ilastik-env/plugins
 EOF
 
+# Remove cplex libs/symlinks (if present)
+rm -f ${RELEASE_ENV}/lib/libcplex.dylib
+rm -f ${RELEASE_ENV}/lib/libilocplex.dylib
+rm -f ${RELEASE_ENV}/lib/libconcert.dylib
+
 echo "Moving ilastik-release environment into ilastik.app bundle..."
 mv ${RELEASE_ENV} ilastik.app/Contents/ilastik-release
 cd ilastik.app/Contents/Resources && ln -s ../ilastik-release/ilastik-meta/ilastik/ilastik.py

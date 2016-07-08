@@ -70,6 +70,11 @@ fi
 
 RELEASE_NAME=ilastik-${ILASTIK_PKG_VERSION}${TRACKING_SUFFIX}-`uname`
 
+# Remove cplex libs/symlinks (if present)
+rm -f ${CONDA_ROOT}/envs/ilastik-release/lib/libcplex.so
+rm -f ${CONDA_ROOT}/envs/ilastik-release/lib/libilocplex.so
+rm -f ${CONDA_ROOT}/envs/ilastik-release/lib/libconcert.so
+
 # Create the tarball, and move it to the current directory.
 echo "Creating ${RELEASE_NAME}.tar.gz"
 DEST_DIR=`pwd`
