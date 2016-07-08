@@ -6,10 +6,11 @@ package:
   version: "1.1"
 
 build:
-  number: 2
+  number: 3
 
 requirements:
-  build:
+
+  run:
     - ilastik-deps-pc-headless
     - pyqt 4.11.3.99            # [osx]
     - pyqt 4.11.3               # [not osx]
@@ -21,12 +22,4 @@ requirements:
     # Python was already included via the headless package,
     # but we need to add it explicitly here due to a conda bug.
     - python
-
-  run:
-    - ilastik-deps-pc-headless
-    - pyqt 4.11.3.99            # [osx]
-    - pyqt 4.11.3               # [not osx]
-    - qimage2ndarray
-    - vtk 5.10.1.99
-    - futures
-    - matplotlib
+    

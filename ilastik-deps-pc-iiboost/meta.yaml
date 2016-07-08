@@ -5,11 +5,10 @@ package:
   name: ilastik-deps-pc-iiboost
   version: "1.1"
 
-requirements:
-  build:
-    - ilastik-deps-pc
-    - iiboost
+build:
+  number: 1
 
+requirements:
   run:
     - ilastik-deps-pc
     - iiboost

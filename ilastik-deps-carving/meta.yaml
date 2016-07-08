@@ -5,10 +5,10 @@ package:
   name: ilastik-deps-carving
   version: "1.1.6a7"
 
+build:
+  number: 1
+
 requirements:
-  build:
-    - ilastik-deps-pc
-    - ilastiktools
 
   run:
     - ilastik-deps-pc

@@ -6,24 +6,9 @@ package:
   version: "1.1"
 
 build:
-  number: 3
+  number: 4
 
 requirements:
-  build:
-    - python
-    - numpy
-    - vigra
-    - h5py
-    - tifffile
-    - psutil
-    - greenlet
-    - yapsy
-    - scikit-learn
-    - scikit-image
-    - faulthandler
-    - jsonschema
-    - nose
-
   run:
     - python
     - numpy
