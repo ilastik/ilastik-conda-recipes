@@ -134,8 +134,6 @@ Generating a release binary
           git tag -m "Alpha Release" -a 1.2.3a4
           git push --tags origin
 
-  3. Update the `git_tag` in `ilastik-build-conda/ilastik-meta/meta.yaml` and commit.
-
 2. Double-check your conda configuration (`.condarc`).  You should allow access to the `ilastik`
    channel and `defaults`, but nothing else:
 
