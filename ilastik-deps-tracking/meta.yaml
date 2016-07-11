@@ -5,7 +5,7 @@ about:
 
 package:
   name: ilastik-deps-tracking
-  version: "1.1{{toolset.suffix}}"
+  version: "1.2{{toolset.suffix}}"
 
 build:
   features:
@@ -14,9 +14,13 @@ build:
 requirements:
   build:
     - {{toolset.build_requirement}}
-    - ilastik-deps-pc  *{{toolset.suffix}}
-    - pgmlink          *{{toolset.suffix}}
+    - ilastik-deps-pc    *{{toolset.suffix}}
+    - opengm             *{{toolset.suffix}}
+    - opengm-with-cplex  *{{toolset.suffix}}
+    - pgmlink-with-cplex *{{toolset.suffix}}
 
   run:
-    - ilastik-deps-pc  *{{toolset.suffix}}
-    - pgmlink          *{{toolset.suffix}}
+    - ilastik-deps-pc    *{{toolset.suffix}}
+    - opengm             *{{toolset.suffix}}
+    - opengm-with-cplex  *{{toolset.suffix}}
+    - pgmlink-with-cplex *{{toolset.suffix}}

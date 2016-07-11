@@ -5,7 +5,7 @@ about:
 
 package:
   name: ilastik-deps-pc
-  version: "1.1{{toolset.suffix}}"
+  version: "1.2{{toolset.suffix}}"
 
 build:
   features:
@@ -21,8 +21,9 @@ requirements:
     - qimage2ndarray *{{toolset.suffix}}
     - vtk  5.10.1.99                     # [unix]
     - vtk  5.10.1{{toolset.suffix}}      # [win]
-    - futures
     - matplotlib  *{{toolset.suffix}}
+    - futures
+    - ilastik-feature-selection   0.123
 
     # Python was already included via the headless package,
     # but we need to add it explicitly here due to a conda bug.
@@ -36,6 +37,7 @@ requirements:
     - qimage2ndarray *{{toolset.suffix}}
     - vtk  5.10.1.99                     # [unix]
     - vtk  5.10.1{{toolset.suffix}}      # [win]
-    - futures
     - matplotlib  *{{toolset.suffix}}
+    - futures
+    - ilastik-feature-selection    0.123
     - python      *{{toolset.suffix}}

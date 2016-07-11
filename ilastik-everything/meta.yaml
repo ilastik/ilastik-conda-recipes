@@ -27,11 +27,11 @@ requirements:
     - ilastik-deps-tracking            *{{toolset.suffix}}
     - ilastik-versions                 *{{toolset.suffix}}
 
-test:
-  requires:
-    - nose
+# test:
+  # requires:
+    # - nose
 
-  imports:
-    - lazyflow
-    - volumina
-    - ilastik
+  # imports:
+    # - lazyflow
+    # - volumina
+    # - ilastik

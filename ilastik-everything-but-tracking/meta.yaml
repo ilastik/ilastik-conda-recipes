@@ -20,29 +20,25 @@ requirements:
     - {{toolset.build_requirement}}
     - ilastik-deps-pc          *{{toolset.suffix}}
     - ilastik-deps-pc-iiboost  *{{toolset.suffix}}
-    # - ilastik-deps-carving >=1.1.6a7,*{{toolset.suffix}}
-    - ilastik-deps-carving     >=1.1.6a7                 # [unix]
-    - ilastik-deps-carving     1.1.6a7{{toolset.suffix}} # [win]
+    - ilastik-deps-carving     *{{toolset.suffix}}   # [win]
     - ilastik-exe              >1.0,*{{toolset.suffix}}  # [win]
     - ilastik-meta
-    - ilastik-versions
+    - ilastik-versions         1.2.0{{toolset.suffix}}
 
   run:
     - {{toolset.run_requirement}}
     - ilastik-deps-pc          *{{toolset.suffix}}
     - ilastik-deps-pc-iiboost  *{{toolset.suffix}}
-    # - ilastik-deps-carving >=1.1.6a7,*{{toolset.suffix}}
-    - ilastik-deps-carving     >=1.1.6a7                 # [unix]
-    - ilastik-deps-carving     1.1.6a7{{toolset.suffix}} # [win]
+    - ilastik-deps-carving     *{{toolset.suffix}}   # [win]
     - ilastik-exe              >1.0,*{{toolset.suffix}}  # [win]
     - ilastik-meta
-    - ilastik-versions
+    - ilastik-versions         1.2.0{{toolset.suffix}}
 
-test:
-  requires:
-    - nose
+# test:
+  # requires:
+    # - nose
 
-  imports:
-    - lazyflow
-    - volumina
-    - ilastik
+  # imports:
+    # - lazyflow
+    # - volumina
+    # - ilastik
