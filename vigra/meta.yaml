@@ -2,11 +2,11 @@
 
 package:
   name: vigra
-  version: "1.11.0post1{{toolset.suffix}}"
+  version: "1.11.0post2{{toolset.suffix}}"
 
 source:
   git_url: git://github.com/ukoethe/vigra.git
-  git_tag: c9aa1f0253880f2d09918dcf962ff8e4844ba44f
+  git_tag: 6fcc71f3447dbc2353733a28f8012b2cbcbdec69
 
 build:
   features:
@@ -34,7 +34,7 @@ requirements:
     - boost    1.55.0*{{toolset.suffix}}
     - nose
     # - sphinx
-#    - zlib     1.2*     # only indirectly used by vigra
+    - zlib     1.2.8*{{toolset.suffix}}
 
   run:
     - {{toolset.run_requirement}}
@@ -46,7 +46,7 @@ requirements:
     - fftw     3.3.4*{{toolset.suffix}}
     - hdf5     1.8.12*{{toolset.suffix}} # [win]
     - boost    1.55.0*{{toolset.suffix}}
-#    - zlib     1.2*
+    - zlib     1.2.8*{{toolset.suffix}}
 
 # test:
   # imports:
