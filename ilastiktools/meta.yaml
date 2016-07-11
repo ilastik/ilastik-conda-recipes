@@ -23,14 +23,14 @@ requirements:
     # - gcc 4.8.2                      # [osx]
     - python   2.7.*{{toolset.suffix}}
     - numpy    >=1.10,*{{toolset.suffix}}
-    - vigra    1.10*{{toolset.suffix}}
+    - vigra    1.11*{{toolset.suffix}}
 
   run:
     - {{toolset.run_requirement}}
     # - libgcc             # [unix]
     - python   2.7.*{{toolset.suffix}}
     - numpy    >=1.10,*{{toolset.suffix}}
-    - vigra    1.10*{{toolset.suffix}}
+    - vigra    1.11*{{toolset.suffix}}
 
 about:
   home: http://ilastik.org
