@@ -29,7 +29,7 @@ requirements:
     - patchelf                            # [linux]
     - ann     *{{toolset.suffix}}
     - boost 1.55.*{{toolset.suffix}}
-    - vigra   1.11.0post1{{toolset.suffix}}
+    - vigra    1.11.*{{toolset.suffix}}
     - opengm-learning-headers  *{{toolset.suffix}}
     - mlpack  *{{toolset.suffix}}
     - lemon   *{{toolset.suffix}}
@@ -46,7 +46,7 @@ requirements:
     - patchelf                            # [linux]
     - ann     *{{toolset.suffix}}
     - boost 1.55.*{{toolset.suffix}}
-    - vigra   1.11.0post1{{toolset.suffix}}
+    - vigra   1.11.*{{toolset.suffix}}
     - mlpack  *{{toolset.suffix}}
     - lemon   *{{toolset.suffix}}
     - libxml2 *{{toolset.suffix}}
