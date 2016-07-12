@@ -3,7 +3,7 @@
 # script cleans the environment to avoid a few potential errors.
 
 # we assume that this script resides in PREFIX
-export PREFIX=$(cd `dirname $0` && pwd)
+export PREFIX="$(cd `dirname $0` && pwd)"
 
 # Do not use the user's previous LD_LIBRARY_PATH settings because they can cause conflicts.
 # Start with an empty LD_LIBRARY_PATH
@@ -38,7 +38,7 @@ export PYTHONNOUSERSITE=1
 if [[ $QT_PLUGIN_PATH != "" ]]; then
     1>&2 echo "Warning: Ignoring your non-empty QT_PLUGIN_PATH"
 fi    
-export QT_PLUGIN_PATH=${PREFIX}/plugins
+export QT_PLUGIN_PATH="${PREFIX}/plugins"
 
 # When Python is compiled with certain (buggy) versions of gcc, 
 #  the Python interpreter can sometimes have memory corruption issues 
@@ -50,8 +50,8 @@ export QT_PLUGIN_PATH=${PREFIX}/plugins
 
 # fontconfig determines the default paths for configuration files during compile time.
 # Make sure to update these to match the local system
-export FONTCONFIG_PATH=${PREFIX}/etc/fonts/
-export FONTCONFIG_FILE=${PREFIX}/etc/fonts/fonts.conf
+export FONTCONFIG_PATH="${PREFIX}/etc/fonts/"
+export FONTCONFIG_FILE="${PREFIX}/etc/fonts/fonts.conf"
 
 # Launch the ilastik entry script, and pass along any commmand line args.
-${PREFIX}/bin/python ${PREFIX}/ilastik-meta/ilastik/ilastik.py "$@"
+"${PREFIX}/bin/python" "${PREFIX}/ilastik-meta/ilastik/ilastik.py" "$@"
