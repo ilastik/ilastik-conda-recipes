@@ -28,7 +28,7 @@ requirements:
     - hdf5                      1.8.16    
     - iiboost                   0.2.post2       
     - ilastik-feature-selection 0.123.post9
-    - ilastiktools              0.1       
+    - ilastiktools              0.2       
     - isl                       0.12.2    
     - itk-seg-conv-only         4.6.1     
     - jbig                      2.1
