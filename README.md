@@ -56,6 +56,18 @@ CONDA_ROOT=`conda info --root`
 source ${CONDA_ROOT}/bin/activate root
 ```
 
+
+**NOTE:**
+
+When using `conda`, make sure you are not using any of python's site-specific or user-specific customization features.  In particular, make sure the following environment variables are **not** defined in your terminal:
+
+- `PYTHONPATH`
+- `PYTHONUSERSITE`
+- `PYTHONUSERBASE`
+
+Also, make sure there are no python-related directories in `~/.local/`.
+
+
 1. Create a fresh environment, and install ilastik
 --------------------------------------------------
 
