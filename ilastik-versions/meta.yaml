@@ -69,7 +69,7 @@ requirements:
     - sip                       4.16.5    
     - six                       1.9.0     
     - sqlite                    3.8.4.1   
-    - tifffile                  0.4.1
+    - tifffile                  0.4.post34
     - tk                        8.5.18    
     - vigra                     1.11.0.post36      
     - vtk                       5.10.1.99
