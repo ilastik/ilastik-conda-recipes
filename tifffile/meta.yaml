@@ -1,21 +1,26 @@
 package:
+  # Transform tag:
+  # v0.9.2 --> 0.9.2
+  {% set tagged_version = GIT_DESCRIBE_TAG|replace("v","") %}
+
+  # If we're using a non-tagged revision, append '.postN' to the version
+  {% if GIT_DESCRIBE_NUMBER|int != 0 %}
+    {% set tagged_version = tagged_version + '.post' + GIT_DESCRIBE_NUMBER %}
+  {% endif %}
+
   name: tifffile
-  version: "0.4.1"
+  version: {{tagged_version}}
 
 source:
   git_url: https://github.com/ilastik/tifffile
-  git_tag: 05b51f398b2c18eacf9dce674631707763f7e94e
+  git_tag: cc9fb437fc124f3b4694075b070639dae3fddbed # Branch 'fix-modulo-attributes'
 
 build:
-  {% set build_num = 2 %}
-  number: {{ build_num }}
-  
+  number: 0
   #
   # You must build this recipe using 'conda build --numpy=X.Y'
   #
-  string: np{{CONDA_NPY}}py{{CONDA_PY}}_{{build_num}}_g{{GIT_FULL_HASH[:7]}}
-
-  detect_binary_files_with_prefix: true
+  string: np{{CONDA_NPY}}py{{CONDA_PY}}_{{PKG_BUILDNUM}}_g{{GIT_FULL_HASH[:7]}}
 
 requirements:
   build:
