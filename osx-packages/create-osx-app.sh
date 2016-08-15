@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ##
-## Usage: create-osx-app.sh [--zip] [--git-latest] [--no-tracking] [... extra install-args, e.g. --use-local or -c ilastik ...]
+## Usage: create-osx-app.sh [--zip] [--git-latest] [--no-tracking] [... extra install-args, e.g. --use-local or -c ilastik or --copy ...]
 ##
 
 set -e
@@ -55,10 +55,10 @@ fi
 # Create new ilastik-release environment and install all ilastik dependencies to it.
 echo "Creating new ilastik-release environment..."
 if [[ $OMIT_TRACKING == 1 ]]; then
-    conda create -q -y --copy -n ilastik-release ilastik-everything-but-tracking py2app "$@"
+    conda create -q -y -n ilastik-release ilastik-everything-but-tracking py2app "$@"
     TRACKING_SUFFIX="-no-tracking"
 else    
-    conda create -q --copy -y -n ilastik-release ilastik-everything py2app "$@"
+    conda create -q -y -n ilastik-release ilastik-everything py2app "$@"
     TRACKING_SUFFIX=""
 fi
 
