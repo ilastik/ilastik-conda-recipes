@@ -13,12 +13,14 @@ requirements:
     - ilastik-deps-pc
     - ilastik-deps-pc-iiboost
     - ilastik-deps-carving >=1.1.6a7
+    - ilastik-deps-multicut
     - ilastik-meta    # Needed to print ilastik.__version__
 
   run:
     - ilastik-deps-pc
     - ilastik-deps-pc-iiboost
     - ilastik-deps-carving >=1.1.6a7
+    - ilastik-deps-multicut
     - ilastik-meta
     - ilastik-launch
 

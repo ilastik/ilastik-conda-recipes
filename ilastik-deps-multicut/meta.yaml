@@ -1,0 +1,17 @@
+about:
+  summary: "A meta-package for building all the dependencies needed for multicut."
+
+package:
+  name: ilastik-deps-multicut
+  version: "1.2"
+
+build:
+  number: 0
+
+requirements:
+
+  run:
+    - ilastik-deps-pc
+    - ilastiktools
+    - wsdt
+    - ilastikrag
