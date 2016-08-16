@@ -2,18 +2,18 @@
 
 package:
   name: ilastiktools
-  version: "0.1post3{{toolset.suffix}}"
+  version: "0.2{{toolset.suffix}}"
 
 source:
   git_url: git://github.com/ilastik/ilastiktools.git
-  git_tag: f68665df6406856d00ef9ae5af64278d685df564 # master 2016/07/07
+  git_tag: 731565e0be509e3a847b3a7d277aacee1ee0161a # master 2016/08/16
 
 build:
   features:
     - {{toolset.short}}
   number: 0
   detect_binary_files_with_prefix: true
-  string: 0_gf68665d
+  string: 0_g731565e
   msvc_compiler: {{toolset.version}}  # [win]
 
 requirements:
@@ -36,4 +36,3 @@ about:
   home: http://ilastik.org
   license: GPLv3
   summary: Various compiled utilities for the ilastik project
-

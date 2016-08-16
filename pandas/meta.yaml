@@ -2,11 +2,11 @@
 
 package:
   name: pandas
-  version: 0.17.0post1{{toolset.suffix}}
+  version: 0.18.1{{toolset.suffix}}
 
 source:
   git_url: https://github.com/pydata/pandas.git
-  git_tag: v0.17.0
+  git_tag: v0.18.1
 
 build:
   number: {{ environ.get('GIT_DESCRIBE_NUMBER', 0) }}
