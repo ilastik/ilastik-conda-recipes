@@ -1,0 +1,24 @@
+{% import '$CONDA_DEFAULT_ENV/toolset-info/config.yaml' as toolset %}
+
+about:
+  summary: "A meta-package for building all the dependencies needed for multicut."
+
+package:
+  name: ilastik-deps-multicut
+  version: "1.2{{toolset.suffix}}"
+
+build:
+  number: 0
+  features:
+    - {{toolset.short}}
+
+requirements:
+  build:
+    - {{toolset.build_requirement}}
+
+  run:
+    - ilastik-deps-pc
+    - ilastiktools *{{toolset.suffix}}
+    - wsdt
+    - ilastikrag
+

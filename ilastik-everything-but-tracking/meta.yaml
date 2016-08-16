@@ -13,7 +13,7 @@ build:
     - {{toolset.short}}
   features:
     - {{toolset.short}}
-  number: 2
+  number: 4
 
 requirements:
   build:
@@ -21,6 +21,7 @@ requirements:
     - ilastik-deps-pc          *{{toolset.suffix}}
     - ilastik-deps-pc-iiboost  *{{toolset.suffix}}
     - ilastik-deps-carving     *{{toolset.suffix}}   # [win]
+    - ilastik-deps-multicut    *{{toolset.suffix}}
     - ilastik-exe              >1.0,*{{toolset.suffix}}  # [win]
     - ilastik-meta
     - ilastik-versions         1.2.0{{toolset.suffix}}
@@ -30,6 +31,7 @@ requirements:
     - ilastik-deps-pc          *{{toolset.suffix}}
     - ilastik-deps-pc-iiboost  *{{toolset.suffix}}
     - ilastik-deps-carving     *{{toolset.suffix}}   # [win]
+    - ilastik-deps-multicut    *{{toolset.suffix}}
     - ilastik-exe              >1.0,*{{toolset.suffix}}  # [win]
     - ilastik-meta
     - ilastik-versions         1.2.0{{toolset.suffix}}

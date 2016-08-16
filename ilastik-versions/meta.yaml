@@ -9,7 +9,7 @@ build:
     - {{toolset.short}}
   features:
     - {{toolset.short}}
-  number: 4
+  number: 6
 
 #
 # In general, we don't specify exact version requirements in each sub-package.
@@ -46,6 +46,7 @@ requirements:
     - hdf5                      1.8.12{{toolset.suffix}}  # [win]
     - iiboost                   0.1post2{{toolset.suffix}} # [win]
     - ilastikrag                0.1.post11                # [win]
+    - ilastiktools              0.2{{toolset.suffix}}
     - isl                       0.12.2{{toolset.suffix}}  # [unix]
     - itk-seg-conv-only         4.6.1{{toolset.suffix}}
     - jpeg                      8d{{toolset.suffix}}      # [unix]
@@ -77,6 +78,7 @@ requirements:
     - opengm-with-cplex         2.3.7post2{{toolset.suffix}}   # [win]
     - openssl                   1.0.1k                    # [unix]
     # - openssl-src-for-python    1.0.2post.a  # [win]  hard-wired in Python
+    - pandas                    0.18.1{{toolset.suffix}}  # [win]
     - pgmlink-with-cplex        1.2.1{{toolset.suffix}}   # [win]
     - pillow                    2.7.0{{toolset.suffix}}   # [unix]
     - pillow                    3.0.0{{toolset.suffix}}   # [win]
@@ -111,7 +113,7 @@ requirements:
     - sqlite                    3.8.4.1                   # [unix]
     # - sqlite-src-for-python     3.8.11  # [win] hard-wired in Python
     - tifffile                  0.4.1{{toolset.suffix}}   # [unix]
-    - tifffile                  0.4.1post1{{toolset.suffix}}   # [win]
+    - tifffile                  0.9.2post1{{toolset.suffix}}   # [win]
     - tk                        8.5.18                    # [unix]
     - vigra                     1.10{{toolset.suffix}}    # [unix]
     - vigra                     1.11.0post2{{toolset.suffix}} # [win]
