@@ -3,7 +3,7 @@ package:
   version: 1.2
 
 build:
-  number: 5
+  number: 6
 
 #
 # In general, we don't specify exact version requirements in each sub-package.
@@ -45,9 +45,13 @@ requirements:
     - mpc                       1.0.1     
     - mpfr                      3.1.2     
     - networkx                  1.11
+    - nifty                     0.2.post202 # [unix]
+    - nifty-with-cplex          0.2.post202 # [unix]
+    - nifty-with-gurobi         0.2.post202 # [unix]
     - nose                      1.3.6     
     - numpy                     1.11.1     
     - opengm                    2.3.7.post29     
+    - opengm-with-cplex         2.3.7.post29 # [unix]
     - openssl                   1.0.1k    
     - pandas                    0.18.1
     - pgmlink                   1.3       
