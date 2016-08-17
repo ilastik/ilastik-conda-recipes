@@ -91,6 +91,14 @@ if [ $(uname) == "Darwin" ]; then
         ${GCC_ENV_PREFIX}/bin/g++ -fpic -shared -Wl,-all_load ${CPLEX_LIB_DIR}/libilocplex.a  -Wl,-noall_load \
             -L${CPLEX_LIB_DIR} -L${CONCERT_LIB_DIR} -lcplex -lconcert -o ${CPLEX_LIB_DIR}/libilocplex.dylib
         
+        # Fix abs links to libgcc_s -> Use @rpath
+        # Note: Even though no LC_RPATH command exists within these dylibs,
+        # The Mac loader searches the RPATH for *all* dylibs in the loader dependency chain.
+        # Hence, as long as libopengm.dylib (or whatever) has an LC_RPATH, then we can use @rpath here.
+        install_name_tool -change ${GCC_ENV_PREFIX}/lib/libgcc_s.1.dylib @rpath/libgcc_s.1.dylib ${CPLEX_LIB_DIR}/libcplex.dylib
+        install_name_tool -change ${GCC_ENV_PREFIX}/lib/libgcc_s.1.dylib @rpath/libgcc_s.1.dylib ${CONCERT_LIB_DIR}/libconcert.dylib
+        install_name_tool -change ${GCC_ENV_PREFIX}/lib/libgcc_s.1.dylib @rpath/libgcc_s.1.dylib ${CPLEX_LIB_DIR}/libilocplex.dylib
+                        
         conda remove -y --all -n _cplex_shared_gcc_throwaway
     fi
 else
