@@ -1,0 +1,30 @@
+package:
+  name: hytra
+  version: "1.0"
+
+source:
+  git_url: https://github.com/chaubold/hytra
+  git_tag: ilastik-integration
+
+requirements:
+  build:
+    - python
+    - setuptools
+
+  run:
+    - python
+    - dpct
+    - yapsy
+    - vigra
+    - scikit-learn
+    - scikit-image
+    - h5py
+
+test:
+  imports:
+    - hytra
+
+about:
+  home: https://github.com/chaubold/hytra
+  license: BSD License
+  summary: 'Python tracking framework developed at the IAL lab @ University of Heidelberg'
