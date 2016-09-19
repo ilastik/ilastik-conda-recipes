@@ -7,7 +7,7 @@ source:
   git_branch: flyem_release
 
 build:
-  number: 5
+  number: 6
 
 requirements:
   build:
