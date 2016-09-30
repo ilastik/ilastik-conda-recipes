@@ -12,6 +12,8 @@ else
     DYLIB_EXT=so
 fi
 
+PY_VER=$(python -c "import sys; print('{}.{}'.format(*sys.version_info[:2]))")
+
 # In release mode, we use -O2 because gcc is known to miscompile certain vigra functionality at the O3 level.
 # (This is probably due to inappropriate use of undefined behavior in vigra itself.)
 VIGRA_CXX_FLAGS_RELEASE="-O2 -DNDEBUG ${VIGRA_CXX_FLAGS}"
@@ -47,18 +49,18 @@ cmake ..\
 \
         -DBoost_INCLUDE_DIR=${PREFIX}/include \
         -DBoost_LIBRARY_DIRS=${PREFIX}/lib \
-        -DBoost_PYTHON_LIBRARY=${PREFIX}/lib/libboost_python-mt.${DYLIB_EXT} \
-        -DBoost_PYTHON_LIBRARY_RELEASE=${PREFIX}/lib/libboost_python-mt.${DYLIB_EXT} \
-        -DBoost_PYTHON_LIBRARY_DEBUG=${PREFIX}/lib/libboost_python-mt.${DYLIB_EXT} \
+        -DBoost_PYTHON_LIBRARY=${PREFIX}/lib/libboost_python.${DYLIB_EXT} \
+        -DBoost_PYTHON_LIBRARY_RELEASE=${PREFIX}/lib/libboost_python.${DYLIB_EXT} \
+        -DBoost_PYTHON_LIBRARY_DEBUG=${PREFIX}/lib/libboost_python.${DYLIB_EXT} \
 \
         -DPYTHON_EXECUTABLE=${PYTHON} \
-        -DPYTHON_LIBRARY=${PREFIX}/lib/libpython2.7.${DYLIB_EXT} \
-        -DPYTHON_INCLUDE_DIR=${PREFIX}/include/python2.7 \
-        -DPYTHON_NUMPY_INCLUDE_DIR=${PREFIX}/lib/python2.7/site-packages/numpy/core/include \
+        -DPYTHON_LIBRARY=${PREFIX}/lib/libpython${PY_VER}.${DYLIB_EXT} \
+        -DPYTHON_INCLUDE_DIR=${PREFIX}/include/python${PY_VER} \
+        -DPYTHON_NUMPY_INCLUDE_DIR=${PREFIX}/lib/python${PY_VER}/site-packages/numpy/core/include \
         -DPYTHON_SPHINX=${PREFIX}/bin/sphinx-build \
 \
-        -DVIGRANUMPY_LIBRARIES="${PREFIX}/lib/libpython2.7.${DYLIB_EXT};${PREFIX}/lib/libboost_python.${DYLIB_EXT};${PREFIX}/lib/libboost_thread.${DYLIB_EXT};${PREFIX}/lib/libboost_system.${DYLIB_EXT}" \
-        -DVIGRANUMPY_INSTALL_DIR=${PREFIX}/lib/python2.7/site-packages \
+        -DVIGRANUMPY_LIBRARIES="${PREFIX}/lib/libpython${PY_VER}.${DYLIB_EXT};${PREFIX}/lib/libboost_python.${DYLIB_EXT};${PREFIX}/lib/libboost_thread.${DYLIB_EXT};${PREFIX}/lib/libboost_system.${DYLIB_EXT}" \
+        -DVIGRANUMPY_INSTALL_DIR=${PREFIX}/lib/python${PY_VER}/site-packages \
 \
         -DZLIB_INCLUDE_DIR=${PREFIX}/include \
         -DZLIB_LIBRARY=${PREFIX}/lib/libz.${DYLIB_EXT} \

@@ -17,7 +17,7 @@ source:
   git_tag: HEAD
 
 build:
-  number: 1
+  number: 2
 
   #
   # You must build this recipe using 'conda build --numpy=X.Y'
@@ -30,7 +30,8 @@ requirements:
   build:
     - gcc 4.8.5 # [linux]
     - gcc 4.8.5 # [osx]
-    - python 2.7*
+    - python 2.7*|3.5*
+    - python {{PY_VER}}*
     - numpy >=1.9,{{NPY_VER}}*
     - jpeg     8d
     - libtiff  4.0.6
@@ -38,7 +39,7 @@ requirements:
     - fftw     3.3*
     - hdf5     1.8.16
     - h5py
-    - boost    1.55.0
+    - boost    1.60.0
     - zlib     1.2*
     - nose
 
@@ -52,7 +53,7 @@ requirements:
     - fftw     3.3*
     - hdf5     1.8.16
     - h5py
-    - boost    1.55.0
+    - boost    1.60.0
     - zlib     1.2*
     - nose
 
