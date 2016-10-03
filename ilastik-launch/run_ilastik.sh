@@ -3,7 +3,13 @@
 # script cleans the environment to avoid a few potential errors.
 
 # we assume that this script resides in PREFIX
-export PREFIX="$(cd `dirname $0` && pwd)"
+if [[uname == "Darwin"]]; then
+    # 'readlink -f' doesn't work on mac
+    export PREFIX="$(cd $(dirname $0) && pwd)"
+else
+    # Use 'readlink -f' on Linux, to support symlinks to run_ilastik.sh
+    export PREFIX=$(dirname "$(readlink -f $0)")
+fi
 
 # Do not use the user's previous LD_LIBRARY_PATH settings because they can cause conflicts.
 # Start with an empty LD_LIBRARY_PATH
