@@ -9,7 +9,7 @@ build:
     - {{toolset.short}}
   features:
     - {{toolset.short}}
-  number: 6
+  number: 7
 
 #
 # In general, we don't specify exact version requirements in each sub-package.
@@ -113,7 +113,7 @@ requirements:
     - sqlite                    3.8.4.1                   # [unix]
     # - sqlite-src-for-python     3.8.11  # [win] hard-wired in Python
     - tifffile                  0.4.1{{toolset.suffix}}   # [unix]
-    - tifffile                  0.9.2post1{{toolset.suffix}}   # [win]
+    - tifffile                  0.4.1post2{{toolset.suffix}}   # [win]
     - tk                        8.5.18                    # [unix]
     - vigra                     1.10{{toolset.suffix}}    # [unix]
     - vigra                     1.11.0post2{{toolset.suffix}} # [win]

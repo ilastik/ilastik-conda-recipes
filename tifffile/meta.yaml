@@ -2,12 +2,20 @@
 
 
 package:
+  {% set tagged_version = GIT_DESCRIBE_TAG|replace("v","") %}
+
+  # If we're using a non-tagged revision, append '.postN' to the version
+  {% if GIT_DESCRIBE_NUMBER|int != 0 %}
+    {% set tagged_version = tagged_version + '.post' + GIT_DESCRIBE_NUMBER %}
+  {% endif %}
+
   name: tifffile
-  version: "0.9.2post1{{toolset.suffix}}"
+#  version: {{tagged_version}}
+  version: "0.4.1post2{{toolset.suffix}}"
 
 source:
   git_url: git://github.com/ilastik/tifffile
-  git_tag: cc9fb437fc124f3b4694075b070639dae3fddbed # Branch 'fix-modulo-attributes'
+  git_tag: 7c3bb9e12bbd4420d55cb0515132da1957b89b85 # # Branch 'ilastik-devel' (v0.4.post2)
 
 build:
   features:
