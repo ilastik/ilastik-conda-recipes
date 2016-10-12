@@ -13,7 +13,12 @@ package:
 
 source:
   git_url: https://github.com/ilastik/tifffile
-  git_tag: cc9fb437fc124f3b4694075b070639dae3fddbed # Branch 'fix-modulo-attributes'
+  #git_tag: cc9fb437fc124f3b4694075b070639dae3fddbed # Branch 'fix-modulo-attributes' (v0.9.2.post1)
+  
+  # We use this old version due to changes in how newer versions of tifffile handle OME TIFF metadata.
+  # Until we adapt ilastik to the new version of tifffile, we must use this version.
+  # See (among others) https://github.com/ilastik/ilastik/issues/1338
+  git_tag: 7c3bb9e12bbd4420d55cb0515132da1957b89b85 # Branch 'ilastik-devel' (v0.4.post2)
 
 build:
   number: 0

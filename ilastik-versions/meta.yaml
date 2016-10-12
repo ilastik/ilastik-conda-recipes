@@ -13,7 +13,7 @@ package:
     version: 1.2
 
 build:
-  number: 7
+  number: 8
 
 #
 # In general, we don't specify exact version requirements in each sub-package.
@@ -97,7 +97,8 @@ requirements:
     - sip                       4.16.5    
     - six                       1.9.0     
     - sqlite                    3.8.4.1   
-    - tifffile                  0.9.2.post1
+    # - tifffile                  0.9.2.post1 # Can't use the new version. See ilastik-build-conda/tifffile/meta.yaml
+    - tifffile                  0.4.post2
     - tk                        8.5.18    
     - vigra                     1.11.0.post36      
     - vtk                       5.10.1.99
