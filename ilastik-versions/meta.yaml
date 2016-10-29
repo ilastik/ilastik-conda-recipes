@@ -13,7 +13,7 @@ package:
     version: 1.2
 
 build:
-  number: 8
+  number: 9
 
 #
 # In general, we don't specify exact version requirements in each sub-package.
@@ -102,7 +102,7 @@ requirements:
     - tk                        8.5.18    
     - vigra                     1.11.0.post36      
     - vtk                       5.10.1.99
-    - wsdt                      0.2.post2
+    - wsdt                      0.2.post4
     - yapsy                     1.10.423  
     - zlib                      1.2.8     
     - xz                        5.0.5
