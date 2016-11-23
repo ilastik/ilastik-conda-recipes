@@ -39,7 +39,8 @@ requirements:
     - fftw     3.3*
     - hdf5     1.8.16
     - h5py
-    - boost    1.60.0
+    - boost    1.55.0 # [py2k]
+    - boost    1.60.0 # [py3k]
     - zlib     1.2*
     - nose
 
@@ -53,7 +54,8 @@ requirements:
     - fftw     3.3*
     - hdf5     1.8.16
     - h5py
-    - boost    1.60.0
+    - boost    1.55.0 # [py2k]
+    - boost    1.60.0 # [py3k]
     - zlib     1.2*
     - nose
 
