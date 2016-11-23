@@ -22,7 +22,7 @@ source:
     - patches/patchPlanarity.sh.patch # Apparently the mirror at http://jgaa.info is not reliable, but the parent website is.
 
 build:
-  number: 2
+  number: 3
 
   #
   # You must build this recipe using 'conda build --numpy=X.Y'
