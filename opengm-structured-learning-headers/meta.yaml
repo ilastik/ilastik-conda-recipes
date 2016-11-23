@@ -7,13 +7,12 @@ source:
     git_tag: learning-experimental
 
 build:
-  {% set build_num = 2 %}
-  number: {{ build_num }}
+  number: 3
 
   #
   # You must build this recipe using 'conda build --numpy=X.Y'
   #
-  string: np{{CONDA_NPY[:]}}py{{CONDA_PY}}_{{build_num}}_g{{GIT_FULL_HASH[:7]}}
+  string: np{{CONDA_NPY[:]}}py{{CONDA_PY}}_{{PKG_BUILDNUM}}_g{{GIT_FULL_HASH[:7]}}
 
   detect_binary_files_with_prefix: true
 
