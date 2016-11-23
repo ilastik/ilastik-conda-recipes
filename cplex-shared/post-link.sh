@@ -1,11 +1,5 @@
 set -e
-# Always write to the root prefix, even if a different env is active.
-if [ $(echo $PREFIX | grep -q envs)$? -eq 0 ]; then
-    ROOT_ENV_PREFIX="${PREFIX}/../.."
-else
-    ROOT_ENV_PREFIX="${PREFIX}"
-fi
-CPLEX_LOCATION_CACHE_FILE="${ROOT_ENV_PREFIX}/share/cplex-root-dir.path"
+CPLEX_LOCATION_CACHE_FILE="$(conda info --root)/share/cplex-root-dir.path"
 
 
 if [ "$CPLEX_ROOT_DIR" == "" ]; then 
