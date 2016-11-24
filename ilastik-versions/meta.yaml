@@ -28,6 +28,7 @@ requirements:
     #- cylemon                   1         
     - dlib                      18.16
     - decorator                 3.4.0
+    - dpct                      1.1.post3
     - faulthandler              2.4       
     - fftw                      3.3.4     
     - freetype                  2.5.2     
@@ -36,6 +37,7 @@ requirements:
     - greenlet                  0.4.6     
     - h5py                      2.6.0     
     - hdf5                      1.8.16    
+    - hytra                     1.1.post5
     - iiboost                   0.2.post2       
     - ilastik-feature-selection 0.123.post9
     - ilastiktools              0.2       
@@ -54,6 +56,10 @@ requirements:
     - mlpack                    1.0.8.99     
     - mpc                       1.0.1     
     - mpfr                      3.1.2     
+
+    - multi-hypotheses-tracking-with-gurobi 1.1.1.post6 # Technically, this isn't used yet, until the 
+    - multi-hypotheses-tracking-with-cplex  1.1.1.post6 # 'new-conservation-tracking' branch is merged,
+                                                        # (that applies to both ilastik and hytra)
     - networkx                  1.11
     - nifty                     0.2.post173 # [unix]
     
@@ -100,7 +106,7 @@ requirements:
     # - tifffile                  0.9.2.post1 # Can't use the new version. See ilastik-build-conda/tifffile/meta.yaml
     - tifffile                  0.4.post2
     - tk                        8.5.18    
-    - vigra                     1.11.0.post36      
+    - vigra                     1.11.0.post194
     - vtk                       5.10.1.99
     - wsdt                      0.2.post4
     - yapsy                     1.10.423  

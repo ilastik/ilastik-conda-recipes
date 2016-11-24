@@ -12,3 +12,7 @@ requirements:
   run:
     - ilastik-deps-pc
     - pgmlink
+    - multiHypothesesTracking
+    - hytra
+    - dpct
+    
