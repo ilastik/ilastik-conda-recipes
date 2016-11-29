@@ -7,7 +7,7 @@ source:
     git_tag: learning-experimental
 
 build:
-  {% set build_num = 2 %}
+  {% set build_num = 3 %}
   number: {{ build_num }}
 
   #
