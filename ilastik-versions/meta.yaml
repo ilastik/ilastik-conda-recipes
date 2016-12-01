@@ -59,11 +59,11 @@ requirements:
     - multi-hypotheses-tracking-with-gurobi 1.1.2
     - multi-hypotheses-tracking-with-cplex  1.1.2
     - networkx                  1.11
-    - nifty                     0.2.post173 # [unix]
+    - nifty                     0.2.post257     py27_0_g968d496 # [unix]
     
 {% if WITH_SOLVERS %}
     ###- nifty-with-cplex          0.2.post173 # [unix] # Not working, apparently.
-    - nifty-with-gurobi         0.2.post173 # [unix]
+    - nifty-with-gurobi         0.2.post257     py27_0_g968d496 # [unix]
 {% endif %}
 
     - nose                      1.3.6     
