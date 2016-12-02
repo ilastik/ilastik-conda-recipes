@@ -3,16 +3,17 @@ about:
 
 package:
   name: ilastik-deps-pc-headless
-  version: "1.1"
+  version: "1.2"
 
 build:
-  number: 5
+  number: 0
 
 requirements:
   run:
     - python
     - numpy
     - vigra
+    - fastfilters # [unix]
     - tifffile
     - h5py
     - psutil
