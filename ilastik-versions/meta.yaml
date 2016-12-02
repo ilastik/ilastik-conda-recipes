@@ -24,7 +24,6 @@ requirements:
     - armadillo                 6.500.5   
     #- blist                     1.3.6 # Only needed by deprecated operators     
     - boost                     1.55.0    
-    - cloog                     0.18.0    
     #- cylemon                   1         
     - dlib                      18.16
     - decorator                 3.4.0
@@ -33,7 +32,6 @@ requirements:
     - fftw                      3.3.4     
     - freetype                  2.5.2     
     - futures                   3.0.2     
-    - gmp                       5.1.2     
     - greenlet                  0.4.6     
     - h5py                      2.6.0     
     - hdf5                      1.8.16    
@@ -42,20 +40,18 @@ requirements:
     - ilastik-feature-selection 0.123.post9
     - ilastiktools              0.2       
     - ilastikrag                0.1.post12
-    - isl                       0.12.2    
     - itk-seg-conv-only         4.6.1     
     - jbig                      2.1
     - jpeg                      8d        
     - jsonschema                2.4.0     
     - lemon                     1.2.4     
-    - libgcc                    4.8.5     
+    - libgcc                    4.8.5  1999 # [linux]
+    - libgcc                    4.8.5  1    # [osx]
     - libpng                    1.6.17
     - libtiff                   4.0.6
     - libxml2                   2.9.0     
     - matplotlib                1.5.1     
     - mlpack                    1.0.8.99     
-    - mpc                       1.0.1     
-    - mpfr                      3.1.2     
     - multi-hypotheses-tracking-with-gurobi 1.1.2
     - multi-hypotheses-tracking-with-cplex  1.1.2
     - networkx                  1.11
