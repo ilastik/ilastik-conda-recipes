@@ -98,7 +98,7 @@ else
     DEST_DIR=`pwd`
     cd ${CONDA_ROOT}/envs/
     mv ilastik-release ${RELEASE_NAME}
-    tar czf $DEST_DIR/${RELEASE_NAME}.tar.gz ${RELEASE_NAME}
+    tar -cjf $DEST_DIR/${RELEASE_NAME}.tar.bz2 ${RELEASE_NAME}
     mv ${RELEASE_NAME} ilastik-release
     cd -
 fi

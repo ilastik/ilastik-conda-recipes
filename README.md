@@ -179,14 +179,14 @@ Generating a release binary
    **Mac:**
        
             $ grep Usage ./osx-packages/create-osx-app.sh
-            ## Usage: create-osx-app.sh [--zip] [--git-latest] [--no-tracking] [... extra install-args, e.g. --use-local or -c ilastik ...]
+            ## Usage: create-osx-app.sh [--compress] [--git-latest] [--no-tracking] [... extra install-args, e.g. --use-local or -c ilastik ...]
             
-            $ ./osx-packages/create-osx-app.sh --zip -c ilastik
+            $ ./osx-packages/create-osx-app.sh --compress -c ilastik
 
   If any options are used, they must be passed in this order:
 
-    - `--skip-tar`: (Linux only) Create the `ilastik-release` environment, but don't zip it into a tarball.
-    - `--zip`: (Mac only) After creating the `.app` bundle, compress it into a `.zip` file.  
+    - `--skip-tar`: (Linux only) Create the `ilastik-release` environment, but don't compress it into a .tar.bz2 file.
+    - `--compress`: (Mac only) After creating the `.app` bundle, compress it into a `.tar.bz2` file.  
     - `--git-latest`: Use the latest `master` branch of `ilastik`, `lazyflow`, and `volumina` instead of the most recent tag. (Don't use for official releases.)
     - `--no-tracking`: Omit tracking-specific dependencies
     - `--use-local`: Tells conda to use your custom builds of each package, if available.

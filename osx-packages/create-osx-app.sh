@@ -1,20 +1,20 @@
 #!/bin/bash
 
 ##
-## Usage: create-osx-app.sh [--zip] [--git-latest] [--no-solvers] [... extra install-args, e.g. --use-local or -c ilastik or --copy ...]
+## Usage: create-osx-app.sh [--compress] [--git-latest] [--no-solvers] [... extra install-args, e.g. --use-local or -c ilastik or --copy ...]
 ##
 
 set -e
 
 OSX_PACKAGES_DIR=$(cd `dirname $0` && pwd)
 
-ZIP=0
-if [[ $@ == *"--zip"* ]]; then
-    if [[ $1 == "--zip" ]]; then
+COMPRESS=0
+if [[ $@ == *"--compress"* ]]; then
+    if [[ $1 == "--compress" ]]; then
         shift
-        ZIP=1
+        COMPRESS=1
     else
-        echo "Error: --zip may only be provided as the first arg." >&2
+        echo "Error: --compress may only be provided as the first arg." >&2
     fi
 fi
 
@@ -24,7 +24,7 @@ if [[ $@ == *"--git-latest"* ]]; then
         USE_GIT_LATEST=1
         shift
     else
-        echo "Error: --git-latest may only be provided as the first arg or after --zip." >&2
+        echo "Error: --git-latest may only be provided as the first arg or after --compress." >&2
         exit 1
     fi
 fi
@@ -147,10 +147,10 @@ cd -
 
 echo "Renaming ilastik.app -> ${RELEASE_NAME}.app"
 rm -rf ${RELEASE_NAME}.app
-rm -f ${RELEASE_NAME}.zip
+rm -f ${RELEASE_NAME}.tar.bz2
 mv ilastik.app ${RELEASE_NAME}.app
 
-if [[ $ZIP == 1 ]]; then
-    echo "Zipping: ${RELEASE_NAME}.app -> ${RELEASE_NAME}.zip"
-    zip -r --symlinks ${RELEASE_NAME}.zip ${RELEASE_NAME}.app
+if [[ $COMPRESS == 1 ]]; then
+    echo "Compressing: ${RELEASE_NAME}.app -> ${RELEASE_NAME}.tar.bz2"
+    tar -cjf ${RELEASE_NAME}.tar.bz2 ${RELEASE_NAME}.app
 fi
