@@ -1,8 +1,7 @@
 {% if not WITH_SOLVERS is defined %}
-  {% set WITH_SOLVERS = true %}
-{% else %}
-  {% set WITH_SOLVERS = WITH_SOLVERS|int %}
+  {% set WITH_SOLVERS = 1 %}
 {% endif %}
+{% set WITH_SOLVERS = WITH_SOLVERS|int %}
 
 package:
   {% if WITH_SOLVERS %}
@@ -14,7 +13,7 @@ package:
     version: "" # build.sh will generate a __conda_version__.txt file
 
 build:
-  number: 1
+  number: 2
 
 requirements:
   build:
