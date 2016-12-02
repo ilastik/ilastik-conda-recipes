@@ -35,7 +35,7 @@ requirements:
     - greenlet                  0.4.6     
     - h5py                      2.6.0     
     - hdf5                      1.8.16    
-    - hytra                     1.1.post25
+    - hytra                     1.1.1
     - iiboost                   0.2.post2       
     - ilastik-feature-selection 0.123.post9
     - ilastiktools              0.2       
