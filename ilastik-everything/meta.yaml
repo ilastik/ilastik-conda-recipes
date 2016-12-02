@@ -1,20 +1,53 @@
-about:
-  summary: "A meta-package for building all ilastik dependencies and downloading the ilastik-meta repo."
+{% if not WITH_SOLVERS is defined %}
+  {% set WITH_SOLVERS = true %}
+{% else %}
+  {% set WITH_SOLVERS = WITH_SOLVERS|int %}
+{% endif %}
 
 package:
-  name: ilastik-everything
-  version: "" # build.sh will generate a __conda_version__.txt file
+  {% if WITH_SOLVERS %}
+    name: ilastik-everything
+  {% else %}
+    name: ilastik-everything-no-solvers
+  {% endif %}
+
+    version: "" # build.sh will generate a __conda_version__.txt file
 
 build:
-  number: 0
+  number: 1
 
 requirements:
   build:
-    - ilastik-everything-but-tracking # <-- Needed just to print ilastik.__version__ into __conda_version__.txt
+    - ilastik-deps-pc
+    - ilastik-deps-pc-iiboost
+    - ilastik-deps-carving >=1.1.6a7
+
+  {% if WITH_SOLVERS %}
+    - ilastik-deps-multicut
+    - ilastik-deps-tracking
+  {% else %}
+    - ilastik-deps-multicut-no-solvers
+    - ilastik-deps-tracking-no-solvers
+  {% endif %}
+
+    - ilastik-meta    # Needed to print ilastik.__version__
 
   run:
-    - ilastik-everything-but-tracking
+    - ilastik-deps-pc
+    - ilastik-deps-pc-iiboost
+    - ilastik-deps-carving >=1.1.6a7
+
+  {% if WITH_SOLVERS %}
+    - ilastik-deps-multicut
     - ilastik-deps-tracking
+  {% else %}
+    - ilastik-deps-multicut-no-solvers
+    - ilastik-deps-tracking-no-solvers
+  {% endif %}
+
+    - ilastik-meta
+
+    - ilastik-launch
     - ilastik-versions
 
 test:
@@ -25,3 +58,7 @@ test:
     - lazyflow
     - volumina
     - ilastik
+
+about:
+  summary: "A meta-package for building all ilastik dependencies and downloading the ilastik-meta repo."
+
