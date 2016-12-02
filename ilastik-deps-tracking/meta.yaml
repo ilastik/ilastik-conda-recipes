@@ -1,18 +1,31 @@
-about:
-  summary: "A meta-package for building all the dependencies needed for pixel/object classification and tracking."
+{% if not WITH_SOLVERS is defined %}
+  {% set WITH_SOLVERS = true %}
+{% else %}
+  {% set WITH_SOLVERS = WITH_SOLVERS|int %}
+{% endif %}
 
 package:
-  name: ilastik-deps-tracking
-  version: "1.1"
+  {% if WITH_SOLVERS %}
+    name: ilastik-deps-tracking
+  {% else %}
+    name: ilastik-deps-tracking-no-solvers
+  {% endif %}
+
+    version: "1.1"
 
 build:
-  number: 1
+  number: 2
 
 requirements:
   run:
     - ilastik-deps-pc
     - pgmlink
-    - multiHypothesesTracking
     - hytra
     - dpct
-    
+{% if WITH_SOLVERS %}
+    - multi-hypotheses-tracking-with-gurobi 1.1.2
+    - multi-hypotheses-tracking-with-cplex  1.1.2
+{% endif %}
+
+about:
+  summary: "A meta-package for building all the dependencies needed for pixel/object classification and tracking."
