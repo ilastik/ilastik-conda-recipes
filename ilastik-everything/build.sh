@@ -1,6 +1,6 @@
 # Verify that the git tag and the python version match (a common error).
-ILASTIK_CODE_VERSION=`${PREFIX}/bin/python -c "import ilastik; print ilastik.__version__"`
-ILASTIK_PKG_VERSION=`conda list -n _build | grep ilastik-meta | python -c "import sys; print sys.stdin.read().split()[1]"`
+ILASTIK_CODE_VERSION=$(${PREFIX}/bin/python -c "import ilastik; print ilastik.__version__")
+ILASTIK_PKG_VERSION=$(conda list -p ${PREFIX} | grep ilastik-meta | python -c "import sys; print sys.stdin.read().split()[1]")
 
 if [[ $ILASTIK_CODE_VERSION != $ILASTIK_PKG_VERSION ]]; then
     set +x
