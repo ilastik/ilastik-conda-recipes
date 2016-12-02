@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ##
-## Usage: create-tarball.sh [--git-latest] [--no-tracking] [... extra install-args, e.g. --use-local or -c ilastik ...]
+## Usage: create-tarball.sh [--git-latest] [--no-solvers] [... extra install-args, e.g. --use-local or -c ilastik ...]
 ##
 
 set -e
@@ -17,13 +17,13 @@ if [[ $@ == *"--git-latest"* ]]; then
     fi
 fi
 
-OMIT_TRACKING=0
-if [[ $@ == *"--no-tracking"* ]]; then
-    if [[ $1 == "--no-tracking" ]]; then
-        OMIT_TRACKING=1
+export WITH_SOLVERS=1
+if [[ $@ == *"--no-solvers"* ]]; then
+    if [[ $1 == "--no-solvers" ]]; then
+        export WITH_SOLVERS=0
         shift
     else
-        echo "Error: --no-tracking may only be provided as the first arg after --git-latest." >&2
+        echo "Error: --no-solvers may only be provided as the first arg after --git-latest." >&2
         exit 1
     fi
 fi
@@ -39,12 +39,12 @@ fi
 
 # Create new ilastik-release environment and install all ilastik dependencies to it.
 echo "Creating new ilastik-release environment..."
-if [[ $OMIT_TRACKING == 1 ]]; then
-    conda create -q -y -n ilastik-release ilastik-everything-but-tracking "$@"
-    TRACKING_SUFFIX="-no-tracking"
+if [[ $WITH_SOLVERS == 0 ]]; then
+    conda create -q -y -n ilastik-release ilastik-everything-no-solvers "$@"
+    SOLVERS_SUFFIX="-no-solvers"
 else    
     conda create -q -y -n ilastik-release ilastik-everything "$@"
-    TRACKING_SUFFIX=""
+    SOLVERS_SUFFIX=""
 fi
 
 if [[ $USE_GIT_LATEST == 1 ]]; then
@@ -68,7 +68,7 @@ else
     ILASTIK_PKG_VERSION=`conda list -n ilastik-release | grep ilastik-meta | python -c "import sys; print sys.stdin.read().split()[1]"`
 fi
 
-RELEASE_NAME=ilastik-${ILASTIK_PKG_VERSION}${TRACKING_SUFFIX}-`uname`
+RELEASE_NAME=ilastik-${ILASTIK_PKG_VERSION}${SOLVERS_SUFFIX}-`uname`
 
 # Remove cplex libs/symlinks (if present)
 rm -f ${CONDA_ROOT}/envs/ilastik-release/lib/libcplex.so
