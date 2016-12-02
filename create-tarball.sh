@@ -1,10 +1,21 @@
 #!/bin/bash
 
 ##
-## Usage: create-tarball.sh [--git-latest] [--no-solvers] [... extra install-args, e.g. --use-local or -c ilastik ...]
+## Usage: create-tarball.sh [--skip-tar] [--git-latest] [--no-solvers] [... extra install-args, e.g. --use-local or -c ilastik ...]
 ##
 
 set -e
+
+SKIP_TAR=0
+if [[ $@ == *"--skip-tar"* ]]; then
+    if [[ $1 == "--skip-tar" ]]; then
+        SKIP_TAR=1
+       shift
+    else
+        echo "Error: --skip-tar may only be provided as the first arg." >&2
+        exit 1
+    fi
+fi
 
 USE_GIT_LATEST=0
 if [[ $@ == *"--git-latest"* ]]; then
@@ -12,7 +23,7 @@ if [[ $@ == *"--git-latest"* ]]; then
         USE_GIT_LATEST=1
        shift
     else
-        echo "Error: --git-latest may only be provided as the first arg." >&2
+        echo "Error: --git-latest may only be provided as the first arg (or after --skip-tar)." >&2
         exit 1
     fi
 fi
@@ -23,7 +34,7 @@ if [[ $@ == *"--no-solvers"* ]]; then
         export WITH_SOLVERS=0
         shift
     else
-        echo "Error: --no-solvers may only be provided as the first arg after --git-latest." >&2
+        echo "Error: --no-solvers may only be provided as the first arg (or after --git-latest)." >&2
         exit 1
     fi
 fi
@@ -78,11 +89,16 @@ rm -f ${CONDA_ROOT}/envs/ilastik-release/lib/libconcert.so
 # Remove gurobi symlinks (if present)
 rm -f ${RELEASE_ENV}/lib/libgurobi*.so
 
-# Create the tarball, and move it to the current directory.
-echo "Creating ${RELEASE_NAME}.tar.gz"
-DEST_DIR=`pwd`
-cd ${CONDA_ROOT}/envs/
-mv ilastik-release ${RELEASE_NAME}
-tar czf $DEST_DIR/${RELEASE_NAME}.tar.gz ${RELEASE_NAME}
-mv ${RELEASE_NAME} ilastik-release
-cd -
+if [[ $SKIP_TAR == 1 ]]; then
+    echo "Skipping tarball creation."
+    echo "Release env created in ${CONDA_ROOT}/envs/ilastik-release"
+else
+    # Create the tarball, and move it to the current directory.
+    echo "Creating ${RELEASE_NAME}.tar.gz"
+    DEST_DIR=`pwd`
+    cd ${CONDA_ROOT}/envs/
+    mv ilastik-release ${RELEASE_NAME}
+    tar czf $DEST_DIR/${RELEASE_NAME}.tar.gz ${RELEASE_NAME}
+    mv ${RELEASE_NAME} ilastik-release
+    cd -
+fi

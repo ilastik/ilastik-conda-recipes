@@ -172,7 +172,7 @@ Generating a release binary
 
            
             $ grep Usage ./create-tarball.sh
-            ## Usage: create-tarball.sh [--git-latest] [--no-tracking] [... extra install-args, e.g. --use-local or -c ilastik ...]
+            ## Usage: create-tarball.sh [--skip-tar] [--git-latest] [--no-tracking] [... extra install-args, e.g. --use-local or -c ilastik ...]
             
             $ ./create-tarball.sh -c ilastik
 
@@ -185,6 +185,7 @@ Generating a release binary
 
   If any options are used, they must be passed in this order:
 
+    - `--skip-tar`: (Linux only) Create the `ilastik-release` environment, but don't zip it into a tarball.
     - `--zip`: (Mac only) After creating the `.app` bundle, compress it into a `.zip` file.  
     - `--git-latest`: Use the latest `master` branch of `ilastik`, `lazyflow`, and `volumina` instead of the most recent tag. (Don't use for official releases.)
     - `--no-tracking`: Omit tracking-specific dependencies
