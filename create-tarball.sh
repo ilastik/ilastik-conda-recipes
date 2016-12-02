@@ -75,6 +75,9 @@ rm -f ${CONDA_ROOT}/envs/ilastik-release/lib/libcplex.so
 rm -f ${CONDA_ROOT}/envs/ilastik-release/lib/libilocplex.so
 rm -f ${CONDA_ROOT}/envs/ilastik-release/lib/libconcert.so
 
+# Remove gurobi symlinks (if present)
+rm -f ${RELEASE_ENV}/lib/libgurobi*.so
+
 # Create the tarball, and move it to the current directory.
 echo "Creating ${RELEASE_NAME}.tar.gz"
 DEST_DIR=`pwd`

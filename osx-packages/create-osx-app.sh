@@ -110,6 +110,9 @@ rm -f ${RELEASE_ENV}/lib/libcplex.dylib
 rm -f ${RELEASE_ENV}/lib/libilocplex.dylib
 rm -f ${RELEASE_ENV}/lib/libconcert.dylib
 
+# Remove gurobi symlinks (if present)
+rm -f ${RELEASE_ENV}/lib/libgurobi*.so # Yes, the extension is .so, even on Mac
+
 echo "Moving ilastik-release environment into ilastik.app bundle..."
 mv ${RELEASE_ENV} ilastik.app/Contents/ilastik-release
 cd ilastik.app/Contents/Resources && ln -s ../ilastik-release/ilastik-meta/ilastik/ilastik.py
