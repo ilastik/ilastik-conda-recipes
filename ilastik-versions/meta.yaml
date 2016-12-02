@@ -52,8 +52,12 @@ requirements:
     - libxml2                   2.9.0     
     - matplotlib                1.5.1     
     - mlpack                    1.0.8.99     
+
+{% if WITH_SOLVERS %}
     - multi-hypotheses-tracking-with-gurobi 1.1.2
     - multi-hypotheses-tracking-with-cplex  1.1.2
+{% endif %}
+
     - networkx                  1.11
     - nifty                     0.2.post257     py27_0_g968d496 # [unix]
     
