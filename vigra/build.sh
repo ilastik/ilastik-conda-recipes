@@ -53,6 +53,11 @@ cmake ..\
         -DBoost_PYTHON_LIBRARY_RELEASE=${PREFIX}/lib/libboost_python.${DYLIB_EXT} \
         -DBoost_PYTHON_LIBRARY_DEBUG=${PREFIX}/lib/libboost_python.${DYLIB_EXT} \
 \
+        -DWITH_LEMON=ON \
+        -DLEMON_DIR=${PREFIX}/share/lemon/cmake \
+        -DLEMON_INCLUDE_DIR=${PREFIX}/include \
+        -DLEMON_LIBRARY=${PREFIX}/lib/libemon.${DYLIB_EXT} \
+\
         -DPYTHON_EXECUTABLE=${PYTHON} \
         -DPYTHON_LIBRARY=${PREFIX}/lib/libpython${PY_VER}.${DYLIB_EXT} \
         -DPYTHON_INCLUDE_DIR=${PREFIX}/include/python${PY_VER} \

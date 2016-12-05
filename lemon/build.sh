@@ -2,7 +2,7 @@
 # 
 # 1) Lemon can be optionally built with glpk to enable the LP solver.
 #    We don't want to build with glpk because it isn't needed for the 
-#    downstream package we're interested in: cylemon.
+#    downstream package we're interested in: vigra.
 #    We kill these cache variables to make sure we don't use it
 #    (avoid potential linker errors if cmake finds a version of glpk on our system)
 #

@@ -17,7 +17,7 @@ source:
   git_tag: HEAD
 
 build:
-  number: 2
+  number: 0
 
   #
   # You must build this recipe using 'conda build --numpy=X.Y'
@@ -41,6 +41,7 @@ requirements:
     - h5py
     - boost    1.55.0 # [py2k]
     - boost    1.60.0 # [py3k]
+    - lemon    1.2.4
     - zlib     1.2*
     - nose
 
@@ -56,6 +57,7 @@ requirements:
     - h5py
     - boost    1.55.0 # [py2k]
     - boost    1.60.0 # [py3k]
+    - lemon    1.2.4
     - zlib     1.2*
     - nose
 
