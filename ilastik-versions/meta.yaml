@@ -44,8 +44,8 @@ requirements:
     - jpeg                      8d        
     - jsonschema                2.4.0     
     - lemon                     1.2.4     
-    - libgcc                    4.8.5  1999 # [linux]
-    - libgcc                    4.8.5  1    # [osx]
+    - libgcc                    4.8.5  19991 # [linux]
+    - libgcc                    4.8.5  1     # [osx]
     - libpng                    1.6.17
     - libtiff                   4.0.6
     - libxml2                   2.9.0     

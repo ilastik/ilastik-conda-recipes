@@ -16,8 +16,6 @@
 #       Optional. The name of the package that provided conda's libstdc++.so file.
 #
 
-CONDA_ROOT_PYTHON=$(conda info --root)/bin/python
-
 # The list of directories we check for system libs
 LIB_SEARCH_DIRS="$LIB_SEARCH_DIRS /lib"     # CentOS
 LIB_SEARCH_DIRS="$LIB_SEARCH_DIRS /usr/lib" # CentOS
@@ -28,14 +26,11 @@ parse_libstdcxx_version() {
     LIBSTDCXX_SO=$1
     
     # This command reads all the GLIBCXX symbol versions from libstdc++.so and finds the max version.
-    # Versions are compared using conda.version, since it's smarter than a plain string comparison.
     # (There are ways to do this with 'strings' or 'readelf' instead of 'grep',
     # but 'grep' is more likely to be installed on an arbitrary linux machine.)
     LIBSTDCXX_VERSION=$(grep -ao 'GLIBCXX_[0-9][0-9]\?\.[0-9][0-9]\?\(\.[0-9][0-9]\?\)\?' $LIBSTDCXX_SO \
                         | cut -b 9- \
-                        | ${CONDA_ROOT_PYTHON} -c \
-                        "import sys; from conda.version import VersionOrder; \
-                         sys.stdout.write(str(sorted(map(VersionOrder, sys.stdin.read().split()))[-1]))")
+                        | python -c "import sys; sys.stdout.write(str(sorted(sys.stdin.split(), key=lambda s: s.split('.'))[-1]))")
 
     echo $LIBSTDCXX_VERSION
 }
@@ -58,9 +53,8 @@ detect_newer_system_libstdcxx()
 		    echo "Found conda  libstdc++ version: ${CONDA_LIBSTDCXX_VERSION}"
 		
 		    # The 'not' here looks backwards, but remember that in bash, '0' means TRUE
-		    if ${CONDA_ROOT_PYTHON} -c \
-	            "import sys; from conda.version import VersionOrder;\
-                 sys.exit(not VersionOrder('$CONDA_LIBSTDCXX_VERSION') < VersionOrder('$SYSTEM_LIBSTDCXX_VERSION'))";
+		    if python -c \
+	            "import sys; sys.exit(not '$CONDA_LIBSTDCXX_VERSION'.split('.') < '$SYSTEM_LIBSTDCXX_VERSION'.split('.'))";
 		    then
                 PKG_NAME=${PKG_NAME-libgcc}
 		        echo "This system has a newer version of libstdc++.so than the one in the ${PKG_NAME} package."
