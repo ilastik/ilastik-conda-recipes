@@ -12,7 +12,7 @@ package:
     version: 1.2
 
 build:
-  number: 12 # If you change this, update the ilastik-versions build strings in 'ilastik-everything' recipe requirements
+  number: 13 # If you change this, update the ilastik-versions build strings in 'ilastik-everything' recipe requirements
 
 #
 # In general, we don't specify exact version requirements in each sub-package.
@@ -104,7 +104,7 @@ requirements:
     # - tifffile                  0.9.2.post1 # Can't use the new version. See ilastik-build-conda/tifffile/meta.yaml
     - tifffile                  0.4.post2
     - tk                        8.5.18    
-    - vigra                     1.11.0.post194
+    - vigra                     1.11.0.post196
     - vtk                       5.10.1.99
     - wsdt                      0.2.post4
     - yapsy                     1.10.423  
