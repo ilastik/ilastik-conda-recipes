@@ -94,7 +94,7 @@ if [[ $SKIP_TAR == 1 ]]; then
     echo "Release env created in ${CONDA_ROOT}/envs/ilastik-release"
 else
     # Create the tarball, and move it to the current directory.
-    echo "Creating ${RELEASE_NAME}.tar.gz"
+    echo "Creating ${RELEASE_NAME}.tar.bz2"
     DEST_DIR=`pwd`
     cd ${CONDA_ROOT}/envs/
     mv ilastik-release ${RELEASE_NAME}
