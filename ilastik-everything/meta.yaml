@@ -13,7 +13,7 @@ package:
     version: "" # build.sh will generate a __conda_version__.txt file
 
 build:
-  number: 4
+  number: 5
 
 requirements:
   build:
