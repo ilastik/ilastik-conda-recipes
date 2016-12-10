@@ -12,7 +12,7 @@ package:
     version: 1.2
 
 build:
-  number: 13 # If you change this, update the ilastik-versions build strings in 'ilastik-everything' recipe requirements
+  number: 14 # If you change this, update the ilastik-versions build strings in 'ilastik-everything' recipe requirements
 
 #
 # In general, we don't specify exact version requirements in each sub-package.
@@ -89,6 +89,7 @@ requirements:
     - pyqt                      4.11.3.99 # [osx]
     - python                    2.7.12     
     - python-dateutil           2.4.2     
+    - pytiff                    0.4.3
     - pytz                      2015.4    
     - qimage2ndarray            1.4       
     - qt                        4.8.6    # [not osx]
