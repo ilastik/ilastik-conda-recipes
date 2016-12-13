@@ -71,27 +71,49 @@ Also, make sure there are no python-related directories in `~/.local/`.
 1. Create a fresh environment, and install ilastik
 --------------------------------------------------
 
-To install everything but tracking, this command is enough:
+Some ilastik workflows require commercial solvers, for which one must purchase or obtain an academic license.
+If you don't have CPLEX and Gurobi on your machine, you can install everything else with this command:
+
 
 ```bash
-conda create -n ilastik-devel -c ilastik ilastik-everything-but-tracking
+conda create -n ilastik-devel -c ilastik ilastik-everything-no-solvers
 ``` 
 
-If you have CPLEX on your machine, you can install the full ilastik development 
-setup, including tracking.  First, install `cplex-shared` to any (temporary) environment:
+If you have both CPLEX and Gurobi on your machine, you can install the full ilastik development 
+setup, including full support for tracking and multicut.
 
+First, define these environment variables:
+
+```bash
+export CPLEX_ROOT_DIR=/path/to/ibm/ILOG/CPLEX_Studio1251
+export GUROBI_ROOT_DIR=/path/to/gurobi650/linux64
 ```
-CPLEX_ROOT_DIR=/path/to/cplex conda create -n throw-away -c ilastik cplex-shared
-conda remove --all -n throw-away
-```
 
-That command generated the necessary cplex `.so` files in-place (if necessary), 
-and also recorded the value of `CPLEX_ROOT_DIR` to your root directory.
-
-Now you can install everything, including tracking:
+Now you can install the `ilastik-everything` package:
 
 ```bash
 conda create -n ilastik-devel -c ilastik ilastik-everything
+```
+
+**Note:** To be really sure that you're getting the right version of `ilastik-everything`, you can require a specific version and build of the package with `PKGNAME=VERSION=BUILD` syntax:
+
+```bash
+conda create -n ilastik-devel -c ilastik ilastik-everything=1.2.0=6
+```
+
+
+If you only have one of CPLEX or Gurobi, and you're seeking to develop for a workflow that requires it, you must install some dependencies of that workflow individually.  For example, to install tracking with CPLEX, but not Gurobi:
+
+```bash
+conda create  -n ilastik-devel -c ilastik install ilastik-everything-no-solvers
+conda install -n ilastik-devel -c ilastik multi-hypotheses-tracking-with-cplex
+```
+
+For example, to install multicut with Gurobi support:
+
+```bash
+conda create  -n ilastik-devel -c ilastik install ilastik-everything-no-solvers
+conda install -n ilastik-devel -c ilastik nifty-with-gurobi
 ```
 
 2. Run ilastik
@@ -107,6 +129,8 @@ ${CONDA_ROOT}/envs/ilastik-devel/run_ilastik.sh --debug
 So far, our environment contains the ilastik source, but not the git repos.
 If you need to edit the ilastik python code,
 replace the `ilastik-meta` directory with the full git repo.
+
+**Note:** This will remove both `ilastik-meta` and `ilastik-everything`, but all of the other dependencies in your environment will remain.
 
 ```bash
 CONDA_ROOT=`conda info --root`
@@ -156,9 +180,11 @@ Generating a release binary
 
 3. Build `ilastik-meta` and `ilastik-everything` packages, and upload to the `ilastik` anaconda channel.
 
-        conda build ilastik-meta ilastik-everything
+        WITH_SOLVERS=1 conda build ilastik-meta ilastik-everything
         anaconda upload -u ilastik ${CONDA_ROOT}/conda-bld/linux-64/ilastik-meta*.tar.bz2
         anaconda upload -u ilastik ${CONDA_ROOT}/conda-bld/linux-64/ilastik-everything*.tar.bz2
+
+**Troubleshooting Tip:** If the `ilastik-meta` tag has been relocated since you last built the `ilastik-meta` package, you should probably clear conda's git cache for that repo, to ensure you have the new tags: `rm -rf $(conda info --root)/conda-bld/git_cache/github.com/ilastik/ilastik-meta`
 
 4. (Optional) Install to a local environment and test
 
@@ -204,28 +230,40 @@ The Mac packages were built with `MACOSX_DEPLOYMENT_TARGET=10.7`, so they should
 But if, for some reason, you need to build your own binary packages from these recipes, it should be easy to do so:
 
 ```bash
-# Prerequisite: Install conda-build and jinja2
+# Prerequisite: Install conda-build
 source activate root
-conda install conda-build jinja2
+conda install conda-build
 
 # Clone the ilastik build recipes
 git clone http://github.com/ilastik/ilastik-build-conda
 cd ilastik-build-conda
 
 # Build a recipe, e.g:
-conda build vigra
+conda build --numpy=1.11 vigra
 
 # Now install your newly built package, directly from your local build directory:
 conda install --use-local -n ilastik-devel vigra
 ```
 
-Now run ilastik from with your ilastik meta-repo:
+Now run ilastik from with your `ilastik-meta` repo:
 
 ```bash
 cd /path/to/ilastik-meta
 
 # Run ilastik
 PYTHONPATH="ilastik:lazyflow:volumina" python ilastik/ilastik.py
+```
+
+As mentioned above, some packages require CPLEX and Gurobi.  To build those packages, you must define some environment variables first:
+
+```bash
+# Configure environment for building with solvers active
+export WITH_SOLVERS=1
+export CPLEX_ROOT_DIR=/path/to/ibm/ILOG/CPLEX_Studio1251
+export GUROBI_ROOT_DIR=/path/to/gurobi650/linux64
+
+# Build some recipes that depend on solvers
+conda build ilastik-deps-tracking ilastik-deps-multicut ilastik-versions ilastik-everything
 ```
 
 <a name="writing"></a>
@@ -242,7 +280,7 @@ The [conda documentation][2] explains in detail how to create a new package, but
 
 ```bash
 source activate root
-conda install conda-build jinja2
+conda install conda-build
 ```
 
 1. Create recipe files
