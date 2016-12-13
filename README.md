@@ -33,6 +33,8 @@ Contents
 Installing ilastik for development
 ==================================
 
+**Preamble:** Depending on what you are trying to do, you may not need to follow any of these steps.  The ilastik binary is shipped with a complete conda environment, `.py` files, etc.  For many purposes, simply downloading the binary and editing the (python) source code by hand may suffice.  However, these instructions can give you a more complete developer setup, suitable e.g. for C++ development. 
+
 Here's how to install everything you need to develop ilastik.
 
 0. Prerequisite: Install [Miniconda]
