@@ -12,7 +12,7 @@ package:
     version: 1.2
 
 build:
-  number: 14 # If you change this, update the ilastik-versions build strings in 'ilastik-everything' recipe requirements
+  number: 15 # If you change this, update the ilastik-versions build strings in 'ilastik-everything' recipe requirements
 
 #
 # In general, we don't specify exact version requirements in each sub-package.
@@ -78,7 +78,7 @@ requirements:
     - pandas                    0.18.1
 
 {% if WITH_SOLVERS %}
-    - pgmlink                   1.3       
+    - pgmlink                   1.3.post4       
 {% endif %}
 
     - pillow                    3.0.0
