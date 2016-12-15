@@ -11,10 +11,10 @@ package:
 source:
     git_url: https://github.com/ilastik/pgmlink
     #git_tag: ilastik-1.1.9-maintenance
-    git_tag: HEAD
+    git_tag: cf4d3da9c72312a3c2076b7af4b95d8e8344b1f2 # 2016-09-19
 
 build:
-  number: 5
+  number: 0
 
   #
   # You must build this recipe using 'conda build --numpy=X.Y'
