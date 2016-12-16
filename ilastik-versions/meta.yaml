@@ -9,7 +9,7 @@ build:
     - {{toolset.short}}
   features:
     - {{toolset.short}}
-  number: 7
+  number: 8
 
 #
 # In general, we don't specify exact version requirements in each sub-package.
@@ -73,13 +73,11 @@ requirements:
     - numpy                     1.9.2{{toolset.suffix}}   # [unix]
     - numpy                     1.10.1{{toolset.suffix}}  # [win]
     - openblas                  0.2.15{{toolset.suffix}}  # [win]
-    - opengm                    2.3.4{{toolset.suffix}}   # [unix]
-    - opengm                    2.3.7post2{{toolset.suffix}}   # [win]
-    - opengm-with-cplex         2.3.7post2{{toolset.suffix}}   # [win]
+    - opengm-with-cplex         2.3.7post29{{toolset.suffix}}   # [win]
     - openssl                   1.0.1k                    # [unix]
     # - openssl-src-for-python    1.0.2post.a  # [win]  hard-wired in Python
     - pandas                    0.18.1{{toolset.suffix}}  # [win]
-    - pgmlink-with-cplex        1.2.1{{toolset.suffix}}   # [win]
+    - pgmlink-with-cplex        1.3.post4{{toolset.suffix}} # [win]
     - pillow                    2.7.0{{toolset.suffix}}   # [unix]
     - pillow                    3.0.0{{toolset.suffix}}   # [win]
     - pip                       6.1.1                     # [unix]
@@ -93,6 +91,7 @@ requirements:
     - python                    2.7.9{{toolset.suffix}}   # [unix]
     - python                    2.7.10{{toolset.suffix}}  # [win]
     - python-dateutil           2.4.2
+    - pytiff                    0.4.4{{toolset.suffix}}
     - pytz                      2015.4
     - qimage2ndarray            1.4{{toolset.suffix}}     # [unix]
     - qimage2ndarray            1.4post1{{toolset.suffix}}     # [win]
@@ -116,10 +115,10 @@ requirements:
     - tifffile                  0.4.1post2{{toolset.suffix}}   # [win]
     - tk                        8.5.18                    # [unix]
     - vigra                     1.10{{toolset.suffix}}    # [unix]
-    - vigra                     1.11.0post2{{toolset.suffix}} # [win]
+    - vigra                     1.11.0post196{{toolset.suffix}} # [win]
     - vtk                       5.10.1.99                 # [unix]
     - vtk                       5.10.1{{toolset.suffix}}  # [win]
-    - wsdt                      0.1                       # [win]
+    - wsdt                      0.2.post4                 # [win]
     - xz                        5.10.5                    # [unix]
     - xz                        5.0.8                     # [win]
     - yapsy                     1.10.423
