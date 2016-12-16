@@ -1,0 +1,46 @@
+{% import '$CONDA_DEFAULT_ENV/toolset-info/config.yaml' as toolset %}
+
+package:
+  name: pytiff
+  version: "0.4.4{{toolset.suffix}}"
+
+source:
+  git_url: https://github.com/FZJ-INM1-BDA/pytiff
+  git_tag: 0.4.4
+
+build:
+  #
+  # You must build this recipe using 'conda build --numpy=X.Y'
+  #
+  features:
+    - {{toolset.short}}
+  number: 0
+  msvc_compiler: {{toolset.version}}  # [win]
+
+requirements:
+  build:
+    - {{toolset.build_requirement}}
+    - python   2.7.10*{{toolset.suffix}}
+    - numpy    1.10.1*{{toolset.suffix}}
+    - libtiff  4.0.6*{{toolset.suffix}}
+    - cython  0.23{{toolset.suffix}}
+
+  run:
+    - {{toolset.run_requirement}}
+    - python   2.7.10*{{toolset.suffix}}
+    - numpy    1.10.1*{{toolset.suffix}} # [win]
+    - libtiff  4.0.6*{{toolset.suffix}}
+
+test:
+  requires:
+    # - pytest
+    # - tifffile # This is Christoph Gohlke's 'tifffile' package, installable from the ilastik channel, or from PyPI
+    # - hypothesis # We have no conda package for this package, so 'run_test.sh' just installs it with pip
+
+  imports:
+    # - pytiff
+
+about:
+  home: https://github.com/FZJ-INM1-BDA/pytiff
+  license: BSD (3-clause)
+  summary: 'Lightweight library for reading chunks from tiff files, including Bigtiff'
