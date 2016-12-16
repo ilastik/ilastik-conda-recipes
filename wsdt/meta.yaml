@@ -1,10 +1,10 @@
 package:
     name: wsdt
-    version: 0.1
+    version: 0.2.post4
 
 source:
   git_url: https://github.com/ilastik/wsdt
-  git_tag: c1709eabe0000530c47763ac55ed936e723a933b # master 2016/07/07
+  git_tag: 5ed2c213aeef270a7bff59810b7a957b19d004cf # master 2016/10/27
 
 build:
   number: 0
