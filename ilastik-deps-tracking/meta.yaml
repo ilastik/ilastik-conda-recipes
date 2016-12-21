@@ -18,10 +18,10 @@ build:
 requirements:
   run:
     - ilastik-deps-pc
-    - pgmlink
     - hytra
     - dpct
 {% if WITH_SOLVERS %}
+    - pgmlink
     - multi-hypotheses-tracking-with-gurobi 1.1.2
     - multi-hypotheses-tracking-with-cplex  1.1.2
 {% endif %}
