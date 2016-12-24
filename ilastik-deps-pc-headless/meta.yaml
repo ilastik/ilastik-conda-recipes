@@ -3,17 +3,16 @@ about:
 
 package:
   name: ilastik-deps-pc-headless
-  version: "1.2"
+  version: "1.1"
 
 build:
-  number: 0
+  number: 6
 
 requirements:
   run:
     - python
     - numpy
     - vigra
-    - fastfilters # [unix]
     - tifffile
     - h5py
     - psutil
@@ -21,9 +20,7 @@ requirements:
     - yapsy
     - scikit-learn
     - scikit-image
-    - faulthandler
     - jsonschema
-    - ilastik-feature-selection >=0.123.post9
     - nose
     #- blist # only needed by deprecated operators
     

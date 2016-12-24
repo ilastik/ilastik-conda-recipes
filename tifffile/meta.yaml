@@ -21,7 +21,7 @@ source:
   git_tag: 7c3bb9e12bbd4420d55cb0515132da1957b89b85 # Branch 'ilastik-devel' (v0.4.post2)
 
 build:
-  number: 0
+  number: 1
   #
   # You must build this recipe using 'conda build --numpy=X.Y'
   #
@@ -29,11 +29,11 @@ build:
 
 requirements:
   build:
-    - python   2.7*
+    - python
     - numpy    >=1.9,{{NPY_VER}}*
 
   run:
-    - python   {{PY_VER}}*
+    - python
     - numpy    {{NPY_VER}}*
 
 test:
