@@ -99,7 +99,13 @@ fi
     fi
     
     # Run the tests
-    #make -j${CPU_COUNT} check
+    if [[ -z "$VIGRA_SKIP_TESTS" || "$VIGRA_SKIP_TESTS" == "0" ]]; then
+        if [[ $(uname) == "Darwin" ]]; then
+            make -j${CPU_COUNT} check 2> >(python "${RECIPE_DIR}"/../build-utils/filter-macos-linker-warnings.py)
+        else
+            make -j${CPU_COUNT} check
+        fi
+    fi
 )
 
 # "install" to the build prefix (conda will relocate these files afterwards)
