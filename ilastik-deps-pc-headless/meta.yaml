@@ -6,7 +6,7 @@ package:
   version: "1.2"
 
 build:
-  number: 0
+  number: 1
 
 requirements:
   run:
@@ -21,7 +21,7 @@ requirements:
     - yapsy
     - scikit-learn
     - scikit-image
-    - faulthandler
+    - faulthandler # [py2k]
     - jsonschema
     - ilastik-feature-selection >=0.123.post9
     - nose

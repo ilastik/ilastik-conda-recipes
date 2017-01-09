@@ -12,7 +12,7 @@ package:
     version: 1.2
 
 build:
-  number: 15 # If you change this, update the ilastik-versions build strings in 'ilastik-everything' recipe requirements
+  number: 16 # If you change this, update the ilastik-versions build strings in 'ilastik-everything' recipe requirements
 
 #
 # In general, we don't specify exact version requirements in each sub-package.
@@ -46,7 +46,7 @@ requirements:
     - lemon                     1.2.4     
     - libgcc                    4.8.5  19991 # [linux]
     - libgcc                    4.8.5  1     # [osx]
-    - libpng                    1.6.17
+    - libpng                    1.6.27
     - libtiff                   4.0.6
     - libxml2                   2.9.0     
     - matplotlib                1.5.1     
@@ -85,15 +85,13 @@ requirements:
     - pip                       6.1.1     
     - psutil                    2.2.1     
     - pyparsing                 2.0.3     
-    - pyqt                      4.11.3    # [not osx]
-    - pyqt                      4.11.3.99 # [osx]
+    - pyqt                      4.11.4
     - python                    2.7.12     
     - python-dateutil           2.4.2     
     - pytiff                    0.4.4
     - pytz                      2015.4    
     - qimage2ndarray            1.4       
-    - qt                        4.8.6    # [not osx]
-    - qt                        4.8.6.99 # [osx]
+    - qt                        4.8.7
     - readline                  6.2       
     - scikit-learn              0.17.1    
     - scikit-image              0.12.3

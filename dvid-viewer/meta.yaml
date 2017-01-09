@@ -7,7 +7,7 @@ source:
   git_tag: HEAD
 
 build:
-  number: 2
+  number: 3
   detect_binary_files_with_prefix: true # (defaults to false)
   
 requirements:
@@ -18,8 +18,7 @@ requirements:
     - jsoncpp
     - libdvid-cpp
     - vtk         5.10.1.99
-    - qt          4.8.6.99 # [osx]
-    - qt          4.8*     # [linux]
+    - qt          4.8.7
 
     
   run:
@@ -27,8 +26,7 @@ requirements:
     - boost 1.55.0
     - jsoncpp
     - vtk         5.10.1.99
-    - qt          4.8.6.99 # [osx]
-    - qt          4.8*     # [linux]
+    - qt          4.8.7
     - libdvid-cpp
 
 about:
