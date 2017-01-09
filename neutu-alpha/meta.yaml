@@ -7,15 +7,15 @@ source:
   git_tag: flyem_release_stage
 
 build:
-  number: 5
+  number: 6
 
 requirements:
   build:
-    - qt      4.8.6.99   # [unix]
+    - qt           4.8.7
     - libdvid-cpp
 
   run:
-    - qt       4.8.6.99   # [unix]
+    - qt           4.8.7
     - libdvid-cpp
 
 about:
