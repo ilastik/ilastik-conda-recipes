@@ -19,16 +19,19 @@
 ##         $ firefox some-env-neato.png
 
 set -e
-if [[ $# != 1 ]]; then
-    1>&2 echo "Usage: $0 <env-name>"
+if [[ $# < 1 ]]; then
+    1>&2 echo "Usage: $0 <env-name> [env-prefix]"
     exit 1
 fi
 
 ENV_NAME=$1
+DEFAULT_PREFIX="$(conda info --root)/envs/${ENV_NAME}"
+
+ENV_PREFIX=${2-${DEFAULT_PREFIX}}
 
 # Dependencies must be computed in the *root* conda environment,
 # becuase that's the only environment that can use 'import conda'
-$(conda info --root)/bin/python dependencies-to-json.py -n ${ENV_NAME} -o ${ENV_NAME}.json
+$(conda info --root)/bin/python dependencies-to-json.py -p ${ENV_PREFIX} -o ${ENV_NAME}.json
 
 # The dot-file is generated with the currently active conda environment,
 # which must have pydot installed to it

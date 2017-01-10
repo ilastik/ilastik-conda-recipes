@@ -96,5 +96,7 @@ def main():
 
 
 if __name__ == "__main__":
+    #sys.argv += ['-p', '/miniconda2/conda-bld/vigra_1483991794828/_b_env_placehold_placehold_placehold_p']
+    #sys.argv += ['-o', 'debug-output.json']
     sys.exit( main() )
     
