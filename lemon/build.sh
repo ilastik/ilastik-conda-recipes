@@ -18,8 +18,14 @@
 
 
 if [[ `uname` == 'Darwin' ]]; then
+    export CC=clang
+    export CXX=clang++
+
     # Pursuant to Item 2 above, replace the tools/CMakeLists.txt with an empty file.
     echo "" > tools/CMakeLists.txt
+else
+    export CC=${PREFIX}/bin/gcc
+    export CXX=${PREFIX}/bin/g++
 fi
 
 mkdir build
@@ -28,8 +34,8 @@ cd build
 echo CXX_LDFLAGS=$CXX_LDFLAGS
 
 cmake .. \
-    -DCMAKE_C_COMPILER=${PREFIX}/bin/gcc \
-    -DCMAKE_CXX_COMPILER=${PREFIX}/bin/g++ \
+    -DCMAKE_C_COMPILER=${CC} \
+    -DCMAKE_CXX_COMPILER=${CXX} \
     -DBUILD_SHARED_LIBS=ON \
     -DCMAKE_INSTALL_PREFIX=${PREFIX} \
     -DCMAKE_PREFIX_PATH=${PREFIX} \

@@ -5,9 +5,13 @@ export CXXFLAGS=""
 export LDFLAGS=""
 
 if [[ `uname` == 'Darwin' ]]; then
-    VIGRA_CXX_FLAGS="-std=c++11 -I${PREFIX}/include" # I have no clue why this -I option is necessary on Mac.
+    export CC=clang
+    export CXX=clang++
+    VIGRA_CXX_FLAGS="-std=c++11 -stdlib=libc++ -I${PREFIX}/include" # I have no clue why this -I option is necessary on Mac.
     DYLIB_EXT=dylib
 else
+    export CC=${PREFIX}/bin/gcc
+    export CXX=${PREFIX}/bin/g++
     VIGRA_CXX_FLAGS="-std=c++11 -pthread ${CXXFLAGS}"
     DYLIB_EXT=so
 fi
@@ -21,12 +25,13 @@ PY_ABI=${PY_VER}${PY_ABIFLAGS}
 VIGRA_CXX_FLAGS_RELEASE="-O2 -DNDEBUG ${VIGRA_CXX_FLAGS}"
 VIGRA_LDFLAGS="-Wl,-rpath,${PREFIX}/lib -L${PREFIX}/lib"
 
+
 # CONFIGURE
 mkdir build
 cd build
 cmake ..\
-        -DCMAKE_C_COMPILER=${PREFIX}/bin/gcc \
-        -DCMAKE_CXX_COMPILER=${PREFIX}/bin/g++ \
+        -DCMAKE_C_COMPILER=${CC} \
+        -DCMAKE_CXX_COMPILER=${CXX} \
         -DCMAKE_INSTALL_PREFIX=${PREFIX} \
         -DCMAKE_PREFIX_PATH=${PREFIX} \
 \
