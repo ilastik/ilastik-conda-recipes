@@ -15,7 +15,7 @@ package:
 source:
   git_url: https://github.com/ukoethe/vigra
   git_tag: HEAD
-
+  
 build:
   number: 4
 
@@ -30,7 +30,6 @@ build:
 requirements:
   build:
     - gcc 4.8.5 # [linux]
-    - gcc 4.8.5 # [osx]
     - python 2.7*|3.5*|3.6*
     - python {{PY_VER}}*
     - numpy >=1.9,{{NPY_VER}}*
@@ -40,14 +39,13 @@ requirements:
     - fftw     3.3*
     - hdf5     1.8.17
     - h5py
-    - boost    1.55.0 # [py2k]
-    - boost    1.60.0 # [py3k]
+    - boost    1.63.0
     - lemon    1.2.4
     - zlib     1.2*
     - nose
 
   run:
-    - libgcc   4.8*
+    - libgcc   4.8* # [linux]
     - python {{PY_VER}}*
     - numpy  {{NPY_VER}}*
     - jpeg     9*
@@ -56,8 +54,7 @@ requirements:
     - fftw     3.3*
     - hdf5     1.8.17
     - h5py
-    - boost    1.55.0 # [py2k]
-    - boost    1.60.0 # [py3k]
+    - boost    1.63.0
     - lemon    1.2.4
     - zlib     1.2*
     - nose
