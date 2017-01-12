@@ -14,7 +14,7 @@ bash build.sh ${PREFIX}/bin/qmake ${QMAKE_SPEC_PATH} -e flyem -q "CONDA_ENV=${PR
 
 # Install to conda environment
 if [ `uname` == 'Darwin' ]; then
-    mv neurolabi/build/neuTube.app ${PREFIX}/bin/
+    mv neurolabi/build/neutu.app ${PREFIX}/bin/
 else
-    mv neurolabi/build/neuTube ${PREFIX}/bin/
+    mv neurolabi/build/neutu ${PREFIX}/bin/
 fi
