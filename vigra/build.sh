@@ -13,6 +13,8 @@ else
 fi
 
 PY_VER=$(python -c "import sys; print('{}.{}'.format(*sys.version_info[:2]))")
+PY_ABIFLAGS=$(python -c "import sys; print('' if sys.version_info.major == 2 else sys.abiflags)")
+PY_ABI=${PY_VER}${PY_ABIFLAGS}
 
 # In release mode, we use -O2 because gcc is known to miscompile certain vigra functionality at the O3 level.
 # (This is probably due to inappropriate use of undefined behavior in vigra itself.)
@@ -59,13 +61,13 @@ cmake ..\
         -DLEMON_LIBRARY=${PREFIX}/lib/libemon.${DYLIB_EXT} \
 \
         -DPYTHON_EXECUTABLE=${PYTHON} \
-        -DPYTHON_LIBRARY=${PREFIX}/lib/libpython${PY_VER}.${DYLIB_EXT} \
-        -DPYTHON_INCLUDE_DIR=${PREFIX}/include/python${PY_VER} \
-        -DPYTHON_NUMPY_INCLUDE_DIR=${PREFIX}/lib/python${PY_VER}/site-packages/numpy/core/include \
+        -DPYTHON_LIBRARY=${PREFIX}/lib/libpython${PY_ABI}.${DYLIB_EXT} \
+        -DPYTHON_INCLUDE_DIR=${PREFIX}/include/python${PY_ABI} \
+        -DPYTHON_NUMPY_INCLUDE_DIR=${SP_DIR}/numpy/core/include \
         -DPYTHON_SPHINX=${PREFIX}/bin/sphinx-build \
 \
-        -DVIGRANUMPY_LIBRARIES="${PREFIX}/lib/libpython${PY_VER}.${DYLIB_EXT};${PREFIX}/lib/libboost_python.${DYLIB_EXT};${PREFIX}/lib/libboost_thread.${DYLIB_EXT};${PREFIX}/lib/libboost_system.${DYLIB_EXT}" \
-        -DVIGRANUMPY_INSTALL_DIR=${PREFIX}/lib/python${PY_VER}/site-packages \
+        -DVIGRANUMPY_LIBRARIES="${PREFIX}/lib/libpython${PY_ABI}.${DYLIB_EXT};${PREFIX}/lib/libboost_python.${DYLIB_EXT};${PREFIX}/lib/libboost_thread.${DYLIB_EXT};${PREFIX}/lib/libboost_system.${DYLIB_EXT}" \
+        -DVIGRANUMPY_INSTALL_DIR=${SP_DIR} \
 \
         -DZLIB_INCLUDE_DIR=${PREFIX}/include \
         -DZLIB_LIBRARY=${PREFIX}/lib/libz.${DYLIB_EXT} \
