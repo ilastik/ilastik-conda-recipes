@@ -7,26 +7,26 @@ source:
     git_tag: learning-experimental
 
 build:
-  number: 3
+  number: 4
 
   #
   # You must build this recipe using 'conda build --numpy=X.Y'
   #
   string: np{{CONDA_NPY[:]}}py{{CONDA_PY}}_{{PKG_BUILDNUM}}_g{{GIT_FULL_HASH[:7]}}
 
-  detect_binary_files_with_prefix: true
-
 requirements:
   build:
     - gcc 4.8.5 # [linux]
-    - gcc 4.8.5 # [osx]
-    - boost 1.55.0
-    - python 2.7*
+    - boost 1.55.0 # [py2k]
+    - boost 1.60.0 # [py3k]
+    - python 2.7*|3.5*
+    - python {{PY_VER}}*
     - numpy >=1.9,{{NPY_VER}}*
     - hdf5
   run:
-    - libgcc
-    - boost 1.55.0
+    - libgcc # [linux]
+    - boost 1.55.0 # [py2k]
+    - boost 1.60.0 # [py3k]
     - python {{PY_VER}}*
     - numpy  {{NPY_VER}}*
     - hdf5
