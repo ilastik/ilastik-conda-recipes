@@ -13,12 +13,9 @@ package:
   version: {{tagged_version}}
 
 source:
-  #git_url: https://github.com/ukoethe/vigra
-  #git_tag: HEAD
+  git_url: https://github.com/ukoethe/vigra
+  git_tag: HEAD
   
-  git_url: https://github.com/stuarteberg/vigra
-  git_tag: clang-fixes
-
 build:
   number: 1
 
