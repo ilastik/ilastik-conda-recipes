@@ -12,7 +12,7 @@ package:
     version: 1.2
 
 build:
-  number: 15 # If you change this, update the ilastik-versions build strings in 'ilastik-everything' recipe requirements
+  number: 16 # If you change this, update the ilastik-versions build strings in 'ilastik-everything' recipe requirements
 
 #
 # In general, we don't specify exact version requirements in each sub-package.
@@ -95,6 +95,7 @@ requirements:
     - qt                        4.8.6    # [not osx]
     - qt                        4.8.6.99 # [osx]
     - readline                  6.2       
+    - requests                  2.13.0
     - scikit-learn              0.17.1    
     - scikit-image              0.12.3
     - scipy                     0.17.0 # Can't use 0.17.1=np111py27_1 due to https://github.com/ContinuumIO/anaconda-issues/issues/899

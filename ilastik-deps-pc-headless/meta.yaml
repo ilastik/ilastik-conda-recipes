@@ -6,7 +6,7 @@ package:
   version: "1.2"
 
 build:
-  number: 0
+  number: 1
 
 requirements:
   run:
@@ -23,6 +23,7 @@ requirements:
     - scikit-image
     - faulthandler
     - jsonschema
+    - requests
     - ilastik-feature-selection >=0.123.post9
     - nose
     #- blist # only needed by deprecated operators
