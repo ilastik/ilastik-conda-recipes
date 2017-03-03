@@ -14,15 +14,16 @@ package:
 
 source:
   git_url: https://github.com/ukoethe/vigra
-  git_tag: HEAD
+  #git_tag: HEAD
+  git_tag: f10b6786fa9630864cf5207949980abf7d1c3d4d
   
 build:
-  number: 1
+  number: 2
 
   #
   # You must build this recipe using 'conda build --numpy=X.Y'
   #
-  string: np{{np}}py{{py}}_{{PKG_BUILDNUM}}_g{{GIT_FULL_HASH[:7]}}
+  string: np{{np}}py{{py}}boost161_{{PKG_BUILDNUM}}_g{{GIT_FULL_HASH[:7]}}
 
   script_env:
     - VIGRA_SKIP_TESTS
@@ -37,9 +38,9 @@ requirements:
     - libtiff  4.0.6
     - libpng   1.6.27
     - fftw     3.3*
-    - hdf5     1.8.16
-    - h5py
-    - boost    1.63.0
+    - hdf5     1.8.17
+    - h5py     2.6*
+    - boost    1.61.0 # See build string
     - lemon    1.2.4
     - zlib     1.2*
     - nose
@@ -52,9 +53,9 @@ requirements:
     - libtiff  4.0.6   # libtiff version must exactly match from the build (on osx, at least)
     - libpng   1.6.27
     - fftw     3.3*
-    - hdf5     1.8.16
-    - h5py
-    - boost    1.63.0
+    - hdf5     1.8.17
+    - h5py     2.6*
+    - boost    1.61.0 # See build string
     - lemon    1.2.4
     - zlib     1.2*
     - nose

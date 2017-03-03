@@ -4,6 +4,8 @@ export CFLAGS=""
 export CXXFLAGS=""
 export LDFLAGS=""
 
+export MACOSX_DEPLOYMENT_TARGET=10.9
+
 if [[ `uname` == 'Darwin' ]]; then
     export CC=clang
     export CXX=clang++
