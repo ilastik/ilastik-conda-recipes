@@ -40,6 +40,14 @@ set -x
 (
     mkdir -p ${PREFIX}/lib
     cd ${PREFIX}/lib
+    
+    if [ -z "$(ls ${GUROBI_LIB_DIR}/*.so)" ]; then
+        1>&2 echo "******************************************************"
+        1>&2 echo "Error: No shared libraries found in ${GUROBI_LIB_DIR}"
+        1>&2 echo "******************************************************"
+        exit 1
+    fi
+    
     for f in $(ls ${GUROBI_LIB_DIR}/*.so); do
         ln -f -s ${f}
     done
