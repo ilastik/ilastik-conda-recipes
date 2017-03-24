@@ -8,7 +8,7 @@ source:
   md5: 0331e12f2485b9d5d39c9d9dea618108
 
 build:
-  number: 7
+  number: 8
 
 requirements:
  build:
@@ -16,13 +16,13 @@ requirements:
      - gcc 4.8.5 # [osx]
      - boost 1.55.0
      - armadillo 6.500.5
-     - hdf5     1.8.16
+     - hdf5     1.8.17
      - libxml2
  run:
      - libgcc
      - boost 1.55.0
      - armadillo 6.500.5
-     - hdf5     1.8.16
+     - hdf5     1.8.17
      - libxml2
 
 about:

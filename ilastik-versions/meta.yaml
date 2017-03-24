@@ -12,7 +12,7 @@ package:
     version: 1.2
 
 build:
-  number: 16 # If you change this, update the ilastik-versions build strings in 'ilastik-everything' recipe requirements
+  number: 17 # If you change this, update the ilastik-versions build strings in 'ilastik-everything' recipe requirements
 
 #
 # In general, we don't specify exact version requirements in each sub-package.
@@ -32,8 +32,8 @@ requirements:
     - freetype                  2.5.2     
     - futures                   3.0.2     
     - greenlet                  0.4.6     
-    - h5py                      2.6.0     
-    - hdf5                      1.8.16    
+    - h5py                      2.7.0     
+    - hdf5                      1.8.17
     - hytra                     1.1.1
     - iiboost                   0.2.post2       
     - ilastik-feature-selection 0.123.post9
@@ -66,7 +66,7 @@ requirements:
 {% endif %}
 
     - nose                      1.3.6     
-    - numpy                     1.11.1     
+    - numpy                     1.12.1     
     - opengm                    2.3.7.post29     
     - opengm-structured-learning-headers  2.3.4 np111py27_3_ga0797cd
 

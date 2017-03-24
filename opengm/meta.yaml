@@ -22,7 +22,7 @@ source:
     - patches/patchPlanarity.sh.patch # Apparently the mirror at http://jgaa.info is not reliable, but the parent website is.
 
 build:
-  number: 3
+  number: 4
 
   #
   # You must build this recipe using 'conda build --numpy=X.Y'
@@ -41,7 +41,7 @@ requirements:
     - boost 1.55.0
     - python 2.7*
     - numpy >=1.9,{{NPY_VER}}*
-    - hdf5 1.8.16
+    - hdf5 1.8.17
     - vigra >=1.11
     
     {% if WITH_CPLEX %}
@@ -53,7 +53,7 @@ requirements:
     - boost 1.55.0
     - python {{PY_VER}}*
     - numpy  {{NPY_VER}}*
-    - hdf5 1.8.16
+    - hdf5 1.8.17
 
     {% if WITH_CPLEX %}
     - cplex-shared # Need to make sure that cplex dylibs exist and are linked into the environment

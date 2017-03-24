@@ -8,7 +8,7 @@ source:
   md5: 2c84eae50ab2452cdad32aaadced3c37
 
 build:
-  number: 5
+  number: 6
   detect_binary_files_with_prefix: true
 
 requirements:  
@@ -18,7 +18,7 @@ requirements:
     - jpeg
     - libtiff
     - libpng 1.6.17
-    - hdf5 1.8.16
+    - hdf5 1.8.17
     - zlib
 
   run:
@@ -28,7 +28,7 @@ requirements:
     # - jpeg
     # - libtiff
     # - libpng
-    # - hdf5 1.8.16
+    # - hdf5 1.8.17
 
 about:
   home: http://itk.org
