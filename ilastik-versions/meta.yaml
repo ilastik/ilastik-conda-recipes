@@ -20,13 +20,11 @@ build:
 requirements:
   run:
     - ann                       1.1.2     
-    - armadillo                 6.500.5   
     #- blist                     1.3.6 # Only needed by deprecated operators     
     - boost                     1.55.0    
     #- cylemon                   1         
-    - dlib                      18.16
     - decorator                 3.4.0
-    - dpct                      1.1.post4
+    - dpct                      1.2
     - faulthandler              2.4       
     - fftw                      3.3.4     
     - freetype                  2.5.2     
@@ -34,7 +32,7 @@ requirements:
     - greenlet                  0.4.6     
     - h5py                      2.7.0     
     - hdf5                      1.8.17
-    - hytra                     1.1.1
+    - hytra                     1.1.3
     - iiboost                   0.2.post2       
     - ilastik-feature-selection 0.123.post9
     - ilastiktools              0.2       
@@ -49,12 +47,12 @@ requirements:
     - libpng                    1.6.17
     - libtiff                   4.0.6
     - libxml2                   2.9.0     
+    - mamutexport               0.2.0
     - matplotlib                1.5.1     
-    - mlpack                    1.0.8.99     
 
 {% if WITH_SOLVERS %}
-    - multi-hypotheses-tracking-with-gurobi 1.1.2
-    - multi-hypotheses-tracking-with-cplex  1.1.2
+    - multi-hypotheses-tracking-with-gurobi 1.1.3
+    - multi-hypotheses-tracking-with-cplex  1.1.3
 {% endif %}
 
     - networkx                  1.11
@@ -77,9 +75,13 @@ requirements:
     - openssl                   1.0.2j    
     - pandas                    0.18.1
 
-{% if WITH_SOLVERS %}
-    - pgmlink                   1.3.post4       
-{% endif %}
+# {% if WITH_SOLVERS %}
+# Only used on windows now!
+    # - pgmlink                   1.3.post4       
+    # - armadillo                 6.500.5   
+    # - dlib                      18.16
+    # - mlpack                    1.0.8.99     
+# {% endif %}
 
     - pillow                    3.0.0
     - pip                       6.1.1     
