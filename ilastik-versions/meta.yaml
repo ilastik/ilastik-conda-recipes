@@ -47,7 +47,7 @@ requirements:
     - libpng                    1.6.17
     - libtiff                   4.0.6
     - libxml2                   2.9.0     
-    - mamutexport               0.2.0
+    - mamutexport               0.2.1
     - matplotlib                1.5.1     
 
 {% if WITH_SOLVERS %}
