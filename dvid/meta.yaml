@@ -1,0 +1,21 @@
+package:
+  name: dvid
+  version: "0.8.8"
+
+source:
+  url: https://github.com/janelia-flyem/dvid/releases/download/v0.8.8/dvid-mac-v0.8.8.tar.gz # [osx]
+  md5: c55fcbaa8802a702be742e162656f741 # [osx]
+  url: https://github.com/janelia-flyem/dvid/releases/download/v0.8.7/dvid-linux-v0.8.7.tar.gz # [linux]
+  md5: 578009f6242342928d3d7b6f341457b0 # [linux]
+
+build:
+  number: 1
+
+requirements:
+  build:
+
+  run:
+
+about:
+  home: http://github.com/janelia-flyem/dvid
+  license: GPL

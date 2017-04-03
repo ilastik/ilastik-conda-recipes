@@ -11,5 +11,10 @@ cmake ..\
 
 make -j${CPU_COUNT} all
 
+# manual install
+pwd
 make install
+cp -r include/* ${PREFIX}/include/
+cp -r lib/* ${PREFIX}/lib/
+cp -r bin/* ${PREFIX}/bin/
 
