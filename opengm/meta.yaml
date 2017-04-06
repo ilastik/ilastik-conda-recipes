@@ -12,9 +12,8 @@ package:
     version: "2.3.7.post29"
 
 source:
-  #git_url: https://github.com/opengm/opengm
-  git_url: https://github.com/DerThorsten/opengm
-  git_rev: a00f9958e8dc79d51f22b9c00e3093bd8bd32ae0
+  git_url: https://github.com/ilastik/opengm
+  git_rev: d94f09af6d58eb6a14cd864c286fff34069637df # branch 'ilastik-build'
 
   patches:
     - patches/patchConicBundle.patch # Yes, we're patching the patch script (ignore ssl certificate problems)
@@ -22,7 +21,7 @@ source:
     - patches/patchPlanarity.sh.patch # Apparently the mirror at http://jgaa.info is not reliable, but the parent website is.
 
 build:
-  number: 4
+  number: 5
 
   #
   # You must build this recipe using 'conda build --numpy=X.Y'
@@ -37,23 +36,25 @@ build:
 
 requirements:
   build:
-    - gcc 4.8.5 # [unix]
+    - gcc 4.8.5 999 # [osx]
+    - gcc 4.8.5 79991 # [linux]
     - boost 1.55.0
     - python 2.7*
     - numpy >=1.9,{{NPY_VER}}*
-    - hdf5 1.8.17
-    - vigra >=1.11
+    - hdf5 1.8.17 # HDF5 is required for the python wrapper
+    - vigra-headers-only 1.11.0.post36   # This version is known to work
     
     {% if WITH_CPLEX %}
     - cplex-shared # Need to make sure that cplex dylibs exist
     {% endif %}
 
   run:
-    - libgcc # [unix]
+    - libgcc # [osx]
+    - libgcc 19991 # [linux]
     - boost 1.55.0
     - python {{PY_VER}}*
     - numpy  {{NPY_VER}}*
-    - hdf5 1.8.17
+    - hdf5 1.8.17 # HDF5 is required for the python wrapper
 
     {% if WITH_CPLEX %}
     - cplex-shared # Need to make sure that cplex dylibs exist and are linked into the environment
