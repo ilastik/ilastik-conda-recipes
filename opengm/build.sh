@@ -102,10 +102,10 @@ fi
 ## START THE BUILD
 ##
 
-mkdir build
+mkdir -p build
 cd build
 
-CXXFLAGS="${CXXFLAGS} -I${PREFIX}/include"
+CXXFLAGS="${CXXFLAGS} -std=c++11 -I${PREFIX}/include"
 LDFLAGS="${LDFLAGS} -Wl,-rpath,${PREFIX}/lib -L${PREFIX}/lib"
 
 ##
