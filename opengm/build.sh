@@ -126,7 +126,11 @@ if [[ "$WITH_EXTERNAL_LIBS" != "" ]]; then
 	        -DCMAKE_CXX_FLAGS_RELEASE="${CXXFLAGS}" \
 	        -DCMAKE_CXX_FLAGS_DEBUG="${CXXFLAGS}" \
 
-    make externalLibs
+    if [[ `uname` == 'Darwin' ]]; then
+        make externalLibs 2> >(python "${RECIPE_DIR}"/filter-macos-linker-warnings.py)
+    else
+        make externalLibs
+    fi
 
     EXTERNAL_LIB_FLAGS="-DWITH_QPBO=ON -DWITH_PLANARITY=ON -DWITH_BLOSSOM5=ON"
 fi
@@ -163,7 +167,11 @@ cmake .. \
 ##
 ## Compile
 ##
-make -j${CPU_COUNT}
+if [[ `uname` == 'Darwin' ]]; then
+    make -j${CPU_COUNT} 2> >(python "${RECIPE_DIR}"/filter-macos-linker-warnings.py)
+else
+    make -j${CPU_COUNT}
+fi
 
 ##
 ## Install to prefix
