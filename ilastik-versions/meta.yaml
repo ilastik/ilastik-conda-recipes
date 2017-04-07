@@ -39,7 +39,7 @@ requirements:
     - ilastikrag                0.1.post12
     - itk-seg-conv-only         4.6.1     
     - jbig                      2.1
-    - jpeg                      8d        
+    - jpeg                      9b        
     - jsonschema                2.4.0     
     - lemon                     1.2.4     
     - libgcc                    4.8.5  19991 # [linux]

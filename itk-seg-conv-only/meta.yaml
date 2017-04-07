@@ -15,7 +15,7 @@ requirements:
   build:
     - gcc 4.8.5 # [linux]
     - gcc 4.8.5 # [osx]
-    - jpeg 8d
+    - jpeg 9b
     - libtiff 4.0.6
     - libpng 1.6.27
     - hdf5 1.8.17

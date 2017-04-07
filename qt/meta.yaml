@@ -23,14 +23,14 @@ requirements:
   build:
     - freetype
     - libtiff
-    - jpeg
+    - jpeg 9b
     - libpng 1.6.27
     - zlib
 
   run:
     - freetype
     - libtiff
-    - jpeg
+    - jpeg 9*
     - libpng >=1.6.27,<1.7
     - zlib
 

@@ -25,7 +25,7 @@ requirements:
     - python
     - pyqt 4.11.3.99            # [osx]
     - pyqt 4.11.3               # [not osx]
-    - jpeg
+    - jpeg 9b
     - libpng >=1.6.27
     - libtiff
     - zlib
@@ -34,7 +34,7 @@ requirements:
   run:
     - libgcc # [linux]
     - python
-    - jpeg
+    - jpeg 9*
     - libpng >=1.6.27,<1.7
     - libtiff
     - zlib
