@@ -7,7 +7,7 @@ source:
   git_tag: master
 
 build:
-  {% set build_num = 3 %}
+  {% set build_num = 4 %}
   number: {{ build_num }}
 
   #
@@ -25,7 +25,7 @@ requirements:
     - numpy    >=1.9,{{NPY_VER}}*
     - jpeg     8d
     - libtiff  4.0*
-    - libpng   1.6.17
+    - libpng   1.6.27
     - fftw     3.3*
     - hdf5     1.8.17
     - boost    1.55.0
@@ -38,7 +38,7 @@ requirements:
     - numpy    {{NPY_VER}}*
     - jpeg     8d
     - libtiff  4.0*
-    - libpng   1.6.17
+    - libpng   >=1.6.27,<1.7
     - fftw     3.3*
     - hdf5     1.8.17
     - boost    1.55.0
