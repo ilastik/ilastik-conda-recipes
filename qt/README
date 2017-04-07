@@ -1,0 +1,4 @@
+This version of qt can't handle build environments with a really
+long prefix, so you have to build it with this command:
+
+  $ conda build --prefix-length=80 qt
