@@ -16,6 +16,8 @@ if [ `uname` == 'Darwin' ]; then
     CXXFLAGS="-stdlib=libstdc++"
     EXTRA_QT4_CONFIG_FLAGS="-cocoa -L/usr/X11/lib -I/usr/X11/include -arch x86_64"
     OPT_FLAG='-openssl -no-framework'
+    
+    export MACOSX_DEPLOYMENT_TARGET="10.9"
 else
     EXTRA_QT4_CONFIG_FLAGS=""
     OPT_FLAG=''

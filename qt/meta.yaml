@@ -15,6 +15,15 @@ source:
     # https://bugreports.qt.io/secure/attachment/46537/QTBUG-40585-Rev3.patch
     - patches/QTBUG-40585-Rev3.patch
     
+    # Fixes the following comilation error, which is due to outdated APIs:
+    #
+    # painting/qpaintengine_mac.cpp:345:19: error: use of undeclared identifier 'CMGetProfileByAVID'
+    # CMError err = CMGetProfileByAVID((CMDisplayIDType)displayID, &displayProfile);
+    #               ^
+    #
+    # See: https://github.com/Homebrew/legacy-homebrew/issues/40585#issuecomment-119042611
+    - patches/qpaintengine_mac.diff
+    
 build:
   number: 3
   detect_binary_files_with_prefix: true
