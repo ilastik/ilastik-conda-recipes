@@ -21,6 +21,7 @@ build:
 
 requirements:
   build:
+    - openssl 1.0.2*
     - freetype
     - libtiff
     - jpeg 9b
@@ -28,6 +29,7 @@ requirements:
     - zlib
 
   run:
+    - openssl 1.0.2*
     - freetype
     - libtiff
     - jpeg 9*
