@@ -27,7 +27,7 @@ requirements:
     - pyqt 4.11.3               # [not osx]
     - jpeg 9b
     - libpng >=1.6.27
-    - libtiff
+    - libtiff 4.0*
     - zlib
     - libxml2
 
@@ -36,7 +36,7 @@ requirements:
     - python
     - jpeg 9*
     - libpng >=1.6.27,<1.7
-    - libtiff
+    - libtiff 4.0*
     - zlib
     - libxml2
 
