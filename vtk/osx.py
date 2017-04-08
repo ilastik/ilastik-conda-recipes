@@ -2,7 +2,7 @@ import os
 from os.path import basename, join
 
 import subprocess
-import conda_build.macho as macho
+import conda_build.os_utils.macho as macho
 
 
 PREFIX = os.getenv('PREFIX')
@@ -14,7 +14,8 @@ PREFIX_PYTHON = join(PREFIX, 'bin/python')
 SP_VTK = subprocess.check_output(
     [PREFIX_PYTHON, "-c", "import imp; print imp.find_module('vtk')[1]"]).strip()
 
-def ch_link_libvtk(path, link):
+def ch_link_libvtk(path, load_command):
+    link = load_command['name']
     if link.startswith('libpython'):
         return '@loader_path/../%s' % basename(link)
 
@@ -28,7 +29,8 @@ def ch_link_libvtk(path, link):
     if link.startswith('lib'):
         return '@loader_path/./%s' % basename(link)
 
-def ch_link_bin(path, link):
+def ch_link_bin(path, load_command):
+    link = load_command['name']
     if not basename(path).startswith('vtk'):
         return
 
@@ -45,7 +47,8 @@ def ch_link_bin(path, link):
     if link.startswith('lib'):
         return '@loader_path/../lib/vtk-5.10/%s' % basename(link)
 
-def ch_link_spvtk(path, link):
+def ch_link_spvtk(path, load_command):
+    link = load_command['name']
     if (   link.startswith('libpng') 
         or link.startswith('libtiff')
         or link.startswith('libxml2')
