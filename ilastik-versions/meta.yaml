@@ -114,3 +114,9 @@ requirements:
     - yapsy                     1.10.423  
     - zlib                      1.2.8     
     - xz                        5.2.2
+
+test:
+  # Just give SOME test to ensure that the package can be installed at all.
+  # (If there are no tests, the test environment isn't even created.)
+  imports:
+    - vigra
