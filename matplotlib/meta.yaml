@@ -10,7 +10,7 @@ package:
 source:
   fn: matplotlib-{{ version }}.tar.gz
   url: https://github.com/matplotlib/matplotlib/archive/v{{ version }}.tar.gz
-  sha256: 966a0807bc961726a68e5b60b6e97c91eed6ba20e0d50dfd699a8f854b2d7370
+  sha256: 36cf0985829c1ab2b8b1dae5e2272e53ae681bf33ab8bedceed4f0565af5f813
   patches:
     # Find libpng on Windows.
     - setupext.patch  # [win]
@@ -20,7 +20,8 @@ source:
     - osx-frame.patch  # [osx]
 
 build:
-  number: 3
+  number: 4
+  string: {{PKG_BUILDNUM}}_ilastik
 
 requirements:
   build:
@@ -29,14 +30,14 @@ requirements:
     - pkg-config  # [not win]
     - numpy x.x
     - python-dateutil
-    - freetype 2.7|2.7.*
+    - freetype 2.5*
     - msinttypes  # [win]
     - cycler >=0.10
     - nose
     - pyparsing
     - pytz
     #- py2cairo  # [linux and py2k]
-    - libpng >=1.6.28,<1.7
+    - libpng >=1.6.27,<1.7
     - zlib 1.2.*  # [win]
     - pyqt 5.6.*  # [not osx]
     - tk 8.5.*  # [linux]
@@ -49,11 +50,11 @@ requirements:
     - numpy x.x
     - cycler >=0.10
     - python-dateutil
-    - freetype 2.7|2.7.*
+    - freetype 2.5*
     - pytz
     - pyparsing
     #- py2cairo  # [linux and py2k]
-    - libpng >=1.6.28,<1.7
+    - libpng >=1.6.27,<1.7
     - pyqt 5.6.*  # [not osx]
     - tk 8.5.*  # [linux]
     - functools32  # [py2k]
