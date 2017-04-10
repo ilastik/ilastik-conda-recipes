@@ -12,7 +12,7 @@ package:
     version: 1.2
 
 build:
-  number: 17 # If you change this, update the ilastik-versions build strings in 'ilastik-everything' recipe requirements
+  number: 18 # If you change this, update the ilastik-versions build strings in 'ilastik-everything' recipe requirements
 
 #
 # In general, we don't specify exact version requirements in each sub-package.
