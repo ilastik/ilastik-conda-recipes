@@ -35,7 +35,7 @@ requirements:
     - hytra                     1.1.3
     - iiboost                   0.2.post5       
     - ilastik-feature-selection 0.123.post9
-    - ilastiktools              0.2       
+    - ilastiktools              0.2.post1       
     - ilastikrag                0.1.1
     - itk-seg-conv-only         4.6.1     
     - jbig                      2.1
