@@ -39,7 +39,7 @@ requirements:
     #- py2cairo  # [linux and py2k]
     - libpng >=1.6.27,<1.7
     - zlib 1.2.*  # [win]
-    - pyqt 5.6.*  # [not osx]
+    #- pyqt 5.6.*  # [not osx]
     - tk 8.5.*  # [linux]
     - functools32  # [py2k]
     - subprocess32  # [py2k and unix]
@@ -55,7 +55,7 @@ requirements:
     - pyparsing
     #- py2cairo  # [linux and py2k]
     - libpng >=1.6.27,<1.7
-    - pyqt 5.6.*  # [not osx]
+    #- pyqt 5.6.*  # [not osx]
     - tk 8.5.*  # [linux]
     - functools32  # [py2k]
     - subprocess32  # [py2k and unix]
