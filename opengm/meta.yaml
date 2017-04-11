@@ -26,7 +26,7 @@ build:
   #
   # You must build this recipe using 'conda build --numpy=X.Y'
   #
-  string: np{{CONDA_NPY[:]}}py{{CONDA_PY}}_{{PKG_BUILDNUM}}_g{{GIT_FULL_HASH[:7]}}
+  string: np{{np}}py{{py}}_{{PKG_BUILDNUM}}_g{{GIT_FULL_HASH[:7]}}
 
   detect_binary_files_with_prefix: true
   script_env:
@@ -49,8 +49,8 @@ requirements:
     {% endif %}
 
   run:
-    - libgcc # [osx]
-    - libgcc 19991 # [linux]
+    - libgcc 4.8.5 # [osx]
+    - libgcc 4.8.5 19991 # [linux]
     - boost 1.55.0
     - python {{PY_VER}}*
     - numpy  {{NPY_VER}}*
