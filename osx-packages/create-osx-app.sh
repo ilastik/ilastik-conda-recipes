@@ -52,15 +52,25 @@ if [ -d ${RELEASE_ENV} ]; then
     conda remove -y --all -n ilastik-release
 fi
 
+function latest_build()
+{
+    VERSION_AND_BUILD=$(conda search -f $1 \
+                        | tail -n1 \
+                        | python -c 'import sys; print("=".join(sys.stdin.read().split()[:2]))')
+    echo "$1=$VERSION_AND_BUILD"
+}
+
 # Create new ilastik-release environment and install all ilastik dependencies to it.
-echo "Creating new ilastik-release environment..."
 if [[ $WITH_SOLVERS == 0 ]]; then
-    conda create -q -y -n ilastik-release ilastik-everything-no-solvers py2app "$@"
+    EVERYTHING_PKG=$(latest_build ilastik-everything-no-solvers)
     SOLVERS_SUFFIX="-no-solvers"
 else    
-    conda create -q -y -n ilastik-release ilastik-everything py2app "$@"
+    EVERYTHING_PKG=$(latest_build ilastik-everything)
     SOLVERS_SUFFIX=""
 fi
+
+echo "Creating new ilastik-release environment using ${EVERYTHING_PKG}"
+conda create -q -y -n ilastik-release ${EVERYTHING_PKG} py2app "$@"
 
 ## Replace all @rpath references with @loader_path references,
 ## and delete the RPATHs (some of which are absolute instead of relative).
