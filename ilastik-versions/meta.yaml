@@ -80,7 +80,7 @@ requirements:
     # - armadillo                 6.500.5   
     # - dlib                      18.16
     # - mlpack                    1.0.8.99     
-    # - opengm-structured-learning-headers  2.3.4 np111py27_3_ga0797cd
+    # - opengm-structured-learning-headers  2.3.4 np112py27_3_ga0797cd
 # {% endif %}
 
     - pillow                    4.1.0
