@@ -13,7 +13,7 @@ package:
     version: "1.1"
 
 build:
-  number: 3
+  number: 4
 
 requirements:
   run:
@@ -22,8 +22,8 @@ requirements:
     - dpct
 {% if WITH_SOLVERS %}
     - pgmlink
-    - multi-hypotheses-tracking-with-gurobi 1.1.2
-    - multi-hypotheses-tracking-with-cplex  1.1.2
+    - multi-hypotheses-tracking-with-gurobi
+    - multi-hypotheses-tracking-with-cplex
 {% endif %}
 
 about:
