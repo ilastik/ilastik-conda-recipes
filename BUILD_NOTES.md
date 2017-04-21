@@ -13,7 +13,6 @@
 - `freetype 2.5.5`
 - `h5py 2.7`
 - `hdf5 1.8.17`
-- `hytra 1.1.3`
 - `jpeg 9b`
 - `libpng 1.6.27`
 - `numpy 1.12.1`
@@ -27,6 +26,7 @@
 Non-windows dependencies (used by tracking and/or multicut):
 
 - `dpct 1.2`
+- `hytra 1.1.3`
 - `multi-hypotheses-tracking-with-cplex 1.1.3.post1` (now requires hdf5)
 - `multi-hypotheses-tracking-with-gurobi 1.1.3.post1` (now requires hdf5, also uses gurobi 7)
 - `nifty 0.3b1.post119`
