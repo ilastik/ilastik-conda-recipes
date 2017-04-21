@@ -2,7 +2,6 @@
 
 ## New Dependencies
 
-- `mamutexport 0.2.1`
 - `requests 2.13.0`
   - Technically, `requests` is still an *optional* dependency in lazyflow (for `TiledVolume` data, such as CATMAID tiles),
     but it's a trivial dependency to carry, so I added it to `ilastik-versions`
@@ -27,6 +26,7 @@ Non-windows dependencies (used by tracking and/or multicut):
 
 - `dpct 1.2`
 - `hytra 1.1.3`
+- `mamutexport 0.2.1` (only used with the new tracking export plugin system that requires hytra)
 - `multi-hypotheses-tracking-with-cplex 1.1.3.post1` (now requires hdf5)
 - `multi-hypotheses-tracking-with-gurobi 1.1.3.post1` (now requires hdf5, also uses gurobi 7)
 - `nifty 0.3b1.post119`
