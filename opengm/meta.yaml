@@ -2,17 +2,16 @@
 
 package:
     name: opengm
-    version: "2.3.5{{toolset.suffix}}"
+    version: "2.3.7post29{{toolset.suffix}}"
 
 source:
-    git_url: https://github.com/opengm/opengm.git
-    git_tag: v2.3.5
+    git_url: https://github.com/ukoethe/opengm
+    git_tag: 6942afce19a61bd4c74d4fd63d1092964e6507be # learning-experimental 2016/12/16
 
 build:
   features:
     - {{toolset.short}}
-  number: 8
-  string: 8
+  number: 3
   detect_binary_files_with_prefix: true
   msvc_compiler: {{toolset.version}}  # [win]
 
@@ -26,6 +25,7 @@ requirements:
     - numpy    >=1.10,*{{toolset.suffix}}
     - hdf5     1.8.14                  # [unix]
     - hdf5     1.8.*{{toolset.suffix}} # [win]
+    - vigra    1.11.*{{toolset.suffix}}
   run:
     - {{toolset.run_requirement}}
     # - libgcc                         # [unix]
@@ -34,11 +34,12 @@ requirements:
     - numpy   >=1.10,*{{toolset.suffix}}
     - hdf5     1.8.14                  # [unix]
     - hdf5     1.8.*{{toolset.suffix}} # [win]
+    - vigra    1.11.*{{toolset.suffix}}
 
 # FIXME: upgrade opengm to make the Python bindings work on Windows
-test:          # [unix]
-  imports:     # [unix]
-    - opengm   # [unix]
+# test:          # [unix]
+  # imports:     # [unix]
+    # - opengm   # [unix]
 
 # Note: tests are run when building the package, they are not accessible
 # in the installed package.

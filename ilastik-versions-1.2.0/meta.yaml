@@ -2,14 +2,14 @@
 
 package:
   name: ilastik-versions
-  version: "1.2.1{{toolset.suffix}}"
+  version: "1.2.0{{toolset.suffix}}"
 
 build:
   track_features:
     - {{toolset.short}}
   features:
     - {{toolset.short}}
-  number: 1
+  number: 8
 
 #
 # In general, we don't specify exact version requirements in each sub-package.
@@ -46,7 +46,7 @@ requirements:
     - hdf5                      1.8.12{{toolset.suffix}}  # [win]
     - iiboost                   0.1post2{{toolset.suffix}} # [win]
     - ilastikrag                0.1.post11                # [win]
-    - ilastiktools              0.2post1{{toolset.suffix}}
+    - ilastiktools              0.2{{toolset.suffix}}
     - isl                       0.12.2{{toolset.suffix}}  # [unix]
     - itk-seg-conv-only         4.6.1{{toolset.suffix}}
     - jpeg                      8d{{toolset.suffix}}      # [unix]
@@ -115,7 +115,7 @@ requirements:
     - tifffile                  0.4.1post2{{toolset.suffix}}   # [win]
     - tk                        8.5.18                    # [unix]
     - vigra                     1.10{{toolset.suffix}}    # [unix]
-    - vigra                     1.11.0post222{{toolset.suffix}} # [win]
+    - vigra                     1.11.0post196{{toolset.suffix}} # [win]
     - vtk                       5.10.1.99                 # [unix]
     - vtk                       5.10.1{{toolset.suffix}}  # [win]
     - wsdt                      0.2.post4                 # [win]

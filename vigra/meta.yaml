@@ -2,11 +2,11 @@
 
 package:
   name: vigra
-  version: "1.11.0post196{{toolset.suffix}}"
+  version: "1.11.0post222{{toolset.suffix}}"
 
 source:
   git_url: git://github.com/ukoethe/vigra.git
-  git_tag: 09a955434bf6931732924730cbb6c326e46c945c
+  git_tag: ab154c5d514c1349c1e2cb119fa34891b69551c6
 
 build:
   features:
@@ -16,9 +16,8 @@ build:
    - LD_LIBRARY_PATH      # [unix]
    - DYLD_LIBRARY_PATH    # [unix]
 
-  number: 0
+  number: 1
   detect_binary_files_with_prefix: true
-#  string: 10_ca22467
   msvc_compiler: {{toolset.version}}  # [win]
 
 requirements:

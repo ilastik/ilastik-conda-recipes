@@ -5,7 +5,7 @@ about:
 
 package:
   name: ilastik-deps-carving
-  version: "1.2.0{{toolset.suffix}}"
+  version: "1.2.1{{toolset.suffix}}"
 
 build:
   features:
