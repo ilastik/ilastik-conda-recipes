@@ -7,15 +7,15 @@ source:
   git_branch: flyem_release
 
 build:
-  number: 14
+  number: 15
 
 requirements:
   build:
-    - qt      4.8.6.99   # [unix]
+    - qt           4.8.7
     - libdvid-cpp 0.2.post55
 
   run:
-    - qt       4.8.6.99   # [unix]
+    - qt           4.8.7
     - libdvid-cpp 0.2.post55
 
 about:
