@@ -3,16 +3,16 @@ about:
 
 package:
   name: ilastik-deps-pc
-  version: "1.1"
+  version: "1.2"
 
 build:
-  number: 5
+  number: 1
 
 requirements:
 
   run:
     - ilastik-deps-pc-headless
-    - pyqt           4.11.4
+    - pyqt
     - qimage2ndarray
     - vtk            5.10.1.99 # [py2k]
     - futures                  # [py2k]
@@ -22,4 +22,7 @@ requirements:
     # Python was already included via the headless package,
     # but we need to add it explicitly here due to a conda bug.
     - python
-    
+
+test:
+  imports:
+    - matplotlib
