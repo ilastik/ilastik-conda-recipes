@@ -17,7 +17,7 @@ requirements:
     - vtk            5.10.1.99 # [py2k]
     - futures                  # [py2k]
     - matplotlib
-    - configparser
+    - configparser             # [py2k]
 
     # Python was already included via the headless package,
     # but we need to add it explicitly here due to a conda bug.
