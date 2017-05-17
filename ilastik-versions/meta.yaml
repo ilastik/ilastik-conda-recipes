@@ -2,14 +2,14 @@
 
 package:
   name: ilastik-versions
-  version: "1.2.1{{toolset.suffix}}"
+  version: "1.2.2{{toolset.suffix}}"
 
 build:
   track_features:
     - {{toolset.short}}
   features:
     - {{toolset.short}}
-  number: 1
+  number: 2
 
 #
 # In general, we don't specify exact version requirements in each sub-package.
@@ -60,7 +60,7 @@ requirements:
     - libtiff                   4.0.6{{toolset.suffix}}   # [win]
     - libxml2                   2.9.0{{toolset.suffix}}   # [unix]
     - libxml2                   2.9.1{{toolset.suffix}}   # [win]
-    - matplotlib                1.4.3{{toolset.suffix}}   # [unix]
+    - mamutexport               0.2.1
     - matplotlib                1.4.3post1{{toolset.suffix}} # [win]
     - mingw-for-msvc            4.7.2                     # [win]
     - mlpack                    1.0.8{{toolset.suffix}}
