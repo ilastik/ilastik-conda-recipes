@@ -24,7 +24,7 @@ requirements:
     - ilastik-deps-multicut    *{{toolset.suffix}}
     - ilastik-exe              >1.0,*{{toolset.suffix}}  # [win]
     - ilastik-meta
-    - ilastik-versions         1.2.1{{toolset.suffix}}
+    - ilastik-versions         1.2.2{{toolset.suffix}}
 
   run:
     - {{toolset.run_requirement}}
@@ -34,7 +34,7 @@ requirements:
     - ilastik-deps-multicut    *{{toolset.suffix}}
     - ilastik-exe              >1.0,*{{toolset.suffix}}  # [win]
     - ilastik-meta
-    - ilastik-versions         1.2.1{{toolset.suffix}}
+    - ilastik-versions         1.2.2{{toolset.suffix}}
 
 # test:
   # requires:
