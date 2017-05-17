@@ -1,0 +1,26 @@
+package:
+    name: mamutexport
+    version: 0.2.1
+
+source:
+  git_url: https://github.com/Beinabih/MaMutConverter
+  git_tag: 0.2.1
+
+build:
+  number: 0
+  string: py27_{{PKG_BUILDNUM}}_g{{GIT_FULL_HASH[:7]}}
+
+requirements:
+  build:
+    - python 2.7*
+    - setuptools
+
+  run:
+    - python 2.7*
+    - numpy
+    - h5py
+
+about:
+  home: https://github.com/Beinabih/MaMutConverter
+  license: MIT
+  summary: Python module to export a tracking solution to MaMuT
