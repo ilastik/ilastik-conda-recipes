@@ -6,12 +6,12 @@ package:
 
 source:
     git_url: https://github.com/ukoethe/opengm
-    git_tag: 6942afce19a61bd4c74d4fd63d1092964e6507be # learning-experimental 2016/12/16
+    git_tag: 6c1334a95efa1501c1709e20614b045f41adf725 # learning-experimental 2017/05/19
 
 build:
   features:
     - {{toolset.short}}
-  number: 3
+  number: 4
   detect_binary_files_with_prefix: true
   msvc_compiler: {{toolset.version}}  # [win]
 
