@@ -46,11 +46,11 @@ Here's how to install everything you need to develop ilastik.
 # Install miniconda to the prefix of your choice, e.g. /my/miniconda
 
 # LINUX:
-wget https://repo.continuum.io/miniconda/Miniconda-latest-Linux-x86_64.sh
+wget https://repo.continuum.io/miniconda/Miniconda2-latest-Linux-x86_64.sh
 bash Miniconda-latest-Linux-x86_64.sh
 
 # MAC:
-wget https://repo.continuum.io/miniconda/Miniconda-latest-MacOSX-x86_64.sh
+wget https://repo.continuum.io/miniconda/Miniconda2-latest-MacOSX-x86_64.sh
 bash Miniconda-latest-MacOSX-x86_64.sh
 
 # Activate conda
