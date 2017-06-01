@@ -39,11 +39,11 @@ requirements:
   {% if WITH_SOLVERS %}
     - ilastik-deps-multicut
     - ilastik-deps-tracking
-    - ilastik-versions 1.2 np112py27_20
+    - ilastik-versions 1.2 np112py27_21
   {% else %}
     - ilastik-deps-multicut-no-solvers
     - ilastik-deps-tracking-no-solvers
-    - ilastik-versions-no-solvers 1.2 np112py27_20
+    - ilastik-versions-no-solvers 1.2 np112py27_21
   {% endif %}
 
     - ilastik-meta
