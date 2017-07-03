@@ -25,7 +25,8 @@ package:
 
 source:
   git_url: https://github.com/ilastik/opengm
-  git_rev: d94f09af6d58eb6a14cd864c286fff34069637df # branch 'ilastik-build'
+  #git_rev: d94f09af6d58eb6a14cd864c286fff34069637df # branch 'ilastik-build'
+  git_rev: fc5abc1f3ec93225044c634151c080611928d0f3 # branch 'ilastik-build'
 
   patches:
     - patches/patchConicBundle.patch # Yes, we're patching the patch script (ignore ssl certificate problems)
@@ -54,7 +55,7 @@ requirements:
   build:
     - gcc 4.8.5 79991 # [linux]
     - boost 1.63.0
-    - python 2.7*
+    - python >=2.7
     - numpy >=1.9,{{NPY_VER}}*
     - hdf5 1.8.17 # HDF5 is required for the python wrapper
     - vigra-headers-only 1.11.0.post36   # This version is known to work

@@ -181,7 +181,7 @@ fi
 ##
 make install
 
-INFERENCE_MODULE_SO=${PREFIX}/lib/python2.7/site-packages/opengm/inference/_inference.so
+INFERENCE_MODULE_SO=${PREFIX}/lib/python${PY_VER}/site-packages/opengm/inference/_inference.so
 
 
 ##
@@ -228,7 +228,7 @@ if [[ "$WITH_CPLEX" != "" ]]; then
         fi
 
         # Rename the opengm package to 'opengm_with_cplex'
-        cd "${PREFIX}/lib/python2.7/site-packages/"
+        cd "${PREFIX}/lib/python${PY_VER}/site-packages/"
         mv opengm opengm_with_cplex
         cd opengm_with_cplex
         
