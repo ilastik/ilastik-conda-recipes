@@ -13,3 +13,7 @@ requirements:
   run:
     - ilastik-deps-pc
     - ilastiktools
+
+test:
+  imports:
+    - ilastiktools
