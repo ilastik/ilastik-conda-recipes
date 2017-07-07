@@ -5,6 +5,7 @@ import pydot
 
 def dict_to_dot_file( deps_dict, output_filepath ):
     g = pydot.Dot('dependencies', graph_type='digraph')
+    g.set_rankdir("LR")
 
     for pkg_name, dep_list in deps_dict.items():
         g.add_node( pydot.Node(pkg_name) )
