@@ -30,7 +30,9 @@ parse_libstdcxx_version() {
     # but 'grep' is more likely to be installed on an arbitrary linux machine.)
     LIBSTDCXX_VERSION=$(grep -ao 'GLIBCXX_[0-9][0-9]\?\.[0-9][0-9]\?\(\.[0-9][0-9]\?\)\?' $LIBSTDCXX_SO \
                         | cut -b 9- \
-                        | python -c "import sys; sys.stdout.write(str(sorted(sys.stdin.split(), key=lambda s: s.split('.'))[-1]))")
+                        | python -c "from distutils.version import StrictVersion; \
+                                     import sys; \
+                                     sys.stdout.write(str(sorted(sys.stdin.read().split(), key=StrictVersion)[-1]))")
 
     echo $LIBSTDCXX_VERSION
 }
