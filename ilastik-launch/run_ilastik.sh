@@ -59,14 +59,5 @@ export QT_PLUGIN_PATH="${PREFIX}/plugins"
 export FONTCONFIG_PATH="${PREFIX}/etc/fonts/"
 export FONTCONFIG_FILE="${PREFIX}/etc/fonts/fonts.conf"
 
-if [[ $(uname) == "Linux" ]]; then
-    # Our binary ships with its own version of libstdc++.so (and libgcc_s.so, etc.),
-    # so we can run on old Linux distros.
-    # But on newer Linux distros, our version is out-of-date compared to the system's version.
-    # In that case, we want to just remove our version from the binary, so the system version is used instead.
-    # The following command compares our libstdc++ to the system's version, and removes ours if necessary.
-    ${PREFIX}/bin/remove-obsolete-libstdcxx.sh
-fi
-
 # Launch the ilastik entry script, and pass along any commmand line args.
 "${PREFIX}/bin/python" "${PREFIX}/ilastik-meta/ilastik/ilastik.py" "$@"
