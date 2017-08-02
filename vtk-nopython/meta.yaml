@@ -1,0 +1,41 @@
+package:
+  name: vtk-nopython
+  version: "5.10.1"
+
+source:
+  url: http://www.vtk.org/files/release/5.10/vtk-5.10.1.tar.gz [not win]
+  fn: vtk-5.10.1.tar.gz                     # [not win]
+  md5: 264b0052e65bd6571a84727113508789     # [not win]
+
+  #fn: VTK-5.10.1.win32-py2.6.exe           # [win32 and py26]
+  #fn: VTK-5.10.1.win-amd64-py2.6.exe       # [win64 and py26]
+  #fn: VTK-5.10.1.win32-py2.7.exe           # [win32 and py27]
+  #fn: VTK-5.10.1.win-amd64-py2.7.exe       # [win64 and py27]
+
+  patches:
+    - osx_patches/no-gc.diff
+
+build:
+  number: 7
+  string: {{PKG_BUILDNUM}}_nopython
+
+requirements:
+  build:
+    - jpeg 9b
+    - libpng >=1.6.27
+    - libtiff 4.0*
+    - zlib
+    - libxml2
+    - qt 4.8*
+
+  run:
+    - jpeg 9*
+    - libpng >=1.6.27,<1.7
+    - libtiff 4.0*
+    - zlib
+    - libxml2
+    - qt 4.8*
+
+about:
+  home: http://www.vtk.org/
+  license: BSD
