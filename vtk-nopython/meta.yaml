@@ -16,7 +16,7 @@ source:
     - osx_patches/no-gc.diff
 
 build:
-  number: 7
+  number: 8
   string: {{PKG_BUILDNUM}}_nopython
 
 requirements:
