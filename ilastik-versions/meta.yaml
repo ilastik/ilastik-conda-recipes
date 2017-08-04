@@ -41,7 +41,7 @@ requirements:
     - jpeg                      9b        
     - jsonschema                2.4.0     
     - lemon                     1.2.4     
-    - libgcc                    4.8.5  19991 # [linux]
+    - libgcc                    4.8.5  19992 # [linux]
     - libgcc                    4.8.5  1     # [osx]
     - libpng 1.6.27
     - libtiff                   4.0.6

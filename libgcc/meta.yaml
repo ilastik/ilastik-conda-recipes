@@ -8,7 +8,7 @@ requirements:
     - gcc 4.8.5
 
 build:
-  number: 19991 # This version was built on top of a pre-built version of libgcc build '1'
+  number: 19992 # This version was built on top of a pre-built version of libgcc build '1'
                 # Note that build '2' is missing gfortran for some reason.
   
   always_include_files:
