@@ -21,6 +21,7 @@ build:
 
 requirements:
   build:
+    - cmake
     - jpeg 9b
     - libpng >=1.6.27
     - libtiff 4.0*

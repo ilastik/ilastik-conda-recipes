@@ -12,8 +12,11 @@ if [ `uname` == Darwin ]; then
     CMAKE=$SYS_PREFIX/bin/cmake
     DYLIB_EXT=dylib
     CXXFLAGS="-stdlib=libc++ $CXXFLAGS"
+else
+    # https://github.com/UV-CDAT/uvcdat/issues/983
+    # https://stackoverflow.com/questions/28761702/getting-error-glintptr-has-not-been-declared-when-building-vtk-on-linux
+    CXXFLAGS="-DGLX_GLXEXT_LEGACY $CXXFLAGS"
 fi
-
 mkdir build
 cd build
 cmake \
