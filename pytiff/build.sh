@@ -4,5 +4,7 @@
 # Another discussion here:
 # https://groups.google.com/a/continuum.io/d/msg/conda/yqQiOnLD4iM/QAWYHU-6BwAJ
 #
+
+export MACOSX_DEPLOYMENT_TARGET=10.9
 ${PYTHON} setup.py build_ext
 ${PYTHON} setup.py install --single-version-externally-managed --root=/
