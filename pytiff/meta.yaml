@@ -9,8 +9,8 @@ package:
   {% endif %}
 
 source:
-  git_url: https://github.com/FZJ-INM1-BDA/pytiff
-  git_tag: 0.4.4
+  git_url: https://github.com/ilastik/pytiff
+  git_tag: v0.4.4-fixed-setup-py
 
 build:
   #
