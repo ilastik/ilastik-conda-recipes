@@ -21,7 +21,7 @@ source:
     - patches/patchPlanarity.sh.patch # Apparently the mirror at http://jgaa.info is not reliable, but the parent website is.
 
 build:
-  number: 6
+  number: 7
 
   #
   # You must build this recipe using 'conda build --numpy=X.Y'
@@ -37,7 +37,7 @@ build:
 requirements:
   build:
     - gcc 4.8.5 999 # [osx]
-    - gcc 4.8.5 79991 # [linux]
+    - gcc 4.8.5 79992 # [linux]
     - boost 1.55.0
     - python 2.7*
     - numpy >=1.9,{{NPY_VER}}*
@@ -50,7 +50,7 @@ requirements:
 
   run:
     - libgcc 4.8.5 # [osx]
-    - libgcc 4.8.5 19992 # [linux]
+    - libgcc 4.8.5 19993 # [linux]
     - boost 1.55.0
     - python {{PY_VER}}*
     - numpy  {{NPY_VER}}*
