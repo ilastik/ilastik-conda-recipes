@@ -56,7 +56,7 @@ detect_newer_system_libstdcxx()
 		
 		    # The 'not' here looks backwards, but remember that in bash, '0' means TRUE
 		    if python -c \
-	            "import sys; sys.exit(not '$CONDA_LIBSTDCXX_VERSION'.split('.') < '$SYSTEM_LIBSTDCXX_VERSION'.split('.'))";
+		          "import sys; from distutils.version import StrictVersion; sys.exit(not StrictVersion('$CONDA_LIBSTDCXX_VERSION') < StrictVersion('$SYSTEM_LIBSTDCXX_VERSION'))";
 		    then
                 PKG_NAME=${PKG_NAME-libgcc}
 		        echo "This system has a newer version of libstdc++.so than the one in the ${PKG_NAME} package."
