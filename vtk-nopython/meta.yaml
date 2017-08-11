@@ -1,6 +1,6 @@
 package:
-  name: vtk
-  version: "5.10.1.99"
+  name: vtk-nopython
+  version: "5.10.1"
 
 source:
   url: http://www.vtk.org/files/release/5.10/vtk-5.10.1.tar.gz [not win]
@@ -16,38 +16,26 @@ source:
     - osx_patches/no-gc.diff
 
 build:
-  number: 7
-  string: with_pyqt_{{PKG_BUILDNUM}}
+  number: 8
+  string: {{PKG_BUILDNUM}}_nopython
 
 requirements:
   build:
-    - gcc 4.8.5 # [linux]
-    - python
-    - pyqt 4.11.4
+    - cmake
     - jpeg 9b
     - libpng >=1.6.27
     - libtiff 4.0*
     - zlib
     - libxml2
+    - qt 4.8*
 
   run:
-    - libgcc # [linux]
-    - python
     - jpeg 9*
     - libpng >=1.6.27,<1.7
     - libtiff 4.0*
     - zlib
     - libxml2
-
-test:
-  requires:
-    - pyqt 4.11.4
-
-  commands:
-    - vtkpython -h # [unix]
-
-  imports:
-    - vtk
+    - qt 4.8*
 
 about:
   home: http://www.vtk.org/

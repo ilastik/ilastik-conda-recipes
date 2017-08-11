@@ -63,42 +63,37 @@ unset CONDA_NPY
 unset CONDA_PY
 
 # If necessary, create a shared library from each static library.
-# Note: To avoid installing gcc into the user's environment every time this is created,
-#       we don't include gcc as a run dependency.
-#       Instead, we create a temporary environment right here and install gcc into it.
 if [ $(uname) == "Darwin" ]; then
     EXISTING_SHARED_OBJECT=`ls ${CPLEX_LIB_DIR}/libilocplex.dylib` \
     || EXISTING_SHARED_OBJECT="NOT_PRESENT"
     if [ "$EXISTING_SHARED_OBJECT" == "NOT_PRESENT" ]; then
 
-        # This is slightly dangerous, but apparently conda doesn't want
-        # to recursively call itself if we don't remove the locks.
-        conda clean --lock
+        CLANG_FOUND=`ls /usr/bin/clang++` || CLANG_FOUND="NOT_PRESENT"
+        if ["$CLANG_FOUND" == "NOT_PRESENT"]; then
+            # abort if user doesn't have clang installed on the system
+            set +x
+            echo "************************************************************"
+            echo "* Could not create cplex-shared libraries.                 *"
+            echo "* This step requires the clang compiler to be installed,   *"
+            echo "* but it was not found                                     *"
+            echo "* Please run 'xcode-select --install' in a terminal first. *" 
+            echo "************************************************************"
+            exit 1
+        fi
 
-        # Install gcc to a temporary environment
-        conda remove -y --all -n _cplex_shared_gcc_throwaway 2> /dev/null || true
-        conda create -y -n _cplex_shared_gcc_throwaway gcc=4.8.5
-        GCC_ENV_PREFIX=$(conda info --root)/envs/_cplex_shared_gcc_throwaway
-
-        ${GCC_ENV_PREFIX}/bin/g++ -fpic -shared -Wl,-all_load ${CPLEX_LIB_DIR}/libcplex.a     -Wl,-noall_load -o ${CPLEX_LIB_DIR}/libcplex.dylib
-        ${GCC_ENV_PREFIX}/bin/g++ -fpic -shared -Wl,-all_load ${CONCERT_LIB_DIR}/libconcert.a -Wl,-noall_load -o ${CONCERT_LIB_DIR}/libconcert.dylib
-        ${GCC_ENV_PREFIX}/bin/g++ -fpic -shared -Wl,-all_load ${CPLEX_LIB_DIR}/libilocplex.a  -Wl,-noall_load \
+        # use system's clang compiler for the creation of shared libs
+        /usr/bin/clang++ -fpic -shared -Wl,-all_load ${CPLEX_LIB_DIR}/libcplex.a     -o ${CPLEX_LIB_DIR}/libcplex.dylib
+        /usr/bin/clang++ -fpic -shared -Wl,-all_load ${CONCERT_LIB_DIR}/libconcert.a -o ${CONCERT_LIB_DIR}/libconcert.dylib
+        /usr/bin/clang++ -fpic -shared -Wl,-all_load ${CPLEX_LIB_DIR}/libilocplex.a  \
             -L${CPLEX_LIB_DIR} -L${CONCERT_LIB_DIR} -lcplex -lconcert -o ${CPLEX_LIB_DIR}/libilocplex.dylib
-        
-        # Fix abs links to libgcc_s -> Use @rpath
-        # Note: Even though no LC_RPATH command exists within these dylibs,
-        # The Mac loader searches the RPATH for *all* dylibs in the loader dependency chain.
-        # Hence, as long as libopengm.dylib (or whatever) has an LC_RPATH, then we can use @rpath here.
-        install_name_tool -change ${GCC_ENV_PREFIX}/lib/libgcc_s.1.dylib @rpath/libgcc_s.1.dylib ${CPLEX_LIB_DIR}/libcplex.dylib
-        install_name_tool -change ${GCC_ENV_PREFIX}/lib/libgcc_s.1.dylib @rpath/libgcc_s.1.dylib ${CONCERT_LIB_DIR}/libconcert.dylib
-        install_name_tool -change ${GCC_ENV_PREFIX}/lib/libgcc_s.1.dylib @rpath/libgcc_s.1.dylib ${CPLEX_LIB_DIR}/libilocplex.dylib
-                        
-        conda remove -y --all -n _cplex_shared_gcc_throwaway
     fi
 else
     EXISTING_SHARED_OBJECT=`ls ${CPLEX_LIB_DIR}/libilocplex.so` \
     || EXISTING_SHARED_OBJECT="NOT_PRESENT"
     if [ "$EXISTING_SHARED_OBJECT" == "NOT_PRESENT" ]; then
+        # Note: To avoid installing gcc into the user's environment every time this is created,
+        #       we don't include gcc as a run dependency.
+        #       Instead, we create a temporary environment right here and install gcc into it.
 
         # This is slightly dangerous, but apparently conda doesn't want
         # to recursively call itself if we don't remove the locks.

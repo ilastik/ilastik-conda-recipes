@@ -1,8 +1,12 @@
-# Depending on our platform, shared libraries end with either .so or .dylib
-if [[ `uname` == 'Darwin' ]]; then
+if [[ $(uname) == Darwin ]]; then
     DYLIB_EXT=dylib
+    CC=clang
+    CXX=clang++
+    CXXFLAGS='-stdlib=libc++'
 else
     DYLIB_EXT=so
+    CC=${PREFIX}/bin/gcc
+    CXX=${PREFIX}/bin/g++
 fi
 
 ITK_LDFLAGS="${CXX_LDFLAGS} -Wl,-rpath,${PREFIX}/lib -L${PREFIX}/lib"
@@ -10,13 +14,13 @@ ITK_LDFLAGS="${CXX_LDFLAGS} -Wl,-rpath,${PREFIX}/lib -L${PREFIX}/lib"
 mkdir build
 cd build
 cmake .. \
-    -DCMAKE_C_COMPILER=${PREFIX}/bin/gcc \
-    -DCMAKE_CXX_COMPILER=${PREFIX}/bin/g++ \
+    -DCMAKE_C_COMPILER=${CC} \
+    -DCMAKE_CXX_COMPILER=${CXX} \
     -DCMAKE_OSX_DEPLOYMENT_TARGET="10.9" \
     -DCMAKE_INSTALL_PREFIX=${PREFIX} \
     -DCMAKE_SHARED_LINKER_FLAGS="${ITK_LDFLAGS}" \
     -DCMAKE_EXE_LINKER_FLAGS="${ITK_LDFLAGS}" \
-    -DCMAKE_CXX_FLAGS=-I${PREFIX}/include \
+    -DCMAKE_CXX_FLAGS="-I${PREFIX}/include ${CXXFLAGS}" \
     -DCMAKE_C_FLAGS=-I${PREFIX}/include \
     -DBUILD_SHARED_LIBS:BOOL=ON \
     -DITK_BUILD_DEFAULT_MODULES=0 \
@@ -25,6 +29,8 @@ cmake .. \
     -DITKGroup_Segmentation=1 \
     -DModule_ITKConvolution=1 \
     -DModule_ITKEigen=1 \
+    -DPYTHON_EXECUTABLE=${PREFIX}/bin/python \
+    -DBUILD_TESTING=ON \
     \
     -DITK_USE_SYSTEM_HDF5=ON \
     -DHDF5_C_LIBRARY=${PREFIX}/lib/libhdf5.${DYLIB_EXT} \
@@ -48,11 +54,7 @@ cmake .. \
 ##
 
 # BUILD
-if [[ $(uname) == 'Darwin' ]]; then
-    make -j${CPU_COUNT} 2> >(python "${RECIPE_DIR}"/../build-utils/filter-macos-linker-warnings.py)
-else
-    make -j${CPU_COUNT}
-fi
+make -j${CPU_COUNT}
 
 # TEST (before install)
 (

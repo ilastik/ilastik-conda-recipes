@@ -2,6 +2,18 @@
   {% set WITH_CPLEX = false %}
 {% endif %}
 
+{% if WITH_CPLEX == "0" %}
+  {% set WITH_CPLEX = false %}
+{% endif %}
+
+{% if not WITH_EXTERNAL_LIBS is defined %}
+  {% set WITH_EXTERNAL_LIBS = false %}
+{% endif %}
+
+{% if WITH_EXTERNAL_LIBS == "0" %}
+  {% set WITH_EXTERNAL_LIBS = false %}
+{% endif %}
+
 package:
   {% if WITH_CPLEX %}
     name: opengm-with-cplex
@@ -13,7 +25,8 @@ package:
 
 source:
   git_url: https://github.com/ilastik/opengm
-  git_rev: d94f09af6d58eb6a14cd864c286fff34069637df # branch 'ilastik-build'
+  #git_rev: d94f09af6d58eb6a14cd864c286fff34069637df # branch 'ilastik-build'
+  git_rev: fc5abc1f3ec93225044c634151c080611928d0f3 # branch 'ilastik-build'
 
   patches:
     - patches/patchConicBundle.patch # Yes, we're patching the patch script (ignore ssl certificate problems)
@@ -26,20 +39,23 @@ build:
   #
   # You must build this recipe using 'conda build --numpy=X.Y'
   #
-  string: np{{np}}py{{py}}_{{PKG_BUILDNUM}}_g{{GIT_FULL_HASH[:7]}}
+  {% if WITH_EXTERNAL_LIBS %}
+    string: np{{np}}py{{py}}_{{PKG_BUILDNUM}}_g{{GIT_FULL_HASH[:7]}}_with_extlibs
+  {% else %}
+    string: np{{np}}py{{py}}_{{PKG_BUILDNUM}}_g{{GIT_FULL_HASH[:7]}}_no_extlibs
+  {% endif %}
 
-  detect_binary_files_with_prefix: true
-  script_env:
-     - WITH_CPLEX
-     - WITH_EXTERNAL_LIBS
-     - CPLEX_ROOT_DIR
+    detect_binary_files_with_prefix: true
+    script_env:
+      - WITH_CPLEX
+      - WITH_EXTERNAL_LIBS
+      - CPLEX_ROOT_DIR
 
 requirements:
   build:
-    - gcc 4.8.5 999 # [osx]
     - gcc 4.8.5 79992 # [linux]
-    - boost 1.55.0
-    - python 2.7*
+    - boost 1.63.0
+    - python >=2.7
     - numpy >=1.9,{{NPY_VER}}*
     - hdf5 1.8.17 # HDF5 is required for the python wrapper
     - vigra-headers-only 1.11.0.post36   # This version is known to work
@@ -49,9 +65,8 @@ requirements:
     {% endif %}
 
   run:
-    - libgcc 4.8.5 # [osx]
     - libgcc 4.8.5 19993 # [linux]
-    - boost 1.55.0
+    - boost 1.63.0
     - python {{PY_VER}}*
     - numpy  {{NPY_VER}}*
     - hdf5 1.8.17 # HDF5 is required for the python wrapper

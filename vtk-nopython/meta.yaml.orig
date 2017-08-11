@@ -18,15 +18,28 @@ source:
 build:
   number: 7
   string: with_pyqt_{{PKG_BUILDNUM}}
+<<<<<<< HEAD
+=======
+
+  detect_binary_files_with_prefix: true
+>>>>>>> b351628... wip
 
 requirements:
   build:
     - gcc 4.8.5 # [linux]
     - python
-    - pyqt 4.11.4
+<<<<<<< HEAD
+    - pyqt 4.11.3.99            # [osx]
+    - pyqt 4.11.3               # [not osx]
     - jpeg 9b
     - libpng >=1.6.27
     - libtiff 4.0*
+=======
+    - pyqt 4.11.4
+    - jpeg
+    - libpng 1.6.17
+    - libtiff
+>>>>>>> b351628... wip
     - zlib
     - libxml2
 

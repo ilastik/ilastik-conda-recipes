@@ -7,17 +7,18 @@ source:
   git_tag: release-1.6
 
 build:
-  number: 0
-  string: py{{CONDA_PY}}_{{PKG_BUILDNUM}}
+  number: 2
+  string: py{{py}}_{{PKG_BUILDNUM}}
 
 requirements:
   build:
-    - python 2.7*|3.5*
-    - python {{PY_VER}}*
+    - python 2.7*  # [py2k]
+    - python >=3.5 # [py3k]
     - numpy >=1.9
 
   run:
-    - python {{PY_VER}}*
+    - python 2.7*  # [py2k]
+    - python >=3.5 # [py3k]
     - numpy >=1.9
     - pyqt
 

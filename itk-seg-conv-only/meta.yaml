@@ -1,28 +1,28 @@
 package:
   name: itk-seg-conv-only
-  version: 4.6.1
+  version: 4.11.1
 
 source:
-  url: http://superb-sea2.dl.sourceforge.net/project/itk/itk/4.6/InsightToolkit-4.6.1.tar.gz
-  fn: InsightToolkit-4.6.1.tar.gz
-  md5: 2c84eae50ab2452cdad32aaadced3c37
+  url: https://downloads.sourceforge.net/project/itk/itk/4.11/InsightToolkit-4.11.1.tar.gz
+  fn: InsightToolkit-4.11.1.tar.gz
+  md5: 853c09b44673eef3f2f1e9ebbbd85cc4
 
 build:
-  number: 8
+  number: 0
   detect_binary_files_with_prefix: true
 
 requirements:  
   build:
     - gcc 4.8.5 # [linux]
-    - gcc 4.8.5 # [osx]
     - jpeg 9b
     - libtiff 4.0.6
     - libpng 1.6.27
     - hdf5 1.8.17
     - zlib
+    - python {{PY_VER}}* # needed for 'make test'
 
   run:
-    - libgcc 4.8.5
+    - libgcc 4.8.5 # [linux]
     - jpeg 9b
     - libtiff 4.0.6
     - libpng 1.6.27

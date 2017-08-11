@@ -105,7 +105,15 @@ fi
 mkdir -p build
 cd build
 
-CXXFLAGS="${CXXFLAGS} -std=c++11 -I${PREFIX}/include"
+if [ $(uname) == Darwin ]; then
+    CC=clang
+    CXX=clang++
+else
+    CC=${PREFIX}/bin/gcc
+    CXX=${PREFIX}/bin/g++
+fi
+
+CXXFLAGS="${CXXFLAGS} -std=c++11 -stdlib=libc++ -I${PREFIX}/include"
 LDFLAGS="${LDFLAGS} -Wl,-rpath,${PREFIX}/lib -L${PREFIX}/lib"
 
 ##
@@ -115,8 +123,8 @@ EXTERNAL_LIB_FLAGS=""
 if [[ "$WITH_EXTERNAL_LIBS" != "" ]]; then
     # We must run cmake preliminarily to enable 'make externalLibs'
 	cmake .. \
-	        -DCMAKE_C_COMPILER=${PREFIX}/bin/gcc \
-	        -DCMAKE_CXX_COMPILER=${PREFIX}/bin/g++ \
+	        -DCMAKE_C_COMPILER=${CC} \
+	        -DCMAKE_CXX_COMPILER=${CXX} \
 	        -DCMAKE_OSX_DEPLOYMENT_TARGET=10.7\
 	        -DCMAKE_INSTALL_PREFIX=${PREFIX} \
 	        -DCMAKE_PREFIX_PATH=${PREFIX} \
@@ -126,12 +134,7 @@ if [[ "$WITH_EXTERNAL_LIBS" != "" ]]; then
 	        -DCMAKE_CXX_FLAGS_RELEASE="${CXXFLAGS}" \
 	        -DCMAKE_CXX_FLAGS_DEBUG="${CXXFLAGS}" \
 
-    if [[ `uname` == 'Darwin' ]]; then
-        make externalLibs 2> >(python "${RECIPE_DIR}"/filter-macos-linker-warnings.py)
-    else
-        make externalLibs
-    fi
-
+    make externalLibs
     EXTERNAL_LIB_FLAGS="-DWITH_QPBO=ON -DWITH_PLANARITY=ON -DWITH_BLOSSOM5=ON"
 fi
 
@@ -139,8 +142,8 @@ fi
 ## Configure
 ##
 cmake .. \
-        -DCMAKE_C_COMPILER=${PREFIX}/bin/gcc \
-        -DCMAKE_CXX_COMPILER=${PREFIX}/bin/g++ \
+        -DCMAKE_C_COMPILER=${CC} \
+        -DCMAKE_CXX_COMPILER=${CXX} \
         -DCMAKE_OSX_DEPLOYMENT_TARGET=10.7\
         -DCMAKE_INSTALL_PREFIX=${PREFIX} \
         -DCMAKE_PREFIX_PATH=${PREFIX} \
@@ -178,7 +181,7 @@ fi
 ##
 make install
 
-INFERENCE_MODULE_SO=${PREFIX}/lib/python2.7/site-packages/opengm/inference/_inference.so
+INFERENCE_MODULE_SO=${PREFIX}/lib/python${PY_VER}/site-packages/opengm/inference/_inference.so
 
 
 ##
@@ -225,7 +228,7 @@ if [[ "$WITH_CPLEX" != "" ]]; then
         fi
 
         # Rename the opengm package to 'opengm_with_cplex'
-        cd "${PREFIX}/lib/python2.7/site-packages/"
+        cd "${PREFIX}/lib/python${PY_VER}/site-packages/"
         mv opengm opengm_with_cplex
         cd opengm_with_cplex
         

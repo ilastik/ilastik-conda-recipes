@@ -46,8 +46,21 @@ def dependencies_for_env( prefix ):
                 for dep in pkg.info['depends']:
                     deps_dict[pkg.name].append(dep.split(' ')[0])
 
+    # If a package's dependencies have been updated recently on the server,
+    # there may be entries in the deps list that aren't actually present in our environment.
+    # In that case, we just omit that dependency.
+    for pkg_name, deps in deps_dict.items():
+        to_remove = []
+        for dep in deps:
+            if dep not in deps_dict:
+                to_remove.append(dep)
+        for dep in to_remove:
+            deps_dict[pkg_name].remove( dep )
+
     # Convenience: Return dict with keys in topologically sorted order
     sorted_keys = toposort( deps_dict )
+    #print('\n'.join(sorted_keys))
+
     deps_dict = collections.OrderedDict( map(lambda k: (k, deps_dict[k]), sorted_keys ) )
     return deps_dict
 
@@ -62,6 +75,10 @@ def main():
     args = parser.parse_args()
 
     prefix = conda.cli.common.get_prefix(args)
+
+    if not os.path.exists(prefix):
+        sys.stderr.write("Error: No such environment: {}\n".format(prefix))
+        sys.exit(1)
 
     # If writing to stdout, make sure the logs are silent
     if not args.output:
@@ -96,7 +113,7 @@ def main():
 
 
 if __name__ == "__main__":
-    #sys.argv += ['-p', '/miniconda2/conda-bld/vigra_1483991794828/_b_env_placehold_placehold_placehold_p']
-    #sys.argv += ['-o', 'debug-output.json']
+    #sys.argv += ['-p', '/miniforge/envs/ilastik-clang-py3qt5-minimal']
+    #sys.argv += ['-o', 'ilastik-clang-py3qt5-minimal.json']
     sys.exit( main() )
     

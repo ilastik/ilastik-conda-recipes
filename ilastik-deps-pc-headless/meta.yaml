@@ -6,7 +6,7 @@ package:
   version: "1.2"
 
 build:
-  number: 1
+  number: 2
 
 requirements:
   run:
@@ -21,10 +21,13 @@ requirements:
     - yapsy
     - scikit-learn
     - scikit-image
-    - faulthandler
+    - faulthandler # [py2k]
     - jsonschema
     - requests
     - ilastik-feature-selection >=0.123.post9
     - nose
     #- blist # only needed by deprecated operators
-    
+
+test:
+  imports:
+    - vigra
