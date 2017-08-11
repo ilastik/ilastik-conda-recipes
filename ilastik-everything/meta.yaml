@@ -13,7 +13,7 @@ package:
     version: "" # build.sh will generate a __conda_version__.txt file
 
 build:
-  number: 13
+  number: 14
 
 requirements:
   build:
@@ -39,11 +39,13 @@ requirements:
   {% if WITH_SOLVERS %}
     - ilastik-deps-multicut
     - ilastik-deps-tracking
-    - ilastik-versions 1.2 np112py27_22
+    - ilastik-versions 1.2 np112py27_22 # [osx]
+    - ilastik-versions 1.2 np112py27_23 # [linux]
   {% else %}
     - ilastik-deps-multicut-no-solvers
     - ilastik-deps-tracking-no-solvers
-    - ilastik-versions-no-solvers 1.2 np112py27_22
+    - ilastik-versions-no-solvers 1.2 np112py27_22 # [osx]
+    - ilastik-versions-no-solvers 1.2 np112py27_23 # [linux]
   {% endif %}
 
     - ilastik-meta
