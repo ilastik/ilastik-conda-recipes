@@ -1,0 +1,99 @@
+{% if not WITH_SOLVERS is defined %}
+  {% set WITH_SOLVERS = 1 %}
+{% endif %}
+{% set WITH_SOLVERS = WITH_SOLVERS|int %}
+
+package:
+  {% if WITH_SOLVERS %}
+    name: ilastik-dependencies
+  {% else %}
+    name: ilastik-dependencies-no-solvers
+  {% endif %}
+    version: 1.3
+
+build:
+  number: 0 # If you change this, update the ilastik-versions build strings in 'ilastik-everything' recipe requirements
+  track_features:
+    # on osx we need to make sure that we install the numpy versions with openblas instead of mkl to prevent clashes with cplex
+    - blas_openblas #[osx] 
+#
+# In general, we don't specify exact version requirements in each sub-package.
+# But this file tracks the versions of all packages used in the release.
+requirements:
+  run:
+    # -----------------------------------------------------------------
+    # General dependencies
+    # -----------------------------------------------------------------
+    - python                    3.6*
+    - numpy                     1.12*
+
+    - decorator                 
+    - fftw                      
+    - future                   
+    - greenlet                  
+    - h5py                      >=2.7.0     
+    - hdf5                      >=1.8.17
+    - jsonschema                
+    - networkx                  
+    - nose                      
+    - psutil                    
+    - pyqt                      5.6*
+    - python-dateutil                
+    - pytiff                    
+    - pytz                      
+    - qimage2ndarray            
+    - qt                        5.6*
+    - readline                  
+    - requests                  
+    - scikit-image              
+    - scikit-learn              
+    - setuptools                
+    - tifffile    
+    - wsdt                 
+    - yapsy                     
+    
+    # -----------------------------------------------------------------
+    # ilastik
+    # -----------------------------------------------------------------
+    - ilastik-feature-selection 
+    - iiboost                   
+    - ilastiktools              
+    - ilastikrag                
+    - lemon    
+    - matplotlib
+    - vigra                     >=v1.11.1                 
+
+    # -----------------------------------------------------------------
+    # Tracking
+    # -----------------------------------------------------------------
+    - dpct                      
+    - hytra                     
+    - mamutexport               
+
+{% if WITH_SOLVERS %}
+    - multi-hypotheses-tracking-with-gurobi
+    - multi-hypotheses-tracking-with-cplex
+{% endif %}
+
+    
+    # -----------------------------------------------------------------
+    # Multicut
+    # -----------------------------------------------------------------
+#     - nifty                     
+    
+# {% if WITH_SOLVERS %}
+#     ###- nifty-with-cplex          0.2.post173 # [unix] # Not working, apparently.
+#     - nifty-with-gurobi
+# {% endif %}
+    
+
+test:
+  # Just give SOME test to ensure that the package can be installed at all.
+  # (If there are no tests, the test environment isn't even created.)
+  imports:
+    - vigra
+
+about:
+  home: https://github.com/FZJ-INM1-BDA/pytiff
+  license: BSD (3-clause)
+  summary: 'Lightweight library for reading chunks from tiff files, including Bigtiff'
