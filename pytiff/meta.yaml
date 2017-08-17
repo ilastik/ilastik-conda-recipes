@@ -10,7 +10,7 @@ package:
 
 source:
   git_url: https://github.com/ilastik/pytiff
-  git_tag: v0.4.4-fixed-setup-py
+  git_tag: v0.7.2-fixed-setup-py
 
 build:
   #
@@ -25,6 +25,8 @@ requirements:
     - numpy >=1.11,{{NPY_VER}}*
     - cython >=0.23
     - libtiff >=0.4
+    - pytest-runner
+    - pytest
 
   run:
     - python {{PY_VER}}*
@@ -37,7 +39,9 @@ test:
     - test_data
     
   requires:
+    - hypothesis
     - pytest
+    - pytest-runner
     - tifffile # This is Christoph Gohlke's 'tifffile' package, installable from the ilastik channel, or from PyPI
     # - hypothesis # We have no conda package for this package, so 'run_test.sh' just installs it with pip 
 

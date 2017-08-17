@@ -1,5 +1,5 @@
 # The tests require the 'hypothesis' package, and we don't have a conda package for that
-pip install hypothesis
+# pip install hypothesis
 
 # Normally the developers build in-place and then test in-place,
 # But we want to test the package as it was installed to the environment.
