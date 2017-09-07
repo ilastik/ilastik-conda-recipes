@@ -2,18 +2,19 @@
 
 package:
   name: ilastiktools
-  version: "0.2post1{{toolset.suffix}}"
+  version: "0.2post2{{toolset.suffix}}"
 
 source:
   git_url: git://github.com/ilastik/ilastiktools.git
-  git_tag: 731565e0be509e3a847b3a7d277aacee1ee0161a # master 2016/08/16
+  # git_tag: 731565e0be509e3a847b3a7d277aacee1ee0161a # master 2016/08/16
+  git_tag: b1ccf0a6717e6778106d804fc999747e7b0a8d05 # master 2017/07/06
 
 build:
   features:
     - {{toolset.short}}
   number: 1
   detect_binary_files_with_prefix: true
-  string: 1_g731565e
+  string: 1_gb1ccf0a
   msvc_compiler: {{toolset.version}}  # [win]
 
 requirements:
