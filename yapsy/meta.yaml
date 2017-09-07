@@ -7,6 +7,11 @@ source:
   url: https://pypi.python.org/packages/source/Y/Yapsy/Yapsy-1.10.423.tar.gz
   md5: fb0e0afbfc1e6086e7d34e093cf3f294
 
+build:
+  features:
+    - vc14 # [win]
+  msvc_compiler: 14.0 # [win]
+
 requirements:
   build:
     - python
