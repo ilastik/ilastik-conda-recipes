@@ -3,11 +3,11 @@
 package:
   # pure python
   name: ilastik-meta
-  version: {{ environ.get('GIT_DESCRIBE_TAG', '') }}
+  version: "1.2.2"
 
 source:
   git_url: https://github.com/ilastik/ilastik-meta
-  git_tag: 1.2.2rc3
+  git_tag: 1.2.2
 
 build:
   number: {{ environ.get('GIT_DESCRIBE_NUMBER', 0) }}

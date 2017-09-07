@@ -13,7 +13,7 @@ build:
     - {{toolset.short}}
   features:
     - {{toolset.short}}
-  number: 4
+  number: 1
 
 requirements:
   build:
