@@ -2,11 +2,11 @@
 
 package:
   name: vigra
-  version: "1.11.0post222{{toolset.suffix}}"
+  version: "1.11.1post1{{toolset.suffix}}"
 
 source:
   git_url: git://github.com/ukoethe/vigra.git
-  git_tag: ab154c5d514c1349c1e2cb119fa34891b69551c6
+  git_tag: fb427440da8c42f96e14ebb60f7f22bdf0b7b1b2  # master 2017/07/19
 
 build:
   features:

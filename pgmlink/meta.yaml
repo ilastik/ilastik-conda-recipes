@@ -11,7 +11,7 @@ source:
 build:
   features:
     - {{toolset.short}}
-  number: 2
+  number: 3
   string: {{PKG_BUILDNUM}}_g{{GIT_FULL_HASH[:7]}}
   script_env:
      - CPLEX_ROOT_DIR
