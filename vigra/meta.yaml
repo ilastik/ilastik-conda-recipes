@@ -17,7 +17,10 @@ source:
   git_tag: HEAD
   
 build:
+  features:
+    - vc14 # [win]
   number: 5
+  msvc_compiler: 14.0 # [win]
 
   #
   # You must build this recipe using 'conda build --numpy=X.Y'
