@@ -7,7 +7,7 @@ git submodule update --recursive
 # Verify that the git tag and the python version match (a common error).
 # This line finds the __version_info__ variable in __init__.py, then strips any comments from it.
 VERSION_INFO_LINE=`grep --no-filename "__version_info__.*="  ${PREFIX}/ilastik-meta/ilastik/ilastik/__init__.py | sed 's|#.*$||'`
-ILASTIK_CODE_VERSION=`python -c "$VERSION_INFO_LINE; print '.'.join(map(str, __version_info__))"`
+ILASTIK_CODE_VERSION=`python -c "$VERSION_INFO_LINE; print('.'.join(map(str, __version_info__)))"`
 ILASTIK_PKG_VERSION=$PKG_VERSION
 
 if [[ $ILASTIK_PKG_VERSION != $ILASTIK_CODE_VERSION* ]]; then
