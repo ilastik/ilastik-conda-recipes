@@ -10,7 +10,8 @@ package:
 
 source:
   git_url: https://github.com/ilastik/ilastik-meta
-  git_rev: HEAD
+  #git_rev: HEAD
+  git_rev: python-2-legacy
 
 build:
   number: 0
