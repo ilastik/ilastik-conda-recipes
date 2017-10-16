@@ -1,17 +1,17 @@
 package:
   name: macholib
-  version: "1.7"
+  version: "1.8"
 
 source:
-  fn: macholib-1.7.tar.gz
-  url: https://pypi.python.org/packages/source/m/macholib/macholib-1.7.tar.gz
-  md5: cf03a55323d5b7ca59be530ba0b01032
+  fn: macholib-1.8.tar.gz
+  url: https://pypi.python.org/packages/a0/de/831116fb6cbbe27eadd66ab87a22af74fe445d3b73d6042e12eaf3fdb964/macholib-1.8.tar.gz
+  md5: 65af8f20dada7bdb2a142afbec51330e
 
   patches:
     # This patch fixes a simple bad variable name.
     # See py2app#137: https://bitbucket.org/ronaldoussoren/py2app/issue/137/py2app-problems-using-enthought-python
     # See also: https://bitbucket.org/ronaldoussoren/macholib/pull-request/10/machographlocate-when-calling-dyld_find/diff#comment-None
-    - MachOGraph.patch
+    # - MachOGraph.patch
 
 build:
   # preserve_egg_dir: True
@@ -46,10 +46,10 @@ test:
   imports:
     - macholib
 
-  commands:
-    - python -mmacholib dump ${PREFIX}/lib/libpython2.7.dylib
-    - macho_find ${PREFIX}/lib/libpython2.7.dylib
-    - macho_dump ${PREFIX}/lib/libpython2.7.dylib
+  # commands:
+  #   - python -mmacholib dump ${PREFIX}/lib/libpython2.7.dylib
+  #   - macho_find ${PREFIX}/lib/libpython2.7.dylib
+  #   - macho_dump ${PREFIX}/lib/libpython2.7.dylib
 
   # You can also put a file called run_test.py in the recipe that will be run
   # at test time.

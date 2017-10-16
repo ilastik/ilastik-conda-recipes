@@ -1,11 +1,11 @@
 package:
   name: modulegraph
-  version: "0.12.1"
+  version: "0.15"
 
 source:
-  fn: modulegraph-0.12.1.tar.gz
-  url: https://pypi.python.org/packages/source/m/modulegraph/modulegraph-0.12.1.tar.gz
-  md5: 27abd74de3ec0e22ef129c1faa628bd5
+  fn: modulegraph-0.15.tar.gz
+  url: https://pypi.python.org/packages/55/4e/67dff18461839a36fd60b2efdc40907f59578c93b9f89fd32024830a8000/modulegraph-0.15.tar.gz
+  md5: 453489055c51a76a50d64aa74563d79f
 #  patches:
    # List any patch files here
    # - fix.patch

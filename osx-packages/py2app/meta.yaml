@@ -1,11 +1,11 @@
 package:
   name: py2app
-  version: "0.9"
+  version: "0.14"
 
 source:
-  fn: py2app-0.9.tar.gz
-  url: https://pypi.python.org/packages/source/p/py2app/py2app-0.9.tar.gz
-  md5: eb31f5fefcf80aeaf4d02ec68d5978b4
+  fn: py2app-0.14.tar.gz
+  url: https://pypi.python.org/packages/65/ea/b8e5a4f41fd65e35c10b41ff68e776baeb07143983f484f1d9005a7ab36a/py2app-0.14.tar.gz
+  md5: 8fa1acfb3e3c2fbf9a396ae5b1f45869
 #  patches:
    # List any patch files here
    # - fix.patch
@@ -30,16 +30,16 @@ requirements:
   build:
     - python
     - setuptools
-    - altgraph >=0.12
-    - modulegraph >=0.12
-    - macholib >=1.5
+    - altgraph >=0.14
+    - modulegraph >=0.15
+    - macholib >=1.8
 
   run:
     - python
     - setuptools
-    - altgraph >=0.12
-    - modulegraph >=0.12
-    - macholib >=1.5
+    - altgraph >=0.14
+    - modulegraph >=0.15
+    - macholib >=1.8
 
 test:
   # Python imports
