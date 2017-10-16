@@ -5,6 +5,7 @@
 ##
 
 set -e
+set -x
 
 SKIP_TAR=0
 if [[ $@ == *"--skip-tar"* ]]; then
@@ -50,7 +51,7 @@ fi
 
 function latest_build()
 {
-    VERSION_AND_BUILD=$(conda search -f $1 \
+    VERSION_AND_BUILD=$(conda search -f $@ \
                         | tail -n1 \
                         | python -c 'import sys; print("=".join(sys.stdin.read().split()[:2]))')
     echo "$1=$VERSION_AND_BUILD"
@@ -58,10 +59,10 @@ function latest_build()
 
 # Create new ilastik-release environment and install all ilastik dependencies to it.
 if [[ $WITH_SOLVERS == 0 ]]; then
-    EVERYTHING_PKG=$(latest_build ilastik-everything-no-solvers)
+    EVERYTHING_PKG=$(latest_build ilastik-dependencies-no-solvers "$@")
     SOLVERS_SUFFIX="-no-solvers"
 else    
-    EVERYTHING_PKG=$(latest_build ilastik-everything)
+    EVERYTHING_PKG=$(latest_build ilastik-dependencies "$@")
     SOLVERS_SUFFIX=""
 fi
 
@@ -86,7 +87,7 @@ if [[ $USE_GIT_LATEST == 1 ]]; then
     ILASTIK_PKG_VERSION="master"
 else
     # Ask conda for the package version
-    ILASTIK_PKG_VERSION=`conda list -n ilastik-release | grep ilastik-meta | python -c "import sys; print sys.stdin.read().split()[1]"`
+    ILASTIK_PKG_VERSION=`conda list -n ilastik-release | grep ilastik-meta | python -c "import sys; print(sys.stdin.read().split()[1])"`
 fi
 
 RELEASE_NAME=ilastik-${ILASTIK_PKG_VERSION}${SOLVERS_SUFFIX}-`uname`
