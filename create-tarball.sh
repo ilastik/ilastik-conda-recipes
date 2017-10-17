@@ -5,7 +5,6 @@
 ##
 
 set -e
-set -x
 
 SKIP_TAR=0
 if [[ $@ == *"--skip-tar"* ]]; then

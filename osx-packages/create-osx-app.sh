@@ -5,6 +5,7 @@
 ##
 
 set -e
+set -x
 
 OSX_PACKAGES_DIR=$(cd `dirname $0` && pwd)
 
@@ -54,7 +55,7 @@ fi
 
 function latest_build()
 {
-    VERSION_AND_BUILD=$(conda search -f $1 \
+    VERSION_AND_BUILD=$(conda search -f $@ \
                         | tail -n1 \
                         | python -c 'import sys; print("=".join(sys.stdin.read().split()[:2]))')
     echo "$1=$VERSION_AND_BUILD"
@@ -62,10 +63,10 @@ function latest_build()
 
 # Create new ilastik-release environment and install all ilastik dependencies to it.
 if [[ $WITH_SOLVERS == 0 ]]; then
-    EVERYTHING_PKG=$(latest_build ilastik-everything-no-solvers)
+    EVERYTHING_PKG=$(latest_build ilastik-dependencies-no-solvers "$@")
     SOLVERS_SUFFIX="-no-solvers"
 else    
-    EVERYTHING_PKG=$(latest_build ilastik-everything)
+    EVERYTHING_PKG=$(latest_build ilastik-dependencies "$@")
     SOLVERS_SUFFIX=""
 fi
 
@@ -98,7 +99,7 @@ if [[ $USE_GIT_LATEST == 1 ]]; then
     ILASTIK_PKG_VERSION="master"
 else
     # Ask conda for the package version
-    ILASTIK_PKG_VERSION=`conda list -n ilastik-release | grep ilastik-meta | python -c "import sys; print sys.stdin.read().split()[1]"`
+    ILASTIK_PKG_VERSION=`conda list -n ilastik-release | grep ilastik-meta | python -c "import sys; print(sys.stdin.read().split()[1])"`
 fi
 RELEASE_NAME=ilastik-${ILASTIK_PKG_VERSION}${SOLVERS_SUFFIX}-OSX
 
@@ -112,7 +113,7 @@ echo "Writing qt.conf"
 cat <<EOF > ilastik.app/Contents/Resources/qt.conf
 ; Qt Configuration file
 [Paths]
-Plugins = ilastik-env/plugins
+Plugins = ilastik-release/plugins
 EOF
 
 # Remove cplex libs/symlinks (if present)
@@ -135,6 +136,7 @@ sed -i '' "s|${CONDA_ROOT}/envs/ilastik-release/ilastik-meta/ilastik/||" ilastik
 
 # Fix Info.plist
 sed -i '' "s|${CONDA_ROOT}/envs/ilastik-release|@executable_path/../ilastik-release|" ilastik.app/Contents/Info.plist
+sed -i '' "s|\.dylib|m\.dylib|" ilastik.app/Contents/Info.plist
 
 # Fix python executable link
 rm ilastik.app/Contents/MacOS/python
