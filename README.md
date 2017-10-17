@@ -1,4 +1,3 @@
-===================
 ilastik-build-conda
 ===================
 
@@ -15,9 +14,8 @@ and can be installed using the [conda][1] package manager.
 [Anaconda]: https://store.continuum.io/cshop/anaconda
 [ilastik]: http://ilastik.org
 
-========
 Contents
-========
+--------
 
 - [Installing ilastik for development](#installing)
 - [Generating a release binary](#generating)
@@ -29,7 +27,6 @@ Contents
 
 
 <a name="installing"></a>
-==================================
 Installing ilastik for development
 ==================================
 
@@ -37,8 +34,7 @@ Installing ilastik for development
 
 Here's how to install everything you need to develop ilastik.
 
-0. Prerequisite: Install [Miniconda]
-------------------------------------
+### 0. Prerequisite: Install [Miniconda]
 
 [Miniconda]: http://conda.pydata.org/miniconda.html
 
@@ -46,12 +42,12 @@ Here's how to install everything you need to develop ilastik.
 # Install miniconda to the prefix of your choice, e.g. /my/miniconda
 
 # LINUX:
-wget https://repo.continuum.io/miniconda/Miniconda2-latest-Linux-x86_64.sh
-bash Miniconda-latest-Linux-x86_64.sh
+wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh
+bash Miniconda3-latest-Linux-x86_64.sh
 
 # MAC:
-wget https://repo.continuum.io/miniconda/Miniconda2-latest-MacOSX-x86_64.sh
-bash Miniconda-latest-MacOSX-x86_64.sh
+wget https://repo.continuum.io/miniconda/Miniconda3-latest-MacOSX-x86_64.sh
+bash Miniconda3-latest-MacOSX-x86_64.sh
 
 # Activate conda
 CONDA_ROOT=`conda info --root`
@@ -70,15 +66,14 @@ When using `conda`, make sure you are not using any of python's site-specific or
 Also, make sure there are no python-related directories in `~/.local/`.
 
 
-1. Create a fresh environment, and install ilastik
---------------------------------------------------
+### 1. Create a fresh environment, and install ilastik
 
 Some ilastik workflows require commercial solvers, for which one must purchase or obtain an academic license.
 If you don't have CPLEX and Gurobi on your machine, you can install everything else with this command:
 
 
 ```bash
-conda create -n ilastik-devel -c ilastik ilastik-everything-no-solvers
+conda create -n ilastik-devel ilastik-dependencies-no-solvers -c ilastik-forge -c conda-forge
 ``` 
 
 If you have both CPLEX and Gurobi on your machine, you can install the full ilastik development 
@@ -91,48 +86,46 @@ export CPLEX_ROOT_DIR=/path/to/ibm/ILOG/CPLEX_Studio1251
 export GUROBI_ROOT_DIR=/path/to/gurobi650/linux64
 ```
 
-Now you can install the `ilastik-everything` package:
+Now you can install the `ilastik-dependencies` package:
 
 ```bash
-conda create -n ilastik-devel -c ilastik ilastik-everything
+conda create -n ilastik-devel ilastik-dependencies -c ilastik-forge -c conda-forge
 ```
 
-**Note:** To be really sure that you're getting the right version of `ilastik-everything`, you can require a specific version and build of the package with `PKGNAME=VERSION=BUILD` syntax:
+**Note:** To be really sure that you're getting the right version of `ilastik-dependencies`, you can require a specific version and build of the package with `PKGNAME=VERSION=BUILD` syntax:
 
 ```bash
-conda create -n ilastik-devel -c ilastik ilastik-everything=1.2.0=6
+conda create -n ilastik-devel ilastik-dependencies=1.2.0=6 -c ilastik-forge -c conda-forge
 ```
 
 
 If you only have one of CPLEX or Gurobi, and you're seeking to develop for a workflow that requires it, you must install some dependencies of that workflow individually.  For example, to install tracking with CPLEX, but not Gurobi:
 
 ```bash
-conda create  -n ilastik-devel -c ilastik install ilastik-everything-no-solvers
-conda install -n ilastik-devel -c ilastik multi-hypotheses-tracking-with-cplex
+conda create  -n ilastik-devel install ilastik-dependencies-no-solvers -c ilastik-forge -c conda-forge
+conda install -n ilastik-devel multi-hypotheses-tracking-with-cplex -c ilastik-forge -c conda-forge
 ```
 
 For example, to install multicut with Gurobi support:
 
 ```bash
-conda create  -n ilastik-devel -c ilastik install ilastik-everything-no-solvers
-conda install -n ilastik-devel -c ilastik nifty-with-gurobi
+conda create  -n ilastik-devel install ilastik-dependencies-no-solvers -c ilastik-forge -c conda-forge
+conda install -n ilastik-devel nifty-with-gurobi -c ilastik-forge -c conda-forge
 ```
 
-2. Run ilastik
---------------
+### 2. Run ilastik
 
 ```bash
 ${CONDA_ROOT}/envs/ilastik-devel/run_ilastik.sh --debug
 ```
 
-3. (Optional) Clone ilastik git repo
-------------------------------------
+### 3. (Optional) Clone ilastik git repo
 
 So far, our environment contains the ilastik source, but not the git repos.
 If you need to edit the ilastik python code,
 replace the `ilastik-meta` directory with the full git repo.
 
-**Note:** This will remove both `ilastik-meta` and `ilastik-everything`, but all of the other dependencies in your environment will remain.
+**Note:** This will remove both `ilastik-meta` and `ilastik-dependencies`, but all of the other dependencies in your environment will remain.
 
 ```bash
 CONDA_ROOT=`conda info --root`
@@ -157,7 +150,6 @@ cd ${DEV_PREFIX} && ln -s /path/to/ilastik-meta
 ```
 
 <a name="generating"></a>
-===========================
 Generating a release binary
 ===========================
 
@@ -180,17 +172,17 @@ Generating a release binary
         - ilastik
         - defaults
 
-3. Build `ilastik-meta` and `ilastik-everything` packages, and upload to the `ilastik` anaconda channel.
+3. Build `ilastik-meta` and `ilastik-dependencies` packages, and upload to the `ilastik` anaconda channel.
 
-        WITH_SOLVERS=1 conda build ilastik-meta ilastik-everything
+        WITH_SOLVERS=1 conda build ilastik-meta ilastik-dependencies
         anaconda upload -u ilastik ${CONDA_ROOT}/conda-bld/linux-64/ilastik-meta*.tar.bz2
-        anaconda upload -u ilastik ${CONDA_ROOT}/conda-bld/linux-64/ilastik-everything*.tar.bz2
+        anaconda upload -u ilastik ${CONDA_ROOT}/conda-bld/linux-64/ilastik-dependencies*.tar.bz2
 
 **Troubleshooting Tip:** If the `ilastik-meta` tag has been relocated since you last built the `ilastik-meta` package, you should probably clear conda's git cache for that repo, to ensure you have the new tags: `rm -rf $(conda info --root)/conda-bld/git_cache/github.com/ilastik/ilastik-meta`
 
 4. (Optional) Install to a local environment and test
 
-        conda create -n test-env -c ilastik ilastik-everything=1.2.3a4
+        conda create -n test-env ilastik-dependencies=1.2.3a4 -c ilastik-forge -c conda-forge
         cd ${CONDA_ROOT}/envs/test-env
         ./run_ilastik.sh
 
@@ -202,14 +194,14 @@ Generating a release binary
             $ grep Usage ./create-tarball.sh
             ## Usage: create-tarball.sh [--skip-tar] [--git-latest] [--no-tracking] [... extra install-args, e.g. --use-local or -c ilastik ...]
             
-            $ ./create-tarball.sh -c ilastik
+            $ ./create-tarball.sh -c ilastik-forge -c conda-forge
 
    **Mac:**
        
             $ grep Usage ./osx-packages/create-osx-app.sh
             ## Usage: create-osx-app.sh [--compress] [--git-latest] [--no-tracking] [... extra install-args, e.g. --use-local or -c ilastik ...]
             
-            $ ./osx-packages/create-osx-app.sh --compress -c ilastik
+            $ ./osx-packages/create-osx-app.sh --compress -c ilastik-forge -c conda-forge
 
   If any options are used, they must be passed in this order:
 
@@ -218,12 +210,15 @@ Generating a release binary
     - `--git-latest`: Use the latest `master` branch of `ilastik`, `lazyflow`, and `volumina` instead of the most recent tag. (Don't use for official releases.)
     - `--no-tracking`: Omit tracking-specific dependencies
     - `--use-local`: Tells conda to use your custom builds of each package, if available.
-    - `-c ilastik`: Tells conda to use packages from the ilastik channel (in case it's missing from `~/.condarc`).
+    - `-c ilastik-forge`: Tells conda to use packages from the ilastik-forge channel (in case it's missing from `~/.condarc`).
 
 <a name="howtobuild"></a>
-====================================
 How to build these packages yourself
 ====================================
+
+**Note**: see https://github.com/ilastik/ilastik-publish-packages for an automated way of building all packages required by ilastik
+
+**Warning**: the description below is outdated
 
 All of the recipes in this repo should already be uploaded to the [ilastik][3] anaconda channel.
 The linux packages were built on CentOS 5.11, so they should be compatible with most modern distros.
@@ -265,11 +260,10 @@ export CPLEX_ROOT_DIR=/path/to/ibm/ILOG/CPLEX_Studio1251
 export GUROBI_ROOT_DIR=/path/to/gurobi650/linux64
 
 # Build some recipes that depend on solvers
-conda build ilastik-deps-tracking ilastik-deps-multicut ilastik-versions ilastik-everything
+conda build ilastik-dependencies
 ```
 
 <a name="writing"></a>
-==============================
 Appendix: Writing a new recipe
 ==============================
 
@@ -277,16 +271,14 @@ The [conda documentation][2] explains in detail how to create a new package, but
 
 [2]: http://conda.pydata.org/docs/build.html
 
-0. Prerequisite: Install `conda-build`
---------------------------------------
+### 0. Prerequisite: Install `conda-build`
 
 ```bash
 source activate root
 conda install conda-build
 ```
 
-1. Create recipe files
-----------------------
+### 1. Create recipe files
 
 Add a directory to this repo:
 
@@ -359,8 +351,7 @@ devenv SomePackage.sln /Build "%RELEASE_TARGET%" /Project INSTALL
 if errorlevel 1 exit 1
 ```
 
-2. Build the package
---------------------
+### 2. Build the package
 
 ```bash
 # Switch back to the `ilastik-build-conda` directory
@@ -370,8 +361,7 @@ $ cd ../
 $ conda build somepackage
 ```
 
-3. Upload the package to your [anaconda] channel.
-------------------------------------------------
+### 3. Upload the package to your [anaconda] channel.
 
 ```bash
 conda install anaconda-client
@@ -386,16 +376,13 @@ anaconda upload -u ilastik /my/miniconda/conda-bld/osx-64/somepackage-1.2.3-0.ta
 [anaconda]: http://anaconda.org
 
 <a name="compiler"></a>
-==========================
 Appendix: Compiler details
 ==========================
 
 **When writing your own recipes, use gcc provided by conda.**
 
 Instead of using your system compiler, all of our C++ packages use the `gcc` package provided by conda
-itself (or our own variation of it).  On Mac, using gcc is critical because some packages require a
-modern (C++11) version of `libstdc++`.  On Linux, using conda's gcc-4.8 is an easy way to get C++11
-support on old OSes, such as our CentOS 5.11 build VM.
+itself (or our own variation of it).  On Mac, we use LLVM's clang instead to get C++11 features.  On Linux, using conda's gcc-4.8 is an easy way to get C++11 support on old OSes, such as our CentOS 5.11 build VM.
 
 To use the gcc package, add these requirements to your `meta.yaml` file:
 
@@ -403,9 +390,8 @@ To use the gcc package, add these requirements to your `meta.yaml` file:
 requirements:
   build:
     - gcc 4.8.5 # [linux]
-    - gcc 4.8.5 # [osx]
   run:
-    - libgcc
+    - libgcc # [linux]
 ```
 
 And in `build.sh`, make sure you use the right `gcc` executable.  For example:
@@ -438,7 +424,6 @@ make install
 ```
 
 <a name="linuxvm"></a>
-==========================
 Appendix: Linux VM Details
 ==========================
 
@@ -459,7 +444,6 @@ To build the ilastik stack on that OS, you'll need to install the following:
 
 
 <a name="todo"></a>
-==================
 Appendix: TODO/TBD
 ==================
 
@@ -487,7 +471,7 @@ Appendix: TODO/TBD
 
 - Windows
 
- - [ ] So far, this repo includes no package build scripts for Windows.
+ - [x] So far, this repo includes no package build scripts for Windows.
 
  - [ ] Generate a final binary package from the built dependencies
 
