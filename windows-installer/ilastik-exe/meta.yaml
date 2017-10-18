@@ -1,0 +1,10 @@
+package:
+  name: ilastik-exe
+  version: "1.0.1"
+
+# source is in recipe dir
+
+build:
+  features:
+    - vc14 # [win]
+  msvc_compiler: 14.0 # [win]
