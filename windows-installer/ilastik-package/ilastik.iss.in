@@ -1,0 +1,48 @@
+[Setup]
+AppName=ilastik
+AppVersion=@VERSION@
+DefaultDirName={pf64}\ilastik-@VERSION@
+DefaultGroupName=ilastik-@VERSION@
+; allows to associate "*.ilp" files in the [Registry] section below
+ChangesAssociations=yes
+; use paint to create this file, size 164x314
+WizardImageFile=package\ilastik-installer.bmp
+WizardImageStretch=no
+; use paint to create this file, size 55x58
+WizardSmallImageFile=package\ilastik-installer-small.bmp
+OutputBaseFilename=ilastik-@VERSION@-win64
+LicenseFile=LICENSE.txt
+SourceDir=..
+OutputDir=package
+
+[Files]
+Source: "LICENSE.txt"; DestDir: "{app}"
+Source: "ilastik.exe"; DestDir: "{app}"
+Source: "run-ilastik.bat"; DestDir: "{app}"
+Source: "python.exe"; DestDir: "{app}"
+Source: "msvc*.dll"; DestDir: "{app}"
+Source: "python*.dll"; DestDir: "{app}"
+Source: "package\ilastik-icon.ico"; DestDir: "{app}"
+Source: "DLLs\*"; DestDir: "{app}\DLLs"; Flags: ignoreversion recursesubdirs
+Source: "ilastik-meta\*"; DestDir: "{app}\ilastik-meta"; Flags: ignoreversion recursesubdirs
+Source: "Library\bin\*.dll"; DestDir: "{app}\Library\bin"; Flags: ignoreversion recursesubdirs
+Source: "Library\bin\qt.conf"; DestDir: "{app}\Library\bin"; Flags: ignoreversion
+Source: "Lib\*"; Excludes: "\plat-*,\test\*,\site-packages\matplotlib\tests\*"; DestDir: "{app}\Lib"; Flags: ignoreversion recursesubdirs
+Source: "Library\plugins\*"; DestDir: "{app}\Library\plugins"; Flags: ignoreversion recursesubdirs
+Source: "Scripts\*"; DestDir: "{app}\Scripts"; Flags: ignoreversion recursesubdirs
+
+[Icons]
+Name: "{group}\ilastik"; Filename: "{app}\ilastik.exe"; IconFilename: "{app}\ilastik-icon.ico"
+Name: "{group}\ilastik help"; Filename: "http://ilastik.org/documentation/"
+Name: "{group}\uninstall ilastik"; Filename: "{uninstallexe}"
+
+
+[Registry]
+; ".ilp" is the extension we're associating. "ilastik-@VERSION@" is the internal name for the file type as stored in the registry. Make sure you use a unique name for this so you don't inadvertently overwrite another application's registry key.
+Root: HKCR64; Subkey: ".ilp"; ValueType: string; ValueName: ""; ValueData: "ilastik-@VERSION@"; Flags: uninsdeletekey deletevalue
+; "ilastik project" is the name for the file type as shown in Explorer.
+Root: HKCR64; Subkey: "ilastik-@VERSION@"; ValueType: string; ValueName: ""; ValueData: "ilastik project"; Flags: uninsdeletekey
+; "DefaultIcon" is the registry key that specifies the filename containing the icon to associate with the file type.
+Root: HKCR64; Subkey: "ilastik-@VERSION@\DefaultIcon"; ValueType: string; ValueName: ""; ValueData: "{app}\ilastik-icon.ico"
+; "shell\open\command" is the registry key that specifies the program to execute when a file of the type is double-clicked in Explorer. The surrounding quotes are in the command line so it handles long filenames correctly.
+Root: HKCR64; Subkey: "ilastik-@VERSION@\shell\open\command"; ValueType: string; ValueName: ""; ValueData: """{app}\ilastik.exe"" ""%1"""
