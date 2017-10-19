@@ -74,7 +74,7 @@ If you don't have CPLEX and Gurobi on your machine, you can install everything e
 
 ```bash
 conda create -n ilastik-devel ilastik-dependencies-no-solvers -c ilastik-forge -c conda-forge
-``` 
+```
 
 If you have both CPLEX and Gurobi on your machine, you can install the full ilastik development 
 setup, including full support for tracking and multicut.
@@ -211,6 +211,24 @@ Generating a release binary
     - `--no-tracking`: Omit tracking-specific dependencies
     - `--use-local`: Tells conda to use your custom builds of each package, if available.
     - `-c ilastik-forge`: Tells conda to use packages from the ilastik-forge channel (in case it's missing from `~/.condarc`).
+
+    **Windows:**
+            
+            ## create new environment for packaging and activate it
+            $ conda create -n ilastik-release ilastik-dependencies -c ilastik-forge -c conda-forge
+            $ activate ilastik-release
+
+            ## install exe and preconfigured installer generation script
+            $ conda install ilastik-exe ilastik-package -c ilastik-forge -c conda-forge
+            
+            ## build the installer using Inno setup
+
+            ## ACTION REQUIRED: open the file ${YOUR_CONDA_ENV_PATH}/package/ilastik.iss in Inno Setup 
+            ## and build the installer.
+
+            ## delete environment
+            $ activate root
+            $ conda env remove -n ilastik-release
 
 <a name="howtobuild"></a>
 How to build these packages yourself
