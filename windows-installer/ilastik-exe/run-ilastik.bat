@@ -18,11 +18,8 @@ rem (note: we cannot use 'if () else ()' here, because it conflicts with parenth
 if DEFINED CPLEX_PATH set PATH=%PATH%;%CPLEX_PATH%
 if DEFINED GUROBI_PATH set PATH=%PATH%;%GUROBI_PATH%
 
-rem otherwise, issue a warning when ilastik was compiled with automatic tracking support
-if NOT DEFINED CPLEX_PATH if EXIST "%INSTALL_DIR%python\Lib\site-packages\pgmlink.pyd" echo WARNING: CPLEX is not in the PATH -- automatic tracking will be unavailable.
-
 rem set more paths
-set QTDIR=%INSTALL_DIR%Qt4
+set QTDIR=%INSTALL_DIR%Library
 IF ["%ILASTIK_DIR%"] EQU [""] set ILASTIK_DIR=%INSTALL_DIR%ilastik-meta
 set PYTHONPATH=%ILASTIK_DIR%\lazyflow;%ILASTIK_DIR%\volumina;%ILASTIK_DIR%\ilastik
 set PYTHONHOME=%INSTALL_DIR%

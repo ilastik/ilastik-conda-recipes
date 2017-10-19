@@ -48,7 +48,7 @@ int main(int argc, char **argv)
     std::string script_name    = prefix + "\\ilastik-meta\\ilastik\\ilastik.py";
     std::string python_home    = prefix;
     std::string python_exe     = prefix + "\\python.exe";
-    std::string qt_plugin_path = prefix + "\\Qt4\\plugins";
+    std::string qt_plugin_path = prefix + "\\Library\\plugins";
 
     std::vector<std::string> args;
     args.push_back("\"" + python_exe + "\"");
