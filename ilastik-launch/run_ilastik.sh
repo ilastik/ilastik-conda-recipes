@@ -11,6 +11,9 @@ else
     export PREFIX=$(dirname "$(readlink -f $0)")
 fi
 
+# make sure we use the correct python in subsequent scripts (/bin/remove-obsolete-libstdcxx.sh)
+export PATH=${PREFIX}/bin:${PATH}
+
 # Do not use the user's previous LD_LIBRARY_PATH settings because they can cause conflicts.
 # Start with an empty LD_LIBRARY_PATH
 if [[ $LD_LIBRARY_PATH != "" ]]; then
