@@ -89,12 +89,12 @@ requirements:
     # -----------------------------------------------------------------
     # Multicut
     # -----------------------------------------------------------------
-#     - nifty                     
+    - nifty                     
     
-# {% if WITH_SOLVERS %}
-#     ###- nifty-with-cplex          0.2.post173 # [unix] # Not working, apparently.
-#     - nifty-with-gurobi
-# {% endif %}
+{% if WITH_SOLVERS %}
+    - nifty-with-cplex
+    - nifty-with-gurobi
+{% endif %}
     
 
 test:
