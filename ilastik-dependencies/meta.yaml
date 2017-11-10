@@ -38,6 +38,8 @@ requirements:
     - nose                      
     - psutil                    
     - pyqt                      5.6*
+    - pyqtgraph
+    - pyopengl
     - python-dateutil                
     - pytz                      
     - qimage2ndarray            
