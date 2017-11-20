@@ -46,6 +46,10 @@ if [[ $QT_PLUGIN_PATH != "" ]]; then
 fi    
 export QT_PLUGIN_PATH="${PREFIX}/plugins"
 
+# As of Qt5, the XKB config root needs to be configured to make keyboard input possible on linux.
+# OSX doesn't care about this variable, so we leave it in for both UNIXes
+export QT_XKB_CONFIG_ROOT="${PREFIX}/lib"
+
 # When Python is compiled with certain (buggy) versions of gcc, 
 #  the Python interpreter can sometimes have memory corruption issues 
 #  as it shuts down.
