@@ -203,7 +203,7 @@ Generating a release binary
             
             $ ./osx-packages/create-osx-app.sh --compress -c ilastik-forge -c conda-forge
 
-  If any options are used, they must be passed in this order:
+   If any options are used in the **Linux** or **Mac** binary creation scripts above, they must be passed in this order:
 
     - `--skip-tar`: (Linux only) Create the `ilastik-release` environment, but don't compress it into a .tar.bz2 file.
     - `--compress`: (Mac only) After creating the `.app` bundle, compress it into a `.tar.bz2` file.  
@@ -212,7 +212,8 @@ Generating a release binary
     - `--use-local`: Tells conda to use your custom builds of each package, if available.
     - `-c ilastik-forge`: Tells conda to use packages from the ilastik-forge channel (in case it's missing from `~/.condarc`).
 
-    **Windows:**
+
+   **Windows:**
             
             ## create new environment for packaging and activate it
             $ conda create -n ilastik-release ilastik-dependencies -c ilastik-forge -c conda-forge
