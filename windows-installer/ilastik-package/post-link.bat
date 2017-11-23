@@ -11,8 +11,9 @@ if "%CONDA_ACTIVE_ENV%"=="" (
 if not exist tmp mkdir tmp
 copy "%RECIPE_DIR%\read-version.py" tmp
 
-python tmp\read-version.py "%PREFIX%/ilastik-meta/ilastik/ilastik/__init__.py" > tmp\version.txt
+python tmp\read-version.py "%PREFIX%\ilastik-meta\ilastik\ilastik\__init__.py" > tmp\version.txt
 set /p ILASTIK_PKG_VERSION=<tmp\version.txt
+echo "Building package for version %ILASTIK_PKG_VERSION%"
 
 cd "%PREFIX%\package"
 
