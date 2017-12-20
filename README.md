@@ -133,7 +133,7 @@ DEV_PREFIX=${CONDA_ROOT}/envs/ilastik-devel
 conda remove -n ilastik-devel ilastik-meta
 
 # Re-install ilastik-meta.pth
-cat > ${DEV_PREFIX}/lib/python2.7/site-packages/ilastik-meta.pth << EOF
+cat > ${DEV_PREFIX}/lib/python3.6/site-packages/ilastik-meta.pth << EOF
 ../../../ilastik-meta/lazyflow
 ../../../ilastik-meta/volumina
 ../../../ilastik-meta/ilastik
