@@ -192,14 +192,14 @@ Generating a release binary
 
            
             $ grep Usage ./create-tarball.sh
-            ## Usage: create-tarball.sh [--skip-tar] [--git-latest] [--no-tracking] [... extra install-args, e.g. --use-local or -c ilastik ...]
+            ## Usage: create-tarball.sh [--skip-tar] [--git-latest] [--no-solvers] [... extra install-args, e.g. --use-local or -c ilastik ...]
             
             $ ./create-tarball.sh -c ilastik-forge -c conda-forge
 
    **Mac:**
        
             $ grep Usage ./osx-packages/create-osx-app.sh
-            ## Usage: create-osx-app.sh [--compress] [--git-latest] [--no-tracking] [... extra install-args, e.g. --use-local or -c ilastik ...]
+            ## Usage: create-osx-app.sh [--compress] [--git-latest] [--no-solvers] [... extra install-args, e.g. --use-local or -c ilastik or --copy ...]
             
             $ ./osx-packages/create-osx-app.sh --compress -c ilastik-forge -c conda-forge
 
@@ -208,7 +208,7 @@ Generating a release binary
     - `--skip-tar`: (Linux only) Create the `ilastik-release` environment, but don't compress it into a .tar.bz2 file.
     - `--compress`: (Mac only) After creating the `.app` bundle, compress it into a `.tar.bz2` file.  
     - `--git-latest`: Use the latest `master` branch of `ilastik`, `lazyflow`, and `volumina` instead of the most recent tag. (Don't use for official releases.)
-    - `--no-tracking`: Omit tracking-specific dependencies
+    - `--no-solvers`: Skip commercial solver dependencies (will used `ilastik-dependencies-no-solvers` instead of `ilastik-dependencies`)
     - `--use-local`: Tells conda to use your custom builds of each package, if available.
     - `-c ilastik-forge`: Tells conda to use packages from the ilastik-forge channel (in case it's missing from `~/.condarc`).
 
