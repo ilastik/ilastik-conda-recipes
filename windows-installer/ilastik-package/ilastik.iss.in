@@ -3,6 +3,10 @@ AppName=ilastik
 AppVersion=@VERSION@
 DefaultDirName={pf64}\ilastik-@VERSION@
 DefaultGroupName=ilastik-@VERSION@
+; Make sure innosetup doesn't just install into the last folder
+; https://superuser.com/questions/779145/innosetup-how-do-you-override-the-remembered-install-folder-and-group
+UsePreviousGroup=no
+UsePreviousAppDir=no
 ; allows to associate "*.ilp" files in the [Registry] section below
 ChangesAssociations=yes
 ; use paint to create this file, size 164x314
