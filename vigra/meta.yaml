@@ -19,7 +19,7 @@ source:
 build:
   features:
     - vc14 # [win]
-  number: 5
+  number: 6
   msvc_compiler: 14.0 # [win]
 
   #
