@@ -58,7 +58,7 @@ function latest_build()
     VERSION_AND_BUILD=$(conda search -f $@ \
                         | tail -n1 \
                         | python -c 'import sys; print("=".join(sys.stdin.read().split()[:2]))')
-    echo "$VERSION_AND_BUILD"
+    echo "$1=$VERSION_AND_BUILD"
 }
 
 # Create new ilastik-release environment and install all ilastik dependencies to it.
