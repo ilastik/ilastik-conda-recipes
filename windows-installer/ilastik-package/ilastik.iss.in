@@ -24,8 +24,7 @@ Source: "LICENSE.txt"; DestDir: "{app}"
 Source: "ilastik.exe"; DestDir: "{app}"
 Source: "run-ilastik.bat"; DestDir: "{app}"
 Source: "python.exe"; DestDir: "{app}"
-Source: "msvc*.dll"; DestDir: "{app}"
-Source: "python*.dll"; DestDir: "{app}"
+Source: "*.dll"; DestDir: "{app}"
 Source: "package\ilastik-icon.ico"; DestDir: "{app}"
 Source: "DLLs\*"; DestDir: "{app}\DLLs"; Flags: ignoreversion recursesubdirs
 Source: "ilastik-meta\*"; DestDir: "{app}\ilastik-meta"; Flags: ignoreversion recursesubdirs
