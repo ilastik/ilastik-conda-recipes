@@ -20,12 +20,13 @@
 if [[ `uname` == 'Darwin' ]]; then
     export CC=clang
     export CXX=clang++
-
+    LEMON_CXX_FLAGS="${CXXFLAGS}"
     # Pursuant to Item 2 above, replace the tools/CMakeLists.txt with an empty file.
     echo "" > tools/CMakeLists.txt
 else
-    export CC=${PREFIX}/bin/gcc
-    export CXX=${PREFIX}/bin/g++
+    export CC=gcc
+    export CXX=g++
+    LEMON_CXX_FLAGS="-D_GLIBCXX_USE_CXX11_ABI=0 ${CXXFLAGS}"
 fi
 
 mkdir build
@@ -42,8 +43,7 @@ cmake .. \
     -DGLPK_LIBRARY= \
     -DGLPK_INCLUDE_DIR= \
     -DGLPK_ROOT_DIR= \
-
-#    -DCMAKE_CXX_FLAGS="${CXXFLAGS}"
+    -DCMAKE_CXX_FLAGS="${LEMON_CXX_FLAGS}" \
 #    -DCMAKE_CXX_LINKER_FLAGS="${CXX_LDFLAGS}"
 
 VERBOSE=1 make -j${CPU_COUNT}
