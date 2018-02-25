@@ -18,13 +18,6 @@ build:
   number: 3
   msvc_compiler: 14.0 # [win]
 
-requirements:
-  build:
-    - gcc 4.8.5 # [linux]
-
-  run:
-    - libgcc # [linux]
-
 about:
   home: http://lemon.cs.elte.hu/trac/lemon
   license: Boost
