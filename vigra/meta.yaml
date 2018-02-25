@@ -32,7 +32,6 @@ build:
 
 requirements:
   build:
-    - gcc 4.8.5 # [linux]
     - python 2.7*|3.5*|3.6*
     - python {{PY_VER}}*
     - numpy >=1.9,{{NPY_VER}}*
@@ -48,7 +47,6 @@ requirements:
     - nose
 
   run:
-    - libgcc   4.8* # [linux]
     - python {{PY_VER}}*
     - numpy  {{NPY_VER}}*
     - jpeg     9*
