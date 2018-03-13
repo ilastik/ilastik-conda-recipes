@@ -13,7 +13,11 @@ if [[ `uname` == 'Darwin' ]]; then
 else
     export CC=gcc
     export CXX=g++
-    VIGRA_CXX_FLAGS="-std=c++11 -D_GLIBCXX_USE_CXX11_ABI=0 -pthread ${CXXFLAGS}"
+    VIGRA_CXX_FLAGS="-std=c++11 -pthread ${CXXFLAGS}"
+    # enable compilation without CXX abi to stay compatible with gcc < 5 built packages
+    if [[ ${DO_NOT_BUILD_WITH_CXX11_ABI} == '1' ]]; then
+        VIGRA_CXX_FLAGS="-D_GLIBCXX_USE_CXX11_ABI=0 ${VIGRA_CXX_FLAGS}"
+    fi
     DYLIB_EXT=so
 fi
 

@@ -29,6 +29,8 @@ build:
 
   script_env:
     - VIGRA_SKIP_TESTS
+    # Control building with CXX11 abi
+    - DO_NOT_BUILD_WITH_CXX11_ABI  # [linux]
 
 requirements:
   build:
