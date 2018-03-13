@@ -102,14 +102,14 @@ conda create -n ilastik-devel ilastik-dependencies=1.2.0=6 -c ilastik-forge -c c
 If you only have one of CPLEX or Gurobi, and you're seeking to develop for a workflow that requires it, you must install some dependencies of that workflow individually.  For example, to install tracking with CPLEX, but not Gurobi:
 
 ```bash
-conda create  -n ilastik-devel install ilastik-dependencies-no-solvers -c ilastik-forge -c conda-forge
+conda create  -n ilastik-devel ilastik-dependencies-no-solvers -c ilastik-forge -c conda-forge
 conda install -n ilastik-devel multi-hypotheses-tracking-with-cplex -c ilastik-forge -c conda-forge
 ```
 
 For example, to install multicut with Gurobi support:
 
 ```bash
-conda create  -n ilastik-devel install ilastik-dependencies-no-solvers -c ilastik-forge -c conda-forge
+conda create  -n ilastik-devel ilastik-dependencies-no-solvers -c ilastik-forge -c conda-forge
 conda install -n ilastik-devel nifty-with-gurobi -c ilastik-forge -c conda-forge
 ```
 
