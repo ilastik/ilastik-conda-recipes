@@ -17,6 +17,8 @@ build:
     - vc14 # [win]
   number: 3
   msvc_compiler: 14.0 # [win]
+  script_env:
+    - DO_NOT_BUILD_WITH_CXX11_ABI  # [linux]
 
 about:
   home: http://lemon.cs.elte.hu/trac/lemon

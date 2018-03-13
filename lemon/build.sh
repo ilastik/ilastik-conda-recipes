@@ -26,7 +26,11 @@ if [[ `uname` == 'Darwin' ]]; then
 else
     export CC=gcc
     export CXX=g++
-    LEMON_CXX_FLAGS="-D_GLIBCXX_USE_CXX11_ABI=0 ${CXXFLAGS}"
+    LEMON_CXX_FLAGS="${CXXFLAGS}"
+    # enable compilation without CXX abi to stay compatible with gcc < 5 built packages
+    if [[ ${DO_NOT_BUILD_WITH_CXX11_ABI} == '1' ]]; then
+        LEMON_CXX_FLAGS="-D_GLIBCXX_USE_CXX11_ABI=0 ${LEMON_CXX_FLAGS}"
+    fi
 fi
 
 mkdir build
