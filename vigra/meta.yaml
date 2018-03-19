@@ -19,7 +19,7 @@ source:
 build:
   features:
     - vc14 # [win]
-  number: 6
+  number: 7
   msvc_compiler: 14.0 # [win]
 
   #
@@ -38,7 +38,7 @@ requirements:
     - python {{PY_VER}}*
     - numpy >=1.9,{{NPY_VER}}*
     - jpeg     9b
-    - libtiff  4.0.6
+    - libtiff  4.0.9
     - libpng   1.6.27
     - fftw     3.3*
     - hdf5     1.10.1
@@ -52,7 +52,7 @@ requirements:
     - python {{PY_VER}}*
     - numpy  {{NPY_VER}}*
     - jpeg     9*
-    - libtiff  4.0.6   # libtiff version must exactly match from the build (on osx, at least)
+    - libtiff  4.0.9   # libtiff version must exactly match from the build (on osx, at least)
     - libpng   >=1.6.27,<1.7
     - fftw     3.3*
     - hdf5     1.10.1
