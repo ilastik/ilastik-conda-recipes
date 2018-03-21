@@ -15,15 +15,11 @@ source:
 build:
   features:
     - vc14 # [win]
-  number: 3
+  number: 4
   msvc_compiler: 14.0 # [win]
-
-requirements:
-  build:
-    - gcc 4.8.5 # [linux]
-
-  run:
-    - libgcc # [linux]
+  script_env:
+    # Control building with CXX11 abi
+    - DO_NOT_BUILD_WITH_CXX11_ABI  # [linux]
 
 about:
   home: http://lemon.cs.elte.hu/trac/lemon

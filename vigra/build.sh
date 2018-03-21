@@ -11,9 +11,13 @@ if [[ `uname` == 'Darwin' ]]; then
     VIGRA_CXX_FLAGS="-std=c++11 -stdlib=libc++ -I${PREFIX}/include" # I have no clue why this -I option is necessary on Mac.
     DYLIB_EXT=dylib
 else
-    export CC=${PREFIX}/bin/gcc
-    export CXX=${PREFIX}/bin/g++
+    export CC=gcc
+    export CXX=g++
     VIGRA_CXX_FLAGS="-std=c++11 -pthread ${CXXFLAGS}"
+    # enable compilation without CXX abi to stay compatible with gcc < 5 built packages
+    if [[ ${DO_NOT_BUILD_WITH_CXX11_ABI} == '1' ]]; then
+        VIGRA_CXX_FLAGS="-D_GLIBCXX_USE_CXX11_ABI=0 ${VIGRA_CXX_FLAGS}"
+    fi
     DYLIB_EXT=so
 fi
 
@@ -87,7 +91,6 @@ cmake ..\
 \
         -DJPEG_INCLUDE_DIR=${PREFIX}/include \
         -DJPEG_LIBRARY=${PREFIX}/lib/libjpeg.${DYLIB_EXT} \
-
 
 # BUILD
 if [[ `uname` == 'Darwin' ]]; then
