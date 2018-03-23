@@ -23,7 +23,7 @@ build:
 requirements:
   run:
     # in order to support older linux distros (e.g. Ubuntu < 16.04):
-    - libstdcxx-ng >= 5.4.0  # [linux]
+    - libstdcxx-ng >=5.4.0  # [linux]
 
 about:
   home: http://lemon.cs.elte.hu/trac/lemon

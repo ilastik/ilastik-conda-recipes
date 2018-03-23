@@ -19,7 +19,7 @@ source:
 build:
   features:
     - vc14 # [win]
-  number: 7
+  number: 8
   msvc_compiler: 14.0 # [win]
 
   #
@@ -59,6 +59,8 @@ requirements:
     - h5py     2.7.1
     - boost    1.63.0
     - lemon    1.2.4
+    # in order to suppor older linux distros after gcc5 switch:
+    - libstdcxx-ng >=5.4.0  # [linux]
     - zlib     1.2*
     - nose
 
