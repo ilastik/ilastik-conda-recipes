@@ -25,7 +25,7 @@ requirements:
     # General dependencies
     # -----------------------------------------------------------------
     - python                    3.6*
-    - numpy                     1.12*
+    - numpy                     1.14*
 
     - decorator                 
     - fftw                      
