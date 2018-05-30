@@ -64,7 +64,6 @@ requirements:
     # ilastik main packages developed by us
     # -----------------------------------------------------------------
     - ilastik-feature-selection 
-    - iiboost                                  # [not win]
     - ilastiktools              
     - ilastikrag                
     - wsdt                 
