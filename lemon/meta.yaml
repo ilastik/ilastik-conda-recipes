@@ -15,7 +15,7 @@ source:
 build:
   features:
     - vc14 # [win]
-  number: 5
+  number: 6
   msvc_compiler: 14.0 # [win]
   script_env:
     # Control building with CXX11 abi
@@ -23,7 +23,7 @@ build:
 requirements:
   run:
     # in order to support older linux distros (e.g. Ubuntu < 16.04):
-    - libstdcxx-ng >=5.4.0  # [linux]
+    - libstdcxx-ng {{ libstdcxx-ng }}  # [linux]
 
 about:
   home: http://lemon.cs.elte.hu/trac/lemon

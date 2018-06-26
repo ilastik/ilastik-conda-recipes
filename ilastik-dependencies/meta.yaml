@@ -9,10 +9,10 @@ package:
   {% else %}
     name: ilastik-dependencies-no-solvers
   {% endif %}
-    version: 1.3
+    version: 1.3.2
 
 build:
-  number: 4
+  number: 0
   track_features:
     # on osx we need to make sure that we install the numpy versions with openblas instead of mkl to prevent clashes with cplex
     - blas_openblas #[osx] 
@@ -24,39 +24,39 @@ requirements:
     # -----------------------------------------------------------------
     # General dependencies
     # -----------------------------------------------------------------
-    - python                    3.6*
-    - numpy                     1.12*
+    - python                    {{ python }}
+    - numpy                     {{ numpy }}
 
     - decorator                 
     - fftw                      
     - future                   
     - greenlet                  
-    - h5py                      >=2.7.0     
-    - hdf5                      >=1.8.17
+    - h5py                      {{ h5py }}
+    - hdf5                      {{ hdf5 }}
     - jsonschema                
-    - networkx                  1.11          # TODO API change in 2.0
+    - networkx                  {{ networkx }}      # TODO API change in 2.0
     - nose                      
     - psutil                    
-    - pyqt                      5.6*
+    - pyqt                      {{ pyqt }}
     - pyqtgraph
     - pyopengl
     - python-dateutil                
     - pytz                      
     - qimage2ndarray            
-    - qt                        5.6*
+    - qt                        {{ qt }}
     - readline                                 # [not win]
     - requests                  
     - scikit-image              
     - scikit-learn              
     - setuptools                
     - matplotlib
-    - mkl                       2017.0.3*      # [win]
+    - mkl                       {{ mkl }}      # [win]
     
     # -----------------------------------------------------------------
     # packages built by us
     # -----------------------------------------------------------------
     - pytiff                    
-    - tifffile                  0.4.post2
+    - tifffile                  {{ tifffile }}
     - yapsy                     
     - lemon    
 
@@ -68,7 +68,7 @@ requirements:
     - ilastikrag                
     - wsdt                 
     - numpy-allocation-tracking
-    - vigra                     >=1.11.1                 
+    - vigra                     {{ vigra }}
     - ilastik-meta
     - ilastik-launch                           # [not win]
 
