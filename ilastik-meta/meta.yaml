@@ -20,4 +20,4 @@ requirements:
   build:
     - python {{ python }}
   run:
-    - python {{ python }}
+    - python

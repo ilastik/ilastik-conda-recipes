@@ -21,9 +21,11 @@ build:
     # Control building with CXX11 abi
     - DO_NOT_BUILD_WITH_CXX11_ABI  # [linux]
 requirements:
+  build:
+    - libstdcxx-ng {{ libstdcxxng }}
   run:
     # in order to support older linux distros (e.g. Ubuntu < 16.04):
-    - libstdcxx-ng {{ libstdcxxng }}  # [linux]
+    - libstdcxx-ng  # [linux]
 
 about:
   home: http://lemon.cs.elte.hu/trac/lemon

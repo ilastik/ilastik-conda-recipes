@@ -17,9 +17,9 @@ requirements:
   build:
     - gcc 4.8.5 # [unix]
     - boost 1.55.0 # [py2k]
-    - boost 1.63.0* # [py3k]
-    - python {{PY_VER}}*
-    - numpy {{NPY_VER}}*
+    - boost {{ boost }} # [py3k]
+    - python {{ python }}
+    - numpy {{ numpy}}
     - hdf5
 
 about:

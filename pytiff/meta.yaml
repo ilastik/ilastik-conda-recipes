@@ -22,15 +22,15 @@ build:
 requirements:
   build:
     - python {{ python }}
-    - numpy >=1.11,{{ numpy }}*
+    - numpy >=1.11,{{ numpy }}
     - cython >=0.23
     - libtiff >=0.4
     - pytest-runner
     - pytest
 
   run:
-    - python {{ python }}
-    - numpy {{ numpy }}*
+    - python
+    - numpy
     - libtiff >=0.4
 
 test:

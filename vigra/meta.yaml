@@ -40,6 +40,7 @@ requirements:
     - jpeg     {{ jpeg }}
     - libtiff  4.0.9
     - libpng   1.6.27
+    - libstdcxx-ng {{ libstdcxxng }}
     - fftw     3.3*
     - hdf5     {{ hdf5 }}
     - h5py     {{ h5py }}
@@ -49,18 +50,18 @@ requirements:
     - nose
 
   run:
-    - python {{ python }}
-    - numpy  {{ numpy }}
-    - jpeg     {{ jpeg }}
+    - python
+    - numpy
+    - jpeg
     - libtiff  4.0.9   # libtiff version must exactly match from the build (on osx, at least)
     - libpng   >=1.6.27,<1.7
     - fftw     3.3*
-    - hdf5     {{ hdf5 }}
-    - h5py     {{ h5py }}
-    - boost    {{ boost }}
-    - lemon    {{ lemon }}
+    - hdf5
+    - h5py
+    - boost
+    - lemon
     # in order to suppor older linux distros after gcc5 switch:
-    - libstdcxx-ng {{ libstdcxxng }}  # [linux]
+    - libstdcxx-ng # [linux]
     - zlib     1.2*
     - nose
 

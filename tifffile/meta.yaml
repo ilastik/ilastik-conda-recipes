@@ -30,11 +30,11 @@ build:
 requirements:
   build:
     - python   {{ python }}
-    - numpy    >=1.10,{{ numpy }}*
+    - numpy    >=1.10,{{ numpy }}
 
   run:
-    - python   {{ python }}
-    - numpy    {{ numpy }}*
+    - python
+    - numpy
 
 test:
   imports:
