@@ -60,7 +60,7 @@ requirements:
     - boost
     - lemon
     # in order to suppor older linux distros after gcc5 switch:
-    - libstdcxx-ng # [linux]
+    - libstdcxx-ng >={{ libstdcxxng }} # [linux]
     - zlib     1.2*
     - nose
 
