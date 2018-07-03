@@ -35,12 +35,11 @@ build:
 requirements:
   build:
     - python 2.7*|3.5*|3.6*
-    - python {{ python }}
-    - numpy >=1.9,{{ numpy }}
+    - python   {{ python }}
+    - numpy    {{ numpy }}
     - jpeg     {{ jpeg }}
     - libtiff  4.0.9
-    - libpng   1.6.27
-    - libstdcxx-ng {{ libstdcxxng }}
+    - libpng   {{ libpng }}
     - fftw     3.3*
     - hdf5     {{ hdf5 }}
     - h5py     {{ h5py }}
@@ -54,7 +53,7 @@ requirements:
     - numpy
     - jpeg
     - libtiff  4.0.9   # libtiff version must exactly match from the build (on osx, at least)
-    - libpng   >=1.6.27,<1.7
+    - libpng
     - fftw     3.3*
     - hdf5
     - h5py
