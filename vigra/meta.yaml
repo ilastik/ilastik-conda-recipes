@@ -19,13 +19,13 @@ source:
 build:
   features:
     - vc14 # [win]
-  number: 9
+  number: 10
   msvc_compiler: 14.0 # [win]
 
   #
   # You must build this recipe using 'conda build --numpy=X.Y'
   #
-  string: np{{ numpy }}py{{ python }}_{{PKG_BUILDNUM}}_g{{GIT_FULL_HASH[:7]}}
+  string: np{{CONDA_NPY}}py{{CONDA_PY}}_{{PKG_BUILDNUM}}_g{{GIT_FULL_HASH[:7]}}
 
   script_env:
     - VIGRA_SKIP_TESTS

@@ -15,7 +15,7 @@ source:
 build:
   features:
     - vc14 # [win]
-  number: 6
+  number: 7
   msvc_compiler: 14.0 # [win]
   script_env:
     # Control building with CXX11 abi
