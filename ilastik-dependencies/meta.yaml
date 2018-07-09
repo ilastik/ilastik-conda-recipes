@@ -73,10 +73,10 @@ requirements:
     - ilastik-launch                           # [not win]
 
     # -----------------------------------------------------------------
-    # Tracking
+    # Trackinghdf5
     # -----------------------------------------------------------------
     - dpct                      
-    - hytra                     
+    - hytra
     - mamutexport               
 
 {% if WITH_SOLVERS %}
