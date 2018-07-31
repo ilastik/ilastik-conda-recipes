@@ -165,19 +165,20 @@ Generating a release binary
           git tag -m "Alpha Release" -a 1.2.3a4
           git push --tags origin
 
-2. Double-check your conda configuration (`.condarc`).  You should allow access to the `ilastik`
-   channel and `defaults`, but nothing else:
+2. Double-check your conda configuration (`.condarc`).  You should allow access to the `ilastik-forge`, `conda-forge`,
+   and `defaults` channels, but nothing else:
 
         $ cat ~/.condarc
         channels:
-        - ilastik
+        - ilastik-forge
+        - conda-forge
         - defaults
 
-3. Build `ilastik-meta` and `ilastik-dependencies` packages, and upload to the `ilastik` anaconda channel.
+3. Build `ilastik-meta` and `ilastik-dependencies` packages, and upload to the `ilastik-forge` anaconda channel.
 
         WITH_SOLVERS=1 conda build ilastik-meta ilastik-dependencies
-        anaconda upload -u ilastik ${CONDA_ROOT}/conda-bld/linux-64/ilastik-meta*.tar.bz2
-        anaconda upload -u ilastik ${CONDA_ROOT}/conda-bld/linux-64/ilastik-dependencies*.tar.bz2
+        anaconda upload -u ilastik-forge ${CONDA_ROOT}/conda-bld/linux-64/ilastik-meta*.tar.bz2
+        anaconda upload -u ilastik-forge ${CONDA_ROOT}/conda-bld/linux-64/ilastik-dependencies*.tar.bz2
 
 **Troubleshooting Tip:** If the `ilastik-meta` tag has been relocated since you last built the `ilastik-meta` package, you should probably clear conda's git cache for that repo, to ensure you have the new tags: `rm -rf $(conda info --root)/conda-bld/git_cache/github.com/ilastik/ilastik-meta`
 
