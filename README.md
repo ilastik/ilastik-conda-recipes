@@ -1,8 +1,9 @@
 ilastik-build-conda
 ===================
 
-[ilastik] depends on **60+ packages**.  Most of those packages are already provided for us by the [Anaconda] Python distribution.
-For 20+ the packages that *aren't* provided by Anaconda, we use the recipes in this repo.
+[ilastik] depends on **110+ packages**.  Most of those packages are already provided for us by the [Anaconda] Python distribution.
+For some of the 20+ the packages that *aren't* provided by Anaconda, we use the recipes in this repo.
+See also our [ilastik-publish-packages repo](https://github.com/ilastik/ilastik-publish-packages), especially the `ilastik-recipe-specs.yaml` for a complete list of packages we build ourselves.
 
 These recipes are built using the [conda-build][2] tool.
 The resulting binaries are uploaded to the [ilastik anaconda channel][3],
