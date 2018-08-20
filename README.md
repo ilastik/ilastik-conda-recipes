@@ -315,6 +315,10 @@ A complete recipe has at least 3 files:
  - `build.sh` (used for both Mac and Linux)
  - `bld.bat` (used for Windows)
 
+furthermore, since conda-build 3, it is possible to supply a config file to specify dependency versions for build and run configurations:
+
+ - `conda_build_config.yaml`
+
 ...additional files (such as patches) may be needed for some recipes.
 
 Write **meta.yaml**:
@@ -330,10 +334,15 @@ source:
   url: http://www.randompackages.org/somepackage/somepackage-1.2.3.tar.bz2
   md5: b060bb137d6bd8accf8f0c4c59d2746d
 
+build:
+  number: 0
+  string: py{{CONDA_PY}}np{{CONDA_NPY}}_{{PKG_BUILDNUM}}_h{{PKG_HASH}}_g{{GIT_FULL_HASH[:7]}}
+
+
 requirements:
   build:
     - zlib
-    - python
+    - python {{ python }}  # jinja2 variable defined in conda_build_config.yaml
   run:
     - zlib
     - python
@@ -341,6 +350,31 @@ requirements:
 about:
   home: http://www.somepackage.com
   license: WYSIWYG v3
+```
+
+for most our package we use a non-standard build string `py{{CONDA_PY}}np{{CONDA_NPY}}_{{PKG_BUILDNUM}}_h{{PKG_HASH}}_g{{GIT_FULL_HASH[:7]}}` to give the resulting package file name just a little more info that might help debugging issues.
+
+Write **conda_build_config.yaml**:
+
+Contents of `conda_build_config.yaml` are used to calculate the `PKG_HASH`.
+
+```yaml
+$ cat > conda_build_config.yaml
+
+# defining jinja variables that can be used in meta.yaml:
+# these variables don't have to be the same as the package name,
+# but we like to keep it that way
+# see usage of this variable in meta.yaml in the build requirements
+python:
+  - 3.6
+
+# the pin_run_as_build is used to configure how dependency versions at run
+# time should relate to versions specified at build time
+# variables here _have_ to be the package names!
+pin_run_as_build:
+  # in this case, python will be required to be 3.6.x, or in other words
+  # >=3.6.0,<3.7
+  python: x.x
 ```
 
 Write **build.sh**:

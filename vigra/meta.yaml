@@ -19,13 +19,13 @@ source:
 build:
   features:
     - vc14 # [win]
-  number: 8
+  number: 10
   msvc_compiler: 14.0 # [win]
 
   #
   # You must build this recipe using 'conda build --numpy=X.Y'
   #
-  string: np{{np}}py{{py}}_{{PKG_BUILDNUM}}_g{{GIT_FULL_HASH[:7]}}
+  string: np{{CONDA_NPY}}py{{CONDA_PY}}_{{PKG_BUILDNUM}}_h{{PKG_HASH}}_g{{GIT_FULL_HASH[:7]}}
 
   script_env:
     - VIGRA_SKIP_TESTS
@@ -34,33 +34,32 @@ build:
 
 requirements:
   build:
-    - python 2.7*|3.5*|3.6*
-    - python {{PY_VER}}*
-    - numpy >=1.9,{{NPY_VER}}*
-    - jpeg     9b
+    - python   {{ python }}
+    - numpy    {{ numpy }}
+    - jpeg     {{ jpeg }}
     - libtiff  4.0.9
-    - libpng   1.6.27
+    - libpng   {{ libpng }}
     - fftw     3.3*
-    - hdf5     1.10.1
-    - h5py     2.7.1
-    - boost    1.63.0
-    - lemon    1.2.4
+    - hdf5     {{ hdf5 }}
+    - h5py     {{ h5py }}
+    - boost    {{ boost }}
+    - lemon    {{ lemon }}
     - zlib     1.2*
     - nose
 
   run:
-    - python {{PY_VER}}*
-    - numpy  {{NPY_VER}}*
-    - jpeg     9*
+    - python
+    - numpy
+    - jpeg
     - libtiff  4.0.9   # libtiff version must exactly match from the build (on osx, at least)
-    - libpng   >=1.6.27,<1.7
+    - libpng
     - fftw     3.3*
-    - hdf5     1.10.1
-    - h5py     2.7.1
-    - boost    1.63.0
-    - lemon    1.2.4
+    - hdf5
+    - h5py
+    - boost
+    - lemon
     # in order to suppor older linux distros after gcc5 switch:
-    - libstdcxx-ng >=5.4.0  # [linux]
+    - libstdcxx-ng >={{ libstdcxxng }} # [linux]
     - zlib     1.2*
     - nose
 

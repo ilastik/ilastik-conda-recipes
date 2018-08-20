@@ -8,7 +8,7 @@ source:
 
 build:
   number: 5
-  string: {{PKG_BUILDNUM}}_g{{GIT_FULL_HASH[:7]}}
+  string: np{{CONDA_NPY}}py{{CONDA_PY}}_{{PKG_BUILDNUM}}_h{{PKG_HASH}}_g{{GIT_FULL_HASH[:7]}}
   features:
     - vc14 # [win]
   msvc_compiler: 14.0 # [win]
@@ -17,10 +17,10 @@ requirements:
   build:
     - gcc 4.8.5 # [unix]
     - boost 1.55.0 # [py2k]
-    - boost 1.63.0* # [py3k]
-    - python {{PY_VER}}*
-    - numpy {{NPY_VER}}*
-    - hdf5
+    - boost {{ boost }} # [py3k]
+    - python {{ python }}
+    - numpy {{ numpy}}
+    - hdf5 {{ hdf5 }}
 
 about:
     home: https://github.com/opengm/opengm

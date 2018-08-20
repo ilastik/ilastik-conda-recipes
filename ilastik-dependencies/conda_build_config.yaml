@@ -1,0 +1,29 @@
+h5py:
+  - 2.7.1
+hdf5:
+  - 1.10.1
+networkx:
+  - 1.11
+numpy:
+  - 1.12
+python:
+  - 3.6
+pyqt:
+  - 5.6
+qt:
+  - 5.6
+tifffile:
+  - 0.4.post2
+vigra:
+  - 1.11
+
+pin_run_as_build:
+  h5py: x.x
+  hdf5: x.x.x
+  networkx: x.x
+  numpy: x.x
+  python: x.x
+  pyqt: x.x
+  qt: x.x
+  tifffile: x.x.x
+  vigra: x.x
