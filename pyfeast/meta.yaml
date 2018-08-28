@@ -13,23 +13,28 @@ source:
     - fix-toolbox-location.patch
 
 build:
-  number: 2
+  number: 3
 
 requirements:
   build:
-    - python 2.7*|3.5*
-    - python {{PY_VER}}*
-    - numpy
+    - python {{ python }}
+    - numpy {{ numpy }}
     - feast >=1.1.1
   
   run:
-    - python {{PY_VER}}*
+    - python
     - numpy
     - feast >=1.1.1
 
 test:
+  source_files:
+    - test/*
+  commands:
+    - python test/test.py
   requires:
     - scikit-learn
+  imports:
+    - feast
 
 about:
   home: https://github.com/mutantturkey/PyFeast
