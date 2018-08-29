@@ -1,0 +1,44 @@
+package:
+  name: pyfeast
+  version: "1.1.post1"
+
+source:
+  #git_url: https://github.com/mutantturkey/PyFeast
+  #git_tag: 556ae3823ce8105668cf22bb966acdec1ef954e6 # 2014-10-27
+
+  git_url: https://github.com/stuarteberg/PyFeast
+  git_tag: 57d808de2ca8832bf3d579358d6c883a8c3e31ba
+  
+  patches:
+    - fix-toolbox-location.patch
+
+build:
+  number: 3
+  skip: true  # [win]
+
+requirements:
+  build:
+    - python {{ python }}
+    - numpy {{ numpy }}
+    - feast >=1.1.1
+  
+  run:
+    - python
+    - numpy
+    - feast >=1.1.1
+
+test:
+  source_files:
+    - test/*
+  commands:
+    - python test/test.py
+  requires:
+    - scikit-learn
+  imports:
+    - feast
+
+about:
+  home: https://github.com/mutantturkey/PyFeast
+  license: GPLv3
+  license_file: LICENSE.txt
+  summary: 'A Python interface to the Feature Selection Toolkit, contains JMI, BetaGamma, CMIM, CondMI, DISR, ICAP, and mRMR'
