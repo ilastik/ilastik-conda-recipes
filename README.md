@@ -194,14 +194,14 @@ Generating a release binary
 
            
             $ grep Usage ./create-tarball.sh
-            ## Usage: create-tarball.sh [--skip-tar] [--git-latest] [--no-solvers] [... extra install-args, e.g. --use-local or -c ilastik ...]
+            ## Usage: create-tarball.sh [--skip-tar] [--git-latest] [--no-solvers] [--include-tests] [... extra install-args, e.g. --use-local or -c ilastik-forge -c conda-forge ...]
             
             $ ./create-tarball.sh -c ilastik-forge -c conda-forge
 
    **Mac:**
        
             $ grep Usage ./osx-packages/create-osx-app.sh
-            ## Usage: create-osx-app.sh [--compress] [--git-latest] [--no-solvers] [... extra install-args, e.g. --use-local or -c ilastik or --copy ...]
+            ## Usage: create-osx-app.sh [--compress] [--git-latest] [--no-solvers] [--include-tests] [... extra install-args, e.g. --use-local or -c ilastik-forge -c conda-forge or --copy ...]
             
             $ ./osx-packages/create-osx-app.sh --compress -c ilastik-forge -c conda-forge
 
