@@ -112,7 +112,7 @@ fi
     
     # Run the tests
     if [[ -z "$VIGRA_SKIP_TESTS" || "$VIGRA_SKIP_TESTS" == "0" ]]; then
-        if [[ $(uname) == "Darwin" ]]; then
+        if [[ `uname` == "Darwin" ]]; then
             make -j${CPU_COUNT} check 2> >(python "${RECIPE_DIR}"/../build-utils/filter-macos-linker-warnings.py)
         else
             make -j${CPU_COUNT} check
