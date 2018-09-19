@@ -113,7 +113,11 @@ fi
     # Run the tests
     if [[ -z "$VIGRA_SKIP_TESTS" || "$VIGRA_SKIP_TESTS" == "0" ]]; then
         if [[ `uname` == "Darwin" ]]; then
-            make -j${CPU_COUNT} check 2> >(python "${RECIPE_DIR}"/../build-utils/filter-macos-linker-warnings.py)
+            # pasted from conda-forge/vigra-feedstock:
+            # Can't run tests due to a bug in the clang compiler provided with XCode.
+            # For more details see here ( https://llvm.org/bugs/show_bug.cgi?id=21083 ).
+            # Also, these tests are very intensive, which makes them challenging to run in CI.
+            make -j${CPU_COUNT} check_python 2> >(python "${RECIPE_DIR}"/../build-utils/filter-macos-linker-warnings.py)
         else
             make -j${CPU_COUNT} check
         fi
