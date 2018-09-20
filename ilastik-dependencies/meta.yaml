@@ -12,7 +12,7 @@ package:
     version: 1.3.2
 
 build:
-  number: 0
+  number: 1
   track_features:
     # on osx we need to make sure that we install the numpy versions with openblas instead of mkl to prevent clashes with cplex
     - blas_openblas #[osx] 
