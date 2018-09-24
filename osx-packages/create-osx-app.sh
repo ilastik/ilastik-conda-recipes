@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ##
-## Usage: create-osx-app.sh [--compress] [--git-latest] [--no-solvers] [... extra install-args, e.g. --use-local or -c ilastik or --copy ...]
+## Usage: create-osx-app.sh [--compress] [--git-latest] [--no-solvers] [--include-tests] [... extra install-args, e.g. --use-local or -c ilastik-forge or --copy ...]
 ##
 
 set -e
@@ -37,6 +37,17 @@ if [[ $@ == *"--no-solvers"* ]]; then
         shift
     else
         echo "Error: --no-solvers may only be provided as the first arg or after --git-latest." >&2
+        exit 1
+    fi
+fi
+
+INCLUDE_TESTS=0
+if [[ $@ == *"--include-tests"* ]]; then
+    if [[ $1 == "--include-tests" ]]; then
+        INCLUDE_TESTS=1
+        shift
+    else
+        echo "Error: --include-tests may only be provided as the first arg (or after --no-solvers)." >&2
         exit 1
     fi
 fi
@@ -123,6 +134,15 @@ rm -f ${RELEASE_ENV}/lib/libconcert.dylib
 
 # Remove gurobi symlinks (if present)
 rm -f ${RELEASE_ENV}/lib/libgurobi*.so # Yes, the extension is .so, even on Mac
+
+if [[ $INCLUDE_TESTS == 1 ]]; then
+    echo "Including ilastik tests in release (larger release size)."
+else
+    echo "Removing ilastik tests from source folders"
+    ILASTIK_META=${CONDA_ROOT}/envs/ilastik-release/ilastik-meta
+    rm -rf ${ILASTIK_META}/*/tests/*
+    echo "test-files removed"
+fi
 
 echo "Moving ilastik-release environment into ilastik.app bundle..."
 mv ${RELEASE_ENV} ilastik.app/Contents/ilastik-release

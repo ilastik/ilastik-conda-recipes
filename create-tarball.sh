@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ##
-## Usage: create-tarball.sh [--skip-tar] [--git-latest] [--no-solvers] [... extra install-args, e.g. --use-local or -c ilastik ...]
+## Usage: create-tarball.sh [--skip-tar] [--git-latest] [--no-solvers] [--include-tests] [... extra install-args, e.g. --use-local or -c ilastik-forge ...]
 ##
 
 set -e
@@ -35,6 +35,17 @@ if [[ $@ == *"--no-solvers"* ]]; then
         shift
     else
         echo "Error: --no-solvers may only be provided as the first arg (or after --git-latest)." >&2
+        exit 1
+    fi
+fi
+
+INCLUDE_TESTS=0
+if [[ $@ == *"--include-tests"* ]]; then
+    if [[ $1 == "--include-tests" ]]; then
+        INCLUDE_TESTS=1
+        shift
+    else
+        echo "Error: --include-tests may only be provided as the first arg (or after --no-solvers)." >&2
         exit 1
     fi
 fi
@@ -98,6 +109,15 @@ rm -f ${CONDA_ROOT}/envs/ilastik-release/lib/libconcert.so
 
 # Remove gurobi symlinks (if present)
 rm -f ${RELEASE_ENV}/lib/libgurobi*.so
+
+if [[ $INCLUDE_TESTS == 1 ]]; then
+    echo "Including ilastik tests in release (larger release size)."
+else
+    echo "Removing ilastik tests from source folders"
+    ILASTIK_META=${CONDA_ROOT}/envs/ilastik-release/ilastik-meta
+    rm -rf ${ILASTIK_META}/*/tests/*
+    echo "test-files removed"
+fi
 
 if [[ $SKIP_TAR == 1 ]]; then
     echo "Skipping tarball creation."
