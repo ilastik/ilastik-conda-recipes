@@ -1,5 +1,5 @@
 
- ilastik is Copyright (C) 2017 The ilastik Team <team@ilastik.org>
+ ilastik is Copyright (C) 2018 The ilastik Team <team@ilastik.org>
 
  You may use, distribute and copy ilastik under the terms of GNU General
  Public License version 2, which is displayed below, or any later version
