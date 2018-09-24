@@ -18,6 +18,7 @@ OutputBaseFilename=ilastik-@VERSION@-win64
 LicenseFile=LICENSE.txt
 SourceDir=..
 OutputDir=package
+OutputManifestFile=ilastik-@VERSION@-manifest.txt
 
 [Files]
 Source: "LICENSE.txt"; DestDir: "{app}"
