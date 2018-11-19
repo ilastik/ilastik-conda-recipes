@@ -35,7 +35,8 @@ requirements:
     - hdf5                      {{ hdf5 }}
     - jsonschema                
     - networkx                  {{ networkx }}      # TODO API change in 2.0
-    - nose                      
+    - nose
+    - pytest                    {{ pytest }}
     - psutil                    
     - pyqt                      {{ pyqt }}
     - pyqtgraph
