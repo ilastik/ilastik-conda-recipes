@@ -20,6 +20,8 @@ tifffile:
   - 0.4.post2
 vigra:
   - 1.11
+pytest:
+  - 3.10
 
 pin_run_as_build:
   h5py: x.x
@@ -31,3 +33,4 @@ pin_run_as_build:
   qt: x.x
   tifffile: x.x.x
   vigra: x.x
+  pytest: x.x
