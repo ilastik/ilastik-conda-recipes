@@ -49,18 +49,27 @@ int main(int argc, char **argv)
     std::string python_home    = prefix;
     std::string python_exe     = prefix + "\\python.exe";
     std::string qt_plugin_path = prefix + "\\Library\\plugins";
+    std::string extra_dll_path = prefix + "\\Library\\bin";
 
     std::vector<std::string> args;
     args.push_back("\"" + python_exe + "\"");
     args.push_back("\"" + script_name + "\"");
     args.push_back("\"--clean_paths\"");
-    for(std::size_t k=1; k<argc; ++k)
+    for(auto k=1; k < argc; ++k)
         args.push_back(std::string("\"") + argv[k] + "\"");
 
     std::vector<const char *> cargs;
     for(std::size_t k=0; k<args.size(); ++k)
         cargs.push_back(args[k].c_str());
     cargs.push_back(0);
+
+    // Possible alternatives:
+    // * AddDllDirectory Supported since Win8 (Win7 requires manual patch installation)
+    // * Usage SxS assembly
+    // See: https://github.com/numpy/numpy/wiki/windows-dll-notes
+    if (!SetDllDirectory(extra_dll_path.c_str())) {
+        printWinError();
+    };
 
     SetEnvironmentVariable("PYTHONHOME", python_home.c_str());
     SetEnvironmentVariable("PYTHONPATH", "");
