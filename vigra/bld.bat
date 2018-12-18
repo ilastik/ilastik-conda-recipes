@@ -29,17 +29,3 @@ if errorlevel 1 exit 1
 
 nmake install
 if errorlevel 1 exit 1
-
-rem REM TEST
-rem cmake --build . --target test_impex --config %CONFIGURATION%
-rem if errorlevel 1 exit 1
-rem cmake --build . --target test_hdf5impex --config %CONFIGURATION%
-rem if errorlevel 1 exit 1
-rem cmake --build . --target test_fourier --config %CONFIGURATION%
-rem if errorlevel 1 exit 1
-rem cmake --build . --target vigranumpytest --config %CONFIGURATION%
-rem if errorlevel 1 exit 1
-
-rem REM INSTALL
-rem cmake --build . --target INSTALL --config %CONFIGURATION%
-rem if errorlevel 1 exit 1
