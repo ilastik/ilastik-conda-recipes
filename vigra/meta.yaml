@@ -15,11 +15,12 @@ package:
 source:
   git_url: https://github.com/ukoethe/vigra
   git_tag: HEAD
+  patches:
 
 build:
   features:
     - vc14 # [win]
-  number: 10
+  number: 11
   msvc_compiler: 14.0 # [win]
 
   #
