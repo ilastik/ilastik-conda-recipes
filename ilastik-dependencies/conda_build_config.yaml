@@ -22,6 +22,8 @@ vigra:
   - 1.11
 pytest:
   - 3.10
+pillow: # [fix macOS build, broken jpeg=9b]
+  - 5.3.0
 
 pin_run_as_build:
   h5py: x.x
@@ -34,3 +36,4 @@ pin_run_as_build:
   tifffile: x.x.x
   vigra: x.x
   pytest: x.x
+  pillow: x.x

@@ -36,6 +36,7 @@ requirements:
     - jsonschema                
     - networkx                  {{ networkx }}      # TODO API change in 2.0
     - nose
+    - pillow                    {{ pillow }}
     - pytest                    {{ pytest }}
     - psutil                    
     - pyqt                      {{ pyqt }}
