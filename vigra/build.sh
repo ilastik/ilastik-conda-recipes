@@ -5,19 +5,10 @@ export CXXFLAGS=""
 export LDFLAGS=""
 
 if [[ `uname` == 'Darwin' ]]; then
-    export MACOSX_DEPLOYMENT_TARGET=10.9
-    export CC=clang
-    export CXX=clang++
     VIGRA_CXX_FLAGS="-std=c++11 -stdlib=libc++ -I${PREFIX}/include" # I have no clue why this -I option is necessary on Mac.
     DYLIB_EXT=dylib
 else
-    export CC=gcc
-    export CXX=g++
     VIGRA_CXX_FLAGS="-std=c++11 -pthread ${CXXFLAGS}"
-    # enable compilation without CXX abi to stay compatible with gcc < 5 built packages
-    if [[ ${DO_NOT_BUILD_WITH_CXX11_ABI} == '1' ]]; then
-        VIGRA_CXX_FLAGS="-D_GLIBCXX_USE_CXX11_ABI=0 ${VIGRA_CXX_FLAGS}"
-    fi
     DYLIB_EXT=so
 fi
 
@@ -35,8 +26,6 @@ VIGRA_LDFLAGS="-Wl,-rpath,${PREFIX}/lib -L${PREFIX}/lib"
 mkdir build
 cd build
 cmake ..\
-        -DCMAKE_C_COMPILER=${CC} \
-        -DCMAKE_CXX_COMPILER=${CXX} \
         -DCMAKE_INSTALL_PREFIX=${PREFIX} \
         -DCMAKE_PREFIX_PATH=${PREFIX} \
         -DCMAKE_OSX_DEPLOYMENT_TARGET="10.9" \
