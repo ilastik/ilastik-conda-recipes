@@ -18,19 +18,11 @@
 
 
 if [[ `uname` == 'Darwin' ]]; then
-    export CC=clang
-    export CXX=clang++
     LEMON_CXX_FLAGS="${CXXFLAGS}"
     # Pursuant to Item 2 above, replace the tools/CMakeLists.txt with an empty file.
     echo "" > tools/CMakeLists.txt
 else
-    export CC=gcc
-    export CXX=g++
     LEMON_CXX_FLAGS="${CXXFLAGS}"
-    # enable compilation without CXX abi to stay compatible with gcc < 5 built packages
-    if [[ ${DO_NOT_BUILD_WITH_CXX11_ABI} == '1' ]]; then
-        LEMON_CXX_FLAGS="-D_GLIBCXX_USE_CXX11_ABI=0 ${LEMON_CXX_FLAGS}"
-    fi
 fi
 
 mkdir build
@@ -39,8 +31,6 @@ cd build
 echo CXX_LDFLAGS=$CXX_LDFLAGS
 
 cmake .. \
-    -DCMAKE_C_COMPILER=${CC} \
-    -DCMAKE_CXX_COMPILER=${CXX} \
     -DBUILD_SHARED_LIBS=ON \
     -DCMAKE_INSTALL_PREFIX=${PREFIX} \
     -DCMAKE_PREFIX_PATH=${PREFIX} \
