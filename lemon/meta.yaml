@@ -13,18 +13,12 @@ source:
     - lemon-test.patch
 
 build:
-  features:
-    - vc14 # [win]
-  number: 7
-  msvc_compiler: 14.0 # [win]
-  script_env:
-    # Control building with CXX11 abi
-    - DO_NOT_BUILD_WITH_CXX11_ABI  # [linux]
+  number: 8
 requirements:
   build:
-  run:
-    # in order to support older linux distros (e.g. Ubuntu < 16.04):
-    - libstdcxx-ng >={{ libstdcxxng }}  # [linux]
+    - cmake
+    - {{ compiler("c") }}
+    - {{ compiler("cxx") }}
 
 about:
   home: http://lemon.cs.elte.hu/trac/lemon
