@@ -1,17 +1,17 @@
 boost:
-  - 1.63.0
+  - 1.68.0
 h5py:
-  - 2.7.1
+  - 2.9
 hdf5:
-  - 1.10.1
+  - 1.10.4
 jpeg:
   - 9b
 lemon:
   - 1.2.4
 libpng:
-  - 1.6.27
-libstdcxxng:
-  - 5.4.0
+  - 1.6.36
+libtiff:
+  - 4.0.10
 numpy:
   - 1.12
 python:
@@ -24,6 +24,6 @@ pin_run_as_build:
   jpeg: x.x
   lemon: x.x.x
   libpng: x.x
-  libstdcxx-ng: x.x
+  libtiff: x.x.x
   numpy: x.x
   python: x.x

@@ -6,15 +6,9 @@ export LDFLAGS=""
 
 if [[ `uname` == 'Darwin' ]]; then
     VIGRA_CXX_FLAGS="-std=c++11 -stdlib=libc++ -I${PREFIX}/include" # I have no clue why this -I option is necessary on Mac.
-    DYLIB_EXT=dylib
 else
     VIGRA_CXX_FLAGS="-std=c++11 -pthread ${CXXFLAGS}"
-    DYLIB_EXT=so
 fi
-
-PY_VER=$(python -c "import sys; print('{}.{}'.format(*sys.version_info[:2]))")
-PY_ABIFLAGS=$(python -c "import sys; print('' if sys.version_info.major == 2 else sys.abiflags)")
-PY_ABI=${PY_VER}${PY_ABIFLAGS}
 
 # In release mode, we use -O2 because gcc is known to miscompile certain vigra functionality at the O3 level.
 # (This is probably due to inappropriate use of undefined behavior in vigra itself.)
@@ -41,45 +35,43 @@ cmake ..\
         -DDEPENDENCY_SEARCH_PREFIX=${PREFIX} \
 \
         -DFFTW3F_INCLUDE_DIR=${PREFIX}/include \
-        -DFFTW3F_LIBRARY=${PREFIX}/lib/libfftw3f.${DYLIB_EXT} \
+        -DFFTW3F_LIBRARY=${PREFIX}/lib/libfftw3f${SHLIB_EXT} \
         -DFFTW3_INCLUDE_DIR=${PREFIX}/include \
-        -DFFTW3_LIBRARY=${PREFIX}/lib/libfftw3.${DYLIB_EXT} \
+        -DFFTW3_LIBRARY=${PREFIX}/lib/libfftw3${SHLIB_EXT} \
 \
-        -DHDF5_CORE_LIBRARY=${PREFIX}/lib/libhdf5.${DYLIB_EXT} \
-        -DHDF5_HL_LIBRARY=${PREFIX}/lib/libhdf5_hl.${DYLIB_EXT} \
+        -DHDF5_CORE_LIBRARY=${PREFIX}/lib/libhdf5${SHLIB_EXT} \
+        -DHDF5_HL_LIBRARY=${PREFIX}/lib/libhdf5_hl${SHLIB_EXT} \
         -DHDF5_INCLUDE_DIR=${PREFIX}/include \
 \
         -DBoost_INCLUDE_DIR=${PREFIX}/include \
         -DBoost_LIBRARY_DIRS=${PREFIX}/lib \
-        -DBoost_PYTHON_LIBRARY=${PREFIX}/lib/libboost_python.${DYLIB_EXT} \
-        -DBoost_PYTHON_LIBRARY_RELEASE=${PREFIX}/lib/libboost_python.${DYLIB_EXT} \
-        -DBoost_PYTHON_LIBRARY_DEBUG=${PREFIX}/lib/libboost_python.${DYLIB_EXT} \
+        -DBoost_PYTHON_LIBRARY=${PREFIX}/lib/libboost_python${CONDA_PY}${SHLIB_EXT} \
 \
         -DWITH_LEMON=ON \
         -DLEMON_DIR=${PREFIX}/share/lemon/cmake \
         -DLEMON_INCLUDE_DIR=${PREFIX}/include \
-        -DLEMON_LIBRARY=${PREFIX}/lib/libemon.${DYLIB_EXT} \
+        -DLEMON_LIBRARY=${PREFIX}/lib/libemon${SHLIB_EXT} \
 \
         -DPYTHON_EXECUTABLE=${PYTHON} \
-        -DPYTHON_LIBRARY=${PREFIX}/lib/libpython${PY_ABI}.${DYLIB_EXT} \
-        -DPYTHON_INCLUDE_DIR=${PREFIX}/include/python${PY_ABI} \
+        -DPYTHON_LIBRARY=${PREFIX}/lib/libpython${CONDA_PY}${SHLIB_EXT} \
+        -DPYTHON_INCLUDE_DIR=${PREFIX}/include/python${CONDA_PY} \
         -DPYTHON_NUMPY_INCLUDE_DIR=${SP_DIR}/numpy/core/include \
         -DPYTHON_SPHINX=${PREFIX}/bin/sphinx-build \
 \
-        -DVIGRANUMPY_LIBRARIES="${PREFIX}/lib/libpython${PY_ABI}.${DYLIB_EXT};${PREFIX}/lib/libboost_python.${DYLIB_EXT};${PREFIX}/lib/libboost_thread.${DYLIB_EXT};${PREFIX}/lib/libboost_system.${DYLIB_EXT}" \
+        -DVIGRANUMPY_LIBRARIES="${PREFIX}/lib/libpython${CONDA_PY}${SHLIB_EXT};${PREFIX}/lib/libboost_python${CONDA_PY}${SHLIB_EXT};${PREFIX}/lib/libboost_thread${SHLIB_EXT};${PREFIX}/lib/libboost_system${SHLIB_EXT}" \
         -DVIGRANUMPY_INSTALL_DIR=${SP_DIR} \
 \
         -DZLIB_INCLUDE_DIR=${PREFIX}/include \
-        -DZLIB_LIBRARY=${PREFIX}/lib/libz.${DYLIB_EXT} \
+        -DZLIB_LIBRARY=${PREFIX}/lib/libz${SHLIB_EXT} \
 \
-        -DPNG_LIBRARY=${PREFIX}/lib/libpng.${DYLIB_EXT} \
+        -DPNG_LIBRARY=${PREFIX}/lib/libpng${SHLIB_EXT} \
         -DPNG_PNG_INCLUDE_DIR=${PREFIX}/include \
 \
-        -DTIFF_LIBRARY=${PREFIX}/lib/libtiff.${DYLIB_EXT} \
+        -DTIFF_LIBRARY=${PREFIX}/lib/libtiff${SHLIB_EXT} \
         -DTIFF_INCLUDE_DIR=${PREFIX}/include \
 \
         -DJPEG_INCLUDE_DIR=${PREFIX}/include \
-        -DJPEG_LIBRARY=${PREFIX}/lib/libjpeg.${DYLIB_EXT} \
+        -DJPEG_LIBRARY=${PREFIX}/lib/libjpeg${SHLIB_EXT} \
 
 # BUILD
 if [[ `uname` == 'Darwin' ]]; then

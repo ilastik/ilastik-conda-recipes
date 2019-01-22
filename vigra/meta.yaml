@@ -31,7 +31,7 @@ requirements:
     - python   {{ python }}
     - numpy    {{ numpy }}
     - jpeg     {{ jpeg }}
-    - libtiff  4.0.9
+    - libtiff  {{ libtiff }}
     - libpng   {{ libpng }}
     - fftw     3.3*
     - hdf5     {{ hdf5 }}
@@ -45,7 +45,7 @@ requirements:
     - python
     - numpy
     - jpeg
-    - libtiff  4.0.9   # libtiff version must exactly match from the build (on osx, at least)
+    - libtiff
     - libpng
     - fftw     3.3*
     - hdf5
