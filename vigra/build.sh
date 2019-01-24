@@ -1,20 +1,12 @@
-# Conda automatically sets these with the -arch x86_64 flag, 
-#  which is not recognized by cmake.
-export CFLAGS=""
-export CXXFLAGS=""
-export LDFLAGS=""
-
-if [[ `uname` == 'Darwin' ]]; then
-    VIGRA_CXX_FLAGS="-std=c++11 -stdlib=libc++ -I${PREFIX}/include" # I have no clue why this -I option is necessary on Mac.
+#!/bin/bash
+EXTRA_CMAKE_ARGS=""
+if [[ `uname` == 'Darwin' ]];
+then
+    EXTRA_CMAKE_ARGS="-DCMAKE_OSX_DEPLOYMENT_TARGET=${CMAKE_OSX_DEPLOYMENT_TARGET}"
+    export LDFLAGS="-undefined dynamic_lookup ${LDFLAGS}"
 else
-    VIGRA_CXX_FLAGS="-std=c++11 -pthread ${CXXFLAGS}"
+    export CXXFLAGS="-pthread ${CXXFLAGS}"
 fi
-
-# In release mode, we use -O2 because gcc is known to miscompile certain vigra functionality at the O3 level.
-# (This is probably due to inappropriate use of undefined behavior in vigra itself.)
-VIGRA_CXX_FLAGS_RELEASE="-O2 -DNDEBUG ${VIGRA_CXX_FLAGS}"
-VIGRA_LDFLAGS="-Wl,-rpath,${PREFIX}/lib -L${PREFIX}/lib"
-
 
 # CONFIGURE
 mkdir build
@@ -22,56 +14,23 @@ cd build
 cmake ..\
         -DCMAKE_INSTALL_PREFIX=${PREFIX} \
         -DCMAKE_PREFIX_PATH=${PREFIX} \
-        -DCMAKE_OSX_DEPLOYMENT_TARGET="10.9" \
 \
-        -DCMAKE_SHARED_LINKER_FLAGS="${VIGRA_LDFLAGS}" \
-        -DCMAKE_EXE_LINKER_FLAGS="${VIGRA_LDFLAGS}" \
-        -DCMAKE_CXX_FLAGS="${VIGRA_CXX_FLAGS}" \
-        -DCMAKE_CXX_FLAGS_RELEASE="${VIGRA_CXX_FLAGS_RELEASE}" \
-        -DCMAKE_CXX_FLAGS_DEBUG="${VIGRA_CXX_FLAGS}" \
+        -DCMAKE_CXX_LINK_FLAGS="${LDFLAGS}" \
+        -DCMAKE_EXE_LINKER_FLAGS="${LDFLAGS}" \
+        -DCMAKE_CXX_FLAGS="${CXX_FLAGS}" \
 \
-        -DWITH_VIGRANUMPY=TRUE \
-        -DWITH_BOOST_THREAD=1 \
+        -DCMAKE_BUILD_TYPE=Release \
+\
+        -DTEST_VIGRANUMPY=1 \
+\
+        -DAUTOEXEC_TESTS=0 \
+\
         -DDEPENDENCY_SEARCH_PREFIX=${PREFIX} \
+        -DCMAKE_PREFIX_PATH=${PREFIX} \
 \
-        -DFFTW3F_INCLUDE_DIR=${PREFIX}/include \
-        -DFFTW3F_LIBRARY=${PREFIX}/lib/libfftw3f${SHLIB_EXT} \
-        -DFFTW3_INCLUDE_DIR=${PREFIX}/include \
-        -DFFTW3_LIBRARY=${PREFIX}/lib/libfftw3${SHLIB_EXT} \
-\
-        -DHDF5_CORE_LIBRARY=${PREFIX}/lib/libhdf5${SHLIB_EXT} \
-        -DHDF5_HL_LIBRARY=${PREFIX}/lib/libhdf5_hl${SHLIB_EXT} \
-        -DHDF5_INCLUDE_DIR=${PREFIX}/include \
-\
-        -DBoost_INCLUDE_DIR=${PREFIX}/include \
-        -DBoost_LIBRARY_DIRS=${PREFIX}/lib \
-        -DBoost_PYTHON_LIBRARY=${PREFIX}/lib/libboost_python${CONDA_PY}${SHLIB_EXT} \
-\
-        -DWITH_LEMON=ON \
-        -DLEMON_DIR=${PREFIX}/share/lemon/cmake \
-        -DLEMON_INCLUDE_DIR=${PREFIX}/include \
+        -DWITH_LEMON=1 \
         -DLEMON_LIBRARY=${PREFIX}/lib/libemon${SHLIB_EXT} \
 \
-        -DPYTHON_EXECUTABLE=${PYTHON} \
-        -DPYTHON_LIBRARY=${PREFIX}/lib/libpython${CONDA_PY}${SHLIB_EXT} \
-        -DPYTHON_INCLUDE_DIR=${PREFIX}/include/python${CONDA_PY} \
-        -DPYTHON_NUMPY_INCLUDE_DIR=${SP_DIR}/numpy/core/include \
-        -DPYTHON_SPHINX=${PREFIX}/bin/sphinx-build \
-\
-        -DVIGRANUMPY_LIBRARIES="${PREFIX}/lib/libpython${CONDA_PY}${SHLIB_EXT};${PREFIX}/lib/libboost_python${CONDA_PY}${SHLIB_EXT};${PREFIX}/lib/libboost_thread${SHLIB_EXT};${PREFIX}/lib/libboost_system${SHLIB_EXT}" \
-        -DVIGRANUMPY_INSTALL_DIR=${SP_DIR} \
-\
-        -DZLIB_INCLUDE_DIR=${PREFIX}/include \
-        -DZLIB_LIBRARY=${PREFIX}/lib/libz${SHLIB_EXT} \
-\
-        -DPNG_LIBRARY=${PREFIX}/lib/libpng${SHLIB_EXT} \
-        -DPNG_PNG_INCLUDE_DIR=${PREFIX}/include \
-\
-        -DTIFF_LIBRARY=${PREFIX}/lib/libtiff${SHLIB_EXT} \
-        -DTIFF_INCLUDE_DIR=${PREFIX}/include \
-\
-        -DJPEG_INCLUDE_DIR=${PREFIX}/include \
-        -DJPEG_LIBRARY=${PREFIX}/lib/libjpeg${SHLIB_EXT} \
 
 # BUILD
 if [[ `uname` == 'Darwin' ]]; then
@@ -101,6 +60,7 @@ fi
             make -j${CPU_COUNT} check_python 2> >(python "${RECIPE_DIR}"/../build-utils/filter-macos-linker-warnings.py)
         else
             make -j${CPU_COUNT} check
+            make -j${CPU_COUNT} ctest
         fi
     fi
 )
