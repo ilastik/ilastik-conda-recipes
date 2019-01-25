@@ -1,14 +1,8 @@
 boost:
-  - 1.63.0
+  - 1.68.0
 hdf5:
-  - 1.10.1
+  - 1.10.4
 numpy:
   - 1.12
 python:
   - 3.6
-
-pin_run_as_build:
-  boost: x.x
-  hdf5: x.x.x
-  numpy: x.x
-  python: x.x
