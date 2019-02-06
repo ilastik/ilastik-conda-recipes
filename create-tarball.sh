@@ -77,7 +77,7 @@ else
 fi
 
 echo "Creating new ilastik-release environment using ${EVERYTHING_PKG}"
-conda create -q -y -n ilastik-release ${EVERYTHING_PKG} "$@"
+conda create -q -y -n ilastik-release ${EVERYTHING_PKG} --override-channels "$@"
 
 if [[ $USE_GIT_LATEST == 1 ]]; then
     # Instead of keeping the version from binstar, get the git repo
