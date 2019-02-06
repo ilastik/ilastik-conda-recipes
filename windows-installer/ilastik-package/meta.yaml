@@ -1,6 +1,3 @@
-about:
-  summary: "A meta-package for creating installers."
-
 package:
   name: ilastik-package
   version: "1.0"
@@ -15,3 +12,6 @@ requirements:
   run:
     - git
     - ilastik-dependencies-no-solvers
+
+about:
+  summary: "A meta-package for creating installers."
