@@ -29,9 +29,10 @@ build:
 
 requirements:
   build:
+    - {{ compiler("cxx") }}
+  host:
     - python   {{ python }}
     - numpy    {{ numpy }}
-
   run:
     - python
     - numpy
