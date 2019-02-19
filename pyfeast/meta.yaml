@@ -13,7 +13,7 @@ source:
     - fix-toolbox-location.patch
 
 build:
-  number: 3
+  number: 4
   skip: true  # [win]
 
 requirements:
@@ -23,8 +23,8 @@ requirements:
     - feast >=1.1.1
   
   run:
-    - python
-    - numpy
+    - python {{ python }}
+    - {{ pin_compatible("numpy") }}
     - feast >=1.1.1
 
 test:

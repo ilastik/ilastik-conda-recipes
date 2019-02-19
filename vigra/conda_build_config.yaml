@@ -13,17 +13,6 @@ libpng:
 libtiff:
   - 4.0.10
 numpy:
-  - 1.12
+  - 1.14
 python:
-  - 3.6
-
-pin_run_as_build:
-  boost: x.x
-  h5py: x.x
-  hdf5: x.x.x
-  jpeg: x.x
-  lemon: x.x.x
-  libpng: x.x
-  libtiff: x.x.x
-  numpy: x.x
-  python: x.x
+  - 3.7

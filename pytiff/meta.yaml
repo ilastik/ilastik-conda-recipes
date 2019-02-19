@@ -16,7 +16,7 @@ build:
   #
   # You must build this recipe using 'conda build --numpy=X.Y'
   #
-  number: 4
+  number: 5
   string: np{{CONDA_NPY}}py{{CONDA_PY}}_{{PKG_BUILDNUM}}_h{{PKG_HASH}}_g{{GIT_FULL_HASH[:7]}}
 
 requirements:
@@ -31,8 +31,8 @@ requirements:
     - pytest-runner
   run:
     - libtiff >=0.4
-    - numpy
-    - python
+    - {{ pin_compatible("numpy") }}
+    - python {{ python }}
 
 test:
   source_files:
