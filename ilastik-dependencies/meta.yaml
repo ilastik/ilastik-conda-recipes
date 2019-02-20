@@ -60,7 +60,8 @@ requirements:
     # -----------------------------------------------------------------
     # packages built by us
     # -----------------------------------------------------------------
-    - pytiff                    
+    - fastfilters
+    - pytiff
     - tifffile                  {{ tifffile }}
     - yapsy                     
     - lemon    
