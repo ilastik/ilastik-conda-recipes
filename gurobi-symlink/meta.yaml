@@ -8,7 +8,7 @@ package:
 #   - ###
 
 build:
-  number: 4
+  number: 1000
   script_env:
     - GUROBI_ROOT_DIR
 

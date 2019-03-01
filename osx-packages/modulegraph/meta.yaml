@@ -11,6 +11,7 @@ source:
    # - fix.patch
 
 build:
+  number: 1000
   # preserve_egg_dir: True
   entry_points:
     # Put any entry points (scripts to be generated automatically) here. The

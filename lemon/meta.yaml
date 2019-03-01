@@ -13,7 +13,7 @@ source:
     - lemon-test.patch
 
 build:
-  number: 8
+  number: 1000
 requirements:
   build:
     - cmake
