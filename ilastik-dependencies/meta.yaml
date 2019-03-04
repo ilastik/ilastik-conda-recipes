@@ -97,11 +97,6 @@ requirements:
     # -----------------------------------------------------------------
     - nifty                     
     
-{% if WITH_SOLVERS %}
-    - nifty-with-cplex
-    - nifty-with-gurobi
-{% endif %}
-    
 
 test:
   # Just give SOME test to ensure that the package can be installed at all.
