@@ -94,19 +94,23 @@ else
         # Note: To avoid installing gcc into the user's environment every time this is created,
         #       we don't include gcc as a run dependency.
         #       Instead, we create a temporary environment right here and install gcc into it.
-
-        # This is slightly dangerous, but apparently conda doesn't want
-        # to recursively call itself if we don't remove the locks.
-        conda clean --lock
-        
         # Install gcc to a temporary environment
         conda remove -y --all -n _cplex_shared_gcc_throwaway 2> /dev/null || true
-        conda create -y -n _cplex_shared_gcc_throwaway gcc=4.8.5
+        conda create -y -n _cplex_shared_gcc_throwaway gxx_linux-64
         GCC_ENV_PREFIX=$(conda info --root)/envs/_cplex_shared_gcc_throwaway
 
-        ${GCC_ENV_PREFIX}/bin/g++ -fpic -shared -Wl,-whole-archive ${CPLEX_LIB_DIR}/libcplex.a     -Wl,-no-whole-archive -o ${CPLEX_LIB_DIR}/libcplex.so
-        ${GCC_ENV_PREFIX}/bin/g++ -fpic -shared -Wl,-whole-archive ${CONCERT_LIB_DIR}/libconcert.a -Wl,-no-whole-archive -o ${CONCERT_LIB_DIR}/libconcert.so
-        ${GCC_ENV_PREFIX}/bin/g++ -fpic -shared -Wl,-whole-archive ${CPLEX_LIB_DIR}/libilocplex.a  -Wl,-no-whole-archive -o ${CPLEX_LIB_DIR}/libilocplex.so
+        ${GCC_ENV_PREFIX}/bin/x86_64-conda_cos6-linux-gnu-g++ -fpic -shared \
+            -Wl,-whole-archive ${CPLEX_LIB_DIR}/libcplex.a \
+            -Wl,-no-whole-archive \
+            -o ${CPLEX_LIB_DIR}/libcplex.so
+        ${GCC_ENV_PREFIX}/bin/x86_64-conda_cos6-linux-gnu-g++ -fpic -shared \
+            -Wl,-whole-archive ${CONCERT_LIB_DIR}/libconcert.a \
+            -Wl,-no-whole-archive \
+            -o ${CONCERT_LIB_DIR}/libconcert.so
+        ${GCC_ENV_PREFIX}/bin/x86_64-conda_cos6-linux-gnu-g++ -fpic -shared \
+            -Wl,-whole-archive ${CPLEX_LIB_DIR}/libilocplex.a  \
+            -Wl,-no-whole-archive \
+            -o ${CPLEX_LIB_DIR}/libilocplex.so
     
         conda remove -y --all -n _cplex_shared_gcc_throwaway
     fi
