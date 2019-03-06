@@ -82,7 +82,7 @@ else
 fi
 
 echo "Creating new ilastik-release environment using ${EVERYTHING_PKG}"
-conda create -q -y -n ilastik-release ${EVERYTHING_PKG} py2app "$@"
+conda create -q -y -n ilastik-release ${EVERYTHING_PKG} py2app --override-channels "$@"
 
 ## Replace all @rpath references with @loader_path references,
 ## and delete the RPATHs (some of which are absolute instead of relative).
