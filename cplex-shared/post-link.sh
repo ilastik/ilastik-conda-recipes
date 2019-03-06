@@ -94,10 +94,6 @@ else
         # Note: To avoid installing gcc into the user's environment every time this is created,
         #       we don't include gcc as a run dependency.
         #       Instead, we create a temporary environment right here and install gcc into it.
-
-        # This is slightly dangerous, but apparently conda doesn't want
-        # to recursively call itself if we don't remove the locks.
-        conda clean --lock
         
         # Install gcc to a temporary environment
         conda remove -y --all -n _cplex_shared_gcc_throwaway 2> /dev/null || true
