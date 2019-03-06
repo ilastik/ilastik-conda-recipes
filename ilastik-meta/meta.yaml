@@ -10,7 +10,12 @@ package:
 
 source:
   git_url: https://github.com/ilastik/ilastik-meta
+  # explicitly pass git_rev
+  {% if ILASTIK_META_REV is not none %}
+  git_rev: {{ ILASTIK_META_REV }}
+  {% else %}
   git_rev: HEAD
+  {% endif %}
 
 build:
   number: 1
