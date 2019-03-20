@@ -8,6 +8,15 @@ else
     export CXXFLAGS="-pthread ${CXXFLAGS}"
 fi
 
+if [[ "${cxx_compiler}" == "toolchain_cxx" ]];
+then
+    export CXXFLAGS="${CXXFLAGS} -std=c++11"
+fi
+
+# In release mode, we use -O2 because gcc is known to miscompile certain vigra functionality at the O3 level.
+# (This is probably due to inappropriate use of undefined behavior in vigra itself.)
+export CXXFLAGS="-O2 -DNDEBUG ${CXXFLAGS}"
+
 # CONFIGURE
 mkdir build
 cd build
@@ -17,7 +26,7 @@ cmake ..\
 \
         -DCMAKE_CXX_LINK_FLAGS="${LDFLAGS}" \
         -DCMAKE_EXE_LINKER_FLAGS="${LDFLAGS}" \
-        -DCMAKE_CXX_FLAGS="${CXX_FLAGS}" \
+        -DCMAKE_CXX_FLAGS="${CXXFLAGS}" \
 \
         -DCMAKE_BUILD_TYPE=Release \
 \
@@ -25,8 +34,13 @@ cmake ..\
 \
         -DAUTOEXEC_TESTS=0 \
 \
+        -DWITH_BOOST_THREAD=1 \
         -DDEPENDENCY_SEARCH_PREFIX=${PREFIX} \
         -DCMAKE_PREFIX_PATH=${PREFIX} \
+\
+        -DBoost_INCLUDE_DIR=${PREFIX}/include \
+        -DBoost_LIBRARY_DIRS=${PREFIX}/lib \
+        -DBoost_PYTHON_LIBRARY=${PREFIX}/lib/libboost_python${CONDA_PY}${SHLIB_EXT} \
 \
         -DWITH_LEMON=1 \
         -DLEMON_LIBRARY=${PREFIX}/lib/libemon${SHLIB_EXT} \
