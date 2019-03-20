@@ -1,5 +1,0 @@
-libstdcxxng:
-  - 5.4.0
-
-pin_run_as_build:
-  libstdcxx-ng: x.x

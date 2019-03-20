@@ -1,0 +1,10 @@
+--- a/lemon/path.h
++++ b/lemon/path.h
+@@ -228,7 +228,7 @@ namespace lemon {
+       int len = path.length();
+       head.reserve(len);
+       for (typename CPath::RevArcIt it(path); it != INVALID; ++it) {
+-        head.push_back(it);
++        head.push_back(it.operator const typename Path::Arc());;
+       }
+     }
