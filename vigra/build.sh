@@ -8,6 +8,9 @@ else
     export CXXFLAGS="-pthread ${CXXFLAGS}"
 fi
 
+
+EXTRA_CMAKE_ARGS="${EXTRA_CMAKE_ARGS} -DPYTHON_LIBRARIES=${PREFIX}/lib/libpython${PY_VER}m${SHLIB_EXT}"
+
 if [[ "${cxx_compiler}" == "toolchain_cxx" ]];
 then
     export CXXFLAGS="${CXXFLAGS} -std=c++11"
@@ -44,7 +47,7 @@ cmake ..\
 \
         -DWITH_LEMON=1 \
         -DLEMON_LIBRARY=${PREFIX}/lib/libemon${SHLIB_EXT} \
-\
+        ${EXTRA_CMAKE_ARGS} \
 
 # BUILD
 if [[ `uname` == 'Darwin' ]]; then

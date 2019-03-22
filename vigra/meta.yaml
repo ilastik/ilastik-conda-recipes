@@ -15,6 +15,8 @@ package:
 source:
   git_url: https://github.com/ukoethe/vigra
   git_tag: HEAD
+  patches:
+    - ignore_libpython_macos.diff
 
 build:
   number: 1001
