@@ -5,7 +5,9 @@ package:
 # source is in recipe dir
 
 build:
-  number: 1
-  features:
-    - vc14 # [win]
-  msvc_compiler: 14.0 # [win]
+  number: 2
+
+requirements:
+  build:
+    - {{ compiler("cxx") }}
+    - cmake
