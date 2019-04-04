@@ -49,14 +49,11 @@ requirements:
     - readline                                 # [not win]
     - requests
     - scikit-image
-    # need to specify version on windows, due to
-    # RuntimeError: module compiled against API version 0xc but this version of numpy is 0xa
-    - scikit-image              {{ skimage }}*  # [win]
     - scikit-learn              {{ sklearn }}*
     - setuptools                
     - matplotlib
-    - mkl                       {{ mkl }}      # [win]
     - z5py
+
     
     # -----------------------------------------------------------------
     # packages built by us
