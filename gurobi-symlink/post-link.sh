@@ -1,6 +1,13 @@
 set -e
 GUROBI_LOCATION_CACHE_FILE="$(conda info --root)/share/gurobi-root-dir.path"
 
+# SHLIB_EXT is not available at install time
+if [ $(uname) == "Darwin" ]; then
+        SHLIB_EXT="dylib"
+else
+        SHLIB_EXT="so"
+fi
+
 
 if [ "$GUROBI_ROOT_DIR" == "" ]; then 
     GUROBI_ROOT_DIR="<UNDEFINED>"
@@ -41,14 +48,14 @@ set -x
     mkdir -p ${PREFIX}/lib
     cd ${PREFIX}/lib
     
-    if [ -z "$(ls ${GUROBI_LIB_DIR}/*.so)" ]; then
+    if [ -z "$(ls ${GUROBI_LIB_DIR}/*.${SHLIB_EXT})" ]; then
         1>&2 echo "******************************************************"
         1>&2 echo "Error: No shared libraries found in ${GUROBI_LIB_DIR}"
         1>&2 echo "******************************************************"
         exit 1
     fi
     
-    for f in $(ls ${GUROBI_LIB_DIR}/*.so); do
+    for f in $(ls ${GUROBI_LIB_DIR}/*.${SHLIB_EXT}); do
         ln -f -s ${f}
     done
 )
