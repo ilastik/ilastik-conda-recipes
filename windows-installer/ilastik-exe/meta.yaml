@@ -5,7 +5,7 @@ package:
 # source is in recipe dir
 
 build:
-  number: 2
+  number: 1000
 
 requirements:
   build:
