@@ -7,7 +7,7 @@ source:
   git_tag: v1.9.3 # If you change this, change the build string below, and the numpy version requirement
 
 build:
-  number: 0
+  number: 1000
   string: py{{py}}np19_{{PKG_BUILDNUM}}
 
 requirements:

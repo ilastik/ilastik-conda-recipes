@@ -24,6 +24,6 @@ fi
 
 # Remove the symlinks we made post-link.sh
 cd ${PREFIX}/lib
-for f in $(ls ${GUROBI_ROOT_DIR}/lib/*.so); do
+for f in $(ls ${GUROBI_ROOT_DIR}/lib/*.${SHLIB_EXT}); do
     rm -f ${PREFIX}/lib/$(basename ${f})
 done

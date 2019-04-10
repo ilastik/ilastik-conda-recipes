@@ -1,12 +1,16 @@
 mkdir build
 cd build
 
-set CONFIGURATION=Release
+cmake ^
+    -G "%CMAKE_GENERATOR%" ^
+    -DCMAKE_PREFIX_PATH=%LIBRARY_PREFIX% ^
+    -DCMAKE_INSTALL_PREFIX=%LIBRARY_PREFIX% ^
+    -DCMAKE_POSITION_INDEPENDENT_CODE=1 ^
+    ..
+if errorlevel 1 exit 1
 
-cmake .. -G "%CMAKE_GENERATOR%" -DCMAKE_PREFIX_PATH="%LIBRARY_PREFIX%" -DCMAKE_INSTALL_PREFIX="%LIBRARY_PREFIX%" 
-REM -DGLPK_LIBRARY="" -DGLPK_INCLUDE_DIR="" -DGLPK_ROOT_DIR=""
+cmake --build . --config Release --target ALL_BUILD
 if errorlevel 1 exit 1
-cmake --build . --target ALL_BUILD --config %CONFIGURATION%
-if errorlevel 1 exit 1
-cmake --build . --target INSTALL --config %CONFIGURATION%
+
+cmake --build . --config Release --target install
 if errorlevel 1 exit 1

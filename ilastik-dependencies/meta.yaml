@@ -9,10 +9,10 @@ package:
   {% else %}
     name: ilastik-dependencies-no-solvers
   {% endif %}
-    version: 1.3.2
+    version: 1.3.3
 
 build:
-  number: 5
+  number: 1002
   track_features:
     # on osx we need to make sure that we install the numpy versions with openblas instead of mkl to prevent clashes with cplex
     - blas_openblas #[osx] 
@@ -49,18 +49,17 @@ requirements:
     - readline                                 # [not win]
     - requests
     - scikit-image
-    # need to specify version on windows, due to
-    # RuntimeError: module compiled against API version 0xc but this version of numpy is 0xa
-    - scikit-image              {{ skimage }}*  # [win]
     - scikit-learn              {{ sklearn }}*
     - setuptools                
     - matplotlib
-    - mkl                       {{ mkl }}      # [win]
+    - z5py
+
     
     # -----------------------------------------------------------------
     # packages built by us
     # -----------------------------------------------------------------
-    - pytiff                    
+    - fastfilters
+    - pytiff
     - tifffile                  {{ tifffile }}
     - yapsy                     
     - lemon    
@@ -95,11 +94,6 @@ requirements:
     # Multicut
     # -----------------------------------------------------------------
     - nifty                     
-    
-{% if WITH_SOLVERS %}
-    - nifty-with-cplex
-    - nifty-with-gurobi
-{% endif %}
     
 
 test:

@@ -14,6 +14,7 @@ cmake .. -G "NMake Makefiles" ^
     -DWITH_LEMON=1 ^
     -DPYTHON_EXECUTABLE="%PYTHON%" ^
     -DBUILD_SHARED_LIBS=1
+
 if errorlevel 1 exit 1
 
 REM BUILD

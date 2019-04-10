@@ -16,53 +16,46 @@ source:
   git_url: https://github.com/ukoethe/vigra
   git_tag: HEAD
   patches:
+    - ignore_libpython_macos.diff
 
 build:
-  features:
-    - vc14 # [win]
-  number: 11
-  msvc_compiler: 14.0 # [win]
-
-  #
-  # You must build this recipe using 'conda build --numpy=X.Y'
-  #
+  number: 1001
   string: np{{CONDA_NPY}}py{{CONDA_PY}}_{{PKG_BUILDNUM}}_h{{PKG_HASH}}_g{{GIT_FULL_HASH[:7]}}
 
   script_env:
     - VIGRA_SKIP_TESTS
-    # Control building with CXX11 abi
-    - DO_NOT_BUILD_WITH_CXX11_ABI  # [linux]
 
 requirements:
   build:
-    - python   {{ python }}
-    - numpy    {{ numpy }}
-    - jpeg     {{ jpeg }}
-    - libtiff  4.0.9
-    - libpng   {{ libpng }}
-    - fftw     3.3*
-    - hdf5     {{ hdf5 }}
-    - h5py     {{ h5py }}
+    - cmake
+    - {{ compiler("cxx") }}
+  host:
     - boost    {{ boost }}
+    - fftw     3.3*
+    - h5py     {{ h5py }}
+    - hdf5     {{ hdf5 }}
+    - jpeg     {{ jpeg }}
     - lemon    {{ lemon }}
-    - zlib     1.2*
+    - libpng   {{ libpng }}
+    - libtiff  {{ libtiff }}
     - nose
+    - numpy    {{ numpy }}
+    - python   {{ python }}
+    - zlib     1.2*
 
   run:
-    - python
-    - numpy
-    - jpeg
-    - libtiff  4.0.9   # libtiff version must exactly match from the build (on osx, at least)
-    - libpng
+    - boost {{ boost }}
     - fftw     3.3*
-    - hdf5
     - h5py
-    - boost
+    - hdf5
+    - jpeg
     - lemon
-    # in order to suppor older linux distros after gcc5 switch:
-    - libstdcxx-ng >={{ libstdcxxng }} # [linux]
-    - zlib     1.2*
+    - libpng
+    - libtiff
     - nose
+    - {{ pin_compatible("numpy")}}
+    - python
+    - zlib     1.2*
 
 test:
   imports:

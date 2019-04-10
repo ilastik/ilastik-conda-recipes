@@ -1,63 +1,39 @@
+{% set name = "modulegraph" %}
+{% set version = "0.17" %}
+
 package:
-  name: modulegraph
-  version: "0.15"
+  name: "{{ name|lower }}"
+  version: "{{ version }}"
 
 source:
-  fn: modulegraph-0.15.tar.gz
-  url: https://pypi.python.org/packages/55/4e/67dff18461839a36fd60b2efdc40907f59578c93b9f89fd32024830a8000/modulegraph-0.15.tar.gz
-  md5: 453489055c51a76a50d64aa74563d79f
-#  patches:
-   # List any patch files here
-   # - fix.patch
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  sha256: d2824588c489c0ba6f815c066950400755e8e287da64bcddae4c0d6e76f8f5f3
 
 build:
-  # preserve_egg_dir: True
+  number: 0
   entry_points:
-    # Put any entry points (scripts to be generated automatically) here. The
-    # syntax is module:function.  For example
-    #
-    # - modulegraph = modulegraph:main
-    #
-    # Would create an entry point called modulegraph that calls modulegraph.main()
-
     - modulegraph = modulegraph.__main__:main
-
-  # If this is a new build for the same version, increment the build
-  # number. If you do not include this key, it defaults to 0.
-  # number: 1
+  script: "{{ PYTHON }} -m pip install . --no-deps --ignore-installed -vv "
 
 requirements:
-  build:
+  host:
+    - altgraph >=0.15
+    - pip
     - python
     - setuptools
-    - altgraph >=0.12
-
   run:
+    - altgraph >=0.15
     - python
-    - altgraph >=0.12
+    - setuptools
 
 test:
-  # Python imports
   imports:
     - modulegraph
-
   commands:
-    # You can put test commands to be run here.  Use this to test that the
-    # entry points work.
-    - modulegraph -m sys
-
-  # You can also put a file called run_test.py in the recipe that will be run
-  # at test time.
-
-  # requires:
-    # Put any additional test requirements here.  For example
-    # - nose
+    - modulegraph --help
 
 about:
   home: http://bitbucket.org/ronaldoussoren/modulegraph
-  license: MIT License
-  summary: 'Python module dependency analysis tool'
-
-# See
-# http://docs.continuum.io/conda/build.html for
-# more information about meta.yaml
+  license: MIT
+  license_family: MIT
+  summary: Python module dependency analysis tool
