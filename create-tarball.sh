@@ -82,6 +82,7 @@ fi
 
 echo "Creating new ${RELEASE_ENV_NAME} environment using ${EVERYTHING_PKG}"
 conda create -q -y -n ${RELEASE_ENV_NAME} ${EVERYTHING_PKG} --override-channels "$@"
+conda install -y -n ${RELEASE_ENV_NAME} -c kdominik ilastik-install
 
 if [[ $USE_GIT_LATEST == 1 ]]; then
     # Instead of keeping the version from binstar, get the git repo
@@ -124,6 +125,8 @@ else
     rm -rf ${ILASTIK_META}/*/tests/*
     echo "test-files removed"
 fi
+
+echo "{\"previous_prefix\": \"${RELEASE_ENV}\"}" > ${RELEASE_ENV}/.prefix_previous
 
 if [[ $SKIP_TAR == 1 ]]; then
     echo "Skipping tarball creation."

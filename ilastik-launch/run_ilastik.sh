@@ -64,5 +64,8 @@ fi
 export FONTCONFIG_PATH="${PREFIX}/etc/fonts/"
 export FONTCONFIG_FILE="${PREFIX}/etc/fonts/fonts.conf"
 
+# do the installation step:
+"${PREFIX}/bin/python -m ilastik_install ${PREFIX}"
+
 # Launch the ilastik entry script, and pass along any commmand line args.
 "${PREFIX}/bin/python" "${PREFIX}/ilastik-meta/ilastik/ilastik.py" "$@"
