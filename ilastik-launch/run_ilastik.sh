@@ -67,7 +67,7 @@ export FONTCONFIG_FILE="${PREFIX}/etc/fonts/fonts.conf"
 # do the installation step:
 if [ -f ${PREFIX}/. ]; then
     echo "Doing installation step..."
-    "${PREFIX}/bin/python -m ilastik_install ${PREFIX}"
+    "${PREFIX}/bin/python" "${PREFIX}/lib/python3.7/site-packages/ilastik_install/cli.py" "${PREFIX}"
     rm -f ${PREFIX}/.prefix_previous
 fi
 
