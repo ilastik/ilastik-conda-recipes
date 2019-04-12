@@ -50,12 +50,14 @@ if [[ $@ == *"--include-tests"* ]]; then
     fi
 fi
 
-RANDOM_STRING="szfndbgckhxkaygjxbpxkbcuwzweapsyayblnqsadneekswtavrfhcgzquyemufyiprbfbcaiahnnssdssobksqqycmqgyvhpnnktprkpujobkjutbzqqujpbdzyaeeg"
-RELEASE_ENV_NAME="${RANDOM_STRING}"
-RELEASE_ENV="${CONDA_ROOT}/envs/${ENV_NAME}"
 
 CONDA_ROOT=`conda info --root`
 source ${CONDA_ROOT}/bin/activate root
+
+RANDOM_STRING="szfndbgckhxkaygjxbpxkbcuwzweapsyayblnqsadneekswtavrfhcgzquyemufyiprbfbcaiahnnssdssobksqqycmqgyvhpnnktprkpujobkjutbzqqujpbdzyaeeg"
+RELEASE_ENV_NAME="${RANDOM_STRING}"
+RELEASE_ENV="${CONDA_ROOT}/envs/${RELEASE_ENV_NAME}"
+
 
 # Remove old ${RELEASE_ENV_NAME} environment
 if [ -d ${RELEASE_ENV} ]; then
@@ -81,6 +83,7 @@ else
 fi
 
 echo "Creating new ${RELEASE_ENV_NAME} environment using ${EVERYTHING_PKG}"
+echo "environment location: ${RELEASE_ENV}"
 conda create -q -y -n ${RELEASE_ENV_NAME} ${EVERYTHING_PKG} --override-channels "$@"
 conda install -y -n ${RELEASE_ENV_NAME} -c kdominik ilastik-install
 
