@@ -12,7 +12,7 @@ package:
     version: 1.3.3
 
 build:
-  number: 1002
+  number: 1003
   track_features:
     # on osx we need to make sure that we install the numpy versions with openblas instead of mkl to prevent clashes with cplex
     - blas_openblas #[osx] 
@@ -38,6 +38,7 @@ requirements:
     - nose
     - pillow                    {{ pillow }}
     - pytest                    {{ pytest }}
+    - pytest-qt
     - psutil                    
     - pyqt                      {{ pyqt }}
     - pyqtgraph
