@@ -176,7 +176,7 @@ Generating a release binary
 
 3. Build `ilastik-meta` and `ilastik-dependencies` packages, and upload to the `ilastik-forge` anaconda channel.
 
-        WITH_SOLVERS=1 conda build ilastik-meta ilastik-dependencies
+        WITH_SOLVERS=1 conda build recipes/ilastik-meta recipes/ilastik-dependencies
         anaconda upload -u ilastik-forge ${CONDA_ROOT}/conda-bld/linux-64/ilastik-meta*.tar.bz2
         anaconda upload -u ilastik-forge ${CONDA_ROOT}/conda-bld/linux-64/ilastik-dependencies*.tar.bz2
 
@@ -200,10 +200,10 @@ Generating a release binary
 
    **Mac:**
        
-            $ grep Usage ./osx-packages/create-osx-app.sh
+            $ grep Usage recipes/osx-packages/create-osx-app.sh
             ## Usage: create-osx-app.sh [--compress] [--git-latest] [--no-solvers] [--include-tests] [... extra install-args, e.g. --use-local or -c ilastik-forge -c conda-forge or --copy ...]
             
-            $ ./osx-packages/create-osx-app.sh --compress -c ilastik-forge -c conda-forge
+            $ recipes/osx-packages/create-osx-app.sh --compress -c ilastik-forge -c conda-forge
 
    If any options are used in the **Linux** or **Mac** binary creation scripts above, they must be passed in this order:
 
@@ -257,7 +257,7 @@ git clone http://github.com/ilastik/ilastik-build-conda
 cd ilastik-build-conda
 
 # Build a recipe, e.g:
-conda build --numpy=1.11 vigra
+conda build --numpy=1.11 recipes/vigra
 
 # Now install your newly built package, directly from your local build directory:
 conda install --use-local -n ilastik-devel vigra
@@ -281,7 +281,7 @@ export CPLEX_ROOT_DIR=/path/to/ibm/ILOG/CPLEX_Studio1251
 export GUROBI_ROOT_DIR=/path/to/gurobi650/linux64
 
 # Build some recipes that depend on solvers
-conda build ilastik-dependencies
+conda build recipes/ilastik-dependencies
 ```
 
 <a name="writing"></a>
@@ -413,7 +413,7 @@ if errorlevel 1 exit 1
 $ cd ../
 
 # Build the package
-$ conda build somepackage
+$ conda build recipes/somepackage
 ```
 
 ### 3. Upload the package to your [anaconda] channel.
