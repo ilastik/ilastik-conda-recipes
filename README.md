@@ -25,7 +25,7 @@ Contents
 - [How to build these packages yourself](#howtobuild)
 - [Appendix: Writing a new recipe](#writing)
 - [Appendix: Compiler details](#compiler)
-- [Appendix: Linux VM Details](#linuxvm)
+- [Appendix: Linux Build Container](#linuxcontainer)
 - [Appendix: TODO/TBD](#todo)
 
 
@@ -438,68 +438,63 @@ anaconda upload -u ilastik /my/miniconda/conda-bld/osx-64/somepackage-1.2.3-0.ta
 Appendix: Compiler details
 ==========================
 
-**When writing your own recipes, use gcc provided by conda.**
+**When writing your own recipes, use gcc/clang provided by conda.**
 
-Instead of using your system compiler, all of our C++ packages use the `gcc` package provided by conda
-itself (or our own variation of it).  On Mac, we use LLVM's clang instead to get C++11 features.  On Linux, using conda's gcc-4.8 is an easy way to get C++11 support on old OSes, such as our CentOS 5.11 build VM.
+Instead of using your system compiler, all of our C++ packages use the compiler packages provided by the Anaconda distribution.
 
 To use the gcc package, add these requirements to your `meta.yaml` file:
 
 ```yaml
 requirements:
   build:
-    - gcc 4.8.5 # [linux]
+    - cmake
+    - {{ compiler("cxx") }}
+  host:
+    - foo
   run:
-    - libgcc # [linux]
+    - foo
 ```
 
-And in `build.sh`, make sure you use the right `gcc` executable.  For example:
+And in `build.sh`, you can rely on the `${CXX}` environment variable as the compiler executable.
+Do NOT hard-code your build scripts to use `gcc` or `clang`.  As long as you don't change `CC` or `CXX`,
+cmake should detect the correct compiler to use.
 
-```bash
-export CC=${PREFIX}/bin/gcc
-export CXX=${PREFIX}/bin/g++
 
-# conda provides default values of these on Mac OS X,
-# but we don't want them when building with gcc
-export CFLAGS=""
-export CXXFLAGS=""
-export LDFLAGS=""
+<a name="linuxcontainer"></a>
+Appendix: Linux Build Container
+===============================
 
-./configure --prefix=${PREFIX} ...etc...
-make
-make install
+The `conda-forge` distribution is built using a CentOS-6 docker container, named [`linux-anvil-comp7`][linux-anvil-comp7].
+If we also build our packages in that container, then they will be binary-compatible with the conda-forge packages,
+and therefore compatible with most modern linux distros.
 
-# Or, for cmake-based packages:
-mkdir build
-cd build
-cmake .. \
-    -DCMAKE_C_COMPILER=${PREFIX}/bin/gcc \
-    -DCMAKE_CXX_COMPILER=${PREFIX}/bin/g++ \
-    -DCMAKE_INSTALL_PREFIX=${PREFIX} \
-    ...etc...
+[linux-anvil-comp7]: https://github.com/conda-forge/docker-images
 
-make
-make install
+These commands will get you started:
+
 ```
+# Launch the container.
+docker run -it \
+    --name my-build-container \
+    -e HOST_USER_NAME=${USERNAME} \
+    -e HOST_USER_ID=${UID} \
+    -e HOST_GROUP_NAME="$(id -g -n ${USERNAME} || echo ${USERNAME})" \
+    -e HOST_GROUP_ID=$(id -g ${USERNAME}) \
+    condaforge/linux-anvil-comp7
 
-<a name="linuxvm"></a>
-Appendix: Linux VM Details
-==========================
+# BTW, Those extra environment variables are used by the
+# linux-anvil startup scripts to enable a convenience:
+# The file permissions used by the container will be
+# compatible with your host machine, too.
 
-The Anaconda distribution is built on a CentOS 5.11 VM.
-To build the ilastik stack on that OS, you'll need to install the following:
- 
-- `cmake`, `git`, `conda`, `gcc`
-- VTK dependencies: 
-  * OpenGL: `yum install mesa-libGL-devel`
-  * X11: `yum groupinstall "X Software Development"`
-- CPLEX (optional)
-- Recommended: VirtualBox Guest additions
-  1. Register external package repository "rpmforge"
-    * http://wiki.centos.org/AdditionalResources/Repositories/RPMForge#head-5aabf02717d5b6b12d47edbc5811404998926a1b
-  2. Install package `dkms`
-  3. In VBox menu, select `Devices` > `Insert Guest Additions CD`
-  4. From disk image, install Guest Additions from command line
+# Download build scripts
+conda install -c ilastik-forge publish-conda-stack
+git clone https://github.com/ilastik/ilastik-build-conda
+
+# Build a recipe
+cd ilastik-build-conda
+publish-conda-stack ilastik-recipe-specs.yaml vigra
+```
 
 
 <a name="todo"></a>
