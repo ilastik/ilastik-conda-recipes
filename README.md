@@ -503,11 +503,6 @@ Appendix: TODO/TBD
 
 - General
 
- - [x] In cases where we provide an alternative build of a package that Continuum already provides, we need to 
-   make sure our special channel takes priority over the `defaults` channel used by conda.
-   (**Edit:** Ideally, we could just use a custom "build string", but due to conda/conda#918, that doesn't work.
-   Instead, we just use a deliberately strange version number in our custom packages, e.g. `version: 5.10.1.99`.)
-
  - [ ] It would be nice if we built "debug" versions of important packages (e.g. Python, vigra, Qt) 
    and attached them to the `[debug]` conda-build "feature".
 
