@@ -53,8 +53,8 @@ wget https://repo.continuum.io/miniconda/Miniconda3-latest-MacOSX-x86_64.sh
 bash Miniconda3-latest-MacOSX-x86_64.sh
 
 # Activate conda
-CONDA_ROOT=`conda info --root`
-source ${CONDA_ROOT}/bin/activate root
+CONDA_BASE=`conda info --base`
+source ${CONDA_BASE}/bin/activate base
 ```
 
 
@@ -119,7 +119,7 @@ conda install -n ilastik-devel nifty-with-gurobi -c ilastik-forge -c conda-forge
 ### 2. Run ilastik
 
 ```bash
-${CONDA_ROOT}/envs/ilastik-devel/run_ilastik.sh --debug
+${CONDA_BASE}/envs/ilastik-devel/run_ilastik.sh --debug
 ```
 
 ### 3. (Optional) Clone ilastik git repo
@@ -131,8 +131,8 @@ replace the `ilastik-meta` directory with the full git repo.
 **Note:** This will remove both `ilastik-meta` and `ilastik-dependencies`, but all of the other dependencies in your environment will remain.
 
 ```bash
-CONDA_ROOT=`conda info --root`
-DEV_PREFIX=${CONDA_ROOT}/envs/ilastik-devel
+CONDA_BASE=`conda info --base`
+DEV_PREFIX=${CONDA_BASE}/envs/ilastik-devel
 conda remove -n ilastik-devel ilastik-meta
 
 # Re-install ilastik-meta.pth
@@ -179,15 +179,15 @@ Generating a release binary
 3. Build `ilastik-meta` and `ilastik-dependencies` packages, and upload to the `ilastik-forge` anaconda channel.
 
         WITH_SOLVERS=1 conda build recipes/ilastik-meta recipes/ilastik-dependencies
-        anaconda upload -u ilastik-forge ${CONDA_ROOT}/conda-bld/linux-64/ilastik-meta*.tar.bz2
-        anaconda upload -u ilastik-forge ${CONDA_ROOT}/conda-bld/linux-64/ilastik-dependencies*.tar.bz2
+        anaconda upload -u ilastik-forge ${CONDA_BASE}/conda-bld/linux-64/ilastik-meta*.tar.bz2
+        anaconda upload -u ilastik-forge ${CONDA_BASE}/conda-bld/linux-64/ilastik-dependencies*.tar.bz2
 
-**Troubleshooting Tip:** If the `ilastik-meta` tag has been relocated since you last built the `ilastik-meta` package, you should probably clear conda's git cache for that repo, to ensure you have the new tags: `rm -rf $(conda info --root)/conda-bld/git_cache/github.com/ilastik/ilastik-meta`
+**Troubleshooting Tip:** If the `ilastik-meta` tag has been relocated since you last built the `ilastik-meta` package, you should probably clear conda's git cache for that repo, to ensure you have the new tags: `rm -rf $(conda info --base)/conda-bld/git_cache/github.com/ilastik/ilastik-meta`
 
 4. (Optional) Install to a local environment and test
 
         conda create -n test-env ilastik-dependencies=1.2.3a4 -c ilastik-forge -c conda-forge
-        cd ${CONDA_ROOT}/envs/test-env
+        cd ${CONDA_BASE}/envs/test-env
         ./run_ilastik.sh
 
 5. Create tarball/app
@@ -232,7 +232,7 @@ Generating a release binary
             ## and build the installer.
 
             ## delete environment
-            $ activate root
+            $ activate base
             $ conda env remove -n ilastik-release
 
 <a name="howtobuild"></a>
@@ -251,7 +251,7 @@ But if, for some reason, you need to build your own binary packages from these r
 
 ```bash
 # Prerequisite: Install conda-build
-source activate root
+source activate base
 conda install conda-build
 
 # Clone the ilastik build recipes
@@ -297,7 +297,7 @@ The [conda documentation][2] explains in detail how to create a new package, but
 ### 0. Prerequisite: Install `conda-build`
 
 ```bash
-source activate root
+source activate base
 conda install conda-build
 ```
 
