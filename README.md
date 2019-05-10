@@ -244,6 +244,9 @@ All of the recipes in this repo are already uploaded to the [`ilastik-forge`][3]
 The linux packages were built on CentOS-6, so they should be compatible with most modern distros.
 The Mac packages were built with `MACOSX_DEPLOYMENT_TARGET=10.9`, so they should theoretically support OSX 10.9+.
 
+Without publish-conda-stack
+---------------------------
+
 If, for some reason, you do need to build your own binary packages from these recipes, it should be easy to do so.
 The recommended procedure for building these packages is to use the [`publish-conda-stack`][publish-conda-stack] tool.
 But here are the steps to follow if you aren't using that tool:
@@ -287,6 +290,35 @@ export GUROBI_ROOT_DIR=/path/to/gurobi650/linux64
 # Build some recipes that depend on solvers
 conda build recipes/ilastik-dependencies
 ```
+
+With publish-conda-stack
+------------------------
+
+As mentioned above, [`publish-conda-stack`][pcs] is a convenient tool for building a set of conda recipes and uploading them to your own channel.
+
+Basically, list your recipes in a "specs" file, along with shared configuration settings (e.g. source channels, destination channel, and your master build config file), and then use `publish-conda-stack` to download, build, and upload one or more of your recipes.
+
+See the [`publish-conda-stack`][pcs] docs for details.  Example usage:
+
+
+```bash
+source activate base
+conda install -c ilastik-forge -c conda-forge conda-build publish-conda-stack
+
+cd ilastik-build-conda
+
+# on Linux and Windows:
+publish-conda-stack ilastik-recipe-specs.yaml
+
+# on Mac:
+MACOSX_DEPLOYMENT_TARGET=10.9 publish-conda-stack ilastik-recipe-specs.yaml
+```
+
+The `publish-conda-stack` script parses the packages from `ilastik-recipe-specs.yaml`, and for each package checks whether that version is already available on the `ilastik-forge` channel. If that is not the case, it will build the package and upload it to `ilastik-forge`. By default, the script **assumes you have both solvers** and wants to build all packages. If you do not have CPLEX or Gurobi, comment out the sections near the end that have `cplex` or `gurobi` in their name, as well as the `ilastik-dependencies` package as described below.
+
+If you want to change which packages are built, _e.g._ to build **without solvers** edit the ilastik-recipe-specs.yaml file. There, you can comment or change the sections specific to respective packages.
+It is a YAML file with the following format:
+
 
 <a name="writing"></a>
 Appendix: Writing a new recipe
