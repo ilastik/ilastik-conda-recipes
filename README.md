@@ -239,15 +239,17 @@ Generating a release binary
 How to build these packages yourself
 ====================================
 
-**Note**: see https://github.com/ilastik/ilastik-publish-packages for an automated way of building all packages required by ilastik
+Unless you are editing the source code of these packages, there should be no need to build these packages yourself.
+All of the recipes in this repo are already uploaded to the [`ilastik-forge`][3] anaconda channel.
+The linux packages were built on CentOS-6, so they should be compatible with most modern distros.
+The Mac packages were built with `MACOSX_DEPLOYMENT_TARGET=10.9`, so they should theoretically support OSX 10.9+.
 
-**Warning**: the description below is outdated
+If, for some reason, you do need to build your own binary packages from these recipes, it should be easy to do so.
+The recommended procedure for building these packages is to use the [`publish-conda-stack`][publish-conda-stack] tool.
+But here are the steps to follow if you aren't using that tool:
 
-All of the recipes in this repo should already be uploaded to the [ilastik][3] anaconda channel.
-The linux packages were built on CentOS 5.11, so they should be compatible with most modern distros.
-The Mac packages were built with `MACOSX_DEPLOYMENT_TARGET=10.7`, so they should theoretically support OSX 10.7+.
+[publish-conda-stack]: https://github.com/ilastik/ilastik-publish-packages
 
-But if, for some reason, you need to build your own binary packages from these recipes, it should be easy to do so:
 
 ```bash
 # Prerequisite: Install conda-build
@@ -258,8 +260,8 @@ conda install conda-build
 git clone http://github.com/ilastik/ilastik-build-conda
 cd ilastik-build-conda
 
-# Build a recipe, e.g:
-conda build --numpy=1.11 recipes/vigra
+# Build a recipe, and use our global version pinnings
+conda build -m ilastik-pins.yaml recipes/vigra
 
 # Now install your newly built package, directly from your local build directory:
 conda install --use-local -n ilastik-devel vigra
