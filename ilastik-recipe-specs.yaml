@@ -26,7 +26,7 @@ recipe-specs:
     - name: lemon
       recipe-repo: https://github.com/ilastik/ilastik-build-conda
       tag: master
-      recipe-subdir: lemon
+      recipe-subdir: recipes/lemon
       # conda-build-flags: --no-test
       # by default a package is built on all 3 platforms
       build-on:
@@ -48,7 +48,7 @@ recipe-specs:
     - name: vigra
       recipe-repo: https://github.com/ilastik/ilastik-build-conda
       tag: master
-      recipe-subdir: vigra
+      recipe-subdir: recipes/vigra
       environment:
         VIGRA_SKIP_TESTS: 0
       no-test: false
@@ -123,12 +123,12 @@ recipe-specs:
     - name: ilastik-meta
       recipe-repo: https://github.com/ilastik/ilastik-build-conda
       tag: master
-      recipe-subdir: ilastik-meta
+      recipe-subdir: recipes/ilastik-meta
 
     - name: ilastik-launch
       recipe-repo: https://github.com/ilastik/ilastik-build-conda
       tag: master
-      recipe-subdir: ilastik-launch
+      recipe-subdir: recipes/ilastik-launch
       build-on:
        - linux
        - osx
@@ -136,35 +136,35 @@ recipe-specs:
     - name: ilastik-dependencies-no-solvers
       recipe-repo: https://github.com/ilastik/ilastik-build-conda
       tag: master
-      recipe-subdir: ilastik-dependencies
+      recipe-subdir: recipes/ilastik-dependencies
       environment:
         WITH_SOLVERS: 0
 
     - name: altgraph
       recipe-repo: https://github.com/ilastik/ilastik-build-conda
       tag: master
-      recipe-subdir: osx-packages/altgraph
+      recipe-subdir: recipes/osx-packages/altgraph
       build-on:
         - osx
 
     - name: macholib
       recipe-repo: https://github.com/ilastik/ilastik-build-conda
       tag: master
-      recipe-subdir: osx-packages/macholib
+      recipe-subdir: recipes/osx-packages/macholib
       build-on:
         - osx
 
     - name: modulegraph
       recipe-repo: https://github.com/ilastik/ilastik-build-conda
       tag: master
-      recipe-subdir: osx-packages/modulegraph
+      recipe-subdir: recipes/osx-packages/modulegraph
       build-on:
         - osx
 
     - name: py2app
       recipe-repo: https://github.com/ilastik/ilastik-build-conda
       tag: master
-      recipe-subdir: osx-packages/py2app
+      recipe-subdir: recipes/osx-packages/py2app
       build-on:
         - osx
 
@@ -175,14 +175,14 @@ recipe-specs:
     - name: opengm-structured-learning-headers
       recipe-repo: https://github.com/ilastik/ilastik-build-conda
       tag: master
-      recipe-subdir: opengm-structured-learning-headers
+      recipe-subdir: recipes/opengm-structured-learning-headers
 
     - name: cplex-shared
       build-on:
         - linux
       recipe-repo: https://github.com/ilastik/ilastik-build-conda
       tag: master
-      recipe-subdir: cplex-shared
+      recipe-subdir: recipes/cplex-shared
       environment:
         CPLEX_ROOT_DIR: /build/in/gurobi811/linux64
 
@@ -191,7 +191,7 @@ recipe-specs:
         - osx
       recipe-repo: https://github.com/ilastik/ilastik-build-conda
       tag: master
-      recipe-subdir: cplex-shared
+      recipe-subdir: recipes/cplex-shared
       environment:
         CPLEX_ROOT_DIR: /Applications/CPLEX_Studio129
 
@@ -200,14 +200,14 @@ recipe-specs:
         - win
       recipe-repo: https://github.com/ilastik/ilastik-build-conda
       tag: master
-      recipe-subdir: cplex-shared
+      recipe-subdir: recipes/cplex-shared
 
     - name: gurobi-symlink
       build-on:
         - linux
       recipe-repo: https://github.com/ilastik/ilastik-build-conda
       tag: master
-      recipe-subdir: gurobi-symlink
+      recipe-subdir: recipes/gurobi-symlink
       environment:
         GUROBI_ROOT_DIR: /build/in/gurobi811/linux64
 
@@ -216,7 +216,7 @@ recipe-specs:
         - osx
       recipe-repo: https://github.com/ilastik/ilastik-build-conda
       tag: master
-      recipe-subdir: gurobi-symlink
+      recipe-subdir: recipes/gurobi-symlink
       environment:
         GUROBI_ROOT_DIR: /Library/gurobi811/mac64
 
@@ -225,7 +225,7 @@ recipe-specs:
         - win
       recipe-repo: https://github.com/ilastik/ilastik-build-conda
       tag: master
-      recipe-subdir: gurobi-symlink
+      recipe-subdir: recipes/gurobi-symlink
       environment:
         GUROBI_ROOT_DIR: /gurobi811/win64
 
@@ -313,14 +313,14 @@ recipe-specs:
     - name: ilastik-exe
       recipe-repo: https://github.com/ilastik/ilastik-build-conda
       tag: master
-      recipe-subdir: windows-installer/ilastik-exe
+      recipe-subdir: recipes/windows-installer/ilastik-exe
       build-on:
        - win
 
     - name: ilastik-package
       recipe-repo: https://github.com/ilastik/ilastik-build-conda
       tag: master
-      recipe-subdir: windows-installer/ilastik-package
+      recipe-subdir: recipes/windows-installer/ilastik-package
       build-on:
        - win
 
