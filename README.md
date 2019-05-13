@@ -1,18 +1,20 @@
 ilastik-build-conda
 ===================
 
-[ilastik] depends on **110+ packages**.  Most of those packages are already provided for us by the [Anaconda] Python distribution.
+[ilastik] depends on **110+ packages**.  Most of those packages are already provided for us by the [conda-forge] [channel][cf-channel].
 For some of the 20+ the packages that *aren't* provided by Anaconda, we use the recipes in this repo.
-See also our [ilastik-publish-packages repo](https://github.com/ilastik/ilastik-publish-packages), especially the `ilastik-recipe-specs.yaml` for a complete list of packages we build ourselves.
+See also our [ilastik-publish-packages repo](https://github.com/ilastik/ilastik-publish-packages),
+especially the `ilastik-recipe-specs.yaml` for a complete list of packages we build ourselves.
 
 These recipes are built using the [conda-build][2] tool.
-The resulting binaries are uploaded to the [ilastik anaconda channel][3],
+The resulting binaries are uploaded to the [`ilastik-forge` anaconda channel][3],
 and can be installed using the [conda][1] package manager.
 
-[1]: http://conda.pydata.org/
-[2]: http://conda.pydata.org/docs/build.html
-[3]: https://anaconda.org/ilastik
-[Anaconda]: https://store.continuum.io/cshop/anaconda
+[1]: https://conda.io
+[2]: https://conda.io/projects/conda-build
+[3]: https://anaconda.org/ilastik-forge
+[conda-forge]: https://conda-forge.org/
+[cf-channel]: https://anaconda.org/conda-forge/repo
 [ilastik]: http://ilastik.org
 
 Contents
@@ -23,7 +25,7 @@ Contents
 - [How to build these packages yourself](#howtobuild)
 - [Appendix: Writing a new recipe](#writing)
 - [Appendix: Compiler details](#compiler)
-- [Appendix: Linux VM Details](#linuxvm)
+- [Appendix: Linux Build Container](#linuxcontainer)
 - [Appendix: TODO/TBD](#todo)
 
 
@@ -51,8 +53,8 @@ wget https://repo.continuum.io/miniconda/Miniconda3-latest-MacOSX-x86_64.sh
 bash Miniconda3-latest-MacOSX-x86_64.sh
 
 # Activate conda
-CONDA_ROOT=`conda info --root`
-source ${CONDA_ROOT}/bin/activate root
+CONDA_BASE=`conda info --base`
+source ${CONDA_BASE}/bin/activate base
 ```
 
 
@@ -117,7 +119,7 @@ conda install -n ilastik-devel nifty-with-gurobi -c ilastik-forge -c conda-forge
 ### 2. Run ilastik
 
 ```bash
-${CONDA_ROOT}/envs/ilastik-devel/run_ilastik.sh --debug
+${CONDA_BASE}/envs/ilastik-devel/run_ilastik.sh --debug
 ```
 
 ### 3. (Optional) Clone ilastik git repo
@@ -129,8 +131,8 @@ replace the `ilastik-meta` directory with the full git repo.
 **Note:** This will remove both `ilastik-meta` and `ilastik-dependencies`, but all of the other dependencies in your environment will remain.
 
 ```bash
-CONDA_ROOT=`conda info --root`
-DEV_PREFIX=${CONDA_ROOT}/envs/ilastik-devel
+CONDA_BASE=`conda info --base`
+DEV_PREFIX=${CONDA_BASE}/envs/ilastik-devel
 conda remove -n ilastik-devel ilastik-meta
 
 # Re-install ilastik-meta.pth
@@ -176,16 +178,16 @@ Generating a release binary
 
 3. Build `ilastik-meta` and `ilastik-dependencies` packages, and upload to the `ilastik-forge` anaconda channel.
 
-        WITH_SOLVERS=1 conda build ilastik-meta ilastik-dependencies
-        anaconda upload -u ilastik-forge ${CONDA_ROOT}/conda-bld/linux-64/ilastik-meta*.tar.bz2
-        anaconda upload -u ilastik-forge ${CONDA_ROOT}/conda-bld/linux-64/ilastik-dependencies*.tar.bz2
+        WITH_SOLVERS=1 conda build recipes/ilastik-meta recipes/ilastik-dependencies
+        anaconda upload -u ilastik-forge ${CONDA_BASE}/conda-bld/linux-64/ilastik-meta*.tar.bz2
+        anaconda upload -u ilastik-forge ${CONDA_BASE}/conda-bld/linux-64/ilastik-dependencies*.tar.bz2
 
-**Troubleshooting Tip:** If the `ilastik-meta` tag has been relocated since you last built the `ilastik-meta` package, you should probably clear conda's git cache for that repo, to ensure you have the new tags: `rm -rf $(conda info --root)/conda-bld/git_cache/github.com/ilastik/ilastik-meta`
+**Troubleshooting Tip:** If the `ilastik-meta` tag has been relocated since you last built the `ilastik-meta` package, you should probably clear conda's git cache for that repo, to ensure you have the new tags: `rm -rf $(conda info --base)/conda-bld/git_cache/github.com/ilastik/ilastik-meta`
 
 4. (Optional) Install to a local environment and test
 
         conda create -n test-env ilastik-dependencies=1.2.3a4 -c ilastik-forge -c conda-forge
-        cd ${CONDA_ROOT}/envs/test-env
+        cd ${CONDA_BASE}/envs/test-env
         ./run_ilastik.sh
 
 5. Create tarball/app
@@ -200,10 +202,10 @@ Generating a release binary
 
    **Mac:**
        
-            $ grep Usage ./osx-packages/create-osx-app.sh
+            $ grep Usage recipes/osx-packages/create-osx-app.sh
             ## Usage: create-osx-app.sh [--compress] [--git-latest] [--no-solvers] [--include-tests] [... extra install-args, e.g. --use-local or -c ilastik-forge -c conda-forge or --copy ...]
             
-            $ ./osx-packages/create-osx-app.sh --compress -c ilastik-forge -c conda-forge
+            $ recipes/osx-packages/create-osx-app.sh --compress -c ilastik-forge -c conda-forge
 
    If any options are used in the **Linux** or **Mac** binary creation scripts above, they must be passed in this order:
 
@@ -230,34 +232,39 @@ Generating a release binary
             ## and build the installer.
 
             ## delete environment
-            $ activate root
+            $ activate base
             $ conda env remove -n ilastik-release
 
 <a name="howtobuild"></a>
 How to build these packages yourself
 ====================================
 
-**Note**: see https://github.com/ilastik/ilastik-publish-packages for an automated way of building all packages required by ilastik
+Unless you are editing the source code of these packages, there should be no need to build these packages yourself.
+All of the recipes in this repo are already uploaded to the [`ilastik-forge`][3] anaconda channel.
+The linux packages were built on CentOS-6, so they should be compatible with most modern distros.
+The Mac packages were built with `MACOSX_DEPLOYMENT_TARGET=10.9`, so they should theoretically support OSX 10.9+.
 
-**Warning**: the description below is outdated
+Without publish-conda-stack
+---------------------------
 
-All of the recipes in this repo should already be uploaded to the [ilastik][3] anaconda channel.
-The linux packages were built on CentOS 5.11, so they should be compatible with most modern distros.
-The Mac packages were built with `MACOSX_DEPLOYMENT_TARGET=10.7`, so they should theoretically support OSX 10.7+.
+If, for some reason, you do need to build your own binary packages from these recipes, it should be easy to do so.
+The recommended procedure for building these packages is to use the [`publish-conda-stack`][publish-conda-stack] tool.
+But here are the steps to follow if you aren't using that tool:
 
-But if, for some reason, you need to build your own binary packages from these recipes, it should be easy to do so:
+[publish-conda-stack]: https://github.com/ilastik/ilastik-publish-packages
+
 
 ```bash
 # Prerequisite: Install conda-build
-source activate root
+source activate base
 conda install conda-build
 
 # Clone the ilastik build recipes
 git clone http://github.com/ilastik/ilastik-build-conda
 cd ilastik-build-conda
 
-# Build a recipe, e.g:
-conda build --numpy=1.11 vigra
+# Build a recipe, and use our global version pinnings
+conda build -m ilastik-pins.yaml recipes/vigra
 
 # Now install your newly built package, directly from your local build directory:
 conda install --use-local -n ilastik-devel vigra
@@ -281,8 +288,37 @@ export CPLEX_ROOT_DIR=/path/to/ibm/ILOG/CPLEX_Studio1251
 export GUROBI_ROOT_DIR=/path/to/gurobi650/linux64
 
 # Build some recipes that depend on solvers
-conda build ilastik-dependencies
+conda build recipes/ilastik-dependencies
 ```
+
+With publish-conda-stack
+------------------------
+
+As mentioned above, [`publish-conda-stack`][pcs] is a convenient tool for building a set of conda recipes and uploading them to your own channel.
+
+Basically, list your recipes in a "specs" file, along with shared configuration settings (e.g. source channels, destination channel, and your master build config file), and then use `publish-conda-stack` to download, build, and upload one or more of your recipes.
+
+See the [`publish-conda-stack`][pcs] docs for details.  Example usage:
+
+
+```bash
+source activate base
+conda install -c ilastik-forge -c conda-forge conda-build publish-conda-stack
+
+cd ilastik-build-conda
+
+# on Linux and Windows:
+publish-conda-stack ilastik-recipe-specs.yaml
+
+# on Mac:
+MACOSX_DEPLOYMENT_TARGET=10.9 publish-conda-stack ilastik-recipe-specs.yaml
+```
+
+The `publish-conda-stack` script parses the packages from `ilastik-recipe-specs.yaml`, and for each package checks whether that version is already available on the `ilastik-forge` channel. If that is not the case, it will build the package and upload it to `ilastik-forge`. By default, the script **assumes you have both solvers** and wants to build all packages. If you do not have CPLEX or Gurobi, comment out the sections near the end that have `cplex` or `gurobi` in their name, as well as the `ilastik-dependencies` package as described below.
+
+If you want to change which packages are built, _e.g._ to build **without solvers** edit the ilastik-recipe-specs.yaml file. There, you can comment or change the sections specific to respective packages.
+It is a YAML file with the following format:
+
 
 <a name="writing"></a>
 Appendix: Writing a new recipe
@@ -295,7 +331,7 @@ The [conda documentation][2] explains in detail how to create a new package, but
 ### 0. Prerequisite: Install `conda-build`
 
 ```bash
-source activate root
+source activate base
 conda install conda-build
 ```
 
@@ -413,7 +449,7 @@ if errorlevel 1 exit 1
 $ cd ../
 
 # Build the package
-$ conda build somepackage
+$ conda build recipes/somepackage
 ```
 
 ### 3. Upload the package to your [anaconda] channel.
@@ -434,68 +470,63 @@ anaconda upload -u ilastik /my/miniconda/conda-bld/osx-64/somepackage-1.2.3-0.ta
 Appendix: Compiler details
 ==========================
 
-**When writing your own recipes, use gcc provided by conda.**
+**When writing your own recipes, use gcc/clang provided by conda.**
 
-Instead of using your system compiler, all of our C++ packages use the `gcc` package provided by conda
-itself (or our own variation of it).  On Mac, we use LLVM's clang instead to get C++11 features.  On Linux, using conda's gcc-4.8 is an easy way to get C++11 support on old OSes, such as our CentOS 5.11 build VM.
+Instead of using your system compiler, all of our C++ packages use the compiler packages provided by the Anaconda distribution.
 
 To use the gcc package, add these requirements to your `meta.yaml` file:
 
 ```yaml
 requirements:
   build:
-    - gcc 4.8.5 # [linux]
+    - cmake
+    - {{ compiler("cxx") }}
+  host:
+    - foo
   run:
-    - libgcc # [linux]
+    - foo
 ```
 
-And in `build.sh`, make sure you use the right `gcc` executable.  For example:
+And in `build.sh`, you can rely on the `${CXX}` environment variable as the compiler executable.
+Do NOT hard-code your build scripts to use `gcc` or `clang`.  As long as you don't change `CC` or `CXX`,
+cmake should detect the correct compiler to use.
 
-```bash
-export CC=${PREFIX}/bin/gcc
-export CXX=${PREFIX}/bin/g++
 
-# conda provides default values of these on Mac OS X,
-# but we don't want them when building with gcc
-export CFLAGS=""
-export CXXFLAGS=""
-export LDFLAGS=""
+<a name="linuxcontainer"></a>
+Appendix: Linux Build Container
+===============================
 
-./configure --prefix=${PREFIX} ...etc...
-make
-make install
+The `conda-forge` distribution is built using a CentOS-6 docker container, named [`linux-anvil-comp7`][linux-anvil-comp7].
+If we also build our packages in that container, then they will be binary-compatible with the conda-forge packages,
+and therefore compatible with most modern linux distros.
 
-# Or, for cmake-based packages:
-mkdir build
-cd build
-cmake .. \
-    -DCMAKE_C_COMPILER=${PREFIX}/bin/gcc \
-    -DCMAKE_CXX_COMPILER=${PREFIX}/bin/g++ \
-    -DCMAKE_INSTALL_PREFIX=${PREFIX} \
-    ...etc...
+[linux-anvil-comp7]: https://github.com/conda-forge/docker-images
 
-make
-make install
+These commands will get you started:
+
 ```
+# Launch the container.
+docker run -it \
+    --name my-build-container \
+    -e HOST_USER_NAME=${USERNAME} \
+    -e HOST_USER_ID=${UID} \
+    -e HOST_GROUP_NAME="$(id -g -n ${USERNAME} || echo ${USERNAME})" \
+    -e HOST_GROUP_ID=$(id -g ${USERNAME}) \
+    condaforge/linux-anvil-comp7
 
-<a name="linuxvm"></a>
-Appendix: Linux VM Details
-==========================
+# BTW, Those extra environment variables are used by the
+# linux-anvil startup scripts to enable a convenience:
+# The file permissions used by the container will be
+# compatible with your host machine, too.
 
-The Anaconda distribution is built on a CentOS 5.11 VM.
-To build the ilastik stack on that OS, you'll need to install the following:
- 
-- `cmake`, `git`, `conda`, `gcc`
-- VTK dependencies: 
-  * OpenGL: `yum install mesa-libGL-devel`
-  * X11: `yum groupinstall "X Software Development"`
-- CPLEX (optional)
-- Recommended: VirtualBox Guest additions
-  1. Register external package repository "rpmforge"
-    * http://wiki.centos.org/AdditionalResources/Repositories/RPMForge#head-5aabf02717d5b6b12d47edbc5811404998926a1b
-  2. Install package `dkms`
-  3. In VBox menu, select `Devices` > `Insert Guest Additions CD`
-  4. From disk image, install Guest Additions from command line
+# Download build scripts
+conda install -c ilastik-forge publish-conda-stack
+git clone https://github.com/ilastik/ilastik-build-conda
+
+# Build a recipe
+cd ilastik-build-conda
+publish-conda-stack ilastik-recipe-specs.yaml vigra
+```
 
 
 <a name="todo"></a>
@@ -503,11 +534,6 @@ Appendix: TODO/TBD
 ==================
 
 - General
-
- - [x] In cases where we provide an alternative build of a package that Continuum already provides, we need to 
-   make sure our special channel takes priority over the `defaults` channel used by conda.
-   (**Edit:** Ideally, we could just use a custom "build string", but due to conda/conda#918, that doesn't work.
-   Instead, we just use a deliberately strange version number in our custom packages, e.g. `version: 5.10.1.99`.)
 
  - [ ] It would be nice if we built "debug" versions of important packages (e.g. Python, vigra, Qt) 
    and attached them to the `[debug]` conda-build "feature".
