@@ -3,7 +3,7 @@ ilastik-conda-recipes
 
 [ilastik] depends on **110+ packages**.  Most of those packages are already provided for us by the [conda-forge] [channel][cf-channel].
 For some of the 20+ the packages that *aren't* provided by Anaconda, we use the recipes in this repo.
-See also our [ilastik-publish-packages repo](https://github.com/ilastik/ilastik-publish-packages),
+See also our [publish-conda-stack repo](https://github.com/ilastik/publish-conda-stack),
 especially the `ilastik-recipe-specs.yaml` for a complete list of packages we build ourselves.
 
 These recipes are built using the [conda-build][2] tool.
@@ -251,7 +251,7 @@ If, for some reason, you do need to build your own binary packages from these re
 The recommended procedure for building these packages is to use the [`publish-conda-stack`][publish-conda-stack] tool.
 But here are the steps to follow if you aren't using that tool:
 
-[publish-conda-stack]: https://github.com/ilastik/ilastik-publish-packages
+[publish-conda-stack]: https://github.com/ilastik/publish-conda-stack
 
 
 ```bash
