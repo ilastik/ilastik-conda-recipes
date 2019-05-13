@@ -104,6 +104,6 @@ test:
     - vigra
 
 about:
-  home: https://github.com/ilastik-build-conda
+  home: https://github.com/ilastik-conda-recipes
   license: BSD (3-clause)
   summary: 'Package for all dependencies needed to run ilastik'

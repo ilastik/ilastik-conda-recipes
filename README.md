@@ -1,5 +1,5 @@
-ilastik-build-conda
-===================
+ilastik-conda-recipes
+=====================
 
 [ilastik] depends on **110+ packages**.  Most of those packages are already provided for us by the [conda-forge] [channel][cf-channel].
 For some of the 20+ the packages that *aren't* provided by Anaconda, we use the recipes in this repo.
@@ -260,8 +260,8 @@ source activate base
 conda install conda-build
 
 # Clone the ilastik build recipes
-git clone http://github.com/ilastik/ilastik-build-conda
-cd ilastik-build-conda
+git clone http://github.com/ilastik/ilastik-conda-recipes
+cd ilastik-conda-recipes
 
 # Build a recipe, and use our global version pinnings
 conda build -m ilastik-pins.yaml recipes/vigra
@@ -305,7 +305,7 @@ See the [`publish-conda-stack`][pcs] docs for details.  Example usage:
 source activate base
 conda install -c ilastik-forge -c conda-forge conda-build publish-conda-stack
 
-cd ilastik-build-conda
+cd ilastik-conda-recipes
 
 # on Linux and Windows:
 publish-conda-stack ilastik-recipe-specs.yaml
@@ -340,7 +340,7 @@ conda install conda-build
 Add a directory to this repo:
 
 ```bash
-cd ilastik-build-conda
+cd ilastik-conda-recipes
 mkdir somepackage
 cd somepackage
 ```
@@ -445,7 +445,7 @@ if errorlevel 1 exit 1
 ### 2. Build the package
 
 ```bash
-# Switch back to the `ilastik-build-conda` directory
+# Switch back to the `ilastik-conda-recipes` directory
 $ cd ../
 
 # Build the package
@@ -521,10 +521,10 @@ docker run -it \
 
 # Download build scripts
 conda install -c ilastik-forge publish-conda-stack
-git clone https://github.com/ilastik/ilastik-build-conda
+git clone https://github.com/ilastik/ilastik-conda-recipes
 
 # Build a recipe
-cd ilastik-build-conda
+cd ilastik-conda-recipes
 publish-conda-stack ilastik-recipe-specs.yaml vigra
 ```
 
