@@ -50,13 +50,19 @@ if [[ $@ == *"--include-tests"* ]]; then
     fi
 fi
 
+
 CONDA_ROOT=`conda info --root`
 source ${CONDA_ROOT}/bin/activate root
 
-# Remove old ilastik-release environment
-if [ -d ${CONDA_ROOT}/envs/ilastik-release ]; then
-    echo "Removing old ilastik-release environment..."
-    conda remove -y --all -n ilastik-release
+RANDOM_STRING="szfndbgckhxkaygjxbpxkbcuwzweapsyayblnqsadneekswtavrfhcgzquyemufyiprbfbcaiahnnssdssobksqqycmqgyvhpnnktprkpujobkjutbzqqujpbdzyaeeg"
+RELEASE_ENV_NAME="${RANDOM_STRING}"
+RELEASE_ENV="${CONDA_ROOT}/envs/${RELEASE_ENV_NAME}"
+
+
+# Remove old ${RELEASE_ENV_NAME} environment
+if [ -d ${RELEASE_ENV} ]; then
+    echo "Removing old ${RELEASE_ENV_NAME} environment..."
+    conda remove -y --all -n ${RELEASE_ENV_NAME}
 fi
 
 function latest_build()
@@ -67,7 +73,7 @@ function latest_build()
     echo "$VERSION_AND_BUILD"
 }
 
-# Create new ilastik-release environment and install all ilastik dependencies to it.
+# Create new ${RELEASE_ENV_NAME} environment and install all ilastik dependencies to it.
 if [[ $WITH_SOLVERS == 0 ]]; then
     EVERYTHING_PKG=$(latest_build ilastik-dependencies-no-solvers "$@")
     SOLVERS_SUFFIX="-no-solvers"
@@ -76,12 +82,13 @@ else
     SOLVERS_SUFFIX=""
 fi
 
-echo "Creating new ilastik-release environment using ${EVERYTHING_PKG}"
-conda create -q -y -n ilastik-release ${EVERYTHING_PKG} --override-channels "$@"
+echo "Creating new ${RELEASE_ENV_NAME} environment using ${EVERYTHING_PKG}"
+echo "environment location: ${RELEASE_ENV}"
+conda create -q -y -n ${RELEASE_ENV_NAME} ${EVERYTHING_PKG} ilastik-install --override-channels "$@" -c kdominik
 
 if [[ $USE_GIT_LATEST == 1 ]]; then
     # Instead of keeping the version from binstar, get the git repo
-    ILASTIK_META=${CONDA_ROOT}/envs/ilastik-release/ilastik-meta
+    ILASTIK_META=${CONDA_ROOT}/envs/${RELEASE_ENV_NAME}/ilastik-meta
     rm -rf ${ILASTIK_META}
 
     echo "Cloning ilastik from latest github sources"
@@ -97,15 +104,17 @@ if [[ $USE_GIT_LATEST == 1 ]]; then
     ILASTIK_PKG_VERSION="master"
 else
     # Ask conda for the package version
-    ILASTIK_PKG_VERSION=`conda list -n ilastik-release | grep ilastik-meta | python -c "import sys; print(sys.stdin.read().split()[1])"`
+    ILASTIK_PKG_VERSION=`conda list -n ${RELEASE_ENV_NAME} | grep ilastik-meta | python -c "import sys; print(sys.stdin.read().split()[1])"`
 fi
 
 RELEASE_NAME=ilastik-${ILASTIK_PKG_VERSION}${SOLVERS_SUFFIX}-`uname`
 
+
 # Remove cplex libs/symlinks (if present)
-rm -f ${CONDA_ROOT}/envs/ilastik-release/lib/libcplex.so
-rm -f ${CONDA_ROOT}/envs/ilastik-release/lib/libilocplex.so
-rm -f ${CONDA_ROOT}/envs/ilastik-release/lib/libconcert.so
+rm -f ${RELEASE_ENV}/lib/libcplex.so
+rm -f ${RELEASE_ENV}/lib/libilocplex.so
+rm -f ${RELEASE_ENV}/lib/libconcert.so
+
 
 # Remove gurobi symlinks (if present)
 rm -f ${RELEASE_ENV}/lib/libgurobi*.so
@@ -114,21 +123,23 @@ if [[ $INCLUDE_TESTS == 1 ]]; then
     echo "Including ilastik tests in release (larger release size)."
 else
     echo "Removing ilastik tests from source folders"
-    ILASTIK_META=${CONDA_ROOT}/envs/ilastik-release/ilastik-meta
+    ILASTIK_META=${RELEASE_ENV}/ilastik-meta
     rm -rf ${ILASTIK_META}/*/tests/*
     echo "test-files removed"
 fi
 
+echo "{\"previous_prefix\": \"${RELEASE_ENV}\"}" > ${RELEASE_ENV}/.prefix_previous
+
 if [[ $SKIP_TAR == 1 ]]; then
     echo "Skipping tarball creation."
-    echo "Release env created in ${CONDA_ROOT}/envs/ilastik-release"
+    echo "Release env created in ${RELEASE_ENV}"
 else
     # Create the tarball, and move it to the current directory.
     echo "Creating ${RELEASE_NAME}.tar.bz2"
     DEST_DIR=`pwd`
     cd ${CONDA_ROOT}/envs/
-    mv ilastik-release ${RELEASE_NAME}
+    mv ${RELEASE_ENV_NAME} ${RELEASE_NAME}
     tar -cjf $DEST_DIR/${RELEASE_NAME}.tar.bz2 ${RELEASE_NAME}
-    mv ${RELEASE_NAME} ilastik-release
+    mv ${RELEASE_NAME} ${RELEASE_ENV_NAME}
     cd -
 fi
