@@ -3,7 +3,7 @@ package:
   version: 0.1
 
 build:
-  number: 1001
+  number: 1004
 
 requirements:
   run:
