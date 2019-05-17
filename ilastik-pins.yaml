@@ -1,3 +1,6 @@
+CONDA_BUILD_SYSROOT:
+  - /Developer/SDKs/MacOSX10.9.sdk  # [osx]
+
 boost:
   - 1.68.0
 h5py:
