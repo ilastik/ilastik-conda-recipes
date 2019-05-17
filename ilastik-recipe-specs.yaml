@@ -93,12 +93,12 @@ recipe-specs:
     - name: tifffile
       recipe-repo: https://github.com/ilastik/ilastik-conda-recipes
       tag: master
-      recipe-subdir: tifffile
+      recipe-subdir: recipes/tifffile
 
     - name: pytiff
       recipe-repo: https://github.com/ilastik/ilastik-conda-recipes
       tag: master
-      recipe-subdir: pytiff
+      recipe-subdir: recipes/pytiff
 
     - name: numpy-allocation-tracking
       recipe-repo: https://github.com/ilastik/numpy-allocation-tracking
