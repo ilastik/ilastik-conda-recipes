@@ -302,7 +302,7 @@ recipe-specs:
     - name: ilastik-dependencies
       recipe-repo: https://github.com/ilastik/ilastik-conda-recipes
       tag: master
-      recipe-subdir: ilastik-dependencies
+      recipe-subdir: recipes/ilastik-dependencies
       environment:
         WITH_SOLVERS: 1
 
