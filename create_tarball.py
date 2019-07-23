@@ -20,7 +20,7 @@ parser.add_argument("--git-branch", type=str, help="use git branch to clone")
 parser.add_argument("--extra-packages", type=str, help="extra packages to install to the release env", nargs="*")
 
 
-SOLVER_FILES = ("libcplex.so", "libilocplex.so", "libconcert.so")
+SOLVER_FILES = ("libcplex.so", "libilocplex.so", "libconcert.so", "libgurobi*.so")
 
 
 class PackageNotFoundError(Exception):
