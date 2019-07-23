@@ -4,11 +4,17 @@
 {% set WITH_SOLVERS = WITH_SOLVERS|int %}
 
 package:
-  {% if WITH_SOLVERS %}
-    name: ilastik-dependencies
-  {% else %}
-    name: ilastik-dependencies-no-solvers
-  {% endif %}
+    {% set package_name = "ilastik-dependencies" %}
+
+    {% if not WITH_SOLVERS %}
+      {% set package_name = package_name + "-no-solvers" %}
+    {% endif %}
+
+    {% if WITH_TIKTORCH %}
+      {% set package_name = package_name + "-tiktorch" %}
+    {% endif %}
+
+    name: {{ package_name }}
     version: 1.3.3
 
 build:
@@ -54,7 +60,7 @@ requirements:
     - setuptools                
     - matplotlib
     - z5py
-
+    - attrs
     
     # -----------------------------------------------------------------
     # packages built by us
@@ -77,6 +83,9 @@ requirements:
     - vigra                     {{ vigra }}
     - ilastik-meta
     - ilastik-launch                           # [not win]
+{% if WITH_TIKTORCH %}
+    - tiktorch-client
+{% endif}
 
     # -----------------------------------------------------------------
     # Trackinghdf5
