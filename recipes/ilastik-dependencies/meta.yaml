@@ -2,6 +2,11 @@
   {% set WITH_SOLVERS = 1 %}
 {% endif %}
 {% set WITH_SOLVERS = WITH_SOLVERS|int %}
+{% if not WITH_TIKTORCH is defined %}
+  {% set WITH_TIKTORCH = 0 %}
+{% endif %}
+{% set WITH_TIKTORCH = WITH_TIKTORCH|int %}
+
 
 package:
     {% set package_name = "ilastik-dependencies" %}
@@ -85,7 +90,7 @@ requirements:
     - ilastik-launch                           # [not win]
 {% if WITH_TIKTORCH %}
     - tiktorch-client
-{% endif}
+{% endif %}
 
     # -----------------------------------------------------------------
     # Trackinghdf5
