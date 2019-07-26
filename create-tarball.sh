@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ##
-## Usage: create-tarball.sh [--skip-tar] [--git-latest] [--no-solvers] [--include-tests] [... extra install-args, e.g. --use-local or -c ilastik-forge ...]
+## Usage: create-tarball.sh [--skip-tar] [--git-latest] [--with-tiktorch] [--no-solvers] [--include-tests] [... extra install-args, e.g. --use-local or -c ilastik-forge ...]
 ##
 
 set -e
@@ -24,6 +24,17 @@ if [[ $@ == *"--git-latest"* ]]; then
        shift
     else
         echo "Error: --git-latest may only be provided as the first arg (or after --skip-tar)." >&2
+        exit 1
+    fi
+fi
+
+WITH_TIKTORCH=0
+if [[ $@ == *"--with-tiktorch"* ]]; then
+    if [[ $1 == "--with-tiktorch" ]]; then
+        WITH_TIKTORCH=1
+       shift
+    else
+        echo "Error: --with-tiktorch may only be provided as the first arg (or after --skip-tar)." >&2
         exit 1
     fi
 fi
@@ -77,6 +88,9 @@ function latest_build()
 if [[ $WITH_SOLVERS == 0 ]]; then
     EVERYTHING_PKG=$(latest_build ilastik-dependencies-no-solvers "$@")
     SOLVERS_SUFFIX="-no-solvers"
+elif [[ $WITH_TIKTORCH == 1 ]]; then
+    EVERYTHING_PKG=$(latest_build ilastik-dependencies-tiktorch "$@")
+    SOLVERS_SUFFIX=""
 else    
     EVERYTHING_PKG=$(latest_build ilastik-dependencies "$@")
     SOLVERS_SUFFIX=""
@@ -102,6 +116,21 @@ if [[ $USE_GIT_LATEST == 1 ]]; then
     python -m compileall lazyflow volumina ilastik
     cd -
     ILASTIK_PKG_VERSION="master"
+elif [[ $WITH_TIKTORCH == 1 ]]; then
+    # Instead of keeping the version from binstar, get the git repo
+    ILASTIK_META=${CONDA_ROOT}/envs/${RELEASE_ENV_NAME}/ilastik-meta
+    rm -rf ${ILASTIK_META}
+    echo "Cloning ilastik from latest github sources"
+    git clone https://github.com/ilastik/ilastik-meta ${ILASTIK_META}
+    cd ${ILASTIK_META}
+    git submodule init
+    git submodule update
+    git submodule foreach 'git checkout tiktorch'
+
+    echo "Compiling python sources"
+    python -m compileall lazyflow volumina ilastik
+    cd -
+    ILASTIK_PKG_VERSION="tiktorch"
 else
     # Ask conda for the package version
     ILASTIK_PKG_VERSION=`conda list -n ${RELEASE_ENV_NAME} | grep ilastik-meta | python -c "import sys; print(sys.stdin.read().split()[1])"`
