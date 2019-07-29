@@ -190,11 +190,11 @@ def main():
     if release_env.exists:
         release_env.remove()
 
-    ilastik_pkg = "ilastik-dependencies"
+    ilastik_deps_pkg = "ilastik-dependencies"
     if args.no_solvers:
-        ilastik_pkg = "ilastik-dependencies-no-solvers"
+        ilastik_deps_pkg = "ilastik-dependencies-no-solvers"
 
-    packages = [ilastik_pkg]
+    packages = [ilastik_deps_pkg, "ilastik-meta"]
 
     if args.extra_packages:
         packages.extend(args.extra_packages)

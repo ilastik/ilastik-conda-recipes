@@ -81,7 +81,6 @@ requirements:
     - marching_cubes
     - numpy-allocation-tracking
     - vigra                     {{ vigra }}
-    - ilastik-meta
     - ilastik-launch                           # [not win]
 {% if WITH_TIKTORCH %}
     - tiktorch-client
