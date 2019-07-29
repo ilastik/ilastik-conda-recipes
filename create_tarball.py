@@ -20,7 +20,7 @@ parser.add_argument("--git-branch", type=str, help="use git branch to clone")
 parser.add_argument("--extra-packages", type=str, help="extra packages to install to the release env", nargs="*")
 
 
-SOLVER_FILES = ("libcplex.so", "libilocplex.so", "libconcert.so", "libgurobi*.so")
+SOLVER_FILES = ("libcplex*", "libilocplex*", "libconcert*", "libgurobi*")
 
 
 class PackageNotFoundError(Exception):
@@ -172,7 +172,6 @@ def main():
     args = parser.parse_args()
 
     branch = None
-    conda = Conda(args.channels)
 
     if args.git_latest:
         branch = "master"
@@ -184,6 +183,7 @@ def main():
     if not version:
         version = conda.get_pkg_version("ilastik-meta")
 
+    conda = Conda(args.channels)
     release_name = get_release_name(version, "-no-solvers" if args.no_solvers else "", sys.platform)
     release_env = conda.env(release_name)
 
