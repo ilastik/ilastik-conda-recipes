@@ -5,9 +5,11 @@ package:
 # source is in recipe dir
 
 build:
-  number: 1000
+  number: 1001
 
 requirements:
   build:
     - {{ compiler("cxx") }}
     - cmake
+  run:
+    - ilastik-package
