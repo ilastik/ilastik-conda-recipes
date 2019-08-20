@@ -324,3 +324,9 @@ recipe-specs:
       build-on:
        - win
 
+    - name: ilastik-dependencies-binary
+      recipe-repo: https://github.com/ilastik/ilastik-conda-recipes
+      tag: master
+      recipe-subdir: recipes/ilastik-dependencies-binary
+      environment:
+        WITH_SOLVERS: 1
