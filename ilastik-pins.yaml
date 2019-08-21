@@ -27,3 +27,5 @@ tifffile:
   - 0.4.post2
 vigra:
   - 1.11
+z5py:
+  - 1.5.1
