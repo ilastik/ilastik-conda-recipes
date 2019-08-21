@@ -64,7 +64,7 @@ requirements:
     - scikit-learn              {{ sklearn }}*
     - setuptools                
     - matplotlib
-    - z5py
+    - z5py                      >={{ z5py }}
     - attrs
     
     # -----------------------------------------------------------------
