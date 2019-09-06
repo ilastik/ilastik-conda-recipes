@@ -19,9 +19,10 @@ source:
   # https://stackoverflow.com/a/33641030
   # and uses the explicit cast operator to Arc.
     - 0001-fix-build-error-with-clang-4.patch  # [osx]
+    - lemon-bigobj.patch  # [win]
 
 build:
-  number: 1004
+  number: 1005
 requirements:
   build:
     - cmake
