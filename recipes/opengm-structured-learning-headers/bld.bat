@@ -3,7 +3,8 @@ cd build
 
 set CONFIGURATION=Release
 
-cmake .. -G "%CMAKE_GENERATOR%" ^
+cmake .. -G "NMake Makefiles" ^
+    -DCMAKE_BUILD_TYPE=%CONFIGURATION% ^
     -DCMAKE_PREFIX_PATH="%LIBRARY_PREFIX%" ^
     -DCMAKE_INSTALL_PREFIX="%LIBRARY_PREFIX%" ^
     -DWITH_BOOST=ON -DWITH_HDF5=ON ^
@@ -14,7 +15,7 @@ cmake .. -G "%CMAKE_GENERATOR%" ^
     -DBUILD_COMMANDLINE=OFF
 
 if errorlevel 1 exit 1
-cmake --build . --target ALL_BUILD --config %CONFIGURATION%
+nmake all
 if errorlevel 1 exit 1
-cmake --build . --target INSTALL --config %CONFIGURATION%
+nmake install
 if errorlevel 1 exit 1
