@@ -1,0 +1,11 @@
+--- a/test/CMakeLists.txt
++++ b/test/CMakeLists.txt
+@@ -35,7 +35,7 @@ SET(TESTS
+   hao_orlin_test
+   heap_test
+   kruskal_test
+-  lgf_reader_writer_test
++  # lgf_reader_writer_test
+   lgf_test
+   maps_test
+   matching_test
