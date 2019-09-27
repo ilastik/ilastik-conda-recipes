@@ -13,7 +13,8 @@ cmake .. -G "NMake Makefiles" ^
     -DCMAKE_INSTALL_PREFIX="%LIBRARY_PREFIX%" ^
     -DWITH_LEMON=1 ^
     -DPYTHON_EXECUTABLE="%PYTHON%" ^
-    -DBUILD_SHARED_LIBS=1
+    -DBUILD_SHARED_LIBS=1 ^
+    -DLEMON_LIBRARY=%PREFIX%/Library/lib/lemon.lib
 
 if errorlevel 1 exit 1
 
