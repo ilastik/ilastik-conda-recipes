@@ -74,10 +74,10 @@ function latest_build()
 
 # Create new ilastik-release environment and install all ilastik dependencies to it.
 if [[ $WITH_SOLVERS == 0 ]]; then
-    EVERYTHING_PKG=$(latest_build ilastik-dependencies-no-solvers "$@")
+    EVERYTHING_PKG=$(latest_build ilastik-dependencies-binary-no-solvers "$@")
     SOLVERS_SUFFIX="-no-solvers"
 else    
-    EVERYTHING_PKG=$(latest_build ilastik-dependencies "$@")
+    EVERYTHING_PKG=$(latest_build ilastik-dependencies-binary "$@")
     SOLVERS_SUFFIX=""
 fi
 
