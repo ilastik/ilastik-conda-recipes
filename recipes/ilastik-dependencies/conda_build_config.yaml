@@ -3,7 +3,7 @@ h5py:
 hdf5:
   - 1.10.4
 networkx:
-  - 2
+  - 2.3*
 numpy:
   - 1.14
 pandas:
