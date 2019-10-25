@@ -5,7 +5,9 @@ hdf5:
 networkx:
   - 2
 numpy:
-  - 1.12
+  - 1.14
+pandas:
+  - 0.24
 python:
   - 3.7
 pyqt:
@@ -29,6 +31,7 @@ pin_run_as_build:
   hdf5: x.x.x
   networkx: x.x
   numpy: x.x
+  pandas: x.x
   python: x.x
   pyqt: x.x
   qt: x.x
