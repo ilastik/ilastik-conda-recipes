@@ -23,7 +23,7 @@ package:
     version: 1.3.3
 
 build:
-  number: 1007
+  number: 1008
   track_features:
     # on osx we need to make sure that we install the numpy versions with openblas instead of mkl to prevent clashes with cplex
     - blas_openblas #[osx] 
@@ -75,7 +75,7 @@ requirements:
     - pytiff
     - tifffile                  {{ tifffile }}
     - yapsy                     
-    - lemon    
+    - lemon
 
     # -----------------------------------------------------------------
     # ilastik main packages developed by us
@@ -85,6 +85,7 @@ requirements:
     - ilastikrag                
     - wsdt
     - marching_cubes
+    - ndstructs
     - numpy-allocation-tracking
     - vigra                     {{ vigra }}
 {% if WITH_TIKTORCH %}
