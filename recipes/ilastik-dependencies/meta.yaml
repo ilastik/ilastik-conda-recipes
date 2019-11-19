@@ -20,10 +20,10 @@ package:
     {% endif %}
 
     name: {{ package_name }}
-    version: 1.3.3
+    version: 1.3.4
 
 build:
-  number: 1008
+  number: 0
   track_features:
     # on osx we need to make sure that we install the numpy versions with openblas instead of mkl to prevent clashes with cplex
     - blas_openblas #[osx] 
