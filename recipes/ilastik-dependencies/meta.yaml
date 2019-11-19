@@ -67,6 +67,7 @@ requirements:
     - matplotlib
     - z5py                      >={{ z5py }}
     - attrs
+    - cachetools
     
     # -----------------------------------------------------------------
     # packages built by us
