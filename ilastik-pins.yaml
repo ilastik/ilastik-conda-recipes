@@ -19,7 +19,7 @@ libpng:
   - 1.6.36
 # see https://github.com/ilastik/ilastik-conda-recipes/issues/79
 networkx:
-  - 2.3*
+  - 2
 numpy:
   - 1.14
 # see https://github.com/ilastik/ilastik-conda-recipes/issues/77
@@ -28,12 +28,12 @@ pandas:
 python:
   - 3.7
 pyqt:
-  - 5.6
+  - 5.12
 qt:
-  - 5.6
+  - 5.12
 tifffile:
   - 0.4.post2
 vigra:
   - 1.11
 z5py:
-  - 1.5.1
+  - 2
