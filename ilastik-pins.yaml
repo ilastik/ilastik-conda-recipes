@@ -8,7 +8,7 @@ boost:
 gdkpixbuf:
   - 2.36.12 h7a26e22_1003
 h5py:
-  - 2.9.0
+  - 2.10.0
 hdf5:
   - 1.10.4
 jpeg:
