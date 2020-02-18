@@ -135,7 +135,7 @@ recipe-specs:
 
     - name: ilastik-dependencies-no-solvers
       recipe-repo: https://github.com/ilastik/ilastik-conda-recipes
-      tag: master
+      tag: 1.3.4-old-deps
       recipe-subdir: recipes/ilastik-dependencies
       environment:
         WITH_SOLVERS: 0
@@ -301,7 +301,7 @@ recipe-specs:
 
     - name: ilastik-dependencies
       recipe-repo: https://github.com/ilastik/ilastik-conda-recipes
-      tag: master
+      tag: 1.3.4-old-deps
       recipe-subdir: recipes/ilastik-dependencies
       environment:
         WITH_SOLVERS: 1
