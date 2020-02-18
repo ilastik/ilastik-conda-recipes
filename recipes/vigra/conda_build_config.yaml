@@ -3,7 +3,7 @@ boost:
 h5py:
   - 2.10
 hdf5:
-  - 1.10.6
+  - 1.10.5
 jpeg:
   - 9b
 lemon:

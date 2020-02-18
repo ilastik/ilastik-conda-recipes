@@ -10,7 +10,7 @@ gdkpixbuf:
 h5py:
   - 2.10.0
 hdf5:
-  - 1.10.6
+  - 1.10.5
 jpeg:
   - 9
 lemon:
@@ -21,7 +21,7 @@ libpng:
 networkx:
   - 2
 numpy:
-  - 1.14
+  - 1.16
 # see https://github.com/ilastik/ilastik-conda-recipes/issues/77
 pandas:
   - 0.24
