@@ -28,9 +28,9 @@ pandas:
 python:
   - 3.7
 pyqt:
-  - 5.6.0
+  - 5.6
 qt:
-  - 5.6.0
+  - 5.6.2
 tifffile:
   - 0.4.post2
 vigra:
