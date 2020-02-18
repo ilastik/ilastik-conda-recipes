@@ -2,7 +2,7 @@ CONDA_BUILD_SYSROOT:
   - /Developer/SDKs/MacOSX10.9.sdk  # [osx]
 
 boost:
-  - 1.68.0
+  - 1.71.0
 # this is an unfortunate one
 # see https://github.com/ilastik/ilastik-conda-recipes/issues/83
 gdkpixbuf:
