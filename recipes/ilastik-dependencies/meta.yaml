@@ -56,7 +56,7 @@ requirements:
     - pytest-qt
     - psutil                    
     - pyqt                      {{ pyqt }}
-    - pyqtgraph
+    - pyqtgraph                 {{ pyqtgraph }}
     - pyopengl
     - python-dateutil                
     - pytz                      
