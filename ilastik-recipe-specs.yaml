@@ -140,13 +140,6 @@ recipe-specs:
       environment:
         WITH_SOLVERS: 0
 
-    - name: altgraph
-      recipe-repo: https://github.com/ilastik/ilastik-conda-recipes
-      tag: master
-      recipe-subdir: recipes/osx-packages/altgraph
-      build-on:
-        - osx
-
     - name: macholib
       recipe-repo: https://github.com/ilastik/ilastik-conda-recipes
       tag: master
