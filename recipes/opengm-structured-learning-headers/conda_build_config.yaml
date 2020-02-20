@@ -3,6 +3,6 @@ boost:
 hdf5:
   - 1.10.5
 numpy:
-  - 1.14
+  - 1.16
 python:
   - 3.7

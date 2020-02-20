@@ -232,7 +232,7 @@ recipe-specs:
       environment:
         WITH_CPLEX: 0
         WITH_GUROBI: 1
-        GUROBI_ROOT_DIR: /build/in/gurobi811/linux64
+        GUROBI_ROOT_DIR: /opt/gurobi811/linux64
 
     - name: multi-hypotheses-tracking-with-gurobi
       build-on:
