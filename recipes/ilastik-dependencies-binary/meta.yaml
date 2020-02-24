@@ -1,16 +1,5 @@
-{% if not WITH_TIKTORCH is defined %}
-{% set WITH_TIKTORCH = 0 %}
-{% endif %}
-{% set WITH_TIKTORCH = WITH_TIKTORCH|int %}
-
-
 package:
-    {% set package_name = "ilastik-dependencies-binary" %}
-
-    {% if WITH_TIKTORCH %}
-      {% set package_name = package_name + "-tiktorch" %}
-    {% endif %}
-  name: {{ package_name }}
+  name: "ilastik-dependencies-binary"
   version: "0.1"
 
 build:
@@ -18,11 +7,7 @@ build:
 
 requirements:
   run:
-  {% if WITH_TIKTORCH %}
-    - ilastik-dependencies-tiktorch
-  {% else %}
     - ilastik-dependencies
-  {% endif %}
     - ilastik-meta
     - ilastik-package  # [win]
     - ilastik-exe  # [win]

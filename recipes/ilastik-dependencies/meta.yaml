@@ -2,10 +2,6 @@
   {% set WITH_SOLVERS = 1 %}
 {% endif %}
 {% set WITH_SOLVERS = WITH_SOLVERS|int %}
-{% if not WITH_TIKTORCH is defined %}
-  {% set WITH_TIKTORCH = 0 %}
-{% endif %}
-{% set WITH_TIKTORCH = WITH_TIKTORCH|int %}
 
 
 package:
@@ -13,10 +9,6 @@ package:
 
     {% if not WITH_SOLVERS %}
       {% set package_name = package_name + "-no-solvers" %}
-    {% endif %}
-
-    {% if WITH_TIKTORCH %}
-      {% set package_name = package_name + "-tiktorch" %}
     {% endif %}
 
     name: {{ package_name }}
@@ -91,9 +83,7 @@ requirements:
     - ndstructs
     - numpy-allocation-tracking
     - vigra                     {{ vigra }}
-{% if WITH_TIKTORCH %}
     - tiktorch-client
-{% endif %}
 
     # -----------------------------------------------------------------
     # Trackinghdf5
