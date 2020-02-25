@@ -43,6 +43,11 @@ recipe-specs:
       # tag: utf-8-support
       # recipe-subdir: recipe
 
+    - name: z5py
+      recipe-repo: https://github.com/k-dominik/z5py-feedstock
+      tag: ilastik-bld
+      recipe-subdir: recipe
+
     # FIXME: We would like to use conda-forge's package for vigra,
     # but it doesn't build WITH_LEMON yet.
     - name: vigra
