@@ -28,7 +28,8 @@ requirements:
     # -----------------------------------------------------------------
     # General dependencies
     # -----------------------------------------------------------------
-    - python                    {{ python }}
+    - python                    {{ python }}  # [not osx]
+    - python                    3.7.3         # [osx]
     - numpy                     {{ numpy }}
 
     - decorator                 
