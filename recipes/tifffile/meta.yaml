@@ -34,7 +34,7 @@ requirements:
     - python   {{ python }}
     - numpy    {{ numpy }}
   run:
-    - {{ pin_compatible("python", max_pin="x.x") }}
+    - {{ pin_compatible("python") }}
     - {{ pin_compatible("numpy") }}
 
 test:

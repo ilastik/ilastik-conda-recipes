@@ -54,7 +54,7 @@ requirements:
     - libtiff
     - nose
     - {{ pin_compatible("numpy")}}
-    - {{ pin_compatible('python', max_pin="x.x") }}
+    - {{ pin_compatible('python') }}
     - zlib     1.2*
 
 test:
