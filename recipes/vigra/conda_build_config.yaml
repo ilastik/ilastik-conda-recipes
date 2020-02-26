@@ -13,6 +13,12 @@ libpng:
 libtiff:
   - 4.0.10
 numpy:
-  - 1.14
+  - 1.16
 python:
   - 3.7
+
+pin_run_as_build:
+  boost:
+    max_pin: x.x.x
+  python:
+    min_pin: x.x
