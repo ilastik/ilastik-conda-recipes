@@ -37,3 +37,10 @@ vigra:
   - 1.11
 z5py:
   - 2
+
+
+pin_run_as_build:
+  boost:
+    max_pin: x.x.x
+  python:
+    min_pin: x.x
