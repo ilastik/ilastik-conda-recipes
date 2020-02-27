@@ -19,7 +19,7 @@ build:
 
   track_features:
     # on osx we need to make sure that we install the numpy versions with openblas instead of mkl to prevent clashes with cplex
-    - blas_openblas #[osx] 
+    - blas_openblas #[osx]
 #
 # In general, we don't specify exact version requirements in each sub-package.
 # But this file tracks the versions of all packages used in the release.
@@ -32,78 +32,78 @@ requirements:
     - python                    3.7.3         # [osx]
     - numpy                     {{ numpy }}
 
-    - decorator                 
-    - fftw                      
-    - future                   
-    - greenlet
+    - attrs
+    - cachetools
+    - decorator
+    - fftw
+    - future
     - gdk-pixbuf                {{ gdkpixbuf }}  # [linux]
+    - greenlet
     - h5py                      {{ h5py }}
     - hdf5                      {{ hdf5 }}
-    - jsonschema                
+    - jsonschema
+    - matplotlib
     - networkx                  >={{ networkx }}
     - nose
     - pandas                    {{ pandas }}*
     - pillow                    {{ pillow }}
-    - pytest                    {{ pytest }}
-    - pytest-qt
-    - psutil                    
+    - psutil
+    - pyopengl
     - pyqt                      {{ pyqt }}
     - pyqtgraph
-    - pyopengl
-    - python-dateutil                
-    - pytz                      
-    - qimage2ndarray            
+    - pytest                    {{ pytest }}
+    - pytest-qt
+    - python-dateutil
+    - pytz
+    - qimage2ndarray
     - qt                        {{ qt }}
     - readline                                 # [not win]
     - requests
     - scikit-image
     - scikit-learn              {{ sklearn }}*
-    - setuptools                
-    - matplotlib
+    - setuptools
     - z5py                      >={{ z5py }}
-    - attrs
-    - cachetools
-    
+
     # -----------------------------------------------------------------
     # packages built by us
     # -----------------------------------------------------------------
     - fastfilters
+    - lemon
     - pytiff
     - tifffile                  {{ tifffile }}
-    - yapsy                     
-    - lemon
+    - yapsy
 
     # -----------------------------------------------------------------
     # ilastik main packages developed by us
     # -----------------------------------------------------------------
-    - ilastik-feature-selection 
-    - ilastiktools              
-    - ilastikrag                
-    - wsdt
+    - ilastik-feature-selection
+    - ilastikrag
+    - ilastiktools
     - marching_cubes
     - ndstructs
     - numpy-allocation-tracking
-    - vigra                     {{ vigra }}
     - tiktorch-client
+    - vigra                     {{ vigra }}
+    - wsdt
 
     # -----------------------------------------------------------------
     # Trackinghdf5
     # -----------------------------------------------------------------
-    - dpct                      
+    - dpct
     - hytra
-    - mamutexport               
+    - mamutexport
 
 {% if WITH_SOLVERS %}
     - multi-hypotheses-tracking-with-gurobi
     - multi-hypotheses-tracking-with-cplex
 {% endif %}
 
-    
+
     # -----------------------------------------------------------------
     # Multicut
     # -----------------------------------------------------------------
-    - nifty                     
-    
+    - nifty
+
 
 test:
   # Just give SOME test to ensure that the package can be installed at all.
