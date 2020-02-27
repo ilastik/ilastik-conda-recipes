@@ -15,7 +15,7 @@ package:
     version: 1.4.0
 
 build:
-  number: 0
+  number: 1
 
   track_features:
     # on osx we need to make sure that we install the numpy versions with openblas instead of mkl to prevent clashes with cplex
@@ -62,16 +62,17 @@ requirements:
     - scikit-image
     - scikit-learn              {{ sklearn }}*
     - setuptools
+    - yapsy
     - z5py                      >={{ z5py }}
 
     # -----------------------------------------------------------------
     # packages built by us
     # -----------------------------------------------------------------
+    - elf
     - fastfilters
     - lemon
     - pytiff
     - tifffile                  {{ tifffile }}
-    - yapsy
 
     # -----------------------------------------------------------------
     # ilastik main packages developed by us
