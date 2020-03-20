@@ -29,8 +29,6 @@ copy "%RECIPE_DIR%\ilastik-meta.pth.win" "%PREFIX%\Lib\site-packages\ilastik-met
 if errorlevel 1 exit 1
 
 REM Install the ilastik modules
-xcopy /S lazyflow "%PREFIX%\ilastik-meta\lazyflow\"
-if errorlevel 1 exit 1
 xcopy /S volumina "%PREFIX%\ilastik-meta\volumina\"
 if errorlevel 1 exit 1
 xcopy /S ilastik "%PREFIX%\ilastik-meta\ilastik\"

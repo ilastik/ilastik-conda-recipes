@@ -25,11 +25,10 @@ fi
 rm -rf .git
 
 # Create .pyc files
-python -m compileall lazyflow volumina ilastik
+python -m compileall volumina ilastik
 
 # Add the ilastik modules to sys.path
 cat > ${SP_DIR}/ilastik-meta.pth << EOF
-../../../ilastik-meta/lazyflow
 ../../../ilastik-meta/volumina
 ../../../ilastik-meta/ilastik
 EOF
