@@ -19,7 +19,7 @@ source:
     - ignore_libpython_macos.diff
 
 build:
-  number: 1001
+  number: 1005
   string: np{{CONDA_NPY}}py{{CONDA_PY}}_{{PKG_BUILDNUM}}_h{{PKG_HASH}}_g{{GIT_FULL_HASH[:7]}}
 
   script_env:
@@ -44,7 +44,7 @@ requirements:
     - zlib     1.2*
 
   run:
-    - boost {{ boost }}
+    - {{ pin_compatible('boost') }}
     - fftw     3.3*
     - h5py
     - hdf5
@@ -54,7 +54,7 @@ requirements:
     - libtiff
     - nose
     - {{ pin_compatible("numpy")}}
-    - python
+    - {{ pin_compatible('python') }}
     - zlib     1.2*
 
 test:

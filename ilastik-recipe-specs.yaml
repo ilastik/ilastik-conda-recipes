@@ -43,6 +43,11 @@ recipe-specs:
       # tag: utf-8-support
       # recipe-subdir: recipe
 
+    - name: z5py
+      recipe-repo: https://github.com/k-dominik/z5py-feedstock
+      tag: ilastik-bld
+      recipe-subdir: recipe
+
     # FIXME: We would like to use conda-forge's package for vigra,
     # but it doesn't build WITH_LEMON yet.
     - name: vigra
@@ -116,8 +121,8 @@ recipe-specs:
       recipe-subdir: pkg/conda/fastfilters
 
     - name: nifty
-      recipe-repo: https://github.com/k-dominik/nifty
-      tag: quickfix-conda-recipe
+      recipe-repo: https://github.com/ilastik/nifty
+      tag: quickfix-conda-recipe2
       recipe-subdir: conda-recipe
 
     - name: ilastik-meta
@@ -139,13 +144,6 @@ recipe-specs:
       recipe-subdir: recipes/ilastik-dependencies
       environment:
         WITH_SOLVERS: 0
-
-    - name: altgraph
-      recipe-repo: https://github.com/ilastik/ilastik-conda-recipes
-      tag: master
-      recipe-subdir: recipes/osx-packages/altgraph
-      build-on:
-        - osx
 
     - name: macholib
       recipe-repo: https://github.com/ilastik/ilastik-conda-recipes
@@ -239,7 +237,7 @@ recipe-specs:
       environment:
         WITH_CPLEX: 0
         WITH_GUROBI: 1
-        GUROBI_ROOT_DIR: /build/in/gurobi811/linux64
+        GUROBI_ROOT_DIR: /opt/gurobi811/linux64
 
     - name: multi-hypotheses-tracking-with-gurobi
       build-on:
@@ -324,3 +322,9 @@ recipe-specs:
       build-on:
        - win
 
+    - name: ilastik-dependencies-binary
+      recipe-repo: https://github.com/ilastik/ilastik-conda-recipes
+      tag: master
+      recipe-subdir: recipes/ilastik-dependencies-binary
+      environment:
+        WITH_SOLVERS: 1

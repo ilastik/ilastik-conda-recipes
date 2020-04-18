@@ -7,7 +7,7 @@ source:
     git_tag: learning-experimental
 
 build:
-  number: 1000
+  number: 1003
   string: np{{CONDA_NPY}}py{{CONDA_PY}}_{{PKG_BUILDNUM}}_h{{PKG_HASH}}_g{{GIT_FULL_HASH[:7]}}
 
 requirements:
@@ -15,10 +15,10 @@ requirements:
     - {{ compiler("cxx") }}
     - cmake
   host:
-    - boost {{ boost }}
-    - python {{ python }}
-    - numpy {{ numpy }}
-    - hdf5 {{ hdf5 }}
+    - boost-cpp {{ boost }}*
+    - python {{ python }}*
+    - numpy {{ numpy }}*
+    - hdf5 {{ hdf5 }}*
 
 about:
     home: https://github.com/opengm/opengm

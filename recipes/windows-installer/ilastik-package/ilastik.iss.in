@@ -34,6 +34,8 @@ Source: "Library\bin\qt.conf"; DestDir: "{app}\Library\bin"; Flags: ignoreversio
 Source: "Lib\*"; Excludes: "\plat-*,\test\*,\site-packages\matplotlib\tests\*"; DestDir: "{app}\Lib"; Flags: ignoreversion recursesubdirs
 Source: "Library\plugins\*"; DestDir: "{app}\Library\plugins"; Flags: ignoreversion recursesubdirs
 Source: "Scripts\*"; DestDir: "{app}\Scripts"; Flags: ignoreversion recursesubdirs
+; the grpc library relies on Library\mingw-w64
+Source: "Library\mingw-w64\*"; DestDir: "{app}\Library\mingw-w64"; Flags: ignoreversion recursesubdirs
 
 [Icons]
 Name: "{group}\ilastik"; Filename: "{app}\ilastik.exe"; IconFilename: "{app}\ilastik-icon.ico"

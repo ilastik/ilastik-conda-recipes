@@ -1,9 +1,9 @@
 boost:
-  - 1.68.0
+  - 1.70.0
 h5py:
-  - 2.9
+  - 2.10
 hdf5:
-  - 1.10.4
+  - 1.10.5
 jpeg:
   - 9b
 lemon:
@@ -13,6 +13,13 @@ libpng:
 libtiff:
   - 4.0.10
 numpy:
-  - 1.14
+  - 1.16
 python:
   - 3.7
+
+pin_run_as_build:
+  boost:
+    max_pin: x.x.x
+  python:
+    min_pin: x.x
+    max_pin: x.x

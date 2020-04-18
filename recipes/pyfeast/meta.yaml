@@ -23,7 +23,7 @@ requirements:
     - feast >=1.1.1
   
   run:
-    - python {{ python }}
+    - {{ pin_compatible("python") }}
     - {{ pin_compatible("numpy") }}
     - feast >=1.1.1
 

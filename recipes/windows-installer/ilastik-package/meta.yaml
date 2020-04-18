@@ -1,9 +1,9 @@
 package:
   name: ilastik-package
-  version: "1.0"
+  version: "1.0.2"
 
 build:
-  number: 1000
+  number: 0
 
 requirements:
   build:
