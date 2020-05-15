@@ -10,16 +10,23 @@ import pathlib
 import subprocess
 from typing import Optional, List
 
+
+SOLVER_FILES = ("libcplex*", "libilocplex*", "libconcert*", "libgurobi*")
+DEFAULT_CHANNELS = ("ilastik-forge", "conda-forge", "defaults")
+
 parser = argparse.ArgumentParser(description="Create ilastik package")
 parser.add_argument("--skip-tar", help="skip compression", action="store_true")
 parser.add_argument("--git-latest", help="use latest git master", action="store_true")
 parser.add_argument("--include-tests", help="include tests", action="store_true")
-parser.add_argument("-c", "--channel", help="conda channels to use when creating package", action="append", dest="channels", default=("ilastik-forge", "conda-forge", "defaults"))
+parser.add_argument(
+    "-c",
+    "--channel",
+    help=(f"conda channels to use when creating package. Defaults to {DEFAULT_CHANNELS}. "),
+    action="append",
+    dest="channels",
+)
 parser.add_argument("--git-branch", type=str, help="use git branch to clone")
 parser.add_argument("--extra-packages", type=str, help="extra packages to install to the release env", nargs="*")
-
-
-SOLVER_FILES = ("libcplex*", "libilocplex*", "libconcert*", "libgurobi*")
 
 
 class PackageNotFoundError(Exception):
@@ -88,7 +95,6 @@ class Conda:
             for p in packages:
                 print("*", p)
 
-
     def __init__(self, channels: List[str]) -> None:
         self._chan_args = []
         for ch in channels:
@@ -102,7 +108,7 @@ class Conda:
         if not out:
             raise PackageNotFoundError(pkg_name)
 
-        non_empty_lines = [l.strip() for l in out.split('\n') if l.strip()]
+        non_empty_lines = [l.strip() for l in out.split("\n") if l.strip()]
         last = non_empty_lines[-1]
 
         # Columns: package name, version, build, channel
@@ -164,11 +170,14 @@ def get_release_name(version, os):
 
 def create_archive(name: str, path: str) -> str:
     root_path = os.path.dirname(path)
-    return shutil.make_archive(name, 'bztar', root_dir=root_path, base_dir=name)
+    return shutil.make_archive(name, "bztar", root_dir=root_path, base_dir=name)
 
 
 def main():
     args = parser.parse_args()
+
+    if not args.channels:
+        args.channels = DEFAULT_CHANNELS
 
     branch = None
 
