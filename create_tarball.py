@@ -13,6 +13,12 @@ from typing import Optional, List
 
 SOLVER_FILES = ("libcplex*", "libilocplex*", "libconcert*", "libgurobi*")
 DEFAULT_CHANNELS = ("ilastik-forge", "conda-forge", "defaults")
+EXTRA_PKGS = {
+    "darwin": ["py2app"],
+    "linux": [],
+    "windows": ["ilastik-exe", "ilastik-installer"],
+}
+
 
 parser = argparse.ArgumentParser(description="Create ilastik package")
 parser.add_argument("--skip-tar", help="skip compression", action="store_true")
@@ -175,6 +181,7 @@ def create_archive(name: str, path: str) -> str:
 
 def main():
     args = parser.parse_args()
+    package_os = sys.platform
 
     if not args.channels:
         args.channels = DEFAULT_CHANNELS
@@ -194,7 +201,7 @@ def main():
     if not version:
         version = conda.get_pkg_version("ilastik-meta")
 
-    release_name = get_release_name(version, sys.platform)
+    release_name = get_release_name(version, package_os)
     release_env = conda.env(release_name)
 
     if release_env.exists:
@@ -203,6 +210,7 @@ def main():
     ilastik_deps_pkg = "ilastik-dependencies-binary"
 
     packages = [ilastik_deps_pkg, "ilastik-meta"]
+    packages.extend(EXTRA_PKGS[package_os])
 
     if args.extra_packages:
         packages.extend(args.extra_packages)
