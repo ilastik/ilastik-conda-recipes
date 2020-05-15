@@ -159,7 +159,7 @@ def clone_and_compile(dst, branch):
         run("git", "submodule", "init")
         run("git", "submodule", "update")
         run("git", "submodule", "foreach", "git checkout %s" % branch)
-        run("python", "-m", "compileall", "lazyflow", "volumina", "ilastik")
+        run("python", "-m", "compileall", "volumina", "ilastik")
 
 
 def remove_directory(path: str) -> None:
