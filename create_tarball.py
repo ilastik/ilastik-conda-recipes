@@ -13,7 +13,6 @@ from typing import Optional, List
 parser = argparse.ArgumentParser(description="Create ilastik package")
 parser.add_argument("--skip-tar", help="skip compression", action="store_true")
 parser.add_argument("--git-latest", help="use latest git master", action="store_true")
-parser.add_argument("--no-solvers", help="package without solvers support", action="store_true")
 parser.add_argument("--include-tests", help="include tests", action="store_true")
 parser.add_argument("-c", "--channel", help="conda channels to use when creating package", action="append", dest="channels", default=("ilastik-forge", "conda-forge", "defaults"))
 parser.add_argument("--git-branch", type=str, help="use git branch to clone")
@@ -159,8 +158,8 @@ def remove_directory(path: str) -> None:
     shutil.rmtree(path)
 
 
-def get_release_name(version, suffix, os):
-    return "ilastik-{pkg_version}{suffix}-{os}".format(pkg_version=version, suffix=suffix, os=os)
+def get_release_name(version, os):
+    return "ilastik-{pkg_version}-{os}".format(pkg_version=version, os=os)
 
 
 def create_archive(name: str, path: str) -> str:
@@ -180,19 +179,19 @@ def main():
         branch = args.git_branch
 
     version = branch
+
+    conda = Conda(args.channels)
+
     if not version:
         version = conda.get_pkg_version("ilastik-meta")
 
-    conda = Conda(args.channels)
-    release_name = get_release_name(version, "-no-solvers" if args.no_solvers else "", sys.platform)
+    release_name = get_release_name(version, sys.platform)
     release_env = conda.env(release_name)
 
     if release_env.exists:
         release_env.remove()
 
     ilastik_deps_pkg = "ilastik-dependencies-binary"
-    if args.no_solvers:
-        ilastik_deps_pkg = "ilastik-dependencies-binary-no-solvers"
 
     packages = [ilastik_deps_pkg, "ilastik-meta"]
 
