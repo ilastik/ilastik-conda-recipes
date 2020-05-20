@@ -13,25 +13,23 @@ set /p ILASTIK_CODE_VERSION=<tmp\version.txt
 
 if not "%ILASTIK_CODE_VERSION%"=="%PKG_VERSION%" (
     echo ********************************************************************************
-    echo ilastik-meta package version does not match __version_info__ in ilastik/__init__.py
-    echo ilastik-meta version:      %PKG_VERSION%
+    echo ilastik tagged version does not match __version_info__ in ilastik/__init__.py
+    echo ilastik tag version:      %PKG_VERSION%
     echo ilastik.__version_info__:  %ILASTIK_CODE_VERSION%
     echo ********************************************************************************
     exit 1
 )
 
 REM Create .pyc files
-python -m compileall lazyflow volumina ilastik
+python -m compileall ilastik
 rem if errorlevel 1 exit 1
 
 REM Add the ilastik modules to sys.path
-copy "%RECIPE_DIR%\ilastik-meta.pth.win" "%PREFIX%\Lib\site-packages\ilastik-meta.pth"
+copy "%RECIPE_DIR%\ilastik.pth.win" "%PREFIX%\Lib\site-packages\ilastik.pth"
 if errorlevel 1 exit 1
 
 REM Install the ilastik modules
-xcopy /S volumina "%PREFIX%\ilastik-meta\volumina\"
-if errorlevel 1 exit 1
-xcopy /S ilastik "%PREFIX%\ilastik-meta\ilastik\"
+xcopy /S ilastik "%PREFIX%\ilastik\ilastik\"
 if errorlevel 1 exit 1
 copy Readme* "%PREFIX%\ilastik-meta\"
 if errorlevel 1 exit 1
