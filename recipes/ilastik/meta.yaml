@@ -1,18 +1,17 @@
-# Historical note: This recipe assumes lazyflow and ilastik to be in one repository
-# this was not the case up until ilastik 1.4.0b3
-package:
-  name: ilastik-meta
+{% set git_tag = environ.get('ILASTIK_VERSION', 'add-volumina-submodule') %}
 
-  # If we're using a non-tagged revision, append '.postN' to the version
+package:
+  name: ilastik
+  # If we're using a non-tagged revision, append 'postN' to the version
   {% if GIT_DESCRIBE_NUMBER|int %}
-  version: {{ GIT_DESCRIBE_TAG }}.post{{ GIT_DESCRIBE_NUMBER }}
+  version: {{ GIT_DESCRIBE_TAG }}post{{ GIT_DESCRIBE_NUMBER }}
   {% else %}
   version: {{ GIT_DESCRIBE_TAG }}
   {% endif %}
 
 source:
-  git_url: https://github.com/ilastik/ilastik-meta
-  git_rev: HEAD
+  git_url: https://github.com/k-dominik/ilastik
+  git_rev: {{ git_tag }}
 
 build:
   number: 0
