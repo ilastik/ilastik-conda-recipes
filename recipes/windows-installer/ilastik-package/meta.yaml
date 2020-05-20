@@ -1,6 +1,6 @@
 package:
   name: ilastik-package
-  version: "1.0.3"
+  version: "1.0.4"
 
 build:
   number: 0
@@ -12,7 +12,7 @@ requirements:
   run:
     - git
     - ilastik-dependencies-no-solvers
-    - ilastik-meta
+    - ilastik
 
 about:
   summary: "A meta-package for creating installers."
