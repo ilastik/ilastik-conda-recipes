@@ -5,7 +5,7 @@ shared-config:
         - ilastik-forge/label/staging
         - ilastik-forge
         - conda-forge
-    destination-channel: ilastik-forge/label/staging
+    destination-channel: ilastik-forge
 
 # Some notes on the used environment variables:
 #   with packages build by conda-forge, which, presumably, used gcc 4.8.5.
