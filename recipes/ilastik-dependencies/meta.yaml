@@ -12,7 +12,7 @@ package:
     {% endif %}
 
     name: {{ package_name }}
-    version: 1.4.0
+    version: 1.4.1
 
 build:
   number: 5
@@ -28,8 +28,7 @@ requirements:
     # -----------------------------------------------------------------
     # General dependencies
     # -----------------------------------------------------------------
-    - python                    {{ python }}  # [not osx]
-    - python                    3.7.3         # [osx]
+    - python
     - numpy                     {{ numpy }}
 
     - appdirs
@@ -49,19 +48,20 @@ requirements:
     - pillow                    {{ pillow }}
     - psutil
     - pyopengl
-    - pyqt                      {{ pyqt }}
+    - pyqt
     - pyqtgraph
-    - pytest                    {{ pytest }}
+    - pytest                    {{ pytest }}*
     - pytest-qt
     - python-dateutil
     - pytz
     - qimage2ndarray
-    - qt                        {{ qt }}
+    - qt                        {{ qt }}*
     - readline                                 # [not win]
     - requests
     - scikit-image
     - scikit-learn              {{ sklearn }}*
     - setuptools
+    - vigra                     {{ vigra }}
     - yapsy
     - z5py                      >={{ z5py }}
 

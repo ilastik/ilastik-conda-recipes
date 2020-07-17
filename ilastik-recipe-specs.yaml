@@ -2,10 +2,10 @@ shared-config:
     master-conda-build-config: ./ilastik-pins.yaml
     repo-cache-dir: ./repo-cache # Relative to this yaml file's directory.
     source-channels:
-        - ilastik-forge/label/staging
-        - ilastik-forge
+        - ilastik-forge/label/ilastik14
+        - ilastik-forge/label/novigra
         - conda-forge
-    destination-channel: ilastik-forge
+    destination-channel: ilastik-forge/label/ilastik14
 
 # Some notes on the used environment variables:
 #   with packages build by conda-forge, which, presumably, used gcc 4.8.5.
@@ -23,16 +23,17 @@ recipe-specs:
     ## from the beginning of the list, but not vice-versa.
     ##
 
-    - name: lemon
-      recipe-repo: https://github.com/ilastik/ilastik-conda-recipes
-      tag: master
-      recipe-subdir: recipes/lemon
-      # conda-build-flags: --no-test
-      # by default a package is built on all 3 platforms
-      build-on:
-        - linux
-        - win
-        - osx
+    # using conda forge build
+    # - name: lemon
+    #   recipe-repo: https://github.com/ilastik/ilastik-conda-recipes
+    #   tag: master
+    #   recipe-subdir: recipes/lemon
+    #   # conda-build-flags: --no-test
+    #   # by default a package is built on all 3 platforms
+    #   build-on:
+    #     - linux
+    #     - win
+    #     - osx
 
     # FIXME: We temporarily build our own windows hdf5 package, because of
     # insufficient unicode support of release version 1.10.1.
@@ -43,20 +44,22 @@ recipe-specs:
       # tag: utf-8-support
       # recipe-subdir: recipe
 
-    - name: z5py
-      recipe-repo: https://github.com/k-dominik/z5py-feedstock
-      tag: ilastik-bld
-      recipe-subdir: recipe
+    # using conda-forge build
+    # - name: z5py
+    #   recipe-repo: https://github.com/k-dominik/z5py-feedstock
+    #   tag: ilastik-bld
+    #   recipe-subdir: recipe
 
-    # FIXME: We would like to use conda-forge's package for vigra,
-    # but it doesn't build WITH_LEMON yet.
-    - name: vigra
-      recipe-repo: https://github.com/ilastik/ilastik-conda-recipes
-      tag: master
-      recipe-subdir: recipes/vigra
-      environment:
-        VIGRA_SKIP_TESTS: 0
-      no-test: false
+    # using conda-forge build
+    # # FIXME: We would like to use conda-forge's package for vigra,
+    # # but it doesn't build WITH_LEMON yet.
+    # - name: vigra
+    #   recipe-repo: https://github.com/ilastik/ilastik-conda-recipes
+    #   tag: master
+    #   recipe-subdir: recipes/vigra
+    #   environment:
+    #     VIGRA_SKIP_TESTS: 0
+    #   no-test: false
 
     - name: dpct
       recipe-repo: https://github.com/ilastik/dpct
