@@ -15,7 +15,7 @@ package:
     version: 1.4.0
 
 build:
-  number: 2
+  number: 5
 
   track_features:
     # on osx we need to make sure that we install the numpy versions with openblas instead of mkl to prevent clashes with cplex
@@ -83,7 +83,7 @@ requirements:
     - marching_cubes
     - ndstructs
     - numpy-allocation-tracking
-    - tiktorch-client
+    - tiktorch-client           >={{ tiktorch-client }}
     - vigra                     {{ vigra }}
     - wsdt
 
