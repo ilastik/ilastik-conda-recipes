@@ -32,6 +32,7 @@ requirements:
     - python                    3.7.3         # [osx]
     - numpy                     {{ numpy }}
 
+    - appdirs
     - attrs
     - cachetools
     - decorator
