@@ -37,7 +37,6 @@ requirements:
     - decorator
     - fftw
     - future
-    - gdk-pixbuf                {{ gdkpixbuf }}  # [linux]
     - greenlet
     - h5py                      {{ h5py }}
     - hdf5                      {{ hdf5 }}

@@ -3,10 +3,6 @@ CONDA_BUILD_SYSROOT:
 
 boost:
   - 1.72.0
-# this is an unfortunate one
-# see https://github.com/ilastik/ilastik-conda-recipes/issues/83
-gdkpixbuf:
-  - 2.36.12 h7a26e22_1003
 h5py:
   - 2.10.0
 hdf5:
