@@ -185,7 +185,7 @@ recipe-specs:
       tag: master
       recipe-subdir: recipes/cplex-shared
       environment:
-        CPLEX_ROOT_DIR: /build/in/gurobi811/linux64
+        CPLEX_ROOT_DIR: /opt/gurobi903/linux64
 
     - name: cplex-shared
       build-on:
@@ -210,7 +210,7 @@ recipe-specs:
       tag: master
       recipe-subdir: recipes/gurobi-symlink
       environment:
-        GUROBI_ROOT_DIR: /build/in/gurobi811/linux64
+        GUROBI_ROOT_DIR: /opt/gurobi903/linux64
 
     - name: gurobi-symlink
       build-on:
@@ -219,7 +219,7 @@ recipe-specs:
       tag: master
       recipe-subdir: recipes/gurobi-symlink
       environment:
-        GUROBI_ROOT_DIR: /Library/gurobi811/mac64
+        GUROBI_ROOT_DIR: /Library/gurobi903/mac64
 
     - name: gurobi-symlink
       build-on:
@@ -228,7 +228,7 @@ recipe-specs:
       tag: master
       recipe-subdir: recipes/gurobi-symlink
       environment:
-        GUROBI_ROOT_DIR: /gurobi811/win64
+        GUROBI_ROOT_DIR: /gurobi903/win64
 
     - name: multi-hypotheses-tracking-with-gurobi
       build-on:
@@ -240,7 +240,7 @@ recipe-specs:
       environment:
         WITH_CPLEX: 0
         WITH_GUROBI: 1
-        GUROBI_ROOT_DIR: /opt/gurobi811/linux64
+        GUROBI_ROOT_DIR: /opt/gurobi903/linux64
 
     - name: multi-hypotheses-tracking-with-gurobi
       build-on:
@@ -252,7 +252,7 @@ recipe-specs:
       environment:
         WITH_CPLEX: 0
         WITH_GUROBI: 1
-        GUROBI_ROOT_DIR: /Library/gurobi811/mac64
+        GUROBI_ROOT_DIR: /Library/gurobi903/mac64
 
     - name: multi-hypotheses-tracking-with-gurobi
       build-on:
@@ -264,8 +264,8 @@ recipe-specs:
       environment:
         WITH_CPLEX: 0
         WITH_GUROBI: 1
-        GUROBI_ROOT_DIR: /gurobi811/win64
-        GUROBI_LIB_WIN: /gurobi811/win64/lib/gurobi81.lib
+        GUROBI_ROOT_DIR: /gurobi903/win64
+        GUROBI_LIB_WIN: /gurobi903/win64/lib/gurobi90.lib
 
     - name: multi-hypotheses-tracking-with-cplex
       build-on:
@@ -276,7 +276,7 @@ recipe-specs:
       environment:
         WITH_CPLEX: 1
         WITH_GUROBI: 0
-        CPLEX_ROOT_DIR: /build/in/cplex
+        CPLEX_ROOT_DIR: /opt/cplex
 
     - name: multi-hypotheses-tracking-with-cplex
       build-on:
