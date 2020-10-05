@@ -30,6 +30,9 @@ tifffile:
 # make sure to use a vigra build that includes lemon!
 vigra:
   - 1.11.1 py37ha1f80a5_1017  # [linux]
+  - 1.11.1 py37h05204d7_1017  # [osx]
+# still on own build where the correct channel priority guarantees version on win
+  - 1.11.1  # [win]
 z5py:
   - 2
 
