@@ -25,7 +25,7 @@ pytest:
 # fix macOS build, broken jpeg=9b
 pillow:
   - 5.3.0
-tiktorch-client:
+tiktorch_client:
   - 20.9.4
 
 pin_run_as_build:
