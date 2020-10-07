@@ -2,10 +2,10 @@ shared-config:
     master-conda-build-config: ./ilastik-pins.yaml
     repo-cache-dir: ./repo-cache # Relative to this yaml file's directory.
     source-channels:
-        - ilastik-forge/label/staging
-        - ilastik-forge
+        - ilastik-forge/label/ilastik140
         - conda-forge
-    destination-channel: ilastik-forge
+        - defaults
+    destination-channel: ilastik-forge/label/ilastik140
 
 # Some notes on the used environment variables:
 #   with packages build by conda-forge, which, presumably, used gcc 4.8.5.
@@ -23,16 +23,17 @@ recipe-specs:
     ## from the beginning of the list, but not vice-versa.
     ##
 
-    - name: lemon
-      recipe-repo: https://github.com/ilastik/ilastik-conda-recipes
-      tag: master
-      recipe-subdir: recipes/lemon
-      # conda-build-flags: --no-test
-      # by default a package is built on all 3 platforms
-      build-on:
-        - linux
-        - win
-        - osx
+    # using conda forge build
+    # - name: lemon
+    #   recipe-repo: https://github.com/ilastik/ilastik-conda-recipes
+    #   tag: master
+    #   recipe-subdir: recipes/lemon
+    #   # conda-build-flags: --no-test
+    #   # by default a package is built on all 3 platforms
+    #   build-on:
+    #     - linux
+    #     - win
+    #     - osx
 
     # FIXME: We temporarily build our own windows hdf5 package, because of
     # insufficient unicode support of release version 1.10.1.
@@ -43,20 +44,22 @@ recipe-specs:
       # tag: utf-8-support
       # recipe-subdir: recipe
 
-    - name: z5py
-      recipe-repo: https://github.com/k-dominik/z5py-feedstock
-      tag: ilastik-bld
-      recipe-subdir: recipe
+    # using conda-forge build
+    # - name: z5py
+    #   recipe-repo: https://github.com/k-dominik/z5py-feedstock
+    #   tag: ilastik-bld
+    #   recipe-subdir: recipe
 
-    # FIXME: We would like to use conda-forge's package for vigra,
-    # but it doesn't build WITH_LEMON yet.
-    - name: vigra
-      recipe-repo: https://github.com/ilastik/ilastik-conda-recipes
-      tag: master
-      recipe-subdir: recipes/vigra
-      environment:
-        VIGRA_SKIP_TESTS: 0
-      no-test: false
+    # using conda-forge build
+    # # FIXME: We would like to use conda-forge's package for vigra,
+    # # but it doesn't build WITH_LEMON yet.
+    # - name: vigra
+    #   recipe-repo: https://github.com/ilastik/ilastik-conda-recipes
+    #   tag: master
+    #   recipe-subdir: recipes/vigra
+    #   environment:
+    #     VIGRA_SKIP_TESTS: 0
+    #   no-test: false
 
     - name: dpct
       recipe-repo: https://github.com/ilastik/dpct
@@ -140,7 +143,7 @@ recipe-specs:
 
     - name: ilastik-dependencies-no-solvers
       recipe-repo: https://github.com/ilastik/ilastik-conda-recipes
-      tag: master
+      tag: update-cycle-1.4
       recipe-subdir: recipes/ilastik-dependencies
       environment:
         WITH_SOLVERS: 0
@@ -182,7 +185,7 @@ recipe-specs:
       tag: master
       recipe-subdir: recipes/cplex-shared
       environment:
-        CPLEX_ROOT_DIR: /build/in/gurobi811/linux64
+        CPLEX_ROOT_DIR: /opt/gurobi903/linux64
 
     - name: cplex-shared
       build-on:
@@ -207,7 +210,7 @@ recipe-specs:
       tag: master
       recipe-subdir: recipes/gurobi-symlink
       environment:
-        GUROBI_ROOT_DIR: /build/in/gurobi811/linux64
+        GUROBI_ROOT_DIR: /opt/gurobi903/linux64
 
     - name: gurobi-symlink
       build-on:
@@ -216,7 +219,7 @@ recipe-specs:
       tag: master
       recipe-subdir: recipes/gurobi-symlink
       environment:
-        GUROBI_ROOT_DIR: /Library/gurobi811/mac64
+        GUROBI_ROOT_DIR: /Library/gurobi903/mac64
 
     - name: gurobi-symlink
       build-on:
@@ -225,7 +228,7 @@ recipe-specs:
       tag: master
       recipe-subdir: recipes/gurobi-symlink
       environment:
-        GUROBI_ROOT_DIR: /gurobi811/win64
+        GUROBI_ROOT_DIR: /gurobi903/win64
 
     - name: multi-hypotheses-tracking-with-gurobi
       build-on:
@@ -237,7 +240,7 @@ recipe-specs:
       environment:
         WITH_CPLEX: 0
         WITH_GUROBI: 1
-        GUROBI_ROOT_DIR: /opt/gurobi811/linux64
+        GUROBI_ROOT_DIR: /opt/gurobi903/linux64
 
     - name: multi-hypotheses-tracking-with-gurobi
       build-on:
@@ -249,7 +252,7 @@ recipe-specs:
       environment:
         WITH_CPLEX: 0
         WITH_GUROBI: 1
-        GUROBI_ROOT_DIR: /Library/gurobi811/mac64
+        GUROBI_ROOT_DIR: /Library/gurobi903/mac64
 
     - name: multi-hypotheses-tracking-with-gurobi
       build-on:
@@ -261,8 +264,8 @@ recipe-specs:
       environment:
         WITH_CPLEX: 0
         WITH_GUROBI: 1
-        GUROBI_ROOT_DIR: /gurobi811/win64
-        GUROBI_LIB_WIN: /gurobi811/win64/lib/gurobi81.lib
+        GUROBI_ROOT_DIR: /gurobi903/win64
+        GUROBI_LIB_WIN: /gurobi903/win64/lib/gurobi90.lib
 
     - name: multi-hypotheses-tracking-with-cplex
       build-on:
@@ -273,7 +276,7 @@ recipe-specs:
       environment:
         WITH_CPLEX: 1
         WITH_GUROBI: 0
-        CPLEX_ROOT_DIR: /build/in/cplex
+        CPLEX_ROOT_DIR: /opt/cplex
 
     - name: multi-hypotheses-tracking-with-cplex
       build-on:

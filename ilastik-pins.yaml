@@ -2,15 +2,11 @@ CONDA_BUILD_SYSROOT:
   - /Developer/SDKs/MacOSX10.9.sdk  # [osx]
 
 boost:
-  - 1.70.0
-# this is an unfortunate one
-# see https://github.com/ilastik/ilastik-conda-recipes/issues/83
-gdkpixbuf:
-  - 2.36.12 h7a26e22_1003
+  - 1.72.0
 h5py:
   - 2.10.0
 hdf5:
-  - 1.10.5
+  - 1.10.6
 jpeg:
   - 9
 lemon:
@@ -27,14 +23,16 @@ pandas:
   - 0.24
 python:
   - 3.7
-pyqt:
-  - 5.6
 qt:
-  - 5.6
+  - 5.12
 tifffile:
   - 0.4.post2
+# make sure to use a vigra build that includes lemon!
 vigra:
-  - 1.11
+  - 1.11.1 py37ha1f80a5_1017  # [linux]
+  - 1.11.1 py37h05204d7_1017  # [osx]
+# still on own build where the correct channel priority guarantees version on win
+  - 1.11.1  # [win]
 z5py:
   - 2
 
