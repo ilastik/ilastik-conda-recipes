@@ -2,10 +2,10 @@ shared-config:
     master-conda-build-config: ./ilastik-pins.yaml
     repo-cache-dir: ./repo-cache # Relative to this yaml file's directory.
     source-channels:
-        - ilastik-forge/label/ilastik14
-        - ilastik-forge/label/novigra
+        - ilastik-forge/label/ilastik140
         - conda-forge
-    destination-channel: ilastik-forge/label/ilastik14
+        - defaults
+    destination-channel: ilastik-forge/label/ilastik140
 
 # Some notes on the used environment variables:
 #   with packages build by conda-forge, which, presumably, used gcc 4.8.5.
@@ -143,7 +143,7 @@ recipe-specs:
 
     - name: ilastik-dependencies-no-solvers
       recipe-repo: https://github.com/ilastik/ilastik-conda-recipes
-      tag: master
+      tag: update-cycle-1.4
       recipe-subdir: recipes/ilastik-dependencies
       environment:
         WITH_SOLVERS: 0
