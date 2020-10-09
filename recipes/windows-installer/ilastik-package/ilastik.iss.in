@@ -35,8 +35,8 @@ Source: "Lib\*"; Excludes: "\plat-*,\test\*,\site-packages\matplotlib\tests\*"; 
 Source: "Library\plugins\*"; DestDir: "{app}\Library\plugins"; Flags: ignoreversion recursesubdirs
 Source: "Scripts\*"; DestDir: "{app}\Scripts"; Flags: ignoreversion recursesubdirs
 Source: "conda-meta\*"; DestDir: "{app}\conda-meta"; Flags: ignoreversion recursesubdirs
-; the grpc library relies on Library\mingw-w64
-Source: "Library\mingw-w64\*"; DestDir: "{app}\Library\mingw-w64"; Flags: ignoreversion recursesubdirs
+; the grpc library relies on Library\mingw64
+Source: "Library\mingw64\*"; DestDir: "{app}\Library\mingw64"; Flags: ignoreversion recursesubdirs
 
 [Icons]
 Name: "{group}\ilastik"; Filename: "{app}\ilastik.exe"; IconFilename: "{app}\ilastik-icon.ico"
