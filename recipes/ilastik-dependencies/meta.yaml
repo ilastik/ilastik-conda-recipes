@@ -12,10 +12,11 @@ package:
     {% endif %}
 
     name: {{ package_name }}
-    version: 1.4.2
+    version: 1.4.3
 
 build:
   number: 0
+
 
   track_features:
     # on osx we need to make sure that we install the numpy versions with openblas instead of mkl to prevent clashes with cplex
@@ -72,8 +73,7 @@ requirements:
     - fastfilters
     - lemon
     - pytiff
-    - tifffile                  {{ tifffile }}
-
+    - tifffile
     # -----------------------------------------------------------------
     # ilastik main packages developed by us
     # -----------------------------------------------------------------
