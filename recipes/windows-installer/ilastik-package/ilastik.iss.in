@@ -52,4 +52,4 @@ Root: HKCR64; Subkey: "ilastik-@VERSION@"; ValueType: string; ValueName: ""; Val
 ; "DefaultIcon" is the registry key that specifies the filename containing the icon to associate with the file type.
 Root: HKCR64; Subkey: "ilastik-@VERSION@\DefaultIcon"; ValueType: string; ValueName: ""; ValueData: "{app}\ilastik-icon.ico"
 ; "shell\open\command" is the registry key that specifies the program to execute when a file of the type is double-clicked in Explorer. The surrounding quotes are in the command line so it handles long filenames correctly.
-Root: HKCR64; Subkey: "ilastik-@VERSION@\shell\open\command"; ValueType: string; ValueName: ""; ValueData: """{app}\ilastik.exe"" ""%1"""
+Root: HKCR64; Subkey: "ilastik-@VERSION@\shell\open\command"; ValueType: string; ValueName: ""; ValueData: """{app}\ilastik.exe"" --project ""%1"""
