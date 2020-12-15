@@ -98,12 +98,6 @@ recipe-specs:
       tag: master
       recipe-subdir: conda-recipe
 
-    # tifffile is available from conda-forge, but we need an old version of it...
-    - name: tifffile
-      recipe-repo: https://github.com/ilastik/ilastik-conda-recipes
-      tag: master
-      recipe-subdir: recipes/tifffile
-
     - name: pytiff
       recipe-repo: https://github.com/ilastik/ilastik-conda-recipes
       tag: master
