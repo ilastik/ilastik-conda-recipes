@@ -133,7 +133,7 @@ rm -f ${RELEASE_ENV}/lib/libilocplex.dylib
 rm -f ${RELEASE_ENV}/lib/libconcert.dylib
 
 # Remove gurobi symlinks (if present)
-rm -f ${RELEASE_ENV}/lib/libgurobi*.so # Yes, the extension is .so, even on Mac
+rm -vf ${RELEASE_ENV}/lib/libgurobi*.{so,dylib}  # older gurobi-versions had *.so even on OSX
 
 if [[ $INCLUDE_TESTS == 1 ]]; then
     echo "Including ilastik tests in release (larger release size)."
