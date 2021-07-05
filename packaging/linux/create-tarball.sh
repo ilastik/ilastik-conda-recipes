@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ##
-## Usage: create-tarball.sh[--include-tests] release-name
+## Usage: create-tarball.sh[--include-tests] release-name output-path
 ##
 
 set -e
@@ -19,6 +19,8 @@ fi
 
 
 RELEASE_NAME=$1
+
+OUTPUT_PATH=$2
 
 CONDA_ROOT=`conda info --root`
 source ${CONDA_ROOT}/bin/activate root
@@ -51,10 +53,8 @@ if [[ $SKIP_TAR == 1 ]]; then
 else
     # Create the tarball, and move it to the current directory.
     echo "Creating ${RELEASE_NAME}.tar.bz2"
-    DEST_DIR=`pwd`
     cd ${CONDA_ROOT}/envs/
     mv ilastik-release ${RELEASE_NAME}
-    tar -cjf $DEST_DIR/${RELEASE_NAME}.tar.bz2 ${RELEASE_NAME}
-    mv ${RELEASE_NAME} ilastik-release
-    cd -
+    tar -cjf ${RELEASE_NAME}.tar.bz2 ${RELEASE_NAME}
+    mv ${RELEASE_NAME}.tar.bz2 ${OUTPUT_PATH}
 fi

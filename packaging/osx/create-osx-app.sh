@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ##
-## Usage: create-osx-app.sh [--include-tests] release-name
+## Usage: create-osx-app.sh [--include-tests] release-name output-path
 ##
 
 set -e
@@ -25,6 +25,9 @@ if [[ $@ == *"--include-tests"* ]]; then
 fi
 
 RELEASE_NAME=$1
+
+OUTPUT_PATH=$2
+
 
 echo "Creating release ${RELEASE_NAME} from ${RELEASE_ENV}"
 echo "Creating ilastik.app."
@@ -97,4 +100,5 @@ mv ilastik.app ${RELEASE_NAME}.app
 
 echo "Compressing: ${RELEASE_NAME}.app -> ${RELEASE_NAME}.tar.bz2"
 tar -cjf ${RELEASE_NAME}.tar.bz2 ${RELEASE_NAME}.app
+mv ${RELEASE_NAME}.tar.bz2 ${OUTPUT_PATH}
 

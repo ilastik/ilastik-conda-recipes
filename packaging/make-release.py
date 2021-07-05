@@ -105,13 +105,14 @@ class CondaEnv:
 
 
 class IlastikRelease:
-    def __init__(self, release_env: CondaEnv):
+    def __init__(self, release_env: CondaEnv, release_dir=Path):
         assert release_env.is_valid
         self._release_env = release_env
 
         imeta_version = self._release_env.package_info("ilastik-meta")["version"]
         # ilastik-${ILASTIK_PKG_VERSION}${SOLVERS_SUFFIX}${TIKTORCH_SUFFIX}-`uname`
-        self._release_name = f"ilastik-{imeta_version}-cpu-{OS_SUFFIX[OS]}"
+        self._release_name = f"ilastik-{imeta_version}-{OS_SUFFIX[OS]}"
+        self._release_dir = release_dir
         self._release_path: Optional[Path] = None
 
         self._prepare_package()
@@ -157,28 +158,42 @@ class IlastikRelease:
 
     def _package_windows(self) -> None:
         iss_path = self._release_env.path / "package" / "ilastik.iss"
-        subprocess.check_call([ISS, f"/O{os.getcwd()}", str(iss_path)])
-        self._release_path = Path(os.getcwd()) / f"{self._release_name}.exe"
+        subprocess.check_call([ISS, f"/O{self._release_dir}", str(iss_path)])
+        self._release_path = self._release_dir / f"{self._release_name}.exe"
 
     def _package_linux(self) -> None:
         package_cmd = Path(__file__).parent / "linux" / "create-tarball.sh"
-        subprocess.check_call([package_cmd, self._release_name])
-        self._release_path = Path(os.getcwd()) / f"{self._release_name}.tar.bz2"
+        subprocess.check_call([package_cmd, self._release_name, self._release_dir])
+        self._release_path = self._release_dir / f"{self._release_name}.tar.bz2"
 
     def _package_darwin(self) -> None:
         package_cmd = Path(__file__).parent / "osx" / "create-osx-app.sh"
-        subprocess.check_call([package_cmd, self._release_name])
-        self._release_path = Path(os.getcwd()) / f"{self._release_name}.tar.bz2"
+        subprocess.check_call([package_cmd, self._release_name, self._release_dir])
+        self._release_path = self._release_dir / f"{self._release_name}.tar.bz2"
 
 
 @click.command()
 @click.option("-v", "--verbose", is_flag=True, help="Enables verbose mode")
-def main(verbose: bool):
+@click.option(
+    "--output-dir",
+    default="./",
+    type=click.Path(
+        exists=True,
+        file_okay=False,
+        dir_okay=True,
+        writable=True,
+        resolve_path=True,
+        path_type=Path,
+    ),
+    help="Output directory for package, default pwd."
+)
+def main(verbose: bool, output_dir: Path):
+
     level = verbose and logging.DEBUG or logging.INFO
     logging.basicConfig()
     logger.setLevel(level)
     ilastik_env = CondaEnv("ilastik-release")
-    ilastik_release = IlastikRelease(ilastik_env)
+    ilastik_release = IlastikRelease(ilastik_env, output_dir)
     assert ilastik_release.release_path.exists()
     logger.info(f"created ilastik package at: {ilastik_release.release_path}.")
 
