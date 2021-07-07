@@ -70,7 +70,13 @@ class CondaEnv:
         if self.path.exists():
             subprocess.check_call(["conda", "env", "remove", "--name", self.name])
             if self.path.exists():
-                self.path.unlink()
+                try:
+                    self.path.unlink()
+                except PermissionError:
+                    if OS == "windows":
+                        logger.warning(f"Could not remove {self.path} - might be some windows issue.")
+                    else:
+                        raise
 
         chans = []
         for channel in channels:
