@@ -47,14 +47,14 @@ else
     echo "test-files removed"
 fi
 
-if [[ $SKIP_TAR == 1 ]]; then
-    echo "Skipping tarball creation."
-    echo "Release env created in ${CONDA_ROOT}/envs/ilastik-release"
-else
-    # Create the tarball, and move it to the current directory.
-    echo "Creating ${RELEASE_NAME}.tar.bz2"
-    cd ${CONDA_ROOT}/envs/
-    mv ilastik-release ${RELEASE_NAME}
-    tar -cjf ${RELEASE_NAME}.tar.bz2 ${RELEASE_NAME}
+
+# Create the tarball, and move it to the current directory.
+echo "Creating ${RELEASE_NAME}.tar.bz2"
+cd ${CONDA_ROOT}/envs/
+mv ilastik-release ${RELEASE_NAME}
+tar -cjf ${RELEASE_NAME}.tar.bz2 ${RELEASE_NAME}
+if [[ !(${OUTPUT_PATH} -ef ${PWD}) ]];
+then
+    echo "Moving release to ${OUTPUT_PATH}"
     mv ${RELEASE_NAME}.tar.bz2 ${OUTPUT_PATH}
 fi

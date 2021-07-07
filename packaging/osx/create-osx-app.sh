@@ -100,5 +100,9 @@ mv ilastik.app ${RELEASE_NAME}.app
 
 echo "Compressing: ${RELEASE_NAME}.app -> ${RELEASE_NAME}.tar.bz2"
 tar -cjf ${RELEASE_NAME}.tar.bz2 ${RELEASE_NAME}.app
-mv ${RELEASE_NAME}.tar.bz2 ${OUTPUT_PATH}
 
+if [[ !(${OUTPUT_PATH} -ef ${PWD}) ]];
+then
+    echo "Moving release to ${OUTPUT_PATH}"
+    mv ${RELEASE_NAME}.tar.bz2 ${OUTPUT_PATH
+fi
