@@ -115,9 +115,9 @@ class IlastikRelease:
         assert release_env.is_valid
         self._release_env = release_env
 
-        imeta_version = self._release_env.package_info("ilastik-meta")["version"]
+        self._imeta_version = self._release_env.package_info("ilastik-meta")["version"]
         # ilastik-${ILASTIK_PKG_VERSION}${SOLVERS_SUFFIX}${TIKTORCH_SUFFIX}-`uname`
-        self._release_suffix = f"{imeta_version}-{OS_SUFFIX[OS]}"
+        self._release_suffix = f"{self._imeta_version}-{OS_SUFFIX[OS]}"
         self._release_name = f"ilastik-{self._release_suffix}"
 
         self._release_dir = release_dir
@@ -145,7 +145,7 @@ class IlastikRelease:
         iss_in = self._release_env.path / "package" / "ilastik.iss.in"
         iss_out = iss_in.parent / "ilastik.iss"
 
-        iss_out.write_text(re.sub("@VERSION@", self._release_suffix, iss_in.read_text()))
+        iss_out.write_text(re.sub("@VERSION@", self._imeta_version, iss_in.read_text()))
 
     def _prepare_darwin(self) -> None:
         pass

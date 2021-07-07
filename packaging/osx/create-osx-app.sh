@@ -104,5 +104,5 @@ tar -cjf ${RELEASE_NAME}.tar.bz2 ${RELEASE_NAME}.app
 if [[ !(${OUTPUT_PATH} -ef ${PWD}) ]];
 then
     echo "Moving release to ${OUTPUT_PATH}"
-    mv ${RELEASE_NAME}.tar.bz2 ${OUTPUT_PATH
+    mv ${RELEASE_NAME}.tar.bz2 ${OUTPUT_PATH}
 fi
