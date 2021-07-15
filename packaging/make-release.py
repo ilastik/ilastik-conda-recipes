@@ -26,7 +26,7 @@ OS_SUFFIX = {
     "windows": "win64",
 }
 
-DEFAULT_CHANNELS = ["ilastik-forge", "conda-forge"]
+DEFAULT_CHANNELS = ["pytorch", "ilastik-forge", "conda-forge"]
 
 
 ISS = None
