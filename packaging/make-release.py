@@ -14,10 +14,12 @@ CONDA_DEFAULT_OPTIONS = ["--yes", "--override-channels", "--strict-channel-prior
 
 OS: str = platform.system().lower()
 
+# FIXME: cudatoolkit should in principle be moved to either ilastik-dependencies or parametrized
+# for now this allows for quicker adjustments of releases...
 ILASTIK_PACKAGES = {
-    "linux": ["ilastik-dependencies-binary"],
-    "darwin": ["ilastik-dependencies-binary", "py2app"],
-    "windows": ["ilastik-dependencies-binary", "ilastik-exe", "ilastik-package"],
+    "linux": ["ilastik-dependencies-binary", "tiktorch", "cudatoolkit=11.0"],
+    "darwin": ["ilastik-dependencies-binary", "tiktorch-cpu", "py2app"],
+    "windows": ["ilastik-dependencies-binary", "tiktorch", "cudatoolkit=11.0", "ilastik-exe", "ilastik-package"],
 }
 
 OS_SUFFIX = {
@@ -26,7 +28,7 @@ OS_SUFFIX = {
     "windows": "win64",
 }
 
-DEFAULT_CHANNELS = ["pytorch", "ilastik-forge", "conda-forge"]
+DEFAULT_CHANNELS = ["ilastik-forge", "pytorch", "conda-forge"]
 
 
 ISS = None
