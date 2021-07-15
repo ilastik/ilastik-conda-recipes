@@ -82,7 +82,8 @@ requirements:
     - marching_cubes
     - ndstructs
     - numpy-allocation-tracking
-    - tiktorch                >={{ tiktorch_client }}
+    - tiktorch                >={{ tiktorch }}  # [not osx]
+    - tiktorch-cpu            >={{ tiktorch }}  # [osx]
     - vigra                     {{ vigra }}
     - wsdt
 

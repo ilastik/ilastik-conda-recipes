@@ -33,7 +33,7 @@ vigra:
   - 1.11.1  # [win]
 z5py:
   - 2
-tiktorch_client:
+tiktorch:
   - 21.7.0
 
 
