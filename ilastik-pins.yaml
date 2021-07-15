@@ -33,6 +33,8 @@ vigra:
   - 1.11.1  # [win]
 z5py:
   - 2
+tiktorch_client:
+  - 21.7.0
 
 
 pin_run_as_build:

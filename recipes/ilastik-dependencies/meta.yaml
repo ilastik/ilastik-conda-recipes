@@ -3,7 +3,6 @@
 {% endif %}
 {% set WITH_SOLVERS = WITH_SOLVERS|int %}
 
-
 package:
     {% set package_name = "ilastik-dependencies" %}
 
@@ -83,7 +82,7 @@ requirements:
     - marching_cubes
     - ndstructs
     - numpy-allocation-tracking
-    - tiktorch-client           >={{ tiktorch_client }}
+    - tiktorch                >={{ tiktorch_client }}
     - vigra                     {{ vigra }}
     - wsdt
 
