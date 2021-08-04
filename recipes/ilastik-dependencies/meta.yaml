@@ -14,7 +14,7 @@ package:
     version: 1.4.4
 
 build:
-  number: 0
+  number: 1
 
 
   track_features:
@@ -76,6 +76,7 @@ requirements:
     # -----------------------------------------------------------------
     # ilastik main packages developed by us
     # -----------------------------------------------------------------
+    - bioimageio.spec         {{ bioimageiospec }}
     - ilastik-feature-selection
     - ilastikrag
     - ilastiktools

@@ -1,6 +1,8 @@
 CONDA_BUILD_SYSROOT:
   - /Developer/SDKs/MacOSX10.9.sdk  # [osx]
 
+bioimageiospec:
+  - 0.3.2rc1
 boost:
   - 1.72.0
 h5py:
