@@ -4,8 +4,6 @@ import sys
 import os
 import re
 import subprocess
-import collections
-from itertools import groupby
 
 from read_rpaths import read_rpaths, read_dylib_id
 

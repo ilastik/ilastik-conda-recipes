@@ -38,7 +38,7 @@ if len(sys.argv) < 3 or sys.argv[1] != "py2app" or "--alias" not in sys.argv:
     sys.exit(1)
 
 ILASTIK_REPO = os.path.normpath(os.path.split(ilastik.__file__)[0] + "/..")
-APP = [ILASTIK_REPO + "/ilastik.py"]
+APP = ILASTIK_REPO + "/ilastik.py"
 assert os.path.exists(APP)
 
 icon_file = ILASTIK_REPO + "/appIcon.icns"
@@ -54,7 +54,7 @@ OPTIONS = {
 }
 
 setup(
-    app=APP,
+    app=[APP],
     options={"py2app": OPTIONS},
     setup_requires=["py2app"],
     version=ilastik.__version__,

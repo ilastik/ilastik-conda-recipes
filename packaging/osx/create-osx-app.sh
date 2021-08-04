@@ -34,7 +34,7 @@ echo "Creating ilastik.app."
 # For some reason, the app created by py2app has stability issues.
 # (It might be related to the load order of multiple libgcc_s dylibs and/or libSystem.B.dylib.)
 # As a workaround, we use py2app in "alias mode" and then manually copy the files we need into the app.
-${RELEASE_ENV}/bin/python ${OSX_PACKAGES_DIR}/setup-alias-app.py py2app --alias --dist-dir .
+${RELEASE_ENV}/bin/python ${OSX_PACKAGES_DIR}/setup-alias-app.py py2app --alias
 
 echo "Writing qt.conf"
 cat <<EOF > ilastik.app/Contents/Resources/qt.conf
