@@ -16,7 +16,7 @@
 #
 # See the LICENSE file for details. License information is also available
 # on the ilastik web site at:
-#		   http://ilastik.org/license.html
+# 		   http://ilastik.org/license.html
 ###############################################################################
 """
 This script uses py2app to generate an app bundle in "alias mode".
@@ -30,32 +30,34 @@ However, if your environment is already "relocatable", then you can use the
 
 import sys
 import os
-from setuptools import setup, find_packages
+from setuptools import setup
 import ilastik
 
 if len(sys.argv) < 3 or sys.argv[1] != "py2app" or "--alias" not in sys.argv:
     sys.stderr.write("Usage: python {} py2app --alias ...\n".format(sys.argv[0]))
     sys.exit(1)
 
-ILASTIK_REPO = os.path.normpath( os.path.split(ilastik.__file__)[0] + "/.." )
-APP = [ILASTIK_REPO + '/ilastik.py']
+ILASTIK_REPO = os.path.normpath(os.path.split(ilastik.__file__)[0] + "/..")
+APP = ILASTIK_REPO + "/ilastik.py"
+assert os.path.exists(APP)
 
-icon_file = ILASTIK_REPO + '/appIcon.icns'
+icon_file = ILASTIK_REPO + "/appIcon.icns"
 assert os.path.exists(icon_file)
 
-OPTIONS = { 'dist_dir' : os.getcwd(),
-            'site_packages' : False,
-            'argv_emulation': False, # argv_emulation interferes with gui apps
-            'iconfile' : icon_file, 
-            'extra_scripts': [ILASTIK_REPO + 'bin/mac_execfile.py'],
-            'alias': True }
+OPTIONS = {
+    "dist_dir": os.getcwd(),
+    "site_packages": False,
+    "argv_emulation": False,  # argv_emulation interferes with gui apps
+    "iconfile": icon_file,
+    "extra_scripts": [ILASTIK_REPO + "bin/mac_execfile.py"],
+    "alias": True,
+}
 
 setup(
-    app=APP,
-    options={'py2app': OPTIONS},
-    setup_requires=['py2app'],
+    app=[APP],
+    options={"py2app": OPTIONS},
+    setup_requires=["py2app"],
     version=ilastik.__version__,
-    description='Interactive Image Analysis',
-    url='http://github.com/ilastik'
+    description="Interactive Image Analysis",
+    url="http://github.com/ilastik",
 )
-
