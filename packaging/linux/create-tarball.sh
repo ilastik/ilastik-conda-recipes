@@ -38,21 +38,13 @@ rm -f ${CONDA_ROOT}/envs/ilastik-release/lib/libconcert.so
 # Remove gurobi symlinks (if present)
 rm -f ${RELEASE_ENV}/lib/libgurobi*.so
 
-if [[ $INCLUDE_TESTS == 1 ]]; then
-    echo "Including ilastik tests in release (larger release size)."
-else
-    echo "Removing ilastik tests from source folders"
-    ILASTIK_META=${CONDA_ROOT}/envs/ilastik-release/ilastik-meta
-    rm -rf ${ILASTIK_META}/*/tests/*
-    echo "test-files removed"
-fi
-
-
 # Create the tarball, and move it to the current directory.
 echo "Creating ${RELEASE_NAME}.tar.bz2"
 cd ${CONDA_ROOT}/envs/
 mv ilastik-release ${RELEASE_NAME}
 tar -cjf ${RELEASE_NAME}.tar.bz2 ${RELEASE_NAME}
+echo "Cleaning up... "
+rm -rf ${RELEASE_NAME}
 if [[ !(${OUTPUT_PATH} -ef ${PWD}) ]];
 then
     echo "Moving release to ${OUTPUT_PATH}"

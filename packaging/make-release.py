@@ -6,7 +6,9 @@ import logging
 import os
 import platform
 import re
+import shutil
 import subprocess
+
 
 logger = logging.getLogger("make-release")
 
@@ -43,6 +45,10 @@ OS_SUFFIX = {
 DEFAULT_CHANNELS = ["ilastik-forge", "pytorch", "conda-forge"]
 
 
+STRIP_PATHS = {
+    "common": [Path("include"), Path("ilastik-meta/ilastik/tests"), Path("qml"), Path("share/doc")]
+}
+
 ISS = None
 if OS == "windows":
     ISS = os.environ["INNOCC"]
@@ -61,6 +67,7 @@ class CondaEnv:
         self._is_valid = False
 
         self._create(channels=DEFAULT_CHANNELS, packages=self._packages_list)
+        self._strip()
 
     @property
     def name(self):
@@ -77,6 +84,16 @@ class CondaEnv:
     @property
     def path(self) -> Path:
         return Path(self.conda_info()["envs_dirs"][0]) / self.name
+
+    def _strip(self):
+        logger.info("Stripping release")
+        for p in STRIP_PATHS["common"]:
+            try:
+                current = self.path / p
+                logger.info(f"removing {current}")
+                shutil.rmtree(current)
+            except Exception as e:
+                logger.warning(f"Encountered error removing {current}: {e}")
 
     def _create(self, channels: List[str], packages: List[str]) -> None:
         logger.info(f"creating environment {self.name} with channels: {channels} and packages {packages}")
