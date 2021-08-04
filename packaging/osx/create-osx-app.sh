@@ -74,6 +74,13 @@ sed -i '' "s|${CONDA_ROOT}/envs/ilastik-release/ilastik-meta/ilastik/||" ilastik
 sed -i '' "s|${CONDA_ROOT}/envs/ilastik-release|@executable_path/../ilastik-release|" ilastik.app/Contents/Info.plist
 sed -i '' "s|\.dylib|m\.dylib|" ilastik.app/Contents/Info.plist
 
+# fix rpath of entrypoint
+# remove rpaths set by py2app
+install_name_tool -delete_rpath @loader_path/../../../../../ ilastik.app/Contents/MacOS/ilastik
+install_name_tool -delete_rpath @loader_path/../lib ilastik.app/Contents/MacOS/ilastik
+# point to lib in ilastik-release env dir
+install_name_tool -add_rpath @loader_path/../ilastik-release/lib ilastik.app/Contents/MacOS/ilastik
+
 # Fix python executable link
 rm ilastik.app/Contents/MacOS/python
 cd ilastik.app/Contents/MacOS && ln -s ../ilastik-release/bin/python
