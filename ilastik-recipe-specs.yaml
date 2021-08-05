@@ -181,7 +181,7 @@ recipe-specs:
       tag: main
       recipe-subdir: recipes/cplex-shared
       environment:
-        CPLEX_ROOT_DIR: /opt/gurobi903/linux64
+        CPLEX_ROOT_DIR: /build/in/cplex
 
     - name: cplex-shared
       build-on:
@@ -299,9 +299,35 @@ recipe-specs:
     - name: ilastik-dependencies
       recipe-repo: https://github.com/ilastik/ilastik-conda-recipes
       tag: main
+      build-on:
+        - linux
       recipe-subdir: recipes/ilastik-dependencies
       environment:
         WITH_SOLVERS: 1
+        CPLEX_ROOT_DIR: /build/in/cplex
+        GUROBI_ROOT_DIR: /opt/gurobi903/linux64
+
+    - name: ilastik-dependencies
+      recipe-repo: https://github.com/ilastik/ilastik-conda-recipes
+      tag: main
+      build-on:
+        - osx
+      recipe-subdir: recipes/ilastik-dependencies
+      environment:
+        WITH_SOLVERS: 1
+        CPLEX_ROOT_DIR: /Applications/CPLEX_Studio129
+        GUROBI_ROOT_DIR: /Library/gurobi903/mac64
+
+    - name: ilastik-dependencies
+      recipe-repo: https://github.com/ilastik/ilastik-conda-recipes
+      tag: main
+      build-on:
+        - win
+      recipe-subdir: recipes/ilastik-dependencies
+      environment:
+        WITH_SOLVERS: 1
+        CPLEX_ROOT_DIR: /build/in/cplex
+        GUROBI_ROOT_DIR: /opt/gurobi903/linux64
 
 ###########################################################################
 #
