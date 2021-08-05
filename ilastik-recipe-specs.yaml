@@ -101,7 +101,7 @@ recipe-specs:
 
     - name: pytiff
       recipe-repo: https://github.com/ilastik/ilastik-conda-recipes
-      tag: master
+      tag: main
       recipe-subdir: recipes/pytiff
 
     - name: numpy-allocation-tracking
@@ -126,12 +126,12 @@ recipe-specs:
 
     - name: ilastik-meta
       recipe-repo: https://github.com/ilastik/ilastik-conda-recipes
-      tag: master
+      tag: main
       recipe-subdir: recipes/ilastik-meta
 
     - name: ilastik-launch
       recipe-repo: https://github.com/ilastik/ilastik-conda-recipes
-      tag: master
+      tag: main
       recipe-subdir: recipes/ilastik-launch
       build-on:
        - linux
@@ -139,28 +139,28 @@ recipe-specs:
 
     - name: ilastik-dependencies-no-solvers
       recipe-repo: https://github.com/ilastik/ilastik-conda-recipes
-      tag: master
+      tag: main
       recipe-subdir: recipes/ilastik-dependencies
       environment:
         WITH_SOLVERS: 0
 
     - name: macholib
       recipe-repo: https://github.com/ilastik/ilastik-conda-recipes
-      tag: master
+      tag: main
       recipe-subdir: recipes/osx-packages/macholib
       build-on:
         - osx
 
     - name: modulegraph
       recipe-repo: https://github.com/ilastik/ilastik-conda-recipes
-      tag: master
+      tag: main
       recipe-subdir: recipes/osx-packages/modulegraph
       build-on:
         - osx
 
     - name: py2app
       recipe-repo: https://github.com/ilastik/ilastik-conda-recipes
-      tag: master
+      tag: main
       recipe-subdir: recipes/osx-packages/py2app
       build-on:
         - osx
@@ -171,14 +171,14 @@ recipe-specs:
 ##
     - name: opengm-structured-learning-headers
       recipe-repo: https://github.com/ilastik/ilastik-conda-recipes
-      tag: master
+      tag: main
       recipe-subdir: recipes/opengm-structured-learning-headers
 
     - name: cplex-shared
       build-on:
         - linux
       recipe-repo: https://github.com/ilastik/ilastik-conda-recipes
-      tag: master
+      tag: main
       recipe-subdir: recipes/cplex-shared
       environment:
         CPLEX_ROOT_DIR: /opt/gurobi903/linux64
@@ -187,7 +187,7 @@ recipe-specs:
       build-on:
         - osx
       recipe-repo: https://github.com/ilastik/ilastik-conda-recipes
-      tag: master
+      tag: main
       recipe-subdir: recipes/cplex-shared
       environment:
         CPLEX_ROOT_DIR: /Applications/CPLEX_Studio129
@@ -196,14 +196,14 @@ recipe-specs:
       build-on:
         - win
       recipe-repo: https://github.com/ilastik/ilastik-conda-recipes
-      tag: master
+      tag: main
       recipe-subdir: recipes/cplex-shared
 
     - name: gurobi-symlink
       build-on:
         - linux
       recipe-repo: https://github.com/ilastik/ilastik-conda-recipes
-      tag: master
+      tag: main
       recipe-subdir: recipes/gurobi-symlink
       environment:
         GUROBI_ROOT_DIR: /opt/gurobi903/linux64
@@ -212,7 +212,7 @@ recipe-specs:
       build-on:
         - osx
       recipe-repo: https://github.com/ilastik/ilastik-conda-recipes
-      tag: master
+      tag: main
       recipe-subdir: recipes/gurobi-symlink
       environment:
         GUROBI_ROOT_DIR: /Library/gurobi903/mac64
@@ -221,7 +221,7 @@ recipe-specs:
       build-on:
         - win
       recipe-repo: https://github.com/ilastik/ilastik-conda-recipes
-      tag: master
+      tag: main
       recipe-subdir: recipes/gurobi-symlink
       environment:
         GUROBI_ROOT_DIR: C:/gurobi903/win64
@@ -298,7 +298,7 @@ recipe-specs:
 
     - name: ilastik-dependencies
       recipe-repo: https://github.com/ilastik/ilastik-conda-recipes
-      tag: master
+      tag: main
       recipe-subdir: recipes/ilastik-dependencies
       environment:
         WITH_SOLVERS: 1
@@ -309,21 +309,21 @@ recipe-specs:
 #
     - name: ilastik-exe
       recipe-repo: https://github.com/ilastik/ilastik-conda-recipes
-      tag: master
+      tag: main
       recipe-subdir: recipes/windows-installer/ilastik-exe
       build-on:
        - win
 
     - name: ilastik-package
       recipe-repo: https://github.com/ilastik/ilastik-conda-recipes
-      tag: master
+      tag: main
       recipe-subdir: recipes/windows-installer/ilastik-package
       build-on:
        - win
 
     - name: ilastik-dependencies-binary
       recipe-repo: https://github.com/ilastik/ilastik-conda-recipes
-      tag: master
+      tag: main
       recipe-subdir: recipes/ilastik-dependencies-binary
       environment:
         WITH_SOLVERS: 1
