@@ -1,9 +1,11 @@
 bioimageiospec:
-  - 0.3.2rc1
+  - 0.3.3.post1
+bioimageiocore:
+  - 0.4.0
 h5py:
   - 2.10.0
 hdf5:
-  - 1.10.5
+  - 1.10.6
 networkx:
   - 2.3*
 numpy:
@@ -26,7 +28,7 @@ pytest:
 pillow:
   - 5.3.0
 tiktorch:
-  - 21.7.0
+  - 21.9.1
 
 pin_run_as_build:
   h5py: x.x

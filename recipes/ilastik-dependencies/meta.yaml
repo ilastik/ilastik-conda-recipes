@@ -11,10 +11,10 @@ package:
     {% endif %}
 
     name: {{ package_name }}
-    version: 1.4.4
+    version: 1.4.5
 
 build:
-  number: 1
+  number: 0
 
 
   track_features:
@@ -77,14 +77,15 @@ requirements:
     # ilastik main packages developed by us
     # -----------------------------------------------------------------
     - bioimageio.spec         {{ bioimageiospec }}
+    - bioimageio.core         {{ bioimageiocore }}
     - ilastik-feature-selection
     - ilastikrag
     - ilastiktools
     - marching_cubes
     - ndstructs
     - numpy-allocation-tracking
-    - tiktorch                >={{ tiktorch }}  # [not osx]
-    - tiktorch-cpu            >={{ tiktorch }}  # [osx]
+    # configure additional neural network dependencies by adding them to the env
+    - tiktorch {{ tiktorch }}
     - vigra                     {{ vigra }}
     - wsdt
 
