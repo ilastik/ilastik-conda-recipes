@@ -17,9 +17,9 @@ OS: str = platform.system().lower()
 # FIXME: cudatoolkit should in principle be moved to either ilastik-dependencies or parametrized
 # for now this allows for quicker adjustments of releases...
 ILASTIK_PACKAGES = {
-    "linux": ["ilastik-dependencies-binary", "tiktorch", "cudatoolkit=11.0"],
-    "darwin": ["ilastik-dependencies-binary", "tiktorch-cpu", "py2app"],
-    "windows": ["ilastik-dependencies-binary", "tiktorch", "cudatoolkit=11.0", "ilastik-exe", "ilastik-package"],
+    "linux": ["ilastik-dependencies-binary", "tiktorch", "pytorch", "cpuonly", "inferno", "git"], # "cudatoolkit=11.0",
+    "darwin": ["ilastik-dependencies-binary", "tiktorch", "py2app", "inferno", "pytorch", "cpuonly", "git"],
+    "windows": ["ilastik-dependencies-binary", "tiktorch", "pytorch", "cpuonly", "inferno", "git", "ilastik-exe", "ilastik-package"], # "cudatoolkit=11.0",
 }
 
 OS_SUFFIX = {
@@ -119,7 +119,8 @@ class IlastikRelease:
 
         self._imeta_version = self._release_env.package_info("ilastik-meta")["version"]
         # ilastik-${ILASTIK_PKG_VERSION}${SOLVERS_SUFFIX}${TIKTORCH_SUFFIX}-`uname`
-        self._release_suffix = f"{self._imeta_version}-{OS_SUFFIX[OS]}"
+        # FIXME: hardcoded variant!
+        self._release_suffix = f"{self._imeta_version}-{OS_SUFFIX[OS]}-cpu"
         self._release_name = f"ilastik-{self._release_suffix}"
 
         self._release_dir = release_dir
