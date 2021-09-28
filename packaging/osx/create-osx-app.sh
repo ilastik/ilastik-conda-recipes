@@ -100,6 +100,11 @@ cd -
 cd ilastik.app/Contents/Resources && ln -s ../ilastik-release/ilastik-meta
 cd -
 
+# HACK: need to fix encoding on osx for bioimage.spec 0.3.3.post1
+# https://github.com/bioimage-io/spec-bioimage-io/pull/249
+# temoporary fix for ilastik-1.4.0b18-OSX!
+sed -i .bkup 's/json.loads(_license_file.read_text())/json.loads(_license_file.read_text(encoding="utf-8"))/g' ilastik.app/Contents/ilastik-release/lib/python3.7/site-packages/bioimageio/spec/shared/__init__.py
+
 echo "Renaming ilastik.app -> ${RELEASE_NAME}.app"
 rm -rf ${RELEASE_NAME}.app
 rm -f ${RELEASE_NAME}.tar.bz2
