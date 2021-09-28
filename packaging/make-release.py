@@ -120,7 +120,7 @@ class IlastikRelease:
         self._imeta_version = self._release_env.package_info("ilastik-meta")["version"]
         # ilastik-${ILASTIK_PKG_VERSION}${SOLVERS_SUFFIX}${TIKTORCH_SUFFIX}-`uname`
         # FIXME: hardcoded variant!
-        self._release_suffix = f"{self._imeta_version}-{OS_SUFFIX[OS]}-cpu"
+        self._release_suffix = f"{self._imeta_version}-{OS_SUFFIX[OS]}"
         self._release_name = f"ilastik-{self._release_suffix}"
 
         self._release_dir = release_dir
