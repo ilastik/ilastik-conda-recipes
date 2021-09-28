@@ -9,7 +9,7 @@ set -x
 
 OSX_PACKAGES_DIR=$(cd `dirname $0` && pwd)
 CONDA_ROOT=`conda info --root`
-source ${CONDA_ROOT}/bin/activate root
+source ${CONDA_ROOT}/bin/activate base
 
 RELEASE_ENV=${CONDA_ROOT}/envs/ilastik-release
 
@@ -34,7 +34,7 @@ echo "Creating ilastik.app."
 # For some reason, the app created by py2app has stability issues.
 # (It might be related to the load order of multiple libgcc_s dylibs and/or libSystem.B.dylib.)
 # As a workaround, we use py2app in "alias mode" and then manually copy the files we need into the app.
-${RELEASE_ENV}/bin/python ${OSX_PACKAGES_DIR}/setup-alias-app.py py2app --alias
+${RELEASE_ENV}/bin/python ${OSX_PACKAGES_DIR}/setup-alias-app.py py2app --alias --dist-dir .
 
 echo "Writing qt.conf"
 cat <<EOF > ilastik.app/Contents/Resources/qt.conf
@@ -77,7 +77,7 @@ sed -i '' "s|\.dylib|m\.dylib|" ilastik.app/Contents/Info.plist
 # fix rpath of entrypoint
 # remove rpaths set by py2app
 install_name_tool -delete_rpath @loader_path/../../../../../ ilastik.app/Contents/MacOS/ilastik
-install_name_tool -delete_rpath @loader_path/../lib ilastik.app/Contents/MacOS/ilastik
+# install_name_tool -delete_rpath @loader_path/../lib ilastik.app/Contents/MacOS/ilastik
 # point to lib in ilastik-release env dir
 install_name_tool -add_rpath @loader_path/../ilastik-release/lib ilastik.app/Contents/MacOS/ilastik
 
