@@ -2,9 +2,9 @@ CONDA_BUILD_SYSROOT:
   - /Developer/SDKs/MacOSX10.9.sdk  # [osx]
 
 bioimageiospec:
-  - 0.3.3.post1
+  - 0.3.3.post2
 bioimageiocore:
-  - 0.4.0
+  - 0.4.1
 boost:
   - 1.72.0
 h5py:
@@ -38,7 +38,7 @@ vigra:
 z5py:
   - 2
 tiktorch:
-  - 21.9.1
+  - 21.10.1
 
 
 pin_run_as_build:
