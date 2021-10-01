@@ -17,10 +17,22 @@ OS: str = platform.system().lower()
 # FIXME: cudatoolkit should in principle be moved to either ilastik-dependencies or parametrized
 # for now this allows for quicker adjustments of releases...
 ILASTIK_PACKAGES = {
-    "linux": ["ilastik-dependencies-binary", "tiktorch", "pytorch", "cpuonly", "inferno", "git"], # "cudatoolkit=11.0",
-    "darwin": ["ilastik-dependencies-binary", "tiktorch", "py2app", "inferno", "pytorch", "cpuonly", "git"],
-    "windows": ["ilastik-dependencies-binary", "tiktorch", "pytorch", "cpuonly", "inferno", "git", "ilastik-exe", "ilastik-package"], # "cudatoolkit=11.0",
+    "common": {
+        "linux": ["ilastik-dependencies-binary", "tiktorch", "pytorch", "inferno"],
+        "darwin": ["ilastik-dependencies-binary", "tiktorch", "py2app", "inferno", "pytorch"],
+        "windows": ["ilastik-dependencies-binary", "tiktorch", "pytorch", "inferno", "ilastik-exe", "ilastik-package"],
+    },
+    "cpu": {
+        "linux": ["cpuonly"],
+        "darwin": ["cpuonly"],
+        "windows": ["cpuonly"],
+    },
+    "gpu": {
+        "linux": ["cudatoolkit>=11.0"],
+        "windows": ["cudatoolkit>=11.0"],
+    },
 }
+
 
 OS_SUFFIX = {
     "linux": "Linux",
@@ -42,33 +54,32 @@ class CondaEnv:
     def conda_info():
         return json.loads(subprocess.check_output(["conda", "info", "-e", "--json"]))
 
-    def __init__(self, env_name):
+    def __init__(self, env_name: str, variant: str):
         self._name = env_name
+        self._variant = variant
+        self._packages_list = ILASTIK_PACKAGES["common"][OS] + ILASTIK_PACKAGES[variant][OS]
         self._is_valid = False
 
-        self._create(channels=DEFAULT_CHANNELS, packages=ILASTIK_PACKAGES[OS])
+        self._create(channels=DEFAULT_CHANNELS, packages=self._packages_list)
 
     @property
     def name(self):
         return self._name
 
+    @property
+    def variant(self):
+        return self._variant
+
     @classmethod
     def envs(cls) -> List[Path]:
-        return [
-            Path(x)
-            for x in json.loads(
-                subprocess.check_output(["conda", "env", "list", "--json"])
-            )["envs"]
-        ]
+        return [Path(x) for x in json.loads(subprocess.check_output(["conda", "env", "list", "--json"]))["envs"]]
 
     @property
     def path(self) -> Path:
         return Path(self.conda_info()["envs_dirs"][0]) / self.name
 
     def _create(self, channels: List[str], packages: List[str]) -> None:
-        logger.info(
-            f"creating environment {self.name} with channels: {channels} and packages {packages}"
-        )
+        logger.info(f"creating environment {self.name} with channels: {channels} and packages {packages}")
         if self.path.exists():
             subprocess.check_call(["conda", "env", "remove", "--name", self.name])
             if self.path.exists():
@@ -98,9 +109,7 @@ class CondaEnv:
         logger.info("created environment successfully")
 
     def package_info(self, package_name: str) -> Dict[str, str]:
-        package_list = json.loads(
-            subprocess.check_output(["conda", "list", "--name", self.name, "--json"])
-        )
+        package_list = json.loads(subprocess.check_output(["conda", "list", "--name", self.name, "--json"]))
         package_info = [x for x in package_list if x["name"] == package_name]
         assert (
             len(package_info) == 1
@@ -121,7 +130,8 @@ class IlastikRelease:
         # ilastik-${ILASTIK_PKG_VERSION}${SOLVERS_SUFFIX}${TIKTORCH_SUFFIX}-`uname`
         # FIXME: hardcoded variant!
         self._release_suffix = f"{self._imeta_version}-{OS_SUFFIX[OS]}"
-        self._release_name = f"ilastik-{self._release_suffix}"
+        self._release_variant_suffix = "" if release_env.variant == "cpu" else f"-{release_env.variant}"
+        self._release_name = f"ilastik-{self._release_suffix}{self._release_variant_suffix}"
 
         self._release_dir = release_dir
         self._release_path: Optional[Path] = None
@@ -196,14 +206,22 @@ class IlastikRelease:
         resolve_path=True,
         path_type=Path,
     ),
-    help="Output directory for package, default pwd."
+    help="Output directory for package, default pwd.",
 )
-def main(verbose: bool, output_dir: Path):
+@click.option(
+    "--variant",
+    type=click.Choice(["cpu", "gpu"]),
+    required=True,
+    help="Build binary with cpu-only pytorch, or with cuda (large binary). gpu not available on osx",
+)
+def main(verbose: bool, output_dir: Path, variant: str):
+    if OS == "darwin" and variant == "gpu":
+        raise ValueError("gpu builds not available on osx")
 
     level = verbose and logging.DEBUG or logging.INFO
     logging.basicConfig()
     logger.setLevel(level)
-    ilastik_env = CondaEnv("ilastik-release")
+    ilastik_env = CondaEnv(env_name="ilastik-release", variant=variant)
     ilastik_release = IlastikRelease(ilastik_env, output_dir)
     assert ilastik_release.release_path.exists()
     logger.info(f"created ilastik package at: {ilastik_release.release_path}.")
