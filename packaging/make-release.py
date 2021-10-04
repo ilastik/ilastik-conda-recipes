@@ -46,7 +46,10 @@ DEFAULT_CHANNELS = ["ilastik-forge", "pytorch", "conda-forge"]
 
 
 STRIP_PATHS = {
-    "common": [Path("include"), Path("ilastik-meta/ilastik/tests"), Path("qml"), Path("share/doc")]
+    "common": [Path("ilastik-meta/ilastik/tests")],
+    "linux": [Path("include"), Path("qml"), Path("share/doc")],
+    "darwin": [Path("include"), Path("qml"), Path("share/doc")],
+    "windows": [],  # stripping on windows via installer builder
 }
 
 ISS = None
@@ -87,7 +90,7 @@ class CondaEnv:
 
     def _strip(self):
         logger.info("Stripping release")
-        for p in STRIP_PATHS["common"]:
+        for p in STRIP_PATHS["common"] + STRIP_PATHS[OS]:
             try:
                 current = self.path / p
                 logger.info(f"removing {current}")
