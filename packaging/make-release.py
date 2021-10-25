@@ -6,7 +6,9 @@ import logging
 import os
 import platform
 import re
+import shutil
 import subprocess
+
 
 logger = logging.getLogger("make-release")
 
@@ -29,7 +31,7 @@ ILASTIK_PACKAGES = {
     },
     "gpu": {
         "linux": ["cudatoolkit>=11.0"],
-        "windows": ["cudatoolkit>=11.0"],
+        "windows": ["cudatoolkit=11.0"],
     },
 }
 
@@ -42,6 +44,13 @@ OS_SUFFIX = {
 
 DEFAULT_CHANNELS = ["ilastik-forge", "pytorch", "conda-forge"]
 
+
+STRIP_PATHS = {
+    "common": [Path("ilastik-meta/ilastik/tests")],
+    "linux": [Path("include"), Path("qml"), Path("share/doc")],
+    "darwin": [Path("include"), Path("qml"), Path("share/doc")],
+    "windows": [],  # stripping on windows via installer builder
+}
 
 ISS = None
 if OS == "windows":
@@ -61,6 +70,7 @@ class CondaEnv:
         self._is_valid = False
 
         self._create(channels=DEFAULT_CHANNELS, packages=self._packages_list)
+        self._strip()
 
     @property
     def name(self):
@@ -77,6 +87,16 @@ class CondaEnv:
     @property
     def path(self) -> Path:
         return Path(self.conda_info()["envs_dirs"][0]) / self.name
+
+    def _strip(self):
+        logger.info("Stripping release")
+        for p in STRIP_PATHS["common"] + STRIP_PATHS[OS]:
+            try:
+                current = self.path / p
+                logger.info(f"removing {current}")
+                shutil.rmtree(current)
+            except Exception as e:
+                logger.warning(f"Encountered error removing {current}: {e}")
 
     def _create(self, channels: List[str], packages: List[str]) -> None:
         logger.info(f"creating environment {self.name} with channels: {channels} and packages {packages}")
@@ -158,7 +178,7 @@ class IlastikRelease:
         iss_in = self._release_env.path / "package" / "ilastik.iss.in"
         iss_out = iss_in.parent / "ilastik.iss"
 
-        iss_out.write_text(re.sub("@VERSION@", self._imeta_version, iss_in.read_text()))
+        iss_out.write_text(re.sub("@VERSION@", f"{self._imeta_version}{self._release_variant_suffix}", iss_in.read_text()))
 
     def _prepare_darwin(self) -> None:
         pass
