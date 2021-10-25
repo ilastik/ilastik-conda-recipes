@@ -31,7 +31,7 @@ ILASTIK_PACKAGES = {
     },
     "gpu": {
         "linux": ["cudatoolkit>=11.0"],
-        "windows": ["cudatoolkit>=11.0"],
+        "windows": ["cudatoolkit=11.0"],
     },
 }
 
@@ -178,7 +178,7 @@ class IlastikRelease:
         iss_in = self._release_env.path / "package" / "ilastik.iss.in"
         iss_out = iss_in.parent / "ilastik.iss"
 
-        iss_out.write_text(re.sub("@VERSION@", self._imeta_version, iss_in.read_text()))
+        iss_out.write_text(re.sub("@VERSION@", f"{self._imeta_version}{self._release_variant_suffix}", iss_in.read_text()))
 
     def _prepare_darwin(self) -> None:
         pass
