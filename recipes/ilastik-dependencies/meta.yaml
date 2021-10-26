@@ -14,7 +14,7 @@ package:
     version: 1.4.5
 
 build:
-  number: 1
+  number: 2
 
 
   track_features:
@@ -76,8 +76,6 @@ requirements:
     # -----------------------------------------------------------------
     # ilastik main packages developed by us
     # -----------------------------------------------------------------
-    - bioimageio.spec         {{ bioimageiospec }}
-    - bioimageio.core         {{ bioimageiocore }}
     - ilastik-feature-selection
     - ilastikrag
     - ilastiktools
@@ -85,6 +83,7 @@ requirements:
     - ndstructs
     - numpy-allocation-tracking
     # configure additional neural network dependencies by adding them to the env
+    # tiktorch pins bioimageio.* versions
     - tiktorch {{ tiktorch }}
     - vigra                     {{ vigra }}
     - wsdt
