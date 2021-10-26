@@ -1,7 +1,3 @@
-bioimageiospec:
-  - 0.3.3.post2
-bioimageiocore:
-  - 0.4.0
 h5py:
   - 2.10.0
 hdf5:
@@ -14,10 +10,8 @@ pandas:
   - 0.24
 python:
   - 3.7
-pyqt:
-  - 5.6
 qt:
-  - 5.6
+  - 5.12
 sklearn:
   - 0.20
 vigra:
@@ -28,7 +22,7 @@ pytest:
 pillow:
   - 5.3.0
 tiktorch:
-  - 21.10.2
+  - 21.10.3
 
 pin_run_as_build:
   h5py: x.x
