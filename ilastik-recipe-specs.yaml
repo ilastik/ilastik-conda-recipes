@@ -65,53 +65,53 @@ recipe-specs:
 
     - name: dpct
       recipe-repo: https://github.com/ilastik/dpct
-      tag: master
+      tag: main
       recipe-subdir: conda-recipe
 
     - name: marching_cubes
       recipe-repo: https://github.com/ilastik/marching_cubes
-      tag: master
+      tag: main
       recipe-subdir: conda-recipe
 
     - name: hytra
       recipe-repo: https://github.com/ilastik/hytra
-      tag: master
+      tag: main
       recipe-subdir: conda-recipe
 
     - name: ilastik-feature-selection
       recipe-repo: https://github.com/ilastik/ilastik-feature-selection
-      tag: master
+      tag: main
       recipe-subdir: conda-recipe
       conda-build-flags: --no-remove-work-dir --no-test
 
     - name: ilastiktools
       recipe-repo: https://github.com/ilastik/ilastiktools
-      tag: master
+      tag: main
       recipe-subdir: conda-recipe
 
     - name: ilastikrag
       recipe-repo: https://github.com/ilastik/ilastikrag
-      tag: master
+      tag: main
       recipe-subdir: conda-recipe
 
     - name: mamutexport
       recipe-repo: https://github.com/ilastik/MaMutConverter
-      tag: master
-      recipe-subdir: conda-recipe
-
-    - name: pytiff
-      recipe-repo: https://github.com/ilastik/ilastik-conda-recipes
       tag: main
-      recipe-subdir: recipes/pytiff
-
-    - name: numpy-allocation-tracking
-      recipe-repo: https://github.com/ilastik/numpy-allocation-tracking
-      tag: master
       recipe-subdir: conda-recipe
+
+    # - name: pytiff
+    #   recipe-repo: https://github.com/ilastik/ilastik-conda-recipes
+    #   tag: main
+    #   recipe-subdir: recipes/pytiff
+
+    # - name: numpy-allocation-tracking
+    #   recipe-repo: https://github.com/ilastik/numpy-allocation-tracking
+    #   tag: main
+    #   recipe-subdir: conda-recipe
 
     - name: wsdt
       recipe-repo: https://github.com/ilastik/wsdt
-      tag: master
+      tag: main
       recipe-subdir: conda-recipe
 
     - name: fastfilters
@@ -119,10 +119,10 @@ recipe-specs:
       tag: devel
       recipe-subdir: pkg/conda/fastfilters
 
-    - name: nifty
-      recipe-repo: https://github.com/ilastik/nifty
-      tag: quickfix-conda-recipe2
-      recipe-subdir: conda-recipe
+    # - name: nifty
+    #   recipe-repo: https://github.com/ilastik/nifty
+    #   tag: quickfix-conda-recipe2
+    #   recipe-subdir: conda-recipe
 
     - name: ilastik-meta
       recipe-repo: https://github.com/ilastik/ilastik-conda-recipes
@@ -144,26 +144,26 @@ recipe-specs:
       environment:
         WITH_SOLVERS: 0
 
-    - name: macholib
-      recipe-repo: https://github.com/ilastik/ilastik-conda-recipes
-      tag: main
-      recipe-subdir: recipes/osx-packages/macholib
-      build-on:
-        - osx
+    # - name: macholib
+    #   recipe-repo: https://github.com/ilastik/ilastik-conda-recipes
+    #   tag: main
+    #   recipe-subdir: recipes/osx-packages/macholib
+    #   build-on:
+    #     - osx
 
-    - name: modulegraph
-      recipe-repo: https://github.com/ilastik/ilastik-conda-recipes
-      tag: main
-      recipe-subdir: recipes/osx-packages/modulegraph
-      build-on:
-        - osx
+    # - name: modulegraph
+    #   recipe-repo: https://github.com/ilastik/ilastik-conda-recipes
+    #   tag: main
+    #   recipe-subdir: recipes/osx-packages/modulegraph
+    #   build-on:
+    #     - osx
 
-    - name: py2app
-      recipe-repo: https://github.com/ilastik/ilastik-conda-recipes
-      tag: main
-      recipe-subdir: recipes/osx-packages/py2app
-      build-on:
-        - osx
+    # - name: py2app
+    #   recipe-repo: https://github.com/ilastik/ilastik-conda-recipes
+    #   tag: main
+    #   recipe-subdir: recipes/osx-packages/py2app
+    #   build-on:
+    #     - osx
 
 ############################################################################
 ##
@@ -174,30 +174,30 @@ recipe-specs:
       tag: main
       recipe-subdir: recipes/opengm-structured-learning-headers
 
-    - name: cplex-shared
-      build-on:
-        - linux
-      recipe-repo: https://github.com/ilastik/ilastik-conda-recipes
-      tag: main
-      recipe-subdir: recipes/cplex-shared
-      environment:
-        CPLEX_ROOT_DIR: /build/in/cplex
+    # - name: cplex-shared
+    #   build-on:
+    #     - linux
+    #   recipe-repo: https://github.com/ilastik/ilastik-conda-recipes
+    #   tag: main
+    #   recipe-subdir: recipes/cplex-shared
+    #   environment:
+    #     CPLEX_ROOT_DIR: /build/in/cplex
 
-    - name: cplex-shared
-      build-on:
-        - osx
-      recipe-repo: https://github.com/ilastik/ilastik-conda-recipes
-      tag: main
-      recipe-subdir: recipes/cplex-shared
-      environment:
-        CPLEX_ROOT_DIR: /Applications/CPLEX_Studio129
+    # - name: cplex-shared
+    #   build-on:
+    #     - osx
+    #   recipe-repo: https://github.com/ilastik/ilastik-conda-recipes
+    #   tag: main
+    #   recipe-subdir: recipes/cplex-shared
+    #   environment:
+    #     CPLEX_ROOT_DIR: /Applications/CPLEX_Studio129
 
-    - name: cplex-shared
-      build-on:
-        - win
-      recipe-repo: https://github.com/ilastik/ilastik-conda-recipes
-      tag: main
-      recipe-subdir: recipes/cplex-shared
+    # - name: cplex-shared
+    #   build-on:
+    #     - win
+    #   recipe-repo: https://github.com/ilastik/ilastik-conda-recipes
+    #   tag: main
+    #   recipe-subdir: recipes/cplex-shared
 
     - name: gurobi-symlink
       build-on:
@@ -230,7 +230,7 @@ recipe-specs:
       build-on:
         - linux
       recipe-repo: https://github.com/ilastik/multiHypothesesTracking
-      tag: master
+      tag: main
       recipe-subdir: conda-recipe
       conda-build-flags: --no-test
       environment:
@@ -263,38 +263,38 @@ recipe-specs:
         GUROBI_ROOT_DIR: C:/gurobi903/win64
         GUROBI_LIB_WIN: C:/gurobi903/win64/lib/gurobi90.lib
 
-    - name: multi-hypotheses-tracking-with-cplex
-      build-on:
-        - linux
-      recipe-repo: https://github.com/ilastik/multiHypothesesTracking
-      tag: master
-      recipe-subdir: conda-recipe
-      environment:
-        WITH_CPLEX: 1
-        WITH_GUROBI: 0
-        CPLEX_ROOT_DIR: /opt/cplex
+    # - name: multi-hypotheses-tracking-with-cplex
+    #   build-on:
+    #     - linux
+    #   recipe-repo: https://github.com/ilastik/multiHypothesesTracking
+    #   tag: master
+    #   recipe-subdir: conda-recipe
+    #   environment:
+    #     WITH_CPLEX: 1
+    #     WITH_GUROBI: 0
+    #     CPLEX_ROOT_DIR: /opt/cplex
 
-    - name: multi-hypotheses-tracking-with-cplex
-      build-on:
-        - osx
-      recipe-repo: https://github.com/ilastik/multiHypothesesTracking
-      tag: master
-      recipe-subdir: conda-recipe
-      environment:
-        WITH_CPLEX: 1
-        WITH_GUROBI: 0
-        CPLEX_ROOT_DIR: /Applications/CPLEX_Studio129
+    # - name: multi-hypotheses-tracking-with-cplex
+    #   build-on:
+    #     - osx
+    #   recipe-repo: https://github.com/ilastik/multiHypothesesTracking
+    #   tag: master
+    #   recipe-subdir: conda-recipe
+    #   environment:
+    #     WITH_CPLEX: 1
+    #     WITH_GUROBI: 0
+    #     CPLEX_ROOT_DIR: /Applications/CPLEX_Studio129
 
-    - name: multi-hypotheses-tracking-with-cplex
-      build-on:
-        - win
-      recipe-repo: https://github.com/ilastik/multiHypothesesTracking
-      tag: master
-      recipe-subdir: conda-recipe
-      environment:
-        WITH_CPLEX: 1
-        WITH_GUROBI: 0
-        CPLEX_WIN_VERSION: 129
+    # - name: multi-hypotheses-tracking-with-cplex
+    #   build-on:
+    #     - win
+    #   recipe-repo: https://github.com/ilastik/multiHypothesesTracking
+    #   tag: master
+    #   recipe-subdir: conda-recipe
+    #   environment:
+    #     WITH_CPLEX: 1
+    #     WITH_GUROBI: 0
+    #     CPLEX_WIN_VERSION: 129
 
     - name: ilastik-dependencies
       recipe-repo: https://github.com/ilastik/ilastik-conda-recipes
@@ -304,7 +304,7 @@ recipe-specs:
       recipe-subdir: recipes/ilastik-dependencies
       environment:
         WITH_SOLVERS: 1
-        CPLEX_ROOT_DIR: /build/in/cplex
+        # CPLEX_ROOT_DIR: /build/in/cplex
         GUROBI_ROOT_DIR: /opt/gurobi903/linux64
 
     - name: ilastik-dependencies
@@ -315,7 +315,7 @@ recipe-specs:
       recipe-subdir: recipes/ilastik-dependencies
       environment:
         WITH_SOLVERS: 1
-        CPLEX_ROOT_DIR: /Applications/CPLEX_Studio129
+        # CPLEX_ROOT_DIR: /Applications/CPLEX_Studio129
         GUROBI_ROOT_DIR: /Library/gurobi903/mac64
 
     - name: ilastik-dependencies
@@ -326,7 +326,7 @@ recipe-specs:
       recipe-subdir: recipes/ilastik-dependencies
       environment:
         WITH_SOLVERS: 1
-        CPLEX_ROOT_DIR: /build/in/cplex
+        # CPLEX_ROOT_DIR: /build/in/cplex
         GUROBI_ROOT_DIR: /opt/gurobi903/linux64
 
 ###########################################################################

@@ -2,9 +2,9 @@ CONDA_BUILD_SYSROOT:
   - /Developer/SDKs/MacOSX10.9.sdk  # [osx]
 
 boost:
-  - 1.72.0
+  - 1.74.0
 h5py:
-  - 2.10.0
+  - 3.4
 hdf5:
   - 1.10.6
 jpeg:
@@ -27,10 +27,7 @@ qt:
   - 5.12
 # make sure to use a vigra build that includes lemon!
 vigra:
-  - 1.11.1 py37ha1f80a5_1017  # [linux]
-  - 1.11.1 py37h05204d7_1017  # [osx]
-# still on own build where the correct channel priority guarantees version on win
-  - 1.11.1  # [win]
+  - 1.11.1=*_1017
 z5py:
   - 2
 tiktorch:
