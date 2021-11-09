@@ -20,14 +20,16 @@ numpy:
   - 1.16
 # see https://github.com/ilastik/ilastik-conda-recipes/issues/77
 pandas:
-  - 0.24
+  - 1
 python:
   - 3.7
+  - 3.8
+  - 3.9
 qt:
   - 5.12
 # make sure to use a vigra build that includes lemon!
 vigra:
-  - 1.11.1=*_1017
+  - 1.11.1=*_1026
 z5py:
   - 2
 tiktorch:

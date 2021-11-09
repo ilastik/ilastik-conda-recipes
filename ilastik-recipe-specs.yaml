@@ -2,12 +2,12 @@ shared-config:
     master-conda-build-config: ./ilastik-pins.yaml
     repo-cache-dir: ./repo-cache # Relative to this yaml file's directory.
     source-channels:
-        - ilastik-forge/label/ilastik140
+        - ilastik-forge/label/freepy
         - ilastik-forge
         - pytorch
         - conda-forge
         - defaults
-    destination-channel: ilastik-forge/label/ilastik140
+    destination-channel: ilastik-forge/label/freepy
 
 # Some notes on the used environment variables:
 #   with packages build by conda-forge, which, presumably, used gcc 4.8.5.
@@ -124,25 +124,25 @@ recipe-specs:
     #   tag: quickfix-conda-recipe2
     #   recipe-subdir: conda-recipe
 
-    - name: ilastik-meta
-      recipe-repo: https://github.com/ilastik/ilastik-conda-recipes
-      tag: main
-      recipe-subdir: recipes/ilastik-meta
+    # - name: ilastik-meta
+    #   recipe-repo: https://github.com/ilastik/ilastik-conda-recipes
+    #   tag: main
+    #   recipe-subdir: recipes/ilastik-meta
 
-    - name: ilastik-launch
-      recipe-repo: https://github.com/ilastik/ilastik-conda-recipes
-      tag: main
-      recipe-subdir: recipes/ilastik-launch
-      build-on:
-       - linux
-       - osx
+    # - name: ilastik-launch
+    #   recipe-repo: https://github.com/ilastik/ilastik-conda-recipes
+    #   tag: main
+    #   recipe-subdir: recipes/ilastik-launch
+    #   build-on:
+    #    - linux
+    #    - osx
 
-    - name: ilastik-dependencies-no-solvers
-      recipe-repo: https://github.com/ilastik/ilastik-conda-recipes
-      tag: main
-      recipe-subdir: recipes/ilastik-dependencies
-      environment:
-        WITH_SOLVERS: 0
+    # - name: ilastik-dependencies-no-solvers
+    #   recipe-repo: https://github.com/ilastik/ilastik-conda-recipes
+    #   tag: main
+    #   recipe-subdir: recipes/ilastik-dependencies
+    #   environment:
+    #     WITH_SOLVERS: 0
 
     # - name: macholib
     #   recipe-repo: https://github.com/ilastik/ilastik-conda-recipes
@@ -296,60 +296,60 @@ recipe-specs:
     #     WITH_GUROBI: 0
     #     CPLEX_WIN_VERSION: 129
 
-    - name: ilastik-dependencies
-      recipe-repo: https://github.com/ilastik/ilastik-conda-recipes
-      tag: main
-      build-on:
-        - linux
-      recipe-subdir: recipes/ilastik-dependencies
-      environment:
-        WITH_SOLVERS: 1
-        # CPLEX_ROOT_DIR: /build/in/cplex
-        GUROBI_ROOT_DIR: /opt/gurobi903/linux64
+    # - name: ilastik-dependencies
+    #   recipe-repo: https://github.com/ilastik/ilastik-conda-recipes
+    #   tag: main
+    #   build-on:
+    #     - linux
+    #   recipe-subdir: recipes/ilastik-dependencies
+    #   environment:
+    #     WITH_SOLVERS: 1
+    #     # CPLEX_ROOT_DIR: /build/in/cplex
+    #     GUROBI_ROOT_DIR: /opt/gurobi903/linux64
 
-    - name: ilastik-dependencies
-      recipe-repo: https://github.com/ilastik/ilastik-conda-recipes
-      tag: main
-      build-on:
-        - osx
-      recipe-subdir: recipes/ilastik-dependencies
-      environment:
-        WITH_SOLVERS: 1
-        # CPLEX_ROOT_DIR: /Applications/CPLEX_Studio129
-        GUROBI_ROOT_DIR: /Library/gurobi903/mac64
+    # - name: ilastik-dependencies
+    #   recipe-repo: https://github.com/ilastik/ilastik-conda-recipes
+    #   tag: main
+    #   build-on:
+    #     - osx
+    #   recipe-subdir: recipes/ilastik-dependencies
+    #   environment:
+    #     WITH_SOLVERS: 1
+    #     # CPLEX_ROOT_DIR: /Applications/CPLEX_Studio129
+    #     GUROBI_ROOT_DIR: /Library/gurobi903/mac64
 
-    - name: ilastik-dependencies
-      recipe-repo: https://github.com/ilastik/ilastik-conda-recipes
-      tag: main
-      build-on:
-        - win
-      recipe-subdir: recipes/ilastik-dependencies
-      environment:
-        WITH_SOLVERS: 1
-        # CPLEX_ROOT_DIR: /build/in/cplex
-        GUROBI_ROOT_DIR: /opt/gurobi903/linux64
+    # - name: ilastik-dependencies
+    #   recipe-repo: https://github.com/ilastik/ilastik-conda-recipes
+    #   tag: main
+    #   build-on:
+    #     - win
+    #   recipe-subdir: recipes/ilastik-dependencies
+    #   environment:
+    #     WITH_SOLVERS: 1
+    #     # CPLEX_ROOT_DIR: /build/in/cplex
+    #     GUROBI_ROOT_DIR: /opt/gurobi903/linux64
 
 ###########################################################################
 #
 # Windows installer
 #
-    - name: ilastik-exe
-      recipe-repo: https://github.com/ilastik/ilastik-conda-recipes
-      tag: main
-      recipe-subdir: recipes/windows-installer/ilastik-exe
-      build-on:
-       - win
+    # - name: ilastik-exe
+    #   recipe-repo: https://github.com/ilastik/ilastik-conda-recipes
+    #   tag: main
+    #   recipe-subdir: recipes/windows-installer/ilastik-exe
+    #   build-on:
+    #    - win
 
-    - name: ilastik-package
-      recipe-repo: https://github.com/ilastik/ilastik-conda-recipes
-      tag: main
-      recipe-subdir: recipes/windows-installer/ilastik-package
-      build-on:
-       - win
+    # - name: ilastik-package
+    #   recipe-repo: https://github.com/ilastik/ilastik-conda-recipes
+    #   tag: main
+    #   recipe-subdir: recipes/windows-installer/ilastik-package
+    #   build-on:
+    #    - win
 
-    - name: ilastik-dependencies-binary
-      recipe-repo: https://github.com/ilastik/ilastik-conda-recipes
-      tag: main
-      recipe-subdir: recipes/ilastik-dependencies-binary
-      environment:
-        WITH_SOLVERS: 1
+    # - name: ilastik-dependencies-binary
+    #   recipe-repo: https://github.com/ilastik/ilastik-conda-recipes
+    #   tag: main
+    #   recipe-subdir: recipes/ilastik-dependencies-binary
+    #   environment:
+    #     WITH_SOLVERS: 1
