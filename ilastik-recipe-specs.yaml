@@ -6,7 +6,6 @@ shared-config:
         - ilastik-forge
         - pytorch
         - conda-forge
-        - defaults
     destination-channel: ilastik-forge/label/freepy
 
 # Some notes on the used environment variables:
