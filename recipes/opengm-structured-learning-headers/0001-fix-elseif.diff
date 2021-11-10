@@ -1,0 +1,16 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 2f63f217..c3885a95 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -413,9 +413,9 @@ if(WITH_LIBDAI)
+   # Add defines for libdai/include/dai/util.h
+   if(WIN32)
+      add_definitions(-DWINDOWS)
+-  else(CYGWIN)
++  elseif(CYGWIN)
+      add_definitions(-DCYGWIN)
+-  else(APPLE)
++  elseif(APPLE)
+      add_definitions(-DMACOSX)
+   endif()
+ 
