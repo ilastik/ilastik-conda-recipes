@@ -1,0 +1,90 @@
+package:
+    name: ilastik-deps-dev
+    version: 1.4.0
+
+build:
+  noarch: python
+  number: 4
+requirements:
+  run:
+    - python 3.7
+    - numpy 1.19.*
+
+    - appdirs
+    - attrs
+    - cachetools
+    - decorator
+    - fftw
+    - future
+    - greenlet
+    - h5py 3.4*
+    - hdf5
+    - jsonschema
+    - lemon
+    - matplotlib
+    - networkx 2*
+    - nifty
+    - pandas 1*
+    - pillow
+    - psutil
+    - pyopengl
+    - pyqt
+    - pyqtgraph
+    - pre-commit
+    - pytest >=3.10,<4
+    - pytest-qt
+    - pytorch
+    - python-dateutil
+    - python-elf
+    - pytiff
+    - pytz
+    - qimage2ndarray
+    - qt 5.12.*
+    - requests
+    - pytorch >=1.6
+    - scikit-image
+    - scikit-learn
+    - setuptools
+    - tifffile
+    - vigra 1.11.1
+    - xarray
+    - yapsy
+    - z5py 2*
+
+
+    # packages not (yet) on conda-forge
+    - fastfilters
+
+    # ilastik main packages developed by us
+    - ilastik-feature-selection
+    - ilastikrag
+    - ilastiktools
+    - marching_cubes
+    - ndstructs
+    # configure additional neural network dependencies by adding them to the env
+    # tiktorch pins bioimageio.* versions
+    - tiktorch >=21.10.3
+    - wsdt
+
+    # Additional Tracking Dependencies
+    - dpct
+    - hytra
+    - mamutexport
+
+  run_constrained:
+    - cudatoolkit >=10.2
+
+test:
+  requires:
+    - cpuonly  # no cudatoolkit download
+  # Just give SOME test to ensure that the package can be installed at all.
+  # (If there are no tests, the test environment isn't even created.)
+  imports:
+    - tiktorch
+    - torch
+    - vigra
+
+about:
+  home: https://github.com/ilastik-conda-recipes
+  license: BSD (3-clause)
+  summary: 'Packages for ilastik development environments'
