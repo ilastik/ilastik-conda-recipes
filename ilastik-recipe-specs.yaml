@@ -25,38 +25,38 @@ recipe-specs:
 
     - name: dpct
       recipe-repo: https://github.com/ilastik/dpct
-      tag: master
+      tag: main
       recipe-subdir: conda-recipe
 
     - name: marching_cubes
       recipe-repo: https://github.com/ilastik/marching_cubes
-      tag: master
+      tag: main
       recipe-subdir: conda-recipe
 
     - name: hytra
       recipe-repo: https://github.com/ilastik/hytra
-      tag: master
+      tag: main
       recipe-subdir: conda-recipe
 
     - name: ilastik-feature-selection
       recipe-repo: https://github.com/ilastik/ilastik-feature-selection
-      tag: master
+      tag: main
       recipe-subdir: conda-recipe
       conda-build-flags: --no-remove-work-dir --no-test
 
     - name: ilastiktools
       recipe-repo: https://github.com/ilastik/ilastiktools
-      tag: master
+      tag: main
       recipe-subdir: conda-recipe
 
     - name: ilastikrag
       recipe-repo: https://github.com/ilastik/ilastikrag
-      tag: master
+      tag: main
       recipe-subdir: conda-recipe
 
     - name: mamutexport
       recipe-repo: https://github.com/ilastik/MaMutConverter
-      tag: master
+      tag: main
       recipe-subdir: conda-recipe
 
     - name: pytiff
@@ -165,11 +165,10 @@ recipe-specs:
       build-on:
         - linux
       recipe-repo: https://github.com/ilastik/multiHypothesesTracking
-      tag: master
+      tag: main
       recipe-subdir: conda-recipe
       conda-build-flags: --no-test
       environment:
-        WITH_CPLEX: 0
         WITH_GUROBI: 1
         GUROBI_ROOT_DIR: /opt/gurobi903/linux64
 
@@ -177,11 +176,10 @@ recipe-specs:
       build-on:
         - osx
       recipe-repo: https://github.com/ilastik/multiHypothesesTracking
-      tag: master
+      tag: main
       recipe-subdir: conda-recipe
       conda-build-flags: --no-test
       environment:
-        WITH_CPLEX: 0
         WITH_GUROBI: 1
         GUROBI_ROOT_DIR: /Library/gurobi903/mac64
 
@@ -189,11 +187,10 @@ recipe-specs:
       build-on:
         - win
       recipe-repo: https://github.com/ilastik/multiHypothesesTracking
-      tag: master
+      tag: main
       recipe-subdir: conda-recipe
       conda-build-flags: --no-test
       environment:
-        WITH_CPLEX: 0
         WITH_GUROBI: 1
         GUROBI_ROOT_DIR: C:/gurobi903/win64
         GUROBI_LIB_WIN: C:/gurobi903/win64/lib/gurobi90.lib
