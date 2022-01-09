@@ -59,16 +59,6 @@ recipe-specs:
       tag: main
       recipe-subdir: conda-recipe
 
-    - name: pytiff
-      recipe-repo: https://github.com/ilastik/ilastik-conda-recipes
-      tag: main
-      recipe-subdir: recipes/pytiff
-
-    - name: numpy-allocation-tracking
-      recipe-repo: https://github.com/ilastik/numpy-allocation-tracking
-      tag: master
-      recipe-subdir: conda-recipe
-
     - name: wsdt
       recipe-repo: https://github.com/ilastik/wsdt
       tag: master
@@ -83,7 +73,6 @@ recipe-specs:
       recipe-repo: https://github.com/ilastik/nifty
       tag: quickfix-conda-recipe2
       recipe-subdir: conda-recipe
-
     - name: ilastik-meta
       recipe-repo: https://github.com/ilastik/ilastik-conda-recipes
       tag: main
