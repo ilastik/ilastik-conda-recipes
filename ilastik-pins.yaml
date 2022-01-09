@@ -27,7 +27,7 @@ qt:
   - 5.12
 # make sure to use a vigra build that includes lemon!
 vigra:
-  - 1.11.1=*_1026
+  - 1.11.1
 z5py:
   - 2
 tiktorch:
