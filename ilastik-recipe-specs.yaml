@@ -126,7 +126,7 @@ recipe-specs:
 
     - name: ilastik-meta
       recipe-repo: https://github.com/ilastik/ilastik-conda-recipes
-      tag: main
+      tag: legacy-1.4.0b21
       recipe-subdir: recipes/ilastik-meta
 
     - name: ilastik-launch
@@ -139,7 +139,7 @@ recipe-specs:
 
     - name: ilastik-dependencies-no-solvers
       recipe-repo: https://github.com/ilastik/ilastik-conda-recipes
-      tag: main
+      tag: oneoff-1.4.0b21
       recipe-subdir: recipes/ilastik-dependencies
       environment:
         WITH_SOLVERS: 0
@@ -298,7 +298,7 @@ recipe-specs:
 
     - name: ilastik-dependencies
       recipe-repo: https://github.com/ilastik/ilastik-conda-recipes
-      tag: main
+      tag: oneoff-1.4.0b21
       build-on:
         - linux
       recipe-subdir: recipes/ilastik-dependencies
@@ -309,7 +309,7 @@ recipe-specs:
 
     - name: ilastik-dependencies
       recipe-repo: https://github.com/ilastik/ilastik-conda-recipes
-      tag: main
+      tag: oneoff-1.4.0b21
       build-on:
         - osx
       recipe-subdir: recipes/ilastik-dependencies
@@ -320,7 +320,7 @@ recipe-specs:
 
     - name: ilastik-dependencies
       recipe-repo: https://github.com/ilastik/ilastik-conda-recipes
-      tag: main
+      tag: oneoff-1.4.0b21
       build-on:
         - win
       recipe-subdir: recipes/ilastik-dependencies

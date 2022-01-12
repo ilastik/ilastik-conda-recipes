@@ -34,7 +34,7 @@ vigra:
 z5py:
   - 2
 tiktorch:
-  - 21.10.3
+  - 21.10.3post1
 
 
 pin_run_as_build:
