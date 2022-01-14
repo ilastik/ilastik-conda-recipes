@@ -3,7 +3,6 @@ shared-config:
     repo-cache-dir: ./repo-cache # Relative to this yaml file's directory.
     source-channels:
         - ilastik-forge/label/ilastik140
-        - ilastik-forge
         - pytorch
         - conda-forge
         - defaults
