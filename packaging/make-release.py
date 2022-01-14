@@ -42,7 +42,7 @@ OS_SUFFIX = {
     "windows": "win64",
 }
 
-DEFAULT_CHANNELS = ["ilastik-forge", "pytorch", "conda-forge"]
+DEFAULT_CHANNELS = ["ilastik-forge/label/ilastik140", "pytorch", "conda-forge"]
 
 
 STRIP_PATHS = {
