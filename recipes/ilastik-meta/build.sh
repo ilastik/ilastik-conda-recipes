@@ -1,4 +1,4 @@
-git clone https://github.com/ilastik/ilastik-meta ${PREFIX}/ilastik-meta
+git clone -b legacy-1.4.0b21 https://github.com/ilastik/ilastik-meta ${PREFIX}/ilastik-meta
 cd ${PREFIX}/ilastik-meta
 git checkout ${GIT_FULL_HASH}
 git submodule init
