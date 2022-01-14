@@ -28,8 +28,8 @@ requirements:
     # -----------------------------------------------------------------
     # General dependencies
     # -----------------------------------------------------------------
-    - python
-    - numpy                     {{ numpy }}
+    - python                    {{ python }}*
+    - numpy                     {{ numpy }}*
 
     - appdirs
     - attrs
@@ -38,13 +38,13 @@ requirements:
     - fftw
     - future
     - greenlet
-    - h5py                      {{ h5py }}
-    - hdf5                      {{ hdf5 }}
+    - h5py                      {{ h5py }}*
+    - hdf5                      {{ hdf5 }}*
     - jsonschema
     - matplotlib
-    - networkx                  >={{ networkx }}
+    - networkx                  >={{ networkx }}*
     - pandas                    {{ pandas }}*
-    - pillow                    {{ pillow }}
+    - pillow                    {{ pillow }}*
     - psutil
     - pyopengl
     - pyqt
@@ -60,10 +60,10 @@ requirements:
     - scikit-image
     - scikit-learn              {{ sklearn }}*
     - setuptools
-    - vigra                     {{ vigra }}
+    - vigra                     {{ vigra }}*
     - xarray
     - yapsy
-    - z5py                      >={{ z5py }}
+    - z5py                      >={{ z5py }}*
 
     # -----------------------------------------------------------------
     # packages built by us
@@ -84,7 +84,7 @@ requirements:
     - numpy-allocation-tracking
     # configure additional neural network dependencies by adding them to the env
     # tiktorch pins bioimageio.* versions
-    - tiktorch {{ tiktorch }}
+    - tiktorch {{ tiktorch }}*
     - vigra                     {{ vigra }}
     - wsdt
 

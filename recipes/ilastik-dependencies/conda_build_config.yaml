@@ -3,7 +3,7 @@ h5py:
 hdf5:
   - 1.10.6
 networkx:
-  - 2.3*
+  - 2.3
 numpy:
   - 1.16
 pandas:
@@ -15,7 +15,7 @@ qt:
 sklearn:
   - 0.20
 vigra:
-  - 1.11
+  - 1.11.1
 pytest:
   - 3.10
 # fix macOS build, broken jpeg=9b

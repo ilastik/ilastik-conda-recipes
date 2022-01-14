@@ -5,7 +5,6 @@ shared-config:
         - ilastik-forge/label/ilastik140
         - pytorch
         - conda-forge
-        - defaults
     destination-channel: ilastik-forge/label/ilastik140
 
 # Some notes on the used environment variables:
