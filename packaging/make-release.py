@@ -30,7 +30,7 @@ ILASTIK_PACKAGES = {
         "windows": ["cpuonly"],
     },
     "gpu": {
-        "linux": ["cudatoolkit>=11.0"],
+        "linux": ["cudatoolkit=11.2"],
         "windows": ["cudatoolkit=11.0"],
     },
 }
