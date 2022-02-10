@@ -2,11 +2,10 @@ shared-config:
     master-conda-build-config: ./ilastik-pins.yaml
     repo-cache-dir: ./repo-cache # Relative to this yaml file's directory.
     source-channels:
-        - ilastik-forge/label/freepy
         - ilastik-forge
         - pytorch
         - conda-forge
-    destination-channel: ilastik-forge/label/freepy
+    destination-channel: ilastik-forge
 
 # Some notes on the used environment variables:
 # * WITH_GUROBI: Exclusive option for our packages that use one of
