@@ -6,6 +6,7 @@ shared-config:
         - pytorch
         - conda-forge
     destination-channel: ilastik-forge
+    backend: mamba
 
 # Some notes on the used environment variables:
 # * WITH_GUROBI: Exclusive option for our packages that use one of
