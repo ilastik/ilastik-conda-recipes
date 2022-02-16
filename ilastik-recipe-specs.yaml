@@ -187,7 +187,7 @@ recipe-specs:
       environment:
         WITH_GUROBI: 1
         GUROBI_ROOT_DIR: C:/gurobi950/win64
-        GUROBI_LIB_WIN: C:/gurobi950/win64/lib/gurobi90.lib
+        GUROBI_LIB_WIN: C:/gurobi950/win64/lib/gurobi95.lib
 
     - name: ilastik-dependencies
       recipe-repo: https://github.com/ilastik/ilastik-conda-recipes
