@@ -1,0 +1,22 @@
+# This is necessary in order to properly solve ilastik environments with
+# pytorch <1.10 with both, conda and mamba.
+# mamba doesn't respect track features, which pytorch relies on (until 1.9).
+# without track features, mamba prioritizes gpu builds even with cpuonly present
+# note: pytorch 1.10 relies on mutex package, but doesn't properly resolve.
+
+# this little helper recipe allows for the ilastik-x recipes to remain noarch
+# while this one isn't.
+
+package:
+  name: "ilastik-pytorch-version-helper-cpu"
+  version: "0.1"
+
+build:
+  number: 0
+
+requirements:
+  run:
+    - pytorch =*=*cpu*  # [not osx]
+
+about:
+  summary: "small helper package to allow for consistent solving of cpu pytorch environments"

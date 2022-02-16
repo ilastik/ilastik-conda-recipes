@@ -114,6 +114,11 @@ recipe-specs:
       build-on:
         - osx
 
+    - name: ilastik-pytorch-version-helper-cpu
+      recipe-repo: https://github.com/ilastik/ilastik-conda-recipes
+      tag: main
+      recipe-subdir: recipes/ilastik-pytorch-version-helper-cpu
+
 ############################################################################
 ##
 ## All the following packages need solvers, or are only needed if solvers are present
