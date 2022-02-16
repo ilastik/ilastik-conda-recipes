@@ -4,9 +4,9 @@ CONDA_BUILD_SYSROOT:
 boost:
   - 1.74.0
 h5py:
-  - 3.4
+  - 3.6
 hdf5:
-  - 1.10.6
+  - 1.12.1
 jpeg:
   - 9
 lemon:

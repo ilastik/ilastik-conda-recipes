@@ -164,7 +164,7 @@ recipe-specs:
       conda-build-flags: --no-test
       environment:
         WITH_GUROBI: 1
-        GUROBI_ROOT_DIR: /opt/gurobi903/linux64
+        GUROBI_ROOT_DIR: /opt/gurobi950/linux64
 
     - name: multi-hypotheses-tracking-with-gurobi
       build-on:
