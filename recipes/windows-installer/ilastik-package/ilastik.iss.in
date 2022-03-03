@@ -28,7 +28,6 @@ Source: "python.exe"; DestDir: "{app}"
 Source: "*.dll"; DestDir: "{app}"
 Source: "package\ilastik-icon.ico"; DestDir: "{app}"
 Source: "DLLs\*"; DestDir: "{app}\DLLs"; Flags: ignoreversion recursesubdirs
-Source: "ilastik-meta\*"; DestDir: "{app}\ilastik-meta"; Flags: ignoreversion recursesubdirs
 Source: "Library\bin\*.dll"; DestDir: "{app}\Library\bin"; Flags: ignoreversion recursesubdirs
 Source: "Library\bin\qt.conf"; DestDir: "{app}\Library\bin"; Flags: ignoreversion
 Source: "Lib\*"; Excludes: "\plat-*,\test\*,\site-packages\matplotlib\tests\*"; DestDir: "{app}\Lib"; Flags: ignoreversion recursesubdirs
@@ -36,14 +35,12 @@ Source: "Library\plugins\*"; DestDir: "{app}\Library\plugins"; Flags: ignorevers
 Source: "Scripts\*"; DestDir: "{app}\Scripts"; Flags: ignoreversion recursesubdirs
 Source: "conda-meta\*"; DestDir: "{app}\conda-meta"; Flags: ignoreversion recursesubdirs
 ; the grpc library relies on Library\mingw64
-Source: "Library\mingw64\*"; DestDir: "{app}\Library\mingw64"; Flags: ignoreversion recursesubdirs
-; tiktorch server binary
-Source: "tiktorch\*"; DestDir: "{app}\tiktorch"; Flags: ignoreversion recursesubdirs
+Source: "Library\mingw-w64\*"; DestDir: "{app}\Library\mingw-w64"; Flags: ignoreversion recursesubdirs
 
 
 [Icons]
 Name: "{group}\ilastik"; Filename: "{app}\ilastik.exe"; IconFilename: "{app}\ilastik-icon.ico"
-Name: "{group}\ilastik help"; Filename: "http://ilastik.org/documentation/"
+Name: "{group}\ilastik help"; Filename: "https://ilastik.org/documentation/"
 Name: "{group}\uninstall ilastik"; Filename: "{uninstallexe}"
 
 
