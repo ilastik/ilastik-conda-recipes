@@ -64,5 +64,9 @@ fi
 export FONTCONFIG_PATH="${PREFIX}/etc/fonts/"
 export FONTCONFIG_FILE="${PREFIX}/etc/fonts/fonts.conf"
 
+# link to LICENSE files in release
+export ILASTIK_LICENSE_3RD_PARTY_PATH="${PREFIX}/THIRDPARTY_LICENSES.txt"
+export ILASTIK_LICENSE_PATH="${PREFIX}/LICENSE.txt"
+
 # Launch the ilastik entry script, and pass along any commmand line args.
 "${PREFIX}/bin/python" "${PREFIX}/bin/ilastik-app" "$@"
