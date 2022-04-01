@@ -50,6 +50,8 @@ int main(int argc, char **argv)
     std::string python_exe     = prefix + "\\python.exe";
     std::string qt_plugin_path = prefix + "\\Library\\plugins";
     std::string extra_dll_path = prefix + "\\Library\\bin";
+    std::string third_p_license_path = prefix + "\\THIRDPARTY_LICENSES.txt";
+    std::string license_path = prefix + "\\LICENSE.txt";
 
     std::vector<std::string> args;
     args.push_back("\"" + python_exe + "\"");
@@ -75,6 +77,8 @@ int main(int argc, char **argv)
     SetEnvironmentVariable("PYTHONPATH", "");
     SetEnvironmentVariable("PYTHONNOUSERSITE", "1");
     SetEnvironmentVariable("QT_PLUGIN_PATH", qt_plugin_path.c_str());
+    SetEnvironmentVariable("ILASTIK_LICENSE_3RD_PARTY_PATH", third_p_license_path.c_str());
+    SetEnvironmentVariable("ILASTIK_LICENSE_PATH", license_path.c_str());
 
     if(_spawnv(P_WAIT, python_exe.c_str(), &cargs[0]))
         printWinError("ilastik error: \n");
