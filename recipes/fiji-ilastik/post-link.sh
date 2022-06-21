@@ -19,7 +19,7 @@ if [ -n "$ilastik_bin" ]; then
 
   Alternatively, you can set it in Fiji with:
     Plugins>ilastik>Configure ilastik executable location
-    ${CONDA_PREFIX}/bin/ilastik
+    ${ilastik_bin}
 
   ------------------------------------------------------------------------------ 
 " >> $PREFIX/.messages.txt
