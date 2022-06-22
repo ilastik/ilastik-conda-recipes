@@ -18,4 +18,4 @@ requirements:
     - fiji >=20170530
   run:
     - fiji >=20170530
-    - ilastik
+    - ilastik >=1.4.0b29
