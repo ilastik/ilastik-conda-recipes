@@ -7,4 +7,4 @@ build:
 
 requirements:
   run:
-    - ilastik
+    - ilastik >=1.4.0b29

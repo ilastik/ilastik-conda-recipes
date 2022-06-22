@@ -65,4 +65,4 @@ export FONTCONFIG_PATH="${PREFIX}/etc/fonts/"
 export FONTCONFIG_FILE="${PREFIX}/etc/fonts/fonts.conf"
 
 # Launch the ilastik entry script, and pass along any commmand line args.
-"${PREFIX}/bin/python" "${PREFIX}/bin/ilastik-app" "$@"
+"${PREFIX}/bin/python" "${PREFIX}/bin/ilastik" "$@"
