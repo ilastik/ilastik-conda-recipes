@@ -3,9 +3,8 @@ package:
   version: 0.3
 
 build:
-  number: 0
+  number: 1
 
 requirements:
   run:
-    - ilastik-core
-    - volumina
+    - ilastik >=1.4.0b29
