@@ -14,8 +14,6 @@ build:
   noarch: generic
 
 requirements:
-  host:
-    - fiji >=20170530
   run:
-    - fiji >=20170530
+    - fiji >=20220414
     - ilastik >=1.4.0b29
