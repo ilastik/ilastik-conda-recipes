@@ -3,7 +3,7 @@
 echo "
   ------------------------------------------------------------------------------
 
-  Please run: bash $CONDA_PREFIX/pkgs/fiji-ilastik-1.8.2-0/info/recipe/set_ilastik_executable_in_ImageJ.sh
+  Please run: $CONDA_PREFIX/bin/set_ilastik_executable_in_ImageJ
     to automatically set the ilastik executable in Fiji in headless mode.
 
   Alternatively, you can set it in Fiji with:
