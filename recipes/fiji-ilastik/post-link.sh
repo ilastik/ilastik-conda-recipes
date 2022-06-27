@@ -1,10 +1,6 @@
 #!/usr/bin/env bash
 
-# Version 1.4.0b29
-ilastik_bin=${CONDA_PREFIX}/bin/ilastik
-
-if [ -n "$ilastik_bin" ]; then
-  echo "
+echo "
   ------------------------------------------------------------------------------
 
   Please run: bash $CONDA_PREFIX/pkgs/fiji-ilastik-1.8.2-0/info/recipe/set_ilastik_executable_in_ImageJ.sh
@@ -12,18 +8,7 @@ if [ -n "$ilastik_bin" ]; then
 
   Alternatively, you can set it in Fiji with:
     Plugins>ilastik>Configure ilastik executable location
-    ${ilastik_bin}
+    ${CONDA_PREFIX}/bin/ilastik
 
   ------------------------------------------------------------------------------ 
 " >> $PREFIX/.messages.txt
-else
-  echo "
-  ------------------------------------------------------------------------------
-
-  Please find the executable of ilastik (probably in ${CONDA_PREFIX}/bin/)
-  and then set it in Fiji with:
-    Plugins>ilastik>Configure ilastik executable location
-
-  ------------------------------------------------------------------------------ 
-" >> $PREFIX/.messages.txt
-fi
