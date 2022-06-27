@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+# First set the ilastik executable
+java "${CONDA_PREFIX}/IlastikSetter.java" "${CONDA_PREFIX}/bin/ilastik"
+# Then launch ImageJ
+"${CONDA_PREFIX}/bin/ImageJ" "$@"
