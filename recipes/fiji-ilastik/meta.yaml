@@ -17,3 +17,9 @@ requirements:
   run:
     - fiji >=20220414
     - ilastik >=1.4.0b29
+
+test:
+  commands:
+    - ilastik --help
+    - ImageJ --help
+
