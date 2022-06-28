@@ -1,0 +1,26 @@
+package:
+  name: fiji-ilastik-helper
+  version: 0.0.1
+
+source:
+  path: .
+
+build:
+  number: 0
+  noarch: python
+  entry_points:
+    - ImageJ_withIlastik = ImageJ_withIlastik:main
+  script:
+    - python -m pip install . -vv
+
+requirements:
+  host:
+    - python
+  run:
+    - python
+    # - fiji >=20220414
+    # - ilastik >=1.4.0b29
+
+test:
+  imports:
+    - ImageJ_withIlastik
