@@ -1,4 +1,4 @@
-#! /bin/bash
+#!/usr/bin/env bash
 
 # Copy the plugin in the good directory:
 outdir="$PREFIX/share/plugins/"
