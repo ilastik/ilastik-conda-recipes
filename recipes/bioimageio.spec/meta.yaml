@@ -1,0 +1,63 @@
+{% set name = "bioimageio.spec" %}
+{% set version = "0.4.6.post3" %}
+
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/bioimageio.spec-{{ version }}.tar.gz
+  sha256: faca1a0fcf75696d7f8ac31767476a607a8352872821d8b50b8b1ac7080b2895
+  patches:
+    - add-dl-cancellation.patch
+
+build:
+  number: 3000
+  noarch: python
+  entry_points:
+    - bioimageio = bioimageio.spec.__main__:app
+  script: {{ PYTHON }} -m pip install . -vv
+
+requirements:
+  host:
+    - pip
+    - python >=3.7
+  run:
+    - imageio >=2.5
+    - marshmallow >=3.6.0,<4.0
+    - marshmallow-jsonschema
+    - marshmallow-union
+    - packaging >=17.0
+    - python >=3.7
+    - python-stdnum
+    - pyyaml >=5.2
+    - requests
+    - ruamel.yaml
+    - tqdm
+    - typer
+    - typing-extensions
+
+test:
+  imports:
+    - bioimageio
+    - bioimageio.spec
+  commands:
+    - pip check
+    - bioimageio --help
+  requires:
+    - pip
+
+about:
+  home: https://github.com/bioimage-io/spec-bioimage-io
+  summary: Parser and validator library for BioImage.IO specifications
+  dev_url: https://github.com/bioimage-io/spec-bioimage-io
+  license: MIT
+  license_file: LICENSE
+
+extra:
+  recipe-maintainers:
+    - constantinpape
+    - FynnBe
+    - k-dominik
+    - oeway
