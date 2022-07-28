@@ -19,7 +19,8 @@ requirements:
     - ilastik >=1.4.0b29
 
 test:
-  commands:
-    - ilastik --help
-    - ImageJ --help 2>&1 | grep ImageJ
-
+  files:
+    - test_ilastik.groovy
+    - 2d_cells_apoptotic_1channel_Probabilities.h5
+    - 2d_cells_apoptotic_1channel.png
+    - 2dcellsdemo.ilp
