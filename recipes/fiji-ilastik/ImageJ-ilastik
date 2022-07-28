@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 # First set the ilastik executable
-java "${CONDA_PREFIX}/IlastikSetter.java" "${CONDA_PREFIX}/bin/ilastik"
+dir=$(dirname $(which ImageJ))
+java "${dir}/../share/IlastikSetter.java" "${dir}/ilastik"
 # Then launch ImageJ
-"${CONDA_PREFIX}/bin/ImageJ" "$@"
+ImageJ "$@"

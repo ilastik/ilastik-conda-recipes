@@ -7,7 +7,8 @@ cp *.jar "$outdir/"
 
 # Create another ImageJ binary which will set the path of Ilastik before launching:
 mkdir -p "${PREFIX}/bin/"
+mkdir -p "${PREFIX}/share/"
 cp "${RECIPE_DIR}/ImageJ-ilastik" "${PREFIX}/bin/ImageJ-ilastik"
-cp "${RECIPE_DIR}/IlastikSetter.java" "${PREFIX}/IlastikSetter.java"
+cp "${RECIPE_DIR}/IlastikSetter.java" "${PREFIX}/share/IlastikSetter.java"
 
 chmod a+x "${PREFIX}/bin/ImageJ-ilastik"
