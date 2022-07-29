@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # First set the ilastik executable
 dir=$(dirname $(which ImageJ))
-java "${dir}/../share/IlastikSetter.java" "${dir}/ilastik"
+java -Djava.util.prefs.userRoot="${dir}/../uprefs/" "${dir}/../share/IlastikSetter.java" "${dir}/ilastik"
 # Then launch ImageJ
 ImageJ "$@"
