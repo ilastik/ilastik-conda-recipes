@@ -1,0 +1,26 @@
+{% set name = "fiji-ilastik" %}
+{% set version = "1.8.2" %}
+ 
+package:
+  name: {{ name | lower }}
+  version: {{ version }}
+
+source:
+  url: https://maven.scijava.org/service/local/repositories/releases/content/org/ilastik/ilastik4ij/{{ version }}/ilastik4ij-{{ version }}.jar
+  sha256: 7ed05f4941d6d870e70bae3ff7e183a1d750ea5ed63f0efaf6bcbac500c715a0
+
+build:
+  number: 0
+  skip: True  # [win]
+
+requirements:
+  run:
+    - fiji>=20220414,!=h527b516_0,!=h9ee0642_0
+    - ilastik >=1.4.0b29
+
+test:
+  files:
+    - test_ilastik.groovy
+    - 2d_cells_apoptotic_1channel_Probabilities.h5
+    - 2d_cells_apoptotic_1channel.png
+    - 2dcellsdemo.ilp
