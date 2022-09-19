@@ -153,7 +153,7 @@ recipe-specs:
       tag: main
       recipe-subdir: recipes/gurobi-symlink
       environment:
-        GUROBI_ROOT_DIR: C:/gurobi950/win64
+        GUROBI_ROOT_DIR: C:/gurobi951/win64
 
     - name: multi-hypotheses-tracking-with-gurobi
       build-on:
@@ -186,8 +186,8 @@ recipe-specs:
       conda-build-flags: --no-test
       environment:
         WITH_GUROBI: 1
-        GUROBI_ROOT_DIR: C:/gurobi950/win64
-        GUROBI_LIB_WIN: C:/gurobi950/win64/lib/gurobi95.lib
+        GUROBI_ROOT_DIR: C:/gurobi951/win64
+        GUROBI_LIB_WIN: C:/gurobi951/win64/lib/gurobi95.lib
 
     - name: ilastik-dependencies
       recipe-repo: https://github.com/ilastik/ilastik-conda-recipes
