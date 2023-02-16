@@ -9,11 +9,11 @@ UsePreviousGroup=no
 UsePreviousAppDir=no
 ; allows to associate "*.ilp" files in the [Registry] section below
 ChangesAssociations=yes
-; use paint to create this file, size 164x314
-WizardImageFile=package\ilastik-installer.bmp
+; use paint to create this file, https://jrsoftware.org/ishelp/index.php?topic=setup_wizardimagefile
+WizardImageFile=package\ilastik-installer-100.bmp,package\ilastik-installer-150.bmp,package\ilastik-installer-200.bmp
 WizardImageStretch=no
-; use paint to create this file, size 55x58
-WizardSmallImageFile=package\ilastik-installer-small.bmp
+; use paint to create this file: sizes https://jrsoftware.org/ishelp/index.php?topic=setup_wizardsmallimagefile
+WizardSmallImageFile=package\ilastik-installer-small-100.bmp,package\ilastik-installer-small-150.bmp,package\ilastik-installer-small-200.bmp
 OutputBaseFilename=ilastik-@VERSION@-win64
 LicenseFile=LICENSE.txt
 SourceDir=..
