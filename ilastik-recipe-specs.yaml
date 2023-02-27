@@ -189,35 +189,6 @@ recipe-specs:
         GUROBI_ROOT_DIR: C:/gurobi951/win64
         GUROBI_LIB_WIN: C:/gurobi951/win64/lib/gurobi95.lib
 
-    - name: ilastik-dependencies
-      recipe-repo: https://github.com/ilastik/ilastik-conda-recipes
-      tag: main
-      build-on:
-        - linux
-      recipe-subdir: recipes/ilastik-dependencies
-      environment:
-        WITH_SOLVERS: 1
-        GUROBI_ROOT_DIR: /opt/gurobi951/linux64
-
-    - name: ilastik-dependencies
-      recipe-repo: https://github.com/ilastik/ilastik-conda-recipes
-      tag: main
-      build-on:
-        - osx
-      recipe-subdir: recipes/ilastik-dependencies
-      environment:
-        WITH_SOLVERS: 1
-        GUROBI_ROOT_DIR: /Library/gurobi951/macos_universal2
-
-    - name: ilastik-dependencies
-      recipe-repo: https://github.com/ilastik/ilastik-conda-recipes
-      tag: main
-      build-on:
-        - win
-      recipe-subdir: recipes/ilastik-dependencies
-      environment:
-        WITH_SOLVERS: 1
-        GUROBI_ROOT_DIR: /opt/gurobi951/linux64
 
 ###########################################################################
 #
@@ -236,10 +207,3 @@ recipe-specs:
       recipe-subdir: recipes/windows-installer/ilastik-package
       build-on:
        - win
-
-    - name: ilastik-dependencies-binary
-      recipe-repo: https://github.com/ilastik/ilastik-conda-recipes
-      tag: main
-      recipe-subdir: recipes/ilastik-dependencies-binary
-      environment:
-        WITH_SOLVERS: 1
