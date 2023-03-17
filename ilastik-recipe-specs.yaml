@@ -38,12 +38,6 @@ recipe-specs:
       tag: main
       recipe-subdir: conda-recipe
 
-    - name: ilastik-feature-selection
-      recipe-repo: https://github.com/ilastik/ilastik-feature-selection
-      tag: main
-      recipe-subdir: conda-recipe
-      conda-build-flags: --no-remove-work-dir --no-test
-
     - name: ilastiktools
       recipe-repo: https://github.com/ilastik/ilastiktools
       tag: main
