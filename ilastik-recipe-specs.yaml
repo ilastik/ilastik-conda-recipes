@@ -53,11 +53,6 @@ recipe-specs:
       tag: main
       recipe-subdir: conda-recipe
 
-    - name: wsdt
-      recipe-repo: https://github.com/ilastik/wsdt
-      tag: master
-      recipe-subdir: conda-recipe
-
     - name: fastfilters
       recipe-repo: https://github.com/ilastik/fastfilters
       tag: devel
