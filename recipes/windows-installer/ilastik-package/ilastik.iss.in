@@ -29,7 +29,6 @@ Source: "*.dll"; DestDir: "{app}"
 Source: "package\ilastik-icon.ico"; DestDir: "{app}"
 Source: "DLLs\*"; DestDir: "{app}\DLLs"; Flags: ignoreversion recursesubdirs
 Source: "Library\bin\*.dll"; DestDir: "{app}\Library\bin"; Flags: ignoreversion recursesubdirs
-Source: "Library\bin\qt.conf"; DestDir: "{app}\Library\bin"; Flags: ignoreversion
 Source: "Lib\*"; Excludes: "\plat-*,\test\*,\site-packages\matplotlib\tests\*"; DestDir: "{app}\Lib"; Flags: ignoreversion recursesubdirs
 Source: "Library\plugins\*"; DestDir: "{app}\Library\plugins"; Flags: ignoreversion recursesubdirs
 Source: "Scripts\*"; DestDir: "{app}\Scripts"; Flags: ignoreversion recursesubdirs
