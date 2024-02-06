@@ -133,7 +133,7 @@ recipe-specs:
       tag: main
       recipe-subdir: recipes/gurobi-symlink
       environment:
-        GUROBI_ROOT_DIR: /Library/gurobi951/macos_universal2/
+        GUROBI_ROOT_DIR: /Library/gurobi952/macos_universal2
 
     - name: gurobi-symlink
       build-on:
@@ -164,7 +164,7 @@ recipe-specs:
       conda-build-flags: --no-test
       environment:
         WITH_GUROBI: 1
-        GUROBI_ROOT_DIR: /Library/gurobi951/macos_universal2/
+        GUROBI_ROOT_DIR: /Library/gurobi952/macos_universal2
 
     - name: multi-hypotheses-tracking-with-gurobi
       build-on:
