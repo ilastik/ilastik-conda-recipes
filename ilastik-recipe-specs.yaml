@@ -55,7 +55,7 @@ recipe-specs:
 
     - name: fastfilters
       recipe-repo: https://github.com/ilastik/fastfilters
-      tag: devel
+      tag: main
       recipe-subdir: pkg/conda/fastfilters
 
     - name: nifty
