@@ -45,3 +45,17 @@ pin_run_as_build:
   python:
     min_pin: x.x
     max_pin: x.x
+
+# clang 17 seems to have issues with this build
+# specifically cmake detecting std versions
+# fixing compiler to clang 16 for now (same as conda-forge atm)
+c_compiler:
+  - clang                      # [osx]
+c_compiler_version:            # [unix]
+  - 16                         # [osx]
+c_stdlib_version:              # [unix]
+  - 11.0                       # [osx and arm64]
+cxx_compiler:
+  - clangxx                    # [osx]
+cxx_compiler_version:          # [unix]
+  - 16                         # [osx]
