@@ -1,6 +1,6 @@
 package:
   name: gurobi-symlink
-  version: "0.1"
+  version: "0.12.0.0"
 
 # No requirements!
 #
@@ -8,7 +8,7 @@ package:
 #   - ###
 
 build:
-  number: 1001
+  number: 0
   script_env:
     - GUROBI_ROOT_DIR
 
