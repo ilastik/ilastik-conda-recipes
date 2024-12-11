@@ -121,7 +121,7 @@ recipe-specs:
       build-on:
         - linux
       recipe-repo: https://github.com/ilastik/ilastik-conda-recipes
-      tag: main
+      tag: gurobi12
       recipe-subdir: recipes/gurobi-symlink
       environment:
         GUROBI_ROOT_DIR: /opt/gurobi1200/linux64
@@ -130,7 +130,7 @@ recipe-specs:
       build-on:
         - osx
       recipe-repo: https://github.com/ilastik/ilastik-conda-recipes
-      tag: main
+      tag: gurobi12
       recipe-subdir: recipes/gurobi-symlink
       environment:
         GUROBI_ROOT_DIR: /Library/gurobi952/macos_universal2
@@ -139,7 +139,7 @@ recipe-specs:
       build-on:
         - win
       recipe-repo: https://github.com/ilastik/ilastik-conda-recipes
-      tag: main
+      tag: gurobi12
       recipe-subdir: recipes/gurobi-symlink
       environment:
         GUROBI_ROOT_DIR: C:/gurobi1200/win64
@@ -148,7 +148,7 @@ recipe-specs:
       build-on:
         - linux
       recipe-repo: https://github.com/ilastik/multiHypothesesTracking
-      tag: main
+      tag: gurobi12
       recipe-subdir: conda-recipe
       conda-build-flags: --no-test
       environment:
@@ -159,7 +159,7 @@ recipe-specs:
       build-on:
         - osx
       recipe-repo: https://github.com/ilastik/multiHypothesesTracking
-      tag: main
+      tag: gurobi12
       recipe-subdir: conda-recipe
       conda-build-flags: --no-test
       environment:
@@ -170,7 +170,7 @@ recipe-specs:
       build-on:
         - win
       recipe-repo: https://github.com/ilastik/multiHypothesesTracking
-      tag: main
+      tag: gurobi12
       recipe-subdir: conda-recipe
       conda-build-flags: --no-test
       environment:
