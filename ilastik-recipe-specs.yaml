@@ -6,7 +6,7 @@ shared-config:
         - pytorch
         - conda-forge
     destination-channel: ilastik-forge
-    backend: mamba
+    backend: conda
 
 # Some notes on the used environment variables:
 # * WITH_GUROBI: Exclusive option for our packages that use one of
@@ -124,7 +124,7 @@ recipe-specs:
       tag: main
       recipe-subdir: recipes/gurobi-symlink
       environment:
-        GUROBI_ROOT_DIR: /opt/gurobi951/linux64
+        GUROBI_ROOT_DIR: /opt/gurobi1200/linux64
 
     - name: gurobi-symlink
       build-on:
@@ -142,7 +142,7 @@ recipe-specs:
       tag: main
       recipe-subdir: recipes/gurobi-symlink
       environment:
-        GUROBI_ROOT_DIR: C:/gurobi951/win64
+        GUROBI_ROOT_DIR: C:/gurobi1200/win64
 
     - name: multi-hypotheses-tracking-with-gurobi
       build-on:
@@ -153,7 +153,7 @@ recipe-specs:
       conda-build-flags: --no-test
       environment:
         WITH_GUROBI: 1
-        GUROBI_ROOT_DIR: /opt/gurobi951/linux64
+        GUROBI_ROOT_DIR: /opt/gurobi1200/linux64
 
     - name: multi-hypotheses-tracking-with-gurobi
       build-on:
@@ -175,8 +175,8 @@ recipe-specs:
       conda-build-flags: --no-test
       environment:
         WITH_GUROBI: 1
-        GUROBI_ROOT_DIR: C:/gurobi951/win64
-        GUROBI_LIB_WIN: C:/gurobi951/win64/lib/gurobi95.lib
+        GUROBI_ROOT_DIR: C:/gurobi1200/win64
+        GUROBI_LIB_WIN: C:/gurobi1200/win64/lib/gurobi95.lib
 
 
 ###########################################################################
