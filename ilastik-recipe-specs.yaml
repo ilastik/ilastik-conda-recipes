@@ -28,11 +28,6 @@ recipe-specs:
       tag: main
       recipe-subdir: conda-recipe
 
-    - name: marching_cubes
-      recipe-repo: https://github.com/ilastik/marching_cubes
-      tag: main
-      recipe-subdir: conda-recipe
-
     - name: hytra
       recipe-repo: https://github.com/ilastik/hytra
       tag: main
