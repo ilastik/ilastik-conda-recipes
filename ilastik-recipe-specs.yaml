@@ -53,11 +53,6 @@ recipe-specs:
       tag: main
       recipe-subdir: pkg/conda/fastfilters
 
-    - name: ilastik-meta
-      recipe-repo: https://github.com/ilastik/ilastik-conda-recipes
-      tag: main
-      recipe-subdir: recipes/ilastik-meta
-
     - name: ilastik-launch
       recipe-repo: https://github.com/ilastik/ilastik-conda-recipes
       tag: main
