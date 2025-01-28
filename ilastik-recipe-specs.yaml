@@ -75,13 +75,6 @@ recipe-specs:
        - linux
        - osx
 
-    - name: ilastik-dependencies-no-solvers
-      recipe-repo: https://github.com/ilastik/ilastik-conda-recipes
-      tag: main
-      recipe-subdir: recipes/ilastik-dependencies
-      environment:
-        WITH_SOLVERS: 0
-
     - name: macholib
       recipe-repo: https://github.com/ilastik/ilastik-conda-recipes
       tag: main
