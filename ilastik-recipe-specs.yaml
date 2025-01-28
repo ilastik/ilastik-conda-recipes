@@ -53,10 +53,6 @@ recipe-specs:
       tag: main
       recipe-subdir: pkg/conda/fastfilters
 
-    - name: nifty
-      recipe-repo: https://github.com/ilastik/nifty
-      tag: quickfix-conda-recipe2
-      recipe-subdir: conda-recipe
     - name: ilastik-meta
       recipe-repo: https://github.com/ilastik/ilastik-conda-recipes
       tag: main
