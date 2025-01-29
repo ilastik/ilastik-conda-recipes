@@ -61,27 +61,6 @@ recipe-specs:
        - linux
        - osx
 
-    - name: macholib
-      recipe-repo: https://github.com/ilastik/ilastik-conda-recipes
-      tag: main
-      recipe-subdir: recipes/osx-packages/macholib
-      build-on:
-        - osx
-
-    - name: modulegraph
-      recipe-repo: https://github.com/ilastik/ilastik-conda-recipes
-      tag: main
-      recipe-subdir: recipes/osx-packages/modulegraph
-      build-on:
-        - osx
-
-    - name: py2app
-      recipe-repo: https://github.com/ilastik/ilastik-conda-recipes
-      tag: main
-      recipe-subdir: recipes/osx-packages/py2app
-      build-on:
-        - osx
-
     - name: ilastik-pytorch-version-helper-cpu
       recipe-repo: https://github.com/ilastik/ilastik-conda-recipes
       tag: main
