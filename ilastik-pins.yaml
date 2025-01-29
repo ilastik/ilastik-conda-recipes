@@ -6,7 +6,7 @@ MACOSX_DEPLOYMENT_TARGET:      # [osx]
   - 10.9                       # [osx and x86_64]
 
 boost:
-  - 1.74.0
+  - 1.78.0
 h5py:
   - 3.6
 hdf5:
@@ -24,7 +24,6 @@ networkx:
 pandas:
   - 1
 python:
-  - 3.8
   - 3.9
   - 3.10
   - 3.11
