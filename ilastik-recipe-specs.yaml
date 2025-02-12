@@ -72,7 +72,7 @@ recipe-specs:
 ##
     - name: opengm-structured-learning-headers
       recipe-repo: https://github.com/ilastik/ilastik-conda-recipes
-      tag: main
+      tag: zlib1.2.13-rebuild
       recipe-subdir: recipes/opengm-structured-learning-headers
 
     - name: gurobi-symlink
@@ -106,7 +106,7 @@ recipe-specs:
       build-on:
         - linux
       recipe-repo: https://github.com/ilastik/multiHypothesesTracking
-      tag: main
+      tag:  zlib1.2.13-rebuild
       recipe-subdir: conda-recipe
       conda-build-flags: --no-test
       environment:
@@ -117,7 +117,7 @@ recipe-specs:
       build-on:
         - osx
       recipe-repo: https://github.com/ilastik/multiHypothesesTracking
-      tag: main
+      tag:  zlib1.2.13-rebuild
       recipe-subdir: conda-recipe
       conda-build-flags: --no-test
       environment:
@@ -128,7 +128,7 @@ recipe-specs:
       build-on:
         - win
       recipe-repo: https://github.com/ilastik/multiHypothesesTracking
-      tag: main
+      tag:  zlib1.2.13-rebuild
       recipe-subdir: conda-recipe
       conda-build-flags: --no-test
       environment:

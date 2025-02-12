@@ -11,6 +11,8 @@ h5py:
   - 3.6
 hdf5:
   - 1.12.2
+zlib:
+  - 1.2.13
 jpeg:
   - 9
 lemon:
