@@ -110,7 +110,6 @@ recipe-specs:
       recipe-subdir: conda-recipe
       conda-build-flags: --no-test
       environment:
-        WITH_GUROBI: 1
         GUROBI_ROOT_DIR: /opt/gurobi1200/linux64
 
     - name: multi-hypotheses-tracking-with-gurobi
@@ -121,7 +120,6 @@ recipe-specs:
       recipe-subdir: conda-recipe
       conda-build-flags: --no-test
       environment:
-        WITH_GUROBI: 1
         GUROBI_ROOT_DIR: /Library/gurobi1200/macos_universal2
 
     - name: multi-hypotheses-tracking-with-gurobi
@@ -132,7 +130,6 @@ recipe-specs:
       recipe-subdir: conda-recipe
       conda-build-flags: --no-test
       environment:
-        WITH_GUROBI: 1
         GUROBI_ROOT_DIR: C:/gurobi1200/win64
         GUROBI_LIB_WIN: C:/gurobi1200/win64/lib/gurobi120.lib
 
