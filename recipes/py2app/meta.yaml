@@ -1,0 +1,61 @@
+{% set name = "py2app" %}
+{% set version = "0.28.8" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  git_url: https://github.com/k-dominik/py2app
+  git_tag: update-flags
+
+build:
+  skip: true  # [not osx]
+  number: 42
+  script: {{ PYTHON }} -m pip install . --no-deps -vv
+  entry_points:
+    - py2applet = py2app.script_py2applet:main
+  binary_relocation: False
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - {{ stdlib("c") }}
+  host:
+    - altgraph >=0.17.3
+    - macholib >=1.16.2
+    - modulegraph >=0.19.6
+    - pip
+    - python
+    - setuptools
+  run:
+    - altgraph >=0.17.3
+    - macholib >=1.16.2
+    - modulegraph >=0.19.6
+    - python
+    - setuptools
+
+test:
+  imports:
+    - py2app
+    - py2app.apptemplate
+    - py2app.bootstrap
+    - py2app.bundletemplate
+    - py2app.converters
+    - py2app.recipes
+    - py2app.recipes.PIL
+  commands:
+    - py2applet
+
+about:
+  home: https://github.com/ronaldoussoren/py2app
+  license: MIT
+  license_family: MIT
+  license_file: LICENSE.txt
+  summary: |
+    py2app is a Python setuptools command which will allow you to make
+    standalone Mac OS X application bundles and plugins from Python scripts.
+    py2app is similar in purpose and design to py2exe for Windows.
+    py2app must be used on OSX to build applications, it cannot create Mac
+    applications on other platforms.
+  doc_url: https://py2app.readthedocs.io/en/latest/
+  dev_url: https://github.com/ronaldoussoren/py2app
