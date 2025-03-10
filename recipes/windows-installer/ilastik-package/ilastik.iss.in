@@ -21,6 +21,7 @@ LicenseFile=LICENSE.txt
 SourceDir=..
 OutputDir=package
 OutputManifestFile=ilastik-@VERSION@-manifest.txt
+UninstallDisplayIcon={app}\ilastik.exe
 
 [Files]
 Source: "LICENSE.txt"; DestDir: "{app}"
