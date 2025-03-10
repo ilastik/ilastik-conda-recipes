@@ -66,6 +66,13 @@ recipe-specs:
       tag: main
       recipe-subdir: recipes/ilastik-pytorch-version-helper-cpu
 
+    - name: py2app
+      recipe-repo: https://github.com/ilastik/ilastik-conda-recipes
+      tag: add-py2app-patched
+      recipe-subdir: recipes/py2app
+      build-on:
+       - osx
+
 ############################################################################
 ##
 ## All the following packages need solvers, or are only needed if solvers are present
