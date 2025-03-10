@@ -1,6 +1,7 @@
 [Setup]
 AppName=ilastik
 AppVersion=@VERSION@
+AppId=ilastik-@VERSION@
 Compression=lzma2/ultra
 DefaultDirName={pf64}\ilastik-@VERSION@
 DefaultGroupName=ilastik-@VERSION@
