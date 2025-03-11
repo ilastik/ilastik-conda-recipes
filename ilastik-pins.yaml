@@ -6,7 +6,7 @@ MACOSX_DEPLOYMENT_TARGET:      # [osx]
   - 10.9                       # [osx and x86_64]
 
 boost:
-  - 1.78.0
+  - 1.86.0
 h5py:
   - 3.6
 hdf5:
