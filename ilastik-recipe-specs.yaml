@@ -61,6 +61,13 @@ recipe-specs:
        - linux
        - osx
 
+    - name: py2app
+      recipe-repo: https://github.com/ilastik/ilastik-conda-recipes
+      tag: add-py2app
+      recipe-subdir: recipes/py2app
+      build-on:
+       - osx
+
     - name: ilastik-pytorch-version-helper-cpu
       recipe-repo: https://github.com/ilastik/ilastik-conda-recipes
       tag: main
