@@ -5,7 +5,7 @@ package:
   version: "1.4.1"
 
 build:
-  number: 0
+  number: 1
 
 about:
   summary: "A package for creating ilastik installers on windows."
