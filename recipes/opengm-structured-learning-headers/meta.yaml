@@ -18,7 +18,7 @@ requirements:
     - cmake
     - make  # [not win]
   host:
-    - boost-cpp {{ boost }}*
+    - libboost-devel {{ boost }}*
     - python
     - numpy >=1.16
     - hdf5 {{ hdf5 }}*
