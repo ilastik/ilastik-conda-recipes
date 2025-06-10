@@ -38,7 +38,7 @@ Source: "Scripts\*"; DestDir: "{app}\Scripts"; Flags: ignoreversion recursesubdi
 Source: "bin\*.dll"; DestDir: "{app}\bin"; Flags: ignoreversion recursesubdirs skipifsourcedoesntexist
 Source: "ilastik-1.*.yaml"; DestDir: "{app}"
 ; the grpc library relies on Library\mingw64
-Source: "Library\mingw-w64\*"; DestDir: "{app}\Library\mingw-w64"; Flags: ignoreversion recursesubdirs
+Source: "Library\mingw-w64\*"; DestDir: "{app}\Library\mingw-w64"; Flags: ignoreversion recursesubdirs skipifsourcedoesntexist
 
 
 [Icons]

@@ -2,10 +2,10 @@ package:
   name: ilastik-package
   # let the version here reflect for which version of ilastik changes
   # have been made to the installer
-  version: "1.4.1"
+  version: "1.4.2"
 
 build:
-  number: 1
+  number: 0
 
 about:
   summary: "A package for creating ilastik installers on windows."
