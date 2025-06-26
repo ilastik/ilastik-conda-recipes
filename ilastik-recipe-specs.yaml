@@ -144,10 +144,3 @@ recipe-specs:
       recipe-subdir: recipes/windows-installer/ilastik-exe
       build-on:
        - win
-
-    - name: ilastik-package
-      recipe-repo: https://github.com/ilastik/ilastik-conda-recipes
-      tag: main
-      recipe-subdir: recipes/windows-installer/ilastik-package
-      build-on:
-       - win

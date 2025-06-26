@@ -1,6 +1,6 @@
 package:
   name: ilastik-exe
-  version: "1.3.0"
+  version: "1.4.0"
 
 # source is in recipe dir
 
@@ -11,5 +11,3 @@ requirements:
   build:
     - {{ compiler("cxx") }}
     - cmake
-  run:
-    - ilastik-package
