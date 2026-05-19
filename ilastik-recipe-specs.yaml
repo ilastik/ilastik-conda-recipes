@@ -23,11 +23,6 @@ recipe-specs:
     ## from the beginning of the list, but not vice-versa.
     ##
 
-    - name: dpct
-      recipe-repo: https://github.com/ilastik/dpct
-      tag: main
-      recipe-subdir: conda-recipe
-
     - name: hytra
       recipe-repo: https://github.com/ilastik/hytra
       tag: main
