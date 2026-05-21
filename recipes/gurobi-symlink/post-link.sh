@@ -1,5 +1,5 @@
 set -e
-GUROBI_LOCATION_CACHE_FILE="$(conda info --root)/share/gurobi-root-dir.path"
+GUROBI_LOCATION_CACHE_FILE="$(conda info --base)/share/gurobi-root-dir.path"
 
 # SHLIB_EXT is not available at install time
 if [ $(uname) == "Darwin" ]; then

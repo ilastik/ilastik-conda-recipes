@@ -1,4 +1,4 @@
-GUROBI_LOCATION_CACHE_FILE="$(conda info --root)/share/gurobi-root-dir.path"
+GUROBI_LOCATION_CACHE_FILE="$(conda info --base)/share/gurobi-root-dir.path"
 
 
 if [ "$GUROBI_ROOT_DIR" == "" ]; then 
