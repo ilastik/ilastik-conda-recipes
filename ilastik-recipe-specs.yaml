@@ -27,8 +27,8 @@ recipe-specs:
       tag: main
       recipe-subdir: conda-recipe
 
-    - name: ilastiktools
-      recipe-repo: https://github.com/ilastik/ilastiktools
+    - name: ilastik-carving-tools
+      recipe-repo: https://github.com/ilastik/ilastik-carving-tools
       tag: main
       recipe-subdir: conda-recipe
 
