@@ -28,13 +28,15 @@ requirements:
     - modulegraph >=0.19.6
     - pip
     - python
-    - setuptools
+    # pin setuptools because of removal of pkg_resources
+    - setuptools <82
   run:
     - altgraph >=0.17.3
     - macholib >=1.16.2
     - modulegraph >=0.19.6
     - python
-    - setuptools
+    # pin setuptools because of removal of pkg_resources
+    - setuptools <82
 
 test:
   imports:
