@@ -6,13 +6,13 @@ MACOSX_DEPLOYMENT_TARGET:      # [osx]
   - 10.9                       # [osx and x86_64]
 
 libboost_devel:
-  - "1.88"
+  - "1.90"
 libboost_headers:
-  - "1.88"
+  - "1.90"
 libboost_python_devel:
-  - "1.88"
+  - "1.90"
 hdf5:
-  - 1.14.6
+  - 2.1.0
 jpeg:
   - 9
 lemon:
@@ -21,7 +21,7 @@ libpng:
   - 1.6
 # see https://github.com/ilastik/ilastik-conda-recipes/issues/79
 networkx:
-  - 2
+  - 3
 # see https://github.com/ilastik/ilastik-conda-recipes/issues/77
 pandas:
   - 2
@@ -47,21 +47,21 @@ c_compiler:
   - clang                      # [osx]
   - vs2022                     # [win and x86_64]
 c_compiler_version:            # [unix]
-  - 14                         # [linux]
-  - 19                         # [osx]
+  - 15                         # [linux]
+  - 21                         # [osx]
 c_stdlib:
   - sysroot                    # [linux]
   - macosx_deployment_target   # [osx]
   - vs                         # [win]
 c_stdlib_version:              # [unix]
-  - 2.12                       # [linux64]
+  - 2.17                       # [linux64]
   - 11.0                       # [osx]
 cxx_compiler:
   - gxx                        # [linux]
   - clangxx                    # [osx]
   - vs2022                     # [win]
 cxx_compiler_version:          # [unix]
-  - 14                         # [linux]
-  - 19                         # [osx]
+  - 15                         # [linux]
+  - 21                         # [osx]
 llvm_openmp:                   # [osx]
-  - 19                         # [osx]
+  - 21                         # [osx]
