@@ -5,11 +5,11 @@ MACOSX_DEPLOYMENT_TARGET:      # [osx]
   - 11.0                       # [osx and arm64]
   - 10.9                       # [osx and x86_64]
 
-libboost-devel:
+libboost_devel:
   - "1.90"
-libboost-headers:
+libboost_headers:
   - "1.90"
-libboost-python-devel:
+libboost_python_devel:
   - "1.90"
 hdf5:
   - 2.1.0
