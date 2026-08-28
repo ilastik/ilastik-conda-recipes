@@ -18,10 +18,10 @@ requirements:
     - cmake <4
     - make  # [not win]
   host:
-    - libboost-devel {{ boost }}*
+    - libboost-devel
     - python
     - numpy >=1.16
-    - hdf5 {{ hdf5 }}*
+    - hdf5
 
 about:
     home: https://github.com/opengm/opengm
