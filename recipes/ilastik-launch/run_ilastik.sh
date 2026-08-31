@@ -3,13 +3,7 @@
 # script cleans the environment to avoid a few potential errors.
 
 # we assume that this script resides in PREFIX
-if [[ $(uname) == "Darwin" ]]; then
-    # 'readlink -f' doesn't work on mac
-    export PREFIX="$(cd $(dirname $0) && pwd)"
-else
-    # Use 'readlink -f' on Linux, to support symlinks to run_ilastik.sh
-    export PREFIX=$(dirname "$(readlink -f $0)")
-fi
+export PREFIX=$(dirname "$(readlink -f $0)")
 
 # Do not use the user's previous LD_LIBRARY_PATH settings because they can cause conflicts.
 # Start with an empty LD_LIBRARY_PATH
@@ -18,15 +12,16 @@ if [[ $LD_LIBRARY_PATH != "" ]]; then
 fi
 export LD_LIBRARY_PATH=""
 
-# This script is typically used on Linux, because our 
-# OSX app uses a different launch mechanism (ilastik.app)
-# Still, this script *can* be used on Mac, so let's 
-# handle the Mac case, too.
-if [[ $DYLD_FALLBACK_LIBRARY_PATH != "" ]] || [[ $DYLD_LIBRARY_PATH != "" ]]; then
-    1>&2 echo "Warning: Ignoring your non-empty DYLD_LIBRARY_PATH/DYLD_FALLBACK_LIBRARY_PATH"
+USE_VENDOR_GL=0
+if [[ "${1:-}" == "--vendor-gl" ]]; then
+    USE_VENDOR_GL=1
+    shift
 fi
-export DYLD_LIBRARY_PATH=""
-export DYLD_FALLBACK_LIBRARY_PATH=""
+
+if (( USE_VENDOR_GL )); then
+    export LD_LIBRARY_PATH="${SCRIPT_DIR}/lib-vendor-gl"
+    echo "Using bundled vendor OpenGL libraries" >&2
+fi
 
 # Similarly, clear PYTHONPATH and PYTHONHOME
 if [[ $PYTHONPATH != "" ]] || [[ $PYTHONHOME != "" ]]; then
@@ -46,10 +41,8 @@ if [[ $QT_PLUGIN_PATH != "" ]]; then
 fi    
 export QT_PLUGIN_PATH="${PREFIX}/plugins"
 
-if [[ $(uname) != "Darwin" ]]; then
-    # As of Qt5, the XKB config root needs to be configured to make keyboard input possible on linux.
-    export QT_XKB_CONFIG_ROOT="${PREFIX}/lib"
-fi
+# As of Qt5, the XKB config root needs to be configured to make keyboard input possible on linux.
+export QT_XKB_CONFIG_ROOT="${PREFIX}/lib"
 
 # When Python is compiled with certain (buggy) versions of gcc, 
 #  the Python interpreter can sometimes have memory corruption issues 

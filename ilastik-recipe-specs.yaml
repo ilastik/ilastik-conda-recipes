@@ -53,7 +53,6 @@ recipe-specs:
       recipe-subdir: recipes/ilastik-launch
       build-on:
        - linux
-       - osx
 
     - name: py2app
       recipe-repo: https://github.com/ilastik/ilastik-conda-recipes
